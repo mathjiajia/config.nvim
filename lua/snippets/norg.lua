@@ -11,7 +11,7 @@ local conds = require('luasnip.extras.expand_conditions')
 
 M = {
 	s({
-		trig = '*(%d)',
+		trig = '*([2-6])',
 		name = 'Heading',
 		dscr = 'Add Heading',
 		regTrig = true,
@@ -24,7 +24,7 @@ M = {
 		condition = conds.line_begin,
 	}),
 	s({
-		trig = 'q(%d)',
+		trig = 'q([2-6])',
 		name = 'Quote',
 		dscr = 'Add Quote',
 		regTrig = true,
@@ -37,7 +37,7 @@ M = {
 		condition = conds.line_begin,
 	}),
 	s({
-		trig = '-(%d)',
+		trig = '-([2-6])',
 		name = 'Unordered lists',
 		dscr = 'Add Unordered lists',
 		regTrig = true,
@@ -50,7 +50,7 @@ M = {
 		condition = conds.line_begin,
 	}),
 	s({
-		trig = '~(%d)',
+		trig = '~([2-6])',
 		name = 'Ordered lists',
 		dscr = 'Add Ordered lists',
 		regTrig = true,
@@ -61,6 +61,18 @@ M = {
 		end, {}),
 	}, {
 		condition = conds.line_begin,
+	}),
+	s({
+		trig = 'link',
+		name = 'Link',
+		dscr = 'Insert a Link',
+	}, {
+		t('{'),
+		i(1, 'url'),
+		t('}['),
+		i(2, 'title'),
+		t(']'),
+		i(0),
 	}),
 	s({
 		trig = 'code',
