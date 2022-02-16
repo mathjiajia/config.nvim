@@ -20,9 +20,6 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 │       └── tex.lua
 ├── colors
 │   └── moon.lua
-├── doc
-│   ├── mydoc.txt
-│   └── tags
 ├── ginit.vim
 ├── init.lua
 ├── lua
@@ -72,8 +69,6 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 │       ├── markdown.lua
 │       ├── norg.lua
 │       └── tex.lua
-├── plugin
-│   └── packer_compiled.lua
 └── spell
     ├── en.utf-8.add
     └── en.utf-8.add.spl
