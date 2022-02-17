@@ -4,46 +4,50 @@ local highlight = function(colors)
 	end
 end
 
-vim.g.colors_name = 'moon'
+vim.g.colors_name = 'sun'
 
 ---------- COLOR PALETTE ----------
 
 local cp = {
-	rosewater = '#F5E0DC', -- Rosewater
-	flamingo = '#F2CDCD', -- Flamingo
-	mauve = '#DDB6F2', -- Mauve
-	pink = '#F5C2E7', -- Pink
-	red = '#F28FAD', -- Red
-	maroon = '#E8A2AF', -- Maroon
+	rosewater = '#FFD1BA', -- Rosewater
+	flamingo = '#FF729F', -- Flamingo
+	mauve = '#A01A7D', -- Mauve
+	pink = '#EF476F', -- Pink
+	red = '#FF3C38', -- Red
+	maroon = '#B8336A', -- Maroon
 	peach = '#F8BD96', -- Peach
-	yellow = '#FAE3B0', -- Yellow
-	green = '#ABE9B3', -- Green
-	blue = '#96CDFB', -- Blue
-	sky = '#89DCEB', -- Sky
-	teal = '#B5E8E0', -- Teal
-	lavender = '#C9CBFF', -- Lavender
-	white = '#D9E0EE', -- White fg = '#eeeeee',
-	gray2 = '#C3BAC6', -- Gray2
-	gray1 = '#988BA2', -- Gray1
-	gray0 = '#6E6C7E', -- Gray0
-	black4 = '#575268', -- Black4
-	black3 = '#302D41', -- Black3
-	black2 = '#1E1E2E', -- Black2
-	black1 = '#1A1826', -- Black1
-	black0 = '#161320', -- Black0
+	yellow = '#CF4C01', -- Yellow
+	green = '#04724D', -- Green
+	blue = '#002FA7', -- Blue
+	sky = '#42CAFD', -- Sky
+	teal = '#42D9C8', -- Teal
+	lavender = '#6f42c1', -- Lavender
+	white = '#333333', -- White
+	gray2 = '#7A7A7A', -- Gray2
+	gray1 = '#666666', -- Gray1
+	gray0 = '#525252', -- Gray0
+	black4 = '#74726D', -- Black4
+	black3 = '#D8D7D5', -- Black3
+	black2 = '#FEF6E2', -- Black2
+	black1 = '#F1F2EE', -- Black1
+	black0 = '#FCFCFC', -- Black0
 
 	-- Diagnostic Colors
 	diag = {
 		error = '#FB617E',
-		warning = '#FAE3B0',
-		info = '#B5E8E0',
+		warning = '#CF4C01',
+		info = '#42D9C8',
 		hint = '#9ed06c',
 	},
+
 	-- Git & Diff Colors
 	diff = {
-		added = '#ABE9B3',
-		changed = '#FAE3B0',
-		removed = '#F28FAD',
+		add = '#8CC084',
+		add_fg = '#04724D',
+		change = '#F8BD96',
+		change_fg = '#CF4C01',
+		delete = '#F5E0DC',
+		delete_fg = '#FF3C38',
 	},
 }
 
