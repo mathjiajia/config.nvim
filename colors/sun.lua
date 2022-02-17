@@ -9,28 +9,28 @@ vim.g.colors_name = 'sun'
 ---------- COLOR PALETTE ----------
 
 local cp = {
-	rosewater = '#FFD1BA', -- Rosewater
+	rosewater = '#FA4EAB', -- Rosewater
 	flamingo = '#FF729F', -- Flamingo
 	mauve = '#A01A7D', -- Mauve
-	pink = '#EF476F', -- Pink
-	red = '#FF3C38', -- Red
-	maroon = '#B8336A', -- Maroon
-	peach = '#F8BD96', -- Peach
-	yellow = '#CF4C01', -- Yellow
-	green = '#04724D', -- Green
-	blue = '#002FA7', -- Blue
-	sky = '#42CAFD', -- Sky
-	teal = '#42D9C8', -- Teal
-	lavender = '#6f42c1', -- Lavender
-	white = '#333333', -- White
-	gray2 = '#7A7A7A', -- Gray2
-	gray1 = '#666666', -- Gray1
-	gray0 = '#525252', -- Gray0
-	black4 = '#74726D', -- Black4
-	black3 = '#D8D7D5', -- Black3
-	black2 = '#FEF6E2', -- Black2
-	black1 = '#F1F2EE', -- Black1
-	black0 = '#FCFCFC', -- Black0
+	pink = '#F25287', -- Pink
+	red = '#F05454', -- Red
+	maroon = '#9C0F48', -- Maroon
+	peach = '#FE8F8F', -- Peach
+	yellow = '#FF8E00', -- Yellow
+	green = '#219F94', -- Green
+	blue = '#00B4D8', -- Blue
+	sky = '#90E0EF', -- Sky
+	teal = '#008080	', -- Teal
+	lavender = '#8A39E1', -- Lavender
+	black = '#393E46', -- Black
+	gray3 = '#92A9BD', -- Gray3
+	gray2 = '#CCD1E4', -- Gray2
+	gray1 = '#D3DEDC', -- Gray1
+	gray0 = '#D1D1D1', -- Gray0
+	white3 = '#F0E5CF', -- White3
+	white2 = '#FEF6E2', -- White2
+	white1 = '#FEFBF3', -- White1
+	white0 = '#F5F5F5', -- White0
 
 	-- Diagnostic Colors
 	diag = {
@@ -42,90 +42,90 @@ local cp = {
 
 	-- Git & Diff Colors
 	diff = {
-		add = '#8CC084',
-		add_fg = '#04724D',
-		change = '#F8BD96',
-		change_fg = '#CF4C01',
-		delete = '#F5E0DC',
-		delete_fg = '#FF3C38',
+		added = '#8CC084',
+		added_fg = '#04724D',
+		changed = '#F8BD96',
+		changed_fg = '#CF4C01',
+		deleted = '#F5E0DC',
+		deleted_fg = '#F8485E',
 	},
 }
 
 ---------- GROUPS ----------
 
 highlight {
-	ColorColumn = { bg = cp.black3 }, -- used for the columns set with 'colorcolumn'
+	ColorColumn = { bg = cp.white3 }, -- used for the columns set with 'colorcolumn'
 	Conceal = { fg = cp.gray1 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-	Cursor = { fg = cp.black2, bg = cp.white }, -- character under the cursor
+	Cursor = { fg = cp.white2, bg = cp.black }, -- character under the cursor
 	lCursor = { link = 'Cursor' }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
 	CursorIM = { link = 'Cursor' }, -- like Cursor, but used when in IME mode |CursorIM|
-	CursorColumn = { bg = cp.black1 }, -- used for the vertical bar at the right of the cursor
-	CursorLine = { bg = cp.black3 }, -- used for the horizontal bar at the bottom of the cursor
+	CursorColumn = { bg = cp.white1 }, -- used for the vertical bar at the right of the cursor
+	CursorLine = { bg = cp.white3 }, -- used for the horizontal bar at the bottom of the cursor
 
 	Directory = { fg = cp.blue }, -- used for the directory name in the quickfix window
-	DiffAdd = { fg = cp.diff.added }, -- used for lines in a diff that have been added
-	DiffChange = { fg = cp.diff.changed }, -- used for lines in a diff that have been changed
-	DiffDelete = { fg = cp.diff.removed }, -- used for lines in a diff that have been deleted
-	DiffText = { fg = cp.blue, bg = cp.black2 }, -- used for lines in a diff that are not changed
+	DiffAdd = { fg = cp.diff.added_fg, bg = cp.diff.added }, -- used for lines in a diff that have been added
+	DiffChange = { fg = cp.diff.changed_fg, bg = cp.diff.changed }, -- used for lines in a diff that have been changed
+	DiffDelete = { fg = cp.diff.deleted_fg, bg = cp.diff.deleted }, -- used for lines in a diff that have been deleted
+	DiffText = { fg = cp.blue, bg = cp.white2 }, -- used for lines in a diff that are not changed
 
 	EndOfBuffer = { link = 'NonText' }, -- filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
 	-- TermCursor = {}, -- cursor in a focused terminal
 	-- TermCursorNC = {}, -- cursor in a unfocused terminal
 
 	ErrorMsg = { fg = cp.diag.error, bold = true, italic = true }, -- error messages on the command line
-	VertSplit = { fg = cp.black0 }, -- the column separating vertically split windows
-	Folded = { fg = cp.blue, bg = cp.black4 }, -- line used for closed folds
-	FoldColumn = { fg = cp.gray0, bg = cp.black2 }, -- 'foldcolumn'
-	SignColumn = { fg = cp.black4, bg = cp.black2 }, -- column where |signs| are displayed
-	IncSearch = { fg = cp.black4, bg = cp.pink }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-	Substitute = { fg = cp.white, bg = cp.diff.removed }, -- |:substitute| replacement text highlighting
+	VertSplit = { fg = cp.white0 }, -- the column separating vertically split windows
+	Folded = { fg = cp.white2, bg = cp.gray0 }, -- line used for closed folds
+	FoldColumn = { fg = cp.gray0, bg = cp.white2 }, -- 'foldcolumn'
+	SignColumn = { fg = cp.gray3, bg = cp.white2 }, -- column where |signs| are displayed
+	IncSearch = { fg = cp.gray3, bg = cp.pink }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+	Substitute = { fg = cp.black, bg = cp.diff.deleted }, -- |:substitute| replacement text highlighting
 
-	LineNr = { fg = cp.black4 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
+	LineNr = { fg = cp.gray3 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
 	-- LineNrAbove = {}, -- Line number for when the 'relativenumber' option is set, above the cursor line.
 	-- LineNrBelow = {}, -- Line number for when the 'relativenumber' option is set, below the cursor line.
-	CursorLineNr = { fg = cp.diag.warning, bg = 'NONE', bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+	CursorLineNr = { fg = cp.diag.warning, bg = NONE, bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
 	-- CursorLineSign = {}, -- Like SignColumn when 'cursorline' is set for the cursor line.
 	-- CursorLineFold = {}, -- Like FoldColumn when 'cursorline' is set for the cursor line.
 
-	MatchParen = { bg = cp.black3, bold = true }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-	ModeMsg = { fg = cp.white, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
-	MsgArea = { fg = cp.white }, -- Area for messages and cmdline
+	MatchParen = { bg = cp.white3, bold = true }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+	ModeMsg = { fg = cp.black, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
+	MsgArea = { fg = cp.black }, -- Area for messages and cmdline
 	-- MsgSeparator = {}, -- Separator for scrolled messages, `msgsep` flag of 'display'
 	MoreMsg = { fg = cp.blue, bold = true }, -- |more-prompt|
 	NonText = { fg = cp.gray0 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 
-	Normal = { fg = cp.white, bg = cp.black2 }, -- normal text
-	NormalFloat = { fg = cp.white, bg = cp.black1 }, -- Normal text in floating windows.
-	NormalNC = { fg = cp.white, bg = cp.black2 }, -- normal text in non-current windows
+	Normal = { fg = cp.black, bg = cp.white2 }, -- normal text
+	NormalFloat = { fg = cp.black, bg = cp.white1 }, -- Normal text in floating windows.
+	NormalNC = { fg = cp.black, bg = cp.white2 }, -- normal text in non-current windows
 
-	Pmenu = { fg = cp.gray2, bg = cp.black3 }, -- Popup menu: normal item.
-	PmenuSel = { fg = cp.white, bg = cp.black4, bold = true }, -- Popup menu: selected item.
-	PmenuSbar = { bg = cp.black4 }, -- Popup menu: scrollbar.
+	Pmenu = { fg = cp.gray2, bg = cp.white3 }, -- Popup menu: normal item.
+	PmenuSel = { fg = cp.black, bg = cp.gray3, bold = true }, -- Popup menu: selected item.
+	PmenuSbar = { bg = cp.gray3 }, -- Popup menu: scrollbar.
 	PmenuThumb = { bg = cp.gray0 }, -- Popup menu: Thumb of the scrollbar.
 
 	Question = { fg = cp.blue }, -- |hit-enter| prompt and yes/no questions
-	QuickFixLine = { bg = cp.black4, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+	QuickFixLine = { bg = cp.gray3, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
 
-	Search = { fg = cp.pink, bg = cp.black4, bold = true }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
-	SpecialKey = { link = 'NonText' }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
+	Search = { fg = cp.pink, bg = cp.gray3, bold = true }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
+	SpecialKey = { link = 'NonText' }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' blackspace. |hl-Whitespace|
 
 	SpellBad = { undercurl = true, sp = cp.diag.error }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
 	SpellCap = { undercurl = true, sp = cp.yellow }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
 	SpellLocal = { undercurl = true, sp = cp.blue }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
 	SpellRare = { undercurl = true, sp = cp.green }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
 
-	StatusLine = { fg = cp.white, bg = cp.black1 }, -- status line of current window
-	StatusLineNC = { fg = cp.black4, bg = cp.black1 }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-	TabLine = { fg = cp.black4, bg = cp.black1 }, -- tab pages line, not active tab page label
-	TabLineFill = { fg = cp.white, bg = cp.black2 }, -- tab pages line, where there are no labels
-	TabLineSel = { fg = cp.green, bg = cp.black4 }, -- tab pages line, active tab page label
+	StatusLine = { fg = cp.black, bg = cp.white1 }, -- status line of current window
+	StatusLineNC = { fg = cp.gray3, bg = cp.white1 }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+	TabLine = { fg = cp.gray3, bg = cp.white1 }, -- tab pages line, not active tab page label
+	TabLineFill = { fg = cp.black, bg = cp.white2 }, -- tab pages line, where there are no labels
+	TabLineSel = { fg = cp.green, bg = cp.gray3 }, -- tab pages line, active tab page label
 
 	Title = { fg = cp.blue, bold = true }, -- titles for output from ":set all", ":autocmd" etcp.
-	Visual = { bg = cp.black4 }, -- Visual mode selection
-	VisualNOS = { bg = cp.black4, underline = true }, -- Visual mode selection when vim is "Not Owning the Selection".
+	Visual = { bg = cp.gray3 }, -- Visual mode selection
+	VisualNOS = { bg = cp.gray3, underline = true }, -- Visual mode selection when vim is "Not Owning the Selection".
 
 	WarningMsg = { fg = cp.yellow }, -- warning messages
-	Whitespace = { fg = cp.black4 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+	Whitespace = { fg = cp.gray3 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
 	WildMenu = { link = 'Pmenu' }, -- current match in 'wildmenu' completion
 
 	-- syntax groups
@@ -168,14 +168,14 @@ highlight {
 	Special = { fg = cp.yellow }, -- any special symbol
 	SpecialChar = { fg = cp.lavender }, -- special character in a constant
 	Tag = { fg = cp.yellow }, -- you can use CTRL-] on this
-	Delimiter = { fg = cp.white }, -- character that needs attention
+	Delimiter = { fg = cp.black }, -- character that needs attention
 	SpecialComment = { fg = cp.gray, italic = true }, -- special things inside a comment
 	-- Debug = {}, -- debugging statements
 
 	Underlined = { underline = true }, -- text that stands out, HTML links
 	-- Ignore = { fg = cp.gray0 }, -- left blank, hidden |hl-Ignore|
-	Error = { fg = cp.diag.error, bg = 'NONE' }, -- any erroneous construct
-	Todo = { fg = cp.black2, bg = cp.diag.warning, bold = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+	Error = { fg = cp.diag.error, bg = NONE }, -- any erroneous construct
+	Todo = { fg = cp.white2, bg = cp.diag.warning, bold = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
 	---------- DIAGNOSTIC ----------
 
@@ -199,10 +199,10 @@ highlight {
 	DiagnosticFloatingInfo = { fg = cp.diag.info },
 	DiagnosticFloatingHint = { fg = cp.diag.hint },
 
-	DiagnosticSignError = { fg = cp.diag.error, bg = cp.black2 },
-	DiagnosticSignWarn = { fg = cp.diag.warning, bg = cp.black2 },
-	DiagnosticSignInfo = { fg = cp.diag.info, bg = cp.black2 },
-	DiagnosticSignHint = { fg = cp.diag.hint, bg = cp.black2 },
+	DiagnosticSignError = { fg = cp.diag.error, bg = cp.white2 },
+	DiagnosticSignWarn = { fg = cp.diag.warning, bg = cp.white2 },
+	DiagnosticSignInfo = { fg = cp.diag.info, bg = cp.white2 },
+	DiagnosticSignHint = { fg = cp.diag.hint, bg = cp.white2 },
 
 	--------- DIFF ----------
 
@@ -225,7 +225,7 @@ highlight {
 	-- Some other LSP clients may use these groups, or use their own.
 	-- Consult your LSP client's documentation.
 
-	LspReferenceText = { bg = cp.black4 }, -- used for highlighting "text" references
+	LspReferenceText = { bg = cp.gray3 }, -- used for highlighting "text" references
 	LspReferenceRead = { link = 'LspReferenceText' }, -- used for highlighting "read" references
 	LspReferenceWrite = { link = 'LspReferenceText' }, -- used for highlighting "write" references
 	LspCodeLens = { fg = cp.gray0 }, -- virtual text of the codelens
@@ -243,7 +243,7 @@ highlight {
 	---------- LUA ----------
 	luaFunc = { fg = cp.green },
 	luaFunction = { fg = cp.red },
-	luaTable = { fg = cp.white },
+	luaTable = { fg = cp.black },
 	luaIn = { fg = cp.red },
 
 	---------- MARKDOWN ----------
@@ -268,21 +268,21 @@ highlight {
 	markdownOrderedListMarker = { fg = cp.gray0 },
 	markdownRule = { fg = cp.gray0 },
 	markdownHeadingRule = { fg = cp.gray0 },
-	markdownUrlDelimiter = { fg = cp.white },
+	markdownUrlDelimiter = { fg = cp.black },
 	markdownLinkText = { fg = cp.blue, underline = true },
-	markdownLinkTextDelimiter = { fg = cp.white },
+	markdownLinkTextDelimiter = { fg = cp.black },
 	markdownHeadingDelimiter = { fg = cp.maroon, bold = true },
-	markdownUrlTitleDelimiter = { fg = cp.white },
+	markdownUrlTitleDelimiter = { fg = cp.black },
 	markdownIdDeclaration = { link = 'markdownLinkText' },
 
 	---------- TEX ----------
 
 	-- A list of groups that are only primitive link targets.
-	texCmdType = { link = 'Type' }, -- Type
-	texError = { link = 'Error' }, -- Error
-	texParm = { link = 'Special' }, -- Special
-	texZone = { link = 'PreCondit' }, -- PreCondit
-	texSymbol = { link = 'SpecialChar' }, -- SpecialChar
+	-- texCmdType = { link = 'Type' }, -- Type
+	-- texError = { link = 'Error' }, -- Error
+	-- texParm = { link = 'Special' }, -- Special
+	-- texZone = { link = 'PreCondit' }, -- PreCondit
+	-- texSymbol = { link = 'SpecialChar' }, -- SpecialChar
 
 	-- A list of the most common normal LaTeX groups.
 	texComment = { link = 'Comment' }, -- Comment -- % COMMENT
@@ -357,29 +357,29 @@ highlight {
 
 	---------- BUFFER LINE ----------
 
-	BufferLineFill = { bg = cp.black0 },
-	-- BufferLineBackground = { fg = cp.white, bg = cp.black0 }, -- others
-	-- BufferLineBufferVisible = { fg = cp.black4, bg = cp.black1 },
-	-- BufferLineBufferSelected = { fg = cp.white, bg = cp.black2, bold = true, italic = true }, -- current
-	-- BufferLineTab = { fg = cp.black4, bg = cp.black0 },
+	BufferLineFill = { bg = cp.white0 },
+	-- BufferLineBackground = { fg = cp.black, bg = cp.white0 }, -- others
+	-- BufferLineBufferVisible = { fg = cp.gray3, bg = cp.white1 },
+	-- BufferLineBufferSelected = { fg = cp.black, bg = cp.white2, bold = true, italic = true }, -- current
+	-- BufferLineTab = { fg = cp.gray3, bg = cp.white0 },
 	-- BufferLineTabSelected = { fg = cp.red, bg = cp.blue },
-	-- BufferLineTabClose = { fg = cp.red, bg = cp.black1 },
-	-- BufferLineIndicatorSelected = { fg = cp.peach, bg = cp.black2 },
+	-- BufferLineTabClose = { fg = cp.red, bg = cp.white1 },
+	-- BufferLineIndicatorSelected = { fg = cp.peach, bg = cp.white2 },
 
 	-- separators
-	-- BufferLineSeparator = { fg = cp.black1, bg = cp.black1 },
+	-- BufferLineSeparator = { fg = cp.white1, bg = cp.white1 },
 	-- BufferLineSeparatorVisible = { link = 'BufferLineSeparator' },
 	-- BufferLineSeparatorSelected = { link = 'BufferLineSeparator' },
 
 	-- close buttons
-	-- BufferLineCloseButton = { fg = cp.black4, bg = cp.black1 },
+	-- BufferLineCloseButton = { fg = cp.gray3, bg = cp.white1 },
 	-- BufferLineCloseButtonVisible = { link = 'BufferLineCloseButton' },
-	-- BufferLineCloseButtonSelected = { fg = cp.red, bg = cp.black2 },
+	-- BufferLineCloseButtonSelected = { fg = cp.red, bg = cp.white2 },
 
 	---------- CMP ----------
 
 	CmpItemAbbr = { fg = cp.gray2 }, --  The abbr field's highlight group.
-	CmpItemAbbrDeprecated = { fg = cp.gray0, bg = 'NONE', strikethrough = true }, --  The abbr field's highlight group that only used for deprecated item.
+	CmpItemAbbrDeprecated = { fg = cp.gray0, bg = NONE, strikethrough = true }, --  The abbr field's highlight group that only used for deprecated item.
 	CmpItemAbbrMatch = { fg = cp.blue }, --  The matched character's highlight group.
 	CmpItemAbbrMatchFuzzy = { fg = cp.blue, bold = true }, --    The fuzzy matched character's highlight group.
 	CmpItemKind = { fg = cp.blue }, --  The kind field's highlight group.
@@ -411,7 +411,7 @@ highlight {
 	CmpItemKindOperator = { fg = cp.blue },
 	CmpItemKindTypeParameter = { fg = cp.blue },
 
-	CmpItemMenu = { fg = cp.white }, --  The menu field's highlight group.
+	CmpItemMenu = { fg = cp.black }, --  The menu field's highlight group.
 
 	---------- GIT SIGNS ----------
 
@@ -428,8 +428,8 @@ highlight {
 
 	---------- INDENT BLANK LINE ----------
 
-	IndentBlanklineChar = { fg = cp.black3 },
-	IndentBlanklineContextChar = { fg = cp.white },
+	IndentBlanklineChar = { fg = cp.white3 },
+	IndentBlanklineContextChar = { fg = cp.black },
 
 	-- IndentBlanklineIndent6 = { fg = cp.yellow }, -- gui = nocombine
 	-- IndentBlanklineIndent5 = { fg = cp.red },
@@ -472,9 +472,9 @@ highlight {
 
 	---------- NVIM TREE ----------
 
-	NvimTreeNormal = { fg = cp.white, bg = cp.black1 },
-	NvimTreeVertSplit = { fg = cp.gray, bg = 'NONE' },
-	NvimTreeStatuslineNc = { fg = cp.white, bg = cp.black0 },
+	NvimTreeNormal = { fg = cp.black, bg = cp.white1 },
+	NvimTreeVertSplit = { fg = cp.gray, bg = NONE },
+	NvimTreeStatuslineNc = { fg = cp.black, bg = cp.white0 },
 
 	NvimTreeSymlink = { link = 'Type' },
 	NvimTreeFolderName = { link = 'Directory' },
@@ -493,9 +493,9 @@ highlight {
 	NvimTreeGitDirty = { fg = cp.diff.changed },
 	NvimTreeGitStaged = { fg = cp.diff.added },
 	NvimTreeGitMerge = { fg = cp.diff.added },
-	NvimTreeGitRenamed = { fg = cp.diff.renamed },
+	NvimTreeGitRenamed = { fg = cp.diff.changed },
 	NvimTreeGitNew = { fg = cp.diff.added },
-	NvimTreeGitDeleted = { fg = cp.diff.removed },
+	NvimTreeGitDeleted = { fg = cp.diff.deleted },
 
 	NvimTreeWindowPicker = { fg = cp.pink },
 
@@ -512,7 +512,7 @@ highlight {
 	---------- TELESCOPE ----------
 
 	-- Sets the highlight for selected items within the picker.
-	TelescopeSelection = { fg = cp.white, bg = cp.black3, bold = true },
+	TelescopeSelection = { fg = cp.black, bg = cp.white3, bold = true },
 	TelescopeSelectionCaret = { fg = cp.flamingo },
 	-- TelescopeMultiSelection = { link = 'Type' },
 	-- TelescopeMultiIcon = { link = 'Identifier' },
@@ -599,96 +599,77 @@ highlight {
 	-- TSError -> Error for example, so you do not have to define these unless
 	-- you explicitly want to support Treesitter's improved syntax awareness.
 
-	TSPunctDelimiter = { fg = cp.gray0 }, -- Punctuation delimiters: Periods, commas, semicolons, etc.
-	TSPunctBracket = { fg = cp.white }, -- Brackets, braces, parentheses, etc.
-	TSPunctSpecial = { fg = cp.maroon }, -- Special punctuation that doesn't fit into the previous categories.
+	TSPunctDelimiter = { fg = cp.teal }, -- Punctuation delimiters: Periods, commas, semicolons, etc.
+	TSPunctBracket = { fg = cp.gray1 }, -- Brackets, braces, parentheses, etc.
+	TSPunctSpecial = { fg = cp.maroon, bold = true }, -- Special punctuation that doesn't fit into the previous categories.
 
-	TSConstant = { fg = cp.yellow }, -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
-	TSConstBuiltin = { fg = cp.yellow }, -- Built-in constant values: `nil` in Lua.
+	TSConstant = { fg = cp.peach }, -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
+	TSConstBuiltin = { fg = cp.lavender, italic = true }, -- Built-in constant values: `nil` in Lua.
 	TSConstMacro = { fg = cp.yellow }, -- Constants defined by macros: `NULL` in C.
 
-	TSString = { fg = cp.red }, -- String literals.
+	TSString = { fg = cp.green }, -- String literals.
 	TSStringEscape = { fg = cp.pink }, -- Escape characters within a string: `\n`, `\t`, etc.
-	TSStringRegex = { fg = cp.green }, -- Regular expression literals.
+	TSStringRegex = { fg = cp.peach }, -- Regular expression literals.
 	TSStringSpecial = { fg = cp.green }, -- Strings with special meaning that don't fit into the previous categories.
 	TSCharacter = { fg = cp.yellow }, -- Character literals: `'a'` in C.
-	TSNumber = { fg = cp.peach }, -- Numeric literals that don't fit into other categories.
-	TSBoolean = { fg = cp.peach }, -- Boolean literals: `True` and `False` in Python.
-	TSFloat = { fg = cp.peach }, -- Floating-point number literals.
+	TSNumber = { fg = cp.peach, bold = true, italic = true }, -- Numeric literals that don't fit into other categories.
+	TSBoolean = { fg = cp.peach, bold = true, italic = true }, -- Boolean literals: `True` and `False` in Python.
+	TSFloat = { fg = cp.peach, bold = true, italic = true }, -- Floating-point number literals.
 
 	TSFunction = { fg = cp.green, italic = true }, -- Function calls and definitions.
-	TSFuncBuiltin = { fg = cp.green }, -- Built-in functions: `print` in Lua.
-	TSFuncMacro = { fg = cp.green }, -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
-	TSParameter = { fg = cp.white }, -- Parameters of a function.
+	TSFuncBuiltin = { fg = cp.peach, italic = true }, -- Built-in functions: `print` in Lua.
+	TSFuncMacro = { fg = cp.red }, -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
+	TSParameter = { fg = cp.rosewater, italic = true }, -- Parameters of a function.
 	TSParameterReference = { fg = cp.white }, -- References to parameters of a function.
-	TSMethod = { fg = cp.green }, -- Method calls and definitions.
+	TSMethod = { fg = cp.blue, italic = true }, -- Method calls and definitions.
 	TSField = { fg = cp.rosewater }, -- Object and struct fields.
-	TSProperty = { fg = cp.green }, -- Same as TSField.
-	TSConstructor = { fg = cp.white }, -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
-	TSAnnotation = { link = 'Constant' },
+	TSProperty = { fg = cp.yellow, italic = true }, -- Same as `TSField`.
+	TSConstructor = { fg = cp.lavender }, -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+	-- TSAnnotation = {},
 	TSAttribute = { fg = cp.blue }, -- Annotations that can be attached to the code to denote some kind of meta information. e.g. C++/Dart attributes.
-	TSNamespace = { fg = cp.green, bold = true }, -- Identifiers referring to modules and namespaces.
+	TSNamespace = { fg = cp.rosewater, bold = true }, -- Identifiers referring to modules and namespaces.
 	TSSymbol = { fg = cp.white }, -- Identifiers referring to symbols or atoms.
 
 	TSConditional = { fg = cp.mauve, bold = true }, -- Keywords related to conditionals: `if`, `when`, `cond`, etc.
-	TSRepeat = { fg = cp.red }, -- Keywords related to loops: `for`, `while`, etc.
-	TSLabel = { fg = cp.red }, -- GOTO labels: `label:` in C, and `::label::` in Lua.
-	TSOperator = { fg = cp.sky }, -- Binary or unary operators: `+`, and also `->` and `*` in C.
-	TSKeyword = { fg = cp.red }, -- Keywords that don't fit into other categories.
+	TSRepeat = { fg = cp.mauve, bold = true }, -- Keywords related to loops: `for`, `while`, etc.
+	TSLabel = { fg = cp.blue }, -- GOTO labels: `label:` in C, and `::label::` in Lua.
+	TSOperator = { fg = cp.sky, bold = true }, -- Binary or unary operators: `+`, and also `->` and `*` in C.
+	TSKeyword = { fg = cp.red, italic = true }, -- Keywords that don't fit into other categories.
 	TSKeywordFunction = { fg = cp.maroon, italic = true }, -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
-	TSKeywordOperator = { fg = cp.red }, -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
-	TSKeywordReturn = { fg = cp.red }, -- Keywords like `return` and `yield`.
-	TSException = { fg = cp.red }, -- Exception related keywords: `try`, `except`, `finally` in Python.
+	TSKeywordOperator = { fg = cp.sky, bold = true }, -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
+	TSKeywordReturn = { fg = cp.pink }, -- Keywords like `return` and `yield`.
+	TSException = { fg = cp.peach, italic = true }, -- Exception related keywords: `try`, `except`, `finally` in Python.
 
 	TSType = { fg = cp.blue }, -- Type (and class) definitions and annotations.
-	TSTypeBuiltin = { fg = cp.blue }, -- Built-in types: `i32` in Rust.
-	TSInclude = { fg = cp.green, italic = true }, -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
+	TSTypeBuiltin = { fg = cp.yellow, italic = true }, -- Built-in types: `i32` in Rust.
+	TSInclude = { fg = cp.teal, italic = true }, -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
 
-	TSVariableBuiltin = { fg = cp.yellow }, -- Variable names defined by the language: `this` or `self` in Javascript.
+	TSVariableBuiltin = { fg = cp.teal, italic = true }, -- Variable names defined by the language: `this` or `self` in Javascript.
 
-	TSText = { fg = cp.green }, -- Non-structured text. Like text in a markup language.
+	TSText = { fg = cp.white }, -- Non-structured text. Like text in a markup language.
 	TSStrong = { fg = cp.maroon, bold = true }, -- Text to be represented in bold.
 	TSEmphasis = { fg = cp.maroon, italic = true }, -- Text to be represented with emphasis.
 	TSUnderline = { underline = true }, -- Text to be represented with an underline.
 	TSStrike = { fg = cp.gray, strikethrough = true }, -- Strikethrough text.
 
 	TSMath = { fg = cp.yellow }, -- Math environments like LaTeX's `$ ... $`
-	TSTextReference = { fg = cp.lavender }, -- Footnotes, text references, citations, etc.
+	TSTextReference = { fg = cp.lavender, bold = true }, -- Footnotes, text references, citations, etc.
 	TSEnvironment = { fg = cp.green }, -- Text environments of markup languages.
 	TSEnvironmentName = { fg = cp.blue, italic = true }, -- Text/string indicating the type of text environment. Like the name of a	`\begin` block in LaTeX.
 	TSTitle = { fg = cp.blue, bold = true }, -- Text that is part of a title.
-	TSLiteral = { fg = cp.teal }, -- Literal or verbatim text.
-	TSURI = { fg = cp.rosewater, underline = true }, -- URIs like hyperlinks or email addresses.
+	TSLiteral = { fg = cp.teal, italic = true }, -- Literal or verbatim text.
+	TSURI = { fg = cp.rosewater, italic = true, underline = true }, -- URIs like hyperlinks or email addresses.
 
 	-- TSComment = { link = 'Comment' }, -- Line comments and block comments.
-	TSNote = { fg = cp.blue, bold = true }, -- Text representation of an informational note.
-	TSWarning = { fg = cp.yellow, bold = true }, -- Text representation of a warning note.
-	TSDanger = { fg = cp.red, bold = true }, -- Text representation of a danger note.
+	TSNote = { fg = cp.black2, bg = cp.blue }, -- Text representation of an informational note.
+	TSWarning = { fg = cp.black2, bg = cp.yellow }, -- Text representation of a warning note.
+	TSDanger = { fg = cp.black2, bg = cp.red }, -- Text representation of a danger note.
 
-	TSTag = { fg = cp.blue }, -- Tags like HTML tag names.
-	TSTagDelimiter = { fg = cp.red }, -- Tag delimiters like `<` `>` `/`.
-	TSTagAttribute = { fg = cp.blue }, -- HTML tag attributes.
+	TSTag = { fg = cp.peach }, -- Tags like HTML tag names.
+	TSTagDelimiter = { fg = cp.maroon }, -- Tag delimiters like `<` `>` `/`.
+	TSTagAttribute = { fg = cp.mauve, italic = true }, -- HTML tag attributes.
 
 	TSError = { fg = cp.diag.error }, -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
 	-- TSNone = {}, -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
-	TSVariable = { fg = 'NONE' }, -- Variable names that don't fit into other categories.
+	TSVariable = { fg = cp.white, italic = true }, -- Variable names that don't fit into other categories.
 }
-
----------- TERM COLORS ----------
-
--- vim.g.terminal_color_0  = '#6E6C7E'
--- vim.g.terminal_color_1  = '#F28FAD'
--- vim.g.terminal_color_2  = '#ABE9B3'
--- vim.g.terminal_color_3  = '#FAE3B0'
--- vim.g.terminal_color_4  = '#96CDFB'
--- vim.g.terminal_color_5  = '#F5C2E7'
--- vim.g.terminal_color_6  = '#89DCEB'
--- vim.g.terminal_color_7  = '#D9E0EE'
--- vim.g.terminal_color_8  = '#988BA2'
--- vim.g.terminal_color_9  = '#F28FAD'
--- vim.g.terminal_color_10 = '#ABE9B3'
--- vim.g.terminal_color_11 = '#FAE3B0'
--- vim.g.terminal_color_12 = '#96CDFB'
--- vim.g.terminal_color_13 = '#F5C2E7'
--- vim.g.terminal_color_14 = '#89DCEB'
--- vim.g.terminal_color_15 = '#D9E0EE'
