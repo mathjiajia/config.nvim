@@ -11,7 +11,7 @@ local conds = require('luasnip.extras.expand_conditions')
 
 M = {
 	s({
-		trig = '#(%d)',
+		trig = '#([2-6])',
 		name = 'Heading',
 		dscr = 'Add Heading',
 		regTrig = true,
