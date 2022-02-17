@@ -17,8 +17,8 @@ function autocmd.load_autocmds()
 		bufs = {
 			{ 'BufEnter', '*', 'silent! lcd %:p:h' }, -- Auto change work directory
 			{
-				"BufReadPost",
-				"*",
+				'BufReadPost',
+				'*',
 				[[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
 			}, -- auto place to last edit
 		},
