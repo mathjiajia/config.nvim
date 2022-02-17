@@ -5,8 +5,10 @@ require('lualine').setup {
 		component_separators = '|',
 		section_separators = '',
 		disabled_filetypes = {
+			'aerial',
 			'alpha',
 			'help',
+			'tsplayground',
 		},
 		always_divide_middle = true,
 	},
@@ -30,7 +32,5 @@ require('lualine').setup {
 	extensions = {
 		'nvim-tree',
 		'quickfix',
-		'symbols-outline',
-		'toggleterm',
 	},
 }

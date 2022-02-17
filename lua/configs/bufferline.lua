@@ -32,6 +32,7 @@ bufferline.setup {
 		offsets = {
 			{ filetype = 'NvimTree', text = 'File Explorer', text_align = 'center' },
 			{ filetype = 'aerial', text = 'Outline', text_align = 'center' },
+			{ filetype = 'tsplayground', text = 'TSPlayground', text_align = 'center' },
 		},
 		groups = {
 			items = nil,

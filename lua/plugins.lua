@@ -255,9 +255,17 @@ local function spec(use)
 	}
 	use {
 		'kevinhwang91/nvim-hlslens',
-		keys = { 'n', '/' },
+		keys = { { 'n', '/' } },
 		config = function()
 			require('configs.hlslens')
+		end,
+	}
+
+	use {
+		'dstein64/vim-startuptime',
+		cmd = 'StartupTime',
+		config = function()
+			vim.g.startuptime_tries = 10
 		end,
 	}
 end
