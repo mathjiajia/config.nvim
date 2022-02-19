@@ -47,7 +47,7 @@ autocmd.load_autocmds()
 -- 	event = 'BufRead',
 -- 	group = 'bufs',
 -- 	pattern = '*',
---	callback = [[if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif]],
+--	callback = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
 -- 	once = true,
 -- }
 

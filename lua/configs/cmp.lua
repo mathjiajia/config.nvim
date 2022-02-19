@@ -97,6 +97,7 @@ cmp.setup {
 	-- },
 
 	formatting = {
+		-- fields = { 'abbr', 'kind', 'menu' },
 		format = function(entry, vim_item)
 			-- Kind icons
 			-- This concatonates the icons with the name of the item kind

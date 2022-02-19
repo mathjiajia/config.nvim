@@ -52,6 +52,21 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.resolved_capabilities.document_highlight then
+		-- vim.api.nvim_create_augroup { name = lsp_document_highlight }
+		-- vim.api.nvim_create_autocmd {
+		-- 	event = { 'CursorHold', 'CursorHoldI' },
+		-- 	group = 'lsp_document_highlight',
+		-- 	pattern = '<buffer>',
+		-- 	callback = vim.lsp.buf.document_highlight,
+		-- 	once = true,
+		-- }
+		-- vim.api.nvim_create_autocmd {
+		-- 	event = 'CursorMoved',
+		-- 	group = 'lsp_document_highlight',
+		-- 	pattern = '<buffer>',
+		-- 	callback = vim.lsp.buf.clear_references,
+		-- 	once = true,
+		-- }
 		vim.cmd(
 			[[
 				augroup lsp_document_highlight
@@ -72,12 +87,23 @@ local on_attach = function(client, bufnr)
 			require('telescope.builtin').lsp_range_code_actions()
 		end, { desc = 'Range Code Actions' })
 
+		-- vim.api.nvim_create_augroup { name = lsp_code_action }
+		-- vim.api.nvim_create_autocmd {
+		-- 	event = { 'CursorHold', 'CursorHoldI' },
+		-- 	group = 'lsp_code_action',
+		-- 	pattern = '<buffer>',
+		-- 	callback = function()
+		-- 		require('nvim-lightbulb').update_lightbulb()
+		-- 	end,
+		-- 	once = true,
+		-- }
+
 		vim.cmd([[
-				augroup lsp_code_action
-					autocmd! * <buffer>
-					autocmd CursorHold,CursorHoldI <buffer> lua require('nvim-lightbulb').update_lightbulb()
-				augroup END
-      ]])
+			augroup lsp_code_action
+				autocmd! * <buffer>
+				autocmd CursorHold,CursorHoldI <buffer> lua require('nvim-lightbulb').update_lightbulb()
+			augroup END
+    ]])
 	end
 
 	require('aerial').on_attach(client, bufnr)
@@ -88,17 +114,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- Enable the following language servers
--- for _, lsp in ipairs(servers) do
--- 	lspconfig[lsp].setup {
--- 		on_attach = on_attach,
--- 		capabilities = capabilities,
--- 		flags = {
--- 			debounce_text_changes = 150,
--- 		},
--- 	}
--- end
-
 for _, server in
 	ipairs {
 		'null-ls',
@@ -108,13 +123,4 @@ for _, server in
 	}
 do
 	require('lsp.' .. server).setup(on_attach, capabilities)
-end
-
--- suppress lspconfig messages
-local notify = vim.notify
-vim.notify = function(msg, ...)
-	if msg:match('%[lspconfig%]') then
-		return
-	end
-	notify(msg, ...)
 end

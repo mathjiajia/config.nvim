@@ -1,6 +1,6 @@
 local excluded_filetypes = { 'nofile', 'prompt' }
 local copilot_filetypes = {}
-for _, ft in pairs(excluded_filetypes) do
+for _, ft in ipairs(excluded_filetypes) do
 	copilot_filetypes[ft] = false
 end
 

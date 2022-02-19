@@ -30,9 +30,24 @@ bufferline.setup {
 		diagnostics_indicator = nil,
 		diagnostics_update_in_insert = true,
 		offsets = {
-			{ filetype = 'NvimTree', text = 'File Explorer', text_align = 'center' },
-			{ filetype = 'aerial', text = 'Outline', text_align = 'center' },
-			{ filetype = 'tsplayground', text = 'TSPlayground', text_align = 'center' },
+			{
+				filetype = 'NvimTree',
+				text = 'File Explorer',
+				highlight = 'Directory',
+				text_align = 'center',
+			},
+			{
+				filetype = 'aerial',
+				text = 'OUTLINE',
+				highlight = 'Directory',
+				text_align = 'center',
+			},
+			{
+				filetype = 'tsplayground',
+				text = 'TS Playground',
+				highlight = 'Directory',
+				text_align = 'center',
+			},
 		},
 		groups = {
 			items = nil,

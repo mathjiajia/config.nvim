@@ -1,39 +1,16 @@
 -- settings
-vim.g.nvim_tree_indent_markers = 1 -- 0 by default, this option shows indent markers when folders are open
-vim.g.nvim_tree_git_hl = 1 -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
-vim.g.nvim_tree_highlight_opened_files = 2 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
-vim.g.nvim_tree_root_folder_modifier = ':~' -- This is the default. See :help filename-modifiers for more options
-vim.g.nvim_tree_add_trailing = 0 -- 0 by default, append a trailing slash to folder names
-vim.g.nvim_tree_group_empty = 1 --  0 by default, compact folders that only contain a single folder into one node in the file tree
-vim.g.nvim_tree_disable_window_picker = 0 -- 0 by default, will disable the window picker.
-vim.g.nvim_tree_icon_padding = ' ' -- one space by default, used for rendering the space between the icon and the filename.
-vim.g.nvim_tree_symlink_arrow = ' >> ' --  defaults to ' ➛ '. used as a separator between symlinks' source and target.
-vim.g.nvim_tree_respect_buf_cwd = 0 -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
-vim.g.nvim_tree_create_in_closed_folder = 1 -- 1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
-
-vim.g.nvim_tree_window_picker_exclude = {
+local picker_exclude = {
 	filetype = { 'notify', 'packer', 'qf' },
 	buftype = { 'terminal' },
 }
--- Dictionary of buffer option names mapped to a list of option values that
--- indicates to the window picker that the buffer's window should not be
--- selectable.
-vim.g.nvim_tree_special_files = {
+local special_files = {
 	['Cargo.toml'] = true,
 	Makefile = true,
 	['README.md'] = true,
 	['readme.md'] = true,
-} -- List of filenames that gets highlighted with NvimTreeSpecialFile
-vim.g.nvim_tree_show_icons = {
-	git = 1,
-	folders = 1,
-	files = 1,
-	folder_arrows = 1,
 }
 
--- default will show icon by default if no icon is provided
--- default shows no icon by default
-vim.g.nvim_tree_icons = {
+local icons = {
 	default = '',
 	symlink = '',
 	git = {
@@ -55,6 +32,60 @@ vim.g.nvim_tree_icons = {
 		symlink = '',
 		symlink_open = '',
 	},
+}
+local show_icons = {
+	git = 1,
+	folders = 1,
+	files = 1,
+	folder_arrows = 1,
+}
+
+vim.g.nvim_tree_indent_markers = 1 -- 0 by default, this option shows indent markers when folders are open
+vim.g.nvim_tree_git_hl = 1 -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
+vim.g.nvim_tree_highlight_opened_files = 2 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
+vim.g.nvim_tree_root_folder_modifier = ':~' -- This is the default. See :help filename-modifiers for more options
+vim.g.nvim_tree_add_trailing = 0 -- 0 by default, append a trailing slash to folder names
+vim.g.nvim_tree_group_empty = 1 --  0 by default, compact folders that only contain a single folder into one node in the file tree
+vim.g.nvim_tree_disable_window_picker = 0 -- 0 by default, will disable the window picker.
+vim.g.nvim_tree_icon_padding = ' ' -- one space by default, used for rendering the space between the icon and the filename.
+vim.g.nvim_tree_symlink_arrow = ' >> ' --  defaults to ' ➛ '. used as a separator between symlinks' source and target.
+vim.g.nvim_tree_respect_buf_cwd = 0 -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+vim.g.nvim_tree_create_in_closed_folder = 1 -- 1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
+
+vim.g.nvim_tree_window_picker_exclude = picker_exclude
+-- Dictionary of buffer option names mapped to a list of option values that
+-- indicates to the window picker that the buffer's window should not be
+-- selectable.
+vim.g.nvim_tree_special_files = special_files
+-- List of filenames that gets highlighted with NvimTreeSpecialFile
+
+vim.g.nvim_tree_icons = icons
+vim.g.nvim_tree_show_icons = show_icons
+-- default will show icon by default if no icon is provided
+-- default shows no icon by default
+
+local custom = {
+	'.cache',
+	'.cpan',
+	'.dropbox',
+	'.gem',
+	'.git',
+	'.npm',
+	'.vscode',
+	'.wns',
+	'.DS_Store',
+	'.CFUserTextEncoding',
+	'.node_repl_history',
+	'bin',
+	'node_modules',
+	'Applications',
+	'Library',
+	'Movies',
+	'Music',
+	'neovim',
+	'Pictures',
+	'Public',
+	'Zotero',
 }
 
 require('nvim-tree').setup {
@@ -90,29 +121,7 @@ require('nvim-tree').setup {
 	},
 	filters = {
 		dotfiles = false,
-		custom = {
-			'.cache',
-			'.cpan',
-			'.dropbox',
-			'.gem',
-			'.git',
-			'.npm',
-			'.vscode',
-			'.wns',
-			'.DS_Store',
-			'.CFUserTextEncoding',
-			'.node_repl_history',
-			'bin',
-			'node_modules',
-			'Applications',
-			'Library',
-			'Movies',
-			'Music',
-			'neovim',
-			'Pictures',
-			'Public',
-			'Zotero',
-		},
+		custom = custom,
 	},
 	git = {
 		enable = true,

@@ -22,7 +22,7 @@ local cp = {
 	sky = '#89DCEB', -- Sky
 	teal = '#B5E8E0', -- Teal
 	lavender = '#C9CBFF', -- Lavender
-	white = '#D9E0EE', -- White fg = '#eeeeee',
+	white = '#D9E0EE', -- White
 	gray2 = '#C3BAC6', -- Gray2
 	gray1 = '#988BA2', -- Gray1
 	gray0 = '#6E6C7E', -- Gray0
@@ -427,12 +427,12 @@ highlight {
 	IndentBlanklineChar = { fg = cp.black3 },
 	IndentBlanklineContextChar = { fg = cp.white },
 
-	-- IndentBlanklineIndent6 = { fg = cp.yellow }, -- gui = nocombine
-	-- IndentBlanklineIndent5 = { fg = cp.red },
-	-- IndentBlanklineIndent4 = { fg = cp.teal },
-	-- IndentBlanklineIndent3 = { fg = cp.peach },
-	-- IndentBlanklineIndent2 = { fg = cp.blue },
-	-- IndentBlanklineIndent1 = { fg = cp.pink },
+	-- IndentBlanklineIndent6 = { fg = cp.yellow, nocombine = true },
+	-- IndentBlanklineIndent5 = { fg = cp.red, nocombine = true },
+	-- IndentBlanklineIndent4 = { fg = cp.teal, nocombine = true },
+	-- IndentBlanklineIndent3 = { fg = cp.peach, nocombine = true },
+	-- IndentBlanklineIndent2 = { fg = cp.blue, nocombine = true },
+	-- IndentBlanklineIndent1 = { fg = cp.pink, nocombine = true },
 
 	---------- NEORG ----------
 
@@ -615,7 +615,7 @@ highlight {
 	TSFunction = { fg = cp.green, italic = true }, -- Function calls and definitions.
 	TSFuncBuiltin = { fg = cp.peach, italic = true }, -- Built-in functions: `print` in Lua.
 	TSFuncMacro = { fg = cp.red }, -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
-	TSParameter = { fg = cp.rosewater, italic = true }, -- Parameters of a function.
+	TSParameter = { fg = cp.rosewater }, -- Parameters of a function.
 	TSParameterReference = { fg = cp.white }, -- References to parameters of a function.
 	TSMethod = { fg = cp.blue, italic = true }, -- Method calls and definitions.
 	TSField = { fg = cp.rosewater }, -- Object and struct fields.
