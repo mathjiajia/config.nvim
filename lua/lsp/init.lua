@@ -2,22 +2,20 @@ require('packer').loader('cmp-nvim-lsp')
 
 local lspconfig = require('lspconfig')
 local null_ls = require('null-ls')
--- 'pyright', 'sumneko_lua', 'texlab'
--- local servers = { 'taplo' }
 
 -- lsp info
 vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
 end, { desc = 'Lsp Info' })
 
-local on_attach = function(client, bufnr)
-	local function map(mode, key, fun, opts)
-		opts = opts or {}
-		opts.buffer = bufnr
-		opts.silent = true
-		vim.keymap.set(mode, key, fun, opts)
-	end
+local function map(mode, key, fun, opts)
+	opts = opts or {}
+	opts.buffer = bufnr
+	opts.silent = true
+	vim.keymap.set(mode, key, fun, opts)
+end
 
+local on_attach = function(client, bufnr)
 	map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Declaration' })
 	map('n', 'K', vim.lsp.buf.hover, { desc = 'Docs Hover' })
 	map('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature' })
@@ -43,13 +41,6 @@ local on_attach = function(client, bufnr)
 	map('n', '<leader>D', function()
 		require('telescope.builtin').lsp_type_definitions()
 	end, { desc = 'Type Definitions' })
-
-	if client.resolved_capabilities.document_formatting then
-		map('n', '<leader>lf', vim.lsp.buf.formatting, { desc = 'Formmating' })
-	end
-	if client.resolved_capabilities.document_range_formatting then
-		map('v', '<leader>lf', vim.lsp.buf.range_formatting, { desc = 'Range Formmating' })
-	end
 
 	if client.resolved_capabilities.document_highlight then
 		-- vim.api.nvim_create_augroup { name = lsp_document_highlight }
@@ -109,6 +100,15 @@ local on_attach = function(client, bufnr)
 	require('aerial').on_attach(client, bufnr)
 end
 
+local null_on_attach = function(client, bufnr)
+	if client.resolved_capabilities.document_formatting then
+		map('n', '<leader>lf', vim.lsp.buf.formatting, { desc = 'Formmating' })
+	end
+	if client.resolved_capabilities.document_range_formatting then
+		map('v', '<leader>lf', vim.lsp.buf.range_formatting, { desc = 'Range Formmating' })
+	end
+end
+
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -116,7 +116,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 for _, server in
 	ipairs {
-		'null-ls',
 		'pyright',
 		'sumneko_lua',
 		'texlab',
@@ -124,3 +123,4 @@ for _, server in
 do
 	require('lsp.' .. server).setup(on_attach, capabilities)
 end
+require('lsp.null-ls').setup(null_on_attach)

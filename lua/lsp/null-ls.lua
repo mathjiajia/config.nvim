@@ -5,7 +5,7 @@ local sources = {
 	-- formatting
 
 	b.formatting.fish_indent,
-	-- b.formatting.latexindent,
+	b.formatting.latexindent,
 	b.formatting.prettierd.with {
 		filetypes = { 'html', 'json', 'yaml', 'markdown' },
 	},
@@ -20,11 +20,11 @@ local sources = {
 }
 
 local M = {}
-M.setup = function(on_attach)
+M.setup = function(null_on_attach)
 	null_ls.setup {
 		-- debug = true,
 		sources = sources,
-		on_attach = on_attach,
+		on_attach = null_on_attach,
 	}
 end
 
