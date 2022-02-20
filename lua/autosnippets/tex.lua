@@ -344,24 +344,16 @@ M = {
 		{ t('('), i(1, 'x'), t('_'), i(2, 'n'), t(')_{'), f(copy, 2), t('\\in '), i(3, '\\mathbb{N}'), t('}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = 'range', name = 'i = 1, ..., n' }, {
-		i(1, 'i'),
-		t(' = '),
-		i(2, '1'),
-		t(' \\dots, '),
-		i(0, 'n'),
-	}, { condition = vimtex.in_mathzone }),
-	s({ trig = 'list', name = 'a_1, ..., a_n' }, {
-		i(1, 'a'),
-		t('_{'),
-		i(2, '1'),
-		t('}, \\dots, '),
-		f(copy, 1),
-		t('_{'),
-		i(3, 'n'),
-		t('}'),
-		i(0),
-	}, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'range', name = 'i = 1, ..., n' },
+		{ i(1, 'i'), t(' = '), i(2, '1'), t(' \\dots, '), i(0, 'n') },
+		{ condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'list', name = 'a_1, ..., a_n' },
+		{ i(1, 'a'), t('_{'), i(2, '1'), t('}, \\dots, '), f(copy, 1), t('_{'), i(3, 'n'), t('}'), i(0) },
+		{ condition = vimtex.in_mathzone }
+	),
 
 	-- All arrows shortcuts
 	s(
@@ -453,6 +445,37 @@ M = {
 		{ t { '\\begin{theorem}', '\t' }, i(0), t { '', '\\end{theorem}' } },
 		{ condition = conds.line_begin and vimtex.in_text }
 	),
+	s(
+		{ trig = 'lem', name = 'Lemma Environment', dscr = 'Create a lemma environment.' },
+		{ t { '\\begin{lemma}', '\t' }, i(0), t { '', '\\end{lemma}' } },
+		{ condition = conds.line_begin and vimtex.in_text }
+	),
+	s(
+		{ trig = 'def', name = 'Definition Environment', dscr = 'Create a definition environment.' },
+		{ t { '\\begin{definition}', '\t' }, i(0), t { '', '\\end{definition}' } },
+		{ condition = conds.line_begin }
+	),
+	s(
+		{ trig = 'prop', name = 'Proposition Environment', dscr = 'Create a proposition environment.' },
+		{ t { '\\begin{proposition}', '\t' }, i(0), t { '', '\\end{proposition}' } },
+		{ condition = conds.line_begin }
+	),
+	s(
+		{ trig = 'cor', name = 'Corollary Environment', dscr = 'Create a corollary environment.' },
+		{ t { '\\begin{corollary}', '\t' }, i(0), t { '', '\\end{corollary}' } },
+		{ condition = conds.line_begin }
+	),
+	s(
+		{ trig = 'rem', name = 'Remark Environment', dscr = 'Create a remark environment.' },
+		{ t { '\\begin{remark}', '\t' }, i(0), t { '', '\\end{remark}' } },
+		{ condition = conds.line_begin }
+	),
+	s(
+		{ trig = 'conj', name = 'Conjecture Environment', dscr = 'Create a conjecture environment.' },
+		{ t { '\\begin{conjecture}', '\t' }, i(0), t { '', '\\end{conjecture}' } },
+		{ condition = conds.line_begin }
+	),
+
 	s({
 		trig = 'lthm',
 		name = 'Theorem Environment with name and lable',
@@ -466,11 +489,6 @@ M = {
 		i(0),
 		t { '', '\\end{theorem}' },
 	}, { condition = conds.line_begin and vimtex.in_text }),
-	s(
-		{ trig = 'lem', name = 'Lemma Environment', dscr = 'Create a lemma environment.' },
-		{ t { '\\begin{lemma}', '\t' }, i(0), t { '', '\\end{lemma}' } },
-		{ condition = conds.line_begin and vimtex.in_text }
-	),
 	s({
 		trig = 'llem',
 		name = 'Lemma Environment with name and lable',
@@ -484,11 +502,6 @@ M = {
 		i(0),
 		t { '', '\\end{lemma}' },
 	}, { condition = conds.line_begin and vimtex.in_text }),
-	s(
-		{ trig = 'def', name = 'Definition Environment', dscr = 'Create a definition environment.' },
-		{ t { '\\begin{definition}', '\t' }, i(0), t { '', '\\end{definition}' } },
-		{ condition = conds.line_begin }
-	),
 	s({
 		trig = 'ldef',
 		name = 'Definition Environment with name and lable',
@@ -502,11 +515,6 @@ M = {
 		i(0),
 		t { '', '\\end{definition}' },
 	}, { condition = conds.line_begin }),
-	s(
-		{ trig = 'prop', name = 'Proposition Environment', dscr = 'Create a proposition environment.' },
-		{ t { '\\begin{proposition}', '\t' }, i(0), t { '', '\\end{proposition}' } },
-		{ condition = conds.line_begin }
-	),
 	s({
 		trig = 'lprop',
 		name = 'Proposition Environment with name and lable',
@@ -520,11 +528,6 @@ M = {
 		i(0),
 		t { '', '\\end{proposition}' },
 	}, { condition = conds.line_begin }),
-	s(
-		{ trig = 'cor', name = 'Corollary Environment', dscr = 'Create a corollary environment.' },
-		{ t { '\\begin{corollary}', '\t' }, i(0), t { '', '\\end{corollary}' } },
-		{ condition = conds.line_begin }
-	),
 	s({
 		trig = 'lcor',
 		name = 'Corollary Environment with name and lable',
@@ -538,11 +541,6 @@ M = {
 		i(0),
 		t { '', '\\end{corollary}' },
 	}, { condition = conds.line_begin }),
-	s(
-		{ trig = 'rem', name = 'Remark Environment', dscr = 'Create a remark environment.' },
-		{ t { '\\begin{remark}', '\t' }, i(0), t { '', '\\end{remark}' } },
-		{ condition = conds.line_begin }
-	),
 	s({
 		trig = 'lrem',
 		name = 'Remark Environment with name and lable',
@@ -556,11 +554,6 @@ M = {
 		i(0),
 		t { '', '\\end{remark}' },
 	}, { condition = conds.line_begin }),
-	s(
-		{ trig = 'conj', name = 'Conjecture Environment', dscr = 'Create a conjecture environment.' },
-		{ t { '\\begin{conjecture}', '\t' }, i(0), t { '', '\\end{conjecture}' } },
-		{ condition = conds.line_begin }
-	),
 	s({
 		trig = 'lconj',
 		name = 'Conjecture Environment with name and lable',
@@ -574,6 +567,7 @@ M = {
 		i(0),
 		t { '', '\\end{conjecture}' },
 	}, { condition = conds.line_begin }),
+
 	s(
 		{ trig = 'xym', name = 'xymatrix Environment', dscr = 'Create a xymatrix environment.' },
 		{ t { '\\[', '\t\\xymatrix{', '\t' }, i(1), t { ' \\\\', '\t}', '\\]' }, i(0) },
