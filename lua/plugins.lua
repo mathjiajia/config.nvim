@@ -161,17 +161,24 @@ local function spec(use)
 		end,
 	}
 	use {
-		'windwp/nvim-autopairs',
-		event = 'InsertEnter',
-		config = function()
-			require('configs.autopairs')
-		end,
-	}
-	use {
 		'github/copilot.vim',
 		cmd = 'Copilot',
 		config = function()
 			require('configs.copilot')
+		end,
+	}
+	-- use {
+	-- 	'windwp/nvim-autopairs',
+	-- 	event = 'InsertEnter',
+	-- 	config = function()
+	-- 		require('configs.autopairs')
+	-- 	end,
+	-- }
+	use {
+		'ZhiyuanLck/smart-pairs',
+		event = 'InsertEnter',
+		config = function()
+			require('configs.smartpairs')
 		end,
 	}
 
