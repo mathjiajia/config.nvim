@@ -12,8 +12,6 @@ local function nmap_cmd(key, fun, opts)
 end
 
 -- Normal
--- nmap_cmd('<D-q>', 'wq', { silent = false, desc = 'Write and Quit' })
--- nmap_cmd('<D-s>', 'write', { silent = false, desc = 'Save Current File' })
 nmap_cmd('<M-q>', 'quit', { silent = false, desc = 'Write and Quit' })
 nmap_cmd('<M-S-q>', 'quit!', { silent = false, desc = 'Force Quit' })
 -- resize
@@ -36,8 +34,6 @@ nmap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Mov
 map('i', '<C-a>', '<ESC>^i', { silent = true, desc = 'Move to the beginning of line' })
 map('i', '<C-f>', '<Right>', { silent = true, desc = 'Move forward a character' })
 map('i', '<C-b>', '<Left>', { silent = true, desc = 'Move back a character' })
--- map('i', '<D-s>', '<Esc><Cmd>write<CR>', { silent = true, desc = 'Write' })
--- map('i', '<D-q>', '<Esc><Cmd>wq<CR>', { silent = true, desc = 'Write and Quit' })
 -- Command line
 map('c', '<C-t>', '<C-R>=expand("%:p:h") . "/" <CR>', { desc = 'Expand Current Path' })
 -- Visual
