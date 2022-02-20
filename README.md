@@ -10,65 +10,66 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ## Structure
 
 ```txt
-── README.md
+├── LICENSE
+├── README.md
 ├── after
-│   └── ftplugin
-│       ├── gitcommit.lua
-│       ├── markdown.lua
-│       ├── norg.lua
-│       ├── qf.lua
-│       └── tex.lua
+│   └── ftplugin
+│       ├── gitcommit.lua
+│       ├── markdown.lua
+│       ├── norg.lua
+│       ├── qf.lua
+│       └── tex.lua
 ├── colors
-│   └── moon.lua
+│   ├── moon.lua
+│   └── sun.lua
 ├── ginit.vim
 ├── init.lua
 ├── lua
-│   ├── autocmds.lua
-│   ├── autosnippets
-│   │   ├── markdown.lua
-│   │   ├── norg.lua
-│   │   └── tex.lua
-│   ├── configs
-│   │   ├── aerial.lua
-│   │   ├── alpha.lua
-│   │   ├── autopairs.lua
-│   │   ├── bufferline.lua
-│   │   ├── cmp.lua
-│   │   ├── copilot.lua
-│   │   ├── devicons.lua
-│   │   ├── fidget.lua
-│   │   ├── fterm.lua
-│   │   ├── gitsigns.lua
-│   │   ├── hlslens.lua
-│   │   ├── hop.lua
-│   │   ├── indentline.lua
-│   │   ├── lualine.lua
-│   │   ├── luasnip.lua
-│   │   ├── neorg.lua
-│   │   ├── notify.lua
-│   │   ├── nvimtree.lua
-│   │   ├── outline.lua
-│   │   ├── session.lua
-│   │   ├── surround.lua
-│   │   ├── telescope.lua
-│   │   ├── treesitter.lua
-│   │   └── vimtex.lua
-│   ├── keybinds.lua
-│   ├── lsp
-│   │   ├── init.lua
-│   │   ├── null-ls.lua
-│   │   ├── pyright.lua
-│   │   ├── sumneko_lua.lua
-│   │   └── texlab.lua
-│   ├── options.lua
-│   ├── plugins.lua
-│   └── snippets
-│       ├── all.lua
-│       ├── gitcommit.lua
-│       ├── lua.lua
-│       ├── markdown.lua
-│       ├── norg.lua
-│       └── tex.lua
+│   ├── autocmds.lua
+│   ├── autosnippets
+│   │   ├── markdown.lua
+│   │   ├── norg.lua
+│   │   └── tex.lua
+│   ├── configs
+│   │   ├── aerial.lua
+│   │   ├── alpha.lua
+│   │   ├── bufferline.lua
+│   │   ├── cmp.lua
+│   │   ├── copilot.lua
+│   │   ├── devicons.lua
+│   │   ├── fidget.lua
+│   │   ├── fterm.lua
+│   │   ├── gitsigns.lua
+│   │   ├── hlslens.lua
+│   │   ├── hop.lua
+│   │   ├── indentline.lua
+│   │   ├── lualine.lua
+│   │   ├── luasnip.lua
+│   │   ├── neorg.lua
+│   │   ├── notify.lua
+│   │   ├── nvimtree.lua
+│   │   ├── session.lua
+│   │   ├── smartpairs.lua
+│   │   ├── surround.lua
+│   │   ├── telescope.lua
+│   │   ├── treesitter.lua
+│   │   └── vimtex.lua
+│   ├── keybinds.lua
+│   ├── lsp
+│   │   ├── init.lua
+│   │   ├── null-ls.lua
+│   │   ├── pyright.lua
+│   │   ├── sumneko_lua.lua
+│   │   └── texlab.lua
+│   ├── options.lua
+│   ├── plugins.lua
+│   └── snippets
+│       ├── all.lua
+│       ├── gitcommit.lua
+│       ├── lua.lua
+│       ├── markdown.lua
+│       ├── norg.lua
+│       └── tex.lua
 └── spell
     ├── en.utf-8.add
     └── en.utf-8.add.spl
