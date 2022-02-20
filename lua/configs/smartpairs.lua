@@ -1,5 +1,4 @@
 local fb = require('pairs.fallback')
-
 local opts = {
 	pairs = {
 		['*'] = {

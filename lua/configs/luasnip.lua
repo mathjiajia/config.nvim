@@ -36,57 +36,16 @@ _G.if_char_insert_space = function()
 	end
 end
 
--- local function load_snippet_file(filename)
--- 	-- 420 = 0644
--- 	local fd = vim.loop.fs_open(filename, 'r', 420)
-
--- 	if not fd then
--- 		return nil
--- 	end
-
--- 	local size = vim.loop.fs_fstat(fd).size
--- 	local func_string = vim.loop.fs_read(fd, size)
--- 	-- don't use require, we know where the file resides.
--- 	func_string = 'dofile("~/.config/nvim/lua/plugins/luasnip/helpers.lua").setup_snip_env() ' .. func_string
--- 	return loadstring(func_string)()
--- end
-
--- ls.snippets = setmetatable({}, {
--- 	__index = function(t, k)
--- 		-- absolute path!!!
--- 		-- adds snip_env to the file before generating the function.
--- 		local snippets = load_snippet_file('~/.config/nvim/lua/snippets/' .. k .. '.lua')
--- 		-- set to empty table if no snippets found, prevents loading the file again on the next expand.
--- 		t[k] = snippets or {}
--- 		return t[k]
--- 	end,
--- })
-
--- ls.autosnippets = setmetatable({}, {
--- 	__index = function(t, k)
--- 		-- absolute path!!!
--- 		-- adds snip_env to the file before generating the function.
--- 		local snippets = load_snippet_file('~/.config/nvim/lua/autosnippets/' .. k .. '.lua')
--- 		-- set to empty table if no snippets found, prevents loading the file again on the next expand.
--- 		t[k] = snippets or {}
--- 		return t[k]
--- 	end,
--- })
-
 local snippets = {}
 local autosnippets = {}
 
-snippets.all = require('snippets.all')
+for _, ft in ipairs { 'all', 'gitcommit', 'lua', 'markdown', 'norg', 'tex' } do
+	snippets.ft = require('snippets.' .. ft)
+end
 
-snippets.gitcommit = require('snippets.gitcommit')
-snippets.lua = require('snippets.lua')
-snippets.markdown = require('snippets.markdown')
-snippets.norg = require('snippets.norg')
-snippets.tex = require('snippets.tex')
-
-autosnippets.markdown = require('autosnippets.markdown')
-autosnippets.norg = require('autosnippets.norg')
-autosnippets.tex = require('autosnippets.tex')
+for _, ft in ipairs { 'markdown', 'norg', 'tex' } do
+	autosnippets.ft = require('snippets.' .. ft)
+end
 
 ls.snippets = snippets
 ls.autosnippets = autosnippets

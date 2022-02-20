@@ -11,11 +11,6 @@ local function nmap_cmd(key, fun, opts)
 	vim.keymap.set('n', key, rhs, opts)
 end
 
-nmap_cmd('<leader>rd', 'TSHighlightCapturesUnderCursor')
-nmap('<leader>fl', function()
-	require('telescope.builtin').highlights()
-end, { desc = 'Highlight Groups' })
-
 -- Normal
 -- nmap_cmd('<D-q>', 'wq', { silent = false, desc = 'Write and Quit' })
 -- nmap_cmd('<D-s>', 'write', { silent = false, desc = 'Save Current File' })
@@ -126,6 +121,9 @@ end, { silent = true, desc = 'Help Tags' })
 nmap('<leader>fk', function()
 	require('telescope.builtin').keymaps()
 end, { silent = true, desc = 'Keymaps' })
+nmap('<leader>fl', function()
+	require('telescope.builtin').highlights()
+end, { desc = 'Highlight Groups' })
 nmap('<leader>fo', function()
 	require('telescope.builtin').oldfiles()
 end, { silent = true, desc = 'Old Files' })
@@ -135,6 +133,7 @@ end, { silent = true, desc = 'Current Buffer Fuzzy Find' })
 nmap('<leader>ft', function()
 	require('telescope.builtin').tags()
 end, { silent = true, desc = 'Tags' })
+
 nmap('<leader>fb', function()
 	require('telescope').extensions.file_browser.file_browser {}
 end, { silent = true, desc = 'Current Buffer Fuzzy Find' })

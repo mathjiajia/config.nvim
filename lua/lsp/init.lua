@@ -114,13 +114,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-for _, server in
-	ipairs {
-		'pyright',
-		'sumneko_lua',
-		'texlab',
-	}
-do
+for _, server in ipairs { 'pyright', 'sumneko_lua', 'texlab' } do
 	require('lsp.' .. server).setup(on_attach, capabilities)
 end
 require('lsp.null-ls').setup(null_on_attach)

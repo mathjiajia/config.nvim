@@ -127,3 +127,10 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
+
+vim.keymap.set(
+	'n',
+	'<leader>ch',
+	'<Cmd>TSHighlightCapturesUnderCursor<CR>',
+	{ silent = true, desc = 'Highlight captures under cursor' }
+)
