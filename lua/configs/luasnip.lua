@@ -1,5 +1,4 @@
 local ls = require('luasnip')
--- local home = os.getenv('HOME')
 
 ls.config.setup {
 	history = true,
@@ -17,18 +16,24 @@ ls.config.setup {
 	-- ft_func = ft_functions.from_filetype,
 }
 
-vim.keymap.set({ 'i', 's' }, '<C-j>', function()
-	require('luasnip').jump(1)
-end, { desc = 'LuaSnip Forward Jump' })
-vim.keymap.set({ 'i', 's' }, '<C-k>', function()
-	require('luasnip').jump(-1)
-end, { desc = 'LuaSnip Backward Jump' })
--- vim.keymap.set({ 'i', 's' }, '<C-E>', function()
--- 	require('luasnip').change_choice(1)
--- end, { desc = 'LuaSnip Next Choice' })
--- vim.keymap.set({ 'i', 's' }, '<C-T>', function()
--- 	require('luasnip').change_choice(-1)
--- end, { desc = 'LuaSnip Previuos Choice' })
+local function map(key, rhs, opts)
+	opts = opts or {}
+	opts.silent = true
+	vim.keymap.set({ 'i', 's' }, key, rhs, opts)
+end
+
+map('<C-j>', function() require('luasnip').jump(1) end, { desc = 'LuaSnip Forward Jump' })
+map('<C-k>', function() require('luasnip').jump(-1) end, { desc = 'LuaSnip Backward Jump' })
+-- map(
+-- 	'<C-E>',
+-- 	'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"',
+-- 	{ expr = true, desc = 'LuaSnip Next Choice' }
+-- )
+-- map(
+-- 	'<C-T>',
+-- 	'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<C-T>"',
+-- 	{ expr = true, desc = 'LuaSnip Previous Choice' }
+-- )
 
 _G.if_char_insert_space = function()
 	if string.find(vim.v.char, '%a') then
@@ -39,13 +44,17 @@ end
 local snippets = {}
 local autosnippets = {}
 
-for _, ft in ipairs { 'all', 'gitcommit', 'lua', 'markdown', 'norg', 'tex' } do
-	snippets.ft = require('snippets.' .. ft)
-end
+snippets.all = require('snippets.all')
 
-for _, ft in ipairs { 'markdown', 'norg', 'tex' } do
-	autosnippets.ft = require('snippets.' .. ft)
-end
+snippets.gitcommit = require('snippets.gitcommit')
+snippets.lua = require('snippets.lua')
+snippets.markdown = require('snippets.markdown')
+snippets.norg = require('snippets.norg')
+snippets.tex = require('snippets.tex')
+
+autosnippets.markdown = require('autosnippets.markdown')
+autosnippets.norg = require('autosnippets.norg')
+autosnippets.tex = require('autosnippets.tex')
 
 ls.snippets = snippets
 ls.autosnippets = autosnippets

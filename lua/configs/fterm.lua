@@ -55,13 +55,5 @@ map('t', '<M-S-i>', function()
 	FTerm.exit()
 end, { desc = 'Terminal Exit' })
 map('n', '<M-g>', function()
-	FTerm
-		:new({
-			cmd = 'lazygit',
-			dimensions = {
-				height = 1,
-				width = 1,
-			},
-		})
-		:open()
+	FTerm:new({ cmd = 'lazygit', dimensions = { height = 1, width = 1 } }):open()
 end, { desc = 'LazyGit' })

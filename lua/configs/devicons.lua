@@ -10,11 +10,6 @@ require('nvim-web-devicons').setup {
 			color = '#e37933',
 			name = 'Neorg',
 		},
-		snippets = {
-			icon = '',
-			color = '#a9b665',
-			name = 'snippets',
-		},
 		tags = {
 			icon = '',
 			color = '#ffbc03',

@@ -5,11 +5,10 @@ require('aerial').setup {
 	backends = { 'lsp', 'treesitter', 'markdown' },
 
 	-- Enum: persist, close, auto, global
-	--   persist - aerial window will stay open until closed
-	--   close   - aerial window will close when original file is no longer visible
-	--   auto    - aerial window will stay open as long as there is a visible
-	--             buffer to attach to
-	--   global  - same as 'persist', and will always show symbols for the current buffer
+	-- persist - aerial window will stay open until closed
+	-- close - aerial window will close when original file is no longer visible
+	-- auto  - aerial window will stay open as long as there is a visible buffer to attach to
+	-- global  - same as 'persist', and will always show symbols for the current buffer
 	close_behavior = 'auto',
 
 	-- Set to false to remove the default keybindings for the aerial buffer
@@ -40,14 +39,11 @@ require('aerial').setup {
 
 	-- Enum: split_width, full_width, last, none
 	-- Determines line highlighting mode when multiple splits are visible.
-	-- split_width   Each open window will have its cursor location marked in the
-	--               aerial buffer. Each line will only be partially highlighted
-	--               to indicate which window is at that location.
-	-- full_width    Each open window will have its cursor location marked as a
-	--               full-width highlight in the aerial buffer.
-	-- last          Only the most-recently focused window will have its location
-	--               marked in the aerial buffer.
-	-- none          Do not show the cursor locations in the aerial window.
+	-- split_width  - Each open window will have its cursor location marked in the aerial buffer.
+	-- Each line will only be partially highlighted to indicate which window is at that location.
+	-- full_width - Each open window will have its cursor location marked as a full-width highlight in the aerial buffer.
+	-- last - Only the most-recently focused window will have its location marked in the aerial buffer.
+	-- none - Do not show the cursor locations in the aerial window.
 	highlight_mode = 'split_width',
 
 	-- Highlight the closest symbol if the cursor is not exactly on one.
@@ -57,10 +53,10 @@ require('aerial').setup {
 	-- Set to false to disable
 	highlight_on_jump = 300,
 
-	-- Define symbol icons. You can also specify "<Symbol>Collapsed" to change the
-	-- icon when the tree is collapsed at that symbol, or "Collapsed" to specify a
-	-- default collapsed icon. The default icon set is determined by the
-	-- "nerd_font" option below.
+	-- Define symbol icons.
+	-- You can also specify "<Symbol>Collapsed" to change the icon when the tree is collapsed at that symbol,
+	-- or "Collapsed" to specify a default collapsed icon.
+	-- The default icon set is determined by the "nerd_font" option below.
 	-- If you have lspkind-nvim installed, aerial will use it for icons.
 	icons = {},
 
@@ -72,8 +68,8 @@ require('aerial').setup {
 	-- Only works when manage_folds = true
 	link_tree_to_folds = true,
 
-	-- Use symbol tree for folding. Set to true or false to enable/disable
-	-- 'auto' will manage folds if your previous foldmethod was 'manual'
+	-- Use symbol tree for folding.
+	-- Set to true or false to enable/disable 'auto' will manage folds if your previous foldmethod was 'manual'
 	manage_folds = false,
 
 	-- The maximum width of the aerial window

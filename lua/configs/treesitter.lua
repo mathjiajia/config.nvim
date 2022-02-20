@@ -16,26 +16,28 @@ parser_configs.norg_table = {
 	},
 }
 
+local ts_install = {
+	'bibtex',
+	'c',
+	'comment',
+	'fish',
+	'html',
+	'latex',
+	'lua',
+	'markdown',
+	'norg',
+	'norg_meta',
+	'norg_table',
+	'python',
+	'query',
+	'ruby',
+	'toml',
+	'vim',
+	'yaml',
+}
+
 require('nvim-treesitter.configs').setup {
-	ensure_installed = {
-		'bibtex',
-		'c',
-		'comment',
-		'fish',
-		'html',
-		'latex',
-		'lua',
-		'markdown',
-		'norg',
-		'norg_meta',
-		'norg_table',
-		'python',
-		'query',
-		'ruby',
-		'toml',
-		'vim',
-		'yaml',
-	},
+	ensure_installed = ts_install,
 	highlight = {
 		enable = true,
 		-- disable = {},

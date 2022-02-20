@@ -16,16 +16,6 @@ require('indent_blankline').setup {
 	show_trailing_blankline_indent = false,
 	show_current_context = true,
 	show_current_context_start = true,
-	filetype_exclude = {
-		'checkhealth',
-		'git',
-		'help',
-		'log',
-		'lspinfo',
-		'NvimTree',
-		'packer',
-		'TelescopePrompt',
-		'',
-	},
+	filetype_exclude = { 'lspinfo', 'packer', 'checkhealth', 'help', '' },
 	buftype_exclude = { 'terminal', 'nofile' },
 }

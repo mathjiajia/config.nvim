@@ -28,30 +28,9 @@ local function copy(args)
 end
 
 M = {
-	s({
-		trig = 'fixme',
-		name = 'FIXME:',
-	}, {
-		t('FIXME('),
-		p(os.getenv, 'USER'),
-		t('): '),
-	}),
-	s({
-		trig = 'note',
-		name = 'NOTE:',
-	}, {
-		t('NOTE('),
-		p(os.getenv, 'USER'),
-		t('): '),
-	}),
-	s({
-		trig = 'todo',
-		name = 'TODO:',
-	}, {
-		t('TODO('),
-		p(os.getenv, 'USER'),
-		t('): '),
-	}),
+	s({ trig = 'fixme', name = 'FIXME:' }, { t('FIXME('), p(os.getenv, 'USER'), t('): ') }),
+	s({ trig = 'note', name = 'NOTE:' }, { t('NOTE('), p(os.getenv, 'USER'), t('): ') }),
+	s({ trig = 'todo', name = 'TODO:' }, { t('TODO('), p(os.getenv, 'USER'), t('): ') }),
 }
 
 return M

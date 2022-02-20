@@ -4,12 +4,7 @@ require('lualine').setup {
 		theme = 'ayu_mirage',
 		component_separators = '|',
 		section_separators = '',
-		disabled_filetypes = {
-			'aerial',
-			'alpha',
-			'help',
-			'tsplayground',
-		},
+		disabled_filetypes = { 'aerial', 'alpha', 'help', 'tsplayground' },
 		always_divide_middle = true,
 	},
 	sections = {
@@ -29,8 +24,5 @@ require('lualine').setup {
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = {
-		'nvim-tree',
-		'quickfix',
-	},
+	extensions = { 'nvim-tree', 'quickfix' },
 }

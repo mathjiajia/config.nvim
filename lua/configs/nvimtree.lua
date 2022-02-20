@@ -4,10 +4,8 @@ local picker_exclude = {
 	buftype = { 'terminal' },
 }
 local special_files = {
-	['Cargo.toml'] = true,
-	Makefile = true,
 	['README.md'] = true,
-	['readme.md'] = true,
+	['LICENSE'] = true,
 }
 
 local icons = {
@@ -51,18 +49,22 @@ vim.g.nvim_tree_icon_padding = ' ' -- one space by default, used for rendering t
 vim.g.nvim_tree_symlink_arrow = ' >> ' --  defaults to ' ➛ '. used as a separator between symlinks' source and target.
 vim.g.nvim_tree_respect_buf_cwd = 0 -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
 vim.g.nvim_tree_create_in_closed_folder = 1 -- 1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
-
 vim.g.nvim_tree_window_picker_exclude = picker_exclude
 -- Dictionary of buffer option names mapped to a list of option values that
 -- indicates to the window picker that the buffer's window should not be
 -- selectable.
 vim.g.nvim_tree_special_files = special_files
 -- List of filenames that gets highlighted with NvimTreeSpecialFile
-
-vim.g.nvim_tree_icons = icons
 vim.g.nvim_tree_show_icons = show_icons
+-- If 0, do not show the icons for one of 'git' 'folder' and 'files'
+-- 1 by default, notice that if 'files' is 1, it will only display
+-- if nvim-web-devicons is installed and on your runtimepath.
+-- if folder is 1, you can also tell folder_arrows 1 to show small arrows next to the folder icons.
+-- but this will not work when you set indent_markers (because of UI conflict)
+
 -- default will show icon by default if no icon is provided
 -- default shows no icon by default
+vim.g.nvim_tree_icons = icons
 
 local custom = {
 	'.cache',

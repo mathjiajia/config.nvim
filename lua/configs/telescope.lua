@@ -103,8 +103,8 @@ require('telescope').setup {
 				['conf'] = home .. '/.config',
 				['cv'] = home .. '/Documents/CV',
 				['exercise'] = home .. '/Documents/Exercises',
+				['norg'] = home .. '/Documents/neorg',
 				['notes'] = home .. '/Documents/Notes',
-				['org'] = home .. '/Documents/neorg',
 				['project'] = home .. '/Documents/Projects',
 				['site'] = home .. '/my_site',
 				['talks'] = home .. '/Documents/Talks',
@@ -131,15 +131,7 @@ require('telescope').setup {
 }
 
 -- Load extensions
-local extensions = {
-	-- 'bibtex',
-	'file_browser',
-	'frecency',
-	'fzf',
-	'project',
-}
-pcall(function()
-	for _, ext in ipairs(extensions) do
-		require('telescope').load_extension(ext)
-	end
-end)
+local extensions = { 'file_browser', 'frecency', 'fzf', 'project' } -- 'bibtex',
+for _, ext in ipairs(extensions) do
+	require('telescope').load_extension(ext)
+end

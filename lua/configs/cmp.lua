@@ -11,21 +11,16 @@ local kind_icons = {
 	Method = '',
 	Function = '',
 	Constructor = '',
-	-- Field = '',
-	-- Variable = '',
-	-- Class = 'ﴯ',
-	Field = '  ',
-	Variable = '  ',
-	Class = '',
+	Field = '',
+	Variable = '',
+	Class = 'ﴯ',
 	Interface = '',
 	Module = '',
 	Property = 'ﰠ',
 	Unit = '',
 	Value = '',
 	Enum = '',
-	-- Keyword = '',
-	-- Snippet = '',
-	Keyword = '  ',
+	Keyword = '',
 	Snippet = '',
 	Color = '',
 	File = '',
@@ -97,7 +92,7 @@ cmp.setup {
 	-- },
 
 	formatting = {
-		-- fields = { 'abbr', 'kind', 'menu' },
+		fields = { 'abbr', 'kind', 'menu' },
 		format = function(entry, vim_item)
 			-- Kind icons
 			-- This concatonates the icons with the name of the item kind
@@ -170,35 +165,29 @@ cmp.setup {
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({
+	sources = cmp.config.sources {
 		{ name = 'luasnip' }, -- You can specify the `cmp_git` source if you were installed it.
-	}, {
-		{ name = 'buffer' },
-	}),
-})
-
-cmp.setup.filetype('norg', {
-	sources = cmp.config.sources({
-		{ name = 'luasnip' },
-	}, {
-		{ name = 'buffer' },
-	}, {
-		{ name = 'neorg' },
-	}),
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-	sources = {
 		{ name = 'buffer' },
 	},
 })
 
+cmp.setup.filetype('norg', {
+	sources = cmp.config.sources {
+		{ name = 'luasnip' },
+		{ name = 'buffer' },
+		{ name = 'neorg' },
+	},
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+	sources = { name = 'buffer' },
+})
+
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-	sources = cmp.config.sources({
+	sources = cmp.config.sources {
 		{ name = 'path' },
-	}, {
-		{ name = 'cmdline', keyword_length = 2 },
-	}),
+		{ name = 'cmdline' },
+	},
 })

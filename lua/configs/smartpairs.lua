@@ -17,19 +17,11 @@ local opts = {
 			{ "'", "'", { triplet = true } },
 			{ '"', '"', { triplet = true } },
 		},
-		ruby = {
-			{ '|', '|' },
-		},
 		markdown = {
 			{ '`', '`', { triplet = true } },
 		},
-		tex = {
-			{ '$', '$', { cross_line = true } },
-			-- Chinese pairs
-			{ '（', '）' },
-			{ '【', '】' },
-			{ '‘', '’' },
-			{ '“', '”' },
+		norg = {
+			{ '`', '`' },
 		},
 	},
 	default_opts = {

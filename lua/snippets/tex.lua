@@ -27,427 +27,199 @@ end
 
 M = {
 	-- priority 1:
-	s({
-		trig = 'c(%u)',
-		name = 'mathcal',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
+	s(
+		{ trig = 'c(%u)', name = 'mathcal', wordTrig = false, regTrig = true },
+		{ f(function(_, snip)
 			return '\\mathcal{' .. snip.captures[1] .. '}'
-		end, {}),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 'f(%a)',
-		name = 'mathfrak',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
+		end, {}) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'f(%a)', name = 'mathfrak', wordTrig = false, regTrig = true },
+		{ f(function(_, snip)
 			return '\\mathfrak{' .. snip.captures[1] .. '}'
-		end, {}),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 's(%u)',
-		name = 'mathscr',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
+		end, {}) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 's(%u)', name = 'mathscr', wordTrig = false, regTrig = true },
+		{ f(function(_, snip)
 			return '\\mathscr{' .. snip.captures[1] .. '}'
-		end, {}),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+		end, {}) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
 	-- priority 0:
 
 	-- variations of brackets
-	s({
-		trig = 'lr',
-		name = 'left( right)',
-	}, {
-		t { '\\left( ' },
-		i(1),
-		t { '\\right)' },
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 'lr(',
-		name = 'left( right)',
-	}, {
-		t { '\\left( ' },
-		i(1),
-		t { '\\right)' },
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 'lr|',
-		name = 'leftvert rightvert',
-	}, {
-		t { '\\left\\lvert ' },
-		i(1),
-		t { '\\right\\lvert' },
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 'lr{',
-		name = 'left\\{ right\\}',
-	}, {
-		t { '\\left\\{ ' },
-		i(1),
-		t { '\\right\\}' },
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 'lrb',
-		name = 'left\\{ right\\}',
-	}, {
-		t { '\\left\\{ ' },
-		i(1),
-		t { '\\right\\}' },
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
-	s({
-		trig = 'lr[',
-		name = 'left[ right]',
-	}, {
-		t { '\\left[ ' },
-		i(1),
-		t { '\\right]' },
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+	s(
+		{ trig = 'lr', name = 'left( right)' },
+		{ t { '\\left( ' }, i(1), t { '\\right)' }, i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'lr(', name = 'left( right)' },
+		{ t { '\\left( ' }, i(1), t { '\\right)' }, i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'lr|', name = 'leftvert rightvert' },
+		{ t { '\\left\\lvert ' }, i(1), t { '\\right\\lvert' }, i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'lr{', name = 'left\\{ right\\}' },
+		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' }, i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'lrb', name = 'left\\{ right\\}' },
+		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' }, i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'lr[', name = 'left[ right]' },
+		{ t { '\\left[ ' }, i(1), t { '\\right]' }, i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
 	-- General text styling like bold and so on
-	s({
-		trig = 'bf',
-		name = 'bold',
-		dscr = 'Insert bold text.',
-	}, {
-		t('\\textbf{'),
-		i(1),
-		t('}'),
-		i(0),
-	}, {
-		condition = vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
-	s({
-		trig = 'it',
-		name = 'italic',
-		dscr = 'Insert italic text.',
-	}, {
-		t('\\textit{'),
-		i(1),
-		t('}'),
-		i(0),
-	}, {
-		condition = vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
-	s({
-		trig = 'em',
-		name = 'emphasize',
-		dscr = 'Insert emphasize text.',
-	}, {
-		t('\\emph{'),
-		i(1),
-		t('}'),
-		i(0),
-	}, {
-		condition = vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
-	s({
-		trig = 'ni',
-		name = 'non-indented paragraph',
-		dscr = 'Insert non-indented paragraph.',
-	}, {
-		t { '\\noindent', '' },
-		i(0),
-	}, {
-		condition = conds.line_begin and vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
-	s({
-		trig = 'cite',
-		name = '\\cite[]{}',
-	}, {
-		t('\\cite['),
-		i(1),
-		t(']{'),
-		i(2),
-		t('}'),
-		i(0),
-	}, {
-		condition = vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
+	s(
+		{ trig = 'bf', name = 'bold', dscr = 'Insert bold text.' },
+		{ t('\\textbf{'), i(1), t('}'), i(0) },
+		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
+	),
+	s(
+		{ trig = 'it', name = 'italic', dscr = 'Insert italic text.' },
+		{ t('\\textit{'), i(1), t('}'), i(0) },
+		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
+	),
+	s(
+		{ trig = 'em', name = 'emphasize', dscr = 'Insert emphasize text.' },
+		{ t('\\emph{'), i(1), t('}'), i(0) },
+		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
+	),
+	s(
+		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
+		{ t { '\\noindent', '' }, i(0) },
+		{ condition = conds.line_begin and vimtex.in_text, show_condition = vimtex.in_text }
+	),
+	s(
+		{ trig = 'cite', name = '\\cite[]{}' },
+		{ t('\\cite['), i(1), t(']{'), i(2), t('}'), i(0) },
+		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
+	),
 
 	-- All kind of sections
-	s({
-		trig = 'cha',
-		name = 'Chapter',
-		dscr = 'Insert a new chapter.',
-	}, {
+	s({ trig = 'cha', name = 'Chapter', dscr = 'Insert a new chapter.' }, {
 		t { 'chapter{' },
 		i(1),
 		t { '}\\label{cha:' },
 		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '\t' },
 		i(0),
-	}, {
-		condition = conds.line_begin,
-	}),
-	s({
-		trig = 'sec',
-		name = 'Section',
-		dscr = 'Insert a new section.',
-		regTrig = true,
-	}, {
+	}, { condition = conds.line_begin }),
+	s({ trig = 'sec', name = 'Section', dscr = 'Insert a new section.', regTrig = true }, {
 		t { '\\section{' },
 		i(1),
 		t { '}\\label{sec:' },
 		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '' },
 		i(0),
-	}, {
-		condition = conds.line_begin,
-	}),
-	s({
-		trig = 'ssec',
-		name = 'star Section',
-		dscr = 'Insert a section without index.',
-		regTrig = true,
-	}, {
+	}, { condition = conds.line_begin }),
+	s({ trig = 'ssec', name = 'star Section', dscr = 'Insert a section without index.', regTrig = true }, {
 		t { '\\section*{' },
 		i(1),
 		t { '}\\label{sec:' },
 		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '' },
 		i(0),
-	}, {
-		condition = conds.line_begin,
-	}),
-	s({
-		trig = 'sub',
-		name = 'subSection',
-		dscr = 'Insert a new subsection.',
-		regTrig = true,
-	}, {
+	}, { condition = conds.line_begin }),
+	s({ trig = 'sub', name = 'subSection', dscr = 'Insert a new subsection.', regTrig = true }, {
 		t { '\\subsection{' },
 		i(1),
 		t { '}\\label{sub:' },
 		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '' },
 		i(0),
-	}, {
-		condition = conds.line_begin,
-	}),
-	s({
-		trig = 'ssub',
-		name = 'star subSection',
-		dscr = 'Insert a subsection without index.',
-		regTrig = true,
-	}, {
+	}, { condition = conds.line_begin }),
+	s({ trig = 'ssub', name = 'star subSection', dscr = 'Insert a subsection without index.', regTrig = true }, {
 		t { '\\subsection*{' },
 		i(1),
 		t { '}\\label{sub:' },
 		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '' },
 		i(0),
-	}, {
-		condition = conds.line_begin,
-	}),
+	}, { condition = conds.line_begin }),
 
-	s({
-		trig = '/',
-		name = 'fraction',
-		dscr = 'Insert a fraction notation.',
-		wordTrig = false,
-	}, {
-		t('\\frac{'),
-		i(1),
-		t('}{'),
-		i(2),
-		t('}'),
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+	s(
+		{ trig = '/', name = 'fraction', dscr = 'Insert a fraction notation.', wordTrig = false },
+		{ t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
-	s({
-		trig = 'sum',
-		name = 'sum',
-		dscr = 'Insert a sum notation.',
-	}, {
-		t('\\sum_{'),
-		i(1),
-		t('}^{'),
-		i(2),
-		t('}'),
-		i(3),
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+	s(
+		{ trig = 'sum', name = 'sum', dscr = 'Insert a sum notation.' },
+		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}'), i(3), i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
-	s({
-		trig = 'lim',
-		name = 'limit',
-		dscr = 'Insert a limit notation.',
-	}, {
-		t('\\lim_{n='),
-		i(1, 'n'),
-		t('} \\to '),
-		i(2, '\\infty'),
-		t('} '),
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+	s(
+		{ trig = 'lim', name = 'limit', dscr = 'Insert a limit notation.' },
+		{ t('\\lim_{n='), i(1, 'n'), t('} \\to '), i(2, '\\infty'), t('} '), i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
-	s({
-		trig = 'limsup',
-		name = 'limsup',
-		dscr = 'Insert a limit superior notation.',
-	}, {
-		t('\\limsup_{n='),
-		i(1, 'n'),
-		t('} \\to '),
-		i(2, '\\infty'),
-		t('} '),
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+	s(
+		{ trig = 'limsup', name = 'limsup', dscr = 'Insert a limit superior notation.' },
+		{ t('\\limsup_{n='), i(1, 'n'), t('} \\to '), i(2, '\\infty'), t('} '), i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
-	s({
-		trig = 'prod',
-		name = 'product',
-		dscr = 'Insert a product notation.',
-	}, {
-		t('\\prod_{'),
-		i(1, 'n'),
-		t('='),
-		i(2, '1'),
-		t('}^{'),
-		i(3, '\\infty'),
-		t('}'),
-		i(4),
-		t(' '),
-		i(0),
-	}, {
-		condition = vimtex.in_mathzone,
-		show_condition = vimtex.in_mathzone,
-	}),
+	s(
+		{ trig = 'prod', name = 'product', dscr = 'Insert a product notation.' },
+		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}'), i(4), t(' '), i(0) },
+		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
 
 	-- phrases which are often used
-	s({
-		trig = 'ses',
-		name = 'short exact sequence',
-		dscr = 'text: short exact sequence.',
-	}, {
-		t('short exact sequence'),
-	}, {
-		condition = vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
+	s(
+		{ trig = 'ses', name = 'short exact sequence', dscr = 'text: short exact sequence.' },
+		{ t('short exact sequence') },
+		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
+	),
 
-	s({
-		trig = 'klt',
-		name = 'Kawamata log terminal',
-		dscr = 'text: Kawamata log terminal.',
-	}, {
-		t('Kawamata log terminal'),
-	}, {
-		condition = vimtex.in_text,
-		show_condition = vimtex.in_text,
-	}),
+	s(
+		{ trig = 'klt', name = 'Kawamata log terminal', dscr = 'text: Kawamata log terminal.' },
+		{ t('Kawamata log terminal') },
+		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
+	),
 
 	-- cycle change sequences
-	-- s({
-	-- 	trig = 'spaceseq',
-	-- 	name = 'set a white space',
-	-- 	dscr = 'Select from 3/4/5/normal/18/36/-3mu.',
-	-- }, {
-	-- 	c(1, {
-	-- 		t('\\, '),
-	-- 		t('\\: '),
-	-- 		t('\\; '),
-	-- 		t('\\  '),
-	-- 		t('\\quad '),
-	-- 		t('\\qquad '),
-	-- 		t('\\! '),
-	-- 	}),
-	-- 	i(0),
-	-- }, {
-	-- 	condition = vimtex.in_mathzone,
-	-- 	show_condition = vimtex.in_mathzone,
-	-- }),
+	-- s(
+	-- 	{ trig = 'spaceseq', name = 'set a white space', dscr = 'Select from 3/4/5/normal/18/36/-3mu.' },
+	-- 	{ c(1, { t('\\, '), t('\\: '), t('\\; '), t('\\  '), t('\\quad '), t('\\qquad '), t('\\! ') }), i(0) },
+	-- 	{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	-- ),
 	-- s({
 	-- 	trig = 'larrowseq',
 	-- 	name = 'set a left arrow',
 	-- 	dscr = 'leftarrow\nlongleftarrow\nLeftarrow\nLongleftarrow\nxleftarrow',
 	-- }, {
-	-- 	c(1, {
-	-- 		t('\\leftarrow '),
-	-- 		t('\\longleftarrow '),
-	-- 		t('\\Leftarrow '),
-	-- 		t('\\Longleftarrow '),
-	-- 		t('\\xleftarrow '),
-	-- 	}),
+	-- 	c(1, { t('\\leftarrow '), t('\\longleftarrow '), t('\\Leftarrow '), t('\\Longleftarrow '), t('\\xleftarrow ') }),
 	-- 	i(0),
-	-- }, {
-	-- 	condition = vimtex.in_mathzone,
-	-- 	show_condition = vimtex.in_mathzone,
-	-- }),
+	-- }, { condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }),
 	-- s({
 	-- 	trig = 'rarrowseq',
 	-- 	name = 'set a right arrow',
 	-- 	dscr = 'rightarrow\nlongrightarrow\nRightarrow\nLongrightarrow\nxrightarrow',
 	-- }, {
-	-- 	c(1, {
-	-- 		t('\\rightarrow '),
-	-- 		t('\\longrightarrow '),
-	-- 		t('\\Rightarrow '),
-	-- 		t('\\Longrightarrow '),
-	-- 		t('\\xrightarrow '),
-	-- 	}),
+	-- 	c(
+	-- 		1,
+	-- 		{ t('\\rightarrow '), t('\\longrightarrow '), t('\\Rightarrow '), t('\\Longrightarrow '), t('\\xrightarrow ') }
+	-- 	),
 	-- 	i(0),
-	-- }, {
-	-- 	condition = vimtex.in_mathzone,
-	-- 	show_condition = vimtex.in_mathzone,
-	-- }),
+	-- }, { condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }),
 	-- s({
 	-- 	trig = 'ltrarrowseq',
 	-- 	name = 'set a left to right arrow',
@@ -461,10 +233,7 @@ M = {
 	-- 		t('\\iff '),
 	-- 	}),
 	-- 	i(0),
-	-- }, {
-	-- 	condition = vimtex.in_mathzone,
-	-- 	show_condition = vimtex.in_mathzone,
-	-- }),
+	-- }, { condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }),
 	-- s({
 	-- 	trig = 'fontseq',
 	-- 	name = 'set a font size',
@@ -483,16 +252,9 @@ M = {
 	-- 		t('\\Huge '),
 	-- 	}),
 	-- 	i(0),
-	-- }, {
-	-- 	condition = vimtex.in_mathzone,
-	-- 	show_condition = vimtex.in_mathzone,
-	-- }),
+	-- }, { condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }),
 
-	s({
-		trig = 'tempb',
-		name = 'Basic template',
-		dscr = 'Use the basic template which includes a variety of packages and declared-commands.',
-	}, {
+	s({ trig = 'tempb', name = 'Basic template', dscr = 'Use the basic template' }, {
 		t {
 			'\\documentclass{article}',
 			'\\input{~/Tex/preamble_pac}',
@@ -529,14 +291,8 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, {
-		condition = conds.line_begin,
-	}),
-	s({
-		trig = 'temps',
-		name = 'Slides template',
-		dscr = 'Use the slides template which includes a variety of packages and declared-commands.',
-	}, {
+	}, { condition = conds.line_begin }),
+	s({ trig = 'temps', name = 'Slides template', dscr = 'Use the slides template' }, {
 		t {
 			'\\documentclass[8pt]{beamer}',
 			'\\input{~/Tex/preamble_pac}',
@@ -596,11 +352,7 @@ M = {
 	}, {
 		condition = conds.line_begin,
 	}),
-	s({
-		trig = 'tempa',
-		name = 'AMS template',
-		dscr = 'Use the AMS template which includes a variety of packages and declared-commands.',
-	}, {
+	s({ trig = 'tempa', name = 'AMS template', dscr = 'Use the AMS template' }, {
 		t {
 			'\\documentclass[11pt]{amsart}',
 			'',
@@ -833,13 +585,8 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, {
-		condition = conds.line_begin,
-	}),
-	s({
-		trig = 'tempr',
-		name = 'report template',
-	}, {
+	}, { condition = conds.line_begin }),
+	s({ trig = 'tempr', name = 'report template' }, {
 		t {
 			'',
 			'% version 15 January 2022',
@@ -916,9 +663,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, {
-		condition = conds.line_begin,
-	}),
+	}, { condition = conds.line_begin }),
 }
 
 return M
