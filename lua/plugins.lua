@@ -34,7 +34,7 @@ local function spec(use)
 	}
 	use { -- notifications
 		'rcarriga/nvim-notify',
-		event = 'WinEnter',
+		event = 'vimEnter',
 		config = function()
 			require('configs.notify')
 		end,
