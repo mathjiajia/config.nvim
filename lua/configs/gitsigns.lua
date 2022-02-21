@@ -54,14 +54,28 @@ gitsigns.setup {
 		map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, desc = 'Previous Hunk' })
 
 		-- Actions
-		map({ 'n', 'v' }, '<leader>gs', function() gitsigns.stage_hunk() end, { desc = 'Stage Hunk' })
-		map('n', '<leader>gu', function() gitsigns.undo_stage_hunk() end, { desc = 'Undo Stage Hunk' })
-		map({ 'n', 'v' }, '<leader>gr', function() gitsigns.reset_hunk() end, { desc = 'Reset Hunk' })
-		map('n', '<leader>gS', function() gitsigns.stage_buffer() end, { desc = 'Stage buffer' })
-		map('n', '<leader>gR', function() gitsigns.reset_buffer() end, { desc = 'Reset buffer' })
-		map('n', '<leader>gp', function() gitsigns.preview_hunk() end, { desc = 'Preview Hunk' })
+		map({ 'n', 'v' }, '<leader>gs', function()
+			gitsigns.stage_hunk()
+		end, { desc = 'Stage Hunk' })
+		map('n', '<leader>gu', function()
+			gitsigns.undo_stage_hunk()
+		end, { desc = 'Undo Stage Hunk' })
+		map({ 'n', 'v' }, '<leader>gr', function()
+			gitsigns.reset_hunk()
+		end, { desc = 'Reset Hunk' })
+		map('n', '<leader>gS', function()
+			gitsigns.stage_buffer()
+		end, { desc = 'Stage buffer' })
+		map('n', '<leader>gR', function()
+			gitsigns.reset_buffer()
+		end, { desc = 'Reset buffer' })
+		map('n', '<leader>gp', function()
+			gitsigns.preview_hunk()
+		end, { desc = 'Preview Hunk' })
 
 		-- Text object
-		map({ 'o', 'x' }, 'ih', function() gitsigns.select_hunk() end, { desc = 'Select Hunk' })
+		map({ 'o', 'x' }, 'ih', function()
+			gitsigns.select_hunk()
+		end, { desc = 'Select Hunk' })
 	end,
 }

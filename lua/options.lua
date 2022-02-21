@@ -42,6 +42,8 @@ vim.opt.tabstop = 2
 vim.opt.history = 2000
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
+vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
 -- ui
 vim.opt.breakindent = true
@@ -83,8 +85,3 @@ vim.opt.updatetime = 500
 -- theme
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
-
--- if vim.fn.executable('rg') == 1 then
--- 	vim.opt.grepprg = 'rg --vimgrep --color=never --no-heading --smart-case --hidden'
--- 	vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
--- end

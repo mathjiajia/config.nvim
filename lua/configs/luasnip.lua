@@ -22,8 +22,12 @@ local function map(key, rhs, opts)
 	vim.keymap.set({ 'i', 's' }, key, rhs, opts)
 end
 
-map('<C-j>', function() require('luasnip').jump(1) end, { desc = 'LuaSnip Forward Jump' })
-map('<C-k>', function() require('luasnip').jump(-1) end, { desc = 'LuaSnip Backward Jump' })
+map('<C-j>', function()
+	require('luasnip').jump(1)
+end, { desc = 'LuaSnip Forward Jump' })
+map('<C-k>', function()
+	require('luasnip').jump(-1)
+end, { desc = 'LuaSnip Backward Jump' })
 -- map(
 -- 	'<C-E>',
 -- 	'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"',

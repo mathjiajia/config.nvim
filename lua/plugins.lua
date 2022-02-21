@@ -46,6 +46,14 @@ local function spec(use)
 			require('configs.lualine')
 		end,
 	}
+	-- use {
+	-- 	'windwp/windline.nvim',
+	-- 	event = 'BufRead',
+	-- 	config = function()
+	-- 		require('configs.windline')
+	-- 	end,
+	-- }
+
 	use { -- tabline
 		'akinsho/nvim-bufferline.lua',
 		event = 'BufRead',
@@ -75,15 +83,17 @@ local function spec(use)
 		'nvim-telescope/telescope.nvim',
 		cmd = 'Telescope',
 		module = 'telescope',
+		requires = {
+			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
+			{ 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
+			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
+			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
+			-- { 'nvim-telescope/telescope-bibtex.nvim', after = 'telescope.nvim' },
+		},
 		config = function()
 			require('configs.telescope')
 		end,
 	}
-	use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' }
-	use { 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' }
-	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' }
-	use { 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' }
-	-- use { 'nvim-telescope/telescope-bibtex.nvim', after = 'telescope.nvim' }
 
 	-- session management
 	use {
@@ -99,13 +109,15 @@ local function spec(use)
 		'nvim-treesitter/nvim-treesitter',
 		event = 'BufRead',
 		run = ':TSUpdate',
+		requires = {
+			{ 'nvim-treesitter/playground', after = 'nvim-treesitter' },
+			{ 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
+			-- { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
+		},
 		config = function()
 			require('configs.treesitter')
 		end,
 	}
-	use { 'nvim-treesitter/playground', after = 'nvim-treesitter' }
-	use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-	-- use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
 	use {
 		'stevearc/aerial.nvim',
 		module = 'aerial',
@@ -143,16 +155,19 @@ local function spec(use)
 	use {
 		'hrsh7th/nvim-cmp',
 		event = 'InsertEnter',
+		requires = {
+			{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+			{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+			{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+			{ 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+			{ 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
+			{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }, -- Snippets source for nvim-cmp
+		},
 		config = function()
 			require('configs.cmp')
 		end,
 	}
-	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
-	use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
-	use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' } -- Snippets source for nvim-cmp
+
 	use { -- Snippets plugin
 		'L3MON4D3/LuaSnip',
 		module = 'luasnip',
@@ -167,20 +182,20 @@ local function spec(use)
 			require('configs.copilot')
 		end,
 	}
-	-- use {
-	-- 	'windwp/nvim-autopairs',
-	-- 	event = 'InsertEnter',
-	-- 	config = function()
-	-- 		require('configs.autopairs')
-	-- 	end,
-	-- }
 	use {
-		'ZhiyuanLck/smart-pairs',
+		'windwp/nvim-autopairs',
 		event = 'InsertEnter',
 		config = function()
-			require('configs.smartpairs')
+			require('configs.autopairs')
 		end,
 	}
+	-- use {
+	-- 	'ZhiyuanLck/smart-pairs',
+	-- 	event = 'InsertEnter',
+	-- 	config = function()
+	-- 		require('configs.smartpairs')
+	-- 	end,
+	-- }
 
 	-- Language stuff
 	use { 'folke/lua-dev.nvim', module = 'lua-dev' }
@@ -253,6 +268,13 @@ local function spec(use)
 	}
 
 	-- search/motions
+	use {
+		'windwp/nvim-spectre',
+		module = 'spectre',
+		config = function()
+			require('configs.spectre')
+		end,
+	}
 	use {
 		'phaazon/hop.nvim',
 		module = 'hop',

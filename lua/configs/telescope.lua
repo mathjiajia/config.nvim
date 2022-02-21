@@ -1,4 +1,5 @@
 local home = os.getenv('HOME')
+require('packer').loader('telescope-file-browser.nvim')
 
 require('telescope').setup {
 	defaults = {
@@ -132,6 +133,8 @@ require('telescope').setup {
 
 -- Load extensions
 local extensions = { 'file_browser', 'frecency', 'fzf', 'project' } -- 'bibtex',
-for _, ext in ipairs(extensions) do
-	require('telescope').load_extension(ext)
-end
+pcall(function()
+	for _, ext in ipairs(extensions) do
+		require('telescope').load_extension(ext)
+	end
+end)

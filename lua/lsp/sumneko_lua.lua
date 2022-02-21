@@ -26,9 +26,7 @@ M.setup = function(on_attach, capabilities)
 		lspconfig = {
 			on_attach = on_attach,
 			capabilities = capabilities,
-			flags = {
-				debounce_text_changes = 150,
-			},
+			flags = { debounce_text_changes = 150 },
 			settings = settings,
 		},
 	}

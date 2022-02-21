@@ -57,17 +57,29 @@ map('<leader>bp', '<Cmd>bprev<CR>', { desc = 'Previous Buffer' })
 map('<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
 
 -- close
-map('<leader>bh', function() bufferline.close_in_direction('left') end, { desc = 'Close Left Buffers' })
-map('<leader>bl', function() bufferline.close_in_direction('right') end, { desc = 'Close Right Buffers' })
+map('<leader>bh', function()
+	bufferline.close_in_direction('left')
+end, { desc = 'Close Left Buffers' })
+map('<leader>bl', function()
+	bufferline.close_in_direction('right')
+end, { desc = 'Close Right Buffers' })
 
 -- jump
 for i = 1, 9 do
-	map(string.format('<M-%s>', i), function() bufferline.go_to_buffer(i) end, { desc = string.format('Buffer %s', i) })
+	map(string.format('<M-%s>', i), function()
+		bufferline.go_to_buffer(i)
+	end, { desc = string.format('Buffer %s', i) })
 end
 
 -- pick
-map('<leader>bs', function() bufferline.pick_buffer() end, { desc = 'Pick a buffer' })
+map('<leader>bs', function()
+	bufferline.pick_buffer()
+end, { desc = 'Pick a buffer' })
 
 -- sort
-map('<leader>bd', function() bufferline.sort_buffers_by('directory') end, { desc = 'Sort Buffers by Directory' })
-map('<leader>be', function() bufferline.sort_buffers_by('extension') end, { desc = 'Sort Buffers by Extension' })
+map('<leader>bd', function()
+	bufferline.sort_buffers_by('directory')
+end, { desc = 'Sort Buffers by Directory' })
+map('<leader>be', function()
+	bufferline.sort_buffers_by('extension')
+end, { desc = 'Sort Buffers by Extension' })

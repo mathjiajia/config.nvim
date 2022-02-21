@@ -22,7 +22,6 @@ local sources = {
 local M = {}
 M.setup = function(null_on_attach)
 	null_ls.setup {
-		-- debug = true,
 		sources = sources,
 		on_attach = null_on_attach,
 	}

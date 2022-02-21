@@ -8,7 +8,7 @@ vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
 end, { desc = 'Lsp Info' })
 
-local function map(mode, key, fun, opts)
+local map = function(mode, key, fun, opts)
 	opts = opts or {}
 	opts.buffer = bufnr
 	opts.silent = true
@@ -16,6 +16,9 @@ local function map(mode, key, fun, opts)
 end
 
 local on_attach = function(client, bufnr)
+	client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_range_formatting = false
+
 	map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Declaration' })
 	map('n', 'K', vim.lsp.buf.hover, { desc = 'Docs Hover' })
 	map('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature' })
