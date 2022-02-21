@@ -39,21 +39,20 @@ local function spec(use)
 			require('configs.notify')
 		end,
 	}
-	use { -- statusline
-		'nvim-lualine/lualine.nvim',
-		event = 'BufRead',
-		config = function()
-			require('configs.lualine')
-		end,
-	}
-	-- use {
-	-- 	'windwp/windline.nvim',
+	-- use { -- statusline
+	-- 	'nvim-lualine/lualine.nvim',
 	-- 	event = 'BufRead',
 	-- 	config = function()
-	-- 		require('configs.windline')
+	-- 		require('configs.lualine')
 	-- 	end,
 	-- }
-
+	use { -- statusline
+		'windwp/windline.nvim',
+		event = 'BufRead',
+		config = function()
+			require('configs.windline')
+		end,
+	}
 	use { -- tabline
 		'akinsho/nvim-bufferline.lua',
 		event = 'BufRead',
@@ -121,6 +120,7 @@ local function spec(use)
 	use {
 		'stevearc/aerial.nvim',
 		module = 'aerial',
+		commit = '5304724ccff1daeb6a829c92bf6f29b391f3bc4a',
 		config = function()
 			require('configs.aerial')
 		end,
@@ -282,13 +282,13 @@ local function spec(use)
 			require('configs.hop')
 		end,
 	}
-	use {
-		'kevinhwang91/nvim-hlslens',
-		keys = { { 'n', '/' } },
-		config = function()
-			require('configs.hlslens')
-		end,
-	}
+	-- use {
+	-- 	'kevinhwang91/nvim-hlslens',
+	-- 	keys = { { 'n', '/' } },
+	-- 	config = function()
+	-- 		require('configs.hlslens')
+	-- 	end,
+	-- }
 
 	use {
 		'dstein64/vim-startuptime',
