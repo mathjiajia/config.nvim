@@ -1,3 +1,4 @@
+vim.g.tex_flavor = 'latex'
 vim.wo.conceallevel = 1
 
 -- spell
