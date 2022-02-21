@@ -468,7 +468,7 @@ highlight {
 
 	---------- NVIM TREE ----------
 
-	NvimTreeNormal = { fg = cp.white, bg = cp.black1 },
+	NvimTreeNormal = { fg = cp.white, bg = cp.black2 },
 	NvimTreeVertSplit = { fg = cp.gray, bg = NONE },
 	NvimTreeStatuslineNc = { fg = cp.white, bg = cp.black0 },
 
