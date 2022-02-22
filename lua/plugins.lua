@@ -15,8 +15,8 @@ local function spec(use)
 	-- Packer can manage itself
 	use { 'wbthomason/packer.nvim', opt = true }
 
+	-- Common Requirements
 	use { 'nvim-lua/plenary.nvim', module = 'plenary' }
-	use { 'tami5/sqlite.lua', module = 'sqlite' }
 	use {
 		'kyazdani42/nvim-web-devicons',
 		module = 'nvim-web-devicons',
@@ -26,20 +26,13 @@ local function spec(use)
 	}
 
 	-- UI stuff
-	use { -- dashboard
+	use { -- startify
 		'goolord/alpha-nvim',
 		config = function()
 			require('configs.alpha')
 		end,
 	}
-	use { -- notifications
-		'rcarriga/nvim-notify',
-		event = 'vimEnter',
-		config = function()
-			require('configs.notify')
-		end,
-	}
-	use {
+	use { -- statusline
 		'feline-nvim/feline.nvim',
 		event = 'BufRead',
 		config = function()
@@ -47,19 +40,18 @@ local function spec(use)
 			require('configs.feline')
 		end,
 	}
-	-- use { -- statusline
-	-- 	-- 'windwp/windline.nvim',
-	-- 	'~/Documents/windline.nvim',
-	-- 	event = 'BufRead',
-	-- 	config = function()
-	-- 		require('configs.windline')
-	-- 	end,
-	-- }
 	use { -- tabline
 		'akinsho/nvim-bufferline.lua',
 		event = 'BufRead',
 		config = function()
 			require('configs.bufferline')
+		end,
+	}
+	use { -- notifications
+		'rcarriga/nvim-notify',
+		event = 'vimEnter',
+		config = function()
+			require('configs.notify')
 		end,
 	}
 	use { -- indentline
@@ -70,42 +62,7 @@ local function spec(use)
 		end,
 	}
 
-	-- File explorer
-	use {
-		'kyazdani42/nvim-tree.lua',
-		module = 'nvim-tree',
-		config = function()
-			require('configs.nvimtree')
-		end,
-	}
-
-	-- Telescope nonsense
-	use {
-		'nvim-telescope/telescope.nvim',
-		cmd = 'Telescope',
-		module = 'telescope',
-		requires = {
-			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
-			{ 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
-			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
-			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
-			-- { 'nvim-telescope/telescope-bibtex.nvim', after = 'telescope.nvim' },
-		},
-		config = function()
-			require('configs.telescope')
-		end,
-	}
-
-	-- session management
-	use {
-		'Shatur/neovim-session-manager',
-		module = 'session_manager.commands',
-		config = function()
-			require('configs.session')
-		end,
-	}
-
-	-- Treesitter for better syntax highlighting
+	-- Syntax highlighter
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		event = 'BufRead',
@@ -126,7 +83,7 @@ local function spec(use)
 			require('configs.aerial')
 		end,
 	}
-	-- use {
+	-- use { -- spellcheck
 	-- 	'lewis6991/spellsitter.nvim',
 	-- 	event = 'BufRead',
 	-- 	config = function()
@@ -138,21 +95,23 @@ local function spec(use)
 	use { -- Collection of configurations for built-in LSP client
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
+		requires = {
+			{ 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
+			{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
+		},
 		config = function()
 			require('lsp')
 		end,
 	}
-	use { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' }
-	use { 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' }
-	use {
+	use { -- nvim-lsp progress
 		'j-hui/fidget.nvim',
-		event = 'BufRead',
+		after = 'nvim-lspconfig',
 		config = function()
 			require('configs.fidget')
 		end,
 	}
 
-	-- Autocomplete engine
+	-- Autocompletion
 	use {
 		'hrsh7th/nvim-cmp',
 		event = 'InsertEnter',
@@ -168,56 +127,83 @@ local function spec(use)
 			require('configs.cmp')
 		end,
 	}
-
-	use { -- Snippets plugin
+	use { -- Snippets Engine
 		'L3MON4D3/LuaSnip',
 		module = 'luasnip',
 		config = function()
 			require('configs.luasnip')
 		end,
 	}
-	use {
+	use { -- AI Tool
 		'github/copilot.vim',
 		cmd = 'Copilot',
 		config = function()
 			require('configs.copilot')
 		end,
 	}
-	-- use {
-	-- 	'windwp/nvim-autopairs',
-	-- 	event = 'InsertEnter',
-	-- 	config = function()
-	-- 		require('configs.autopairs')
-	-- 	end,
-	-- }
-	use {
-		'ZhiyuanLck/smart-pairs',
-		event = 'InsertEnter',
-		config = function()
-			require('configs.pairs')
-		end,
-	}
 
-	-- Language stuff
-	use { 'folke/lua-dev.nvim', module = 'lua-dev' }
-	use {
+	-- Language Stuff
+	use { -- Lua for neovim
+		'folke/lua-dev.nvim',
+		module = 'lua-dev',
+	}
+	use { -- LaTeX
 		'lervag/vimtex',
 		ft = 'tex',
 		config = function()
 			require('configs.vimtex')
 		end,
 	}
-	use {
+	use { -- Note and Organizing
 		'nvim-neorg/neorg',
+		opt = true,
 		ft = 'norg',
+		requires = { 'nvim-neorg/neorg-telescope', opt = true },
 		config = function()
 			require('configs.neorg')
 		end,
 	}
-	use { 'nvim-neorg/neorg-telescope', ft = 'norg' }
+
+	-- Telescope nonsense
+	use {
+		'nvim-telescope/telescope.nvim',
+		cmd = 'Telescope',
+		module = 'telescope',
+		requires = {
+			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
+			{
+				'nvim-telescope/telescope-frecency.nvim',
+				opt = true,
+				after = 'telescope.nvim',
+				requires = { 'tami5/sqlite.lua', module = 'sqlite', opt = true },
+			},
+			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
+			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
+			-- { 'nvim-telescope/telescope-bibtex.nvim', after = 'telescope.nvim' },
+		},
+		config = function()
+			require('configs.telescope')
+		end,
+	}
+
+	-- File Explorer
+	use {
+		'kyazdani42/nvim-tree.lua',
+		module = 'nvim-tree',
+		config = function()
+			require('configs.nvimtree')
+		end,
+	}
 
 	-- Editors
-	use {
+	use { -- Git Integration
+		'lewis6991/gitsigns.nvim',
+		event = 'BufRead',
+		config = function()
+			require('configs.gitsigns')
+		end,
+	}
+	use { -- Comment/Uncomment
 		'numToStr/Comment.nvim',
 		keys = {
 			{ 'n', 'gb' },
@@ -233,7 +219,14 @@ local function spec(use)
 			require('Comment').setup()
 		end,
 	}
-	use {
+	use { -- Delimiters
+		'ZhiyuanLck/smart-pairs',
+		event = 'InsertEnter',
+		config = function()
+			require('configs.pairs')
+		end,
+	}
+	use { -- Surrounding
 		'~/Documents/surround.nvim',
 		keys = {
 			{ 'n', 'sa' },
@@ -245,18 +238,30 @@ local function spec(use)
 			require('configs.surround')
 		end,
 	}
-
-	-- Git integration
-	use {
-		'lewis6991/gitsigns.nvim',
-		event = 'BufRead',
+	use { -- Search Panel
+		'windwp/nvim-spectre',
+		module = 'spectre',
 		config = function()
-			require('configs.gitsigns')
+			require('configs.spectre')
+		end,
+	}
+	use { -- Motions
+		'phaazon/hop.nvim',
+		module = 'hop',
+		config = function()
+			require('configs.hop')
+		end,
+	}
+	use { -- Sessions Management
+		'Shatur/neovim-session-manager',
+		module = 'session_manager.commands',
+		config = function()
+			require('configs.session')
 		end,
 	}
 
-	-- Terminal
-	use {
+	-- Terminal Emulator
+	use { --floating terminal
 		'numtostr/FTerm.nvim',
 		module = 'FTerm',
 		keys = {
@@ -265,22 +270,6 @@ local function spec(use)
 		},
 		config = function()
 			require('configs.fterm')
-		end,
-	}
-
-	-- search/motions
-	use {
-		'windwp/nvim-spectre',
-		module = 'spectre',
-		config = function()
-			require('configs.spectre')
-		end,
-	}
-	use {
-		'phaazon/hop.nvim',
-		module = 'hop',
-		config = function()
-			require('configs.hop')
 		end,
 	}
 

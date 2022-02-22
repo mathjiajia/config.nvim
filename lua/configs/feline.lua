@@ -1,23 +1,10 @@
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
-local api = vim.api
 
-local position = function()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	-- Turn col from byteindex to column number and make it start from 1
-	col = vim.str_utfindex(vim.api.nvim_get_current_line(), col) + 1
-	return string.format('Ln %d, Col %d', row, col)
-end
-
-local lsp_client_names = function()
-	local clients = {}
-
-	for _, client in ipairs(vim.lsp.buf_get_clients(0)) do
-		clients[#clients + 1] = client.name
-	end
-
-	return table.concat(clients, '|'), ' '
-end
+local components = {
+	active = { {}, {}, {} },
+	inactive = { {}, {} },
+}
 
 local force_inactive = {
 	filetypes = {},
@@ -25,10 +12,13 @@ local force_inactive = {
 	bufnames = {},
 }
 
-local components = {
-	active = { {}, {}, {} },
-	inactive = { {}, {} },
+local disable = {
+	filetypes = {},
+	buftypes = {},
+	bufnames = {},
 }
+
+local custom_providers = {}
 
 local colors = {
 	bg = '#1A1826',
@@ -83,16 +73,55 @@ local vi_mode_text = {
 }
 
 force_inactive.filetypes = {
-	'NvimTree',
-	'packer',
-	'alpha',
-	'aerial',
-	'tsplayground',
-	'qf',
+	'^aerial$',
+	'^help$',
+	'^NvimTree$',
+	'^packer$',
+	'^qf$',
+	'^TelescopePrompt$',
+	'^tsplayground$',
 }
 
 force_inactive.buftypes = {
-	'terminal',
+	'^terminal$',
+}
+
+disable.filetypes = {
+	'^alpha$',
+}
+
+custom_providers = {
+	file_type_2 = function()
+		local filename = vim.api.nvim_buf_get_name(0)
+		local extension = vim.fn.fnamemodify(filename, ':e')
+		local filetype = vim.bo.filetype
+		local icon
+
+		local icon_str, icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+
+		icon = { str = icon_str }
+		icon.hl = { fg = icon_color }
+		filetype = ' ' .. filetype:gsub('^%l', string.upper)
+
+		return filetype, icon
+	end,
+	lsp_client_names_2 = function()
+		local clients = {}
+
+		for _, client in ipairs(vim.lsp.buf_get_clients(0)) do
+			clients[#clients + 1] = client.name
+		end
+
+		return table.concat(clients, '|'), ' '
+	end,
+	-- position = function()
+	-- 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	--
+	-- 	-- Turn col from byteindex to column number and make it start from 1
+	-- 	col = vim.str_utfindex(vim.api.nvim_get_current_line(), col) + 1
+	--
+	-- 	return string.format('Ln %d, Col %d', row, col)
+	-- end,
 }
 
 -- LEFT
@@ -130,7 +159,7 @@ components.active[1] = {
 		end,
 		icon = ' ',
 		hl = {
-			fg = 'yellow',
+			fg = 'white',
 			bg = 'bg',
 		},
 		right_sep = {
@@ -156,7 +185,7 @@ components.active[1] = {
 		provider = 'git_diff_changed',
 		icon = ' ~',
 		hl = {
-			fg = 'orange',
+			fg = 'yellow',
 			bg = 'bg',
 		},
 		truncate_hide = true,
@@ -177,10 +206,7 @@ components.active[1] = {
 -- MID
 components.active[2] = {
 	{ -- fileType
-		provider = {
-			name = 'file_type',
-			opts = { filetype_icon = true, case == 'titlecase' },
-		},
+		provider = 'file_type_2',
 		hl = {
 			fg = 'white',
 		},
@@ -240,7 +266,7 @@ components.active[3] = {
 		priority = 2,
 	},
 	{ -- LspName
-		provider = lsp_client_names,
+		provider = 'lsp_client_names_2',
 		hl = {
 			fg = 'violet',
 			bg = 'bg',
@@ -259,7 +285,7 @@ components.active[3] = {
 		right_sep = ' ',
 	},
 	{ -- lineInfo
-		provider = position,
+		provider = 'position',
 		hl = function()
 			return {
 				fg = 'black',
@@ -302,9 +328,9 @@ components.inactive[1] = {
 
 require('feline').setup {
 	theme = colors,
-	default_bg = bg,
-	default_fg = fg,
 	vi_mode_colors = vi_mode_colors,
-	components = components,
 	force_inactive = force_inactive,
+	disable = disable,
+	custom_providers = custom_providers,
+	components = components,
 }
