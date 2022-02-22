@@ -156,7 +156,7 @@ local opts = {
 		enable_fallback = fb.space,
 	},
 	enter = {
-		enable_mapping = true,
+		enable_mapping = false, -- TODO
 		enable_cond = true,
 		enable_fallback = fb.enter,
 	},

@@ -39,20 +39,22 @@ local function spec(use)
 			require('configs.notify')
 		end,
 	}
-	-- use { -- statusline
-	-- 	'nvim-lualine/lualine.nvim',
-	-- 	event = 'BufRead',
-	-- 	config = function()
-	-- 		require('configs.lualine')
-	-- 	end,
-	-- }
-	use { -- statusline
-		'windwp/windline.nvim',
+	use {
+		'feline-nvim/feline.nvim',
 		event = 'BufRead',
 		config = function()
-			require('configs.windline')
+			-- require('feline').setup()
+			require('configs.feline')
 		end,
 	}
+	-- use { -- statusline
+	-- 	-- 'windwp/windline.nvim',
+	-- 	'~/Documents/windline.nvim',
+	-- 	event = 'BufRead',
+	-- 	config = function()
+	-- 		require('configs.windline')
+	-- 	end,
+	-- }
 	use { -- tabline
 		'akinsho/nvim-bufferline.lua',
 		event = 'BufRead',
@@ -120,7 +122,6 @@ local function spec(use)
 	use {
 		'stevearc/aerial.nvim',
 		module = 'aerial',
-		commit = '5304724ccff1daeb6a829c92bf6f29b391f3bc4a',
 		config = function()
 			require('configs.aerial')
 		end,
@@ -182,20 +183,20 @@ local function spec(use)
 			require('configs.copilot')
 		end,
 	}
-	use {
-		'windwp/nvim-autopairs',
-		event = 'InsertEnter',
-		config = function()
-			require('configs.autopairs')
-		end,
-	}
 	-- use {
-	-- 	'ZhiyuanLck/smart-pairs',
+	-- 	'windwp/nvim-autopairs',
 	-- 	event = 'InsertEnter',
 	-- 	config = function()
-	-- 		require('configs.smartpairs')
+	-- 		require('configs.autopairs')
 	-- 	end,
 	-- }
+	use {
+		'ZhiyuanLck/smart-pairs',
+		event = 'InsertEnter',
+		config = function()
+			require('configs.pairs')
+		end,
+	}
 
 	-- Language stuff
 	use { 'folke/lua-dev.nvim', module = 'lua-dev' }
@@ -282,13 +283,6 @@ local function spec(use)
 			require('configs.hop')
 		end,
 	}
-	-- use {
-	-- 	'kevinhwang91/nvim-hlslens',
-	-- 	keys = { { 'n', '/' } },
-	-- 	config = function()
-	-- 		require('configs.hlslens')
-	-- 	end,
-	-- }
 
 	use {
 		'dstein64/vim-startuptime',
