@@ -14,3 +14,19 @@ require('spectre').setup {
 	is_open_target_win = true, --open file on opener window
 	is_insert_mode = false, -- start open panel on is_insert_mode
 }
+
+vim.keymap.set('n', '<leader>R', function()
+	require('spectre').open()
+end, { desc = 'Open Spectre' })
+vim.keymap.set('n', '<leader>rw', function()
+	require('spectre').open_visual { select_word = true }
+end, { desc = 'search current word' })
+vim.keymap.set('v', '<leader>rw', function()
+	require('spectre').open_visual()
+end, { silent = true, desc = 'search current word' })
+vim.keymap.set(
+	'n',
+	'<leader>rp',
+	'viw:lua require("spectre").open_file_search()<CR>',
+	{ desc = 'search in current file' }
+)

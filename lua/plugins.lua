@@ -96,13 +96,20 @@ local function spec(use)
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
 		requires = {
-			{ 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
 			{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
 		},
 		config = function()
 			require('lsp')
 		end,
 	}
+	use {
+		'jose-elias-alvarez/null-ls.nvim',
+		ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
+		config = function()
+			require('lsp.null-ls')
+		end,
+	}
+
 	use { -- nvim-lsp progress
 		'j-hui/fidget.nvim',
 		after = 'nvim-lspconfig',
@@ -169,6 +176,7 @@ local function spec(use)
 		'nvim-telescope/telescope.nvim',
 		cmd = 'Telescope',
 		module = 'telescope',
+		keys = { { 'n', '<leader>f' } },
 		requires = {
 			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
 			{
@@ -189,7 +197,7 @@ local function spec(use)
 	-- File Explorer
 	use {
 		'kyazdani42/nvim-tree.lua',
-		module = 'nvim-tree',
+		keys = { { 'n', '<M-t>' } },
 		config = function()
 			require('configs.nvimtree')
 		end,
@@ -238,23 +246,27 @@ local function spec(use)
 			require('configs.surround')
 		end,
 	}
-	use { -- Search Panel
-		'windwp/nvim-spectre',
-		module = 'spectre',
-		config = function()
-			require('configs.spectre')
-		end,
-	}
+	-- use { -- Search Panel
+	-- 	'windwp/nvim-spectre',
+	-- 	keys = { { 'n', '<leader>r' } },
+	-- 	config = function()
+	-- 		require('configs.spectre')
+	-- 	end,
+	-- }
 	use { -- Motions
 		'phaazon/hop.nvim',
-		module = 'hop',
+		keys = {
+			{ 'n', '<leader>h' },
+			{ 'x', '<leader>h' },
+			{ 'o', '<leader>h' },
+		},
 		config = function()
 			require('configs.hop')
 		end,
 	}
 	use { -- Sessions Management
 		'Shatur/neovim-session-manager',
-		module = 'session_manager.commands',
+		keys = { { 'n', '<leader>s' } },
 		config = function()
 			require('configs.session')
 		end,

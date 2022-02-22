@@ -1,12 +1,17 @@
 require('packer').loader('cmp-nvim-lsp')
 
 local lspconfig = require('lspconfig')
-local null_ls = require('null-ls')
 
 -- lsp info
 vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
 end, { desc = 'Lsp Info' })
+
+-- Diagnostic
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Float diagnostics' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostics' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostics' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Loclist diagnostics' })
 
 local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
@@ -77,6 +82,7 @@ local on_attach = function(client, bufnr)
 	end
 
 	require('aerial').on_attach(client, bufnr)
+	vim.keymap.set('n', '<M-o>', '<Cmd>AerialToggle<CR>', { buffer = bufnr, desc = 'Aerial code outline' })
 end
 
 local null_on_attach = function(client, bufnr)
@@ -96,4 +102,3 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 for _, server in ipairs { 'pyright', 'sumneko_lua', 'texlab' } do
 	require('lsp.' .. server).setup(on_attach, capabilities)
 end
-require('lsp.null-ls').setup(null_on_attach)

@@ -161,6 +161,13 @@ require('nvim-tree').setup {
 	},
 }
 
+vim.keymap.set('n', '<M-t>', function()
+	require('nvim-tree').toggle(false)
+end, { desc = 'NvimTree Toggle' })
+vim.keymap.set('n', '<M-r>', function()
+	require('nvim-tree.lib').refresh_tree()
+end, { desc = 'NvimTree Refresh' })
+
 local cp = require('colors')
 
 vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = cp.blue })
