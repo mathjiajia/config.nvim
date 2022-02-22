@@ -79,7 +79,7 @@ highlight {
 	LineNr = { fg = cp.black4 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
 	-- LineNrAbove = {}, -- Line number for when the 'relativenumber' option is set, above the cursor line.
 	-- LineNrBelow = {}, -- Line number for when the 'relativenumber' option is set, below the cursor line.
-	CursorLineNr = { fg = cp.diag.warning, bg = NONE, bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+	CursorLineNr = { fg = cp.diag.warning, bg = 'NONE', bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
 	-- CursorLineSign = {}, -- Like SignColumn when 'cursorline' is set for the cursor line.
 	-- CursorLineFold = {}, -- Like FoldColumn when 'cursorline' is set for the cursor line.
 
@@ -170,7 +170,7 @@ highlight {
 
 	Underlined = { underline = true }, -- text that stands out, HTML links
 	-- Ignore = { fg = cp.gray0 }, -- left blank, hidden |hl-Ignore|
-	Error = { fg = cp.diag.error, bg = NONE }, -- any erroneous construct
+	Error = { fg = cp.diag.error, bg = 'NONE' }, -- any erroneous construct
 	Todo = { fg = cp.black2, bg = cp.diag.warning, bold = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
 	---------- DIAGNOSTIC ----------
@@ -375,7 +375,7 @@ highlight {
 	---------- CMP ----------
 
 	CmpItemAbbr = { fg = cp.gray2 }, --  The abbr field's highlight group.
-	CmpItemAbbrDeprecated = { fg = cp.gray0, bg = NONE, strikethrough = true }, --  The abbr field's highlight group that only used for deprecated item.
+	CmpItemAbbrDeprecated = { fg = cp.gray0, bg = 'NONE', strikethrough = true }, --  The abbr field's highlight group that only used for deprecated item.
 	CmpItemAbbrMatch = { fg = cp.blue }, --  The matched character's highlight group.
 	CmpItemAbbrMatchFuzzy = { fg = cp.blue, bold = true }, --    The fuzzy matched character's highlight group.
 	CmpItemKind = { fg = cp.blue }, --  The kind field's highlight group.
@@ -469,7 +469,7 @@ highlight {
 	---------- NVIM TREE ----------
 
 	NvimTreeNormal = { fg = cp.white, bg = cp.black2 },
-	NvimTreeVertSplit = { fg = cp.gray, bg = NONE },
+	NvimTreeVertSplit = { fg = cp.gray, bg = 'NONE' },
 	NvimTreeStatuslineNc = { fg = cp.white, bg = cp.black0 },
 
 	NvimTreeSymlink = { link = 'Type' },
