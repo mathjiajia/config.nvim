@@ -16,24 +16,20 @@ ls.config.setup {
 	-- ft_func = ft_functions.from_filetype,
 }
 
-local function map(key, rhs, opts)
-	opts = opts or {}
-	opts.silent = true
-	vim.keymap.set({ 'i', 's' }, key, rhs, opts)
-end
-
-map('<C-j>', function()
+vim.keymap.set({ 'i', 's' }, '<C-j>', function()
 	require('luasnip').jump(1)
 end, { desc = 'LuaSnip Forward Jump' })
-map('<C-k>', function()
+vim.keymap.set({ 'i', 's' }, '<C-k>', function()
 	require('luasnip').jump(-1)
 end, { desc = 'LuaSnip Backward Jump' })
--- map(
+-- vim.keymap.set(
+-- 	{ 'i', 's' },
 -- 	'<C-E>',
 -- 	'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"',
 -- 	{ expr = true, desc = 'LuaSnip Next Choice' }
 -- )
--- map(
+-- vim.keymap.set(
+-- 	{ 'i', 's' },
 -- 	'<C-T>',
 -- 	'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<C-T>"',
 -- 	{ expr = true, desc = 'LuaSnip Previous Choice' }

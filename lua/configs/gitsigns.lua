@@ -43,26 +43,43 @@ gitsigns.setup {
 		enable = false,
 	},
 	on_attach = function(bufnr)
-		local function map(mode, key, fun, opts)
-			opts = opts or {}
-			opts.buffer = bufnr
-			vim.keymap.set(mode, key, fun, opts)
-		end
-
 		-- Navigation
-		map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, desc = 'Next Hunk' })
-		map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, desc = 'Previous Hunk' })
+		vim.keymap.set(
+			'n',
+			']c',
+			"&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+			{ buffer = bufnr, expr = true, desc = 'Next Hunk' }
+		)
+		vim.keymap.set(
+			'n',
+			'[c',
+			"&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+			{ buffer = bufnr, expr = true, desc = 'Previous Hunk' }
+		)
 
-		-- stylua: ignore
 		-- Actions
-		map({'n', 'v' }, '<leader>gs', function() gitsigns.stage_hunk() end, { desc = 'Stage Hunk' })
-		map('n', '<leader>gu', function() gitsigns.undo_stage_hunk() end, { desc = 'Undo Stage Hunk' })
-		map({ 'n', 'v' }, '<leader>gr', function() gitsigns.reset_hunk() end, { desc = 'Reset Hunk' })
-		map('n', '<leader>gS', function() gitsigns.stage_buffer() end, { desc = 'Stage buffer' })
-		map('n', '<leader>gR', function() gitsigns.reset_buffer() end, { desc = 'Reset buffer' })
-		map('n', '<leader>gp', function() gitsigns.preview_hunk() end, { desc = 'Preview Hunk' })
+		vim.keymap.set({ 'n', 'v' }, '<leader>gs', function()
+			gitsigns.stage_hunk()
+		end, { buffer = bufnr, desc = 'Stage Hunk' })
+		vim.keymap.set('n', '<leader>gu', function()
+			gitsigns.undo_stage_hunk()
+		end, { buffer = bufnr, desc = 'Undo Stage Hunk' })
+		vim.keymap.set({ 'n', 'v' }, '<leader>gr', function()
+			gitsigns.reset_hunk()
+		end, { buffer = bufnr, desc = 'Reset Hunk' })
+		vim.keymap.set('n', '<leader>gS', function()
+			gitsigns.stage_buffer()
+		end, { buffer = bufnr, desc = 'Stage buffer' })
+		vim.keymap.set('n', '<leader>gR', function()
+			gitsigns.reset_buffer()
+		end, { buffer = bufnr, desc = 'Reset buffer' })
+		vim.keymap.set('n', '<leader>gp', function()
+			gitsigns.preview_hunk()
+		end, { buffer = bufnr, desc = 'Preview Hunk' })
 
 		-- Text object
-		map({ 'o', 'x' }, 'ih', function() gitsigns.select_hunk() end, { desc = 'Select Hunk' })
+		vim.keymap.set({ 'o', 'x' }, 'ih', function()
+			gitsigns.select_hunk()
+		end, { buffer = bufnr, desc = 'Select Hunk' })
 	end,
 }

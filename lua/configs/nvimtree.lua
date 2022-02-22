@@ -160,3 +160,22 @@ require('nvim-tree').setup {
 		},
 	},
 }
+
+local cp = require('colors')
+
+vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'NvimTreeFolderIcon', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = cp.white, bg = cp.black1 })
+vim.api.nvim_set_hl(0, 'NvimTreeOpenedFolderName', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'NvimTreeEmptyFolderName', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = cp.gray0 })
+vim.api.nvim_set_hl(0, 'NvimTreeVertSplit', { fg = cp.black2, bg = cp.black2 })
+vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = root_dir_color, bold = true })
+vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'NvimTreeStatuslineNc', { fg = cp.black1, bg = cp.black1 })
+vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = cp.white })
+vim.api.nvim_set_hl(0, 'NvimTreeOpenedFile', { fg = cp.pink })

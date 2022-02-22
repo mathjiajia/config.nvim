@@ -138,3 +138,10 @@ pcall(function()
 		require('telescope').load_extension(ext)
 	end
 end)
+
+local cp = require('colors')
+
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.white, bg = cp.black3, bold = true })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })

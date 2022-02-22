@@ -19,3 +19,15 @@ require('indent_blankline').setup {
 	filetype_exclude = { 'lspinfo', 'packer', 'checkhealth', 'help', '' },
 	buftype_exclude = { 'terminal', 'nofile' },
 }
+
+local cp = require('colors')
+
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = cp.black3 })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.white })
+
+vim.api.nvim_set_hl(0, 'IndentBlanklineIndent6', { fg = cp.yellow, nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineIndent5', { fg = cp.red, nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineIndent4', { fg = cp.teal, nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineIndent3', { fg = cp.peach, nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineIndent2', { fg = cp.blue, nocombine = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { fg = cp.pink, nocombine = true })

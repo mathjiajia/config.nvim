@@ -34,37 +34,3 @@ function autocmd.load_autocmds()
 end
 
 autocmd.load_autocmds()
-
--- vim.api.nvim_create_augroup({ name = bufs })
--- vim.api.nvim_create_autocmd {
--- 	event = 'BufEnter',
--- 	group = 'bufs',
--- 	pattern = '*',
---	callback = 'silent! lcd %:p:h',
--- 	once = true,
--- }
--- vim.api.nvim_create_autocmd {
--- 	event = 'BufRead',
--- 	group = 'bufs',
--- 	pattern = '*',
---	callback = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
--- 	once = true,
--- }
-
--- vim.api.nvim_create_augroup({ name = packer_user_config })
--- vim.api.nvim_create_autocmd {
--- 	event = 'BufWritePost',
--- 	group = 'packer_user_config',
--- 	pattern = 'plugins.lua',
---	callback = 'source <afile> | PackerCompile',
--- 	once = true,
--- }
-
--- vim.api.nvim_create_augroup({ name = yank })
--- vim.api.nvim_create_autocmd {
--- 	event = 'TextYankPost',
--- 	group = 'yank',
--- 	pattern = '*',
---	callback = 'silent! lua vim.highlight.on_yank()',
--- 	once = true,
--- }

@@ -186,3 +186,42 @@ cmp.setup.cmdline(':', {
 		{ name = 'cmdline' },
 	},
 })
+
+local cp = require('colors')
+
+vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.gray2 }) --  The abbr field's highlight group.
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.gray0, bg = 'NONE', strikethrough = true })
+-- The abbr field's highlight group that only used for deprecated item.
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = cp.blue }) --  The matched character's highlight group.
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = cp.blue, bold = true })
+-- The fuzzy matched character's highlight group.
+vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = cp.blue }) --  The kind field's highlight group.
+
+-- 'The kind field's highlight group for specific `lsp.CompletionItemKind`.
+vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = cp.mauve })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = cp.peach })
+vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'CmpItemKindFile', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindColor', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindReference', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.peach })
+vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
+
+vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.white }) --  The menu field's highlight group.

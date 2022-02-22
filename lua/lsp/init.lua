@@ -8,59 +8,39 @@ vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
 end, { desc = 'Lsp Info' })
 
-local map = function(mode, key, fun, opts)
-	opts = opts or {}
-	opts.buffer = bufnr
-	opts.silent = true
-	vim.keymap.set(mode, key, fun, opts)
-end
-
 local on_attach = function(client, bufnr)
-	client.resolved_capabilities.document_formatting = false
-	client.resolved_capabilities.document_range_formatting = false
-
-	map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Declaration' })
-	map('n', 'K', vim.lsp.buf.hover, { desc = 'Docs Hover' })
-	map('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature' })
-	map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'Add Workspace Folder' })
-	map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'Remove Workspace Folder' })
-	map('n', '<leader>wl', function()
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
+	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder' })
+	vim.keymap.set(
+		'n',
+		'<leader>wr',
+		vim.lsp.buf.remove_workspace_folder,
+		{ buffer = bufnr, desc = 'Remove Workspace Folder' }
+	)
+	vim.keymap.set('n', '<leader>wl', function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, { desc = 'List Workspace Folders' })
-	map('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 
-	map('n', 'gd', function()
+	vim.keymap.set('n', 'gd', function()
 		require('telescope.builtin').lsp_definitions()
-	end, { desc = 'Definitions' })
-	map('n', 'gr', function()
+	end, { buffer = bufnr, desc = 'Definitions' })
+	vim.keymap.set('n', 'gr', function()
 		require('telescope.builtin').lsp_references()
-	end, { desc = 'References' })
-	map('n', 'gi', function()
+	end, { buffer = bufnr, desc = 'References' })
+	vim.keymap.set('n', 'gi', function()
 		require('telescope.builtin').lsp_implementations()
-	end, { desc = 'Implementations' })
-	map('n', '<leader>so', function()
+	end, { buffer = bufnr, desc = 'Implementations' })
+	vim.keymap.set('n', '<leader>so', function()
 		require('telescope.builtin').lsp_document_symbols()
-	end, { desc = 'Document Symbols' })
-	map('n', '<leader>D', function()
+	end, { buffer = bufnr, desc = 'Document Symbols' })
+	vim.keymap.set('n', '<leader>D', function()
 		require('telescope.builtin').lsp_type_definitions()
-	end, { desc = 'Type Definitions' })
+	end, { buffer = bufnr, desc = 'Type Definitions' })
 
 	if client.resolved_capabilities.document_highlight then
-		-- vim.api.nvim_create_augroup { name = lsp_document_highlight }
-		-- vim.api.nvim_create_autocmd {
-		-- 	event = { 'CursorHold', 'CursorHoldI' },
-		-- 	group = 'lsp_document_highlight',
-		-- 	pattern = '<buffer>',
-		-- 	callback = vim.lsp.buf.document_highlight,
-		-- 	once = true,
-		-- }
-		-- vim.api.nvim_create_autocmd {
-		-- 	event = 'CursorMoved',
-		-- 	group = 'lsp_document_highlight',
-		-- 	pattern = '<buffer>',
-		-- 	callback = vim.lsp.buf.clear_references,
-		-- 	once = true,
-		-- }
 		vim.cmd(
 			[[
 				augroup lsp_document_highlight
@@ -74,23 +54,12 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.resolved_capabilities.code_action then
-		map('n', '<leader>ca', function()
+		vim.keymap.set('n', '<leader>ca', function()
 			require('telescope.builtin').lsp_code_actions()
-		end, { desc = 'Code Actions' })
-		map('v', '<leader>ca', function()
+		end, { buffer = bufnr, desc = 'Code Actions' })
+		vim.keymap.set('v', '<leader>ca', function()
 			require('telescope.builtin').lsp_range_code_actions()
-		end, { desc = 'Range Code Actions' })
-
-		-- vim.api.nvim_create_augroup { name = lsp_code_action }
-		-- vim.api.nvim_create_autocmd {
-		-- 	event = { 'CursorHold', 'CursorHoldI' },
-		-- 	group = 'lsp_code_action',
-		-- 	pattern = '<buffer>',
-		-- 	callback = function()
-		-- 		require('nvim-lightbulb').update_lightbulb()
-		-- 	end,
-		-- 	once = true,
-		-- }
+		end, { buffer = bufnr, desc = 'Range Code Actions' })
 
 		vim.cmd([[
 			augroup lsp_code_action
@@ -100,15 +69,22 @@ local on_attach = function(client, bufnr)
     ]])
 	end
 
+	if client.resolved_capabilities.document_formatting then
+		vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, { buffer = bufnr, desc = 'Formmating' })
+	end
+	if client.resolved_capabilities.document_range_formatting then
+		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
+	end
+
 	require('aerial').on_attach(client, bufnr)
 end
 
 local null_on_attach = function(client, bufnr)
 	if client.resolved_capabilities.document_formatting then
-		map('n', '<leader>lf', vim.lsp.buf.formatting, { desc = 'Formmating' })
+		vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, { buffer = bufnr, desc = 'Formmating' })
 	end
 	if client.resolved_capabilities.document_range_formatting then
-		map('v', '<leader>lf', vim.lsp.buf.range_formatting, { desc = 'Range Formmating' })
+		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 end
 
