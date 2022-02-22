@@ -6,6 +6,5 @@ startify.section.header.val = { 'mathjiajia' }
 
 require('alpha').setup(startify.config)
 
-vim.keymap.set('n', '++', function()
-	require('alpha').start(false)
-end, { desc = 'Startify' })
+-- stylua: ignore
+vim.keymap.set('n', '++', function() require('alpha').start(false) end, { desc = 'Startify' })

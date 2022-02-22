@@ -48,12 +48,12 @@ local function map(mode, key, fun, opts)
 	vim.keymap.set(mode, key, fun, opts)
 end
 
-map({ 'n', 't' }, '<M-i>', function()
-	FTerm.toggle()
-end, { desc = 'Terminal Toggle' })
-map('t', '<M-S-i>', function()
-	FTerm.exit()
-end, { desc = 'Terminal Exit' })
-map('n', '<M-g>', function()
-	FTerm:new({ cmd = 'lazygit', dimensions = { height = 0.9, width = 0.9 } }):open()
-end, { desc = 'LazyGit' })
+-- stylua: ignore
+map({ 'n', 't' }, '<M-i>', function() FTerm.toggle() end, { desc = 'Terminal Toggle' })
+map('t', '<M-S-i>', function() FTerm.exit() end, { desc = 'Terminal Exit' })
+map(
+	'n',
+	'<M-g>',
+	function() FTerm:new({ cmd = 'lazygit', dimensions = { height = 0.9, width = 0.9 } }):open() end,
+	{ desc = 'LazyGit' }
+)
