@@ -161,12 +161,10 @@ require('nvim-tree').setup {
 	},
 }
 
-vim.keymap.set('n', '<M-t>', function()
-	require('nvim-tree').toggle(false)
-end, { desc = 'NvimTree Toggle' })
-vim.keymap.set('n', '<M-r>', function()
-	require('nvim-tree.lib').refresh_tree()
-end, { desc = 'NvimTree Refresh' })
+-- stylua: ignore start
+vim.keymap.set('n', '<M-t>', function() require('nvim-tree').toggle(false) end, { desc = 'NvimTree Toggle' })
+vim.keymap.set('n', '<M-r>', function() require('nvim-tree.lib').refresh_tree() end, { desc = 'NvimTree Refresh' })
+-- stylua: ignore end
 
 local cp = require('colors')
 

@@ -1,5 +1,4 @@
 local home = os.getenv('HOME')
-require('packer').loader('telescope-file-browser.nvim')
 
 require('telescope').setup {
 	defaults = {
@@ -139,52 +138,24 @@ pcall(function()
 	end
 end)
 
-vim.keymap.set('n', '<leader><space>', function()
-	require('telescope.builtin').buffers()
-end, { desc = 'Buffers' })
-vim.keymap.set('n', '<leader>fd', function()
-	require('telescope.builtin').grep_string()
-end, { desc = 'Grep Strings' })
-vim.keymap.set('n', '<leader>ff', function()
-	require('telescope.builtin').find_files { hidden = true }
-end, { desc = 'Find Files' })
-vim.keymap.set('n', '<leader>fg', function()
-	require('telescope.builtin').live_grep()
-end, { desc = 'Live Grep' })
-vim.keymap.set('n', '<leader>fh', function()
-	require('telescope.builtin').help_tags()
-end, { desc = 'Help Tags' })
-vim.keymap.set('n', '<leader>fk', function()
-	require('telescope.builtin').keymaps()
-end, { desc = 'Keymaps' })
-vim.keymap.set('n', '<leader>fl', function()
-	require('telescope.builtin').highlights()
-end, { desc = 'Highlight Groups' })
-vim.keymap.set('n', '<leader>fo', function()
-	require('telescope.builtin').oldfiles()
-end, { desc = 'Old Files' })
-vim.keymap.set('n', '<leader>fs', function()
-	require('telescope.builtin').current_buffer_fuzzy_find()
-end, { desc = 'Current Buffer Fuzzy Find' })
-vim.keymap.set('n', '<leader>ft', function()
-	require('telescope.builtin').tags()
-end, { desc = 'Tags' })
-vim.keymap.set('n', '<leader>fx', function()
-	require('telescope.builtin').diagnostics()
-end, { desc = 'Workspace Diagnostics' })
+local tb = require('telescope.builtin')
+local te = require('telescope').extensions
 
-vim.keymap.set('n', '<leader>fb', function()
-	require('telescope').extensions.file_browser.file_browser {}
-end, { desc = 'File Browser' })
-vim.keymap.set('n', '<leader>fc', function()
-	require('telescope').extensions.bibtex.bibtex {}
-end, { desc = 'bibtex' })
-vim.keymap.set('n', '<leader>fp', function()
-	require('telescope').extensions.project.project {}
-end, { desc = 'Projects' })
-vim.keymap.set('n', '<leader>fr', function()
-	require('telescope').extensions.frecency.frecency {}
-end, { desc = 'Frecency' })
+-- stylua: ignore start
+vim.keymap.set('n', '<leader>fc', function() tb.commands() end, { desc = 'Command Pallete' })
+vim.keymap.set('n', '<leader>fd', function() tb.grep_string() end, { desc = 'Grep Strings' })
+vim.keymap.set('n', '<leader>ff', function() tb.find_files { hidden = true } end, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>fg', function() tb.live_grep() end, { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>fk', function() tb.keymaps() end, { desc = 'Keymaps' })
+vim.keymap.set('n', '<leader>fo', function() tb.oldfiles() end, { desc = 'Old Files' })
+vim.keymap.set('n', '<leader>fs', function() tb.current_buffer_fuzzy_find() end, { desc = 'Current Buffer Fuzzy Find' })
+vim.keymap.set('n', '<leader>fx', function() tb.diagnostics() end, { desc = 'Workspace Diagnostics' })
+
+vim.keymap.set('n', '<leader>fb', function() te.file_browser.file_browser {} end, { desc = 'File Browser' })
+-- vim.keymap.set('n', '<leader>ft', function() te.bibtex.bibtex {} end, { desc = 'bibtex' })
+vim.keymap.set('n', '<leader>fp', function() te.project.project {} end, { desc = 'Projects' })
+vim.keymap.set('n', '<leader>fr', function() te.frecency.frecency {} end, { desc = 'Frecency' })
+-- stylua: ignore end
 
 local cp = require('colors')
 

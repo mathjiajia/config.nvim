@@ -26,8 +26,8 @@ local function spec(use)
 	}
 
 	-- UI stuff
-	use { -- startify
-		'goolord/alpha-nvim',
+	use {
+		'~/Documents/alpha-nvim', -- goolord
 		config = function()
 			require('configs.alpha')
 		end,
@@ -41,15 +41,15 @@ local function spec(use)
 		end,
 	}
 	use { -- tabline
-		'akinsho/nvim-bufferline.lua',
+		'jose-elias-alvarez/buftabline.nvim',
 		event = 'BufRead',
 		config = function()
-			require('configs.bufferline')
+			require('configs.buftabline')
 		end,
 	}
 	use { -- notifications
 		'rcarriga/nvim-notify',
-		event = 'vimEnter',
+		event = 'VimEnter',
 		config = function()
 			require('configs.notify')
 		end,
@@ -68,7 +68,7 @@ local function spec(use)
 		event = 'BufRead',
 		run = ':TSUpdate',
 		requires = {
-			{ 'nvim-treesitter/playground', after = 'nvim-treesitter' },
+			{ 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } },
 			{ 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
 			-- { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
 		},
@@ -96,6 +96,7 @@ local function spec(use)
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
 		requires = {
+			{ 'folke/lua-dev.nvim', module = 'lua-dev' }, -- Lua for neovim
 			{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
 		},
 		config = function()
@@ -109,7 +110,6 @@ local function spec(use)
 			require('lsp.null-ls')
 		end,
 	}
-
 	use { -- nvim-lsp progress
 		'j-hui/fidget.nvim',
 		after = 'nvim-lspconfig',
@@ -150,10 +150,6 @@ local function spec(use)
 	}
 
 	-- Language Stuff
-	use { -- Lua for neovim
-		'folke/lua-dev.nvim',
-		module = 'lua-dev',
-	}
 	use { -- LaTeX
 		'lervag/vimtex',
 		ft = 'tex',

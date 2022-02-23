@@ -25,7 +25,7 @@ highlight {
 	DiffDelete = { fg = cp.diff.deleted }, -- used for lines in a diff that have been deleted
 	DiffText = { fg = cp.blue, bg = cp.black2 }, -- used for lines in a diff that are not changed
 
-	EndOfBuffer = { link = 'NonText' }, -- filler lines (~) after the end of the buffer.
+	EndOfBuffer = { fg = cp.black2 }, -- filler lines (~) after the end of the buffer.
 	-- By default, this is highlighted like |hl-NonText|.
 	-- TermCursor = {}, -- cursor in a focused terminal
 	-- TermCursorNC = {}, -- cursor in a unfocused terminal
