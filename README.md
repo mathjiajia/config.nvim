@@ -78,5 +78,6 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 - `keybinds.lua` -- Various keymaps
 - `plugins.lua` -- Neovim plugins installed
 - `options.lua` -- General settings and options
-- `configs` -- A folder full of the configurations needed for each individual plugin, stored in the form `config/[pluginName].lua`
+- `configs` -- A folder full of the configurations needed for each individual plugin,
+stored in the form `config/[pluginName].lua`
 - `lsp` -- configurations for each language serves

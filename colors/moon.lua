@@ -25,7 +25,7 @@ highlight {
 	DiffDelete = { fg = cp.diff.deleted }, -- used for lines in a diff that have been deleted
 	DiffText = { fg = cp.blue, bg = cp.black2 }, -- used for lines in a diff that are not changed
 
-	EndOfBuffer = { fg = cp.black2 }, -- filler lines (~) after the end of the buffer.
+	-- EndOfBuffer = { link = 'NonText' }, -- filler lines (~) after the end of the buffer.
 	-- By default, this is highlighted like |hl-NonText|.
 	-- TermCursor = {}, -- cursor in a focused terminal
 	-- TermCursorNC = {}, -- cursor in a unfocused terminal
@@ -93,8 +93,8 @@ highlight {
 	-- status lines of not-current windows
 	-- Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
 	TabLine = { fg = cp.black4, bg = cp.black1 }, -- tab pages line, not active tab page label
-	TabLineFill = { fg = cp.white, bg = cp.black2 }, -- tab pages line, where there are no labels
-	TabLineSel = { fg = cp.green, bg = cp.black4 }, -- tab pages line, active tab page label
+	TabLineFill = { fg = cp.gray0, bg = cp.black0 }, -- tab pages line, where there are no labels
+	TabLineSel = { fg = cp.black0, bg = cp.red }, -- tab pages line, active tab page label
 
 	Title = { fg = cp.blue, bold = true }, -- titles for output from ":set all", ":autocmd" etcp.
 	Visual = { bg = cp.black4 }, -- Visual mode selection

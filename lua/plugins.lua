@@ -27,24 +27,23 @@ local function spec(use)
 
 	-- UI stuff
 	use {
-		'~/Documents/alpha-nvim', -- goolord
+		'~/Dev/alpha.nvim',
 		config = function()
 			require('configs.alpha')
 		end,
 	}
 	use { -- statusline
-		'feline-nvim/feline.nvim',
+		'~/Dev/statusline.nvim',
 		event = 'BufRead',
 		config = function()
-			-- require('feline').setup()
-			require('configs.feline')
+			require('statusline').setup()
 		end,
 	}
 	use { -- tabline
-		'jose-elias-alvarez/buftabline.nvim',
+		'~/Dev/buftabline.nvim',
 		event = 'BufRead',
 		config = function()
-			require('configs.buftabline')
+			require('buftabline').setup()
 		end,
 	}
 	use { -- notifications
@@ -212,12 +211,8 @@ local function spec(use)
 		keys = {
 			{ 'n', 'gb' },
 			{ 'n', 'gc' },
-			{ 'n', 'g<' },
-			{ 'n', 'g>' },
 			{ 'v', 'gb' },
 			{ 'v', 'gc' },
-			{ 'v', 'g<' },
-			{ 'v', 'g>' },
 		},
 		config = function()
 			require('Comment').setup()
@@ -227,11 +222,12 @@ local function spec(use)
 		'ZhiyuanLck/smart-pairs',
 		event = 'InsertEnter',
 		config = function()
+			-- require('pairs'):setup()
 			require('configs.pairs')
 		end,
 	}
 	use { -- Surrounding
-		'~/Documents/surround.nvim',
+		'~/Dev/surround.nvim',
 		keys = {
 			{ 'n', 'sa' },
 			{ 'n', 'sr' },

@@ -261,7 +261,6 @@ highlight {
 	markdownItalicDelimiter = { fg = cp.gray0 },
 
 	markdownCode = { fg = cp.flamingo },
-	markdownCodeBlock = { fg = cp.pink },
 	markdownCodeBlock = { fg = cp.flamingo },
 	markdownBlockquote = { fg = cp.gray0 },
 	markdownListMarker = { fg = cp.gray0 },

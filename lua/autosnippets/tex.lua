@@ -585,27 +585,27 @@ M = {
 	),
 	s(
 		{ trig = 'bit', name = 'Itemize Environment', dscr = 'Create an itemize environment' },
-		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{itemize}' }, i(0) },
+		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), t { '', '\\end{itemize}' }, i(0) },
 		{ condition = conds.line_begin }
 	),
 	s(
 		{ trig = 'ben', name = 'Enumerate Environment' },
-		{ t { '\\begin{enumerate}', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{enumerate}' } },
+		{ t { '\\begin{enumerate}', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
 		{ condition = conds.line_begin }
 	),
 	s(
 		{ trig = 'baen', name = 'Enumerate with lower alph' },
-		{ t { '\\begin{enumerate}[label=(\\alph*)]', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{enumerate}' } },
+		{ t { '\\begin{enumerate}[label=(\\alph*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
 		{ condition = conds.line_begin }
 	),
 	s(
 		{ trig = 'bden', name = 'Enumerate with arabic' },
-		{ t { '\\begin{enumerate}[label=(\\arabic*)]', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{enumerate}' } },
+		{ t { '\\begin{enumerate}[label=(\\arabic*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
 		{ condition = conds.line_begin }
 	),
 	s(
 		{ trig = 'bren', name = 'Enumerate with lower roman' },
-		{ t { '\\begin{enumerate}[label=(\\roman*)]', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{enumerate}' } },
+		{ t { '\\begin{enumerate}[label=(\\roman*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
 		{ condition = conds.line_begin }
 	),
 	s(

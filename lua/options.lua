@@ -50,14 +50,7 @@ vim.opt.breakindent = true
 vim.wo.cursorline = true -- Highlight the text line of the cursor
 -- vim.opt.guifont = 'MesloLGS Nerd Font:h18'
 vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than at the last character that fits on the screen
-vim.opt.list = true
-vim.opt.listchars = {
-	tab = '❘-',
-	nbsp = '+',
-	trail = '·',
-	extends = '→',
-	precedes = '←',
-}
+vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
 vim.wo.number = true
 vim.opt.pumheight = 10 -- Maximum number of items to show in the popup menu
 vim.wo.relativenumber = true

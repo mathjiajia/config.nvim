@@ -10,8 +10,6 @@ vim.keymap.set('i', '<C-l>', '<C-g>u<Esc>[s1z=`]a<C-g>u', { buffer = true, desc 
 vim.keymap.set('n', '<M-b>', '<Cmd>TexlabBuild<CR>', { buffer = true, desc = 'Texlab Build' })
 vim.keymap.set('n', '<M-f>', '<Cmd>TexlabForward<CR>', { buffer = true, desc = 'Texlab Forward' })
 
-local cp = require('colors')
-
 -- A list of groups that are only primitive link targets.
 vim.api.nvim_set_hl(0, 'texCmdType', { link = 'Type' })
 vim.api.nvim_set_hl(0, 'texError', { link = 'Error' })

@@ -25,7 +25,6 @@ end, { buffer = true, silent = true, desc = 'Markdown Preview' })
 
 -- vim.api.nvim_set_hl(0, 'markdownCode', { fg = cp.flamingo })
 -- vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = cp.pink })
--- vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = cp.flamingo })
 -- vim.api.nvim_set_hl(0, 'markdownBlockquote', { fg = cp.gray0 })
 -- vim.api.nvim_set_hl(0, 'markdownListMarker', { fg = cp.gray0 })
 -- vim.api.nvim_set_hl(0, 'markdownOrderedListMarker', { fg = cp.gray0 })
