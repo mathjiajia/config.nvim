@@ -27,23 +27,23 @@ local function spec(use)
 
 	-- UI stuff
 	use {
-		'~/Dev/alpha.nvim',
+		'goolord/alpha-nvim',
 		config = function()
 			require('configs.alpha')
 		end,
 	}
 	use { -- statusline
-		'~/Dev/statusline.nvim',
+		'feline-nvim/feline.nvim',
 		event = 'BufRead',
 		config = function()
-			require('statusline').setup()
+			require('configs.feline')
 		end,
 	}
 	use { -- tabline
-		'~/Dev/buftabline.nvim',
+		'jose-elias-alvarez/buftabline.nvim',
 		event = 'BufRead',
 		config = function()
-			require('buftabline').setup()
+			require('configs.buftabline')
 		end,
 	}
 	use { -- notifications
@@ -227,7 +227,7 @@ local function spec(use)
 		end,
 	}
 	use { -- Surrounding
-		'~/Dev/surround.nvim',
+		'ur4ltz/surround.nvim',
 		keys = {
 			{ 'n', 'sa' },
 			{ 'n', 'sr' },

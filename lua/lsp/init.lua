@@ -33,14 +33,13 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<leader>D', function() tb.lsp_type_definitions() end, { buffer = bufnr, desc = 'Type Definitions' })
 
 	if client.resolved_capabilities.document_highlight then
-		vim.cmd(
-			[[
-				augroup lsp_document_highlight
-					autocmd! * <buffer>
-					autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-					autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-				augroup END
-			]],
+		vim.cmd([[
+			augroup lsp_document_highlight
+				autocmd! * <buffer>
+				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+			augroup END
+		]],
 			false
 		)
 	end

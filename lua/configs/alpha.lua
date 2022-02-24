@@ -1,4 +1,8 @@
-local startify = require('startify')
+local startify = require('alpha.themes.startify')
+
+startify.nvim_web_devicons.enabled = false
+startify.nvim_web_devicons.highlight = false
+startify.section.header.val = { 'mathjiajia' }
 
 require('alpha').setup(startify.config)
 
