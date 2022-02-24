@@ -26,12 +26,6 @@ local function spec(use)
 	}
 
 	-- UI stuff
-	use {
-		'goolord/alpha-nvim',
-		config = function()
-			require('configs.alpha')
-		end,
-	}
 	use { -- statusline
 		'feline-nvim/feline.nvim',
 		event = 'BufRead',
@@ -69,7 +63,6 @@ local function spec(use)
 		requires = {
 			{ 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } },
 			{ 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
-			-- { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
 		},
 		config = function()
 			require('configs.treesitter')
@@ -78,17 +71,11 @@ local function spec(use)
 	use {
 		'stevearc/aerial.nvim',
 		module = 'aerial',
+		cmd = 'AerialToggle',
 		config = function()
 			require('configs.aerial')
 		end,
 	}
-	-- use { -- spellcheck
-	-- 	'lewis6991/spellsitter.nvim',
-	-- 	event = 'BufRead',
-	-- 	config = function()
-	-- 		require('spellsitter').setup()
-	-- 	end,
-	-- }
 
 	-- LSP Stuff
 	use { -- Collection of configurations for built-in LSP client
@@ -122,6 +109,7 @@ local function spec(use)
 		'hrsh7th/nvim-cmp',
 		event = 'InsertEnter',
 		requires = {
+			{ 'onsails/lspkind-nvim', module = 'lspkind' },
 			{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
 			{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
 			{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
@@ -238,13 +226,6 @@ local function spec(use)
 			require('configs.surround')
 		end,
 	}
-	-- use { -- Search Panel
-	-- 	'windwp/nvim-spectre',
-	-- 	keys = { { 'n', '<leader>r' } },
-	-- 	config = function()
-	-- 		require('configs.spectre')
-	-- 	end,
-	-- }
 	use { -- Motions
 		'phaazon/hop.nvim',
 		keys = {
@@ -274,14 +255,6 @@ local function spec(use)
 		},
 		config = function()
 			require('configs.fterm')
-		end,
-	}
-
-	use {
-		'dstein64/vim-startuptime',
-		cmd = 'StartupTime',
-		config = function()
-			vim.g.startuptime_tries = 10
 		end,
 	}
 end

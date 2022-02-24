@@ -11,16 +11,16 @@ vim.keymap.set('n', '<M-b>', '<Cmd>TexlabBuild<CR>', { buffer = true, desc = 'Te
 vim.keymap.set('n', '<M-f>', '<Cmd>TexlabForward<CR>', { buffer = true, desc = 'Texlab Forward' })
 
 -- A list of groups that are only primitive link targets.
-vim.api.nvim_set_hl(0, 'texCmdType', { link = 'Type' })
-vim.api.nvim_set_hl(0, 'texError', { link = 'Error' })
-vim.api.nvim_set_hl(0, 'texParm', { link = 'Special' })
-vim.api.nvim_set_hl(0, 'texZone', { link = 'PreCondit' })
-vim.api.nvim_set_hl(0, 'texSymbol', { link = 'SpecialChar' })
+-- vim.api.nvim_set_hl(0, 'texCmdType', { link = 'Type' })
+-- vim.api.nvim_set_hl(0, 'texError', { link = 'Error' })
+-- vim.api.nvim_set_hl(0, 'texParm', { link = 'Special' })
+-- vim.api.nvim_set_hl(0, 'texZone', { link = 'PreCondit' })
+-- vim.api.nvim_set_hl(0, 'texSymbol', { link = 'SpecialChar' })
 
 -- A list of the most common normal LaTeX groups.
-vim.api.nvim_set_hl(0, 'texComment', { link = 'Comment' }) -- % COMMENT
-vim.api.nvim_set_hl(0, 'texCommentTodo', { link = 'Todo' }) -- % TODO
-vim.api.nvim_set_hl(0, 'texDelim', { link = 'Delimiter' }) -- {, }, [, and ]
+-- vim.api.nvim_set_hl(0, 'texComment', { link = 'Comment' }) -- % COMMENT
+-- vim.api.nvim_set_hl(0, 'texCommentTodo', { link = 'Todo' }) -- % TODO
+-- vim.api.nvim_set_hl(0, 'texDelim', { link = 'Delimiter' }) -- {, }, [, and ]
 vim.api.nvim_set_hl(0, 'texCmd', { link = 'Statement' }) -- \CMD
 vim.api.nvim_set_hl(0, 'texOpt', { link = 'Identifier' }) -- \cmd[OPT]
 vim.api.nvim_set_hl(0, 'texOptSep', { link = 'NormalNC' }) -- [a, b] (commas)

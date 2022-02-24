@@ -43,9 +43,9 @@ local colors = {
 }
 
 local vi_mode_colors = {
-	['NORMAL'] = 'lavender',
-	['OP'] = 'lavender',
-	['INSERT'] = 'green',
+	['NORMAL'] = 'green',
+	['OP'] = 'green',
+	['INSERT'] = 'red',
 	['VISUAL'] = 'flamingo',
 	['LINES'] = 'flamingo',
 	['BLOCK'] = 'flamingo',
@@ -55,10 +55,44 @@ local vi_mode_colors = {
 	['MORE'] = 'teal',
 	['SELECT'] = 'maroon',
 	['COMMAND'] = 'peach',
-	['SHELL'] = 'green',
-	['TERM'] = 'green',
+	['SHELL'] = 'red',
+	['TERM'] = 'red',
 	['NONE'] = 'yellow',
 }
+
+-- local mode_alias = {
+-- 	['n'] = 'Normal',
+-- 	['no'] = 'OP',
+-- 	['nov'] = 'OP',
+-- 	['noV'] = 'OP',
+-- 	['no'] = 'OP',
+-- 	['niI'] = 'Normal',
+-- 	['niR'] = 'Normal',
+-- 	['niV'] = 'Normal',
+-- 	['v'] = 'Visual',
+-- 	['V'] = 'Line',
+-- 	[''] = 'Bolck',
+-- 	['s'] = 'Select',
+-- 	['S'] = 'Select',
+-- 	[''] = 'Bolck',
+-- 	['i'] = 'Insert',
+-- 	['ic'] = 'Insert',
+-- 	['ix'] = 'Insert',
+-- 	['R'] = 'Replace',
+-- 	['Rc'] = 'Replace',
+-- 	['Rv'] = 'V-Replace',
+-- 	['Rx'] = 'Replace',
+-- 	['c'] = 'Command',
+-- 	['cv'] = 'Command',
+-- 	['ce'] = 'Command',
+-- 	['r'] = 'Enter',
+-- 	['rm'] = 'More',
+-- 	['r?'] = 'Confirm',
+-- 	['!'] = 'Shell',
+-- 	['t'] = 'Terminal',
+-- 	['nt'] = 'Terminal',
+-- 	['null'] = 'None',
+-- }
 
 local function any_git_changes()
 	local gst = vim.b.gitsigns_status_dict -- git stats
@@ -93,6 +127,12 @@ disable.filetypes = {
 }
 
 custom_providers = {
+	-- vim_mode = function()
+	-- 	local mode = mode_alias[vim.api.nvim_get_mode().mode]
+	-- 	local icon = ' '
+
+	-- 	return mode, icon
+	-- end,
 	lsp_status = function()
 		if next(vim.lsp.buf_get_clients(0)) ~= nil then
 			return ' '
@@ -113,7 +153,6 @@ custom_providers = {
 components.active[1][1] = {
 	provider = { name = 'vi_mode', opts = { show_mode_name = true } },
 	icon = ' ',
-	-- icon = '',
 	hl = function()
 		return {
 			fg = 'black',
@@ -152,7 +191,7 @@ components.active[1][3] = {
 	hl = function()
 		return {
 			fg = vi_mode_utils.get_mode_color(),
-			bg = 'mauve',
+			bg = 'sky',
 		}
 	end,
 }
@@ -164,7 +203,7 @@ components.active[1][4] = {
 	icon = '  ',
 	hl = {
 		fg = 'black',
-		bg = 'mauve',
+		bg = 'sky',
 	},
 }
 
@@ -173,7 +212,7 @@ components.active[1][5] = {
 	icon = '  ',
 	hl = {
 		fg = 'black',
-		bg = 'mauve',
+		bg = 'sky',
 	},
 }
 
@@ -182,7 +221,7 @@ components.active[1][6] = {
 	icon = '  ',
 	hl = {
 		fg = 'black',
-		bg = 'mauve',
+		bg = 'sky',
 	},
 }
 
@@ -192,7 +231,7 @@ components.active[1][7] = {
 		return any_git_changes()
 	end,
 	hl = {
-		fg = 'mauve',
+		fg = 'sky',
 		bg = 'black',
 	},
 }
@@ -234,6 +273,7 @@ components.active[1][9] = {
 -- workspace loader
 components.active[2][1] = {
 	provider = 'lsp_client_names',
+	icon = ' ',
 	hl = {
 		fg = 'gray',
 		bg = 'black',
@@ -354,41 +394,22 @@ components.active[3][4] = {
 
 -- INACTIVE
 components.inactive[1][1] = {
-	provider = { name = 'vi_mode', opts = { show_mode_name = true } },
-	icon = ' ',
-	hl = function()
-		return {
-			fg = 'black',
-			bg = vi_mode_utils.get_mode_color(),
-		}
-	end,
-	left_sep = 'block',
-}
-components.inactive[1][2] = {
-	provider = '',
-	hl = function()
-		return {
-			fg = vi_mode_utils.get_mode_color(),
-			bg = 'black',
-		}
-	end,
-}
-
-components.inactive[2][1] = {
 	provider = 'file_type',
 	hl = {
 		fg = 'black',
 		bg = 'maroon',
 	},
-	left_sep = {
-		str = 'left_rounded',
+	left_sep = 'block',
+	right_sep = {
+		str = 'right_rounded',
 		hl = {
 			fg = 'maroon',
 			bg = 'black',
 		},
 	},
-	right_sep = 'block',
 }
+
+components.inactive[1][2] = {}
 
 require('feline').setup {
 	theme = colors,

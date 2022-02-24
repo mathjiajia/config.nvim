@@ -23,9 +23,9 @@ local p = require('luasnip.extras').partial
 -- local conds = require('luasnip.extras.expand_conditions')
 -- local events = require('luasnip.util.events')
 
-local function copy(args)
-	return args[1]
-end
+-- local function copy(args)
+-- 	return args[1]
+-- end
 
 M = {
 	s({ trig = 'fixme', name = 'FIXME:' }, { t('FIXME('), p(os.getenv, 'USER'), t('): ') }),

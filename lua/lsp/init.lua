@@ -1,7 +1,5 @@
 require('packer').loader('cmp-nvim-lsp')
 
-local lspconfig = require('lspconfig')
-
 -- lsp info
 vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
@@ -66,15 +64,6 @@ local on_attach = function(client, bufnr)
 
 	require('aerial').on_attach(client, bufnr)
 	vim.keymap.set('n', '<M-o>', '<Cmd>AerialToggle<CR>', { buffer = bufnr, desc = 'Aerial code outline' })
-end
-
-local null_on_attach = function(client, bufnr)
-	if client.resolved_capabilities.document_formatting then
-		vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, { buffer = bufnr, desc = 'Formmating' })
-	end
-	if client.resolved_capabilities.document_range_formatting then
-		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
-	end
 end
 
 -- nvim-cmp supports additional completion capabilities
