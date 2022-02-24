@@ -3,12 +3,24 @@ local M = {}
 local ls = require('luasnip')
 
 -- some shorthands...
-local c = ls.choice_node
+-- some shorthands...
 local s = ls.snippet
+-- local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
+-- local c = ls.choice_node
+-- local d = ls.dynamic_node
+-- local r = ls.restore_node
 local l = require('luasnip.extras').lambda
+-- local rep = require('luasnip.extras').rep
+-- local p = require("luasnip.extras").partial
+-- local m = require("luasnip.extras").match
+-- local n = require("luasnip.extras").nonempty
+-- local dl = require("luasnip.extras").dynamic_lambda
+-- local fmt = require("luasnip.extras.fmt").fmt
+-- local fmta = require("luasnip.extras.fmt").fmta
+-- local types = require("luasnip.util.types")
 local conds = require('luasnip.extras.expand_conditions')
 
 local vimtex = {}
@@ -21,8 +33,12 @@ end
 -- vimtex.in_comment = function()
 -- 	return vim.fn['vimtex#syntax#in_comment']() == 1
 -- end
+-- vimtex.in_beamer = function()
+-- 	return vim.b.vimtex['documentclass'] == 'beamer'
+-- end
 -- vimtex.env_align = function()
--- 	return vim.fn["vimtex#env#is_inside('align')"]() == 1
+-- 	local x, y = unpack(vim.eval('vimtex#env#is_inside("align")'))
+-- 	return x ~= '0' and y ~= '0'
 -- end
 
 M = {

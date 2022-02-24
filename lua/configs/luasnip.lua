@@ -1,29 +1,33 @@
 local ls = require('luasnip')
 
 ls.config.setup {
-	history = true,
+	-- history = true,
 	region_check_events = 'CursorHold',
 	delete_check_events = 'TextChanged,InsertEnter',
 	store_selection_keys = '<Tab>',
 	enable_autosnippets = true,
 }
 
--- stylua: ignore start
-vim.keymap.set({ 'i', 's' }, '<C-j>', function() ls.jump(1) end, { desc = 'LuaSnip Forward Jump' })
-vim.keymap.set({ 'i', 's' }, '<C-k>', function() ls.jump(-1) end, { desc = 'LuaSnip Backward Jump' })
-vim.keymap.set(
-	{ 'i', 's' },
-	'<C-E>',
-	'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"',
-	{ expr = true, desc = 'LuaSnip Next Choice' }
-)
-vim.keymap.set(
-	{ 'i', 's' },
-	'<C-T>',
-	'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<C-T>"',
-	{ expr = true, desc = 'LuaSnip Previous Choice' }
-)
--- stylua: ignore end
+vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+	if ls.jumpable(1) then
+		ls.jump(1)
+	end
+end, { desc = 'LuaSnip Forward Jump' })
+vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
+end, { desc = 'LuaSnip Backward Jump' })
+vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, { desc = 'LuaSnip Next Choice' })
+-- vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+-- 	if ls.choice_active() then
+-- 		ls.change_choice(-1)
+-- 	end
+-- end, { desc = 'LuaSnip Previous Choice' })
 
 _G.if_char_insert_space = function()
 	if string.find(vim.v.char, '%a') then

@@ -1,17 +1,26 @@
 local M = {}
 
 local ls = require('luasnip')
-
 -- some shorthands...
 local s = ls.snippet
-local sn = ls.snippet_node
+-- local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local c = ls.choice_node
-local d = ls.dynamic_node
+-- local d = ls.dynamic_node
+-- local r = ls.restore_node
 local l = require('luasnip.extras').lambda
+local rep = require('luasnip.extras').rep
+-- local p = require("luasnip.extras").partial
+-- local m = require("luasnip.extras").match
+-- local n = require("luasnip.extras").nonempty
+-- local dl = require("luasnip.extras").dynamic_lambda
+-- local fmt = require("luasnip.extras.fmt").fmt
+-- local fmta = require("luasnip.extras.fmt").fmta
+-- local types = require("luasnip.util.types")
 local conds = require('luasnip.extras.expand_conditions')
+
 local events = require('luasnip.util.events')
 
 local vimtex = {}
@@ -34,10 +43,6 @@ end
 -- vimtex.env_align = function()
 -- 	return vim.fn["vimtex#env#is_inside('align')"]() == 1
 -- end
-
-local function copy(args)
-	return args[1]
-end
 
 M = {
 
@@ -147,7 +152,10 @@ M = {
 	}, { condition = vimtex.in_text }),
 
 	s({ trig = 'ses', name = 'short exact sequence' }, {
-		i(1, '0'),
+		c(1, {
+			t('0'),
+			t('1'),
+		}),
 		t(' \\longrightarrow '),
 		i(2),
 		t(' \\longrightarrow '),
@@ -155,7 +163,7 @@ M = {
 		t(' \\longrightarrow '),
 		i(4),
 		t(' \\longrightarrow '),
-		f(copy, 1),
+		rep(1),
 		i(0),
 	}, { condition = vimtex.in_mathzone }),
 
@@ -341,7 +349,7 @@ M = {
 
 	s(
 		{ trig = 'rij', name = '(x_n) n ∈ N' },
-		{ t('('), i(1, 'x'), t('_'), i(2, 'n'), t(')_{'), f(copy, 2), t('\\in '), i(3, '\\mathbb{N}'), t('}'), i(0) },
+		{ t('('), i(1, 'x'), t('_'), i(2, 'n'), t(')_{'), rep(2), t('\\in '), i(3, '\\mathbb{N}'), t('}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
@@ -351,7 +359,7 @@ M = {
 	),
 	s(
 		{ trig = 'list', name = 'a_1, ..., a_n' },
-		{ i(1, 'a'), t('_{'), i(2, '1'), t('}, \\dots, '), f(copy, 1), t('_{'), i(3, 'n'), t('}'), i(0) },
+		{ i(1, 'a'), t('_{'), i(2, '1'), t('}, \\dots, '), rep(1), t('_{'), i(3, 'n'), t('}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
 
@@ -408,7 +416,7 @@ M = {
 		t('}_'),
 		i(2, '1'),
 		t { '\\\\', '\\vdots \\\\', '' },
-		f(copy, 1),
+		rep(1),
 		t('_'),
 		i(3, 'n'),
 		t { '', '\\end{pmatrix}' },
@@ -638,9 +646,9 @@ M = {
 		t(', \\quad '),
 		i(4),
 		t('\\longmapsto '),
-		f(copy, 1),
+		rep(1),
 		t('('),
-		f(copy, 4),
+		rep(4),
 		t(') = '),
 		i(0),
 		t { '', '\\end{equation*}' },
@@ -742,11 +750,23 @@ M = {
 	s({ trig = 'AA', wordTrig = false, name = 'affine 𝔸' }, { t('\\mathbb{A}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'CC', wordTrig = false, name = 'complex ℂ' }, { t('\\mathbb{C}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'DD', wordTrig = false, name = 'disc 𝔻' }, { t('\\mathbb{D}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'FF', wordTrig = false, name = 'Hirzebruch 𝔽' }, { t('\\mathbb{F}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'HH', wordTrig = false, name = 'half plane ℍ' }, { t('\\mathbb{H}') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'FF', wordTrig = false, name = 'Hirzebruch 𝔽' },
+		{ t('\\mathbb{F}') },
+		{ condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'HH', wordTrig = false, name = 'half plane ℍ' },
+		{ t('\\mathbb{H}') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s({ trig = 'NN', wordTrig = false, name = 'natural ℕ' }, { t('\\mathbb{N}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'OO', wordTrig = false, name = 'mathcal{O}' }, { t('\\mathcal{O}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'PP', wordTrig = false, name = 'projective ℙ' }, { t('\\mathbb{P}') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'PP', wordTrig = false, name = 'projective ℙ' },
+		{ t('\\mathbb{P}') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s({ trig = 'QQ', wordTrig = false, name = 'rational ℚ' }, { t('\\mathbb{Q}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'RR', wordTrig = false, name = 'real ℝ' }, { t('\\mathbb{R}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t('\\mathbb{Z}') }, { condition = vimtex.in_mathzone }),

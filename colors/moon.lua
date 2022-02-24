@@ -93,7 +93,7 @@ highlight {
 	-- status lines of not-current windows
 	-- Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
 	TabLine = { fg = cp.black4, bg = cp.black1 }, -- tab pages line, not active tab page label
-	TabLineFill = { fg = cp.gray0, bg = cp.black0 }, -- tab pages line, where there are no labels
+	TabLineFill = { fg = cp.gray0, bg = cp.black2 }, -- tab pages line, where there are no labels
 	TabLineSel = { fg = cp.black0, bg = cp.red }, -- tab pages line, active tab page label
 
 	Title = { fg = cp.blue, bold = true }, -- titles for output from ":set all", ":autocmd" etcp.

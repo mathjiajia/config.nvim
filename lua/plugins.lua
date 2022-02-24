@@ -16,11 +16,11 @@ local function spec(use)
 	use { 'wbthomason/packer.nvim', opt = true }
 
 	-- Common Requirements
-	use { 'nvim-lua/plenary.nvim', module = 'plenary' }
+	use { 'nvim-lua/plenary.nvim' }
 	use { 'tami5/sqlite.lua', module = 'sqlite' }
 	use {
 		'kyazdani42/nvim-web-devicons',
-		module = 'nvim-web-devicons',
+		-- module = 'nvim-web-devicons',
 		config = function()
 			require('configs.devicons')
 		end,
@@ -43,7 +43,7 @@ local function spec(use)
 	}
 	use { -- notifications
 		'rcarriga/nvim-notify',
-		event = 'VimEnter',
+		-- event = 'VimEnter',
 		config = function()
 			require('configs.notify')
 		end,
@@ -59,11 +59,11 @@ local function spec(use)
 	-- Syntax highlighter
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		event = 'BufRead',
+		-- event = 'BufRead',
 		run = ':TSUpdate',
 		requires = {
 			{ 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } },
-			{ 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
+			{ 'p00f/nvim-ts-rainbow', event = 'BufRead' },
 		},
 		config = function()
 			require('configs.treesitter')
@@ -147,13 +147,12 @@ local function spec(use)
 	}
 	use { -- Note and Organizing
 		'nvim-neorg/neorg',
-		opt = true,
 		ft = 'norg',
-		requires = { 'nvim-neorg/neorg-telescope', opt = true },
 		config = function()
 			require('configs.neorg')
 		end,
 	}
+	use { 'nvim-neorg/neorg-telescope', opt = true }
 
 	-- Telescope nonsense
 	use {
@@ -167,8 +166,8 @@ local function spec(use)
 		requires = {
 			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
 			{ 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
-			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
-			{'natecraddock/telescope-zf-native.nvim', opt = true},
+			-- { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
+			{ 'natecraddock/telescope-zf-native.nvim', opt = true },
 			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
 		},
 		config = function()
