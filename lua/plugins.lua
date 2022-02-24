@@ -28,10 +28,10 @@ local function spec(use)
 
 	-- UI stuff
 	use { -- statusline
-		'feline-nvim/feline.nvim',
+		'~/Dev/statusline.nvim',
 		event = 'BufRead',
 		config = function()
-			require('configs.feline')
+			require('statusline').setup()
 		end,
 	}
 	use { -- tabline
@@ -160,11 +160,15 @@ local function spec(use)
 		'nvim-telescope/telescope.nvim',
 		cmd = 'Telescope',
 		module = 'telescope',
-		keys = { { 'n', '<leader>f' } },
+		keys = {
+			{ 'n', '<leader>f' },
+			{ 'n', '<leader><space>' },
+		},
 		requires = {
 			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
 			{ 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
 			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
+			{'natecraddock/telescope-zf-native.nvim', opt = true},
 			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
 		},
 		config = function()
@@ -230,6 +234,13 @@ local function spec(use)
 		},
 		config = function()
 			require('configs.hop')
+		end,
+	}
+	use { -- Search Panel
+		'windwp/nvim-spectre',
+		keys = { { 'n', '<leader>r' } },
+		config = function()
+			require('configs.spectre')
 		end,
 	}
 	use { -- Sessions Management

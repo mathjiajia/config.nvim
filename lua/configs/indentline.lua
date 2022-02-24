@@ -11,7 +11,7 @@ vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.white })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { fg = cp.pink, nocombine = true })
 
 require('indent_blankline').setup {
-	char = '|',
+	-- char = '|',
 	char_list = {},
 	char_highlight_list = {
 		-- 'IndentBlanklineIndent1',

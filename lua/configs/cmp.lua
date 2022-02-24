@@ -41,34 +41,6 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
 
-local kind_icons = {
-	Text = '',
-	Method = '',
-	Function = '',
-	Constructor = '',
-	Field = '',
-	Variable = '',
-	Class = 'ﴯ',
-	Interface = '',
-	Module = '',
-	Property = 'ﰠ',
-	Unit = '',
-	Value = '',
-	Enum = '',
-	Keyword = '',
-	Snippet = '',
-	Color = '',
-	File = '',
-	Reference = '',
-	Folder = '',
-	EnumMember = '',
-	Constant = '',
-	Struct = '',
-	Event = '',
-	Operator = '',
-	TypeParameter = '',
-}
-
 cmp.setup {
 	enabled = function()
 		local in_prompt = vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt'
