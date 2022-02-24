@@ -17,6 +17,7 @@ local function spec(use)
 
 	-- Common Requirements
 	use { 'nvim-lua/plenary.nvim', module = 'plenary' }
+	use { 'tami5/sqlite.lua', module = 'sqlite' }
 	use {
 		'kyazdani42/nvim-web-devicons',
 		module = 'nvim-web-devicons',
@@ -162,15 +163,9 @@ local function spec(use)
 		keys = { { 'n', '<leader>f' } },
 		requires = {
 			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
-			{
-				'nvim-telescope/telescope-frecency.nvim',
-				opt = true,
-				after = 'telescope.nvim',
-				requires = { 'tami5/sqlite.lua', module = 'sqlite', opt = true },
-			},
+			{ 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
 			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
 			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
-			-- { 'nvim-telescope/telescope-bibtex.nvim', after = 'telescope.nvim' },
 		},
 		config = function()
 			require('configs.telescope')

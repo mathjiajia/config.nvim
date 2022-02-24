@@ -7,8 +7,8 @@ vim.bo.spelllang = 'en_gb'
 vim.keymap.set('i', '<C-l>', '<C-g>u<Esc>[s1z=`]a<C-g>u', { buffer = true, desc = 'Fix Last Miss-Spelling' })
 
 -- texlab
-vim.keymap.set('n', '<M-b>', '<Cmd>TexlabBuild<CR>', { buffer = true, desc = 'Texlab Build' })
-vim.keymap.set('n', '<M-f>', '<Cmd>TexlabForward<CR>', { buffer = true, desc = 'Texlab Forward' })
+-- vim.keymap.set('n', '<M-b>', '<Cmd>TexlabBuild<CR>', { buffer = true, desc = 'Texlab Build' })
+-- vim.keymap.set('n', '<M-f>', '<Cmd>TexlabForward<CR>', { buffer = true, desc = 'Texlab Forward' })
 
 -- A list of groups that are only primitive link targets.
 -- vim.api.nvim_set_hl(0, 'texCmdType', { link = 'Type' })
@@ -52,10 +52,10 @@ vim.api.nvim_set_hl(0, 'texEnvArgName', { link = 'TSEnvironmentName' }) -- PreCo
 vim.api.nvim_set_hl(0, 'texTheoremEnvBgn', { link = 'texCmd' }) -- \begin{theorem}
 vim.api.nvim_set_hl(0, 'texCmdRef', { link = 'texCmd' }) -- \CITE; \LABEL
 vim.api.nvim_set_hl(0, 'texRefArg', { link = 'Special' }) -- \cite{REFERENCE}; \label{REF}
-vim.api.nvim_set_hl(0, 'texE3Variable', { link = 'texCmd' }) -- \G_MYFILE_NAME_STR
-vim.api.nvim_set_hl(0, 'texE3Constant', { link = 'texE3Variabl' }) -- \C_MYFILE_NAME_STR
-vim.api.nvim_set_hl(0, 'texE3Function', { link = 'texCmdType' }) -- \STR_NEW:n
-vim.api.nvim_set_hl(0, 'texE3Type', { link = 'texParm' }) -- \str_new:N
+-- vim.api.nvim_set_hl(0, 'texE3Variable', { link = 'texCmd' }) -- \G_MYFILE_NAME_STR
+-- vim.api.nvim_set_hl(0, 'texE3Constant', { link = 'texE3Variabl' }) -- \C_MYFILE_NAME_STR
+-- vim.api.nvim_set_hl(0, 'texE3Function', { link = 'texCmdType' }) -- \STR_NEW:n
+-- vim.api.nvim_set_hl(0, 'texE3Type', { link = 'texParm' }) -- \str_new:N
 vim.api.nvim_set_hl(0, 'texCmdParbox', { link = 'texCmd' }) -- \PARBOX[p][h][i]{w}{c}
 vim.api.nvim_set_hl(0, 'texBoxOptPosVal', { link = 'texSymbol' }) -- parbox[P][h][i]{w}{c}, \begin{minipage}[P][h][i]{w}
 vim.api.nvim_set_hl(0, 'texBoxOptIPosVal', { link = 'texBoxOptPosVal' })
@@ -65,17 +65,17 @@ vim.api.nvim_set_hl(0, 'texBoxOptIPosVal', { link = 'texBoxOptPosVal' })
 vim.api.nvim_set_hl(0, 'texMathZone', { link = 'Special' }) -- Special \( HERE \); \[ HERE \]
 vim.api.nvim_set_hl(0, 'texMathZoneEnv', { link = 'texMathZone' }) -- \begin{menv} HERE \end{menv}
 vim.api.nvim_set_hl(0, 'texMathZoneEnvStarred', { link = 'texMathZone' }) -- \begin{menv*} HERE \end{menv*}
-vim.api.nvim_set_hl(0, 'texMathZoneX', { link = 'texMathZone' }) -- $ HERE $
-vim.api.nvim_set_hl(0, 'texMathZoneXX', { link = 'texMathZone' }) -- $$ HERE $$
+-- vim.api.nvim_set_hl(0, 'texMathZoneX', { link = 'texMathZone' }) -- $ HERE $
+-- vim.api.nvim_set_hl(0, 'texMathZoneXX', { link = 'texMathZone' }) -- $$ HERE $$
 vim.api.nvim_set_hl(0, 'texMathZoneEnsured', { link = 'texMathZone' }) -- \ensuremath{HERE}
 vim.api.nvim_set_hl(0, 'texCmdMathEnv', { link = 'texCmdEnv' }) -- \BEGIN; \END (for math environments)
 vim.api.nvim_set_hl(0, 'texMathEnvArgName', { link = 'Delimiter' }) -- \begin{EQUATION}
 vim.api.nvim_set_hl(0, 'texCmdMath', { link = 'texCmd' }) -- \ENSUREMATH
 vim.api.nvim_set_hl(0, 'texMathDelim', { link = 'Type' }) -- LVERT
 vim.api.nvim_set_hl(0, 'texMathDelimMod', { link = 'texMathDelim' }) -- \LEFT\lvert \RIGHT\rvert
-vim.api.nvim_set_hl(0, 'texMathOper', { link = 'Operator' }) -- Basic operators: + -= /
+-- vim.api.nvim_set_hl(0, 'texMathOper', { link = 'Operator' }) -- Basic operators: + -= /
 vim.api.nvim_set_hl(0, 'texMathSuperSub', { link = 'texMathOper' }) -- Sub and super operators (^, _)
-vim.api.nvim_set_hl(0, 'texMathError', { link = 'texError' }) -- Unmatched region endings
+-- vim.api.nvim_set_hl(0, 'texMathError', { link = 'texError' }) -- Unmatched region endings
 
 -- A list of other important groups.
 vim.api.nvim_set_hl(0, 'texLength', { link = 'Number' })
