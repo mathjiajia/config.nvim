@@ -3,6 +3,7 @@ local modules = {
 	'plugins',
 	'keybinds',
 	'autocmds',
+	-- 'status'
 }
 
 for _, mod in ipairs(modules) do

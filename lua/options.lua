@@ -33,13 +33,12 @@ vim.g.clipboard = { -- clipboard
 }
 
 -- indention & tab
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
-vim.opt.softtabstop = 2
-vim.opt.tabstop = 2
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
 
 -- search
-vim.opt.history = 2000
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
@@ -54,9 +53,9 @@ vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
 vim.wo.number = true
 vim.opt.pumheight = 10 -- Maximum number of items to show in the popup menu
 vim.wo.relativenumber = true
-vim.opt.scrolloff = 5 -- Minimal number of screen lines to keep above and below the cursor
+vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
-vim.opt.showmode = false
+-- vim.opt.showmode = false
 vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
 vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
 vim.opt.splitright = true -- splitting a window will put the new window right of the current one
@@ -73,7 +72,7 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match
 vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
 
 -- perfomance
-vim.opt.updatetime = 500
+vim.opt.updatetime = 400
 
 -- theme
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|

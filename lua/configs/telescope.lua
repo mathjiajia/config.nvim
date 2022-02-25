@@ -30,7 +30,7 @@ require('telescope').setup {
 		path_display = { 'absolute' },
 		set_env = { ['COLORTERM'] = 'truecolor' },
 		mappings = {},
-		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$', '%.ttf$' },
+		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
 	},
 	pickers = {
 		-- builtin

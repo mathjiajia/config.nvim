@@ -112,11 +112,10 @@ cmp.setup {
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
 	sources = cmp.config.sources {
-		{ name = 'luasnip' }, -- You can specify the `cmp_git` source if you were installed it.
+		{ name = 'luasnip' },
 		{ name = 'buffer' },
 	},
 })
-
 cmp.setup.filetype('norg', {
 	sources = cmp.config.sources {
 		{ name = 'luasnip' },

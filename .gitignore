@@ -1,3 +1,4 @@
-plugin/packer_compiled.lua
-doc/
+.editorconfig
 benchmarks/
+doc/
+plugin/packer_compiled.lua

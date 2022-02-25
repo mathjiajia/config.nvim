@@ -17,14 +17,8 @@ local function spec(use)
 
 	-- Common Requirements
 	use { 'nvim-lua/plenary.nvim' }
+	use { 'kyazdani42/nvim-web-devicons' }
 	use { 'tami5/sqlite.lua', module = 'sqlite' }
-	use {
-		'kyazdani42/nvim-web-devicons',
-		-- module = 'nvim-web-devicons',
-		config = function()
-			require('configs.devicons')
-		end,
-	}
 
 	-- UI stuff
 	use { -- statusline
@@ -260,6 +254,13 @@ local function spec(use)
 		},
 		config = function()
 			require('configs.fterm')
+		end,
+	}
+	use {
+		'dstein64/vim-startuptime',
+		cmd = 'StartupTime',
+		config = function()
+			vim.g.startuptime_tries = 10
 		end,
 	}
 end
