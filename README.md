@@ -13,63 +13,62 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ├── LICENSE
 ├── README.md
 ├── after
-│   └── ftplugin
-│       ├── gitcommit.lua
-│       ├── markdown.lua
-│       ├── norg.lua
-│       ├── qf.lua
-│       └── tex.lua
+│   └── ftplugin
+│       ├── checkhealth.lua
+│       ├── gitcommit.lua
+│       ├── lua.lua
+│       ├── markdown.lua
+│       ├── norg.lua
+│       ├── qf.lua
+│       └── tex.lua
 ├── colors
-│   ├── moon.lua
-│   └── sun.lua
+│   └── moon.lua
 ├── ginit.vim
 ├── init.lua
 ├── lua
-│   ├── autocmds.lua
-│   ├── autosnippets
-│   │   ├── markdown.lua
-│   │   ├── norg.lua
-│   │   └── tex.lua
-│   ├── configs
-│   │   ├── aerial.lua
-│   │   ├── alpha.lua
-│   │   ├── bufferline.lua
-│   │   ├── cmp.lua
-│   │   ├── copilot.lua
-│   │   ├── devicons.lua
-│   │   ├── fidget.lua
-│   │   ├── fterm.lua
-│   │   ├── gitsigns.lua
-│   │   ├── hlslens.lua
-│   │   ├── hop.lua
-│   │   ├── indentline.lua
-│   │   ├── lualine.lua
-│   │   ├── luasnip.lua
-│   │   ├── neorg.lua
-│   │   ├── notify.lua
-│   │   ├── nvimtree.lua
-│   │   ├── session.lua
-│   │   ├── smartpairs.lua
-│   │   ├── surround.lua
-│   │   ├── telescope.lua
-│   │   ├── treesitter.lua
-│   │   └── vimtex.lua
-│   ├── keybinds.lua
-│   ├── lsp
-│   │   ├── init.lua
-│   │   ├── null-ls.lua
-│   │   ├── pyright.lua
-│   │   ├── sumneko_lua.lua
-│   │   └── texlab.lua
-│   ├── options.lua
-│   ├── plugins.lua
-│   └── snippets
-│       ├── all.lua
-│       ├── gitcommit.lua
-│       ├── lua.lua
-│       ├── markdown.lua
-│       ├── norg.lua
-│       └── tex.lua
+│   ├── autocmds.lua
+│   ├── autosnippets
+│   │   ├── markdown.lua
+│   │   ├── norg.lua
+│   │   └── tex.lua
+│   ├── colors.lua
+│   ├── configs
+│   │   ├── aerial.lua
+│   │   ├── buftabline.lua
+│   │   ├── cmp.lua
+│   │   ├── copilot.lua
+│   │   ├── fidget.lua
+│   │   ├── fterm.lua
+│   │   ├── gitsigns.lua
+│   │   ├── hop.lua
+│   │   ├── indentline.lua
+│   │   ├── luasnip.lua
+│   │   ├── neorg.lua
+│   │   ├── notify.lua
+│   │   ├── nvimtree.lua
+│   │   ├── pairs.lua
+│   │   ├── session.lua
+│   │   ├── spectre.lua
+│   │   ├── surround.lua
+│   │   ├── telescope.lua
+│   │   ├── treesitter.lua
+│   │   └── vimtex.lua
+│   ├── keybinds.lua
+│   ├── lsp
+│   │   ├── init.lua
+│   │   ├── null-ls.lua
+│   │   ├── pyright.lua
+│   │   ├── sumneko_lua.lua
+│   │   └── texlab.lua
+│   ├── options.lua
+│   ├── plugins.lua
+│   └── snippets
+│       ├── all.lua
+│       ├── gitcommit.lua
+│       ├── lua.lua
+│       ├── markdown.lua
+│       ├── norg.lua
+│       └── tex.lua
 └── spell
     ├── en.utf-8.add
     └── en.utf-8.add.spl
@@ -79,5 +78,5 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 - `plugins.lua` -- Neovim plugins installed
 - `options.lua` -- General settings and options
 - `configs` -- A folder full of the configurations needed for each individual plugin,
-stored in the form `config/[pluginName].lua`
+  stored in the form `config/[pluginName].lua`
 - `lsp` -- configurations for each language serves
