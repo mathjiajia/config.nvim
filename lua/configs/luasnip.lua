@@ -2,15 +2,13 @@ local ls = require('luasnip')
 
 ls.config.setup {
 	-- history = true,
-	region_check_events = 'CursorHold',
-	delete_check_events = 'TextChanged,InsertEnter',
-	store_selection_keys = '<Tab>',
+	updateevents = 'TextChanged,TextChangedI',
 	enable_autosnippets = true,
 }
 
 vim.keymap.set({ 'i', 's' }, '<C-j>', function()
-	if ls.jumpable(1) then
-		ls.jump(1)
+	if ls.expand_or_jumpable() then
+		ls.expand_or_jump()
 	end
 end, { desc = 'LuaSnip Forward Jump' })
 vim.keymap.set({ 'i', 's' }, '<C-k>', function()

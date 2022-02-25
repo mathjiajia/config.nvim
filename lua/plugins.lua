@@ -1,5 +1,5 @@
 -- Install packer
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 local function install_packer()
 	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
@@ -9,11 +9,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	install_packer()
 end
 
-vim.cmd([[packadd packer.nvim]])
-
 local function spec(use)
 	-- Packer can manage itself
-	use { 'wbthomason/packer.nvim', opt = true }
+	use { 'wbthomason/packer.nvim' }
 
 	-- Common Requirements
 	use { 'nvim-lua/plenary.nvim' }

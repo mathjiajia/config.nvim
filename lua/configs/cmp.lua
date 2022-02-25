@@ -37,6 +37,11 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
 
 vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.white }) --  The menu field's highlight group.
 
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+end
+
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
@@ -54,19 +59,13 @@ cmp.setup {
 		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-		['<C-e>'] = cmp.mapping {
-			i = cmp.mapping.abort(),
-			c = cmp.mapping.close(),
-		},
-		['<CR>'] = cmp.mapping.confirm {
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		},
+		['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+		['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
 		['<Tab>'] = cmp.mapping(function(fallback)
-			if luasnip.expandable() then
-				luasnip.expand()
-			elseif cmp.visible() then
+			if cmp.visible() then
 				cmp.select_next_item()
+			elseif has_words_before() then
+				cmp.complete()
 			else
 				fallback()
 			end
@@ -104,6 +103,7 @@ cmp.setup {
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'path' },
 		{ name = 'buffer' },
 		{ name = 'rg', keyword_length = 3 },
 	},
@@ -111,27 +111,29 @@ cmp.setup {
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources {
+	sources = {
 		{ name = 'luasnip' },
 		{ name = 'buffer' },
 	},
 })
 cmp.setup.filetype('norg', {
-	sources = cmp.config.sources {
+	sources = {
 		{ name = 'luasnip' },
-		{ name = 'buffer' },
 		{ name = 'neorg' },
+		{ name = 'buffer' },
 	},
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-	sources = { name = 'buffer' },
+	sources = {
+		{ name = 'buffer' },
+	},
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-	sources = cmp.config.sources {
+	sources = {
 		{ name = 'path' },
 		{ name = 'cmdline' },
 	},
