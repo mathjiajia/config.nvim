@@ -15,7 +15,12 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder' })
+	vim.keymap.set(
+		'n',
+		'<leader>wa',
+		vim.lsp.buf.add_workspace_folder,
+		{ buffer = bufnr, desc = 'Add Workspace Folder' }
+	)
 	vim.keymap.set(
 		'n',
 		'<leader>wr',

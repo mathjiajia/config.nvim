@@ -1,17 +1,25 @@
 -- Install packer
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
-local function install_packer()
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
 end
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	install_packer()
-end
+-- Only required if you have packer configured as `opt`
+vim.cmd([[packadd packer.nvim]])
+
+vim.cmd([[
+	augroup packer_user_config
+		autocmd!
+		autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+	augroup end
+]])
 
 local function spec(use)
 	-- Packer can manage itself
-	use { 'wbthomason/packer.nvim' }
+	use { 'wbthomason/packer.nvim', opt = true }
+
+	use { 'lewis6991/impatient.nvim' }
 
 	-- Common Requirements
 	use { 'nvim-lua/plenary.nvim' }
@@ -35,7 +43,6 @@ local function spec(use)
 	}
 	use { -- notifications
 		'rcarriga/nvim-notify',
-		-- event = 'VimEnter',
 		config = function()
 			require('configs.notify')
 		end,
@@ -51,7 +58,6 @@ local function spec(use)
 	-- Syntax highlighter
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		-- event = 'BufRead',
 		run = ':TSUpdate',
 		requires = {
 			{ 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } },
@@ -266,6 +272,10 @@ end
 require('packer').startup {
 	spec,
 	config = {
+		profile = {
+			enable = true,
+			threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+		},
 		display = {
 			open_fn = function()
 				return require('packer.util').float { border = 'single' }

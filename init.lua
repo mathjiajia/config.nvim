@@ -1,13 +1,9 @@
-local modules = {
-	'options',
-	'plugins',
-	'keybinds',
-	'autocmds',
-}
-
-for _, mod in ipairs(modules) do
-	local ok, err = pcall(require, mod)
-	if not ok then
-		error(('Error loading %s...\n\n%s'):format(mod, err))
-	end
+local ok, impatient = pcall(require, 'impatient')
+if ok then
+	impatient.enable_profile()
+else
+	vim.notify('impatient', 'warn')
 end
+
+-- Do all init in core/init.lua so impatient can cache it
+require('core')
