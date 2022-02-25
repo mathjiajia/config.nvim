@@ -22,6 +22,9 @@ local opts = {
 		norg = {
 			{ '`', '`' },
 		},
+		tex = {
+			{ '``', "''" },
+		},
 	},
 	space = {
 		enable_mapping = false,
