@@ -41,6 +41,18 @@ end
 -- 	return x ~= '0' and y ~= '0'
 -- end
 
+local pipe = function(fns)
+	return function(...)
+		for _, fn in ipairs(fns) do
+			if not fn(...) then
+				return false
+			end
+		end
+
+		return true
+	end
+end
+
 M = {
 	-- priority 1:
 	s(
@@ -118,7 +130,7 @@ M = {
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
 		{ t { '\\noindent', '' }, i(0) },
-		{ condition = conds.line_begin and vimtex.in_text, show_condition = vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text }, show_condition = vimtex.in_text }
 	),
 	s(
 		{ trig = 'cite', name = '\\cite[]{}' },

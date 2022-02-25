@@ -44,6 +44,18 @@ end
 -- 	return vim.fn["vimtex#env#is_inside('align')"]() == 1
 -- end
 
+local pipe = function(fns)
+	return function(...)
+		for _, fn in ipairs(fns) do
+			if not fn(...) then
+				return false
+			end
+		end
+
+		return true
+	end
+end
+
 M = {
 
 	-- priority 60:
@@ -295,14 +307,14 @@ M = {
 		{ f(function(_, snip)
 			return snip.captures[1] .. 'he following are equivalent'
 		end, {}) },
-		{ condition = conds.line_begin and vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = '([wW])log', name = 'without loss of generality', regTrig = true },
 		{ f(function(_, snip)
 			return snip.captures[1] .. 'ithout loss of generality'
 		end, {}) },
-		{ condition = conds.line_begin and vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s({ trig = 'quad', name = 'quad' }, { t('\\quad ') }, { condition = vimtex.in_mathzone }),
 
@@ -337,7 +349,7 @@ M = {
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t { '\\[', '\t' }, i(1), t { '', '\\]' }, i(0) },
-		{ condition = conds.line_begin and vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 
 	s({ trig = 'cref', name = '\\cref{}' }, { t('\\cref{'), i(1), t('}'), i(0) }, { condition = vimtex.in_text }),
@@ -431,59 +443,59 @@ M = {
 	s(
 		{ trig = 'beq', name = 'Equation Environment', dscr = 'Create an equation environment.' },
 		{ t { '\\begin{equation}', '\t' }, i(1), t { '', '\\end{equation}' }, i(0) },
-		{ condition = conds.line_begin and vimtex.in_text, show_condition = vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bseq', name = 'Equation Environment without number', dscr = 'Create a star equation environment.' },
 		{ t { '\\begin{equation*}', '\t' }, i(1), t { '', '\\end{equation*}' }, i(0) },
-		{ condition = conds.line_begin and vimtex.in_text, show_condition = vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'proof', name = 'Proof Environment', dscr = 'Create a proof environment.' },
 		{ t { '\\begin{proof}', '\t' }, i(0), t { '', '\\end{proof}' } },
-		{ condition = conds.line_begin and vimtex.in_text, show_condition = vimtex.in_text }
-	),
-	s(
-		{ trig = 'lproof', name = 'Titled Proof', dscr = 'Create a titled proof environment.' },
-		{ t('\\begin{proof}[Proof of \\cref{'), i(1), t { '}]', '\t' }, i(0), t { '', '\\end{proof}' } },
-		{ condition = conds.line_begin and vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'thm', name = 'Theorem Environment', dscr = 'Create a theorem environment.' },
 		{ t { '\\begin{theorem}', '\t' }, i(0), t { '', '\\end{theorem}' } },
-		{ condition = conds.line_begin and vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'lem', name = 'Lemma Environment', dscr = 'Create a lemma environment.' },
 		{ t { '\\begin{lemma}', '\t' }, i(0), t { '', '\\end{lemma}' } },
-		{ condition = conds.line_begin and vimtex.in_text }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'def', name = 'Definition Environment', dscr = 'Create a definition environment.' },
 		{ t { '\\begin{definition}', '\t' }, i(0), t { '', '\\end{definition}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'prop', name = 'Proposition Environment', dscr = 'Create a proposition environment.' },
 		{ t { '\\begin{proposition}', '\t' }, i(0), t { '', '\\end{proposition}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'cor', name = 'Corollary Environment', dscr = 'Create a corollary environment.' },
 		{ t { '\\begin{corollary}', '\t' }, i(0), t { '', '\\end{corollary}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'rem', name = 'Remark Environment', dscr = 'Create a remark environment.' },
 		{ t { '\\begin{remark}', '\t' }, i(0), t { '', '\\end{remark}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'conj', name = 'Conjecture Environment', dscr = 'Create a conjecture environment.' },
 		{ t { '\\begin{conjecture}', '\t' }, i(0), t { '', '\\end{conjecture}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 
+	s(
+		{ trig = 'lprf', name = 'Titled Proof', dscr = 'Create a titled proof environment.' },
+		{ t('\\begin{proof}[Proof of \\cref{'), i(1), t { '}]', '\t' }, i(0), t { '', '\\end{proof}' } },
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
+	),
 	s({
 		trig = 'lthm',
 		name = 'Theorem Environment with name and lable',
@@ -496,7 +508,7 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{theorem}' },
-	}, { condition = conds.line_begin and vimtex.in_text }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({
 		trig = 'llem',
 		name = 'Lemma Environment with name and lable',
@@ -509,7 +521,7 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{lemma}' },
-	}, { condition = conds.line_begin and vimtex.in_text }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({
 		trig = 'ldef',
 		name = 'Definition Environment with name and lable',
@@ -522,7 +534,7 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{definition}' },
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({
 		trig = 'lprop',
 		name = 'Proposition Environment with name and lable',
@@ -535,7 +547,7 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{proposition}' },
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({
 		trig = 'lcor',
 		name = 'Corollary Environment with name and lable',
@@ -548,7 +560,7 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{corollary}' },
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({
 		trig = 'lrem',
 		name = 'Remark Environment with name and lable',
@@ -561,7 +573,7 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{remark}' },
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({
 		trig = 'lconj',
 		name = 'Conjecture Environment with name and lable',
@@ -574,67 +586,67 @@ M = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{conjecture}' },
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 
 	s(
 		{ trig = 'xym', name = 'xymatrix Environment', dscr = 'Create a xymatrix environment.' },
 		{ t { '\\[', '\t\\xymatrix{', '\t' }, i(1), t { ' \\\\', '\t}', '\\]' }, i(0) },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bal', name = 'Align Environment', dscr = 'Create an align environment' },
 		{ t { '\\begin{align}', '\t' }, i(0), t { '', '\\end{align}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bsal', name = 'Align without a number', dscr = 'Create an align environment without number' },
 		{ t { '\\begin{align*}', '\t' }, i(0), t { '', '\\end{align*}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bit', name = 'Itemize Environment', dscr = 'Create an itemize environment' },
 		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), t { '', '\\end{itemize}' }, i(0) },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'ben', name = 'Enumerate Environment' },
 		{ t { '\\begin{enumerate}', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'baen', name = 'Enumerate with lower alph' },
 		{ t { '\\begin{enumerate}[label=(\\alph*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bden', name = 'Enumerate with arabic' },
 		{ t { '\\begin{enumerate}[label=(\\arabic*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bren', name = 'Enumerate with lower roman' },
 		{ t { '\\begin{enumerate}[label=(\\roman*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = conds.line_begin }
+		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bfr', name = 'Beamer Frame Environment' },
 		{ t { '\\begin{frame}', '\t\\frametitle{' }, i(1, 'frame title'), t { '}', '\t' }, i(0), t { '', '\\end{frame}' } },
-		{ condition = conds.line_begin and vimtex.in_beamer }
+		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bcor', name = 'Beamer Corollary Environment' },
 		{ t { '\\begin{block}{Corollary}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = conds.line_begin and vimtex.in_beamer }
+		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bdef', name = 'Beamer Definition Environment' },
 		{ t { '\\begin{block}{Definition}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = conds.line_begin and vimtex.in_beamer }
+		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'brem', name = 'Beamer Remark Environment' },
 		{ t { '\\begin{block}{Remark}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = conds.line_begin and vimtex.in_beamer }
+		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
 	),
 	s({ trig = 'bfu', name = 'function' }, {
 		t { '\\begin{equation*}', '\t' },
@@ -652,7 +664,7 @@ M = {
 		t(') = '),
 		i(0),
 		t { '', '\\end{equation*}' },
-	}, { condition = conds.line_begin or vimtex.in_text }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 
 	s(
 		{ trig = 'tt', wordTrig = false, name = 'text' },
