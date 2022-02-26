@@ -21,11 +21,6 @@ local function spec(use)
 
 	use { 'lewis6991/impatient.nvim' }
 
-	-- Common Requirements
-	use { 'nvim-lua/plenary.nvim' }
-	use { 'kyazdani42/nvim-web-devicons' }
-	use { 'tami5/sqlite.lua', module = 'sqlite' }
-
 	-- UI stuff
 	use { -- statusline
 		'~/Dev/statusline.nvim',
@@ -59,14 +54,13 @@ local function spec(use)
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
-		requires = {
-			{ 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } },
-			{ 'p00f/nvim-ts-rainbow', event = 'BufRead' },
-		},
+		requires = {},
 		config = function()
 			require('configs.treesitter')
 		end,
 	}
+	use { 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
+	use { 'p00f/nvim-ts-rainbow', event = 'BufRead' }
 	use {
 		'stevearc/aerial.nvim',
 		module = 'aerial',
@@ -80,14 +74,12 @@ local function spec(use)
 	use { -- Collection of configurations for built-in LSP client
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
-		requires = {
-			{ 'folke/lua-dev.nvim', module = 'lua-dev' }, -- Lua for neovim
-			{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
-		},
 		config = function()
 			require('lsp')
 		end,
 	}
+	use { 'folke/lua-dev.nvim', module = 'lua-dev' } -- Lua for neovim
+	use { 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' }
 	use {
 		'jose-elias-alvarez/null-ls.nvim',
 		ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
@@ -107,19 +99,17 @@ local function spec(use)
 	use {
 		'hrsh7th/nvim-cmp',
 		event = 'InsertEnter',
-		requires = {
-			{ 'onsails/lspkind-nvim', module = 'lspkind' },
-			{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-			{ 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
-			{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }, -- Snippets source for nvim-cmp
-		},
 		config = function()
 			require('configs.cmp')
 		end,
 	}
+	use { 'onsails/lspkind-nvim', module = 'lspkind' }
+	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
+	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
+	use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
+	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
+	use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
+	use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' } -- Snippets source for nvim-cmp
 	use { -- Snippets Engine
 		'L3MON4D3/LuaSnip',
 		module = 'luasnip',
@@ -161,22 +151,26 @@ local function spec(use)
 			{ 'n', '<leader>f' },
 			{ 'n', '<leader><space>' },
 		},
-		requires = {
-			{ 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' },
-			{ 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
-			-- { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'telescope.nvim' },
-			{ 'natecraddock/telescope-zf-native.nvim', opt = true },
-			{ 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' },
-		},
+		requires = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			require('configs.telescope')
 		end,
 	}
+	use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' }
+	use {
+		'nvim-telescope/telescope-frecency.nvim',
+		opt = true,
+		after = 'telescope.nvim',
+		requires = { 'tami5/sqlite.lua', opt = true, module = 'sqlite' },
+	}
+	use { 'natecraddock/telescope-zf-native.nvim', opt = true }
+	use { 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' }
 
 	-- File Explorer
 	use {
 		'kyazdani42/nvim-tree.lua',
 		keys = { { 'n', '<M-t>' } },
+		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
 			require('configs.nvimtree')
 		end,
@@ -185,7 +179,8 @@ local function spec(use)
 	-- Editors
 	use { -- Git Integration
 		'lewis6991/gitsigns.nvim',
-		event = 'BufRead',
+		event = { 'BufRead' },
+		requires = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			require('configs.gitsigns')
 		end,
@@ -206,7 +201,6 @@ local function spec(use)
 		'ZhiyuanLck/smart-pairs',
 		event = 'InsertEnter',
 		config = function()
-			-- require('pairs'):setup()
 			require('configs.pairs')
 		end,
 	}
@@ -222,6 +216,18 @@ local function spec(use)
 			require('configs.surround')
 		end,
 	}
+	-- use {
+	-- 	'echasnovski/mini.nvim',
+	-- 	keys = {
+	-- 		{ 'n', 'sa' },
+	-- 		{ 'n', 'sr' },
+	-- 		{ 'n', 'sd' },
+	-- 		{ 'x', 's' },
+	-- 	},
+	-- 	config = function()
+	-- 		require('mini.surround').setup()
+	-- 	end,
+	-- }
 	use { -- Motions
 		'phaazon/hop.nvim',
 		keys = {
@@ -258,13 +264,6 @@ local function spec(use)
 		},
 		config = function()
 			require('configs.fterm')
-		end,
-	}
-	use {
-		'dstein64/vim-startuptime',
-		cmd = 'StartupTime',
-		config = function()
-			vim.g.startuptime_tries = 10
 		end,
 	}
 end

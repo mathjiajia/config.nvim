@@ -48,7 +48,7 @@ vim.api.nvim_set_hl(0, 'CursorIM', { link = 'Cursor' }) -- like Cursor, but used
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = cp.black1 }) -- used for the vertical bar at the right of the cursor
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.black3 }) -- used for the horizontal bar at the bottom of the cursor
 
-vim.api.nvim_set_hl(0, 'Directory', { fg = cp.blue }) -- used for the directory name in the quickfix window
+vim.api.nvim_set_hl(0, 'Directory', { fg = cp.sky }) -- used for the directory name in the quickfix window
 vim.api.nvim_set_hl(0, 'DiffAdd', { fg = cp.diff.added }) -- used for lines in a diff that have been added
 vim.api.nvim_set_hl(0, 'DiffChange', { fg = cp.diff.changed }) -- used for lines in a diff that have been changed
 vim.api.nvim_set_hl(0, 'DiffDelete', { fg = cp.diff.deleted }) -- used for lines in a diff that have been deleted
@@ -61,7 +61,7 @@ vim.api.nvim_set_hl(0, 'DiffText', { fg = cp.blue, bg = cp.black2 }) -- used for
 
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = cp.diag.error, bold = true, italic = true }) -- error messages on the command line
 vim.api.nvim_set_hl(0, 'VertSplit', { fg = cp.black0 }) -- the column separating vertically split windows
-vim.api.nvim_set_hl(0, 'Folded', { fg = cp.blue, bg = cp.black4 }) -- line used for closed folds
+vim.api.nvim_set_hl(0, 'Folded', { fg = cp.sky, bg = cp.black4 }) -- line used for closed folds
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = cp.gray0, bg = cp.black2 }) -- 'foldcolumn'
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.black4, bg = cp.black2 }) -- column where |signs| are displayed
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.black4, bg = cp.pink }) -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
@@ -158,7 +158,7 @@ vim.api.nvim_set_hl(0, 'PreCondit', { fg = cp.blue }) -- preprocessor #if, #else
 
 vim.api.nvim_set_hl(0, 'Type', { fg = cp.blue }) -- int, long, char, etc.
 vim.api.nvim_set_hl(0, 'StorageClass', { fg = cp.blue }) -- static, register, volatile, etc.
-vim.api.nvim_set_hl(0, 'Structure', { fg = cp.blue }) -- struct, union, enum, etc.
+vim.api.nvim_set_hl(0, 'Structure', { fg = cp.sky }) -- struct, union, enum, etc.
 vim.api.nvim_set_hl(0, 'Typedef', { fg = cp.red }) -- A typedef
 
 vim.api.nvim_set_hl(0, 'Special', { fg = cp.yellow }) -- any special symbol
@@ -276,7 +276,7 @@ vim.api.nvim_set_hl(0, 'TSStrike', { fg = cp.gray, strikethrough = true }) -- St
 vim.api.nvim_set_hl(0, 'TSMath', { fg = cp.yellow }) -- Math environments like LaTeX's `$ ... $`
 vim.api.nvim_set_hl(0, 'TSTextReference', { fg = cp.lavender, bold = true }) -- Footnotes, text references, citations, etc.
 vim.api.nvim_set_hl(0, 'TSEnvironment', { fg = cp.green }) -- Text environments of markup languages.
-vim.api.nvim_set_hl(0, 'TSEnvironmentName', { fg = cp.blue, italic = true }) -- Text/string indicating the type of text environment. Like the name of a	`\begin` block in LaTeX.
+vim.api.nvim_set_hl(0, 'TSEnvironmentName', { fg = cp.flamingo, italic = true }) -- Text/string indicating the type of text environment. Like the name of a	`\begin` block in LaTeX.
 -- vim.api.nvim_set_hl(0, 'TSTitle', { link = 'Title' }) -- Text that is part of a title.
 vim.api.nvim_set_hl(0, 'TSLiteral', { fg = cp.teal, italic = true }) -- Literal or verbatim text.
 vim.api.nvim_set_hl(0, 'TSURI', { fg = cp.rosewater, italic = true, underline = true }) -- URIs like hyperlinks or email addresses.
