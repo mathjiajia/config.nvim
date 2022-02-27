@@ -57,6 +57,7 @@ vim.wo.relativenumber = true
 vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
 vim.opt.showmode = false
+vim.opt.showtabline = 2
 vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
 vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
 vim.opt.splitright = true -- splitting a window will put the new window right of the current one
@@ -112,9 +113,14 @@ vim.keymap.set('n', '<M-k>', '<C-w>k', { desc = 'Move to Upper Window' })
 --Remap for dealing with word wrap
 vim.keymap.set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, desc = 'Move Cursor Down' })
 vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, desc = 'Move Cursor Up' })
+-- buffer navigation
+vim.keymap.set('n', '<leader>bp', '<Cmd>bprev<CR>', { desc = 'Previous Buffer' })
+vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
 -- Insert
 vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move forward a character' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move back a character' })
 
 -- PLUGINS --------------------------------------------------
 require('core.plugins')
+require('ui.status')
+require('ui.buftab')

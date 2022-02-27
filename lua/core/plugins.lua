@@ -22,20 +22,6 @@ local function spec(use)
 	use { 'lewis6991/impatient.nvim' }
 
 	-- UI stuff
-	use { -- statusline
-		'~/Dev/statusline.nvim',
-		event = 'BufRead',
-		config = function()
-			require('statusline').setup()
-		end,
-	}
-	use { -- tabline
-		'jose-elias-alvarez/buftabline.nvim',
-		event = 'BufRead',
-		config = function()
-			require('configs.buftabline')
-		end,
-	}
 	use { -- notifications
 		'rcarriga/nvim-notify',
 		config = function()
@@ -44,7 +30,6 @@ local function spec(use)
 	}
 	use { -- indentline
 		'lukas-reineke/indent-blankline.nvim',
-		event = 'BufRead',
 		config = function()
 			require('configs.indentline')
 		end,
@@ -60,7 +45,7 @@ local function spec(use)
 		end,
 	}
 	use { 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
-	use { 'p00f/nvim-ts-rainbow', event = 'BufRead' }
+	use { 'p00f/nvim-ts-rainbow' }
 	use {
 		'stevearc/aerial.nvim',
 		module = 'aerial',
@@ -73,7 +58,6 @@ local function spec(use)
 	-- LSP Stuff
 	use { -- Collection of configurations for built-in LSP client
 		'neovim/nvim-lspconfig',
-		event = 'BufReadPre',
 		config = function()
 			require('lsp')
 		end,
@@ -179,7 +163,6 @@ local function spec(use)
 	-- Editors
 	use { -- Git Integration
 		'lewis6991/gitsigns.nvim',
-		event = { 'BufRead' },
 		requires = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			require('configs.gitsigns')
@@ -216,18 +199,6 @@ local function spec(use)
 			require('configs.surround')
 		end,
 	}
-	-- use {
-	-- 	'echasnovski/mini.nvim',
-	-- 	keys = {
-	-- 		{ 'n', 'sa' },
-	-- 		{ 'n', 'sr' },
-	-- 		{ 'n', 'sd' },
-	-- 		{ 'x', 's' },
-	-- 	},
-	-- 	config = function()
-	-- 		require('mini.surround').setup()
-	-- 	end,
-	-- }
 	use { -- Motions
 		'phaazon/hop.nvim',
 		keys = {

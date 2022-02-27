@@ -10,13 +10,10 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ## Structure
 
 ```txt
-├── LICENSE
-├── README.md
 ├── after
 │   └── ftplugin
 │       ├── checkhealth.lua
 │       ├── gitcommit.lua
-│       ├── lua.lua
 │       ├── markdown.lua
 │       ├── norg.lua
 │       ├── qf.lua
@@ -26,15 +23,12 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ├── ginit.vim
 ├── init.lua
 ├── lua
-│   ├── autocmds.lua
 │   ├── autosnippets
 │   │   ├── markdown.lua
 │   │   ├── norg.lua
 │   │   └── tex.lua
-│   ├── colors.lua
 │   ├── configs
 │   │   ├── aerial.lua
-│   │   ├── buftabline.lua
 │   │   ├── cmp.lua
 │   │   ├── copilot.lua
 │   │   ├── fidget.lua
@@ -53,22 +47,25 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 │   │   ├── telescope.lua
 │   │   ├── treesitter.lua
 │   │   └── vimtex.lua
-│   ├── keybinds.lua
+│   ├── core
+│   │   ├── init.lua
+│   │   └── plugins.lua
 │   ├── lsp
 │   │   ├── init.lua
 │   │   ├── null-ls.lua
 │   │   ├── pyright.lua
 │   │   ├── sumneko_lua.lua
 │   │   └── texlab.lua
-│   ├── options.lua
-│   ├── plugins.lua
-│   └── snippets
-│       ├── all.lua
-│       ├── gitcommit.lua
-│       ├── lua.lua
-│       ├── markdown.lua
-│       ├── norg.lua
-│       └── tex.lua
+│   ├── snippets
+│   │   ├── all.lua
+│   │   ├── gitcommit.lua
+│   │   ├── lua.lua
+│   │   ├── markdown.lua
+│   │   ├── norg.lua
+│   │   └── tex.lua
+│   └── ui
+│       ├── buftab.lua
+│       └── status.lua
 └── spell
     ├── en.utf-8.add
     └── en.utf-8.add.spl
