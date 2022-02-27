@@ -59,9 +59,6 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 		colors = { '#96CDFB', '#ABE9B3', '#B5E8E0', '#F2CDCD', '#F5C2E7', '#F28FAD', '#FAE3B0' }, -- table of hex strings
 	},
-	playground = {
-		enable = true,
-	},
 }
 
 vim.keymap.set(

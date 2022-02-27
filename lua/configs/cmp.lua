@@ -75,7 +75,7 @@ cmp.setup {
 			return false
 		end
 		local context = require('cmp.config.context')
-		return not (context.in_treesitter_capture('comment') == true or context.in_syntax_group('Comment'))
+		return not (context.in_treesitter_capture('comment') or context.in_syntax_group('Comment'))
 	end,
 	mapping = {
 		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),

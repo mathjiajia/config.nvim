@@ -29,7 +29,6 @@ vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.white, bg = cp.black3, bo
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'TelescopeFrecencyScores', { fg = cp.maroon })
 
--- require('packer').loader('telescope-fzf-native.nvim')
 require('packer').loader('telescope-zf-native.nvim')
 require('packer').loader('telescope-file-browser.nvim')
 require('packer').loader('telescope-frecency.nvim')

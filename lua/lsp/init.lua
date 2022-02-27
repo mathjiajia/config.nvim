@@ -57,7 +57,7 @@ local on_attach = function(client, bufnr)
 				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
 				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 			augroup END
-		]],
+			]],
 			false
 		)
 	end
@@ -75,7 +75,7 @@ local on_attach = function(client, bufnr)
 				autocmd! * <buffer>
 				autocmd CursorHold,CursorHoldI <buffer> lua require('nvim-lightbulb').update_lightbulb()
 			augroup END
-    ]])
+		]])
 	end
 
 	if client.resolved_capabilities.document_formatting then

@@ -45,6 +45,19 @@ vim.opt.smartcase = true
 vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
 vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
+-- backups
+vim.opt.autowrite = true -- Write the contents of the file, if it has been modified
+vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
+vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
+vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read
+
+-- autocomplete
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match in the menu, force the user to select one from the menu
+vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
+
+-- perfomance
+vim.opt.updatetime = 400
+
 -- ui
 vim.opt.breakindent = true
 vim.wo.cursorline = true -- Highlight the text line of the cursor
@@ -63,22 +76,11 @@ vim.opt.splitbelow = true -- splitting a window will put the new window below th
 vim.opt.splitright = true -- splitting a window will put the new window right of the current one
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line
 
--- backups
-vim.opt.autowrite = true -- Write the contents of the file, if it has been modified
-vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
-vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
-vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read
-
--- autocomplete
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match in the menu, force the user to select one from the menu
-vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
-
--- perfomance
-vim.opt.updatetime = 400
-
--- theme
+-- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
+require('ui.status')
+require('ui.buftab')
 
 -- Highlight on yank
 vim.cmd([[
@@ -121,6 +123,8 @@ vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move forward a character' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move back a character' })
 
 -- PLUGINS --------------------------------------------------
-require('core.plugins')
-require('ui.status')
-require('ui.buftab')
+vim.cmd([[
+	augroup vimrc
+		autocmd CursorHold * ++once lua require'core.plugins'
+	augroup END
+]])

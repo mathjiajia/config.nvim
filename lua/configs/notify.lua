@@ -1,5 +1,5 @@
 local cp = {
-	peach = '#F8BD96', -- Peach
+	peach = '#F8BD96',
 
 	-- Diagnostic Colors
 	diag = {

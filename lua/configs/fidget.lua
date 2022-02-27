@@ -1,3 +1,1 @@
-require('fidget').setup {
-	text = { spinner = 'line' },
-}
+require('fidget').setup { text = { spinner = 'line' } }

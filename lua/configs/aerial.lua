@@ -14,6 +14,9 @@ require('aerial').setup {
 			'Method',
 			'Struct',
 		},
+		markdown = {
+			'Interface',
+		},
 		tex = {
 			'Enum',
 			'Module',

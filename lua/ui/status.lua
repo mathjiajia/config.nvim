@@ -227,15 +227,15 @@ end
 
 -- Only set up WinEnter autocmd when the WinLeave autocmd runs
 vim.cmd([[
-  augroup statusline
-	autocmd!
-	autocmd WinLeave,FocusLost *
-		\ autocmd statusline BufWinEnter,WinEnter,FocusGained *
-		\ if index(['aerial','help','NvimTree','packer','qf','spectre_panel','TelescopePrompt','tsplayground'], &ft) < 0
-		\ | lua statusline.active()
-	autocmd WinLeave,FocusLost * lua statusline.inactive()
-	autocmd VimEnter * lua statusline.active()
-  augroup END
+	augroup statusline
+		autocmd!
+		autocmd WinLeave,FocusLost *
+			\ autocmd statusline BufWinEnter,WinEnter,FocusGained *
+			\ if index(['aerial','help','NvimTree','packer','qf','spectre_panel','TelescopePrompt','tsplayground'], &ft) < 0
+			\ | lua statusline.active()
+		autocmd WinLeave,FocusLost * lua statusline.inactive()
+		autocmd VimEnter * lua statusline.active()
+	augroup END
 ]])
 
 _G.statusline = M
