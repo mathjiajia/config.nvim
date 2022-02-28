@@ -19,12 +19,9 @@ vim.api.nvim_create_autocmd {
 }
 
 local function spec(use)
-	-- Packer can manage itself
 	use { 'wbthomason/packer.nvim', opt = true }
-
 	use { 'lewis6991/impatient.nvim' }
 
-	-- notifications
 	use {
 		'rcarriga/nvim-notify',
 		config = function()
@@ -32,7 +29,6 @@ local function spec(use)
 		end,
 	}
 
-	-- Syntax highlighter
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
@@ -53,27 +49,29 @@ local function spec(use)
 	}
 
 	-- LSP Stuff
-	use { -- Collection of configurations for built-in LSP client
+	use {
 		'neovim/nvim-lspconfig',
 		config = function()
 			require('lsp')
 		end,
 	}
-	use { 'folke/lua-dev.nvim', module = 'lua-dev' } -- Lua for neovim
-	use { 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' }
 	use {
-		'jose-elias-alvarez/null-ls.nvim',
-		ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
-		config = function()
-			require('lsp.null-ls')
-		end,
-	}
-	use { -- nvim-lsp progress
-		'j-hui/fidget.nvim',
-		after = 'nvim-lspconfig',
-		config = function()
-			require('configs.fidget')
-		end,
+		{ 'folke/lua-dev.nvim', module = 'lua-dev' },
+		{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
+		{
+			'jose-elias-alvarez/null-ls.nvim',
+			ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
+			config = function()
+				require('lsp.null-ls')
+			end,
+		},
+		{
+			'j-hui/fidget.nvim',
+			after = 'nvim-lspconfig',
+			config = function()
+				require('fidget').setup { text = { spinner = 'line' } }
+			end,
+		},
 	}
 
 	-- Autocompletion
@@ -84,21 +82,23 @@ local function spec(use)
 			require('configs.cmp')
 		end,
 	}
-	use { 'onsails/lspkind-nvim', module = 'lspkind' }
-	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
-	use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
-	use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' } -- Snippets source for nvim-cmp
-	use { -- Snippets Engine
+	use {
+		{ 'onsails/lspkind-nvim', module = 'lspkind' },
+		{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+		{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+		{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+		{ 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+		{ 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
+		{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+	}
+	use {
 		'L3MON4D3/LuaSnip',
 		module = 'luasnip',
 		config = function()
 			require('configs.luasnip')
 		end,
 	}
-	use { -- AI Tool
+	use {
 		'github/copilot.vim',
 		cmd = 'Copilot',
 		config = function()
@@ -107,21 +107,23 @@ local function spec(use)
 	}
 
 	-- Language Stuff
-	use { -- LaTeX
+	use {
 		'lervag/vimtex',
 		ft = 'tex',
 		config = function()
 			require('configs.vimtex')
 		end,
 	}
-	use { -- Note and Organizing
-		'nvim-neorg/neorg',
-		ft = 'norg',
-		config = function()
-			require('configs.neorg')
-		end,
+	use {
+		{
+			'nvim-neorg/neorg',
+			ft = 'norg',
+			config = function()
+				require('configs.neorg')
+			end,
+		},
+		{ 'nvim-neorg/neorg-telescope', opt = true },
 	}
-	use { 'nvim-neorg/neorg-telescope', opt = true }
 
 	-- Telescope nonsense
 	use {
@@ -137,15 +139,16 @@ local function spec(use)
 			require('configs.telescope')
 		end,
 	}
-	use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim' }
 	use {
-		'nvim-telescope/telescope-frecency.nvim',
-		opt = true,
-		after = 'telescope.nvim',
-		requires = { 'tami5/sqlite.lua', opt = true, module = 'sqlite' },
+		{ 'nvim-telescope/telescope-file-browser.nvim', opt = true },
+		{
+			'nvim-telescope/telescope-frecency.nvim',
+			opt = true,
+			requires = { 'tami5/sqlite.lua', opt = true },
+		},
+		{ 'natecraddock/telescope-zf-native.nvim', opt = true },
+		{ 'nvim-telescope/telescope-project.nvim', opt = true },
 	}
-	use { 'natecraddock/telescope-zf-native.nvim', opt = true }
-	use { 'nvim-telescope/telescope-project.nvim', after = 'telescope.nvim' }
 
 	-- File Explorer
 	use {

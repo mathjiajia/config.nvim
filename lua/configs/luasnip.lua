@@ -26,12 +26,6 @@ end, { desc = 'LuaSnip Next Choice' })
 -- 	end
 -- end, { desc = 'LuaSnip Previous Choice' })
 
-_G.if_char_insert_space = function()
-	if string.find(vim.v.char, '%a') then
-		vim.v.char = ' ' .. vim.v.char
-	end
-end
-
 local snippets = {}
 local autosnippets = {}
 

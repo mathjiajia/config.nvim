@@ -357,11 +357,12 @@ M = {
 						event = 'InsertCharPre',
 						pattern = '<buffer>',
 						callback = function()
-							_G.if_char_insert_space()
+							if string.find(vim.v.char, '%a') then
+								vim.v.char = ' ' .. vim.v.char
+							end
 						end,
 						once = true,
 					}
-					-- vim.cmd([[ autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space() ]])
 				end,
 			},
 		},
