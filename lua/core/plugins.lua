@@ -13,9 +13,7 @@ vim.api.nvim_create_autocmd {
 	group = 'packer_user_config',
 	event = 'BufWritePost',
 	pattern = 'plugins.lua',
-	callback = function()
-		vim.cmd([[source <afile> | PackerCompile]])
-	end,
+	command = [[source <afile> | PackerCompile]],
 }
 
 local function spec(use)
@@ -39,12 +37,12 @@ local function spec(use)
 	}
 	use { 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } }
 	use { 'p00f/nvim-ts-rainbow' }
+
 	use {
-		'stevearc/aerial.nvim',
-		module = 'aerial',
-		cmd = 'AerialToggle',
+		'simrat39/symbols-outline.nvim',
+		keys = { { 'n', '<M-o>' } },
 		config = function()
-			require('configs.aerial')
+			require('configs.outline')
 		end,
 	}
 
@@ -83,7 +81,6 @@ local function spec(use)
 		end,
 	}
 	use {
-		{ 'onsails/lspkind-nvim', module = 'lspkind' },
 		{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
 		{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
 		{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },

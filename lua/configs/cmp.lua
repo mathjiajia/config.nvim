@@ -23,42 +23,39 @@ local cp = {
 	-- black0 = '#161320', -- Black0
 }
 
-vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.gray2 }) --  The abbr field's highlight group.
-vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.gray0, bg = 'NONE', strikethrough = true })
--- The abbr field's highlight group that only used for deprecated item.
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = cp.blue }) --  The matched character's highlight group.
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = cp.blue, bold = true })
--- The fuzzy matched character's highlight group.
-vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = cp.blue }) --  The kind field's highlight group.
+vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.gray2 })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.gray0, strikethrough = true })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = cp.blue })
 
--- 'The kind field's highlight group for specific `lsp.CompletionItemKind`.
 vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = cp.mauve })
 vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = cp.teal })
-vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = cp.pink })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { link = 'TSConstructor' })
-vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = cp.pink })
 vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { link = 'Directory' })
-vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = cp.teal })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = cp.peach })
 vim.api.nvim_set_hl(0, 'CmpItemKindField', { link = 'TSField' })
-vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = cp.green })
-vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'Type' })
-vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.teal })
 vim.api.nvim_set_hl(0, 'CmpItemKindFile', { link = 'Directory' })
-vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = cp.teal })
 vim.api.nvim_set_hl(0, 'CmpItemKindColor', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'TSParameterReference' })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = cp.red })
-vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = cp.blue })
-vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.peach })
+vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = cp.sky })
+vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.lavender })
 vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = cp.sky })
 vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
 
-vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.white }) --  The menu field's highlight group.
+vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.white })
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -66,7 +63,34 @@ local has_words_before = function()
 end
 
 local cmp = require('cmp')
-local lspkind = require('lspkind')
+
+local kind_icons = {
+	Text = '',
+	Method = '',
+	Function = '',
+	Constructor = '',
+	Field = '',
+	Variable = '',
+	Class = 'ﴯ',
+	Interface = '',
+	Module = '',
+	Property = 'ﰠ',
+	Unit = '',
+	Value = '',
+	Enum = '',
+	Keyword = '',
+	Snippet = '',
+	Color = '',
+	File = '',
+	Reference = '',
+	Folder = '',
+	EnumMember = '',
+	Constant = '',
+	Struct = '',
+	Event = '',
+	Operator = '',
+	TypeParameter = '',
+}
 
 cmp.setup {
 	enabled = function()
@@ -106,9 +130,9 @@ cmp.setup {
 		end,
 	},
 	formatting = {
-		format = lspkind.cmp_format {
-			with_text = true,
-			menu = {
+		format = function(entry, vim_item)
+			vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+			vim_item.menu = ({
 				buffer = '[Buf]',
 				cmdline = '[Cmd]',
 				luasnip = '[Snip]',
@@ -116,8 +140,9 @@ cmp.setup {
 				neorg = '[Norg]',
 				path = '[Path]',
 				rg = '[RG]',
-			},
-		},
+			})[entry.source.name]
+			return vim_item
+		end,
 	},
 	matching = {
 		disallow_prefix_unmatching = true,

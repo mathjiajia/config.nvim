@@ -141,7 +141,7 @@ vim.api.nvim_set_hl(0, 'Boolean', { fg = cp.lavender, bold = true, italic = true
 vim.api.nvim_set_hl(0, 'Float', { fg = cp.lavender, bold = true, italic = true }) -- a floating point constant: 2.3e10
 
 vim.api.nvim_set_hl(0, 'Identifier', { fg = cp.flamingo, italic = true }) -- any variable name
-vim.api.nvim_set_hl(0, 'Function', { fg = cp.green, italic = true }) -- function name (also: methods for classes)
+vim.api.nvim_set_hl(0, 'Function', { fg = cp.pink, italic = true }) -- function name (also: methods for classes)
 
 vim.api.nvim_set_hl(0, 'Statement', { fg = cp.green }) -- any statement
 vim.api.nvim_set_hl(0, 'Conditional', { fg = cp.mauve, bold = true }) -- if, then, else, endif, switch, etc.
@@ -243,7 +243,7 @@ vim.api.nvim_set_hl(0, 'TSFuncBuiltin', { fg = cp.peach, italic = true }) -- Bui
 -- vim.api.nvim_set_hl(0, 'TSFuncMacro', { link = 'Macro' }) -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
 vim.api.nvim_set_hl(0, 'TSParameter', { fg = cp.rosewater }) -- Parameters of a function.
 vim.api.nvim_set_hl(0, 'TSParameterReference', { fg = cp.white }) -- References to parameters of a function.
-vim.api.nvim_set_hl(0, 'TSMethod', { fg = cp.blue, italic = true }) -- Method calls and definitions.
+vim.api.nvim_set_hl(0, 'TSMethod', { fg = cp.pink, italic = true }) -- Method calls and definitions.
 vim.api.nvim_set_hl(0, 'TSField', { fg = cp.rosewater }) -- Object and struct fields.
 vim.api.nvim_set_hl(0, 'TSProperty', { fg = cp.yellow, italic = true }) -- Same as `TSField`.
 vim.api.nvim_set_hl(0, 'TSConstructor', { fg = cp.lavender }) -- Constructor calls and definitions: `{}` in Lua, and Java constructors.

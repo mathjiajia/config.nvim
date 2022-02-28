@@ -98,9 +98,7 @@ autocmd {
 	group = 'last_edit',
 	event = 'BufReadPost',
 	pattern = '*',
-	callback = function()
-		vim.cmd([[ if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]])
-	end,
+	command = [[ if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]],
 }
 
 augroup { name = 'change_work_dict' }
@@ -108,9 +106,7 @@ autocmd {
 	group = 'change_work_dict',
 	event = 'BufEnter',
 	pattern = '*',
-	callback = function()
-		vim.cmd('silent! lcd %:p:h')
-	end,
+	command = 'silent! lcd %:p:h',
 }
 
 -- KEYBINDINGS ---------------------------------------------------------------

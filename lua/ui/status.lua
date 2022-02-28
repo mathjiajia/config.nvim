@@ -54,12 +54,13 @@ local vim_modes = {
 
 local force_inactive = {
 	filetypes = {
-		'^aerial$',
+		-- '^aerial$',
 		'^help$',
 		'^NvimTree$',
 		'^packer$',
 		'^qf$',
 		'^spectre_panel$',
+		'^Outline$',
 		'^TelescopePrompt$',
 		'^tsplayground$',
 	},
