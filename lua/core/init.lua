@@ -70,7 +70,6 @@ vim.wo.relativenumber = true
 vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
 vim.opt.showmode = false
-vim.opt.showtabline = 2
 vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
 vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
 vim.opt.splitright = true -- splitting a window will put the new window right of the current one
@@ -79,7 +78,7 @@ vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to t
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
-require('ui.buftab')
+-- require('ui.buftab')
 require('ui.status')
 
 local augroup = vim.api.nvim_create_augroup
@@ -136,8 +135,8 @@ autocmd {
 	group = 'PluginsList',
 	event = 'CursorHold',
 	pattern = '*',
+	once = true,
 	callback = function()
 		require('core.plugins')
 	end,
-	once = true,
 }

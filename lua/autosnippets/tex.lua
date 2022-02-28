@@ -356,12 +356,12 @@ M = {
 					vim.api.nvim_create_autocmd {
 						event = 'InsertCharPre',
 						pattern = '<buffer>',
+						once = true,
 						callback = function()
 							if string.find(vim.v.char, '%a') then
 								vim.v.char = ' ' .. vim.v.char
 							end
 						end,
-						once = true,
 					}
 				end,
 			},

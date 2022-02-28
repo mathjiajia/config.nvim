@@ -171,7 +171,6 @@ components.active[1][4] = {
 	enabled = vim.b.gitsigns_status_dict,
 	icon = '  ',
 	hl = { fg = 'black', bg = 'sky' },
-	right_sep = '█',
 	truncate_hide = true,
 	priority = 2,
 }
@@ -292,7 +291,7 @@ components.active[3][4] = {
 	priority = 3,
 }
 components.active[3][5] = {
-	provider = ' %y ',
+	provider = ' %t%m ',
 	hl = { fg = 'black', bg = 'maroon' },
 	truncate_hide = true,
 	priority = 3,
@@ -308,7 +307,10 @@ components.active[3][6] = {
 components.inactive[1][1] = {
 	provider = ' %y',
 	hl = { fg = 'black', bg = 'maroon' },
-	right_sep = { str = '', hl = { fg = 'maroon', bg = 'black' } },
+}
+components.inactive[1][2] = {
+	provider = '',
+	hl = { fg = 'maroon', bg = 'black' },
 }
 
 local M = {}
@@ -321,10 +323,8 @@ local function find_pattern_match(tbl, val)
 end
 
 local function is_forced_inactive()
-	-- local bufname = vim.api.nvim_buf_get_name(0)
 	return find_pattern_match(force_inactive.filetypes, vim.bo.filetype)
 		or find_pattern_match(force_inactive.buftypes, vim.bo.buftype)
-	-- or find_pattern_match(force_inactive.bufnames, bufname)
 end
 
 local function parse_hl(hl, parent_hl)
@@ -352,16 +352,11 @@ local function get_hlname(hl, parent_hl)
 	return hlname
 end
 
-local function parse_sep(sep, parent_bg)
+local function parse_sep(sep)
 	if sep == nil then
 		return ''
 	end
-
-	if type(sep) == 'table' then
-		return string.format('%%#%s#%s', get_hlname(sep.hl), sep.str)
-	else
-		return string.format('%%#%s#%s', get_hlname { fg = parent_bg, bg = colors.bg }, sep)
-	end
+	return string.format('%%#%s#%s', get_hlname(sep.hl), sep.str)
 end
 
 local function parse_component(component)
@@ -369,22 +364,17 @@ local function parse_component(component)
 		return ''
 	end
 
-	local hl
-	if type(component.hl) == 'function' then
-		hl = parse_hl(component.hl())
-	else
-		hl = parse_hl(component.hl)
-	end
-
+	local hl = type(component.hl) == 'function' and parse_hl(component.hl()) or parse_hl(component.hl)
 	local provider = component.provider
-	if provider then
-		local pd = providers[provider] and providers[provider]() or provider
-		if pd ~= '' then
-			local icon = component.icon == nil and '' or string.format('%%#%s#%s', get_hlname(hl, hl), component.icon)
-			local left_str = parse_sep(component.left_sep, hl.bg)
-			local right_str = parse_sep(component.right_sep, hl.bg)
-			return string.format('%s%s%%#%s#%s%s', left_str, icon, get_hlname(hl), pd, right_str)
-		end
+	if not providers[provider] then
+		return string.format('%%#%s#%s', get_hlname(hl), provider)
+	end
+	local pd = providers[provider]()
+	if pd ~= '' then
+		local icon = component.icon == nil and '' or string.format('%%#%s#%s', get_hlname(hl, hl), component.icon)
+		local left_str = parse_sep(component.left_sep)
+		local right_str = parse_sep(component.right_sep)
+		return string.format('%s%s%%#%s#%s%s', left_str, icon, get_hlname(hl), pd, right_str)
 	end
 	return ''
 end
