@@ -3,7 +3,6 @@ local b = null_ls.builtins
 
 local sources = {
 	-- formatting
-
 	b.formatting.fish_indent,
 	-- b.formatting.latexindent,
 	b.formatting.prettierd.with {

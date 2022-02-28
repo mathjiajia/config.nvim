@@ -15,17 +15,17 @@ outline.setup {
 	lsp_blacklist = {},
 	symbol_blacklist = {},
 	symbols = {
-		File = { icon = '', hl = 'Include' },
+		File = { icon = '', hl = 'Include' },
 		Module = { icon = '', hl = 'Include' }, --
 		Namespace = { icon = '', hl = 'TSNamespace' },
 		Package = { icon = '', hl = 'Include' },
 		Class = { icon = '', hl = 'Type' }, --
 		Method = { icon = '', hl = 'TSMethod' }, --
-		Property = { icon = 'ﰠ', hl = 'TSProperty' },
+		Property = { icon = '', hl = 'TSProperty' },
 		Field = { icon = '', hl = 'TSField' },
 		Constructor = { icon = '', hl = 'TSConstructor' },
 		Enum = { icon = '', hl = 'Type' }, --
-		Interface = { icon = 'ﰮ', hl = 'Type' },
+		Interface = { icon = '', hl = 'Type' },
 		Function = { icon = '', hl = 'Function' }, --
 		Variable = { icon = '', hl = 'TSVariableBuiltin' }, --
 		Constant = { icon = '', hl = 'Constant' }, --
