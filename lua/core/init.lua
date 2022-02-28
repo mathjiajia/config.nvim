@@ -79,8 +79,9 @@ vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to t
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
-require('ui.status')
+-- require('ui.status')
 require('ui.buftab')
+require('ui.status')
 
 -- Highlight on yank
 vim.cmd([[

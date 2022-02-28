@@ -285,7 +285,7 @@ function M.setup()
 	return table.concat(labels)
 end
 
-vim.o.tabline = [[%!luaeval('tabline.setup()')]]
+vim.o.tabline = '%!v:lua.tabline.setup()'
 
 _G.tabline = M
 

@@ -21,17 +21,11 @@ local function spec(use)
 
 	use { 'lewis6991/impatient.nvim' }
 
-	-- UI stuff
-	use { -- notifications
+	-- notifications
+	use {
 		'rcarriga/nvim-notify',
 		config = function()
 			require('configs.notify')
-		end,
-	}
-	use { -- indentline
-		'lukas-reineke/indent-blankline.nvim',
-		config = function()
-			require('configs.indentline')
 		end,
 	}
 
@@ -178,6 +172,12 @@ local function spec(use)
 		},
 		config = function()
 			require('Comment').setup()
+		end,
+	}
+	use { -- indentline
+		'lukas-reineke/indent-blankline.nvim',
+		config = function()
+			require('configs.indentline')
 		end,
 	}
 	use { -- Delimiters

@@ -1,4 +1,5 @@
 vim.g.colors_name = 'moon'
+
 local cp = {
 	rosewater = '#F5E0DC', -- Rosewater
 	flamingo = '#F2CDCD', -- Flamingo
