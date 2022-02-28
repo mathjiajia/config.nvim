@@ -29,7 +29,7 @@ local cp = {
 		error = '#FB617E',
 		warning = '#FAE3B0',
 		info = '#B5E8E0',
-		hint = '#9ed06c',
+		hint = '#9ED06C',
 	},
 	-- Git & Diff Colors
 	diff = {

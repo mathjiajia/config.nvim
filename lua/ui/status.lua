@@ -10,9 +10,9 @@ local colors = {
 	gray = '#988BA2',
 	black = '#302D41',
 	bg = '#1A1826',
-	fg = '#D9E0EE',
+	fg = '#C3BAC6',
 	diag_error = '#FB617E',
-	diag_hint = '#9ed06c',
+	diag_hint = '#9ED06C',
 }
 local vim_modes = {
 	['n'] = { 'Normal', 'green' },
@@ -80,22 +80,19 @@ function providers.git_branch()
 	return vim.b.gitsigns_head or ''
 end
 
-local function git_diff(type) -- Common function used by the git providers
+local function git_status(type)
 	local gsd = vim.b.gitsigns_status_dict
-	if gsd and gsd[type] and gsd[type] > 0 then
-		return tostring(gsd[type])
-	end
-	return ''
+	return gsd and gsd[type] and gsd[type] > 0
 end
 
 function providers.git_diff_added()
-	return git_diff('added')
-end
-function providers.git_diff_removed()
-	return git_diff('removed')
+	return git_status('added') and tostring(vim.b.gitsigns_status_dict['added']) or ''
 end
 function providers.git_diff_changed()
-	return git_diff('changed')
+	return git_status('changed') and tostring(vim.b.gitsigns_status_dict['changed']) or ''
+end
+function providers.git_diff_removed()
+	return git_status('removed') and tostring(vim.b.gitsigns_status_dict['removed']) or ''
 end
 
 function providers.lsp_client_names()
@@ -168,7 +165,9 @@ components.active[1][3] = {
 }
 components.active[1][4] = {
 	provider = 'git_branch',
-	enabled = vim.b.gitsigns_status_dict,
+	enabled = function()
+		return vim.b.gitsigns_status_dict
+	end,
 	icon = '  ',
 	hl = { fg = 'black', bg = 'sky' },
 	truncate_hide = true,
@@ -185,9 +184,7 @@ components.active[1][5] = {
 components.active[1][6] = {
 	provider = 'git_diff_added',
 	enabled = function()
-		return vim.b.gitsigns_status_dict
-			and vim.b.gitsigns_status_dict['added']
-			and vim.b.gitsigns_status_dict['added'] > 0
+		return git_status('added')
 	end,
 	icon = '  ',
 	hl = { fg = 'green', bg = 'black' },
@@ -197,9 +194,7 @@ components.active[1][6] = {
 components.active[1][7] = {
 	provider = 'git_diff_changed',
 	enabled = function()
-		return vim.b.gitsigns_status_dict
-			and vim.b.gitsigns_status_dict['changed']
-			and vim.b.gitsigns_status_dict['changed'] > 0
+		return git_status('changed')
 	end,
 	icon = '  ',
 	hl = { fg = 'yellow', bg = 'black' },
@@ -209,9 +204,7 @@ components.active[1][7] = {
 components.active[1][8] = {
 	provider = 'git_diff_removed',
 	enabled = function()
-		return vim.b.gitsigns_status_dict
-			and vim.b.gitsigns_status_dict['removed']
-			and vim.b.gitsigns_status_dict['removed'] > 0
+		return git_status('removed')
 	end,
 	icon = '  ',
 	hl = { fg = 'maroon', bg = 'black' },
@@ -264,14 +257,14 @@ components.active[2][5] = {
 }
 
 components.active[3][1] = {
-	provider = '%3p%%',
-	hl = { fg = 'gray', bg = 'black' },
+	provider = '[%3p%%]',
+	hl = { fg = 'fg', bg = 'black' },
 	truncate_hide = true,
 	priority = 1,
 }
 components.active[3][2] = {
 	provider = ' %3l:%-3c ',
-	hl = { fg = 'gray', bg = 'black' },
+	hl = { fg = 'fg', bg = 'black' },
 	truncate_hide = true,
 	priority = 1,
 }
@@ -329,8 +322,8 @@ end
 
 local function parse_hl(hl, parent_hl)
 	parent_hl = parent_hl or {}
-	local fg = hl.fg or parent_hl.fg or colors.fg
-	local bg = hl.bg or parent_hl.bg or colors.bg
+	local fg = hl.fg or parent_hl.fg
+	local bg = hl.bg or parent_hl.bg
 
 	if colors[fg] then
 		fg = colors[fg]
@@ -371,7 +364,7 @@ local function parse_component(component)
 	end
 	local pd = providers[provider]()
 	if pd ~= '' then
-		local icon = component.icon == nil and '' or string.format('%%#%s#%s', get_hlname(hl, hl), component.icon)
+		local icon = component.icon == nil and '' or string.format('%%#%s#%s', get_hlname(hl), component.icon)
 		local left_str = parse_sep(component.left_sep)
 		local right_str = parse_sep(component.right_sep)
 		return string.format('%s%s%%#%s#%s%s', left_str, icon, get_hlname(hl), pd, right_str)
