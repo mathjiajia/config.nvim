@@ -8,12 +8,15 @@ end
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 
-vim.cmd([[
-	augroup packer_user_config
-		autocmd!
-		autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-	augroup end
-]])
+vim.api.nvim_create_augroup { name = 'packer_user_config' }
+vim.api.nvim_create_autocmd {
+	group = 'packer_user_config',
+	event = 'BufWritePost',
+	pattern = 'plugins.lua',
+	callback = function()
+		vim.cmd([[source <afile> | PackerCompile]])
+	end,
+}
 
 local function spec(use)
 	-- Packer can manage itself
@@ -235,6 +238,13 @@ local function spec(use)
 		},
 		config = function()
 			require('configs.fterm')
+		end,
+	}
+	use {
+		'dstein64/vim-startuptime',
+		cmd = 'StartupTime',
+		config = function()
+			vim.g.startuptime_tries = 20
 		end,
 	}
 end

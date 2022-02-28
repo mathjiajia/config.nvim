@@ -300,7 +300,11 @@ M = {
 	s({ trig = 'fgd', name = 'finitely generated' }, { t('finitely generated') }, { condition = vimtex.in_text }),
 	s({ trig = 'mfs', name = 'Mori fibre space' }, { t('Mori fibre space') }, { condition = vimtex.in_text }),
 	s({ trig = 'bpf', name = 'base point free' }, { t('base point free') }, { condition = vimtex.in_text }),
-	s({ trig = 'snc', name = 'simple normal crossing' }, { t('simple normal crossing') }, { condition = vimtex.in_text }),
+	s(
+		{ trig = 'snc', name = 'simple normal crossing' },
+		{ t('simple normal crossing') },
+		{ condition = vimtex.in_text }
+	),
 	s({ trig = 'lmm', name = 'log minimal model' }, { t('log minimal model') }, { condition = vimtex.in_text }),
 	s(
 		{ trig = '([tT])fae', name = 'the following are equivalent', regTrig = true },
@@ -318,9 +322,17 @@ M = {
 	),
 	s({ trig = 'quad', name = 'quad' }, { t('\\quad ') }, { condition = vimtex.in_mathzone }),
 
-	s({ trig = 'bar', name = 'overline' }, { t('\\overline{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'bar', name = 'overline' },
+		{ t('\\overline{'), i(1), t('}'), i(0) },
+		{ condition = vimtex.in_mathzone }
+	),
 	s({ trig = 'hat', name = 'widehat' }, { t('\\widehat{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'td', name = 'widetilde' }, { t('\\widetilde{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'td', name = 'widetilde' },
+		{ t('\\widetilde{'), i(1), t('}'), i(0) },
+		{ condition = vimtex.in_mathzone }
+	),
 
 	s({ trig = 'O([A-NP-Za-z])', name = 'local ring, structure sheaf', wordTrig = false, regTrig = true }, {
 		f(function(_, snip)
@@ -341,7 +353,15 @@ M = {
 			-- index `-1` means the callback is on the snippet as a whole
 			[-1] = {
 				[events.leave] = function()
-					vim.cmd([[ autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space() ]])
+					vim.api.nvim_create_autocmd {
+						event = 'InsertCharPre',
+						pattern = '<buffer>',
+						callback = function()
+							_G.if_char_insert_space()
+						end,
+						once = true,
+					}
+					-- vim.cmd([[ autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space() ]])
 				end,
 			},
 		},
@@ -628,11 +648,13 @@ M = {
 		{ t { '\\begin{enumerate}[label=(\\roman*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
-	s(
-		{ trig = 'bfr', name = 'Beamer Frame Environment' },
-		{ t { '\\begin{frame}', '\t\\frametitle{' }, i(1, 'frame title'), t { '}', '\t' }, i(0), t { '', '\\end{frame}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
-	),
+	s({ trig = 'bfr', name = 'Beamer Frame Environment' }, {
+		t { '\\begin{frame}', '\t\\frametitle{' },
+		i(1, 'frame title'),
+		t { '}', '\t' },
+		i(0),
+		t { '', '\\end{frame}' },
+	}, { condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }),
 	s(
 		{ trig = 'bcor', name = 'Beamer Corollary Environment' },
 		{ t { '\\begin{block}{Corollary}', '\t' }, i(0), t { '', '\\end{block}' } },
@@ -712,7 +734,11 @@ M = {
 		{ t('\\geq ') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = '<<', name = 'much less than ≪', wordTrig = false }, { t('\\ll ') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = '<<', name = 'much less than ≪', wordTrig = false },
+		{ t('\\ll ') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s(
 		{ trig = '>>', name = 'much greater than ≫', wordTrig = false },
 		{ t('\\gg ') },
@@ -744,7 +770,11 @@ M = {
 	s({ trig = '...', name = 'dots ...', wordTrig = false }, { t('\\dots') }, { condition = vimtex.in_mathzone }),
 	s({ trig = '||', name = 'mid |', wordTrig = false }, { t('\\mid ') }, { condition = vimtex.in_mathzone }),
 	s({ trig = '::', name = 'colon :', wordTrig = false }, { t('\\colon ') }, { condition = vimtex.in_mathzone }),
-	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t('\\coloneqq ') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = ':=', name = 'coloneqq :=', wordTrig = false },
+		{ t('\\coloneqq ') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s(
 		{ trig = 'rup', name = 'round up', wordTrig = false },
 		{ t('\\rup{'), i(1), t('}'), i(0) },
@@ -759,8 +789,16 @@ M = {
 	s({ trig = 'lll', wordTrig = false, name = 'ell ℓ' }, { t('\\ell') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'xx', wordTrig = false, name = 'times ×' }, { t('\\times') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'nabl', wordTrig = false, name = 'nabla ∇' }, { t('\\nabla') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'AA', wordTrig = false, name = 'affine 𝔸' }, { t('\\mathbb{A}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'CC', wordTrig = false, name = 'complex ℂ' }, { t('\\mathbb{C}') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'AA', wordTrig = false, name = 'affine 𝔸' },
+		{ t('\\mathbb{A}') },
+		{ condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'CC', wordTrig = false, name = 'complex ℂ' },
+		{ t('\\mathbb{C}') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s({ trig = 'DD', wordTrig = false, name = 'disc 𝔻' }, { t('\\mathbb{D}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'FF', wordTrig = false, name = 'Hirzebruch 𝔽' },
@@ -772,16 +810,32 @@ M = {
 		{ t('\\mathbb{H}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = 'NN', wordTrig = false, name = 'natural ℕ' }, { t('\\mathbb{N}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'OO', wordTrig = false, name = 'mathcal{O}' }, { t('\\mathcal{O}') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'NN', wordTrig = false, name = 'natural ℕ' },
+		{ t('\\mathbb{N}') },
+		{ condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = 'OO', wordTrig = false, name = 'mathcal{O}' },
+		{ t('\\mathcal{O}') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s(
 		{ trig = 'PP', wordTrig = false, name = 'projective ℙ' },
 		{ t('\\mathbb{P}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = 'QQ', wordTrig = false, name = 'rational ℚ' }, { t('\\mathbb{Q}') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'QQ', wordTrig = false, name = 'rational ℚ' },
+		{ t('\\mathbb{Q}') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s({ trig = 'RR', wordTrig = false, name = 'real ℝ' }, { t('\\mathbb{R}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t('\\mathbb{Z}') }, { condition = vimtex.in_mathzone }),
+	s(
+		{ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' },
+		{ t('\\mathbb{Z}') },
+		{ condition = vimtex.in_mathzone }
+	),
 	s(
 		{ trig = 'srt', wordTrig = false, name = 'square root' },
 		{ t('\\sqrt{'), i(1), t('}'), i(0) },

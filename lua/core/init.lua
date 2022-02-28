@@ -79,33 +79,40 @@ vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to t
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
--- require('ui.status')
 require('ui.buftab')
 require('ui.status')
 
--- Highlight on yank
-vim.cmd([[
-	augroup YankHighlight
-		autocmd!
-		autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-	augroup end
-]])
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+augroup { name = 'HighlightYank' }
+autocmd {
+	group = 'HighlightYank',
+	event = 'TextYankPost',
+	pattern = '*',
+	callback = function()
+		vim.highlight.on_yank {}
+	end,
+}
 
--- Auto place to last edit
-vim.cmd([[
-	augroup last_edit
-		autocmd!
-		autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-	augroup end
-]])
+augroup { name = 'last_edit' }
+autocmd {
+	group = 'last_edit',
+	event = 'BufReadPost',
+	pattern = '*',
+	callback = function()
+		vim.cmd([[ if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]])
+	end,
+}
 
--- Auto change work directory
-vim.cmd([[
-	augroup change_work_dict
-		autocmd!
-		autocmd BufEnter * silent! lcd %:p:h
-	augroup end
-]])
+augroup { name = 'change_work_dict' }
+autocmd {
+	group = 'change_work_dict',
+	event = 'BufEnter',
+	pattern = '*',
+	callback = function()
+		vim.cmd('silent! lcd %:p:h')
+	end,
+}
 
 -- KEYBINDINGS ---------------------------------------------------------------
 -- cursor movements
@@ -124,8 +131,13 @@ vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move forward a character' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move back a character' })
 
 -- PLUGINS --------------------------------------------------
-vim.cmd([[
-	augroup vimrc
-		autocmd CursorHold * ++once lua require'core.plugins'
-	augroup END
-]])
+augroup { name = 'PluginsList' }
+autocmd {
+	group = 'PluginsList',
+	event = 'CursorHold',
+	pattern = '*',
+	callback = function()
+		require('core.plugins')
+	end,
+	once = true,
+}

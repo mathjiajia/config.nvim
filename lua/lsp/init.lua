@@ -49,17 +49,27 @@ local on_attach = function(client, bufnr)
 		tb.lsp_type_definitions()
 	end, { buffer = bufnr, desc = 'Type Definitions' })
 
+	local augroup = vim.api.nvim_create_augroup
+	local autocmd = vim.api.nvim_create_autocmd
+
 	if client.resolved_capabilities.document_highlight then
-		vim.cmd(
-			[[
-			augroup lsp_document_highlight
-				autocmd! * <buffer>
-				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-			augroup END
-			]],
-			false
-		)
+		augroup { name = 'lsp_document_highlight' }
+		autocmd {
+			group = 'lsp_document_highlight',
+			event = 'CursorHold',
+			pattern = '<buffer>',
+			callback = function()
+				vim.lsp.buf.document_highlight()
+			end,
+		}
+		autocmd {
+			group = 'lsp_document_highlight',
+			event = 'CursorMoved',
+			pattern = '<buffer>',
+			callback = function()
+				vim.lsp.buf.clear_references()
+			end,
+		}
 	end
 
 	if client.resolved_capabilities.code_action then
@@ -70,12 +80,15 @@ local on_attach = function(client, bufnr)
 			tb.lsp_range_code_actions()
 		end, { buffer = bufnr, desc = 'Range Code Actions' })
 
-		vim.cmd([[
-			augroup lsp_code_action
-				autocmd! * <buffer>
-				autocmd CursorHold,CursorHoldI <buffer> lua require('nvim-lightbulb').update_lightbulb()
-			augroup END
-		]])
+		augroup { name = 'lsp_code_action' }
+		autocmd {
+			group = 'lsp_code_action',
+			event = { 'CursorHold', 'CursorHoldI' },
+			pattern = '<buffer>',
+			callback = function()
+				require('nvim-lightbulb').update_lightbulb()
+			end,
+		}
 	end
 
 	if client.resolved_capabilities.document_formatting then
