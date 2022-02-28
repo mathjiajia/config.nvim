@@ -78,18 +78,27 @@ vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to t
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
--- require('ui.buftab')
+require('ui.buftab')
 require('ui.status')
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+
+local set_cursor_position = function()
+	local last_cursor_pos = vim.api.nvim_buf_get_mark(0, '"')
+	if not vim.endswith(vim.bo.filetype, 'commit') then
+		return pcall(vim.api.nvim_win_set_cursor, 0, last_cursor_pos)
+	end
+end
+
 augroup { name = 'HighlightYank' }
 autocmd {
 	group = 'HighlightYank',
 	event = 'TextYankPost',
 	pattern = '*',
+	desc = 'Highlight the yanked text',
 	callback = function()
-		vim.highlight.on_yank {}
+		vim.highlight.on_yank { timeout = 200 }
 	end,
 }
 
@@ -98,7 +107,8 @@ autocmd {
 	group = 'last_edit',
 	event = 'BufReadPost',
 	pattern = '*',
-	command = [[ if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]],
+	desc = 'set cursor to the last editing position',
+	callback = set_cursor_position,
 }
 
 augroup { name = 'change_work_dict' }
@@ -106,6 +116,7 @@ autocmd {
 	group = 'change_work_dict',
 	event = 'BufEnter',
 	pattern = '*',
+	desc = 'change the working directory',
 	command = 'silent! lcd %:p:h',
 }
 
@@ -122,17 +133,18 @@ vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, desc = 'Mov
 vim.keymap.set('n', '<leader>bp', '<Cmd>bprev<CR>', { desc = 'Previous Buffer' })
 vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
 -- Insert
-vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move forward a character' })
-vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move back a character' })
+vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
+vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
 
 -- PLUGINS --------------------------------------------------
-augroup { name = 'PluginsList' }
+augroup { name = 'plugins_list' }
 autocmd {
-	group = 'PluginsList',
+	group = 'plugins_list',
 	event = 'CursorHold',
 	pattern = '*',
-	once = true,
+	desc = 'Enable Packer commands',
 	callback = function()
 		require('core.plugins')
 	end,
+	once = true,
 }

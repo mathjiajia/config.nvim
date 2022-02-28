@@ -56,6 +56,12 @@ local pipe = function(fns)
 	end
 end
 
+local appended_space_after_math = function()
+	if string.find(vim.v.char, '%a') then
+		vim.v.char = ' ' .. vim.v.char
+	end
+end
+
 M = {
 
 	-- priority 60:
@@ -355,13 +361,11 @@ M = {
 				[events.leave] = function()
 					vim.api.nvim_create_autocmd {
 						event = 'InsertCharPre',
-						pattern = '<buffer>',
+						-- pattern = '<buffer>',
+						buffer = 0,
+						desc = 'Auto Add a Space after Math',
+						callback = appended_space_after_math,
 						once = true,
-						callback = function()
-							if string.find(vim.v.char, '%a') then
-								vim.v.char = ' ' .. vim.v.char
-							end
-						end,
 					}
 				end,
 			},

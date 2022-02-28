@@ -33,16 +33,13 @@ local on_attach = function(client, bufnr)
 	local tb = require('telescope.builtin')
 	vim.keymap.set('n', 'gd', function()
 		tb.lsp_definitions()
-	end, { buffer = bufnr, desc = 'Definitions' })
+	end, { buffer = bufnr, desc = 'Go to Definitions' })
 	vim.keymap.set('n', 'gr', function()
 		tb.lsp_references()
-	end, { buffer = bufnr, desc = 'References' })
+	end, { buffer = bufnr, desc = 'Go to References' })
 	vim.keymap.set('n', 'gi', function()
 		tb.lsp_implementations()
-	end, { buffer = bufnr, desc = 'Implementations' })
-	vim.keymap.set('n', '<leader>so', function()
-		tb.lsp_document_symbols()
-	end, { buffer = bufnr, desc = 'Document Symbols' })
+	end, { buffer = bufnr, desc = 'Go to Implementations' })
 	vim.keymap.set('n', '<leader>D', function()
 		tb.lsp_type_definitions()
 	end, { buffer = bufnr, desc = 'Type Definitions' })
@@ -51,22 +48,22 @@ local on_attach = function(client, bufnr)
 	local autocmd = vim.api.nvim_create_autocmd
 
 	if client.resolved_capabilities.document_highlight then
-		augroup { name = 'lsp_document_highlight' }
+		augroup { name = 'lsp_document_highlight', clear = true }
 		autocmd {
 			group = 'lsp_document_highlight',
 			event = 'CursorHold',
-			pattern = '<buffer>',
-			callback = function()
-				vim.lsp.buf.document_highlight()
-			end,
+			-- pattern = '<buffer>',
+			buffer = 0,
+			desc = 'Document Highlight',
+			callback = vim.lsp.buf.document_highlight,
 		}
 		autocmd {
 			group = 'lsp_document_highlight',
 			event = 'CursorMoved',
-			pattern = '<buffer>',
-			callback = function()
-				vim.lsp.buf.clear_references()
-			end,
+			-- pattern = '<buffer>',
+			buffer = 0,
+			desc = 'Clear All the References',
+			callback = vim.lsp.buf.clear_references,
 		}
 	end
 
@@ -78,11 +75,13 @@ local on_attach = function(client, bufnr)
 			tb.lsp_range_code_actions()
 		end, { buffer = bufnr, desc = 'Range Code Actions' })
 
-		augroup { name = 'lsp_code_action' }
+		augroup { name = 'lsp_code_action', clear = true }
 		autocmd {
 			group = 'lsp_code_action',
 			event = { 'CursorHold', 'CursorHoldI' },
-			pattern = '<buffer>',
+			-- pattern = '<buffer>',
+			buffer = 0,
+			desc = 'Update the LightBulb',
 			callback = function()
 				require('nvim-lightbulb').update_lightbulb()
 			end,
@@ -96,11 +95,26 @@ local on_attach = function(client, bufnr)
 		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
-	require('aerial').on_attach(client, bufnr)
-	-- vim.keymap.set('n', '<M-o>', '<Cmd>AerialToggle<CR>', { buffer = bufnr, desc = 'Aerial code outline' })
+	-- if client.resolved_capabilities.code_lens then
+	-- 	vim.api.nvim_create_augroup { name = 'lsp_document_codelens', clear = true }
+	-- 	vim.api.nvim_create_autocmd {
+	-- 		group = 'lsp_document_codelens',
+	-- 		event = 'BufEnter',
+	-- 		-- pattern = '<buffer>',
+	-- 		buffer = 0,
+	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 		once = true,
+	-- 	}
+	-- 	vim.api.nvim_create_autocmd {
+	-- 		group = 'lsp_document_codelens',
+	-- 		event = { 'BufWritePost', 'CursorHold' },
+	-- 		-- pattern = '<buffer>',
+	-- 		buffer = 0,
+	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 	}
+	-- end
 end
 
--- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true

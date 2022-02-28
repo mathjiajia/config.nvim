@@ -13,7 +13,8 @@ vim.api.nvim_create_autocmd {
 	group = 'packer_user_config',
 	event = 'BufWritePost',
 	pattern = 'plugins.lua',
-	command = [[source <afile> | PackerCompile]],
+	desc = 'Compile whenever plugins.lua is updated',
+	command = 'source <afile> | PackerCompile',
 }
 
 local function spec(use)
