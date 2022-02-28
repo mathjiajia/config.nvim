@@ -130,6 +130,7 @@ local function spec(use)
 		keys = {
 			{ 'n', '<leader>f' },
 			{ 'n', '<leader><space>' },
+			{ 'n', '<leader><leader>' },
 		},
 		requires = { 'nvim-lua/plenary.nvim' },
 		config = function()
