@@ -2,7 +2,6 @@ local ls = require('luasnip')
 local types = require('luasnip.util.types')
 
 ls.config.setup {
-	history = true,
 	updateevents = 'TextChanged,TextChangedI',
 	enable_autosnippets = true,
 	ext_opts = {
@@ -42,24 +41,27 @@ local snipMeta = function(ty)
 	}
 end
 
-local snippets_clear = function()
-	for m, _ in pairs(ls.snippets) do
-		package.loaded['snippets.' .. m] = nil
-		package.loaded['autosnippets.' .. m] = nil
-	end
-	ls.snippets = setmetatable({}, snipMeta(''))
-	ls.autosnippets = setmetatable({}, snipMeta('auto'))
-end
+ls.snippets = setmetatable({}, snipMeta(''))
+ls.autosnippets = setmetatable({}, snipMeta('auto'))
 
-snippets_clear()
+-- local snippets_clear = function()
+-- 	for m, _ in pairs(ls.snippets) do
+-- 		package.loaded['snippets.' .. m] = nil
+-- 		package.loaded['autosnippets.' .. m] = nil
+-- 	end
+-- 	ls.snippets = setmetatable({}, snipMeta(''))
+-- 	ls.autosnippets = setmetatable({}, snipMeta('auto'))
+-- end
 
-vim.api.nvim_create_augroup('snippets_clear', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-	callback = snippets_clear,
-	pattern = '~/.config/nvim/lua/snippets/*.lua, ~/.config/nvim/lua/autosnippets/*.lua',
-	group = 'snippets_clear',
-	desc = 'Reload snippets whenever they are updated',
-})
+-- snippets_clear()
+
+-- vim.api.nvim_create_augroup('luasnip_clear', { clear = true })
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+-- 	callback = snippets_clear,
+-- 	pattern = '~/.config/nvim/lua/snippets/*.lua, ~/.config/nvim/lua/autosnippets/*.lua',
+-- 	group = 'luasnip_clear',
+-- 	desc = 'Reload snippets whenever they are updated',
+-- })
 
 -- local edit_ft = function()
 -- 	-- returns table like {"lua", "all"}
