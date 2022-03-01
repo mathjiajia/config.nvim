@@ -49,10 +49,12 @@ vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 vim.opt.autowrite = true -- Write the contents of the file, if it has been modified
 vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
 vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
-vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read
+vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file,
+-- and restores undo history from the same file on buffer read
 
 -- autocomplete
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match in the menu, force the user to select one from the menu
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match in the menu,
+-- force the user to select one from the menu
 vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
 
 -- perfomance
@@ -62,7 +64,8 @@ vim.opt.updatetime = 400
 vim.opt.breakindent = true
 vim.wo.cursorline = true -- Highlight the text line of the cursor
 -- vim.opt.guifont = 'MesloLGS Nerd Font:h18'
-vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than at the last character that fits on the screen
+vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than
+-- at the last character that fits on the screen
 vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
 vim.wo.number = true
 vim.opt.pumheight = 10 -- Maximum number of items to show in the popup menu
@@ -73,7 +76,8 @@ vim.opt.showmode = false
 vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
 vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
 vim.opt.splitright = true -- splitting a window will put the new window right of the current one
-vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line
+vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line
+-- when the cursor is on the first/last character in the line
 
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
@@ -91,34 +95,29 @@ local set_cursor_position = function()
 	end
 end
 
-augroup { name = 'HighlightYank' }
-autocmd {
-	group = 'HighlightYank',
-	event = 'TextYankPost',
-	pattern = '*',
-	desc = 'Highlight the yanked text',
+augroup('HighlightYank', { clear = true })
+autocmd('TextYankPost', {
 	callback = function()
-		vim.highlight.on_yank { timeout = 200 }
+		vim.highlight.on_yank {}
 	end,
-}
-
-augroup { name = 'last_edit' }
-autocmd {
-	group = 'last_edit',
-	event = 'BufReadPost',
 	pattern = '*',
-	desc = 'set cursor to the last editing position',
+	group = 'HighlightYank',
+	desc = 'Highlight the yanked text',
+})
+
+augroup('buffer_prep', { clear = true })
+autocmd('BufReadPost', {
 	callback = set_cursor_position,
-}
-
-augroup { name = 'change_work_dict' }
-autocmd {
-	group = 'change_work_dict',
-	event = 'BufEnter',
 	pattern = '*',
-	desc = 'change the working directory',
+	group = 'buffer_prep',
+	desc = 'set cursor to the last editing position',
+})
+autocmd('BufEnter', {
 	command = 'silent! lcd %:p:h',
-}
+	pattern = '*',
+	group = 'buffer_prep',
+	desc = 'change the working directory',
+})
 
 -- KEYBINDINGS ---------------------------------------------------------------
 -- cursor movements
@@ -137,14 +136,13 @@ vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
 
 -- PLUGINS --------------------------------------------------
-augroup { name = 'plugins_list' }
-autocmd {
-	group = 'plugins_list',
-	event = 'CursorHold',
-	pattern = '*',
-	desc = 'Enable Packer commands',
+augroup('plugins_list', { clear = true })
+autocmd('CursorHold', {
 	callback = function()
 		require('core.plugins')
 	end,
+	pattern = '*',
+	group = 'plugins_list',
 	once = true,
-}
+	desc = 'Enable Packer commands',
+})

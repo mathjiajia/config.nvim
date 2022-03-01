@@ -8,14 +8,13 @@ end
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 
-vim.api.nvim_create_augroup { name = 'packer_user_config' }
-vim.api.nvim_create_autocmd {
-	group = 'packer_user_config',
-	event = 'BufWritePost',
-	pattern = 'plugins.lua',
-	desc = 'Compile whenever plugins.lua is updated',
+vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
 	command = 'source <afile> | PackerCompile',
-}
+	pattern = 'core.plugins.lua',
+	group = 'packer_user_config',
+	desc = 'Compile whenever plugins.lua is updated',
+})
 
 local function spec(use)
 	use { 'wbthomason/packer.nvim', opt = true }

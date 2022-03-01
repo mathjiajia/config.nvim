@@ -1,42 +1,41 @@
 vim.g.colors_name = 'moon'
 
 local cp = {
+	-- stylua ignore: start
 	rosewater = '#F5E0DC', -- Rosewater
-	flamingo = '#F2CDCD', -- Flamingo
-	mauve = '#DDB6F2', -- Mauve
-	pink = '#F5C2E7', -- Pink
-	red = '#F28FAD', -- Red
-	maroon = '#E8A2AF', -- Maroon
-	peach = '#F8BD96', -- Peach
-	yellow = '#FAE3B0', -- Yellow
-	green = '#ABE9B3', -- Green
-	blue = '#96CDFB', -- Blue
-	sky = '#89DCEB', -- Sky
-	teal = '#B5E8E0', -- Teal
-	lavender = '#C9CBFF', -- Lavender
-	white = '#D9E0EE', -- White
-	gray2 = '#C3BAC6', -- Gray2
-	gray1 = '#988BA2', -- Gray1
-	gray0 = '#6E6C7E', -- Gray0
-	black4 = '#575268', -- Black4
-	black3 = '#302D41', -- Black3
-	black2 = '#1E1E2E', -- Black2
-	black1 = '#1A1826', -- Black1
-	black0 = '#161320', -- Black0
-
-	-- Diagnostic Colors
-	diag = {
-		error = '#FB617E',
+	flamingo  = '#F2CDCD', -- Flamingo
+	mauve     = '#DDB6F2', -- Mauve
+	pink      = '#F5C2E7', -- Pink
+	red       = '#F28FAD', -- Red
+	maroon    = '#E8A2AF', -- Maroon
+	peach     = '#F8BD96', -- Peach
+	yellow    = '#FAE3B0', -- Yellow
+	green     = '#ABE9B3', -- Green
+	blue      = '#96CDFB', -- Blue
+	sky       = '#89DCEB', -- Sky
+	teal      = '#B5E8E0', -- Teal
+	lavender  = '#C9CBFF', -- Lavender
+	white     = '#D9E0EE', -- White
+	gray2     = '#C3BAC6', -- Gray2
+	gray1     = '#988BA2', -- Gray1
+	gray0     = '#6E6C7E', -- Gray0
+	black4    = '#575268', -- Black4
+	black3    = '#302D41', -- Black3
+	black2    = '#1E1E2E', -- Black2
+	black1    = '#1A1826', -- Black1
+	black0    = '#161320', -- Black0
+	diag      = {
+		error   = '#FB617E',
 		warning = '#FAE3B0',
-		info = '#B5E8E0',
-		hint = '#9ED06C',
+		info    = '#B5E8E0',
+		hint    = '#9ED06C',
 	},
-	-- Git & Diff Colors
 	diff = {
-		added = '#ABE9B3',
+		added   = '#ABE9B3',
 		changed = '#FAE3B0',
 		deleted = '#F28FAD',
 	},
+	-- stylua ignore: end
 }
 
 ---------- GROUPS ----------
@@ -135,8 +134,8 @@ vim.api.nvim_set_hl(0, 'Comment', { fg = cp.gray0, italic = true }) -- any comme
 
 vim.api.nvim_set_hl(0, 'Constant', { fg = cp.peach }) -- any constant
 vim.api.nvim_set_hl(0, 'String', { fg = cp.green }) -- a string constant: "this is a string"
-vim.api.nvim_set_hl(0, 'Character', { fg = cp.yellow }) -- a character constant: 'c', '\n'
-vim.api.nvim_set_hl(0, 'Number', { fg = cp.peach, bold = true, italic = true }) -- a number constant: 234, 0xff
+vim.api.nvim_set_hl(0, 'Character', { fg = cp.yellow }) -- a character constant: 'c',  '\n'
+vim.api.nvim_set_hl(0, 'Number', { fg = cp.peach, bold = true, italic = true }) -- a number constant: 234,  0xff
 vim.api.nvim_set_hl(0, 'Boolean', { fg = cp.lavender, bold = true, italic = true }) -- a boolean constant: TRUE, false
 vim.api.nvim_set_hl(0, 'Float', { fg = cp.lavender, bold = true, italic = true }) -- a floating point constant: 2.3e10
 
@@ -227,7 +226,7 @@ vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = cp.red }) -- Used t
 
 -- vim.api.nvim_set_hl(0, 'TSConstant', { link = 'Constant' }) -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = cp.lavender, italic = true }) -- Built-in constant values: `nil` in Lua.
-vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = cp.yellow }) -- Constants defined by macros: `NULL` in C.
+vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = cp.yellow }) -- Constants defined by macros                : `NULL` in C.
 
 -- vim.api.nvim_set_hl(0, 'TSString', { link = 'String' }) -- String literals.
 vim.api.nvim_set_hl(0, 'TSStringEscape', { fg = cp.pink }) -- Escape characters within a string: `\n`, `\t`, etc.

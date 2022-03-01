@@ -56,10 +56,19 @@ local pipe = function(fns)
 	end
 end
 
-local appended_space_after_math = function()
+local appended_space = function()
 	if string.find(vim.v.char, '%a') then
 		vim.v.char = ' ' .. vim.v.char
 	end
+end
+
+local appended_space_after_insert = function()
+	vim.api.nvim_create_autocmd('InsertCharPre', {
+		callback = appended_space,
+		buffer = 0,
+		once = true,
+		desc = 'Auto Add a Space after Math',
+	})
 end
 
 M = {
@@ -306,11 +315,9 @@ M = {
 	s({ trig = 'fgd', name = 'finitely generated' }, { t('finitely generated') }, { condition = vimtex.in_text }),
 	s({ trig = 'mfs', name = 'Mori fibre space' }, { t('Mori fibre space') }, { condition = vimtex.in_text }),
 	s({ trig = 'bpf', name = 'base point free' }, { t('base point free') }, { condition = vimtex.in_text }),
-	s(
-		{ trig = 'snc', name = 'simple normal crossing' },
-		{ t('simple normal crossing') },
-		{ condition = vimtex.in_text }
-	),
+	s({ trig = 'snc', name = 'simple normal crossing' }, { t('simple normal crossing') }, {
+		condition = vimtex.in_text,
+	}),
 	s({ trig = 'lmm', name = 'log minimal model' }, { t('log minimal model') }, { condition = vimtex.in_text }),
 	s(
 		{ trig = '([tT])fae', name = 'the following are equivalent', regTrig = true },
@@ -328,17 +335,11 @@ M = {
 	),
 	s({ trig = 'quad', name = 'quad' }, { t('\\quad ') }, { condition = vimtex.in_mathzone }),
 
-	s(
-		{ trig = 'bar', name = 'overline' },
-		{ t('\\overline{'), i(1), t('}'), i(0) },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'bar', name = 'overline' }, { t('\\overline{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'hat', name = 'widehat' }, { t('\\widehat{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = 'td', name = 'widetilde' },
-		{ t('\\widetilde{'), i(1), t('}'), i(0) },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'td', name = 'widetilde' }, { t('\\widetilde{'), i(1), t('}'), i(0) }, {
+		condition = vimtex.in_mathzone,
+	}),
 
 	s({ trig = 'O([A-NP-Za-z])', name = 'local ring, structure sheaf', wordTrig = false, regTrig = true }, {
 		f(function(_, snip)
@@ -356,19 +357,7 @@ M = {
 	}, {
 		condition = vimtex.in_text,
 		callbacks = {
-			-- index `-1` means the callback is on the snippet as a whole
-			[-1] = {
-				[events.leave] = function()
-					vim.api.nvim_create_autocmd {
-						event = 'InsertCharPre',
-						-- pattern = '<buffer>',
-						buffer = 0,
-						desc = 'Auto Add a Space after Math',
-						callback = appended_space_after_math,
-						once = true,
-					}
-				end,
-			},
+			[-1] = { [events.leave] = appended_space_after_insert },
 		},
 	}),
 	s(
@@ -739,11 +728,9 @@ M = {
 		{ t('\\geq ') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s(
-		{ trig = '<<', name = 'much less than ≪', wordTrig = false },
-		{ t('\\ll ') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = '<<', name = 'much less than ≪', wordTrig = false }, { t('\\ll ') }, {
+		condition = vimtex.in_mathzone,
+	}),
 	s(
 		{ trig = '>>', name = 'much greater than ≫', wordTrig = false },
 		{ t('\\gg ') },
@@ -775,11 +762,7 @@ M = {
 	s({ trig = '...', name = 'dots ...', wordTrig = false }, { t('\\dots') }, { condition = vimtex.in_mathzone }),
 	s({ trig = '||', name = 'mid |', wordTrig = false }, { t('\\mid ') }, { condition = vimtex.in_mathzone }),
 	s({ trig = '::', name = 'colon :', wordTrig = false }, { t('\\colon ') }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = ':=', name = 'coloneqq :=', wordTrig = false },
-		{ t('\\coloneqq ') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t('\\coloneqq ') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'rup', name = 'round up', wordTrig = false },
 		{ t('\\rup{'), i(1), t('}'), i(0) },
@@ -794,16 +777,8 @@ M = {
 	s({ trig = 'lll', wordTrig = false, name = 'ell ℓ' }, { t('\\ell') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'xx', wordTrig = false, name = 'times ×' }, { t('\\times') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'nabl', wordTrig = false, name = 'nabla ∇' }, { t('\\nabla') }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = 'AA', wordTrig = false, name = 'affine 𝔸' },
-		{ t('\\mathbb{A}') },
-		{ condition = vimtex.in_mathzone }
-	),
-	s(
-		{ trig = 'CC', wordTrig = false, name = 'complex ℂ' },
-		{ t('\\mathbb{C}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'AA', wordTrig = false, name = 'affine 𝔸' }, { t('\\mathbb{A}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'CC', wordTrig = false, name = 'complex ℂ' }, { t('\\mathbb{C}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'DD', wordTrig = false, name = 'disc 𝔻' }, { t('\\mathbb{D}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'FF', wordTrig = false, name = 'Hirzebruch 𝔽' },
@@ -815,32 +790,18 @@ M = {
 		{ t('\\mathbb{H}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s(
-		{ trig = 'NN', wordTrig = false, name = 'natural ℕ' },
-		{ t('\\mathbb{N}') },
-		{ condition = vimtex.in_mathzone }
-	),
-	s(
-		{ trig = 'OO', wordTrig = false, name = 'mathcal{O}' },
-		{ t('\\mathcal{O}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'NN', wordTrig = false, name = 'natural ℕ' }, { t('\\mathbb{N}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'OO', wordTrig = false, name = 'mathcal{O}' }, { t('\\mathcal{O}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'PP', wordTrig = false, name = 'projective ℙ' },
 		{ t('\\mathbb{P}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s(
-		{ trig = 'QQ', wordTrig = false, name = 'rational ℚ' },
-		{ t('\\mathbb{Q}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'QQ', wordTrig = false, name = 'rational ℚ' }, { t('\\mathbb{Q}') }, {
+		condition = vimtex.in_mathzone,
+	}),
 	s({ trig = 'RR', wordTrig = false, name = 'real ℝ' }, { t('\\mathbb{R}') }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' },
-		{ t('\\mathbb{Z}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t('\\mathbb{Z}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'srt', wordTrig = false, name = 'square root' },
 		{ t('\\sqrt{'), i(1), t('}'), i(0) },
