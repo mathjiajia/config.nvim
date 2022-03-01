@@ -2,6 +2,7 @@ local ls = require('luasnip')
 local types = require('luasnip.util.types')
 
 ls.config.setup {
+	history = true,
 	updateevents = 'TextChanged,TextChangedI',
 	enable_autosnippets = true,
 	ext_opts = {
@@ -12,7 +13,7 @@ ls.config.setup {
 }
 
 vim.keymap.set({ 'i', 's' }, '<C-j>', function()
-	if ls.expand_or_jumpable() then
+	if ls.expand_or_locally_jumpable() then
 		ls.expand_or_jump()
 	end
 end, { desc = 'LuaSnip Forward Jump' })
@@ -27,55 +28,37 @@ vim.keymap.set({ 'i', 's' }, '<C-l>', function()
 	end
 end, { desc = 'LuaSnip Next Choice' })
 
+local snipMeta = function(ty)
+	return {
+		__index = function(t, k)
+			local ok, m = pcall(require, ty .. 'snippets.' .. k)
+			if not ok and not string.match(m, '^module.*not found:') then
+				error(m)
+			end
+			t[k] = ok and m or {}
+
+			return t[k]
+		end,
+	}
+end
+
 local snippets_clear = function()
 	for m, _ in pairs(ls.snippets) do
 		package.loaded['snippets.' .. m] = nil
-	end
-	ls.snippets = setmetatable({}, {
-		__index = function(t, k)
-			local ok, m = pcall(require, 'snippets.' .. k)
-			if not ok and not string.match(m, '^module.*not found:') then
-				error(m)
-			end
-			t[k] = ok and m or {}
-
-			return t[k]
-		end,
-	})
-end
-
-local autosnippets_clear = function()
-	for m, _ in pairs(ls.snippets) do
 		package.loaded['autosnippets.' .. m] = nil
 	end
-	ls.autosnippets = setmetatable({}, {
-		__index = function(t, k)
-			local ok, m = pcall(require, 'autosnippets.' .. k)
-			if not ok and not string.match(m, '^module.*not found:') then
-				error(m)
-			end
-			t[k] = ok and m or {}
-
-			return t[k]
-		end,
-	})
+	ls.snippets = setmetatable({}, snipMeta(''))
+	ls.autosnippets = setmetatable({}, snipMeta('auto'))
 end
 
 snippets_clear()
-autosnippets_clear()
 
 vim.api.nvim_create_augroup('snippets_clear', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
 	callback = snippets_clear,
-	pattern = '~/.config/nvim/lua/snippets/*.lua',
+	pattern = '~/.config/nvim/lua/snippets/*.lua, ~/.config/nvim/lua/autosnippets/*.lua',
 	group = 'snippets_clear',
 	desc = 'Reload snippets whenever they are updated',
-})
-vim.api.nvim_create_autocmd('BufWritePost', {
-	callback = autosnippets_clear,
-	pattern = '~/.config/nvim/lua/autosnippets/*.lua',
-	group = 'snippets_clear',
-	desc = 'Reload autosnippets whenever they are updated',
 })
 
 -- local edit_ft = function()

@@ -3,12 +3,12 @@ local M = {}
 local ls = require('luasnip')
 -- some shorthands...
 local s = ls.snippet
--- local sn = ls.snippet_node
+local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local c = ls.choice_node
--- local d = ls.dynamic_node
+local d = ls.dynamic_node
 -- local r = ls.restore_node
 local l = require('luasnip.extras').lambda
 local rep = require('luasnip.extras').rep
@@ -68,6 +68,18 @@ local appended_space_after_insert = function()
 		buffer = 0,
 		once = true,
 		desc = 'Auto Add a Space after Math',
+	})
+end
+
+local rec_ls
+rec_ls = function()
+	return sn(nil, {
+		c(1, {
+			-- important!! Having the sn(...) as the first choice will cause infinite recursion.
+			t { '' },
+			-- The same dynamicNode as in the snippet (also note: self reference).
+			sn(nil, { t { '', '\t\\item ' }, i(1), d(2, rec_ls, {}) }),
+		}),
 	})
 end
 
@@ -619,29 +631,26 @@ M = {
 	),
 	s(
 		{ trig = 'bit', name = 'Itemize Environment', dscr = 'Create an itemize environment' },
-		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), t { '', '\\end{itemize}' }, i(0) },
+		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{itemize}' }, i(0) },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'ben', name = 'Enumerate Environment' },
-		{ t { '\\begin{enumerate}', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
+		{ t { '\\begin{enumerate}', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{enumerate}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
-	s(
-		{ trig = 'baen', name = 'Enumerate with lower alph' },
-		{ t { '\\begin{enumerate}[label=(\\alph*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_text } }
-	),
-	s(
-		{ trig = 'bden', name = 'Enumerate with arabic' },
-		{ t { '\\begin{enumerate}[label=(\\arabic*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_text } }
-	),
-	s(
-		{ trig = 'bren', name = 'Enumerate with lower roman' },
-		{ t { '\\begin{enumerate}[label=(\\roman*)]', '\t\\item ' }, i(1), t { '', '\\end{enumerate}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_text } }
-	),
+	s({ trig = 'lben', name = 'Enumerate with labels' }, {
+		t { '\\begin{enumerate}[label=(\\' },
+		c(1, {
+			t('alph'),
+			t('arabic'),
+			t('roman'),
+		}),
+		t { '*)]', '\t\\item ' },
+		i(2),
+		d(3, rec_ls, {}),
+		t { '', '\\end{enumerate}' },
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({ trig = 'bfr', name = 'Beamer Frame Environment' }, {
 		t { '\\begin{frame}', '\t\\frametitle{' },
 		i(1, 'frame title'),
