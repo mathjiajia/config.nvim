@@ -11,7 +11,7 @@ vim.cmd([[packadd packer.nvim]])
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
 	command = 'source <afile> | PackerCompile',
-	pattern = 'core.plugins.lua',
+	pattern = '~/.config/nvim/lua/core/plugins.lua',
 	group = 'packer_user_config',
 	desc = 'Compile whenever plugins.lua is updated',
 })
