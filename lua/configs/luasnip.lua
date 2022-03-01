@@ -30,7 +30,6 @@ end, { desc = 'LuaSnip Next Choice' })
 local snippets_clear = function()
 	for m, _ in pairs(ls.snippets) do
 		package.loaded['snippets.' .. m] = nil
-		package.loaded['autosnippets.' .. m] = nil
 	end
 	ls.snippets = setmetatable({}, {
 		__index = function(t, k)
@@ -43,6 +42,12 @@ local snippets_clear = function()
 			return t[k]
 		end,
 	})
+end
+
+local autosnippets_clear = function()
+	for m, _ in pairs(ls.snippets) do
+		package.loaded['autosnippets.' .. m] = nil
+	end
 	ls.autosnippets = setmetatable({}, {
 		__index = function(t, k)
 			local ok, m = pcall(require, 'autosnippets.' .. k)
@@ -57,6 +62,7 @@ local snippets_clear = function()
 end
 
 snippets_clear()
+autosnippets_clear()
 
 vim.api.nvim_create_augroup('snippets_clear', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -64,6 +70,12 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 	pattern = '~/.config/nvim/lua/snippets/*.lua',
 	group = 'snippets_clear',
 	desc = 'Reload snippets whenever they are updated',
+})
+vim.api.nvim_create_autocmd('BufWritePost', {
+	callback = autosnippets_clear,
+	pattern = '~/.config/nvim/lua/autosnippets/*.lua',
+	group = 'snippets_clear',
+	desc = 'Reload autosnippets whenever they are updated',
 })
 
 -- local edit_ft = function()
