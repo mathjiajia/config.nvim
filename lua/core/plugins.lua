@@ -144,7 +144,7 @@ local function spec(use)
 			opt = true,
 			requires = { 'tami5/sqlite.lua', opt = true },
 		},
-		{ 'natecraddock/telescope-zf-native.nvim', opt = true },
+		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
 		{ 'nvim-telescope/telescope-project.nvim', opt = true },
 	}
 
@@ -245,7 +245,7 @@ local function spec(use)
 		'dstein64/vim-startuptime',
 		cmd = 'StartupTime',
 		config = function()
-			vim.g.startuptime_tries = 20
+			vim.g.startuptime_tries = 5
 		end,
 	}
 end
@@ -255,7 +255,7 @@ require('packer').startup {
 	config = {
 		profile = {
 			enable = true,
-			threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+			threshold = 1,
 		},
 		display = {
 			open_fn = function()

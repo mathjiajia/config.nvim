@@ -29,7 +29,7 @@ vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.white, bg = cp.black3, bo
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'TelescopeFrecencyScores', { fg = cp.maroon })
 
-require('packer').loader('telescope-zf-native.nvim')
+require('packer').loader('telescope-fzf-native.nvim')
 require('packer').loader('telescope-file-browser.nvim')
 require('packer').loader('telescope-frecency.nvim')
 require('packer').loader('telescope-project.nvim')
@@ -103,7 +103,7 @@ require('telescope').setup {
 }
 
 -- Load extensions
-local extensions = { 'file_browser', 'frecency', 'zf-native', 'project' }
+local extensions = { 'file_browser', 'frecency', 'fzf', 'project' } -- zf-native
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
