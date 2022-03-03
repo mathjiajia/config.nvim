@@ -111,6 +111,8 @@ M = {
 
 	-- priority 50:
 
+	s({ trig = '\\varpii', name = '\\varpi_i' }, { t('\\varpi_{i}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = '\\varphii', name = '\\varphi_i' }, { t('\\varphi_{i}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = '\\([xX])ii', name = '\\xi_{i}', regTrig = true },
 		{ f(function(_, snip)
@@ -128,26 +130,24 @@ M = {
 	s(
 		{ trig = '\\([pP])hii', name = '\\phi_{i}', regTrig = true },
 		{ f(function(_, snip)
-			return string.format('\\%si_{i}', snip.captures[1])
+			return string.format('\\%shi_{i}', snip.captures[1])
 		end, {}) },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = '\\([cC])hii', name = '\\chi_{i}', regTrig = true },
 		{ f(function(_, snip)
-			return string.format('\\%si_{i}', snip.captures[1])
+			return string.format('\\%shi_{i}', snip.captures[1])
 		end, {}) },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = '\\([pP])sii', name = '\\psi_{i}', regTrig = true },
 		{ f(function(_, snip)
-			return string.format('\\%si_{i}', snip.captures[1])
+			return string.format('\\%ssi_{i}', snip.captures[1])
 		end, {}) },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = '\\varpi', name = '\\varpi_i' }, { t('\\varpi_{i}') }, { condition = vimtex.in_mathzone }),
-	s({ trig = '\\varphi', name = '\\varphi_i' }, { t('\\varphi_{i}') }, { condition = vimtex.in_mathzone }),
 
 	-- priority 40:
 

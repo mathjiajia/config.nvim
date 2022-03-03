@@ -67,7 +67,7 @@ vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.black4, bg = cp.black2 }) -- colu
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.black4, bg = cp.pink }) -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.white, bg = cp.diff.deleted }) -- |:substitute| replacement text highlighting
 
-vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.black4 }) -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
+vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.gray1 }) -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
 -- vim.api.nvim_set_hl(0, 'LineNrAbove', {}) -- Line number for when the 'relativenumber' option is set, above the cursor line.
 -- vim.api.nvim_set_hl(0, 'LineNrBelow', {}) -- Line number for when the 'relativenumber' option is set, below the cursor line.
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.diag.warning, bg = 'NONE', bold = true }) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -80,7 +80,7 @@ vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.white, bold = true }) -- 'showmode' 
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = cp.white }) -- Area for messages and cmdline
 -- vim.api.nvim_set_hl(0,'MsgSeparator', {}) -- Separator for scrolled messages, `msgsep` flag of 'display'
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue, bold = true }) -- |more-prompt|
-vim.api.nvim_set_hl(0, 'NonText', { fg = cp.gray0 })
+vim.api.nvim_set_hl(0, 'NonText', { fg = cp.sky })
 -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text
 -- (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 
