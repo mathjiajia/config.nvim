@@ -697,7 +697,7 @@ M = {
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
-		{ trig = 'sts', wordTrig = false, name = 'text subscript' },
+		{ trig = 'tss', wordTrig = false, name = 'text subscript' },
 		{ t('_{\\mathrm{'), i(1), t('}}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
@@ -833,14 +833,14 @@ M = {
 	s(
 		{ trig = '([QRZ])P', name = 'positive', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
-			return '\\mathbbl{' .. snip.captures[1] .. '}^{>0}'
+			return '\\mathbb{' .. snip.captures[1] .. '}^{>0}'
 		end, {}) },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = '([QRZ])N', name = 'negative', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
-			return '\\mathbbl{' .. snip.captures[1] .. '}^{<0}'
+			return '\\mathbb{' .. snip.captures[1] .. '}^{<0}'
 		end, {}) },
 		{ condition = vimtex.in_mathzone }
 	),
