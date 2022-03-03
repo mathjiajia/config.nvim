@@ -143,7 +143,7 @@ M = {
 		t { '\\chapter{' },
 		i(1),
 		t { '}\\label{cha:' },
-		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
+		l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '', '' },
 		i(0),
 	}, { condition = conds.line_begin }),
@@ -151,7 +151,7 @@ M = {
 		t { '\\section{' },
 		i(1),
 		t { '}\\label{sec:' },
-		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
+		l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '', '' },
 		i(0),
 	}, { condition = conds.line_begin }),
@@ -159,7 +159,7 @@ M = {
 		t { '\\section*{' },
 		i(1),
 		t { '}\\label{sec:' },
-		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
+		l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '', '' },
 		i(0),
 	}, { condition = conds.line_begin }),
@@ -167,7 +167,7 @@ M = {
 		t { '\\subsection{' },
 		i(1),
 		t { '}\\label{sub:' },
-		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
+		l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '', '' },
 		i(0),
 	}, { condition = conds.line_begin }),
@@ -175,7 +175,7 @@ M = {
 		t { '\\subsection*{' },
 		i(1),
 		t { '}\\label{sub:' },
-		l(l._1:gsub('[^%w]', '_'):gsub('_*$', ''):lower(), 1),
+		l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 		t { '}', '', '' },
 		i(0),
 	}, { condition = conds.line_begin }),
@@ -194,13 +194,13 @@ M = {
 
 	s(
 		{ trig = 'lim', name = 'limit', dscr = 'Insert a limit notation.' },
-		{ t('\\lim_{n='), i(1, 'n'), t('} \\to '), i(2, '\\infty'), t('} '), i(0) },
+		{ t('\\lim_{n='), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} '), i(0) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 
 	s(
 		{ trig = 'limsup', name = 'limsup', dscr = 'Insert a limit superior notation.' },
-		{ t('\\limsup_{n='), i(1, 'n'), t('} \\to '), i(2, '\\infty'), t('} '), i(0) },
+		{ t('\\limsup_{n='), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} '), i(0) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 

@@ -1,7 +1,7 @@
 vim.g.colors_name = 'moon'
 
 local cp = {
-	-- stylua ignore: start
+	-- stylua: ignore start
 	rosewater = '#F5E0DC', -- Rosewater
 	flamingo  = '#F2CDCD', -- Flamingo
 	mauve     = '#DDB6F2', -- Mauve
@@ -35,7 +35,7 @@ local cp = {
 		changed = '#FAE3B0',
 		deleted = '#F28FAD',
 	},
-	-- stylua ignore: end
+	-- stylua: ignore end
 }
 
 ---------- GROUPS ----------

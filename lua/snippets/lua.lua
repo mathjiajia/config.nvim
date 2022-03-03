@@ -32,6 +32,11 @@ M = {
 		{ t('local '), i(1, 'var'), t('= require("'), i(2, 'mod'), t('")'), i(0) },
 		{ condition = conds.line_begin }
 	),
+	s(
+		{ trig = 'ignore', name = 'stylua ignore', dscr = 'Ignoring parts of a file with stylua' },
+		{ t('-- stylua: ignore '), i(0) },
+		{ condition = conds.line_begin }
+	),
 }
 
 return M

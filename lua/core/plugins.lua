@@ -59,6 +59,7 @@ local function spec(use)
 		{
 			'jose-elias-alvarez/null-ls.nvim',
 			ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
+			requires = { 'nvim-lua/plenary.nvim' },
 			config = function()
 				require('lsp.null-ls')
 			end,
@@ -241,13 +242,13 @@ local function spec(use)
 			require('configs.fterm')
 		end,
 	}
-	use {
-		'dstein64/vim-startuptime',
-		cmd = 'StartupTime',
-		config = function()
-			vim.g.startuptime_tries = 5
-		end,
-	}
+	-- use {
+	-- 	'dstein64/vim-startuptime',
+	-- 	cmd = 'StartupTime',
+	-- 	config = function()
+	-- 		vim.g.startuptime_tries = 5
+	-- 	end,
+	-- }
 end
 
 require('packer').startup {

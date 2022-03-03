@@ -6,7 +6,10 @@ ls.config.setup {
 	enable_autosnippets = true,
 	ext_opts = {
 		[types.choiceNode] = {
-			active = { virt_text = { { '●', 'DiagnosticSignHint' } } },
+			active = {
+				-- virt_text = { { '●', 'DiagnosticSignHint' } },
+				virt_text = { { '<-', 'Error' } },
+			},
 		},
 	},
 }
@@ -41,9 +44,6 @@ local snipMeta = function(ty)
 	}
 end
 
-ls.snippets = setmetatable({}, snipMeta(''))
-ls.autosnippets = setmetatable({}, snipMeta('auto'))
-
 -- local snippets_clear = function()
 -- 	for m, _ in pairs(ls.snippets) do
 -- 		package.loaded['snippets.' .. m] = nil
@@ -54,6 +54,9 @@ ls.autosnippets = setmetatable({}, snipMeta('auto'))
 -- end
 
 -- snippets_clear()
+
+ls.snippets = setmetatable({}, snipMeta(''))
+ls.autosnippets = setmetatable({}, snipMeta('auto'))
 
 -- vim.api.nvim_create_augroup('luasnip_clear', { clear = true })
 -- vim.api.nvim_create_autocmd('BufWritePost', {

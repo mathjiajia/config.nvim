@@ -82,18 +82,11 @@ vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to t
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
-require('ui.buftab')
+-- require('ui.buftab')
 require('ui.status')
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-
-local set_cursor_position = function()
-	local last_cursor_pos = vim.api.nvim_buf_get_mark(0, '"')
-	if not vim.endswith(vim.bo.filetype, 'commit') then
-		return pcall(vim.api.nvim_win_set_cursor, 0, last_cursor_pos)
-	end
-end
 
 augroup('HighlightYank', { clear = true })
 autocmd('TextYankPost', {
@@ -106,12 +99,6 @@ autocmd('TextYankPost', {
 })
 
 augroup('buffer_prep', { clear = true })
-autocmd('BufReadPost', {
-	callback = set_cursor_position,
-	pattern = '*',
-	group = 'buffer_prep',
-	desc = 'set cursor to the last editing position',
-})
 autocmd('BufEnter', {
 	command = 'silent! lcd %:p:h',
 	pattern = '*',
@@ -144,5 +131,5 @@ autocmd('CursorHold', {
 	pattern = '*',
 	group = 'plugins_list',
 	once = true,
-	desc = 'Enable Packer commands',
+	desc = 'Load Packer',
 })

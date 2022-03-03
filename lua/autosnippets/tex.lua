@@ -816,11 +816,7 @@ M = {
 		{ t('\\sqrt{'), i(1), t('}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
-	s(
-		{ trig = 'set', wordTrig = false, name = 'set' },
-		{ t('\\{'), i(1), t('\\}'), i(0) },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'set', name = 'set' }, { t('\\{'), i(1), t('\\}'), i(0) }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'o+', wordTrig = false, name = 'oplus' }, { t('\\oplus') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'ox', wordTrig = false, name = 'otimes' }, { t('\\otimes') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t('\\cap') }, { condition = vimtex.in_mathzone }),
