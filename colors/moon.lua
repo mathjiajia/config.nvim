@@ -42,7 +42,6 @@ vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.black3 }) -- used for the column
 vim.api.nvim_set_hl(0, 'Conceal', { fg = cp.gray1 }) -- placeholder characters substituted for concealed text (see 'conceallevel')
 vim.api.nvim_set_hl(0, 'Cursor', { fg = cp.black2, bg = cp.white }) -- character under the cursor
 vim.api.nvim_set_hl(0, 'lCursor', { link = 'Cursor' }) -- the character under the cursor when |language-mapping| is used (see 'guicursor')
-vim.api.nvim_set_hl(0, 'CursorIM', { link = 'Cursor' }) -- like Cursor, but used when in IME mode |CursorIM|
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = cp.black1 }) -- used for the vertical bar at the right of the cursor
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.black3 }) -- used for the horizontal bar at the bottom of the cursor
 
@@ -68,7 +67,7 @@ vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.white, bg = cp.diff.deleted }) --
 vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.gray1 }) -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
 -- vim.api.nvim_set_hl(0, 'LineNrAbove', {}) -- Line number for when the 'relativenumber' option is set, above the cursor line.
 -- vim.api.nvim_set_hl(0, 'LineNrBelow', {}) -- Line number for when the 'relativenumber' option is set, below the cursor line.
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.diag.warning, bg = 'NONE', bold = true }) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.diag.warning, bold = true }) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 -- highlights the number in numberline.
 -- vim.api.nvim_set_hl(0, 'CursorLineSign', {}) -- Like SignColumn when 'cursorline' is set for the cursor line.
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {}) -- Like FoldColumn when 'cursorline' is set for the cursor line.
@@ -166,9 +165,9 @@ vim.api.nvim_set_hl(0, 'Delimiter', { fg = cp.teal }) -- character that needs at
 vim.api.nvim_set_hl(0, 'SpecialComment', { fg = cp.gray, italic = true }) -- special things inside a comment
 -- vim.api.nvim_set_hl(0, 'Debug', {}) -- debugging statements
 
-vim.api.nvim_set_hl(0, 'Underlined', { underline = true }) -- text that stands out, HTML links
--- vim.api.nvim_set_hl(0, 'Ignore', { fg = cp.gray0 }) -- left blank, hidden |hl-Ignore|
-vim.api.nvim_set_hl(0, 'Error', { fg = cp.diag.error, bg = 'NONE' }) -- any erroneous construct
+-- vim.api.nvim_set_hl(0, 'Underlined', {}) -- text that stands out, HTML links
+-- vim.api.nvim_set_hl(0, 'Ignore', {}) -- left blank, hidden |hl-Ignore|
+vim.api.nvim_set_hl(0, 'Error', { fg = cp.diag.error }) -- any erroneous construct
 vim.api.nvim_set_hl(0, 'Todo', { fg = cp.black2, bg = cp.diag.warning, bold = true }) -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
 ---------- DIAGNOSTIC ----------
@@ -187,9 +186,28 @@ vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = cp.diag.hint })
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = cp.black4 }) -- used for highlighting "text" references
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' }) -- used for highlighting "read" references
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' }) -- used for highlighting "write" references
-vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = cp.gray0 }) -- virtual text of the codelens
+-- vim.api.nvim_set_hl(0, 'LspCodeLens', {}) -- virtual text of the codelens
 -- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', {})
-vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = cp.red }) -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
+-- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {}) -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
+
+---------- NVIM NOTIFY ----------
+vim.api.nvim_set_hl(0, 'NotifyERRORBorder', { link = 'DiagnosticError' })
+vim.api.nvim_set_hl(0, 'NotifyWARNBorder', { link = 'DiagnosticWarning' })
+vim.api.nvim_set_hl(0, 'NotifyINFOBorder', { link = 'DiagnosticInfo' })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGBorder', { fg = cp.peach })
+vim.api.nvim_set_hl(0, 'NotifyTRACEBorder', { link = 'DiagnosticHint' })
+
+vim.api.nvim_set_hl(0, 'NotifyERRORIcon', { link = 'NotifyERRORBorder' })
+vim.api.nvim_set_hl(0, 'NotifyWARNIcon', { link = 'NotifyWARNBorder' })
+vim.api.nvim_set_hl(0, 'NotifyINFOIcon', { link = 'NotifyINFOBorder' })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGIcon', { link = 'NotifyDEBUGBorder' })
+vim.api.nvim_set_hl(0, 'NotifyTRACEIcon', { link = 'NotifyTRACEBorder' })
+
+vim.api.nvim_set_hl(0, 'NotifyERRORTitle', { fg = cp.diag.error, italic = true })
+vim.api.nvim_set_hl(0, 'NotifyWARNTitle', { fg = cp.diag.warning, italic = true })
+vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.diag.info, italic = true })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
+vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
 
 ---------- TREESITTER ----------
 -- These groups are for the neovim tree-sitter highlights.
@@ -199,8 +217,8 @@ vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = cp.red }) -- Used t
 -- you explicitly want to support Treesitter's improved syntax awareness.
 
 -- vim.api.nvim_set_hl(0, 'TSPunctDelimiter', { link = 'Delimiter' }) -- Punctuation delimiters: Periods, commas, semicolons, etc.
--- vim.api.nvim_set_hl(0, 'TSPunctBracket', { link = 'Delimiter' }) -- Brackets, braces, parentheses, etc.
--- vim.api.nvim_set_hl(0, 'TSPunctSpecial', { link = 'Delimiter' }) -- Special punctuation that doesn't fit into the previous categories.
+vim.api.nvim_set_hl(0, 'TSPunctBracket', { fg = cp.maroon, bold = true }) -- Brackets, braces, parentheses, etc.
+vim.api.nvim_set_hl(0, 'TSPunctSpecial', { fg = cp.gray1 }) -- Special punctuation that doesn't fit into the previous categories.
 
 -- vim.api.nvim_set_hl(0, 'TSConstant', { link = 'Constant' }) -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = cp.lavender, italic = true }) -- Built-in constant values: `nil` in Lua.

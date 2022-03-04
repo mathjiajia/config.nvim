@@ -58,7 +58,7 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match
 vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
 
 -- perfomance
-vim.opt.updatetime = 400
+vim.opt.updatetime = 250
 
 -- ui
 vim.opt.breakindent = true
@@ -82,7 +82,7 @@ vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to t
 -- theme and UI
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
--- require('ui.buftab')
+require('ui.buftab')
 require('ui.status')
 
 local augroup = vim.api.nvim_create_augroup

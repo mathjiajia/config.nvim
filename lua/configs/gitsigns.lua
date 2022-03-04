@@ -6,13 +6,13 @@ gitsigns.setup {
 		vim.keymap.set(
 			'n',
 			']c',
-			"&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+			'&diff ? "]c" : "<cmd>Gitsigns next_hunk<CR>"',
 			{ buffer = bufnr, expr = true, desc = 'Next Hunk' }
 		)
 		vim.keymap.set(
 			'n',
 			'[c',
-			"&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+			'&diff ? "[c" : "<cmd>Gitsigns prev_hunk<CR>"',
 			{ buffer = bufnr, expr = true, desc = 'Previous Hunk' }
 		)
 

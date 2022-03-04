@@ -147,24 +147,6 @@ components.active[1][1] = {
 	end,
 }
 components.active[1][2] = {
-	provider = '',
-	enabled = function()
-		return not vim.b.gitsigns_status_dict
-	end,
-	hl = function()
-		return { fg = get_mode_color(), bg = 'black' }
-	end,
-}
-components.active[1][3] = {
-	provider = '',
-	enabled = function()
-		return vim.b.gitsigns_status_dict
-	end,
-	hl = function()
-		return { fg = get_mode_color(), bg = 'sky' }
-	end,
-}
-components.active[1][4] = {
 	provider = 'git_branch',
 	enabled = function()
 		return vim.b.gitsigns_status_dict
@@ -172,15 +154,12 @@ components.active[1][4] = {
 	icon = '  ',
 	hl = { fg = 'black', bg = 'sky' },
 }
-components.active[1][5] = {
-	provider = '',
-	enabled = function()
-		return vim.b.gitsigns_status_dict
-	end,
+components.active[1][3] = {
+	provider = '',
 	hl = { fg = 'sky', bg = 'black' },
 }
 
-components.active[1][6] = {
+components.active[1][4] = {
 	provider = 'git_diff_added',
 	enabled = function()
 		return git_status('added')
@@ -188,7 +167,7 @@ components.active[1][6] = {
 	icon = '  ',
 	hl = { fg = 'green', bg = 'black' },
 }
-components.active[1][7] = {
+components.active[1][5] = {
 	provider = 'git_diff_changed',
 	enabled = function()
 		return git_status('changed')
@@ -196,7 +175,7 @@ components.active[1][7] = {
 	icon = '  ',
 	hl = { fg = 'yellow', bg = 'black' },
 }
-components.active[1][8] = {
+components.active[1][6] = {
 	provider = 'git_diff_removed',
 	enabled = function()
 		return git_status('removed')
@@ -254,43 +233,31 @@ components.active[3][2] = {
 }
 
 components.active[3][3] = {
-	provider = '',
-	hl = { fg = 'flamingo', bg = 'black' },
-}
-components.active[3][4] = {
 	provider = 'file_dict',
 	icon = '  ',
 	hl = { fg = 'black', bg = 'flamingo' },
 }
-components.active[3][5] = {
-	provider = '',
-	hl = { fg = 'maroon', bg = 'flamingo' },
-}
 
-components.active[3][6] = {
+components.active[3][4] = {
 	provider = 'file_icon',
 	hl = { fg = 'black', bg = 'maroon' },
 }
-components.active[3][7] = {
+components.active[3][5] = {
 	provider = ' %t%m ',
 	hl = { fg = 'black', bg = 'maroon' },
 }
-components.active[3][8] = {
-	provider = '',
-	hl = { fg = 'green', bg = 'maroon' },
-}
-components.active[3][9] = {
+components.active[3][6] = {
 	provider = 'treesitter',
 	hl = { fg = 'black', bg = 'green' },
 }
 
 components.inactive[1][1] = {
-	provider = ' %y',
+	provider = ' %y ',
 	hl = { fg = 'black', bg = 'maroon' },
 }
 components.inactive[1][2] = {
-	provider = '',
-	hl = { fg = 'maroon', bg = 'black' },
+	provider = '',
+	hl = { fg = '', bg = 'black' },
 }
 
 local M = {}
