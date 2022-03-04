@@ -41,47 +41,22 @@ require('nvim-treesitter.configs').setup {
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = { 'latex' },
-		use_languagetree = true,
 	},
 	incremental_selection = {
 		enable = true,
-		keymaps = {
-			init_selection = 'gnn',
-			node_incremental = 'grn',
-			scope_incremental = 'grc',
-			node_decremental = 'grm',
-		},
 	},
 	indent = {
 		enable = true,
 	},
 	rainbow = {
 		enable = true,
-		colors = { '#F5C2E7', '#F28FAD', '#96CDFB', '#FAE3B0', '#ABE9B3', '#B5E8E0', '#F2CDCD' }, -- table of hex strings
+		colors = { '#F5C2E7', '#F28FAD', '#96CDFB', '#FAE3B0', '#ABE9B3', '#B5E8E0', '#F2CDCD' },
 	},
 	playground = {
 		enable = true,
-		disable = {},
-		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-		persist_queries = false, -- Whether the query persists across vim sessions
-		keybindings = {
-			toggle_query_editor = 'o',
-			toggle_hl_groups = 'i',
-			toggle_injected_languages = 't',
-			toggle_anonymous_nodes = 'a',
-			toggle_language_display = 'I',
-			focus_language = 'f',
-			unfocus_language = 'F',
-			update = 'R',
-			goto_node = '<cr>',
-			show_help = '?',
-		},
 	},
 }
 
-vim.keymap.set(
-	'n',
-	'<leader>th',
-	'<Cmd>TSHighlightCapturesUnderCursor<CR>',
-	{ desc = 'Highlight captures under cursor' }
-)
+vim.keymap.set('n', '<leader>th', function()
+	require('nvim-treesitter-playground.hl-info').show_hl_captures()
+end, { desc = 'Highlight captures under cursor' })

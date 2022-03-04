@@ -1,41 +1,39 @@
 vim.g.colors_name = 'moon'
 
 local cp = {
-	-- stylua: ignore start
 	rosewater = '#F5E0DC', -- Rosewater
-	flamingo  = '#F2CDCD', -- Flamingo
-	mauve     = '#DDB6F2', -- Mauve
-	pink      = '#F5C2E7', -- Pink
-	red       = '#F28FAD', -- Red
-	maroon    = '#E8A2AF', -- Maroon
-	peach     = '#F8BD96', -- Peach
-	yellow    = '#FAE3B0', -- Yellow
-	green     = '#ABE9B3', -- Green
-	blue      = '#96CDFB', -- Blue
-	sky       = '#89DCEB', -- Sky
-	teal      = '#B5E8E0', -- Teal
-	lavender  = '#C9CBFF', -- Lavender
-	white     = '#D9E0EE', -- White
-	gray2     = '#C3BAC6', -- Gray2
-	gray1     = '#988BA2', -- Gray1
-	gray0     = '#6E6C7E', -- Gray0
-	black4    = '#575268', -- Black4
-	black3    = '#302D41', -- Black3
-	black2    = '#1E1E2E', -- Black2
-	black1    = '#1A1826', -- Black1
-	black0    = '#161320', -- Black0
-	diag      = {
-		error   = '#FB617E',
+	flamingo = '#F2CDCD', -- Flamingo
+	mauve = '#DDB6F2', -- Mauve
+	pink = '#F5C2E7', -- Pink
+	red = '#F28FAD', -- Red
+	maroon = '#E8A2AF', -- Maroon
+	peach = '#F8BD96', -- Peach
+	yellow = '#FAE3B0', -- Yellow
+	green = '#ABE9B3', -- Green
+	blue = '#96CDFB', -- Blue
+	sky = '#89DCEB', -- Sky
+	teal = '#B5E8E0', -- Teal
+	lavender = '#C9CBFF', -- Lavender
+	white = '#D9E0EE', -- White
+	gray2 = '#C3BAC6', -- Gray2
+	gray1 = '#988BA2', -- Gray1
+	gray0 = '#6E6C7E', -- Gray0
+	black4 = '#575268', -- Black4
+	black3 = '#302D41', -- Black3
+	black2 = '#1E1E2E', -- Black2
+	black1 = '#1A1826', -- Black1
+	black0 = '#161320', -- Black0
+	diag = {
+		error = '#FB617E',
 		warning = '#FAE3B0',
-		info    = '#B5E8E0',
-		hint    = '#9ED06C',
+		info = '#B5E8E0',
+		hint = '#9ED06C',
 	},
 	diff = {
-		added   = '#ABE9B3',
+		added = '#ABE9B3',
 		changed = '#FAE3B0',
 		deleted = '#F28FAD',
 	},
-	-- stylua: ignore end
 }
 
 ---------- GROUPS ----------
@@ -175,30 +173,10 @@ vim.api.nvim_set_hl(0, 'Todo', { fg = cp.black2, bg = cp.diag.warning, bold = tr
 
 ---------- DIAGNOSTIC ----------
 -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = cp.diag.error, italic = true })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = cp.diag.warning, italic = true })
-vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = cp.diag.info, italic = true })
-vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = cp.diag.hint, italic = true })
-
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = cp.diag.error })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { fg = cp.diag.warning })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { fg = cp.diag.info })
-vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { fg = cp.diag.hint })
-
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { undercurl = true, sp = cp.diag.error })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { undercurl = true, sp = cp.diag.warning })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { undercurl = true, sp = cp.diag.info })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { undercurl = true, sp = cp.diag.hint })
-
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingError', { fg = cp.diag.error })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { fg = cp.diag.warning })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingInfo', { fg = cp.diag.info })
-vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { fg = cp.diag.hint })
-
-vim.api.nvim_set_hl(0, 'DiagnosticSignError', { fg = cp.diag.error, bg = cp.black2 })
-vim.api.nvim_set_hl(0, 'DiagnosticSignWarn', { fg = cp.diag.warning, bg = cp.black2 })
-vim.api.nvim_set_hl(0, 'DiagnosticSignInfo', { fg = cp.diag.info, bg = cp.black2 })
-vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = cp.diag.hint, bg = cp.black2 })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = cp.diag.error })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = cp.diag.warning })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = cp.diag.info })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = cp.diag.hint })
 
 ---------- NVIM LSPCONFIG ----------
 
