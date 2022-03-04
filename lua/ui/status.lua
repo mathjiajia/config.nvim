@@ -1,12 +1,17 @@
 local colors = {
+	rosewater = '#F5E0DC',
 	flamingo = '#F2CDCD',
+	mauve = '#DDB6F2',
+	pink = '#F5C2E7',
 	red = '#F28FAD',
 	maroon = '#E8A2AF',
 	peach = '#F8BD96',
 	yellow = '#FAE3B0',
 	green = '#ABE9B3',
+	blue = '#96CDFB',
 	sky = '#89DCEB',
 	teal = '#B5E8E0',
+	lavender = '#C9CBFF',
 	gray = '#988BA2',
 	black = '#302D41',
 	bg = '#1A1826',
@@ -15,46 +20,30 @@ local colors = {
 	diag_hint = '#9ED06C',
 }
 local vim_modes = {
-	['n'] = { 'Normal', 'green' },
-	['no'] = { 'OP', 'green' },
-	['nov'] = { 'OP', 'green' },
-	['noV'] = { 'OP', 'green' },
-	['no'] = { 'OP', 'green' },
-	['niI'] = { 'Normal', 'green' },
-	['niR'] = { 'Normal', 'green' },
-	['niV'] = { 'Normal', 'green' },
-	['nt'] = { 'Normal', 'green' },
+	['n'] = { 'Normal', 'blue' },
+	['no'] = { 'N-Pending', 'blue' },
 	['v'] = { 'Visual', 'flamingo' },
-	['vs'] = { 'Visual', 'flamingo' },
-	['V'] = { 'Lines', 'flamingo' },
-	['Vs'] = { 'Lines', 'flamingo' },
-	[''] = { 'Block', 'flamingo' },
-	['s'] = { 'Block', 'flamingo' },
+	['V'] = { 'V-Lines', 'flamingo' },
+	[''] = { 'V-Block', 'flamingo' },
 	['s'] = { 'Select', 'maroon' },
-	['S'] = { 'Select', 'maroon' },
-	[''] = { 'Block', 'flamingo' },
-	['i'] = { 'Insert', 'red' },
-	['ic'] = { 'Insert', 'red' },
-	['ix'] = { 'Insert', 'red' },
+	['S'] = { 'S-Line', 'maroon' },
+	[''] = { 'S-Block', 'flamingo' },
+	['i'] = { 'Insert', 'green' },
+	['ic'] = { 'Insert', 'green' },
 	['R'] = { 'Replace', 'maroon' },
-	['Rc'] = { 'Replace', 'maroon' },
-	['Rx'] = { 'Replace', 'maroon' },
 	['Rv'] = { 'V-Replace', 'maroon' },
-	['Rvc'] = { 'V-Replace', 'maroon' },
-	['Rvx'] = { 'V-Replace', 'maroon' },
 	['c'] = { 'Command', 'peach' },
 	['cv'] = { 'Command', 'peach' },
-	['r'] = { 'Enter', 'teal' },
+	['ce'] = { 'COMMAND', 'peach' },
+	['r'] = { 'Prompt', 'teal' },
 	['rm'] = { 'More', 'teal' },
 	['r?'] = { 'Confirm', 'teal' },
 	['!'] = { 'Shell', 'red' },
 	['t'] = { 'Terminal', 'red' },
-	['null'] = { 'None', 'yellow' },
 }
 
 local force_inactive = {
 	filetypes = {
-		-- '^aerial$',
 		'^help$',
 		'^NvimTree$',
 		'^packer$',
@@ -152,11 +141,11 @@ components.active[1][2] = {
 		return vim.b.gitsigns_status_dict
 	end,
 	icon = '  ',
-	hl = { fg = 'black', bg = 'sky' },
+	hl = { fg = 'black', bg = 'rosewater' },
 }
 components.active[1][3] = {
 	provider = '',
-	hl = { fg = 'sky', bg = 'black' },
+	hl = { fg = '', bg = 'black' },
 }
 
 components.active[1][4] = {
@@ -248,7 +237,7 @@ components.active[3][5] = {
 }
 components.active[3][6] = {
 	provider = 'treesitter',
-	hl = { fg = 'black', bg = 'green' },
+	hl = { fg = 'black', bg = 'teal' },
 }
 
 components.inactive[1][1] = {
