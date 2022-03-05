@@ -1,45 +1,43 @@
 local colors = {
-	rosewater = '#F5E0DC',
-	flamingo = '#F2CDCD',
-	mauve = '#DDB6F2',
-	pink = '#F5C2E7',
-	red = '#F28FAD',
-	maroon = '#E8A2AF',
-	peach = '#F8BD96',
+	purple = '#c19ee0',
+	pink = '#FFAFCC',
+	red = '#FB617E',
 	yellow = '#FAE3B0',
 	green = '#ABE9B3',
-	blue = '#96CDFB',
-	sky = '#89DCEB',
-	teal = '#B5E8E0',
-	lavender = '#C9CBFF',
-	gray = '#988BA2',
+	blue = '#A2D2FF',
+	teal = '#D8E2DC',
 	black = '#302D41',
-	bg = '#1A1826',
-	fg = '#C3BAC6',
+	bg = '#302D41',
+	fg = '#C5C5C5',
 	diag_error = '#FB617E',
+	diag_warning = '#FAE3B0',
+	diag_info = '#B5E8E0',
 	diag_hint = '#9ED06C',
+	diff_added = '#ABE9B3',
+	diff_changed = '#FAE3B0',
+	diff_removed = '#F28FAD',
 }
 local vim_modes = {
 	['n'] = { 'Normal', 'blue' },
 	['no'] = { 'N-Pending', 'blue' },
-	['v'] = { 'Visual', 'flamingo' },
-	['V'] = { 'V-Lines', 'flamingo' },
-	[''] = { 'V-Block', 'flamingo' },
-	['s'] = { 'Select', 'maroon' },
-	['S'] = { 'S-Line', 'maroon' },
-	[''] = { 'S-Block', 'flamingo' },
-	['i'] = { 'Insert', 'green' },
-	['ic'] = { 'Insert', 'green' },
-	['R'] = { 'Replace', 'maroon' },
-	['Rv'] = { 'V-Replace', 'maroon' },
-	['c'] = { 'Command', 'peach' },
-	['cv'] = { 'Command', 'peach' },
-	['ce'] = { 'COMMAND', 'peach' },
+	['v'] = { 'Visual', 'purple' },
+	['V'] = { 'V-Lines', 'purple' },
+	[''] = { 'V-Block', 'purple' },
+	['s'] = { 'Select', 'red' },
+	['S'] = { 'S-Line', 'red' },
+	[''] = { 'S-Block', 'red' },
+	['i'] = { 'Insert', 'pink' },
+	['ic'] = { 'Insert', 'pink' },
+	['R'] = { 'Replace', 'red' },
+	['Rv'] = { 'V-Replace', 'red' },
+	['c'] = { 'Command', 'yellow' },
+	['cv'] = { 'Command', 'yellow' },
+	['ce'] = { 'COMMAND', 'yellow' },
 	['r'] = { 'Prompt', 'teal' },
 	['rm'] = { 'More', 'teal' },
 	['r?'] = { 'Confirm', 'teal' },
-	['!'] = { 'Shell', 'red' },
-	['t'] = { 'Terminal', 'red' },
+	['!'] = { 'Shell', 'green' },
+	['t'] = { 'Terminal', 'green' },
 }
 
 local force_inactive = {
@@ -111,19 +109,17 @@ function providers.diagnostic_hints()
 	return diagnostics(vim.diagnostic.severity.HINT)
 end
 
-function providers.file_icon()
-	local name = vim.api.nvim_buf_get_name(0)
-	local ext = vim.fn.fnamemodify(name, ':e')
-	local icon = require('nvim-web-devicons').get_icon(name, ext, { default = true })
-	return ' ' .. icon
-end
 function providers.treesitter()
 	local bufnr = vim.api.nvim_get_current_buf()
 	return vim.treesitter.highlighter.active[bufnr] and ' 侮' or ''
 end
 
-function providers.file_dict()
-	return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
+function providers.file_info()
+	local dict = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+	local name = vim.api.nvim_buf_get_name(0)
+	local ext = vim.fn.fnamemodify(name, ':e')
+	local icon = require('nvim-web-devicons').get_icon(name, ext, { default = true })
+	return dict .. ' | ' .. icon
 end
 
 local components = { active = { {}, {}, {} }, inactive = { {}, {} } }
@@ -141,11 +137,11 @@ components.active[1][2] = {
 		return vim.b.gitsigns_status_dict
 	end,
 	icon = '  ',
-	hl = { fg = 'black', bg = 'rosewater' },
+	hl = { fg = 'black', bg = 'teal' },
 }
 components.active[1][3] = {
 	provider = '',
-	hl = { fg = '', bg = 'black' },
+	hl = { fg = '', bg = 'bg' },
 }
 
 components.active[1][4] = {
@@ -154,7 +150,7 @@ components.active[1][4] = {
 		return git_status('added')
 	end,
 	icon = '  ',
-	hl = { fg = 'green', bg = 'black' },
+	hl = { fg = 'diff_added', bg = 'bg' },
 }
 components.active[1][5] = {
 	provider = 'git_diff_changed',
@@ -162,7 +158,7 @@ components.active[1][5] = {
 		return git_status('changed')
 	end,
 	icon = '  ',
-	hl = { fg = 'yellow', bg = 'black' },
+	hl = { fg = 'diff_changed', bg = 'bg' },
 }
 components.active[1][6] = {
 	provider = 'git_diff_removed',
@@ -170,13 +166,13 @@ components.active[1][6] = {
 		return git_status('removed')
 	end,
 	icon = '  ',
-	hl = { fg = 'maroon', bg = 'black' },
+	hl = { fg = 'diff_removed', bg = 'bg' },
 }
 
 components.active[2][1] = {
 	provider = 'lsp_client_names',
 	icon = ' ',
-	hl = { fg = 'gray', bg = 'black' },
+	hl = { fg = 'fg', bg = 'bg' },
 }
 
 components.active[2][2] = {
@@ -185,7 +181,7 @@ components.active[2][2] = {
 	enabled = function()
 		return diagnostics(vim.diagnostic.severity.ERROR)
 	end,
-	hl = { fg = 'diag_error', bg = 'black' },
+	hl = { fg = 'diag_error', bg = 'bg' },
 }
 components.active[2][3] = {
 	provider = 'diagnostic_warnings',
@@ -193,7 +189,7 @@ components.active[2][3] = {
 	enabled = function()
 		return diagnostics(vim.diagnostic.severity.WARN)
 	end,
-	hl = { fg = 'yellow', bg = 'black' },
+	hl = { fg = 'diag_warning', bg = 'bg' },
 }
 components.active[2][4] = {
 	provider = 'diagnostic_info',
@@ -201,7 +197,7 @@ components.active[2][4] = {
 	enabled = function()
 		return diagnostics(vim.diagnostic.severity.INFO)
 	end,
-	hl = { fg = 'sky', bg = 'black' },
+	hl = { fg = 'diag_info', bg = 'bg' },
 }
 components.active[2][5] = {
 	provider = 'diagnostic_hints',
@@ -209,44 +205,40 @@ components.active[2][5] = {
 	enabled = function()
 		return diagnostics(vim.diagnostic.severity.HINT)
 	end,
-	hl = { fg = 'diag_hint', bg = 'black' },
+	hl = { fg = 'diag_hint', bg = 'bg' },
 }
 
 components.active[3][1] = {
 	provider = '[%3p%%]',
-	hl = { fg = 'fg', bg = 'black' },
+	hl = { fg = 'fg', bg = 'bg' },
 }
 components.active[3][2] = {
 	provider = ' %3l:%-3c ',
-	hl = { fg = 'fg', bg = 'black' },
+	hl = { fg = 'fg', bg = 'bg' },
 }
 
 components.active[3][3] = {
-	provider = 'file_dict',
+	provider = 'file_info',
 	icon = '  ',
-	hl = { fg = 'black', bg = 'flamingo' },
+	hl = { fg = 'black', bg = 'teal' },
 }
 
 components.active[3][4] = {
-	provider = 'file_icon',
-	hl = { fg = 'black', bg = 'maroon' },
+	provider = ' %t%m ',
+	hl = { fg = 'black', bg = 'teal' },
 }
 components.active[3][5] = {
-	provider = ' %t%m ',
-	hl = { fg = 'black', bg = 'maroon' },
-}
-components.active[3][6] = {
 	provider = 'treesitter',
-	hl = { fg = 'black', bg = 'teal' },
+	hl = { fg = 'black', bg = 'green' },
 }
 
 components.inactive[1][1] = {
 	provider = ' %y ',
-	hl = { fg = 'black', bg = 'maroon' },
+	hl = { fg = 'black', bg = 'blue' },
 }
 components.inactive[1][2] = {
 	provider = '',
-	hl = { fg = '', bg = 'black' },
+	hl = { fg = '', bg = 'bg' },
 }
 
 local M = {}

@@ -1,15 +1,12 @@
 local M = {}
 
-local hlgroups = {
-	current = 'TabLineSel',
-	normal = 'TabLineFill',
-}
+local hlgroups = { current = 'TabLineSel' }
 
 local Buftab = {}
 Buftab.__index = Buftab
 
 function Buftab:generate_hl()
-	local name = self.buf.current and 'current' or self.buf.active or 'normal'
+	local name = self.buf.current and 'current' or ''
 	self.hl = hlgroups[name] or 'TabLineFill'
 end
 
@@ -32,10 +29,6 @@ end
 
 function Buftab:generate_icon()
 	local fname, ext = vim.fn.fnamemodify(self.buf.name, ':t'), vim.fn.fnamemodify(self.buf.name, ':e')
-	if ext == '' then
-		ext = vim.api.nvim_buf_get_option(self.buf.bufnr, 'filetype')
-	end
-
 	self.icon = require('nvim-web-devicons').get_icon(fname, ext, { default = true })
 end
 
@@ -50,6 +43,7 @@ function Buftab:new(buf, index, last)
 	}
 
 	setmetatable(r, self)
+
 	r:generate_hl()
 	r:generate_icon()
 	r:generate_flags()
@@ -63,6 +57,7 @@ function Buftab:is_ambiguous(tabs)
 			return true
 		end
 	end
+
 	return false
 end
 
@@ -99,21 +94,21 @@ local getbufinfo = function()
 				changed = vim.api.nvim_buf_get_option(bufnr, 'modified'),
 				modifiable = vim.api.nvim_buf_get_option(bufnr, 'modifiable'),
 				readonly = vim.api.nvim_buf_get_option(bufnr, 'readonly'),
-				active = vim.fn.bufwinnr(bufnr) > 0,
 			})
 		end
 	end
+
 	return processed
 end
 
-local b = {}
-b.getbufinfo = getbufinfo
+local b = { getbufinfo = getbufinfo }
 
 b.make_buftabs = function()
 	local bufinfo, buftabs = getbufinfo(), {}
 	for i, buf in ipairs(bufinfo) do
 		table.insert(buftabs, Buftab:new(buf, i, i == #bufinfo))
 	end
+
 	return buftabs
 end
 
@@ -121,7 +116,7 @@ local t, Tabpage = {}, {}
 Tabpage.__index = Tabpage
 
 function Tabpage:generate_hl()
-	local name = self.current and 'current' or 'normal'
+	local name = self.current and 'current' or ''
 	self.hl = hlgroups[name] or 'TabLineFill'
 end
 
@@ -140,8 +135,7 @@ end
 
 -- generator methods
 function Tabpage:generate(budget)
-	self.label = ' #{n} '
-	self.label = self.label:gsub('#{n}', self.index)
+	self.label = ' ' .. self.index .. ' '
 	local adjusted = budget - vim.fn.strchars(self.label)
 
 	self.label = string.format('%%#%s#%s%%*', self.hl, self.label)
@@ -150,11 +144,7 @@ end
 
 t.tabinfo = function()
 	local tabnrs = vim.api.nvim_list_tabpages()
-	if #tabnrs <= 1 then
-		return {}
-	end
-
-	return tabnrs
+	return #tabnrs <= 1 and {} or tabnrs
 end
 
 t.make_tabpage_tabs = function()
@@ -168,6 +158,7 @@ t.make_tabpage_tabs = function()
 			}
 		)
 	end
+
 	return tabpage_tabs
 end
 
@@ -214,6 +205,7 @@ end
 
 vim.opt.showtabline = 2
 vim.o.tabline = '%!v:lua.tabline.setup()'
+
 _G.tabline = M
 
 return M
