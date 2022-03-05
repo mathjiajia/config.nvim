@@ -28,18 +28,16 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 │   │   ├── norg.lua
 │   │   └── tex.lua
 │   ├── configs
-│   │   ├── aerial.lua
 │   │   ├── cmp.lua
 │   │   ├── copilot.lua
-│   │   ├── fidget.lua
 │   │   ├── fterm.lua
 │   │   ├── gitsigns.lua
 │   │   ├── hop.lua
 │   │   ├── indentline.lua
 │   │   ├── luasnip.lua
 │   │   ├── neorg.lua
-│   │   ├── notify.lua
 │   │   ├── nvimtree.lua
+│   │   ├── outline.lua
 │   │   ├── pairs.lua
 │   │   ├── session.lua
 │   │   ├── spectre.lua
