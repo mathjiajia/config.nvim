@@ -52,8 +52,6 @@ vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
 vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file,
 -- and restores undo history from the same file on buffer read
 
--- autocomplete
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Do not select a match in the menu,
 -- force the user to select one from the menu
 vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
 

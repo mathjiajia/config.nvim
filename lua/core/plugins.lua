@@ -23,7 +23,8 @@ local function spec(use)
 	use {
 		'rcarriga/nvim-notify',
 		config = function()
-			require('configs.notify')
+			require('notify').setup {}
+			vim.notify = require('notify')
 		end,
 	}
 

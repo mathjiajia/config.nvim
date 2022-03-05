@@ -129,6 +129,9 @@ cmp.setup {
 			require('luasnip').lsp_expand(args.body)
 		end,
 	},
+	completion = {
+		completeopt = 'menu,menuone,noselect',
+	},
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)

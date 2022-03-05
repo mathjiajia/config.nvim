@@ -8,6 +8,7 @@ ls.config.setup {
 		[types.choiceNode] = {
 			active = {
 				-- virt_text = { { '●', 'DiagnosticSignHint' } },
+				-- virt_text = { { '◍', 'DiagnosticSignHint' } },
 				virt_text = { { '<-', 'Error' } },
 			},
 		},
