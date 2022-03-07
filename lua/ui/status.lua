@@ -192,5 +192,3 @@ vim.g.qf_disable_statusline = true
 vim.opt.statusline = '%{%v:lua.statusline.setup()%}'
 
 _G.statusline = M
-
-return M
