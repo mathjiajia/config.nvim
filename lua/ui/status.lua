@@ -1,50 +1,32 @@
-local colors = {
-	purple = '#c19ee0',
-	pink = '#FFAFCC',
-	red = '#FB617E',
-	yellow = '#FAE3B0',
-	green = '#ABE9B3',
-	blue = '#A2D2FF',
-	teal = '#D8E2DC',
-	black = '#302D41',
-	bg = '#302D41',
-	fg = '#C5C5C5',
-	diag_error = '#FB617E',
-	diag_warning = '#FAE3B0',
-	diag_info = '#B5E8E0',
-	diag_hint = '#9ED06C',
-	diff_added = '#ABE9B3',
-	diff_changed = '#FAE3B0',
-	diff_removed = '#F28FAD',
-}
+local M = {}
+
 local vim_modes = {
-	['n'] = { 'Normal', 'blue' },
-	['no'] = { 'N-Pending', 'blue' },
-	['v'] = { 'Visual', 'purple' },
-	['V'] = { 'V-Lines', 'purple' },
-	[''] = { 'V-Block', 'purple' },
-	['s'] = { 'Select', 'red' },
-	['S'] = { 'S-Line', 'red' },
-	[''] = { 'S-Block', 'red' },
-	['i'] = { 'Insert', 'pink' },
-	['ic'] = { 'Insert', 'pink' },
-	['R'] = { 'Replace', 'red' },
-	['Rv'] = { 'V-Replace', 'red' },
-	['c'] = { 'Command', 'yellow' },
-	['cv'] = { 'Command', 'yellow' },
-	['ce'] = { 'COMMAND', 'yellow' },
-	['r'] = { 'Prompt', 'teal' },
-	['rm'] = { 'More', 'teal' },
-	['r?'] = { 'Confirm', 'teal' },
-	['!'] = { 'Shell', 'green' },
-	['t'] = { 'Terminal', 'green' },
+	['n'] = '%#MatchParen# Normal %#Statusline#',
+	['no'] = ' N-OpPd ',
+	['i'] = '%#Function# Insert %#Statusline#',
+	['ic'] = '%#Function# ICompl %#Statusline#',
+	['v'] = ' Visual ',
+	['V'] = ' V-Line ',
+	[''] = ' V-Blck ',
+	['R'] = ' Rplace ',
+	['Rv'] = ' V-Rplce ',
+	['s'] = ' Select ',
+	['S'] = ' S-Line ',
+	[''] = ' S-Blck ',
+	['c'] = '%#Constant# Cmmand %#Statusline#',
+	['cv'] = ' Vim Ex ',
+	['ce'] = ' Ex (r) ',
+	['r'] = ' Prompt ',
+	['rm'] = '  More  ',
+	['r?'] = ' Cnfirm ',
+	['t'] = '  Term  ',
+	['!'] = ' Shell  ',
 }
 
 local force_inactive = {
 	filetypes = {
 		'^help$',
 		'^NvimTree$',
-		'^packer$',
 		'^qf$',
 		'^spectre_panel$',
 		'^Outline$',
@@ -57,227 +39,112 @@ local force_inactive = {
 local providers = {}
 
 function providers.vi_mode()
-	return vim_modes[vim.api.nvim_get_mode().mode][1] .. ' '
-end
-
-local function get_mode_color()
-	return vim_modes[vim.api.nvim_get_mode().mode][2]
+	return vim_modes[vim.api.nvim_get_mode().mode]
 end
 
 function providers.git_branch()
-	return vim.b.gitsigns_head .. ' ' or ''
+	if vim.b.gitsigns_head then
+		return '  ' .. vim.b.gitsigns_head
+	end
+	return ''
 end
 
 local function git_status(type)
 	local gsd = vim.b.gitsigns_status_dict
 	return gsd and gsd[type] and gsd[type] > 0
 end
-
 function providers.git_diff_added()
-	return git_status('added') and tostring(vim.b.gitsigns_status_dict['added']) or ''
+	return '  ' .. tostring(vim.b.gitsigns_status_dict['added'])
 end
 function providers.git_diff_changed()
-	return git_status('changed') and tostring(vim.b.gitsigns_status_dict['changed']) or ''
+	return ' 柳' .. tostring(vim.b.gitsigns_status_dict['changed'])
 end
 function providers.git_diff_removed()
-	return git_status('removed') and tostring(vim.b.gitsigns_status_dict['removed']) or ''
+	return '  ' .. tostring(vim.b.gitsigns_status_dict['removed'])
 end
 
-function providers.lsp_client_names()
-	local clients = {}
-	for _, client in ipairs(vim.lsp.buf_get_clients(0)) do
-		clients[#clients + 1] = client.name
-	end
-	return table.concat(clients, ' • ')
+local function diag_count(ty)
+	return vim.tbl_count(vim.diagnostic.get(0, { severity = ty }))
+end
+function providers.diag_error()
+	return '  ' .. tostring(diag_count(vim.diagnostic.severity.ERROR))
+end
+function providers.diag_warn()
+	return '  ' .. tostring(diag_count(vim.diagnostic.severity.WARN))
+end
+function providers.diag_info()
+	return '  ' .. tostring(diag_count(vim.diagnostic.severity.INFO))
+end
+function providers.diag_hint()
+	return '  ' .. tostring(diag_count(vim.diagnostic.severity.HINT))
 end
 
-local function diagnostics(ty) -- Common function used by the diagnostics providers
-	local count = vim.tbl_count(vim.diagnostic.get(0, { severity = ty }))
-	return count ~= 0 and tostring(count) or ''
-end
+local components = { active = { {}, {}, {} }, inactive = { {} } }
 
-function providers.diagnostic_errors()
-	return diagnostics(vim.diagnostic.severity.ERROR)
-end
-function providers.diagnostic_warnings()
-	return diagnostics(vim.diagnostic.severity.WARN)
-end
-function providers.diagnostic_info()
-	return diagnostics(vim.diagnostic.severity.INFO)
-end
-function providers.diagnostic_hints()
-	return diagnostics(vim.diagnostic.severity.HINT)
-end
-
-function providers.treesitter()
-	local bufnr = vim.api.nvim_get_current_buf()
-	return vim.treesitter.highlighter.active[bufnr] and ' 侮' or ''
-end
-
-function providers.file_info()
-	local dict = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-	local name = vim.api.nvim_buf_get_name(0)
-	local ext = vim.fn.fnamemodify(name, ':e')
-	local icon = require('nvim-web-devicons').get_icon(name, ext, { default = true })
-	return dict .. ' | ' .. icon
-end
-
-local components = { active = { {}, {}, {} }, inactive = { {}, {} } }
-
-components.active[1][1] = {
-	provider = 'vi_mode',
-	icon = '  ',
-	hl = function()
-		return { fg = 'black', bg = get_mode_color() }
-	end,
-}
+components.active[1][1] = { provider = 'vi_mode' }
 components.active[1][2] = {
 	provider = 'git_branch',
 	enabled = function()
 		return vim.b.gitsigns_status_dict
 	end,
-	icon = '  ',
-	hl = { fg = 'black', bg = 'teal' },
 }
 components.active[1][3] = {
-	provider = '',
-	hl = { fg = '', bg = 'bg' },
-}
-
-components.active[1][4] = {
 	provider = 'git_diff_added',
 	enabled = function()
 		return git_status('added')
 	end,
-	icon = '  ',
-	hl = { fg = 'diff_added', bg = 'bg' },
 }
-components.active[1][5] = {
+components.active[1][4] = {
 	provider = 'git_diff_changed',
 	enabled = function()
 		return git_status('changed')
 	end,
-	icon = '  ',
-	hl = { fg = 'diff_changed', bg = 'bg' },
 }
-components.active[1][6] = {
+components.active[1][5] = {
 	provider = 'git_diff_removed',
 	enabled = function()
 		return git_status('removed')
 	end,
-	icon = '  ',
-	hl = { fg = 'diff_removed', bg = 'bg' },
 }
 
-components.active[2][1] = {
-	provider = 'lsp_client_names',
-	icon = ' ',
-	hl = { fg = 'fg', bg = 'bg' },
-}
-
-components.active[2][2] = {
-	provider = 'diagnostic_errors',
-	icon = '  ',
-	enabled = function()
-		return diagnostics(vim.diagnostic.severity.ERROR)
-	end,
-	hl = { fg = 'diag_error', bg = 'bg' },
-}
-components.active[2][3] = {
-	provider = 'diagnostic_warnings',
-	icon = '  ',
-	enabled = function()
-		return diagnostics(vim.diagnostic.severity.WARN)
-	end,
-	hl = { fg = 'diag_warning', bg = 'bg' },
-}
-components.active[2][4] = {
-	provider = 'diagnostic_info',
-	icon = '  ',
-	enabled = function()
-		return diagnostics(vim.diagnostic.severity.INFO)
-	end,
-	hl = { fg = 'diag_info', bg = 'bg' },
-}
-components.active[2][5] = {
-	provider = 'diagnostic_hints',
-	icon = '  ',
-	enabled = function()
-		return diagnostics(vim.diagnostic.severity.HINT)
-	end,
-	hl = { fg = 'diag_hint', bg = 'bg' },
-}
+components.active[2][1] = { provider = '%F%m ' }
 
 components.active[3][1] = {
-	provider = '[%3p%%]',
-	hl = { fg = 'fg', bg = 'bg' },
+	provider = 'diag_error',
+	enabled = function()
+		return diag_count(vim.diagnostic.severity.ERROR) ~= 0
+	end,
 }
 components.active[3][2] = {
-	provider = ' %3l:%-3c ',
-	hl = { fg = 'fg', bg = 'bg' },
+	provider = 'diag_warn',
+	enabled = function()
+		return diag_count(vim.diagnostic.severity.WARN) ~= 0
+	end,
 }
-
 components.active[3][3] = {
-	provider = 'file_info',
-	icon = '  ',
-	hl = { fg = 'black', bg = 'teal' },
+	provider = 'diag_info',
+	enabled = function()
+		return diag_count(vim.diagnostic.severity.INFO) ~= 0
+	end,
 }
-
 components.active[3][4] = {
-	provider = ' %t%m ',
-	hl = { fg = 'black', bg = 'teal' },
+	provider = 'diag_hint',
+	enabled = function()
+		return diag_count(vim.diagnostic.severity.HINT) ~= 0
+	end,
 }
-components.active[3][5] = {
-	provider = 'treesitter',
-	hl = { fg = 'black', bg = 'green' },
-}
+components.active[3][5] = { provider = ' [%3p%%] Ln %-3l Col %-3c ' }
 
-components.inactive[1][1] = {
-	provider = ' %y ',
-	hl = { fg = 'black', bg = 'blue' },
-}
-components.inactive[1][2] = {
-	provider = '',
-	hl = { fg = '', bg = 'bg' },
-}
-
-local M = {}
-local highlights = {}
+components.inactive[1][1] = { provider = ' %y ' }
 
 local function find_pattern_match(tbl, val)
 	return tbl and next(vim.tbl_filter(function(pattern)
 		return val:match(pattern)
 	end, tbl))
 end
-
 local function is_forced_inactive()
 	return find_pattern_match(force_inactive.filetypes, vim.bo.filetype)
 		or find_pattern_match(force_inactive.buftypes, vim.bo.buftype)
-end
-
-local function parse_hl(hl, parent_hl)
-	parent_hl = parent_hl or {}
-	local fg = hl.fg or parent_hl.fg
-	local bg = hl.bg or parent_hl.bg
-
-	if colors[fg] then
-		fg = colors[fg]
-	end
-	if colors[bg] then
-		bg = colors[bg]
-	end
-	return { fg = fg, bg = bg }
-end
-local function get_hlname(hl, parent_hl)
-	hl = parse_hl(hl, parent_hl)
-	local fg_str, bg_str = hl.fg:sub(2), hl.bg:sub(2)
-
-	local hlname = string.format('StatusComponent_%s_%s', fg_str, bg_str)
-	if not highlights[hlname] then
-		vim.api.nvim_set_hl(0, hlname, { fg = hl.fg, bg = hl.bg })
-		highlights[hlname] = true
-	end
-	return hlname
 end
 
 local function parse_component(component)
@@ -285,17 +152,12 @@ local function parse_component(component)
 		return ''
 	end
 
-	local hl = type(component.hl) == 'function' and parse_hl(component.hl()) or parse_hl(component.hl)
 	local provider = component.provider
 	if not providers[provider] then
-		return string.format('%%#%s#%s', get_hlname(hl), provider)
+		return provider
 	end
 	local pd = providers[provider]()
-	if pd ~= '' then
-		local icon = component.icon == nil and '' or string.format('%%#%s#%s', get_hlname(hl), component.icon)
-		return string.format('%s%%#%s#%s', icon, get_hlname(hl), pd)
-	end
-	return ''
+	return pd ~= '' and pd or ''
 end
 
 function M.generate_statusline(is_active)
@@ -306,21 +168,12 @@ function M.generate_statusline(is_active)
 		statusline_type = 'inactive'
 	end
 
-	local sections = components[statusline_type]
-	if not sections then
-		return ''
-	end
-
-	local component_strs, component_indices = {}, {}
+	local sections, component_strs = components[statusline_type], {}
 
 	for i, section in ipairs(sections) do
 		component_strs[i] = {}
-
 		for j, component in ipairs(section) do
-			local component_str = parse_component(component)
-
-			component_strs[i][j] = component_str
-			component_indices[#component_indices + 1] = { i, j }
+			component_strs[i][j] = parse_component(component)
 		end
 	end
 
@@ -334,8 +187,10 @@ function M.setup()
 	return M.generate_statusline(vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin))
 end
 
+vim.opt.showmode = false
 vim.g.qf_disable_statusline = true
 vim.opt.statusline = '%{%v:lua.statusline.setup()%}'
+
 _G.statusline = M
 
 return M

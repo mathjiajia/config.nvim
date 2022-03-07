@@ -18,6 +18,7 @@ local cp = {
 	gray2 = '#C3BAC6', -- Gray2
 	gray1 = '#988BA2', -- Gray1
 	gray0 = '#6E6C7E', -- Gray0
+	statusbg = '#6998AB', -- Bg
 	black4 = '#575268', -- Black4
 	black3 = '#302D41', -- Black3
 	black2 = '#1E1E2E', -- Black2
@@ -106,10 +107,10 @@ vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = cp.blue }) -- Word
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = cp.green }) -- Word that is recognized by the spellchecker as one that is hardly ever used.
 -- |spell| Combined with the highlighting used otherwise.
 
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.white, bg = cp.black1 }) -- status line of current window
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.black4, bg = cp.black1 }) -- status lines of not-current windows
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.black2, bg = cp.statusbg }) -- status line of current window
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.gray0, bg = cp.black1 }) -- status lines of not-current windows
 -- Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.black4, bg = cp.black1 }) -- tab pages line, not active tab page label
+vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.black0, bg = cp.green }) -- tab pages line, not active tab page label
 vim.api.nvim_set_hl(0, 'TabLineFill', { fg = cp.gray0, bg = cp.black2 }) -- tab pages line, where there are no labels
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.black0, bg = cp.red }) -- tab pages line, active tab page label
 
