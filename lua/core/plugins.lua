@@ -15,14 +15,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 local function spec(use)
 	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
-	use { 'nvim-lua/plenary.nvim' }
 
 	use {
 		'rcarriga/nvim-notify',
-		config = [[
+		config = function()
 			require('notify').setup {}
 			vim.notify = require('notify')
-		]],
+		end,
 	}
 
 	use {
@@ -31,17 +30,20 @@ local function spec(use)
 		config = [[require('configs.treesitter')]],
 	}
 	use {
-		{ 'nvim-treesitter/playground' },
+		{
+			'nvim-treesitter/playground',
+			cmd = { 'TSPlaygroundToggle' },
+			module = 'nvim-treesitter-playground',
+		},
 		{ 'p00f/nvim-ts-rainbow' },
 		{
 			'lukas-reineke/indent-blankline.nvim',
 			config = [[require('configs.indentline')]],
 		},
 	}
-
 	use {
 		'simrat39/symbols-outline.nvim',
-		opt = true,
+		keys = { { 'n', '<M-o>' } },
 		config = [[require('configs.outline')]],
 	}
 
@@ -60,7 +62,9 @@ local function spec(use)
 		},
 		{
 			'j-hui/fidget.nvim',
-			config = [[require('fidget').setup { text = { spinner = 'line' } }]],
+			config = function()
+				require('fidget').setup { text = { spinner = 'line' } }
+			end,
 		},
 	}
 
@@ -109,19 +113,30 @@ local function spec(use)
 
 	use {
 		'nvim-telescope/telescope.nvim',
+		cmd = 'Telescope',
+		module = 'telescope',
+		keys = {
+			{ 'n', '<leader>f' },
+			{ 'n', '<leader><space>' },
+			{ 'n', '<leader><leader>' },
+		},
 		requires = { 'nvim-lua/plenary.nvim' },
 		config = [[require('configs.telescope')]],
 	}
 	use {
-		{ 'nvim-telescope/telescope-file-browser.nvim' },
-		{ 'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sqlite.lua' },
-		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-		{ 'nvim-telescope/telescope-project.nvim' },
+		{ 'nvim-telescope/telescope-file-browser.nvim', opt = true },
+		{
+			'nvim-telescope/telescope-frecency.nvim',
+			opt = true,
+			requires = { 'tami5/sqlite.lua', opt = true },
+		},
+		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
+		{ 'nvim-telescope/telescope-project.nvim', opt = true },
 	}
 
 	use {
 		'kyazdani42/nvim-tree.lua',
-		key = { { 'n', '<M-t>' } },
+		keys = { { 'n', '<M-t>' } },
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = [[require('configs.nvimtree')]],
 	}
@@ -133,29 +148,53 @@ local function spec(use)
 	}
 	use {
 		'numToStr/Comment.nvim',
-		config = [[require('Comment').setup()]],
+		keys = {
+			{ 'n', 'gb' },
+			{ 'n', 'gc' },
+			{ 'v', 'gb' },
+			{ 'v', 'gc' },
+		},
+		config = function()
+			require('Comment').setup()
+		end,
 	}
 
 	use {
 		'ur4ltz/surround.nvim',
+		keys = {
+			{ 'n', 'sa' },
+			{ 'n', 'sr' },
+			{ 'n', 'sd' },
+			{ 'x', 's' },
+		},
 		config = [[require('configs.surround')]],
 	}
 	use {
 		'phaazon/hop.nvim',
+		keys = {
+			{ 'n', '<leader>h' },
+			{ 'x', '<leader>h' },
+			{ 'o', '<leader>h' },
+		},
 		config = [[require('configs.hop')]],
 	}
 	use {
 		'windwp/nvim-spectre',
+		keys = { { 'n', '<leader>r' } },
 		config = [[require('configs.spectre')]],
 	}
 	use {
 		'Shatur/neovim-session-manager',
+		keys = { { 'n', '<leader>s' } },
 		config = [[require('configs.session')]],
 	}
 
 	use {
 		'numtostr/FTerm.nvim',
-		opt = true,
+		keys = {
+			{ 'n', '<M-i>' },
+			{ 'n', '<M-g>' },
+		},
 		config = [[require('configs.terminal')]],
 	}
 	use {
