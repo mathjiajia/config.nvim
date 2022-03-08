@@ -1,7 +1,3 @@
-vim.keymap.set('n', '<M-t>', function()
-	require('nvim-tree').toggle()
-end, { desc = 'Toggle NvimTree' })
-
 -- settings
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_hl = 1

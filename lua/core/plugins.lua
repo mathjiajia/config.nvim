@@ -30,11 +30,7 @@ local function spec(use)
 		config = [[require('configs.treesitter')]],
 	}
 	use {
-		{
-			'nvim-treesitter/playground',
-			cmd = { 'TSPlaygroundToggle' },
-			module = 'nvim-treesitter-playground',
-		},
+		{ 'nvim-treesitter/playground', module = 'nvim-treesitter-playground' },
 		{ 'p00f/nvim-ts-rainbow' },
 		{
 			'lukas-reineke/indent-blankline.nvim',
@@ -43,8 +39,14 @@ local function spec(use)
 	}
 	use {
 		'simrat39/symbols-outline.nvim',
-		keys = { { 'n', '<M-o>' } },
+		module = 'symbols-outline',
 		config = [[require('configs.outline')]],
+	}
+
+	use {
+		'lewis6991/gitsigns.nvim',
+		requires = { 'nvim-lua/plenary.nvim' },
+		config = [[require('configs.gitsigns')]],
 	}
 
 	use {
@@ -62,6 +64,7 @@ local function spec(use)
 		},
 		{
 			'j-hui/fidget.nvim',
+			after = 'nvim-lspconfig',
 			config = function()
 				require('fidget').setup { text = { spinner = 'line' } }
 			end,
@@ -93,7 +96,7 @@ local function spec(use)
 	}
 	use {
 		'github/copilot.vim',
-		cmd = 'Copilot',
+		disable = true,
 		config = [[require('configs.copilot')]],
 	}
 
@@ -113,13 +116,7 @@ local function spec(use)
 
 	use {
 		'nvim-telescope/telescope.nvim',
-		cmd = 'Telescope',
 		module = 'telescope',
-		keys = {
-			{ 'n', '<leader>f' },
-			{ 'n', '<leader><space>' },
-			{ 'n', '<leader><leader>' },
-		},
 		requires = { 'nvim-lua/plenary.nvim' },
 		config = [[require('configs.telescope')]],
 	}
@@ -136,16 +133,11 @@ local function spec(use)
 
 	use {
 		'kyazdani42/nvim-tree.lua',
-		keys = { { 'n', '<M-t>' } },
+		module = 'nvim-tree',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = [[require('configs.nvimtree')]],
 	}
 
-	use {
-		'lewis6991/gitsigns.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-		config = [[require('configs.gitsigns')]],
-	}
 	use {
 		'numToStr/Comment.nvim',
 		keys = {
@@ -171,35 +163,26 @@ local function spec(use)
 	}
 	use {
 		'phaazon/hop.nvim',
-		keys = {
-			{ 'n', '<leader>h' },
-			{ 'x', '<leader>h' },
-			{ 'o', '<leader>h' },
-		},
-		config = [[require('configs.hop')]],
+		module = 'hop',
+		config = [[require('hop').setup()]],
 	}
 	use {
 		'windwp/nvim-spectre',
-		keys = { { 'n', '<leader>r' } },
 		config = [[require('configs.spectre')]],
 	}
 	use {
 		'Shatur/neovim-session-manager',
-		keys = { { 'n', '<leader>s' } },
-		config = [[require('configs.session')]],
+		module = 'session_manager.commands',
+		config = [[require('session_manager').setup { autoload_mode = require('session_manager.config').AutoloadMode.Disabled }]],
 	}
 
 	use {
 		'numtostr/FTerm.nvim',
-		keys = {
-			{ 'n', '<M-i>' },
-			{ 'n', '<M-g>' },
-		},
-		config = [[require('configs.terminal')]],
+		module = 'FTerm',
+		config = [[require('FTerm').setup()')]],
 	}
 	use {
 		'dstein64/vim-startuptime',
-		cmd = 'StartupTime',
 		config = [[vim.g.startuptime_tries = 20]],
 	}
 end

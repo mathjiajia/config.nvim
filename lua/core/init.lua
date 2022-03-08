@@ -39,87 +39,124 @@ vim.api.nvim_create_augroup('init_nvim', { clear = true })
 -- })
 require('core.plugins')
 
-if 'Options' then
-	-- misc
-	vim.opt.clipboard = 'unnamedplus'
-	vim.opt.mouse = 'a'
+---- OPTIONS ----
+-- misc
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.mouse = 'a'
 
-	vim.g.clipboard = { -- clipboard
-		name = 'macOS-clipboard',
-		copy = { ['+'] = 'pbcopy', ['*'] = 'pbcopy' },
-		paste = { ['+'] = 'pbpaste', ['*'] = 'pbpaste' },
-		cache_enabled = 0,
-	}
+vim.g.clipboard = { -- clipboard
+	name = 'macOS-clipboard',
+	copy = { ['+'] = 'pbcopy', ['*'] = 'pbcopy' },
+	paste = { ['+'] = 'pbpaste', ['*'] = 'pbpaste' },
+	cache_enabled = 0,
+}
 
-	-- indention & tab
-	vim.opt.shiftwidth = 4
-	vim.opt.smartindent = true
-	vim.opt.softtabstop = 4
-	vim.opt.tabstop = 4
+-- indention & tab
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
 
-	-- search
-	vim.opt.ignorecase = true
-	vim.opt.smartcase = true
-	vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
-	vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
+vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
-	-- backups
-	vim.opt.autowrite = true -- Write the contents of the file, if it has been modified
-	vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
-	vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
-	vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file,
-	-- and restores undo history from the same file on buffer read
+-- backups
+vim.opt.autowrite = true -- Write the contents of the file, if it has been modified
+vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
+vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
+vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file,
+-- and restores undo history from the same file on buffer read
 
-	-- force the user to select one from the menu
-	vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
+-- force the user to select one from the menu
+vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
 
-	-- perfomance
-	vim.opt.updatetime = 250
+-- perfomance
+vim.opt.updatetime = 250
 
-	-- ui
-	vim.opt.breakindent = true
-	vim.wo.cursorline = true -- Highlight the text line of the cursor
-	-- vim.opt.guifont = 'MesloLGS Nerd Font:h18'
-	vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than
-	-- at the last character that fits on the screen
-	vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
-	vim.wo.number = true
-	vim.opt.pumheight = 10 -- Maximum number of items to show in the popup menu
-	vim.wo.relativenumber = true
-	vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
-	vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
-	vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
-	vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
-	vim.opt.splitright = true -- splitting a window will put the new window right of the current one
-	vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line
-	-- when the cursor is on the first/last character in the line
+-- ui
+vim.opt.breakindent = true
+vim.wo.cursorline = true -- Highlight the text line of the cursor
+-- vim.opt.guifont = 'MesloLGS Nerd Font:h18'
+vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than
+-- at the last character that fits on the screen
+vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
+vim.wo.number = true
+vim.opt.pumheight = 10 -- Maximum number of items to show in the popup menu
+vim.wo.relativenumber = true
+vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
+vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
+vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
+vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
+vim.opt.splitright = true -- splitting a window will put the new window right of the current one
+vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line
+-- when the cursor is on the first/last character in the line
 
-	-- theme and UI
-	vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
-end
-
-if 'Mappings' then
-	--use comma as leader key
-	vim.g.mapleader = ','
-
-	-- cursor movements
-	vim.keymap.set('n', '<M-h>', '<C-w>h', { desc = 'Move to Left Window' })
-	vim.keymap.set('n', '<M-l>', '<C-w>l', { desc = 'Move to Right Window' })
-	vim.keymap.set('n', '<M-j>', '<C-w>j', { desc = 'Move to Bottom Window' })
-	vim.keymap.set('n', '<M-k>', '<C-w>k', { desc = 'Move to Upper Window' })
-	--Remap for dealing with word wrap
-	vim.keymap.set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, desc = 'Move Cursor Down' })
-	vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, desc = 'Move Cursor Up' })
-	-- buffer navigation
-	vim.keymap.set('n', '<leader>bp', '<Cmd>bprev<CR>', { desc = 'Previous Buffer' })
-	vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
-	-- Insert
-	vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
-	vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
-end
-
+-- theme and UI
+vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
 vim.cmd('colorscheme moon')
 
+---- KEYBINDINGS ----
+--use comma as leader key
+vim.g.mapleader = ','
+
+-- cursor movements
+vim.keymap.set('n', '<M-h>', '<C-w>h', { desc = 'Move to Left Window' })
+vim.keymap.set('n', '<M-l>', '<C-w>l', { desc = 'Move to Right Window' })
+vim.keymap.set('n', '<M-j>', '<C-w>j', { desc = 'Move to Bottom Window' })
+vim.keymap.set('n', '<M-k>', '<C-w>k', { desc = 'Move to Upper Window' })
+--Remap for dealing with word wrap
+vim.keymap.set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, desc = 'Move Cursor Down' })
+vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, desc = 'Move Cursor Up' })
+-- buffer navigation
+vim.keymap.set('n', '<leader>bp', '<Cmd>bprev<CR>', { desc = 'Previous Buffer' })
+vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
+-- Insert
+vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
+vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
+
+-- hop
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>hw', function()
+	require('hop').hint_words()
+end, { desc = 'Hop Words' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>hl', function()
+	require('hop').hint_lines()
+end, { desc = 'Hop Lines' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>/', function()
+	require('hop').hint_patterns()
+end, { desc = 'Hop Patterns' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>1', function()
+	require('hop').hint_char1()
+end, { desc = 'Hop 1-char' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>2', function()
+	require('hop').hint_char2()
+end, { desc = 'Hop 2-char' })
+
+-- outline
+vim.keymap.set('n', '<M-o>', function()
+	require('symbols-outline').toggle_outline()
+end, { desc = 'Symbols Outline' })
+
+-- session
+vim.keymap.set('n', '<leader>sl', function()
+	require('session_manager.commands').run_command('load_last_session')
+end, { desc = 'Restore last session' })
+vim.keymap.set('n', '<leader>sr', function()
+	require('session_manager.commands').run_command('load_session')
+end, { desc = 'Select and load session' })
+vim.keymap.set('n', '<leader>ss', function()
+	require('session_manager.commands').run_command('save_current_session')
+	vim.notify('Current Session Saved', 'info', { title = 'Session Manager' })
+end, { desc = 'Save current session' })
+
+-- tree
+vim.keymap.set('n', '<M-t>', function()
+	require('nvim-tree').toggle()
+end, { desc = 'Toggle NvimTree' })
+
+---- AUTOCOMMANDS ----
 vim.api.nvim_create_augroup('HighlightYank', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
 	callback = function()
