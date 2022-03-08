@@ -26,7 +26,7 @@ local function spec(use)
 	}
 	use {
 		'simrat39/symbols-outline.nvim',
-		module = 'symbols-outline',
+		keys = { { 'n', '<M-o>' } },
 		config = [[require('configs.outline')]],
 	}
 
@@ -116,10 +116,7 @@ end
 require('packer').startup {
 	spec,
 	config = {
-		profile = {
-			enable = true,
-			threshold = 1,
-		},
+		profile = { enable = true, threshold = 1 },
 		display = {
 			open_fn = function()
 				return require('packer.util').float { border = 'single' }

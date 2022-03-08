@@ -1,6 +1,3 @@
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-
 -- Stop loading built in plugins
 vim.g.loaded_gzip = 1
 vim.g.loaded_man = 1
@@ -119,10 +116,6 @@ end, {})
 vim.api.nvim_add_user_command('Oldfiles', function()
 	require('telescope.builtin').oldfiles()
 end, {})
-vim.api.nvim_add_user_command('PackSync', function()
-	require('core.plugins')
-	require('packer').sync()
-end, {})
 
 ---- AUTOCOMMANDS ----
 vim.api.nvim_create_augroup('HighlightYank', { clear = true })
@@ -136,10 +129,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 local function lastplace()
-	if vim.tbl_contains({ 'quickfix', 'nofile', 'help' }, vim.api.nvim_buf_get_option(0, 'buftype')) then
+	local function find_pattern_match(tbl, val)
+		return next(vim.tbl_filter(function(pattern)
+			return val:match(pattern)
+		end, tbl))
+	end
+
+	if find_pattern_match({ '^help$', '^nofile$', '^quickfix$' }, vim.bo.buftype) then
 		return
 	end
-	if vim.tbl_contains({ 'gitcommit', 'gitrebase' }, vim.api.nvim_buf_get_option(0, 'filetype')) then
+	if find_pattern_match({ '^gitcommit$', '^gitrebase$' }, vim.bo.filetype) then
 		vim.api.nvim_command([[normal! gg]])
 		return
 	end
@@ -170,4 +169,13 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 	pattern = '*',
 	group = 'init_nvim',
 	desc = 'restore the cursor position',
+})
+vim.api.nvim_create_autocmd('CursorHold', {
+	callback = function()
+		require('core.plugins')
+	end,
+	pattern = '*',
+	group = 'init_nvim',
+	once = true,
+	desc = 'Load Packer',
 })
