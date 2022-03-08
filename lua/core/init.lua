@@ -4,42 +4,40 @@ require('ui.status')
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-if 'Plugins' then
-	-- Stop loading built in plugins
-	vim.g.loaded_gzip = 1
-	vim.g.loaded_man = 1
-	vim.g.loaded_matchit = 1
-	vim.g.loaded_matchparen = 1
-	vim.g.loaded_netrwPlugin = 1
-	vim.g.loaded_tarPlugin = 1
-	vim.g.loaded_2html_plugin = 1
-	vim.g.loaded_zipPlugin = 1
-	vim.g.loaded_remote_plugins = 1
-	vim.g.loaded_shada_plugin = 1
+-- Stop loading built in plugins
+vim.g.loaded_gzip = 1
+vim.g.loaded_man = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_remote_plugins = 1
+vim.g.loaded_shada_plugin = 1
 
-	vim.g.loaded_node_provider = 0
-	vim.g.loaded_perl_provider = 0
-	vim.g.loaded_ruby_provider = 0
-	vim.g.python3_host_prog = '/usr/local/bin/python3'
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.python3_host_prog = '/usr/local/bin/python3'
 
-	vim.g.do_filetype_lua = 1
-	vim.g.did_load_filetypes = 0
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
 
-	augroup('init_nvim', { clear = true })
+vim.api.nvim_create_augroup('init_nvim', { clear = true })
 
-	-- Plugins are 'start' plugins so are loaded automatically, but to enable packer
-	-- commands we need to require plugins at some point
-	-- autocmd('CursorHold', {
-	-- 	callback = function()
-	-- 		require('core.plugins')
-	-- 	end,
-	-- 	pattern = '*',
-	-- 	group = 'init_nvim',
-	-- 	once = true,
-	-- 	desc = 'Load Packer',
-	-- })
-	require('core.plugins')
-end
+-- Plugins are 'start' plugins so are loaded automatically, but to enable packer
+-- commands we need to require plugins at some point
+-- autocmd('CursorHold', {
+-- 	callback = function()
+-- 		require('core.plugins')
+-- 	end,
+-- 	pattern = '*',
+-- 	group = 'init_nvim',
+-- 	once = true,
+-- 	desc = 'Load Packer',
+-- })
+require('core.plugins')
 
 if 'Options' then
 	-- misc
@@ -118,27 +116,12 @@ if 'Mappings' then
 	-- Insert
 	vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 	vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
-
-	vim.keymap.set({ 'n', 't' }, '<M-i>', function()
-		require('packer').loader('FTerm.nvim')
-		require('FTerm').toggle()
-	end, { desc = 'Terminal Toggle' })
-
-	vim.keymap.set('n', '<M-g>', function()
-		require('packer').loader('FTerm.nvim')
-		require('FTerm'):new({ cmd = 'lazygit', dimensions = { height = 0.9, width = 0.9 } }):open()
-	end, { desc = 'LazyGit' })
-
-	vim.keymap.set('n', '<M-o>', function()
-		require('packer').loader('symbols-outline.nvim')
-		require('symbols-outline').toggle_outline()
-	end, { desc = 'Symbols Outline' })
 end
 
 vim.cmd('colorscheme moon')
 
-augroup('HighlightYank', { clear = true })
-autocmd('TextYankPost', {
+vim.api.nvim_create_augroup('HighlightYank', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
 	callback = function()
 		vim.highlight.on_yank {}
 	end,
@@ -147,22 +130,53 @@ autocmd('TextYankPost', {
 	desc = 'Highlight the yanked text',
 })
 
-autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('BufEnter', {
 	command = 'silent! lcd %:p:h',
 	pattern = '*',
 	group = 'init_nvim',
 	desc = 'change the working directory',
 })
 
-require('core.autocmd')
+vim.api.nvim_create_augroup('load_lazyly', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+	callback = function()
+		require('packer').loader('null-ls.nvim')
+	end,
+	pattern = {
+		'fish',
+		'html',
+		'json',
+		'lua',
+		'markdown',
+		'yaml',
+	},
+	group = 'load_lazyly',
+	desc = 'lazy loading null-ls',
+})
+vim.api.nvim_create_autocmd('FileType', {
+	callback = function()
+		require('packer').loader('neorg')
+	end,
+	pattern = 'norg',
+	group = 'load_lazyly',
+	desc = 'lazy loading neorg',
+})
+vim.api.nvim_create_autocmd('FileType', {
+	callback = function()
+		require('packer').loader('vimtex')
+	end,
+	pattern = 'tex',
+	group = 'load_lazyly',
+	desc = 'lazy loading vimtex',
+})
 
--- COMMANDS -------------------------------------------------
-vim.api.nvim_add_user_command('Files', function()
-	require('telescope.builtin').find_files { hidden = true }
-end, {})
-vim.api.nvim_add_user_command('Grep', function()
-	require('telescope.builtin').live_grep()
-end, {})
-vim.api.nvim_add_user_command('Oldfiles', function()
-	require('telescope.builtin').oldfiles()
-end, {})
+vim.api.nvim_create_autocmd('InsertEnter', {
+	callback = function()
+		require('packer').loader('nvim-cmp')
+		require('packer').loader('smart-pairs')
+	end,
+	pattern = '*',
+	group = 'load_lazyly',
+	once = true,
+	desc = 'Lazy Loading cmp and pairs',
+})

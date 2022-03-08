@@ -1,8 +1,5 @@
 local sc = require('session_manager.commands')
 
-vim.keymap.set('n', '<leader>sd', function()
-	sc.run_command('delete_session')
-end, { desc = 'Select and Delete a Session' })
 vim.keymap.set('n', '<leader>sl', function()
 	sc.run_command('load_last_session')
 end, { desc = 'Restore last session' })
