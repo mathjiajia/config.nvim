@@ -1,7 +1,3 @@
-require('session_manager').setup {
-	autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
-}
-
 local sc = require('session_manager.commands')
 
 vim.keymap.set('n', '<leader>sd', function()
@@ -17,3 +13,7 @@ vim.keymap.set('n', '<leader>ss', function()
 	sc.run_command('save_current_session')
 	vim.notify('Current Session Saved', 'info', { title = 'Session Manager' })
 end, { desc = 'Save current session' })
+
+require('session_manager').setup {
+	autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+}

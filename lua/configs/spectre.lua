@@ -1,7 +1,5 @@
 local spectre = require('spectre')
 
-spectre.setup {}
-
 vim.keymap.set('n', '<leader>rp', function()
 	spectre.open()
 end, { desc = 'Open Spectre' })
@@ -14,3 +12,5 @@ end, { silent = true, desc = 'Search the Current Word' })
 vim.keymap.set('n', '<leader>rf', function()
 	spectre.open_file_search()
 end, { desc = 'Search in the Current File' })
+
+spectre.setup {}

@@ -62,8 +62,6 @@ local has_words_before = function()
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
-local cmp = require('cmp')
-
 local kind_icons = {
 	Text = '',
 	Method = '',
@@ -91,6 +89,8 @@ local kind_icons = {
 	Operator = '',
 	TypeParameter = '',
 }
+
+local cmp = require('cmp')
 
 cmp.setup {
 	enabled = function()
