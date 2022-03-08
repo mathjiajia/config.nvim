@@ -1,6 +1,3 @@
-require('ui.buftab')
-require('ui.status')
-
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -24,27 +21,10 @@ vim.g.python3_host_prog = '/usr/local/bin/python3'
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
 
-vim.api.nvim_create_augroup('init_nvim', { clear = true })
-
--- Plugins are 'start' plugins so are loaded automatically, but to enable packer
--- commands we need to require plugins at some point
--- autocmd('CursorHold', {
--- 	callback = function()
--- 		require('core.plugins')
--- 	end,
--- 	pattern = '*',
--- 	group = 'init_nvim',
--- 	once = true,
--- 	desc = 'Load Packer',
--- })
-require('core.plugins')
-
 ---- OPTIONS ----
--- misc
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
-
-vim.g.clipboard = { -- clipboard
+vim.g.clipboard = {
 	name = 'macOS-clipboard',
 	copy = { ['+'] = 'pbcopy', ['*'] = 'pbcopy' },
 	paste = { ['+'] = 'pbpaste', ['*'] = 'pbpaste' },
@@ -64,22 +44,18 @@ vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
 vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
 -- backups
-vim.opt.autowrite = true -- Write the contents of the file, if it has been modified
+vim.opt.autowrite = true
 vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
 vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
 vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file,
 -- and restores undo history from the same file on buffer read
 
--- force the user to select one from the menu
 vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
-
--- perfomance
 vim.opt.updatetime = 250
 
 -- ui
 vim.opt.breakindent = true
-vim.wo.cursorline = true -- Highlight the text line of the cursor
--- vim.opt.guifont = 'MesloLGS Nerd Font:h18'
+vim.wo.cursorline = true
 vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than
 -- at the last character that fits on the screen
 vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
@@ -89,19 +65,19 @@ vim.wo.relativenumber = true
 vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
 vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
-vim.opt.splitbelow = true -- splitting a window will put the new window below the current one
-vim.opt.splitright = true -- splitting a window will put the new window right of the current one
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line
 -- when the cursor is on the first/last character in the line
 
 -- theme and UI
-vim.opt.termguicolors = true -- Enables 24-bit RGB color in the |TUI|
+vim.opt.termguicolors = true
 vim.cmd('colorscheme moon')
+require('ui.buftab')
+require('ui.status')
 
 ---- KEYBINDINGS ----
---use comma as leader key
 vim.g.mapleader = ','
-
 -- cursor movements
 vim.keymap.set('n', '<M-h>', '<C-w>h', { desc = 'Move to Left Window' })
 vim.keymap.set('n', '<M-l>', '<C-w>l', { desc = 'Move to Right Window' })
@@ -134,27 +110,19 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<leader>2', function()
 	require('hop').hint_char2()
 end, { desc = 'Hop 2-char' })
 
--- outline
-vim.keymap.set('n', '<M-o>', function()
-	require('symbols-outline').toggle_outline()
-end, { desc = 'Symbols Outline' })
-
--- session
-vim.keymap.set('n', '<leader>sl', function()
-	require('session_manager.commands').run_command('load_last_session')
-end, { desc = 'Restore last session' })
-vim.keymap.set('n', '<leader>sr', function()
-	require('session_manager.commands').run_command('load_session')
-end, { desc = 'Select and load session' })
-vim.keymap.set('n', '<leader>ss', function()
-	require('session_manager.commands').run_command('save_current_session')
-	vim.notify('Current Session Saved', 'info', { title = 'Session Manager' })
-end, { desc = 'Save current session' })
-
--- tree
-vim.keymap.set('n', '<M-t>', function()
-	require('nvim-tree').toggle()
-end, { desc = 'Toggle NvimTree' })
+vim.api.nvim_add_user_command('Files', function()
+	require('telescope.builtin').find_files { hidden = true }
+end, {})
+vim.api.nvim_add_user_command('Grep', function()
+	require('telescope.builtin').live_grep()
+end, {})
+vim.api.nvim_add_user_command('Oldfiles', function()
+	require('telescope.builtin').oldfiles()
+end, {})
+vim.api.nvim_add_user_command('PackSync', function()
+	require('core.plugins')
+	require('packer').sync()
+end, {})
 
 ---- AUTOCOMMANDS ----
 vim.api.nvim_create_augroup('HighlightYank', { clear = true })
@@ -167,53 +135,39 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	desc = 'Highlight the yanked text',
 })
 
+local function lastplace()
+	if vim.tbl_contains({ 'quickfix', 'nofile', 'help' }, vim.api.nvim_buf_get_option(0, 'buftype')) then
+		return
+	end
+	if vim.tbl_contains({ 'gitcommit', 'gitrebase' }, vim.api.nvim_buf_get_option(0, 'filetype')) then
+		vim.api.nvim_command([[normal! gg]])
+		return
+	end
+
+	if vim.fn.line([['"]]) > 0 and vim.fn.line([['"]]) <= vim.fn.line('$') then
+		if vim.fn.line('w$') == vim.fn.line('$') then
+			vim.api.nvim_command([[normal! g`"]])
+		elseif vim.fn.line('$') - vim.fn.line([['"]]) > ((vim.fn.line('w$') - vim.fn.line('w0')) / 2) - 1 then
+			vim.api.nvim_command([[normal! g`"zz]])
+		else
+			vim.api.nvim_command([[normal! G'"<c-e>]])
+		end
+	end
+	if vim.fn.foldclosed('.') ~= -1 then
+		vim.api.nvim_command([[normal! zvzz]])
+	end
+end
+
+vim.api.nvim_create_augroup('init_nvim', { clear = true })
 vim.api.nvim_create_autocmd('BufEnter', {
 	command = 'silent! lcd %:p:h',
 	pattern = '*',
 	group = 'init_nvim',
 	desc = 'change the working directory',
 })
-
-vim.api.nvim_create_augroup('load_lazyly', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-	callback = function()
-		require('packer').loader('null-ls.nvim')
-	end,
-	pattern = {
-		'fish',
-		'html',
-		'json',
-		'lua',
-		'markdown',
-		'yaml',
-	},
-	group = 'load_lazyly',
-	desc = 'lazy loading null-ls',
-})
-vim.api.nvim_create_autocmd('FileType', {
-	callback = function()
-		require('packer').loader('neorg')
-	end,
-	pattern = 'norg',
-	group = 'load_lazyly',
-	desc = 'lazy loading neorg',
-})
-vim.api.nvim_create_autocmd('FileType', {
-	callback = function()
-		require('packer').loader('vimtex')
-	end,
-	pattern = 'tex',
-	group = 'load_lazyly',
-	desc = 'lazy loading vimtex',
-})
-
-vim.api.nvim_create_autocmd('InsertEnter', {
-	callback = function()
-		require('packer').loader('nvim-cmp')
-		require('packer').loader('smart-pairs')
-	end,
+vim.api.nvim_create_autocmd('BufReadPost', {
+	callback = lastplace,
 	pattern = '*',
-	group = 'load_lazyly',
-	once = true,
-	desc = 'Lazy Loading cmp and pairs',
+	group = 'init_nvim',
+	desc = 'restore the cursor position',
 })

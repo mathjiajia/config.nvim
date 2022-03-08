@@ -29,49 +29,6 @@ vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.white, bg = cp.black3, bo
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'TelescopeFrecencyScores', { fg = cp.maroon })
 
-local tb = require('telescope.builtin')
-local te = require('telescope').extensions
-
-vim.keymap.set('n', '<leader><leader>', function()
-	tb.buffers()
-end, { desc = 'Buffers' })
-vim.keymap.set('n', '<leader>fc', function()
-	tb.commands()
-end, { desc = 'Command Pallete' })
-vim.keymap.set('n', '<leader>fd', function()
-	tb.diagnostics()
-end, { desc = 'Workspace Diagnostics' })
-vim.keymap.set('n', '<leader>ff', function()
-	tb.find_files { hidden = true }
-end, { desc = 'Find Files' })
-vim.keymap.set('n', '<leader>fg', function()
-	tb.grep_string()
-end, { desc = 'Grep Strings' })
-vim.keymap.set('n', '<leader>fl', function()
-	tb.live_grep()
-end, { desc = 'Live Grep' })
-vim.keymap.set('n', '<leader>fo', function()
-	tb.oldfiles()
-end, { desc = 'Old Files' })
-vim.keymap.set('n', '<leader>fs', function()
-	tb.current_buffer_fuzzy_find()
-end, { desc = 'Current Buffer Fuzzy Find' })
-
-vim.keymap.set('n', '<leader><space>', function()
-	te.file_browser.file_browser {}
-end, { desc = 'File Browser' })
-vim.keymap.set('n', '<leader>fp', function()
-	te.project.project {}
-end, { desc = 'Projects' })
-vim.keymap.set('n', '<leader>fr', function()
-	te.frecency.frecency {}
-end, { desc = 'Frecency' })
-
-require('packer').loader('telescope-fzf-native.nvim')
-require('packer').loader('telescope-file-browser.nvim')
-require('packer').loader('telescope-frecency.nvim')
-require('packer').loader('telescope-project.nvim')
-
 local home = os.getenv('HOME')
 
 require('telescope').setup {
@@ -145,3 +102,41 @@ local extensions = { 'file_browser', 'frecency', 'fzf', 'project' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
+
+local tb = require('telescope.builtin')
+local te = require('telescope').extensions
+
+vim.keymap.set('n', '<leader><leader>', function()
+	tb.buffers()
+end, { desc = 'Buffers' })
+vim.keymap.set('n', '<leader>fc', function()
+	tb.commands()
+end, { desc = 'Command Pallete' })
+vim.keymap.set('n', '<leader>fd', function()
+	tb.diagnostics()
+end, { desc = 'Workspace Diagnostics' })
+vim.keymap.set('n', '<leader>ff', function()
+	tb.find_files { hidden = true }
+end, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>fg', function()
+	tb.grep_string()
+end, { desc = 'Grep Strings' })
+vim.keymap.set('n', '<leader>fl', function()
+	tb.live_grep()
+end, { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>fo', function()
+	tb.oldfiles()
+end, { desc = 'Old Files' })
+vim.keymap.set('n', '<leader>fs', function()
+	tb.current_buffer_fuzzy_find()
+end, { desc = 'Current Buffer Fuzzy Find' })
+
+vim.keymap.set('n', '<leader><space>', function()
+	te.file_browser.file_browser {}
+end, { desc = 'File Browser' })
+vim.keymap.set('n', '<leader>fp', function()
+	te.project.project {}
+end, { desc = 'Projects' })
+vim.keymap.set('n', '<leader>fr', function()
+	te.frecency.frecency {}
+end, { desc = 'Frecency' })
