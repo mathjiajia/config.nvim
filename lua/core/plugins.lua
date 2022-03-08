@@ -1,10 +1,8 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
 end
-
--- vim.cmd([[packadd packer.nvim]])
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -15,8 +13,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 local function spec(use)
-	use { 'wbthomason/packer.nvim', opt = true }
+	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
+	use { 'nvim-lua/plenary.nvim' }
 
 	use {
 		'rcarriga/nvim-notify',
@@ -42,6 +41,7 @@ local function spec(use)
 
 	use {
 		'simrat39/symbols-outline.nvim',
+		opt = true,
 		config = [[require('configs.outline')]],
 	}
 
@@ -54,7 +54,7 @@ local function spec(use)
 		{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
 		{
 			'jose-elias-alvarez/null-ls.nvim',
-			ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
+			opt = true,
 			requires = { 'nvim-lua/plenary.nvim' },
 			config = [[require('lsp.null-ls')]],
 		},
@@ -66,7 +66,7 @@ local function spec(use)
 
 	use {
 		'hrsh7th/nvim-cmp',
-		event = 'InsertEnter',
+		opt = true,
 		config = [[require('configs.cmp')]],
 	}
 	use {
@@ -84,7 +84,7 @@ local function spec(use)
 	}
 	use {
 		'ZhiyuanLck/smart-pairs',
-		event = 'InsertEnter',
+		opt = true,
 		config = [[require('configs.pairs')]],
 	}
 	use {
@@ -95,13 +95,13 @@ local function spec(use)
 
 	use {
 		'lervag/vimtex',
-		ft = 'tex',
+		opt = true,
 		config = [[require('configs.vimtex')]],
 	}
 	use {
 		{
 			'nvim-neorg/neorg',
-			ft = 'norg',
+			opt = true,
 			config = [[require('configs.neorg')]],
 		},
 		{ 'nvim-neorg/neorg-telescope', opt = true },
@@ -155,7 +155,8 @@ local function spec(use)
 
 	use {
 		'numtostr/FTerm.nvim',
-		config = [[require('configs.fterm')]],
+		opt = true,
+		config = [[require('configs.terminal')]],
 	}
 	use {
 		'dstein64/vim-startuptime',
