@@ -29,15 +29,16 @@ if 'Plugins' then
 
 	-- Plugins are 'start' plugins so are loaded automatically, but to enable packer
 	-- commands we need to require plugins at some point
-	autocmd('CursorHold', {
-		callback = function()
-			require('core.plugins')
-		end,
-		pattern = '*',
-		group = 'init_nvim',
-		once = true,
-		desc = 'Load Packer',
-	})
+	-- autocmd('CursorHold', {
+	-- 	callback = function()
+	-- 		require('core.plugins')
+	-- 	end,
+	-- 	pattern = '*',
+	-- 	group = 'init_nvim',
+	-- 	once = true,
+	-- 	desc = 'Load Packer',
+	-- })
+	require('core.plugins')
 end
 
 if 'Options' then
@@ -117,6 +118,21 @@ if 'Mappings' then
 	-- Insert
 	vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 	vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
+
+	vim.keymap.set({ 'n', 't' }, '<M-i>', function()
+		require('packer').loader('FTerm.nvim')
+		require('FTerm').toggle()
+	end, { desc = 'Terminal Toggle' })
+
+	vim.keymap.set('n', '<M-g>', function()
+		require('packer').loader('FTerm.nvim')
+		require('FTerm'):new({ cmd = 'lazygit', dimensions = { height = 0.9, width = 0.9 } }):open()
+	end, { desc = 'LazyGit' })
+
+	vim.keymap.set('n', '<M-o>', function()
+		require('packer').loader('symbols-outline.nvim')
+		require('symbols-outline').toggle_outline()
+	end, { desc = 'Symbols Outline' })
 end
 
 vim.cmd('colorscheme moon')
@@ -137,6 +153,8 @@ autocmd('BufEnter', {
 	group = 'init_nvim',
 	desc = 'change the working directory',
 })
+
+require('core.autocmd')
 
 -- COMMANDS -------------------------------------------------
 vim.api.nvim_add_user_command('Files', function()
