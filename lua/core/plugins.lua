@@ -36,9 +36,9 @@ local function spec(use)
 		config = [[require('configs.telescope')]],
 	}
 	use {
+		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
 		{ 'nvim-telescope/telescope-frecency.nvim', requires = { 'tami5/sqlite.lua' } },
-		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 		{ 'nvim-telescope/telescope-project.nvim' },
 	}
 
@@ -62,14 +62,15 @@ local function spec(use)
 		{ 'j-hui/fidget.nvim', config = [[require('fidget').setup { text = { spinner = 'line' } }]] },
 	}
 
-	use { 'hrsh7th/nvim-cmp', config = [[require('configs.cmp')]] }
+	use { 'hrsh7th/nvim-cmp', event = { 'CmdlineEnter', 'InsertEnter' }, config = [[require('configs.cmp')]] }
+
 	use {
-		{ 'hrsh7th/cmp-buffer' },
-		{ 'hrsh7th/cmp-cmdline' },
-		{ 'hrsh7th/cmp-nvim-lsp' },
-		{ 'hrsh7th/cmp-path' },
-		{ 'lukas-reineke/cmp-rg' },
-		{ 'saadparwaiz1/cmp_luasnip' },
+		{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+		{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+		{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+		{ 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+		{ 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
+		{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
 	}
 	use { 'L3MON4D3/LuaSnip', config = [[require('configs.luasnip')]] }
 	use { 'ZhiyuanLck/smart-pairs', event = 'InsertEnter', config = [[require('configs.pairs')]] }
@@ -81,16 +82,35 @@ local function spec(use)
 		config = [[require('configs.gitsigns')]],
 	}
 	use { 'numToStr/Comment.nvim', config = [[require('Comment').setup()]] }
-	use { 'ur4ltz/surround.nvim', config = [[require('configs.surround')]] }
+	use {
+		'ur4ltz/surround.nvim',
+		keys = {
+			{ 'n', 'sa' },
+			{ 'n', 'sr' },
+			{ 'n', 'sd' },
+			{ 'x', 's' },
+		},
+		config = [[require('configs.surround')]],
+	}
 	use { 'phaazon/hop.nvim', config = [[require('hop').setup()]] }
-	use { 'windwp/nvim-spectre', config = [[require('configs.spectre')]] }
-	use { 'numtostr/FTerm.nvim', module = 'FTerm', config = [[require('FTerm').setup()')]] }
+	use {
+		'windwp/nvim-spectre',
+		keys = { { 'n', '<leader>rf' }, { 'n', '<leader>rp' }, { 'n', '<leader>rw' }, { 'v', '<leader>rw' } },
+		config = [[require('configs.search')]],
+	}
+	use {
+		'numtostr/FTerm.nvim',
+		keys = { { 'n', '<M-i>' }, { 'n', '<M-g>' } },
+		config = [[require('configs.terminal')]],
+	}
 
-	use { 'lervag/vimtex', ft = 'tex', config = [[require('configs.vimtex')]] }
+	use { 'lervag/vimtex', ft = 'tex', config = [[require('configs.latex')]] }
 	use {
 		{ 'nvim-neorg/neorg', ft = 'norg', config = [[require('configs.neorg')]] },
 		{ 'nvim-neorg/neorg-telescope', opt = true },
 	}
+
+	-- use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 5]] }
 end
 
 require('packer').startup {

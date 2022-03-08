@@ -98,7 +98,7 @@ require('telescope').setup {
 }
 
 -- Load extensions
-local extensions = { 'file_browser', 'frecency', 'fzf', 'project' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'project' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end

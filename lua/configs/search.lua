@@ -13,4 +13,4 @@ vim.keymap.set('n', '<leader>rf', function()
 	spectre.open_file_search()
 end, { desc = 'Search in the Current File' })
 
-spectre.setup {}
+spectre.setup()
