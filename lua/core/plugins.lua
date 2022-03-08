@@ -16,26 +16,13 @@ local function spec(use)
 	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
 
-	use {
-		'rcarriga/nvim-notify',
-		config = function()
-			require('notify').setup {}
-			vim.notify = require('notify')
-		end,
-	}
+	use { 'rcarriga/nvim-notify', config = [[require('notify').setup {} vim.notify = require('notify')]] }
 
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-		config = [[require('configs.treesitter')]],
-	}
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('configs.treesitter')]] }
 	use {
 		{ 'nvim-treesitter/playground', module = 'nvim-treesitter-playground' },
 		{ 'p00f/nvim-ts-rainbow' },
-		{
-			'lukas-reineke/indent-blankline.nvim',
-			config = [[require('configs.indentline')]],
-		},
+		{ 'lukas-reineke/indent-blankline.nvim', config = [[require('configs.indentline')]] },
 	}
 	use {
 		'simrat39/symbols-outline.nvim',
@@ -44,91 +31,15 @@ local function spec(use)
 	}
 
 	use {
-		'lewis6991/gitsigns.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-		config = [[require('configs.gitsigns')]],
-	}
-
-	use {
-		'neovim/nvim-lspconfig',
-		config = [[require('lsp')]],
-	}
-	use {
-		{ 'folke/lua-dev.nvim', module = 'lua-dev' },
-		{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
-		{
-			'jose-elias-alvarez/null-ls.nvim',
-			opt = true,
-			requires = { 'nvim-lua/plenary.nvim' },
-			config = [[require('lsp.null-ls')]],
-		},
-		{
-			'j-hui/fidget.nvim',
-			after = 'nvim-lspconfig',
-			config = function()
-				require('fidget').setup { text = { spinner = 'line' } }
-			end,
-		},
-	}
-
-	use {
-		'hrsh7th/nvim-cmp',
-		opt = true,
-		config = [[require('configs.cmp')]],
-	}
-	use {
-		{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-		{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-		{ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-		{ 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-		{ 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
-		{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-	}
-	use {
-		'L3MON4D3/LuaSnip',
-		module = 'luasnip',
-		config = [[require('configs.luasnip')]],
-	}
-	use {
-		'ZhiyuanLck/smart-pairs',
-		opt = true,
-		config = [[require('configs.pairs')]],
-	}
-	use {
-		'github/copilot.vim',
-		disable = true,
-		config = [[require('configs.copilot')]],
-	}
-
-	use {
-		'lervag/vimtex',
-		opt = true,
-		config = [[require('configs.vimtex')]],
-	}
-	use {
-		{
-			'nvim-neorg/neorg',
-			opt = true,
-			config = [[require('configs.neorg')]],
-		},
-		{ 'nvim-neorg/neorg-telescope', opt = true },
-	}
-
-	use {
 		'nvim-telescope/telescope.nvim',
-		module = 'telescope',
 		requires = { 'nvim-lua/plenary.nvim' },
 		config = [[require('configs.telescope')]],
 	}
 	use {
-		{ 'nvim-telescope/telescope-file-browser.nvim', opt = true },
-		{
-			'nvim-telescope/telescope-frecency.nvim',
-			opt = true,
-			requires = { 'tami5/sqlite.lua', opt = true },
-		},
-		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
-		{ 'nvim-telescope/telescope-project.nvim', opt = true },
+		{ 'nvim-telescope/telescope-file-browser.nvim' },
+		{ 'nvim-telescope/telescope-frecency.nvim', requires = { 'tami5/sqlite.lua' } },
+		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+		{ 'nvim-telescope/telescope-project.nvim' },
 	}
 
 	use {
@@ -138,52 +49,47 @@ local function spec(use)
 		config = [[require('configs.nvimtree')]],
 	}
 
+	use { 'neovim/nvim-lspconfig', config = [[require('lsp')]] }
 	use {
-		'numToStr/Comment.nvim',
-		keys = {
-			{ 'n', 'gb' },
-			{ 'n', 'gc' },
-			{ 'v', 'gb' },
-			{ 'v', 'gc' },
+		{ 'folke/lua-dev.nvim', module = 'lua-dev' },
+		{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
+		{
+			'jose-elias-alvarez/null-ls.nvim',
+			ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
+			requires = { 'nvim-lua/plenary.nvim' },
+			config = [[require('lsp.null-ls')]],
 		},
-		config = function()
-			require('Comment').setup()
-		end,
+		{ 'j-hui/fidget.nvim', config = [[require('fidget').setup { text = { spinner = 'line' } }]] },
 	}
 
+	use { 'hrsh7th/nvim-cmp', config = [[require('configs.cmp')]] }
 	use {
-		'ur4ltz/surround.nvim',
-		keys = {
-			{ 'n', 'sa' },
-			{ 'n', 'sr' },
-			{ 'n', 'sd' },
-			{ 'x', 's' },
-		},
-		config = [[require('configs.surround')]],
+		{ 'hrsh7th/cmp-buffer' },
+		{ 'hrsh7th/cmp-cmdline' },
+		{ 'hrsh7th/cmp-nvim-lsp' },
+		{ 'hrsh7th/cmp-path' },
+		{ 'lukas-reineke/cmp-rg' },
+		{ 'saadparwaiz1/cmp_luasnip' },
 	}
-	use {
-		'phaazon/hop.nvim',
-		module = 'hop',
-		config = [[require('hop').setup()]],
-	}
-	use {
-		'windwp/nvim-spectre',
-		config = [[require('configs.spectre')]],
-	}
-	use {
-		'Shatur/neovim-session-manager',
-		module = 'session_manager.commands',
-		config = [[require('session_manager').setup { autoload_mode = require('session_manager.config').AutoloadMode.Disabled }]],
-	}
+	use { 'L3MON4D3/LuaSnip', config = [[require('configs.luasnip')]] }
+	use { 'ZhiyuanLck/smart-pairs', event = 'InsertEnter', config = [[require('configs.pairs')]] }
+	use { 'github/copilot.vim', opt = true, config = [[require('configs.copilot')]] }
 
 	use {
-		'numtostr/FTerm.nvim',
-		module = 'FTerm',
-		config = [[require('FTerm').setup()')]],
+		'lewis6991/gitsigns.nvim',
+		requires = { 'nvim-lua/plenary.nvim' },
+		config = [[require('configs.gitsigns')]],
 	}
+	use { 'numToStr/Comment.nvim', config = [[require('Comment').setup()]] }
+	use { 'ur4ltz/surround.nvim', config = [[require('configs.surround')]] }
+	use { 'phaazon/hop.nvim', config = [[require('hop').setup()]] }
+	use { 'windwp/nvim-spectre', config = [[require('configs.spectre')]] }
+	use { 'numtostr/FTerm.nvim', module = 'FTerm', config = [[require('FTerm').setup()')]] }
+
+	use { 'lervag/vimtex', ft = 'tex', config = [[require('configs.vimtex')]] }
 	use {
-		'dstein64/vim-startuptime',
-		config = [[vim.g.startuptime_tries = 20]],
+		{ 'nvim-neorg/neorg', ft = 'norg', config = [[require('configs.neorg')]] },
+		{ 'nvim-neorg/neorg-telescope', opt = true },
 	}
 end
 

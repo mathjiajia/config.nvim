@@ -2,10 +2,6 @@ vim.api.nvim_set_hl(0, 'FocusedSymbol', { link = 'Search' })
 
 local outline = require('symbols-outline')
 
-vim.keymap.set('n', '<M-o>', function()
-	outline.toggle_outline()
-end, { desc = 'Symbols Outline' })
-
 outline.setup {
 	auto_preview = false,
 	relative_width = false,
@@ -43,3 +39,7 @@ outline.setup {
 		TypeParameter = { icon = '', hl = 'TSParameter' },
 	},
 }
+
+vim.keymap.set('n', '<M-o>', function()
+	outline.toggle_outline()
+end, { desc = 'Symbols Outline' })
