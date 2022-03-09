@@ -55,7 +55,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = cp.sky })
 vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
 
-vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.white })
+vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.gray0 })
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -93,20 +93,20 @@ local cmp_kinds = {
 local cmp = require('cmp')
 
 cmp.setup {
-	enabled = function()
-		local in_prompt = vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt'
-		if in_prompt then
-			return false
-		end
-		local context = require('cmp.config.context')
-		return not (context.in_treesitter_capture('comment') or context.in_syntax_group('Comment'))
-	end,
+	-- enabled = function()
+	-- 	local in_prompt = vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt'
+	-- 	if in_prompt then
+	-- 		return false
+	-- 	end
+	-- 	local context = require('cmp.config.context')
+	-- 	return not (context.in_treesitter_capture('comment') or context.in_syntax_group('Comment'))
+	-- end,
 	mapping = {
-		['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-		['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
 		['<C-y>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
+		['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
 	},
 	snippet = {
 		expand = function(args)
@@ -138,25 +138,14 @@ cmp.setup {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
-		{ name = 'buffer' },
+		{ name = 'neorg' },
+		{ name = 'buffer', keyword_length = 3 },
 		{ name = 'rg', keyword_length = 3 },
 	},
+	experimental = {
+		ghost_text = true,
+	},
 }
-
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-	sources = {
-		{ name = 'luasnip' },
-		{ name = 'buffer' },
-	},
-})
-cmp.setup.filetype('norg', {
-	sources = {
-		{ name = 'luasnip' },
-		{ name = 'neorg' },
-		{ name = 'buffer' },
-	},
-})
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {

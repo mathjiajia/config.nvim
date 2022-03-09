@@ -120,7 +120,7 @@ components.active[1][2] = {
 	enabled = function()
 		return vim.b.gitsigns_status_dict
 	end,
-	icon = '  ',
+	icon = '  ',
 	hl = { fg = 'yellow', bg = 'gray' },
 }
 components.active[1][3] = {
