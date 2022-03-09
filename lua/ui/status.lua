@@ -8,31 +8,32 @@ local colors = {
 	sky = '#89DCEB',
 	teal = '#B5E8E0',
 	gray = '#3E4452',
-	black = '#302D41',
 	bg = '#1A1826',
 	fg = '#C3BAC6',
 	diag_error = '#FB617E',
 	diag_hint = '#9ED06C',
 }
 local vim_modes = {
-	['n'] = { 'normal ', 'green' },
-	['no'] = { 'n-oppd ', 'green' },
-	['i'] = { 'insert ', 'sky' },
-	['ic'] = { 'icompl ', 'sky' },
-	['v'] = { 'visual ', 'flamingo' },
-	['V'] = { 'v-Line ', 'flamingo' },
-	[''] = { 'v-Blck ', 'flamingo' },
-	['s'] = { 'select ', 'maroon' },
-	['S'] = { 's-Line ', 'maroon' },
-	[''] = { 's-Blck ', 'flamingo' },
-	['c'] = { 'cmmand ', 'peach' },
-	['cv'] = { 'vim ex ', 'peach' },
-	['ce'] = { 'ex (r) ', 'peach' },
-	['r'] = { 'prompt ', 'teal' },
-	['rm'] = { ' more  ', 'teal' },
-	['r?'] = { 'cnfirm ', 'teal' },
-	['t'] = { ' term  ', 'red' },
-	['!'] = { 'shell  ', 'red' },
+	['n'] = { '  normal ', 'green' },
+	['no'] = { '  n-oppd ', 'green' },
+	['i'] = { '  insert ', 'sky' },
+	['ic'] = { '  icompl ', 'sky' },
+	['v'] = { '  visual ', 'flamingo' },
+	['V'] = { '  v-Line ', 'flamingo' },
+	[''] = { '  v-Blck ', 'flamingo' },
+	['s'] = { '  select ', 'maroon' },
+	['S'] = { '  s-Line ', 'maroon' },
+	[''] = { '  s-Blck ', 'flamingo' },
+	['R'] = { '  Rplace ', 'yellow' },
+	['Rv'] = { '  VRplce ', 'yellow' },
+	['c'] = { '  cmmand ', 'peach' },
+	['cv'] = { '  vim ex ', 'peach' },
+	['ce'] = { '  ex (r) ', 'peach' },
+	['r'] = { '  prompt ', 'teal' },
+	['rm'] = { '   more  ', 'teal' },
+	['r?'] = { '  cnfirm ', 'teal' },
+	['t'] = { '   term  ', 'red' },
+	['!'] = { '  shell  ', 'red' },
 }
 
 local providers = {}
@@ -40,7 +41,6 @@ local providers = {}
 function providers.vi_mode()
 	return vim_modes[vim.fn.mode()][1]
 end
-
 local function get_mode_color()
 	return vim_modes[vim.fn.mode()][2]
 end
@@ -64,20 +64,35 @@ function providers.git_diff_removed()
 	return tostring(vim.b.gitsigns_status_dict['removed'])
 end
 
+function providers.file_dict()
+	local fp = vim.fn.fnamemodify(vim.fn.getcwd(), ':~:.')
+	local tbl = vim.fn.split(fp, '/')
+	local len = #tbl
+
+	if tbl[1] == '~' or len <= 2 then
+		return fp .. '/'
+	else
+		return '' .. '/' .. table.concat(tbl, '/', len - 1) .. '/'
+	end
+	-- local Path = require('plenary.path')
+	-- local short_path = Path:new(vim.loop.cwd()):shorten(3, { 3 })
+	-- return short_path:gsub('^/%w+/%w+', '~') .. '/'
+end
+
 local function diag_count(ty)
 	return vim.tbl_count(vim.diagnostic.get(0, { severity = ty }))
 end
 function providers.diag_error()
-	return tostring(diag_count(vim.diagnostic.severity.ERROR)) .. ' '
+	return tostring(diag_count(vim.diagnostic.severity.ERROR))
 end
 function providers.diag_warn()
-	return tostring(diag_count(vim.diagnostic.severity.WARN)) .. ' '
+	return tostring(diag_count(vim.diagnostic.severity.WARN))
 end
 function providers.diag_info()
-	return tostring(diag_count(vim.diagnostic.severity.INFO)) .. ' '
+	return tostring(diag_count(vim.diagnostic.severity.INFO))
 end
 function providers.diag_hint()
-	return tostring(diag_count(vim.diagnostic.severity.HINT)) .. ' '
+	return tostring(diag_count(vim.diagnostic.severity.HINT))
 end
 
 local function pad(c, m)
@@ -95,14 +110,14 @@ function providers.ln_col()
 	local nbline = vim.fn.line('$')
 	local line = vim.fn.line('.')
 	local col = vim.fn.col('.')
-	return string.format('Ln %s%d, Col %s%d ', pad(line, nbline), line, pad(col, 100), col)
+	return string.format('%s%d %s%d ', pad(line, nbline), line, pad(col, 100), col)
 end
 
 local components = { active = { {}, {}, {} }, inactive = { {} }, exclude = { {}, {} } }
 
 components.active[1][1] = {
 	provider = 'vi_mode',
-	icon = '  ',
+	-- hl = { fg = 'bg', bg = 'green' },
 	hl = function()
 		return { fg = 'bg', bg = get_mode_color() }
 	end,
@@ -117,7 +132,7 @@ components.active[1][2] = {
 }
 components.active[1][3] = {
 	provider = '',
-	hl = { fg = '', bg = 'black' },
+	hl = { fg = '', bg = 'bg' },
 }
 
 components.active[1][4] = {
@@ -126,7 +141,7 @@ components.active[1][4] = {
 		return git_status('added')
 	end,
 	icon = '  ',
-	hl = { fg = 'green', bg = 'black' },
+	hl = { fg = 'green', bg = 'bg' },
 }
 components.active[1][5] = {
 	provider = 'git_diff_changed',
@@ -134,7 +149,7 @@ components.active[1][5] = {
 		return git_status('changed')
 	end,
 	icon = '  ',
-	hl = { fg = 'yellow', bg = 'black' },
+	hl = { fg = 'yellow', bg = 'bg' },
 }
 components.active[1][6] = {
 	provider = 'git_diff_removed',
@@ -142,82 +157,94 @@ components.active[1][6] = {
 		return git_status('removed')
 	end,
 	icon = '  ',
-	hl = { fg = 'maroon', bg = 'black' },
+	hl = { fg = 'maroon', bg = 'bg' },
 }
 
 components.active[2][1] = {
-	provider = '%F%m',
-	hl = { fg = 'peach', bg = 'black' },
+	provider = 'file_dict',
+	icon = '  ',
+	hl = { fg = 'red', bg = 'bg' },
 }
 
 components.active[3][1] = {
 	provider = 'diag_error',
-	icon = ' ',
+	icon = '  ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.ERROR) ~= 0
 	end,
-	hl = { fg = 'diag_error', bg = 'black' },
+	hl = { fg = 'diag_error', bg = 'bg' },
 }
 components.active[3][2] = {
 	provider = 'diag_warn',
-	icon = ' ',
+	icon = '  ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.WARN) ~= 0
 	end,
-	hl = { fg = 'yellow', bg = 'black' },
+	hl = { fg = 'yellow', bg = 'bg' },
 }
 components.active[3][3] = {
 	provider = 'diag_info',
-	icon = ' ',
+	icon = '  ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.INFO) ~= 0
 	end,
-	hl = { fg = 'sky', bg = 'black' },
+	hl = { fg = 'sky', bg = 'bg' },
 }
 components.active[3][4] = {
 	provider = 'diag_hint',
-	icon = ' ',
+	icon = '  ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.HINT) ~= 0
 	end,
-	hl = { fg = 'diag_hint', bg = 'black' },
+	hl = { fg = 'diag_hint', bg = 'bg' },
 }
 
 components.active[3][5] = {
+	provider = '  ',
+	enabled = function()
+		return next(vim.lsp.buf_get_clients(0)) ~= nil
+	end,
+	hl = { fg = 'fg', bg = 'bg' },
+}
+
+components.active[3][6] = {
 	provider = ' %y%m ',
 	hl = { fg = 'yellow', bg = 'gray' },
 }
 
-components.active[3][6] = {
+components.active[3][7] = {
 	provider = 'percent',
 	hl = { fg = 'bg', bg = 'green' },
 }
-components.active[3][7] = {
+components.active[3][8] = {
 	provider = 'ln_col',
 	hl = { fg = 'bg', bg = 'green' },
 }
 
 components.inactive[1][1] = {
 	provider = ' %y ',
-	hl = { fg = 'black', bg = 'teal' },
+	hl = { fg = 'yellow', bg = 'gray' },
 }
 components.inactive[1][2] = {
 	provider = '',
-	hl = { fg = '', bg = 'black' },
+	hl = { fg = '', bg = 'bg' },
 }
 
 components.exclude[1][1] = {
 	provider = 'vi_mode',
-	icon = '  ',
-	hl = { fg = 'fg', bg = 'black' },
-	-- hl = function()
-	-- 	return { fg = 'bg', bg = get_mode_color() }
-	-- end,
+	-- hl = { fg = 'fg', bg = 'bg' },
+	hl = function()
+		return { fg = 'bg', bg = get_mode_color() }
+	end,
+}
+components.exclude[1][2] = {
+	provider = '',
+	hl = { fg = 'fg', bg = 'bg' },
 }
 
 components.exclude[2][1] = {
 	provider = ' %y ',
-	hl = { fg = 'fg', bg = 'black' },
+	hl = { fg = 'yellow', bg = 'gray' },
 }
 
 local M, highlights = {}, {}

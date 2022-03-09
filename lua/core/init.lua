@@ -66,12 +66,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line
 -- when the cursor is on the first/last character in the line
-
--- theme and UI
 vim.opt.termguicolors = true
-vim.cmd('colorscheme moon')
-require('ui.buftab')
-require('ui.status')
 
 ---- KEYBINDINGS ----
 vim.g.mapleader = ','
@@ -117,6 +112,11 @@ vim.api.nvim_add_user_command('Oldfiles', function()
 	require('telescope.builtin').oldfiles()
 end, {})
 
+---- THEMS & LINES ----
+vim.cmd('colorscheme moon')
+require('ui.buftab')
+require('ui.status')
+
 ---- AUTOCOMMANDS ----
 vim.api.nvim_create_augroup('HighlightYank', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -157,11 +157,11 @@ local function lastplace()
 	end
 end
 
-vim.api.nvim_create_augroup('init_nvim', { clear = true })
+local init_nvim = vim.api.nvim_create_augroup('init_nvim', { clear = true })
 vim.api.nvim_create_autocmd('BufEnter', {
 	command = 'silent! lcd %:p:h',
 	pattern = '*',
-	group = 'init_nvim',
+	group = init_nvim,
 	desc = 'change the working directory',
 })
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -175,7 +175,7 @@ vim.api.nvim_create_autocmd('CursorHold', {
 		require('core.plugins')
 	end,
 	pattern = '*',
-	group = 'init_nvim',
+	group = init_nvim,
 	once = true,
 	desc = 'Load Packer',
 })
