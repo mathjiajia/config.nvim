@@ -64,6 +64,15 @@ function providers.git_diff_removed()
 	return tostring(vim.b.gitsigns_status_dict['removed'])
 end
 
+function providers.file_info()
+	local fname = vim.api.nvim_buf_get_name(0)
+	local extn = vim.fn.fnamemodify(fname, ':e')
+	local icon = require('nvim-web-devicons').get_icon(fname, extn)
+
+	fname = vim.fn.pathshorten(fname):gsub('^/U/%w+', '~')
+	return string.format('%s %s %%m', icon, fname)
+end
+
 local function diag_count(ty)
 	return vim.tbl_count(vim.diagnostic.get(0, { severity = ty }))
 end
@@ -145,7 +154,7 @@ components.active[1][6] = {
 }
 
 components.active[2][1] = {
-	provider = ' %F%m',
+	provider = 'file_info',
 	hl = { fg = 'red', bg = 'bg' },
 }
 
