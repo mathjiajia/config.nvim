@@ -24,9 +24,6 @@ local opts = {
 	space = {
 		enable_mapping = false,
 	},
-	enter = {
-		enable_mapping = false, -- TODO
-	},
 }
 
 require('pairs'):setup(opts)
