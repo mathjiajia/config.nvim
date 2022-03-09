@@ -64,35 +64,20 @@ function providers.git_diff_removed()
 	return tostring(vim.b.gitsigns_status_dict['removed'])
 end
 
-function providers.file_dict()
-	local fp = vim.fn.fnamemodify(vim.fn.getcwd(), ':~:.')
-	local tbl = vim.fn.split(fp, '/')
-	local len = #tbl
-
-	if tbl[1] == '~' or len <= 2 then
-		return fp .. '/'
-	else
-		return '' .. '/' .. table.concat(tbl, '/', len - 1) .. '/'
-	end
-	-- local Path = require('plenary.path')
-	-- local short_path = Path:new(vim.loop.cwd()):shorten(3, { 3 })
-	-- return short_path:gsub('^/%w+/%w+', '~') .. '/'
-end
-
 local function diag_count(ty)
 	return vim.tbl_count(vim.diagnostic.get(0, { severity = ty }))
 end
 function providers.diag_error()
-	return tostring(diag_count(vim.diagnostic.severity.ERROR))
+	return tostring(diag_count(vim.diagnostic.severity.ERROR)) .. ' '
 end
 function providers.diag_warn()
-	return tostring(diag_count(vim.diagnostic.severity.WARN))
+	return tostring(diag_count(vim.diagnostic.severity.WARN)) .. ' '
 end
 function providers.diag_info()
-	return tostring(diag_count(vim.diagnostic.severity.INFO))
+	return tostring(diag_count(vim.diagnostic.severity.INFO)) .. ' '
 end
 function providers.diag_hint()
-	return tostring(diag_count(vim.diagnostic.severity.HINT))
+	return tostring(diag_count(vim.diagnostic.severity.HINT)) .. ' '
 end
 
 local function pad(c, m)
@@ -117,7 +102,6 @@ local components = { active = { {}, {}, {} }, inactive = { {} }, exclude = { {},
 
 components.active[1][1] = {
 	provider = 'vi_mode',
-	-- hl = { fg = 'bg', bg = 'green' },
 	hl = function()
 		return { fg = 'bg', bg = get_mode_color() }
 	end,
@@ -161,14 +145,13 @@ components.active[1][6] = {
 }
 
 components.active[2][1] = {
-	provider = 'file_dict',
-	icon = '  ',
+	provider = ' %F%m',
 	hl = { fg = 'red', bg = 'bg' },
 }
 
 components.active[3][1] = {
 	provider = 'diag_error',
-	icon = '  ',
+	icon = ' ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.ERROR) ~= 0
 	end,
@@ -176,7 +159,7 @@ components.active[3][1] = {
 }
 components.active[3][2] = {
 	provider = 'diag_warn',
-	icon = '  ',
+	icon = ' ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.WARN) ~= 0
 	end,
@@ -184,7 +167,7 @@ components.active[3][2] = {
 }
 components.active[3][3] = {
 	provider = 'diag_info',
-	icon = '  ',
+	icon = ' ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.INFO) ~= 0
 	end,
@@ -192,7 +175,7 @@ components.active[3][3] = {
 }
 components.active[3][4] = {
 	provider = 'diag_hint',
-	icon = '  ',
+	icon = ' ',
 	enabled = function()
 		return diag_count(vim.diagnostic.severity.HINT) ~= 0
 	end,
@@ -200,23 +183,18 @@ components.active[3][4] = {
 }
 
 components.active[3][5] = {
-	provider = '  ',
+	provider = '  LSP ',
 	enabled = function()
 		return next(vim.lsp.buf_get_clients(0)) ~= nil
 	end,
-	hl = { fg = 'fg', bg = 'bg' },
-}
-
-components.active[3][6] = {
-	provider = ' %y%m ',
 	hl = { fg = 'yellow', bg = 'gray' },
 }
 
-components.active[3][7] = {
+components.active[3][6] = {
 	provider = 'percent',
 	hl = { fg = 'bg', bg = 'green' },
 }
-components.active[3][8] = {
+components.active[3][7] = {
 	provider = 'ln_col',
 	hl = { fg = 'bg', bg = 'green' },
 }
@@ -232,7 +210,6 @@ components.inactive[1][2] = {
 
 components.exclude[1][1] = {
 	provider = 'vi_mode',
-	-- hl = { fg = 'fg', bg = 'bg' },
 	hl = function()
 		return { fg = 'bg', bg = get_mode_color() }
 	end,
