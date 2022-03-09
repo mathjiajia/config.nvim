@@ -9,17 +9,8 @@ vim.g.nvim_tree_respect_buf_cwd = 0
 vim.g.nvim_tree_create_in_closed_folder = 1
 
 local custom = {
-	'.cache',
-	'.cpan',
 	'.dropbox',
-	'.gem',
 	'.git',
-	'.npm',
-	'.vscode',
-	'.wns',
-	'.DS_Store',
-	'.CFUserTextEncoding',
-	'.node_repl_history',
 	'bin',
 	'Applications',
 	'Library',
