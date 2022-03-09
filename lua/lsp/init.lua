@@ -48,17 +48,17 @@ local on_attach = function(client, bufnr)
 	local autocmd = vim.api.nvim_create_autocmd
 
 	if client.resolved_capabilities.document_highlight then
-		augroup('lsp_document_highlight', { clear = true })
+		local group = augroup('lsp_document_highlight', { clear = true })
 		autocmd('CursorHold', {
 			callback = vim.lsp.buf.document_highlight,
 			buffer = bufnr,
-			group = 'lsp_document_highlight',
+			group = group,
 			desc = 'Document Highlight',
 		})
 		autocmd('CursorMoved', {
 			callback = vim.lsp.buf.clear_references,
 			buffer = bufnr,
-			group = 'lsp_document_highlight',
+			group = group,
 			desc = 'Clear All the References',
 		})
 	end
@@ -71,13 +71,13 @@ local on_attach = function(client, bufnr)
 			tb.lsp_range_code_actions()
 		end, { buffer = bufnr, desc = 'Range Code Actions' })
 
-		augroup('lsp_code_action', { clear = true })
+		local group = augroup('lsp_code_action', { clear = true })
 		autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
 				require('nvim-lightbulb').update_lightbulb()
 			end,
 			buffer = bufnr,
-			group = 'lsp_code_action',
+			group = group,
 			desc = 'Update the LightBulb',
 		})
 	end
@@ -90,22 +90,20 @@ local on_attach = function(client, bufnr)
 	end
 
 	-- if client.resolved_capabilities.code_lens then
-	-- 	vim.api.nvim_create_augroup { name = 'lsp_document_codelens', clear = true }
-	-- 	vim.api.nvim_create_autocmd {
-	-- 		group = 'lsp_document_codelens',
-	-- 		event = 'BufEnter',
-	-- 		-- pattern = '<buffer>',
-	-- 		buffer = 0,
+	-- 	local group = augroup('lsp_document_codelens', { clear = true })
+	-- 	autocmd('BufEnter', {
 	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 		buffer = bufnr,
+	-- 		group = group,
 	-- 		once = true,
-	-- 	}
-	-- 	vim.api.nvim_create_autocmd {
-	-- 		group = 'lsp_document_codelens',
-	-- 		event = { 'BufWritePost', 'CursorHold' },
-	-- 		-- pattern = '<buffer>',
-	-- 		buffer = 0,
+	-- 		desc = 'Refresh CodeLens',
+	-- 	})
+	-- 	autocmd({ 'BufWritePost', 'CursorHold' }, {
 	-- 		callback = require('vim.lsp.codelens').refresh,
-	-- 	}
+	-- 		buffer = bufnr,
+	-- 		group = group,
+	-- 		desc = 'Refresh CodeLens',
+	-- 	})
 	-- end
 end
 
