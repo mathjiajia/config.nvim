@@ -55,7 +55,6 @@ require('telescope').setup {
 		current_buffer_fuzzy_find = { prompt_title = '< Fuzzy Finder >', theme = 'ivy' },
 		find_files = { prompt_title = '< Search Files >', theme = 'ivy' },
 		grep_string = { prompt_title = '< Grep String >' },
-		keymaps = { prompt_title = '< Keymaps >' },
 		live_grep = { prompt_title = '< Live Grep >', theme = 'ivy' },
 		oldfiles = { prompt_title = '< Recent Files >', theme = 'ivy' },
 		-- LSP
@@ -98,7 +97,7 @@ require('telescope').setup {
 }
 
 -- Load extensions
-local extensions = { 'fzf', 'file_browser', 'frecency', 'project' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'project', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end

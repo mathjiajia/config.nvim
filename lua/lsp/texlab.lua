@@ -19,9 +19,7 @@ local settings = {
 			args = { '%l', '%p', '%f' },
 		},
 		latexFormatter = 'latexindent',
-		latexindent = {
-			modifyLineBreaks = false,
-		},
+		latexindent = { modifyLineBreaks = false },
 	},
 }
 

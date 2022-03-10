@@ -18,7 +18,6 @@ parser_configs.norg_table = {
 
 local ts_install = {
 	'bibtex',
-	'c',
 	'comment',
 	'fish',
 	'html',
@@ -42,19 +41,13 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 		additional_vim_regex_highlighting = { 'latex' },
 	},
-	incremental_selection = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
+	incremental_selection = { enable = true },
+	indent = { enable = true },
 	rainbow = {
 		enable = true,
 		colors = { '#F5C2E7', '#F28FAD', '#96CDFB', '#FAE3B0', '#ABE9B3', '#B5E8E0', '#F2CDCD' },
 	},
-	playground = {
-		enable = true,
-	},
+	playground = { enable = true },
 }
 
 vim.keymap.set('n', '<leader>th', function()

@@ -167,7 +167,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 vim.api.nvim_create_autocmd('BufReadPost', {
 	callback = lastplace,
 	pattern = '*',
-	group = 'init_nvim',
+	group = init_nvim,
 	desc = 'restore the cursor position',
 })
 vim.api.nvim_create_autocmd('CursorHold', {

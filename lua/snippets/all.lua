@@ -25,9 +25,9 @@ local p = require('luasnip.extras').partial
 -- local events = require('luasnip.util.events')
 
 M = {
-	s({ trig = 'fixme', name = 'FIXME:' }, { t('FIXME('), p(os.getenv, 'USER'), t('): ') }),
-	s({ trig = 'note', name = 'NOTE:' }, { t('NOTE('), p(os.getenv, 'USER'), t('): ') }),
-	s({ trig = 'todo', name = 'TODO:' }, { t('TODO('), p(os.getenv, 'USER'), t('): ') }),
+	s({ trig = 'fixme', name = 'FIXME:', hidden = true }, { t('FIXME('), p(os.getenv, 'USER'), t('): ') }),
+	s({ trig = 'note', name = 'NOTE:', hidden = true }, { t('NOTE('), p(os.getenv, 'USER'), t('): ') }),
+	s({ trig = 'todo', name = 'TODO:', hidden = true }, { t('TODO('), p(os.getenv, 'USER'), t('): ') }),
 }
 
 return M

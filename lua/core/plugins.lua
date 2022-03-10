@@ -16,6 +16,7 @@ local function spec(use)
 	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
 
+	use { 'kyazdani42/nvim-web-devicons', config = [[require('configs.devicons')]] }
 	use { 'rcarriga/nvim-notify', config = [[require('notify').setup {} vim.notify = require('notify')]] }
 
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('configs.treesitter')]] }
@@ -44,7 +45,7 @@ local function spec(use)
 
 	use {
 		'kyazdani42/nvim-tree.lua',
-		module = 'nvim-tree',
+		keys = { { 'n', '<M-t>' } },
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = [[require('configs.nvimtree')]],
 	}
@@ -110,7 +111,7 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope', opt = true },
 	}
 
-	-- use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 5]] }
+	use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 10]] }
 end
 
 require('packer').startup {

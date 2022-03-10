@@ -56,21 +56,21 @@ end
 M = {
 	-- priority 1:
 	s(
-		{ trig = 'c(%u)', name = 'mathcal', wordTrig = false, regTrig = true },
+		{ trig = 'c(%u)', name = 'mathcal', wordTrig = false, regTrig = true, hidden = true },
 		{ f(function(_, snip)
 			return '\\mathcal{' .. snip.captures[1] .. '}'
 		end, {}) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
-		{ trig = 'f(%a)', name = 'mathfrak', wordTrig = false, regTrig = true },
+		{ trig = 'f(%a)', name = 'mathfrak', wordTrig = false, regTrig = true, hidden = true },
 		{ f(function(_, snip)
 			return '\\mathfrak{' .. snip.captures[1] .. '}'
 		end, {}) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
-		{ trig = 's(%u)', name = 'mathscr', wordTrig = false, regTrig = true },
+		{ trig = 's(%u)', name = 'mathscr', wordTrig = false, regTrig = true, hidden = true },
 		{ f(function(_, snip)
 			return '\\mathscr{' .. snip.captures[1] .. '}'
 		end, {}) },

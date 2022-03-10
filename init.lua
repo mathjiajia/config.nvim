@@ -5,5 +5,4 @@ else
 	vim.notify(impatient)
 end
 
--- Do all init in core/init.lua so impatient can cache it
 require('core')

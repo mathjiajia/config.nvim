@@ -19,13 +19,9 @@ require('neorg').setup {
 				},
 			},
 		},
-		['core.gtd.base'] = {
-			config = { workspace = 'gtd' },
-		},
+		['core.gtd.base'] = { config = { workspace = 'gtd' } },
 		['core.gtd.ui'] = {},
-		['core.norg.completion'] = {
-			config = { engine = 'nvim-cmp' },
-		},
+		['core.norg.completion'] = { config = { engine = 'nvim-cmp' } },
 		['core.norg.qol.toc'] = {},
 		['core.integrations.telescope'] = {}, -- Enable the telescope module
 	},

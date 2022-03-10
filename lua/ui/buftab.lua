@@ -18,17 +18,9 @@ function Buftab:generate_flags()
 	local buffer_flags = {}
 	if self.buf.changed then
 		table.insert(buffer_flags, ' [+]')
-	end
-	if not self.buf.modifiable then
-		table.insert(buffer_flags, ' [-]')
-	end
-	if self.buf.readonly then
-		table.insert(buffer_flags, ' [RO]')
-	end
-
-	if vim.tbl_count(buffer_flags) > 0 then
 		table.insert(buffer_flags, 1, '')
 	end
+
 	self.flags = table.concat(buffer_flags)
 end
 
@@ -94,8 +86,6 @@ local getbufinfo = function()
 				current = bufnr == current_bufnr,
 				safe = bufnr <= current_bufnr,
 				changed = vim.api.nvim_buf_get_option(bufnr, 'modified'),
-				modifiable = vim.api.nvim_buf_get_option(bufnr, 'modifiable'),
-				readonly = vim.api.nvim_buf_get_option(bufnr, 'readonly'),
 				active = vim.fn.bufwinnr(bufnr) > 0,
 			})
 		end

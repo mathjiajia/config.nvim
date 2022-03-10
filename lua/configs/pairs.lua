@@ -1,29 +1,9 @@
 local opts = {
 	pairs = {
-		['*'] = {
-			{ '(', ')' },
-			{ '[', ']' },
-			{ '{', '}' },
-			-- {"'", "'"},
-			{ '"', '"' },
-		},
-		lua = {
-			{ "'", "'" },
-		},
-		markdown = {
-			{ "'", "'" },
-		},
-		norg = {
-			{ '`', '`' },
-			{ "'", "'" },
-		},
-		tex = {
-			{ '``', "''" },
-		},
+		norg = { { '`', '`' } },
+		tex = { { '``', "''" } },
 	},
-	space = {
-		enable_mapping = false,
-	},
+	space = { enable_mapping = false },
 }
 
 require('pairs'):setup(opts)

@@ -57,11 +57,6 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
 
 vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.gray0 })
 
-local has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
 local cmp_kinds = {
 	Text = '',
 	Method = '',
@@ -93,14 +88,6 @@ local cmp_kinds = {
 local cmp = require('cmp')
 
 cmp.setup {
-	-- enabled = function()
-	-- 	local in_prompt = vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt'
-	-- 	if in_prompt then
-	-- 		return false
-	-- 	end
-	-- 	local context = require('cmp.config.context')
-	-- 	return not (context.in_treesitter_capture('comment') or context.in_syntax_group('Comment'))
-	-- end,
 	mapping = {
 		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -112,9 +99,6 @@ cmp.setup {
 		expand = function(args)
 			require('luasnip').lsp_expand(args.body)
 		end,
-	},
-	completion = {
-		completeopt = 'menu,menuone,noselect',
 	},
 	formatting = {
 		format = function(entry, vim_item)
@@ -131,30 +115,34 @@ cmp.setup {
 			return vim_item
 		end,
 	},
-	matching = {
-		disallow_prefix_unmatching = true,
-	},
+	matching = { disallow_prefix_unmatching = true },
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
-		{ name = 'neorg' },
 		{ name = 'buffer', keyword_length = 3 },
 		{ name = 'rg', keyword_length = 3 },
 	},
-	experimental = {
-		ghost_text = true,
-	},
+	experimental = { ghost_text = true },
 }
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.filetype('gitcommit', {
 	sources = {
-		{ name = 'buffer' },
+		{ name = 'luasnip' },
+		{ name = 'buffer', keyword_length = 3 },
+	},
+})
+cmp.setup.filetype('norg', {
+	sources = {
+		{ name = 'luasnip' },
+		{ name = 'neorg' },
+		{ name = 'buffer', keyword_length = 3 },
 	},
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+	sources = { { name = 'buffer' } },
+})
 cmp.setup.cmdline(':', {
 	sources = {
 		{ name = 'path' },
