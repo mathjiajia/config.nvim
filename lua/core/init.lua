@@ -37,35 +37,30 @@ vim.opt.tabstop = 4
 -- search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.grepprg = 'rg --vimgrep -no-heading --smart-case --hidden'
-vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
 -- backups
 vim.opt.autowrite = true
-vim.opt.swapfile = false -- DO NOT Use a swapfile for the buffer
-vim.opt.writebackup = false -- DO NOT Make a backup before overwriting a file
-vim.o.undofile = true -- automatically saves undo history to an undo file when writing a buffer to a file,
--- and restores undo history from the same file on buffer read
+vim.opt.swapfile = false
+vim.opt.writebackup = false
+vim.o.undofile = true
 
-vim.opt.shortmess = vim.opt.shortmess + { c = true } -- don't give |ins-completion-menu| messages
+-- performance
 vim.opt.updatetime = 250
 
 -- ui
 vim.opt.breakindent = true
 vim.wo.cursorline = true
-vim.opt.linebreak = true -- wrap long lines at a character in 'breakat' rather than
--- at the last character that fits on the screen
-vim.opt.fillchars = 'eob: ' -- Remove tilda from signcolumn
+vim.opt.linebreak = true
+vim.opt.fillchars = 'eob: '
 vim.wo.number = true
-vim.opt.pumheight = 10 -- Maximum number of items to show in the popup menu
+vim.opt.pumheight = 10
 vim.wo.relativenumber = true
-vim.opt.scrolloff = 8 -- Minimal number of screen lines to keep above and below the cursor
-vim.opt.showbreak = '↳ ' -- String to put at the start of lines that have been wrapped
-vim.wo.signcolumn = 'yes' -- always to draw the signcolumn
+vim.opt.scrolloff = 8
+vim.opt.showbreak = '↳ '
+vim.wo.signcolumn = 'yes'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.whichwrap = 'b,s,h,l,<,>,[,]' -- move the cursor left/right to move to the previous/next line
--- when the cursor is on the first/last character in the line
+vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.termguicolors = true
 
 ---- KEYBINDINGS ----

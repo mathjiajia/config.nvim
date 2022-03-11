@@ -123,29 +123,13 @@ cmp.setup {
 		{ name = 'buffer', keyword_length = 3 },
 		{ name = 'rg', keyword_length = 3 },
 	},
-	experimental = { ghost_text = true },
 }
 
-cmp.setup.filetype('gitcommit', {
-	sources = {
-		{ name = 'luasnip' },
-		{ name = 'buffer', keyword_length = 3 },
-	},
-})
-cmp.setup.filetype('norg', {
-	sources = {
-		{ name = 'luasnip' },
-		{ name = 'neorg' },
-		{ name = 'buffer', keyword_length = 3 },
-	},
-})
+cmp.setup.filetype('gitcommit', { sources = { { name = 'luasnip' }, { name = 'buffer', keyword_length = 3 } } })
+cmp.setup.filetype(
+	'norg',
+	{ sources = { { name = 'luasnip' }, { name = 'neorg' }, { name = 'buffer', keyword_length = 3 } } }
+)
 
-cmp.setup.cmdline('/', {
-	sources = { { name = 'buffer' } },
-})
-cmp.setup.cmdline(':', {
-	sources = {
-		{ name = 'path' },
-		{ name = 'cmdline' },
-	},
-})
+cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+cmp.setup.cmdline(':', { sources = { { name = 'path' }, { name = 'cmdline' } } })

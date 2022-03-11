@@ -319,7 +319,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({ trig = 'temps', name = 'Slides template', dscr = 'Use the slides template' }, {
 		t {
 			'\\documentclass[8pt]{beamer}',
@@ -377,9 +377,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, {
-		condition = conds.line_begin,
-	}),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({ trig = 'tempa', name = 'AMS template', dscr = 'Use the AMS template' }, {
 		t {
 			'\\documentclass[11pt]{amsart}',
@@ -613,7 +611,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 	s({ trig = 'tempr', name = 'report template' }, {
 		t {
 			'',
@@ -691,7 +689,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = conds.line_begin }),
+	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
 }
 
 return M

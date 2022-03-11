@@ -380,7 +380,14 @@ M = {
 
 	s({ trig = 'cref', name = '\\cref{}' }, { t('\\cref{'), i(1), t('}'), i(0) }, { condition = vimtex.in_text }),
 	s(
-		{ trig = '//', name = 'fraction', wordTrig = false },
+		{ trig = '(%w)//', name = 'fraction with a single numerator', regTrig = true },
+		{ t('\\frac{'), f(function(_, snip)
+			return snip.captures[1]
+		end, {}), t('}{'), i(1), t('}'), i(0) },
+		{ condition = vimtex.in_mathzone }
+	),
+	s(
+		{ trig = '//', name = 'fraction' },
 		{ t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
