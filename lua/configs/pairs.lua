@@ -1,7 +1,7 @@
 local opts = {
 	pairs = {
 		norg = { { '`', '`' } },
-		tex = { { '``', "''" } },
+		tex = { { '``', "''" },{ "'", " " } },
 	},
 	space = { enable_mapping = false },
 }

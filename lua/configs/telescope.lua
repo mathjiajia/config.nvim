@@ -1,34 +1,3 @@
-local cp = {
-	-- rosewater = '#F5E0DC', -- Rosewater
-	flamingo = '#F2CDCD', -- Flamingo
-	-- mauve = '#DDB6F2', -- Mauve
-	-- pink = '#F5C2E7', -- Pink
-	-- red = '#F28FAD', -- Red
-	maroon = '#E8A2AF', -- Maroon
-	-- peach = '#F8BD96', -- Peach
-	-- yellow = '#FAE3B0', -- Yellow
-	-- green = '#ABE9B3', -- Green
-	blue = '#96CDFB', -- Blue
-	-- sky = '#89DCEB', -- Sky
-	-- teal = '#B5E8E0', -- Teal
-	-- lavender = '#C9CBFF', -- Lavender
-	white = '#D9E0EE', -- White
-	-- gray2 = '#C3BAC6', -- Gray2
-	-- gray1 = '#988BA2', -- Gray1
-	-- gray0 = '#6E6C7E', -- Gray0
-	-- black4 = '#575268', -- Black4
-	black3 = '#302D41', -- Black3
-	-- black2 = '#1E1E2E', -- Black2
-	-- black1 = '#1A1826', -- Black1
-	-- black0 = '#161320', -- Black0
-}
-
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = cp.blue })
-vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = cp.flamingo })
-vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.white, bg = cp.black3, bold = true })
-vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
-vim.api.nvim_set_hl(0, 'TelescopeFrecencyScores', { fg = cp.maroon })
-
 local home = os.getenv('HOME')
 
 require('telescope').setup {
@@ -44,31 +13,27 @@ require('telescope').setup {
 		},
 		prompt_prefix = ' ',
 		selection_caret = ' ',
+		-- border = false,
 		path_display = { 'absolute' },
 		set_env = { ['COLORTERM'] = 'truecolor' },
-		mappings = {},
 		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
 	},
 	pickers = {
 		-- builtin
-		buffers = { prompt_title = '< Search Buffers >', theme = 'ivy', sort_lastused = true, previewer = false },
-		current_buffer_fuzzy_find = { prompt_title = '< Fuzzy Finder >', theme = 'ivy' },
-		find_files = { prompt_title = '< Search Files >', theme = 'ivy' },
-		grep_string = { prompt_title = '< Grep String >' },
-		live_grep = { prompt_title = '< Live Grep >', theme = 'ivy' },
-		oldfiles = { prompt_title = '< Recent Files >', theme = 'ivy' },
+		buffers = { prompt_title = 'Active Buffers', theme = 'dropdown', sort_lastused = true, previewer = false },
+		current_buffer_fuzzy_find = { prompt_title = 'Fuzzy Finder', theme = 'ivy' },
+		find_files = { results_title = 'Files List', theme = 'ivy' },
+		grep_string = { theme = 'ivy' },
+		live_grep = { prompt_title = 'Live Grep', theme = 'ivy' },
+		oldfiles = { prompt_title = 'Recent Files', results_title = 'Files List', theme = 'ivy' },
 		-- LSP
-		lsp_code_actions = { prompt_title = '< Code Actions >', theme = 'cursor' },
-		lsp_definitions = { prompt_title = '< Definitions >', theme = 'dropdown' },
-		lsp_document_symbols = { prompt_title = '< Document Symbols >' },
-		lsp_implementations = { prompt_title = '< Implementations >', theme = 'dropdown' },
-		lsp_references = { prompt_title = '< References >', theme = 'dropdown' },
+		lsp_code_actions = { prompt_title = 'Code Actions', theme = 'cursor' },
+		lsp_definitions = { preview_title = 'Results Preview', theme = 'dropdown' },
+		lsp_implementations = { preview_title = 'Results Preview', theme = 'dropdown' },
+		lsp_references = { preview_title = 'Results Preview', theme = 'dropdown' },
 	},
 	extensions = {
-		file_browser = {
-			prompt_title = '< File Browser >',
-			theme = 'ivy',
-		},
+		file_browser = { prompt_title = 'File Browser', theme = 'ivy' },
 		frecency = {
 			show_scores = true,
 			workspaces = {
@@ -123,6 +88,9 @@ end, { desc = 'Grep Strings' })
 vim.keymap.set('n', '<leader>fl', function()
 	tb.live_grep()
 end, { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>fn', function()
+	tb.find_files { cwd = home .. '/.config/nvim', prompt_title = '< Nvim Configs >' }
+end, { desc = 'Neovim Config Files' })
 vim.keymap.set('n', '<leader>fo', function()
 	tb.oldfiles()
 end, { desc = 'Old Files' })

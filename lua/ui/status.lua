@@ -65,12 +65,7 @@ function providers.git_diff_removed()
 end
 
 function providers.file_info()
-	local fname = vim.api.nvim_buf_get_name(0)
-	local extn = vim.fn.fnamemodify(fname, ':e')
-	local icon = require('nvim-web-devicons').get_icon(fname, extn, { default = true })
-
-	fname = vim.fn.pathshorten(fname):gsub('^/U/%w+', '~')
-	return string.format('%s %s %%m', icon, fname)
+	return vim.fn.pathshorten(vim.api.nvim_buf_get_name(0)):gsub('^/U/%w+', '~')
 end
 
 local function diag_count(ty)

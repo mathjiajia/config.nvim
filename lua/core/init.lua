@@ -80,6 +80,17 @@ vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
 vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
 
+-- FTerm
+vim.keymap.set({ 'n', 't' }, '<M-i>', function()
+	require('FTerm').toggle()
+end, { desc = 'Terminal Toggle' })
+vim.keymap.set('t', '<M-S-i>', function()
+	require('FTerm').exit()
+end, { desc = 'Terminal Exit' })
+vim.keymap.set('n', '<M-g>', function()
+	require('FTerm'):new({ cmd = 'lazygit', dimensions = { height = 0.9, width = 0.9 } }):open()
+end, { desc = 'LazyGit' })
+
 -- hop
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>hw', function()
 	require('hop').hint_words()
@@ -96,6 +107,20 @@ end, { desc = 'Hop 1-char' })
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>2', function()
 	require('hop').hint_char2()
 end, { desc = 'Hop 2-char' })
+
+-- Spectre
+vim.keymap.set('n', '<leader>rp', function()
+	require('spectre').open()
+end, { desc = 'Open Spectre' })
+vim.keymap.set('n', '<leader>rw', function()
+	require('spectre').open_visual { select_word = true }
+end, { desc = 'Search the Current Word' })
+vim.keymap.set('v', '<leader>rw', function()
+	require('spectre').open_visual()
+end, { silent = true, desc = 'Search the Current Word' })
+vim.keymap.set('n', '<leader>rf', function()
+	require('spectre').open_file_search()
+end, { desc = 'Search in the Current File' })
 
 vim.api.nvim_add_user_command('Files', function()
 	require('telescope.builtin').find_files { hidden = true }

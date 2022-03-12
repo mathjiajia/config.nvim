@@ -24,14 +24,14 @@ function Buftab:generate_flags()
 	self.flags = table.concat(buffer_flags)
 end
 
--- function Buftab:generate_icon()
--- 	local fname, ext = vim.fn.fnamemodify(self.buf.name, ':t'), vim.fn.fnamemodify(self.buf.name, ':e')
--- 	self.icon = require('nvim-web-devicons').get_icon(fname, ext, { default = true })
--- end
+function Buftab:generate_icon()
+	local fname, ext = vim.fn.fnamemodify(self.buf.name, ':t'), vim.fn.fnamemodify(self.buf.name, ':e')
+	self.icon = require('nvim-web-devicons').get_icon(fname, ext, { default = true })
+end
 
 function Buftab:new(buf, index, last)
 	local r = {
-		index = index,
+		-- index = index,
 		insert_at = index,
 		last = last,
 		buf = buf,
@@ -42,7 +42,7 @@ function Buftab:new(buf, index, last)
 	setmetatable(r, self)
 
 	r:generate_hl()
-	-- r:generate_icon()
+	r:generate_icon()
 	r:generate_flags()
 	return r
 end
@@ -63,7 +63,7 @@ function Buftab:generate(budget, tabs)
 		local disambiguated = { split_path[#split_path - 1], '/', name }
 		name = table.concat(disambiguated)
 	end
-	self.label = ' ' .. self.index .. ': ' .. name .. self.flags .. ' '
+	self.label = ' ' .. self.icon .. ' ' .. name .. self.flags .. ' '
 
 	local adjusted = budget - vim.fn.strchars(self.label)
 	if not self.buf.safe and adjusted <= 0 then

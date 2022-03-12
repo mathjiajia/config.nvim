@@ -209,6 +209,15 @@ vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.diag.info, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
 
+---------- TELESCOPE ----------
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.flamingo, bg = cp.black3 })
+vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = cp.black2, bg = cp.pink })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = cp.black2, bg = cp.rosewater })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = cp.black2, bg = cp.teal })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'TelescopeFrecencyScores', { fg = cp.maroon })
+
 ---------- TREESITTER ----------
 -- These groups are for the neovim tree-sitter highlights.
 -- As of writing, tree-sitter support is a WIP, group names may change.

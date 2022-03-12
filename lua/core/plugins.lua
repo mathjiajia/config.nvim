@@ -33,13 +33,13 @@ local function spec(use)
 
 	use {
 		'nvim-telescope/telescope.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
+		requires = 'nvim-lua/plenary.nvim',
 		config = [[require('configs.telescope')]],
 	}
 	use {
 		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
-		{ 'nvim-telescope/telescope-frecency.nvim', requires = { 'tami5/sqlite.lua' } },
+		{ 'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sqlite.lua' },
 		{ 'nvim-telescope/telescope-project.nvim' },
 	}
 
@@ -56,15 +56,13 @@ local function spec(use)
 		{ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' },
 		{
 			'jose-elias-alvarez/null-ls.nvim',
-			ft = { 'fish', 'html', 'json', 'lua', 'markdown', 'yaml' },
-			requires = { 'nvim-lua/plenary.nvim' },
+			requires = 'nvim-lua/plenary.nvim',
 			config = [[require('lsp.null-ls')]],
 		},
 		{ 'j-hui/fidget.nvim', config = [[require('fidget').setup { text = { spinner = 'line' } }]] },
 	}
 
 	use { 'hrsh7th/nvim-cmp', event = { 'CmdlineEnter', 'InsertEnter' }, config = [[require('configs.cmp')]] }
-
 	use {
 		{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
 		{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
@@ -73,15 +71,11 @@ local function spec(use)
 		{ 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
 		{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
 	}
-	use { 'L3MON4D3/LuaSnip', config = [[require('configs.luasnip')]] }
+	use { 'L3MON4D3/LuaSnip', after = 'nvim-cmp', config = [[require('configs.luasnip')]] }
 	use { 'ZhiyuanLck/smart-pairs', event = 'InsertEnter', config = [[require('configs.pairs')]] }
 	use { 'github/copilot.vim', opt = true, config = [[require('configs.copilot')]] }
 
-	use {
-		'lewis6991/gitsigns.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-		config = [[require('configs.gitsigns')]],
-	}
+	use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim', config = [[require('configs.gitsigns')]] }
 	use { 'numToStr/Comment.nvim', config = [[require('Comment').setup()]] }
 	use {
 		'ur4ltz/surround.nvim',
@@ -94,16 +88,8 @@ local function spec(use)
 		config = [[require('configs.surround')]],
 	}
 	use { 'phaazon/hop.nvim', config = [[require('hop').setup()]] }
-	use {
-		'windwp/nvim-spectre',
-		keys = { { 'n', '<leader>rf' }, { 'n', '<leader>rp' }, { 'n', '<leader>rw' }, { 'v', '<leader>rw' } },
-		config = [[require('configs.search')]],
-	}
-	use {
-		'numtostr/FTerm.nvim',
-		keys = { { 'n', '<M-i>' }, { 'n', '<M-g>' } },
-		config = [[require('configs.terminal')]],
-	}
+	use { 'windwp/nvim-spectre', module = 'spectre' }
+	use { 'numtostr/FTerm.nvim', module = 'FTerm' }
 
 	use { 'lervag/vimtex', ft = 'tex', config = [[require('configs.latex')]] }
 	use {
@@ -111,7 +97,7 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope', opt = true },
 	}
 
-	-- use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 10]] }
+	use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 3]] }
 end
 
 require('packer').startup {
