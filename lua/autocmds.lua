@@ -38,12 +38,12 @@ local function lastplace()
 end
 
 local init_nvim = vim.api.nvim_create_augroup('init_nvim', { clear = true })
-vim.api.nvim_create_autocmd('BufEnter', {
-	command = 'silent! lcd %:p:h',
-	pattern = '*',
-	group = init_nvim,
-	desc = 'change the working directory',
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+-- 	command = 'silent! lcd %:p:h',
+-- 	pattern = '*',
+-- 	group = init_nvim,
+-- 	desc = 'change the working directory',
+-- })
 vim.api.nvim_create_autocmd('BufReadPost', {
 	callback = lastplace,
 	pattern = '*',

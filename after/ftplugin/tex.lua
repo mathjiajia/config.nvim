@@ -27,15 +27,10 @@ vim.api.nvim_set_hl(0, 'texCmdInput', { link = 'texCmd' }) -- \INPUT, \INCLUDE, 
 vim.api.nvim_set_hl(0, 'texCmdBib', { link = 'texCmd' }) -- \BIBLIOGRAPHY, \BIBLIOGRAPHYSTYLE
 vim.api.nvim_set_hl(0, 'texCmdClass', { link = 'texCmd' }) -- \DOCUMENTCLASS
 vim.api.nvim_set_hl(0, 'texCmdPackage', { link = 'texCmd' }) -- \USEPACKAGE, \REQUIREPACKAGE
-vim.api.nvim_set_hl(0, 'texFileOpt', { link = 'texOpt' })
--- \includegraphics[PACKAGE OPTIONS], \documentclass[CLASS OPTIONS]
-vim.api.nvim_set_hl(0, 'texFileArg', { link = 'texArg' })
--- \input{FILE}, \include{FILE}, \includegraphics[...]{FILE}, \bibliographystyle{FILE}, \documentclass[...]{CLASS}
-vim.api.nvim_set_hl(0, 'texFilesOpt', { link = 'texFileOpt' })
--- \usepackage[PACKAGE OPTIONS], \RequirePackage[PACKAGE OPTIONS]
-vim.api.nvim_set_hl(0, 'texFilesArg', { link = 'texFileArg' })
--- \includeonly{FILE1, FILE2}, \bibliography{FILE1, FILE2},
--- \usepackage[...]{PACKAGE1, PACKAGE2}, \RequirePackage[...]{PACKAGE1, PACKAGE2}
+vim.api.nvim_set_hl(0, 'texFileOpt', { link = 'texOpt' }) -- \includegraphics[PACKAGE OPTIONS], \documentclass[CLASS OPTIONS]
+vim.api.nvim_set_hl(0, 'texFileArg', { link = 'texArg' }) -- \input{FILE}, \include{FILE}, \includegraphics[...]{FILE}, \bibliographystyle{FILE}, \documentclass[...]{CLASS}
+vim.api.nvim_set_hl(0, 'texFilesOpt', { link = 'texFileOpt' }) -- \usepackage[PACKAGE OPTIONS], \RequirePackage[PACKAGE OPTIONS]
+vim.api.nvim_set_hl(0, 'texFilesArg', { link = 'texFileArg' }) -- \includeonly{FILE1, FILE2}, \bibliography{FILE1, FILE2}, \usepackage[...]{PACKAGE1, PACKAGE2}, \RequirePackage[...]{PACKAGE1, PACKAGE2}
 vim.api.nvim_set_hl(0, 'texCmdTitle', { link = 'texCmd' }) -- \TITLE
 vim.api.nvim_set_hl(0, 'texTitleArg', { link = 'Underlined' }) -- \title{MAIN TITLE}
 vim.api.nvim_set_hl(0, 'texCmdAuthor', { link = 'texCmd' }) -- \AUTHOR
@@ -54,8 +49,7 @@ vim.api.nvim_set_hl(0, 'texRefArg', { link = 'Special' }) -- \cite{REFERENCE}; \
 -- vim.api.nvim_set_hl(0, 'texE3Type', { link = 'texParm' }) -- \str_new:N
 vim.api.nvim_set_hl(0, 'texCmdParbox', { link = 'texCmd' }) -- \PARBOX[p][h][i]{w}{c}
 vim.api.nvim_set_hl(0, 'texBoxOptPosVal', { link = 'texSymbol' }) -- parbox[P][h][i]{w}{c}, \begin{minipage}[P][h][i]{w}
-vim.api.nvim_set_hl(0, 'texBoxOptIPosVal', { link = 'texBoxOptPosVal' })
--- \parbox[p][h][I]{w}{c}, \begin{minipage}[p][h][I]{w}
+vim.api.nvim_set_hl(0, 'texBoxOptIPosVal', { link = 'texBoxOptPosVal' }) -- \parbox[p][h][I]{w}{c}, \begin{minipage}[p][h][I]{w}
 
 -- A list of math mode groups.
 vim.api.nvim_set_hl(0, 'texMathZone', { link = 'Special' }) -- Special \( HERE \); \[ HERE \]
@@ -74,13 +68,11 @@ vim.api.nvim_set_hl(0, 'texMathSuperSub', { link = 'texMathOper' }) -- Sub and s
 -- vim.api.nvim_set_hl(0, 'texMathError', { link = 'texError' }) -- Unmatched region endings
 
 -- A list of other important groups.
-vim.api.nvim_set_hl(0, 'texLength', { link = 'Number' })
--- Length units, e.g. "4 cm". Only when contained e.g. in option groups.
+vim.api.nvim_set_hl(0, 'texLength', { link = 'Number' }) -- Length units, e.g. "4 cm". Only when contained e.g. in option groups.
 vim.api.nvim_set_hl(0, 'texLigature', { link = 'texSymbol' }) -- --; ---; ``; '';,,
 vim.api.nvim_set_hl(0, 'texCmdAccent', { link = 'texCmd' }) -- \"{a}
 vim.api.nvim_set_hl(0, 'texCmdLigature', { link = 'texSpecialChar' }) -- \ss; \ae
-vim.api.nvim_set_hl(0, 'texCmdSpaceCodeChar', { link = 'Special' })
--- Catcodes. For more info, see: https://en.wikibooks.org/wiki/TeX/catcode
+vim.api.nvim_set_hl(0, 'texCmdSpaceCodeChar', { link = 'Special' }) -- Catcodes. For more info, see: https://en.wikibooks.org/wiki/TeX/catcode
 vim.api.nvim_set_hl(0, 'texCmdTodo', { link = 'Todo' }) -- \TODOSOMETHING
 vim.api.nvim_set_hl(0, 'texCmdVerb', { link = 'texCmd' }) -- \VERB
 vim.api.nvim_set_hl(0, 'texVerbZoneInline', { link = 'texZone' }) -- \verb+VERB TEXT+

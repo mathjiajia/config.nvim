@@ -1,7 +1,10 @@
 local opts = {
 	pairs = {
 		norg = { { '`', '`' } },
-		tex = { { '``', "''" },{ "'", " " } },
+		tex = {
+			{ '``', "''" },
+			{ "'", "'", { ignore_pre = '\\v(\\\\|\\S)' } },
+		},
 	},
 	space = { enable_mapping = false },
 }
