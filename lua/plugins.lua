@@ -17,6 +17,7 @@ local function spec(use)
 	use { 'lewis6991/impatient.nvim' }
 
 	use { 'kyazdani42/nvim-web-devicons', config = [[require('configs.devicons')]] }
+	use { 'tami5/sqlite.lua', module = 'sqlite' }
 	use { 'rcarriga/nvim-notify', config = [[require('notify').setup {} vim.notify = require('notify')]] }
 
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require('configs.treesitter')]] }
@@ -25,14 +26,12 @@ local function spec(use)
 		{ 'p00f/nvim-ts-rainbow' },
 		{ 'lukas-reineke/indent-blankline.nvim', config = [[require('configs.indentline')]] },
 	}
-	use {
-		'simrat39/symbols-outline.nvim',
-		keys = { { 'n', '<M-o>' } },
-		config = [[require('configs.outline')]],
-	}
+	use { 'simrat39/symbols-outline.nvim', module = 'symbols-outline', config = [[require('configs.outline')]] }
 
 	use {
 		'nvim-telescope/telescope.nvim',
+		-- cmd = 'Telescope',
+		-- module = 'telescope',
 		requires = 'nvim-lua/plenary.nvim',
 		config = [[require('configs.telescope')]],
 	}
@@ -45,7 +44,7 @@ local function spec(use)
 
 	use {
 		'kyazdani42/nvim-tree.lua',
-		keys = { { 'n', '<M-t>' } },
+		module = 'nvim-tree',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = [[require('configs.nvimtree')]],
 	}
@@ -79,12 +78,7 @@ local function spec(use)
 	use { 'numToStr/Comment.nvim', config = [[require('Comment').setup()]] }
 	use {
 		'ur4ltz/surround.nvim',
-		keys = {
-			{ 'n', 'sa' },
-			{ 'n', 'sr' },
-			{ 'n', 'sd' },
-			{ 'x', 's' },
-		},
+		keys = { { 'n', 'sa' }, { 'n', 'sr' }, { 'n', 'sd' }, { 'x', 's' } },
 		config = [[require('configs.surround')]],
 	}
 	use { 'phaazon/hop.nvim', config = [[require('hop').setup()]] }
@@ -103,7 +97,6 @@ end
 require('packer').startup {
 	spec,
 	config = {
-		profile = { enable = true, threshold = 1 },
 		display = {
 			open_fn = function()
 				return require('packer.util').float { border = 'single' }

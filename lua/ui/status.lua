@@ -231,7 +231,7 @@ components.exclude[2][1] = {
 local M, highlights = {}, {}
 
 local function find_pattern_match(tbl, val)
-	return tbl and next(vim.tbl_filter(function(pattern)
+	return next(vim.tbl_filter(function(pattern)
 		return val:match(pattern)
 	end, tbl))
 end

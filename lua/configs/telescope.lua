@@ -1,5 +1,10 @@
 local home = os.getenv('HOME')
 
+-- require('packer').loader('telescope-fzf-native.nvim')
+-- require('packer').loader('telescope-file-browser.nvim')
+-- require('packer').loader('telescope-frecency.nvim')
+-- require('packer').loader('telescope-project.nvim')
+
 require('telescope').setup {
 	defaults = {
 		sorting_strategy = 'ascending',
@@ -66,44 +71,3 @@ local extensions = { 'fzf', 'file_browser', 'frecency', 'project', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
-
-local tb = require('telescope.builtin')
-local te = require('telescope').extensions
-
-vim.keymap.set('n', '<leader><leader>', function()
-	tb.buffers()
-end, { desc = 'Buffers' })
-vim.keymap.set('n', '<leader>fc', function()
-	tb.commands()
-end, { desc = 'Command Pallete' })
-vim.keymap.set('n', '<leader>fd', function()
-	tb.diagnostics()
-end, { desc = 'Workspace Diagnostics' })
-vim.keymap.set('n', '<leader>ff', function()
-	tb.find_files { hidden = true }
-end, { desc = 'Find Files' })
-vim.keymap.set('n', '<leader>fg', function()
-	tb.grep_string()
-end, { desc = 'Grep Strings' })
-vim.keymap.set('n', '<leader>fl', function()
-	tb.live_grep()
-end, { desc = 'Live Grep' })
-vim.keymap.set('n', '<leader>fn', function()
-	tb.find_files { cwd = home .. '/.config/nvim', prompt_title = '< Nvim Configs >' }
-end, { desc = 'Neovim Config Files' })
-vim.keymap.set('n', '<leader>fo', function()
-	tb.oldfiles()
-end, { desc = 'Old Files' })
-vim.keymap.set('n', '<leader>fs', function()
-	tb.current_buffer_fuzzy_find()
-end, { desc = 'Current Buffer Fuzzy Find' })
-
-vim.keymap.set('n', '<leader><space>', function()
-	te.file_browser.file_browser {}
-end, { desc = 'File Browser' })
-vim.keymap.set('n', '<leader>fp', function()
-	te.project.project {}
-end, { desc = 'Projects' })
-vim.keymap.set('n', '<leader>fr', function()
-	te.frecency.frecency {}
-end, { desc = 'Frecency' })

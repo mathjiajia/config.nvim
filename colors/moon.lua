@@ -51,7 +51,7 @@ vim.api.nvim_set_hl(0, 'DiffChange', { fg = cp.diff.changed }) -- used for lines
 vim.api.nvim_set_hl(0, 'DiffDelete', { fg = cp.diff.deleted }) -- used for lines in a diff that have been deleted
 vim.api.nvim_set_hl(0, 'DiffText', { fg = cp.blue, bg = cp.black2 }) -- used for lines in a diff that are not changed
 
--- vim.api.nvim_set_hl(0, 'EndOfBuffer', { link = 'NonText' }) -- filler lines (~) after the end of the buffer.
+-- vim.api.nvim_set_hl(0, 'EndOfBuffer', {}) -- filler lines (~) after the end of the buffer.
 -- By default, this is highlighted like |hl-NonText|.
 -- vim.api.nvim_set_hl(0, 'TermCursor', {}) -- cursor in a focused terminal
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {}) -- cursor in a unfocused terminal
@@ -231,7 +231,7 @@ vim.api.nvim_set_hl(0, 'TSPunctSpecial', { fg = cp.gray1 }) -- Special punctuati
 
 -- vim.api.nvim_set_hl(0, 'TSConstant', { link = 'Constant' }) -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = cp.lavender, italic = true }) -- Built-in constant values: `nil` in Lua.
-vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = cp.yellow }) -- Constants defined by macros                : `NULL` in C.
+vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = cp.yellow }) -- Constants defined by macros: `NULL` in C.
 
 -- vim.api.nvim_set_hl(0, 'TSString', { link = 'String' }) -- String literals.
 vim.api.nvim_set_hl(0, 'TSStringEscape', { fg = cp.pink }) -- Escape characters within a string: `\n`, `\t`, etc.
@@ -295,6 +295,6 @@ vim.api.nvim_set_hl(0, 'TSTag', { fg = cp.peach }) -- Tags like HTML tag names.
 vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = cp.maroon }) -- Tag delimiters like `<` `>` `/`.
 vim.api.nvim_set_hl(0, 'TSTagAttribute', { fg = cp.mauve, italic = true }) -- HTML tag attributes.
 
--- vim.api.nvim_set_hl(0, 'TSError', { fg = cp.diag.error }) -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
+-- vim.api.nvim_set_hl(0, 'TSError', { link = 'Error' }) -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
 -- vim.api.nvim_set_hl(0, 'TSNone', {}) -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
 vim.api.nvim_set_hl(0, 'TSVariable', { fg = cp.white, italic = true }) -- Variable names that don't fit into other categories.

@@ -5,4 +5,6 @@ else
 	vim.notify(impatient)
 end
 
-require('core')
+require('options')
+require('keymaps')
+require('autocmds')
