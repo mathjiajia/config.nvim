@@ -45,17 +45,17 @@ local on_attach = function(client, bufnr)
 	end, { buffer = bufnr, desc = 'Type Definitions' })
 
 	if client.resolved_capabilities.document_highlight then
-		local group = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+		vim.api.nvim_create_augroup('lsp_doc_hl', { clear = true })
 		vim.api.nvim_create_autocmd('CursorHold', {
 			callback = vim.lsp.buf.document_highlight,
 			buffer = bufnr,
-			group = group,
+			group = 'lsp_doc_hl',
 			desc = 'Document Highlight',
 		})
 		vim.api.nvim_create_autocmd('CursorMoved', {
 			callback = vim.lsp.buf.clear_references,
 			buffer = bufnr,
-			group = group,
+			group = 'lsp_doc_hl',
 			desc = 'Clear All the References',
 		})
 	end
@@ -68,13 +68,11 @@ local on_attach = function(client, bufnr)
 			tb.lsp_range_code_actions()
 		end, { buffer = bufnr, desc = 'Range Code Actions' })
 
-		local group = vim.api.nvim_create_augroup('lsp_code_action', { clear = true })
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
 				require('nvim-lightbulb').update_lightbulb()
 			end,
 			buffer = bufnr,
-			group = group,
 			desc = 'Update the LightBulb',
 		})
 	end
@@ -87,18 +85,18 @@ local on_attach = function(client, bufnr)
 	end
 
 	-- if client.resolved_capabilities.code_lens then
-	-- 	local group = vim.api.nvim_create_augroup('lsp_document_codelens', { clear = true })
+	-- 	vim.api.nvim_create_augroup('lsp_doc_codelens', { clear = true })
 	-- 	vim.api.nvim_create_autocmd('BufEnter', {
 	-- 		callback = require('vim.lsp.codelens').refresh,
 	-- 		buffer = bufnr,
-	-- 		group = group,
+	-- 		group = 'lsp_doc_codelens',
 	-- 		once = true,
 	-- 		desc = 'Refresh CodeLens',
 	-- 	})
 	-- 	vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
 	-- 		callback = require('vim.lsp.codelens').refresh,
 	-- 		buffer = bufnr,
-	-- 		group = group,
+	-- 		group = 'lsp_doc_codelens',
 	-- 		desc = 'Refresh CodeLens',
 	-- 	})
 	-- end

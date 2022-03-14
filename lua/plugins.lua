@@ -4,11 +4,11 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
 end
 
-local group = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
 	command = 'source <afile> | PackerCompile',
 	pattern = 'plugins.lua',
-	group = group,
+	group = 'packer_user_config',
 	desc = 'Compile whenever plugins.lua is updated',
 })
 
@@ -91,7 +91,7 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope', opt = true },
 	}
 
-	use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 3]] }
+	-- use { 'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 3]] }
 end
 
 require('packer').startup {

@@ -191,23 +191,26 @@ M = {
 		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}'), i(3), i(0) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
-
 	s(
 		{ trig = 'lim', name = 'limit', dscr = 'Insert a limit notation.' },
 		{ t('\\lim_{n='), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} '), i(0) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
-
 	s(
 		{ trig = 'limsup', name = 'limsup', dscr = 'Insert a limit superior notation.' },
 		{ t('\\limsup_{n='), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} '), i(0) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
-
 	s(
 		{ trig = 'prod', name = 'product', dscr = 'Insert a product notation.' },
 		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}'), i(4), t(' '), i(0) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
+	),
+
+	s(
+		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.' },
+		{ t('&\\phantom{\\;=\\;} ') },
+		{ condition = pipe { conds.line_begin, vimtex.in_mathzone }, show_condition = vimtex.in_mathzone }
 	),
 
 	-- phrases which are often used

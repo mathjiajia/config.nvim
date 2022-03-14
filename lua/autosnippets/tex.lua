@@ -37,8 +37,8 @@ vimtex.in_beamer = function()
 	return vim.b.vimtex['documentclass'] == 'beamer'
 end
 -- vimtex.env_align = function()
--- 	local x, y = unpack(vim.eval('vimtex#env#is_inside("align")'))
--- 	return x ~= '0' and y ~= '0'
+-- 	local x, y = unpack(vim.fn['vimtex#env#is_inside'](align))
+-- 	return x == 1 and y == 1
 -- end
 -- vimtex.env_align = function()
 -- 	return vim.fn["vimtex#env#is_inside('align')"]() == 1

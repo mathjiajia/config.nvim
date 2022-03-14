@@ -73,7 +73,7 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.diag.warning, bold = true }) --
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {}) -- Like FoldColumn when 'cursorline' is set for the cursor line.
 
 vim.api.nvim_set_hl(0, 'MatchParen', { bg = cp.black3, bold = true }) -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.white, bold = true }) -- 'showmode' message (e.g., "-- INSERT -- ")
+-- vim.api.nvim_set_hl(0, 'ModeMsg', {}) -- 'showmode' message (e.g., "-- INSERT -- ")
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = cp.white }) -- Area for messages and cmdline
 -- vim.api.nvim_set_hl(0,'MsgSeparator', {}) -- Separator for scrolled messages, `msgsep` flag of 'display'
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue, bold = true }) -- |more-prompt|
@@ -219,12 +219,6 @@ vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'TelescopeFrecencyScores', { fg = cp.maroon })
 
 ---------- TREESITTER ----------
--- These groups are for the neovim tree-sitter highlights.
--- As of writing, tree-sitter support is a WIP, group names may change.
--- By default, most of these groups link to an appropriate Vim group,
--- TSError -> Error for example, so you do not have to define these unless
--- you explicitly want to support Treesitter's improved syntax awareness.
-
 -- vim.api.nvim_set_hl(0, 'TSPunctDelimiter', { link = 'Delimiter' }) -- Punctuation delimiters: Periods, commas, semicolons, etc.
 vim.api.nvim_set_hl(0, 'TSPunctBracket', { fg = cp.maroon, bold = true }) -- Brackets, braces, parentheses, etc.
 vim.api.nvim_set_hl(0, 'TSPunctSpecial', { fg = cp.gray1 }) -- Special punctuation that doesn't fit into the previous categories.

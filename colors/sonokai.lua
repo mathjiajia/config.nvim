@@ -60,7 +60,7 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.fg })
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
 
 vim.api.nvim_set_hl(0, 'MatchParen', { bg = cp.bg4 })
-vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.fg, bold = true })
+-- vim.api.nvim_set_hl(0, 'ModeMsg', {})
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = cp.fg })
 -- vim.api.nvim_set_hl(0,'MsgSeparator', {})
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue, bold = true })
