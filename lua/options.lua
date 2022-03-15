@@ -13,7 +13,8 @@ vim.g.loaded_shada_plugin = 1
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-vim.g.python3_host_prog = '/usr/local/bin/python3'
+vim.g.loaded_python3_provider = 0
+-- vim.g.python3_host_prog = '/usr/local/bin/python3'
 
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
