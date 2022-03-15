@@ -44,30 +44,20 @@ require('telescope').setup {
 			workspaces = {
 				['conf'] = home .. '/.config',
 				['cv'] = home .. '/Documents/CV',
-				['exercise'] = home .. '/Documents/Exercises',
-				['norg'] = home .. '/Documents/neorg',
-				['notes'] = home .. '/Documents/Notes',
-				['project'] = home .. '/Documents/Projects',
+				['ex'] = home .. '/Documents/Exercises',
+				['org'] = home .. '/Documents/neorg',
+				['note'] = home .. '/Documents/Notes',
+				['proj'] = home .. '/Documents/Projects',
 				['site'] = home .. '/my_site',
-				['talks'] = home .. '/Documents/Talks',
-				['tex'] = home .. ' /Tex',
+				['talk'] = home .. '/Documents/Talks',
+				['tex'] = home .. '/Tex',
 			},
-		},
-		project = {
-			base_dirs = {
-				home .. '/.config',
-				home .. '/Test',
-				home .. '/Tex',
-				{ path = home .. '/Documents', max_depth = 2 },
-				{ path = home .. '/my_site', max_depth = 2 },
-			},
-			hidden_files = true,
 		},
 	},
 }
 
 -- Load extensions
-local extensions = { 'fzf', 'file_browser', 'frecency', 'project', 'notify' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end

@@ -39,7 +39,6 @@ local function spec(use)
 		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
 		{ 'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sqlite.lua' },
-		{ 'nvim-telescope/telescope-project.nvim' },
 	}
 
 	use {

@@ -91,6 +91,9 @@ end, { desc = 'Neovim Config Files' })
 vim.keymap.set('n', '<leader>fo', function()
 	require('telescope.builtin').oldfiles()
 end, { desc = 'Old Files' })
+vim.keymap.set('n', '<leader>fp', function()
+	require('telescope.builtin').find_files { cwd = '~/Documents/Projects', prompt_title = 'Projects Files' }
+end, { desc = 'Projects' })
 vim.keymap.set('n', '<leader>fs', function()
 	require('telescope.builtin').current_buffer_fuzzy_find()
 end, { desc = 'Current Buffer Fuzzy Find' })
@@ -98,9 +101,6 @@ end, { desc = 'Current Buffer Fuzzy Find' })
 vim.keymap.set('n', '<leader><space>', function()
 	require('telescope').extensions.file_browser.file_browser {}
 end, { desc = 'File Browser' })
-vim.keymap.set('n', '<leader>fp', function()
-	require('telescope').extensions.project.project {}
-end, { desc = 'Projects' })
 vim.keymap.set('n', '<leader>fr', function()
 	require('telescope').extensions.frecency.frecency {}
 end, { desc = 'Frecency' })
