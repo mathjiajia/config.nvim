@@ -190,6 +190,41 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' }) -- us
 -- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', {})
 -- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {}) -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
 
+---------- CMP ----------
+vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.gray2 })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.gray0, strikethrough = true })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = cp.blue })
+
+vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = cp.mauve })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { link = 'TSConstructor' })
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { link = 'Directory' })
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = cp.peach })
+vim.api.nvim_set_hl(0, 'CmpItemKindField', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'CmpItemKindFile', { link = 'Directory' })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'CmpItemKindColor', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'TSParameterReference' })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = cp.sky })
+vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.lavender })
+vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = cp.sky })
+vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
+
+vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.gray0 })
+
 ---------- NVIM NOTIFY ----------
 vim.api.nvim_set_hl(0, 'NotifyERRORBorder', { link = 'DiagnosticError' })
 vim.api.nvim_set_hl(0, 'NotifyWARNBorder', { link = 'DiagnosticWarning' })
@@ -208,6 +243,9 @@ vim.api.nvim_set_hl(0, 'NotifyWARNTitle', { fg = cp.diag.warning, italic = true 
 vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.diag.info, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
+
+---------- SYMBOLS OUTLINE ----------
+vim.api.nvim_set_hl(0, 'FocusedSymbol', { link = 'Search' })
 
 ---------- TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.flamingo, bg = cp.black3 })

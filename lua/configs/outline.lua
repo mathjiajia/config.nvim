@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, 'FocusedSymbol', { link = 'Search' })
-
 require('symbols-outline').setup {
 	auto_preview = false,
 	relative_width = false,

@@ -1,8 +1,6 @@
 local M = {}
 
 local ls = require('luasnip')
-
--- some shorthands...
 -- some shorthands...
 local s = ls.snippet
 -- local sn = ls.snippet_node

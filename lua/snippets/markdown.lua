@@ -12,7 +12,7 @@ local f = ls.function_node
 -- local r = ls.restore_node
 -- local l = require('luasnip.extras').lambda
 -- local rep = require('luasnip.extras').rep
--- local p = require("luasnip.extras").partial
+local p = require('luasnip.extras').partial
 -- local m = require("luasnip.extras").match
 -- local n = require("luasnip.extras").nonempty
 -- local dl = require("luasnip.extras").dynamic_lambda
@@ -33,6 +33,21 @@ M = {
 		{ trig = 'code', name = 'Insert fenced code block' },
 		{ t('``` '), i(1, 'lang'), t { '', '' }, i(0), t { '', '```' } }
 	),
+	s({ trig = 'meta', name = 'Markdown front matter (YAML format)' }, {
+		t { '---', 'title: ' },
+		i(1),
+		t { '', 'date: ' },
+		p(os.date, '%Y-%m-%dT%H:%M:%S+0800'),
+		t { '', 'tags: ["' },
+		i(2),
+		t { '"]', 'categories: ["' },
+		i(3),
+		t { '"]', 'series: ["' },
+		i(4),
+		t { '"]', '---', '', '' },
+		i(0),
+	}, { condition = conds.line_begin }),
+	s({ trig = 'td', name = 'too long, do not read' }, { t('tl;dr: ') }, { condition = conds.line_begin }),
 }
 
 return M

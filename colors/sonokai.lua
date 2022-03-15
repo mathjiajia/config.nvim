@@ -158,6 +158,41 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
 -- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', {})
 -- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {})
 
+---------- CMP ----------
+vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.fg })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.fg, strikethrough = true })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = cp.green, bold = true })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = cp.green, bold = true })
+vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = cp.blue })
+
+vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = cp.fg })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { link = 'TSConstructor' })
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { link = 'Directory' })
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = cp.orange })
+vim.api.nvim_set_hl(0, 'CmpItemKindField', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = cp.fg })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.purple })
+vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.orange })
+vim.api.nvim_set_hl(0, 'CmpItemKindFile', { link = 'Directory' })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindColor', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'TSParameterReference' })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = cp.purple })
+vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.purple })
+vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
+
+vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.fg })
+
 ---------- NVIM NOTIFY ----------
 vim.api.nvim_set_hl(0, 'NotifyERRORBorder', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'NotifyWARNBorder', { fg = cp.yellow })
@@ -176,6 +211,9 @@ vim.api.nvim_set_hl(0, 'NotifyWARNTitle', { fg = cp.yellow, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.green, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.grey, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.purple, italic = true })
+
+---------- SYMBOLS OUTLINE ----------
+vim.api.nvim_set_hl(0, 'FocusedSymbol', { link = 'Search' })
 
 ---------- TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.fg, bg = cp.bg1, bold = true })

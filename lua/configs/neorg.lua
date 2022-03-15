@@ -1,6 +1,3 @@
-require('packer').loader('nvim-cmp')
-require('packer').loader('neorg-telescope')
-
 require('neorg').setup {
 	load = {
 		['core.defaults'] = {}, -- Load all the default modules

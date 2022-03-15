@@ -1,5 +1,3 @@
-require('packer').loader('cmp-nvim-lsp')
-
 -- lsp info
 vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
