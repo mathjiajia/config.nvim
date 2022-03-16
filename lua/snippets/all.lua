@@ -7,12 +7,12 @@ local s = ls.snippet
 local t = ls.text_node
 -- local i = ls.insert_node
 -- local f = ls.function_node
--- local c = ls.choice_node
+local c = ls.choice_node
 -- local d = ls.dynamic_node
 -- local r = ls.restore_node
 -- local l = require('luasnip.extras').lambda
 -- local rep = require('luasnip.extras').rep
-local p = require('luasnip.extras').partial
+-- local p = require('luasnip.extras').partial
 -- local m = require('luasnip.extras').match
 -- local n = require('luasnip.extras').nonempty
 -- local dl = require('luasnip.extras').dynamic_lambda
@@ -24,9 +24,17 @@ local p = require('luasnip.extras').partial
 -- local events = require('luasnip.util.events')
 
 M = {
-	s({ trig = 'fixme', name = 'FIXME:', hidden = true }, { t('FIXME('), p(os.getenv, 'USER'), t('): ') }),
-	s({ trig = 'note', name = 'NOTE:', hidden = true }, { t('NOTE('), p(os.getenv, 'USER'), t('): ') }),
-	s({ trig = 'todo', name = 'TODO:', hidden = true }, { t('TODO('), p(os.getenv, 'USER'), t('): ') }),
+	-- s({ trig = 'fixme', name = 'FIXME:', hidden = true }, { t('FIXME('), p(os.getenv, 'USER'), t('): ') }),
+	-- s({ trig = 'note', name = 'NOTE:', hidden = true }, { t('NOTE('), p(os.getenv, 'USER'), t('): ') }),
+	-- s({ trig = 'todo', name = 'TODO:', hidden = true }, { t('TODO('), p(os.getenv, 'USER'), t('): ') }),
+	s(
+		{ trig = 'todo', name = 'TODO, NOTE, FIXME', hidden = true },
+		{ c(1, {
+			t('TODO(jia): '),
+			t('NOTE(jia): '),
+			t('FIXME(jia): '),
+		}) }
+	),
 }
 
 return M

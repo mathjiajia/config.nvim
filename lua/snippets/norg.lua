@@ -51,7 +51,7 @@ M = {
 		{ condition = conds.line_begin }
 	),
 	s(
-		{ trig = 'link', name = 'Link', dscr = 'Insert a Link' },
+		{ trig = 'link', name = 'Neorg Links', dscr = 'Insert a Link' },
 		{ t('{'), i(1, 'url'), t('}['), i(2, 'title'), t(']'), i(0) }
 	),
 	s(

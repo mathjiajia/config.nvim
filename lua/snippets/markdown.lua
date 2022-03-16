@@ -48,6 +48,10 @@ M = {
 		i(0),
 	}, { condition = conds.line_begin }),
 	s({ trig = 'td', name = 'too long, do not read' }, { t('tl;dr: ') }, { condition = conds.line_begin }),
+	s(
+		{ trig = 'link', name = 'Markdown Links', dscr = 'Insert a Link' },
+		{ t('['), i(1, 'title'), t(']('), i(2, 'url'), t(')'), i(0) }
+	),
 }
 
 return M
