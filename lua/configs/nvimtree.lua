@@ -22,7 +22,9 @@ local custom = {
 	'Zotero',
 }
 
-require('nvim-tree').setup {
+local tree = require('nvim-tree')
+
+tree.setup {
 	disable_netrw = true,
 	auto_close = true,
 	update_cwd = true,
@@ -35,3 +37,7 @@ require('nvim-tree').setup {
 		custom = custom,
 	},
 }
+
+vim.keymap.set('n', '<M-t>', function()
+	tree.toggle()
+end, { desc = 'Toggle NvimTree' })
