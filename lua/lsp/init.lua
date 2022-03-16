@@ -29,17 +29,19 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 
 	local tb = require('telescope.builtin')
+	local themes = require('telescope.themes')
+
 	vim.keymap.set('n', 'gd', function()
-		tb.lsp_definitions()
+		tb.lsp_definitions(themes.get_dropdown {})
 	end, { buffer = bufnr, desc = 'Go to Definitions' })
 	vim.keymap.set('n', 'gr', function()
-		tb.lsp_references()
+		tb.lsp_references(themes.get_dropdown {})
 	end, { buffer = bufnr, desc = 'Go to References' })
 	vim.keymap.set('n', 'gi', function()
-		tb.lsp_implementations()
+		tb.lsp_implementations(themes.get_dropdown {})
 	end, { buffer = bufnr, desc = 'Go to Implementations' })
 	vim.keymap.set('n', '<leader>D', function()
-		tb.lsp_type_definitions()
+		tb.lsp_type_definitions(themes.get_dropdown {})
 	end, { buffer = bufnr, desc = 'Type Definitions' })
 
 	if client.resolved_capabilities.document_highlight then
@@ -59,12 +61,8 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.resolved_capabilities.code_action then
-		vim.keymap.set('n', '<leader>ca', function()
-			tb.lsp_code_actions()
-		end, { buffer = bufnr, desc = 'Code Actions' })
-		vim.keymap.set('v', '<leader>ca', function()
-			tb.lsp_range_code_actions()
-		end, { buffer = bufnr, desc = 'Range Code Actions' })
+		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions' })
+		vim.keymap.set('v', '<leader>ca', vim.lsp.buf.range_code_action, { buffer = bufnr, desc = 'Range Code Actions' })
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()

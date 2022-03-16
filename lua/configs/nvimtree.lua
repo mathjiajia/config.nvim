@@ -8,20 +8,6 @@ vim.g.nvim_tree_symlink_arrow = ' >> '
 vim.g.nvim_tree_respect_buf_cwd = 0
 vim.g.nvim_tree_create_in_closed_folder = 1
 
-local custom = {
-	'.dropbox',
-	'.git',
-	'bin',
-	'Applications',
-	'Library',
-	'Movies',
-	'Music',
-	'neovim',
-	'Pictures',
-	'Public',
-	'Zotero',
-}
-
 local tree = require('nvim-tree')
 
 tree.setup {
@@ -32,10 +18,7 @@ tree.setup {
 		enable = true,
 		update_cwd = true,
 	},
-	filters = {
-		dotfiles = false,
-		custom = custom,
-	},
+	filters = { dotfiles = false },
 }
 
 vim.keymap.set('n', '<M-t>', function()

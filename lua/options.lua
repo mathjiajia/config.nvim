@@ -38,6 +38,8 @@ vim.opt.tabstop = 4
 -- search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.grepprg = 'rg --vimgrep --no-heading --smart-case'
+vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
 -- backups
 vim.opt.autowrite = true
