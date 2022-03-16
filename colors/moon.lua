@@ -190,6 +190,34 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' }) -- us
 -- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', {})
 -- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {}) -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
 
+---------- AERIAL ----------
+vim.api.nvim_set_hl(0, 'AerialArrayIcon', { link = 'Constant' })
+vim.api.nvim_set_hl(0, 'AerialBooleanIcon', { link = 'Boolean' })
+vim.api.nvim_set_hl(0, 'AerialClassIcon', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'AerialConstantIcon', { link = 'Constant' })
+vim.api.nvim_set_hl(0, 'AerialConstructorIcon', { link = 'TSConstructor' })
+vim.api.nvim_set_hl(0, 'AerialEnumIcon', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'AerialEnumMemberIcon', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'AerialEventIcon', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'AerialFieldIcon', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'AerialFileIcon', { link = 'Include' })
+vim.api.nvim_set_hl(0, 'AerialFunctionIcon', { link = 'Function' })
+vim.api.nvim_set_hl(0, 'AerialInterfaceIcon', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'AerialKeyIcon', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'AerialMethodIcon', { link = 'TSMethod' })
+vim.api.nvim_set_hl(0, 'AerialModuleIcon', { link = 'Include' })
+vim.api.nvim_set_hl(0, 'AerialNamespaceIcon', { link = 'TSNamespace' })
+-- vim.api.nvim_set_hl(0, 'AerialNullIcon', { link = 'Type' })
+vim.api.nvim_set_hl(0, 'AerialNumberIcon', { link = 'Number' })
+vim.api.nvim_set_hl(0, 'AerialObjectIcon', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'AerialOperatorIcon', { link = '' })
+vim.api.nvim_set_hl(0, 'AerialPackageIcon', { link = 'Include' })
+vim.api.nvim_set_hl(0, 'AerialPropertyIcon', { link = 'TSProperty' })
+vim.api.nvim_set_hl(0, 'AerialStringIcon', { link = 'String' })
+vim.api.nvim_set_hl(0, 'AerialStructIcon', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'AerialTypeParameterIcon', { link = 'TSParameter' })
+vim.api.nvim_set_hl(0, 'AerialVariableIcon', { link = 'TSVariableBuiltin' })
+
 ---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.gray2 })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.gray0, strikethrough = true })
@@ -244,8 +272,14 @@ vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.diag.info, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
 
----------- SYMBOLS OUTLINE ----------
-vim.api.nvim_set_hl(0, 'FocusedSymbol', { link = 'Search' })
+---------- RAINBOW ----------
+vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.flamingo })
 
 ---------- TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.flamingo, bg = cp.black3 })

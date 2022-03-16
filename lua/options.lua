@@ -66,5 +66,7 @@ vim.opt.termguicolors = true
 
 ---- THEMS & LINES ----
 vim.cmd('colorscheme moon')
+-- vim.cmd('colorscheme gruvbox')
+-- vim.cmd('colorscheme sonokai')
 require('ui.buftab')
 require('ui.status')
