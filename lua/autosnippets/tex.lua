@@ -191,17 +191,14 @@ M = {
 	}, { condition = vimtex.in_text }),
 
 	s({ trig = 'ses', name = 'short exact sequence' }, {
-		c(1, {
-			t('0'),
-			t('1'),
-		}),
-		t(' \\longrightarrow '),
+		c(1, { t('0'), t('1') }),
+		t('\\longrightarrow '),
 		i(2),
-		t(' \\longrightarrow '),
+		t('\\longrightarrow '),
 		i(3),
-		t(' \\longrightarrow '),
+		t('\\longrightarrow '),
 		i(4),
-		t(' \\longrightarrow '),
+		t('\\longrightarrow '),
 		rep(1),
 		i(0),
 	}, { condition = vimtex.in_mathzone }),

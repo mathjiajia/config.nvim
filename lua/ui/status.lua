@@ -237,13 +237,10 @@ local function find_pattern_match(tbl, val)
 end
 
 local function force_inactive()
-	return find_pattern_match({ '^aerial$', '^NvimTree$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
-		or find_pattern_match({ '^help$', '^quickfix$' }, vim.bo.buftype)
+	-- return find_pattern_match({ '^aerial$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
+	-- 	or find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
+	return find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
 end
-
--- local function excluded()
--- 	return find_pattern_match({ '^prompt$', '^terminal$' }, vim.bo.buftype)
--- end
 
 local function parse_hl(hl, parent_hl)
 	parent_hl = parent_hl or {}
@@ -318,6 +315,7 @@ function M.setup()
 	return M.generate_statusline(vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin))
 end
 
+vim.opt.laststatus = 3
 vim.opt.showmode = false
 vim.g.qf_disable_statusline = true
 vim.opt.statusline = '%{%v:lua.statusline.setup()%}'

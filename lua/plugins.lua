@@ -62,9 +62,14 @@ local function spec(use)
 	}
 
 	use {
-		'kyazdani42/nvim-tree.lua',
-		requires = { 'kyazdani42/nvim-web-devicons' },
-		config = [[require('configs.nvimtree')]],
+		'nvim-neo-tree/neo-tree.nvim',
+		branch = 'v1.x',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'kyazdani42/nvim-web-devicons',
+			'MunifTanjim/nui.nvim',
+		},
+		config = [[require('configs.tree')]],
 	}
 
 	use { 'neovim/nvim-lspconfig', config = [[require('lsp')]] }
@@ -151,11 +156,11 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope' },
 	}
 
-	-- use {
-	-- 	'dstein64/vim-startuptime',
-	-- 	cmd = 'StartupTime',
-	-- 	config = [[vim.g.startuptime_tries = 10]],
-	-- }
+	use {
+		'dstein64/vim-startuptime',
+		cmd = 'StartupTime',
+		config = [[vim.g.startuptime_tries = 10]],
+	}
 end
 
 require('packer').startup {
@@ -163,7 +168,7 @@ require('packer').startup {
 	config = {
 		profile = {
 			enable = true,
-			threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+			threshold = 1,
 		},
 		display = {
 			open_fn = function()

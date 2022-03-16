@@ -1,4 +1,5 @@
 require('aerial').setup {
+	default_direction = 'right',
 	filter_kind = {
 		'Array',
 		'Boolean',

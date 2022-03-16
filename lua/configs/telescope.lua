@@ -68,13 +68,6 @@ vim.keymap.set(
 	{ desc = 'Telescope Meta' }
 )
 vim.keymap.set(
-	'n', '<leader>fc',
-	function()
-		tb.commands()
-	end,
-	{ desc = 'Command Pallete' }
-)
-vim.keymap.set(
 	'n', '<leader>fd',
 	function()
 		tb.find_files(themes.get_ivy { hidden = false })
@@ -137,7 +130,13 @@ vim.keymap.set(
 	end,
 	{ desc = 'Grep Strings' }
 )
-
+vim.keymap.set(
+	'n', '<F1>',
+	function()
+		tb.commands()
+	end,
+	{ desc = 'Command Pallete' }
+)
 vim.keymap.set(
 	'n', '<leader>nv',
 	function()

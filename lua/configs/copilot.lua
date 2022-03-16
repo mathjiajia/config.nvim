@@ -1,11 +1,3 @@
-local excluded_filetypes = { 'nofile', 'prompt' }
-local copilot_filetypes = {}
-for _, ft in ipairs(excluded_filetypes) do
-	copilot_filetypes[ft] = false
-end
-
-vim.g.copilot_filetypes = copilot_filetypes
-
 vim.keymap.set(
 	'i',
 	'<C-j>',

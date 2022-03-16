@@ -71,7 +71,11 @@ cmp.setup {
 cmp.setup.filetype('gitcommit', { sources = { { name = 'luasnip' }, { name = 'buffer', keyword_length = 3 } } })
 cmp.setup.filetype(
 	'norg',
-	{ sources = { { name = 'luasnip' }, { name = 'neorg' }, { name = 'buffer', keyword_length = 3 } } }
+	{ sources = {
+		{ name = 'luasnip' },
+		{ name = 'neorg' },
+		{ name = 'buffer', keyword_length = 3 },
+	} }
 )
 
 cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
