@@ -98,6 +98,7 @@ local on_attach = function(client, bufnr)
 	-- 		desc = 'Refresh CodeLens',
 	-- 	})
 	-- end
+	require('aerial').on_attach(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -237,13 +237,13 @@ local function find_pattern_match(tbl, val)
 end
 
 local function force_inactive()
-	return find_pattern_match({ '^NvimTree$', '^spectre_panel$', '^Outline$', '^tsplayground$' }, vim.bo.filetype)
+	return find_pattern_match({ '^aerial$', '^NvimTree$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
 		or find_pattern_match({ '^help$', '^quickfix$' }, vim.bo.buftype)
 end
 
-local function excluded()
-	return find_pattern_match({ '^prompt$', '^terminal$' }, vim.bo.buftype)
-end
+-- local function excluded()
+-- 	return find_pattern_match({ '^prompt$', '^terminal$' }, vim.bo.buftype)
+-- end
 
 local function parse_hl(hl, parent_hl)
 	parent_hl = parent_hl or {}

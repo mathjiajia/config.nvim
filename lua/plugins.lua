@@ -39,7 +39,7 @@ local function spec(use)
 		},
 	}
 	use {
-		'simrat39/symbols-outline.nvim',
+		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
 
@@ -117,23 +117,27 @@ local function spec(use)
 		'numToStr/Comment.nvim',
 		config = [[require('Comment').setup()]],
 	}
-	-- use {
-	-- 	'Shatur/neovim-session-manager',
-	-- 	requires = 'nvim-lua/plenary.nvim',
-	-- 	config = [[	require('session_manager').setup { autoload_mode = require('session_manager.config').AutoloadMode.Disabled }]],
-	-- }
+	use {
+		'Shatur/neovim-session-manager',
+		requires = 'nvim-lua/plenary.nvim',
+		config = [[require('configs.session')]],
+	}
 	use {
 		'~/Dev/surround.nvim',
 		config = [[require('surround').setup()]],
 	}
 	use {
-		{
-			'phaazon/hop.nvim',
-			config = [[require('hop').setup()]],
-		},
-		{ 'windwp/nvim-spectre' },
+		'phaazon/hop.nvim',
+		config = [[require('configs.hop')]],
 	}
-	use { 'numtostr/FTerm.nvim' }
+	use {
+		'windwp/nvim-spectre',
+		config = [[require('configs.search')]],
+	}
+	use {
+		'numtostr/FTerm.nvim',
+		config = [[require('configs.terminal')]],
+	}
 
 	use {
 		'lervag/vimtex',
