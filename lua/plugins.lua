@@ -33,7 +33,10 @@ local function spec(use)
 	use {
 		{ 'nvim-treesitter/playground' },
 		{ 'p00f/nvim-ts-rainbow' },
-		{ 'lukas-reineke/indent-blankline.nvim', config = [[require('configs.indentline')]] },
+		{
+			'lukas-reineke/indent-blankline.nvim',
+			config = [[require('configs.indentline')]],
+		},
 	}
 	use {
 		'stevearc/aerial.nvim',
@@ -46,9 +49,15 @@ local function spec(use)
 		config = [[require('configs.telescope')]],
 	}
 	use {
-		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+		{
+			'nvim-telescope/telescope-fzf-native.nvim',
+			run = 'make',
+		},
+		{
+			'nvim-telescope/telescope-frecency.nvim',
+			requires = 'tami5/sqlite.lua',
+		},
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
-		{ 'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sqlite.lua' },
 		{ 'nvim-telescope/telescope-ui-select.nvim' },
 	}
 
@@ -63,7 +72,10 @@ local function spec(use)
 		config = [[require('configs.tree')]],
 	}
 
-	use { 'neovim/nvim-lspconfig', config = [[require('lsp')]] }
+	use {
+		'neovim/nvim-lspconfig',
+		config = [[require('lsp')]],
+	}
 	use {
 		{
 			'jose-elias-alvarez/null-ls.nvim',
@@ -111,7 +123,7 @@ local function spec(use)
 	}
 	use {
 		'numToStr/Comment.nvim',
-		config = [[require('Comment').setup()]],
+		config = [[require('Comment').setup({ padding = function () return vim.bo.filetype ~= 'norg' end })]],
 	}
 	use {
 		'Shatur/neovim-session-manager',
@@ -146,6 +158,11 @@ local function spec(use)
 		},
 		{ 'nvim-neorg/neorg-telescope' },
 	}
+
+	-- use {
+	-- 	'dstein64/vim-startuptime',
+	-- 	config = [[vim.g.startuptime_tries = 10]],
+	-- }
 end
 
 require('packer').startup {

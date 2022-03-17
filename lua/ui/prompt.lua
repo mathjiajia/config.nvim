@@ -3,21 +3,34 @@ local M = {}
 local Input = require('nui.input')
 local Text = require('nui.text')
 
-local function popup_opts(top)
+local function editor_popup_opts(top)
 	return {
 		position = '50%',
 		size = { width = 30 },
 		relative = 'editor',
-		-- position = { row = 1, col = 0 },
-		-- size = { width = 30, height = 2 },
-		-- relative = 'cursor',
 		border = {
 			style = 'rounded',
 			text = { top = Text(top, 'Special'), top_align = 'left' },
 		},
 		win_options = {
 			winblend = 10,
-			winhighlight = 'FloatBorder:DiagnosticInfo',
+			winhighlight = 'Normal:Normal,FloatBorder:DiagnosticInfo',
+		},
+	}
+end
+
+local function cursor_popup_opts(top)
+	return {
+		position = { row = 1, col = 0 },
+		size = { width = 30, height = 2 },
+		relative = 'cursor',
+		border = {
+			style = 'rounded',
+			text = { top = Text(top, 'Special'), top_align = 'left' },
+		},
+		win_options = {
+			winblend = 10,
+			winhighlight = 'Normal:Normal,FloatBorder:DiagnosticInfo',
 		},
 	}
 end
@@ -36,7 +49,6 @@ local function popup_input(pop_opts, opts)
 		end,
 		buffer = 0,
 		once = true,
-		desc = 'Document Highlight',
 	})
 end
 
@@ -57,19 +69,51 @@ local grep_string_opts = {
 }
 
 function M.certain_type()
-	popup_input(popup_opts('File Type'), certain_type_opts)
+	popup_input(editor_popup_opts('File Type'), certain_type_opts)
 end
 
 function M.grep_string()
-	popup_input(popup_opts('Grep String'), grep_string_opts)
+	popup_input(editor_popup_opts('Grep String'), grep_string_opts)
 end
 
--- local function vim_input()
--- 	vim.ui.input({
--- 		prompt = 'prompt',
--- 	}, function(value)
--- 		return value
--- 	end)
--- end
+function M.lsp_rename()
+	local function on_confirm(input)
+		if not (input and #input > 0) then
+			return
+		end
+		local params = vim.lsp.util.make_position_params()
+		params.newName = input
+		vim.lsp.buf_request(0, 'textDocument/rename', params)
+	end
+
+	local popup_opts = cursor_popup_opts('New Name')
+
+	local opts = {
+		prompt = '> ',
+		default_value = vim.fn.expand('<cword>'),
+		on_submit = on_confirm,
+	}
+
+	local function prepare_rename(err, result)
+		if err == nil and result == nil then
+			vim.notify('nothing to rename', 'info', { title = 'LSP Rename' })
+			return
+		end
+		if result and result.placeholder then
+			opts.default_value = result.placeholder
+			popup_input(popup_opts, opts)
+		elseif result and result.start and result['end'] and result.start.line == result['end'].line then
+			local line = vim.fn.getline(result.start.line + 1)
+			local start_char = result.start.character + 1
+			local end_char = result['end'].character
+			opts.default_value = string.sub(line, start_char, end_char)
+			popup_input(popup_opts, opts)
+		else
+			opts.default_value = vim.fn.expand('<cword>')
+			popup_input(popup_opts, opts)
+		end
+	end
+	vim.lsp.buf_request(0, 'textDocument/prepareRename', vim.lsp.util.make_position_params(), prepare_rename)
+end
 
 return M

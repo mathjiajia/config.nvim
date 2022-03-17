@@ -1,14 +1,12 @@
+vim.g.neo_tree_remove_legacy_commands = 1
+
 require('neo-tree').setup {
-	default_source = 'filesystem',
-	close_if_last_window = true,
 	default_component_configs = {
-		indent = {
-			padding = 0,
-			with_markers = true,
-		},
+		indent = { padding = 0, with_markers = true },
 		icon = {
 			folder_closed = '',
 			folder_open = '',
+			folder_empty = '',
 			default = '',
 		},
 		git_status = {
@@ -29,14 +27,13 @@ require('neo-tree').setup {
 	},
 	window = { width = 35 },
 	filesystem = {
-		bind_to_cwd = true,
 		filtered_items = { hide_dotfiles = false },
 		follow_current_file = true,
 		hijack_netrw_behavior = 'open_current',
 	},
 }
 
-vim.keymap.set('n', '<M-t>', ':NeoTreeShowToggle<CR>', { silent = true, desc = 'Toggle NeoTree' })
+vim.keymap.set('n', '<M-t>', ':Neotree show<CR>', { silent = true, desc = 'Toggle NeoTree' })
 -- vim.keymap.set('n', '<M-b>', ':Neotree buffers<CR>', { silent = true, desc = 'Toggle NeoTree Buffer' })
 -- vim.keymap.set('n', '<M-b>', function()
 -- 	require('neo-tree').show('buffers', true)
