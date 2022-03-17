@@ -33,10 +33,7 @@ local function spec(use)
 	use {
 		{ 'nvim-treesitter/playground' },
 		{ 'p00f/nvim-ts-rainbow' },
-		{
-			'lukas-reineke/indent-blankline.nvim',
-			config = [[require('configs.indentline')]],
-		},
+		{ 'lukas-reineke/indent-blankline.nvim', config = [[require('configs.indentline')]] },
 	}
 	use {
 		'stevearc/aerial.nvim',
@@ -49,21 +46,15 @@ local function spec(use)
 		config = [[require('configs.telescope')]],
 	}
 	use {
-		{
-			'nvim-telescope/telescope-fzf-native.nvim',
-			run = 'make',
-		},
+		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
-		{
-			'nvim-telescope/telescope-frecency.nvim',
-			requires = 'tami5/sqlite.lua',
-		},
+		{ 'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sqlite.lua' },
 		{ 'nvim-telescope/telescope-ui-select.nvim' },
 	}
 
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
-		branch = 'v1.x',
+		branch = 'v2.x',
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons',
@@ -154,12 +145,6 @@ local function spec(use)
 			config = [[require('configs.neorg')]],
 		},
 		{ 'nvim-neorg/neorg-telescope' },
-	}
-
-	use {
-		'dstein64/vim-startuptime',
-		cmd = 'StartupTime',
-		config = [[vim.g.startuptime_tries = 10]],
 	}
 end
 

@@ -1,44 +1,48 @@
-vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', { link = 'Directory' })
-vim.api.nvim_set_hl(0, 'NeoTreeDirectoryIcon', { link = 'NeoTreeDirectoryName' })
-
 require('neo-tree').setup {
+	default_source = 'filesystem',
 	close_if_last_window = true,
-	popup_border_style = 'rounded',
-	enable_git_status = true,
-	enable_diagnostics = true,
 	default_component_configs = {
 		indent = {
-			indent_size = 2,
-			padding = 0, -- extra padding on left hand side
+			padding = 0,
 			with_markers = true,
-			indent_marker = '│',
-			last_indent_marker = '└',
-			highlight = 'NeoTreeIndentMarker',
 		},
 		icon = {
 			folder_closed = '',
-			folder_open = '',
-			folder_empty = '',
+			folder_open = '',
 			default = '',
 		},
-		name = {
-			trailing_slash = false,
-			use_git_status_colors = true,
-		},
 		git_status = {
-			-- highlight = 'NeoTreeDimText', -- if you remove this the status will be colorful
+			symbols = {
+				-- Change type
+				added = '',
+				deleted = '',
+				modified = '',
+				renamed = '',
+				-- Status type
+				untracked = '',
+				ignored = '',
+				unstaged = '',
+				staged = '',
+				conflict = '',
+			},
 		},
 	},
 	filesystem = {
+		bind_to_cwd = true,
+		filtered_items = { hide_dotfiles = false },
 		follow_current_file = true,
-		use_libuv_file_watcher = true,
-		hijack_netrw_behavior = 'open_split',
+		hijack_netrw_behavior = 'open_current',
 		window = { width = 35 },
 	},
-	buffers = {
-		show_unloaded = true,
-		window = { position = 'float' },
-	},
+	buffers = { window = { width = 35 } },
+	git_status = { window = { width = 35 } },
 }
 
-vim.keymap.set('n', '<M-t>', ':NeoTreeReveal<CR>', { silent = true, desc = 'Toggle NeoTree' })
+vim.keymap.set('n', '<M-t>', ':NeoTreeShowToggle<CR>', { silent = true, desc = 'Toggle NeoTree' })
+-- vim.keymap.set('n', '<M-b>', ':Neotree buffers<CR>', { silent = true, desc = 'Toggle NeoTree Buffer' })
+-- vim.keymap.set('n', '<M-b>', function()
+-- 	require('neo-tree').show('buffers', true)
+-- end, { desc = 'Toggle NeoTree Buffers' })
+-- vim.keymap.set('n', '<M-t>', function()
+-- 	require('neo-tree').focus('filesystem', true)
+-- end, { desc = 'Toggle NeoTree' })

@@ -45,10 +45,11 @@ vim.keymap.set(
 )
 -- stylua: ignore end
 
-local snipMeta = function(ty)
+local snipMeta = function(type)
+	local ft = type or ''
 	return {
 		__index = function(t, k)
-			local ok, m = pcall(require, ty .. 'snippets.' .. k)
+			local ok, m = pcall(require, ft .. 'snippets.' .. k)
 			if not ok and not string.match(m, '^module.*not found:') then
 				error(m)
 			end
@@ -70,7 +71,7 @@ end
 
 -- snippets_clear()
 
-ls.snippets = setmetatable({}, snipMeta(''))
+ls.snippets = setmetatable({}, snipMeta())
 ls.autosnippets = setmetatable({}, snipMeta('auto'))
 
 -- vim.api.nvim_create_augroup('luasnip_clear', { clear = true })

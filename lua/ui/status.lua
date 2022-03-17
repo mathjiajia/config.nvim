@@ -14,26 +14,26 @@ local colors = {
 	diag_hint = '#9ED06C',
 }
 local vim_modes = {
-	['n'] = { '  ormal ', 'green' },
-	['no'] = { '  -oppd ', 'green' },
-	['i'] = { '  nsert ', 'sky' },
-	['ic'] = { '  compl ', 'sky' },
-	['v'] = { '  isual ', 'flamingo' },
-	['V'] = { '  -Line ', 'flamingo' },
-	[''] = { '  -Blck ', 'flamingo' },
-	['s'] = { '  elect ', 'maroon' },
-	['S'] = { '  -Line ', 'maroon' },
-	[''] = { '  -Blck ', 'flamingo' },
-	['R'] = { '  place ', 'yellow' },
-	['Rv'] = { '  Rplce ', 'yellow' },
-	['c'] = { '  mmand ', 'peach' },
-	['cv'] = { '  im ex ', 'peach' },
-	['ce'] = { '  ex (r) ', 'peach' },
-	['r'] = { '  prompt ', 'teal' },
-	['rm'] = { '  more  ', 'teal' },
-	['r?'] = { '  nfirm ', 'teal' },
-	['t'] = { '  erm   ', 'red' },
-	['!'] = { '  hell  ', 'red' },
+	['n'] = { ' Normal ', 'green' },
+	['no'] = { ' N-oppd ', 'green' },
+	['i'] = { ' Insert ', 'sky' },
+	['ic'] = { ' Icompl ', 'sky' },
+	['v'] = { ' Visual ', 'flamingo' },
+	['V'] = { ' V-Line ', 'flamingo' },
+	[''] = { ' V-Blck ', 'flamingo' },
+	['s'] = { ' Select ', 'maroon' },
+	['S'] = { ' S-Line ', 'maroon' },
+	[''] = { ' S-Blck ', 'flamingo' },
+	['R'] = { ' Rplace ', 'yellow' },
+	['Rv'] = { ' VRplce ', 'yellow' },
+	['c'] = { ' Cmmand ', 'peach' },
+	['cv'] = { ' Vim ex ', 'peach' },
+	['ce'] = { ' ex (r) ', 'peach' },
+	['r'] = { ' Prompt ', 'teal' },
+	['rm'] = { '  More  ', 'teal' },
+	['r?'] = { ' Cnfirm ', 'teal' },
+	['t'] = { '  Term  ', 'red' },
+	['!'] = { ' Shell  ', 'red' },
 }
 
 local providers = {}
@@ -102,7 +102,7 @@ function providers.ln_col()
 	return string.format('%s%d %s%d ', pad(line, nbline), line, pad(col, 100), col)
 end
 
-local components = { active = { {}, {}, {} }, inactive = { {} }, exclude = { {}, {} } }
+local components = { active = { {}, {}, {} }, inactive = { {} } }
 
 components.active[1][1] = {
 	provider = 'vi_mode',
@@ -212,22 +212,6 @@ components.inactive[1][2] = {
 	hl = { fg = '', bg = 'bg' },
 }
 
-components.exclude[1][1] = {
-	provider = 'vi_mode',
-	hl = function()
-		return { fg = 'bg', bg = get_mode_color() }
-	end,
-}
-components.exclude[1][2] = {
-	provider = '',
-	hl = { fg = 'fg', bg = 'bg' },
-}
-
-components.exclude[2][1] = {
-	provider = ' %y ',
-	hl = { fg = 'yellow', bg = 'gray' },
-}
-
 local M, highlights = {}, {}
 
 local function find_pattern_match(tbl, val)
@@ -237,9 +221,9 @@ local function find_pattern_match(tbl, val)
 end
 
 local function force_inactive()
-	-- return find_pattern_match({ '^aerial$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
-	-- 	or find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
-	return find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
+	return find_pattern_match({ '^aerial$', '^neo%-tree$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
+		or find_pattern_match({ '^help$', '^quickfix$' }, vim.bo.buftype)
+	-- return find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
 end
 
 local function parse_hl(hl, parent_hl)
@@ -289,10 +273,8 @@ function M.generate_statusline(is_active)
 	local statusline_type
 	if is_active and not force_inactive() then
 		statusline_type = 'active'
-	elseif force_inactive() then
-		statusline_type = 'inactive'
 	else
-		statusline_type = 'exclude'
+		statusline_type = 'inactive'
 	end
 
 	local sections, component_strs = components[statusline_type], {}
@@ -315,7 +297,6 @@ function M.setup()
 	return M.generate_statusline(vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin))
 end
 
-vim.opt.laststatus = 3
 vim.opt.showmode = false
 vim.g.qf_disable_statusline = true
 vim.opt.statusline = '%{%v:lua.statusline.setup()%}'

@@ -109,26 +109,20 @@ vim.keymap.set(
 	end,
 	{ desc = 'Recent Files' }
 )
+
 vim.keymap.set(
 	'n', '<leader>fz',
 	function()
-		tb.find_files(themes.get_ivy {
-			find_command = {
-				'rg',
-				'--files',
-				'--type',
-				vim.fn.input 'Type: ',
-			},
-		})
+		require('ui.prompt').certain_type()
 	end,
 	{ desc = 'Search Certain Type Files' }
 )
 vim.keymap.set(
 	'n', '<leader>f/',
 	function()
-		tb.grep_string({ path_display = { 'shorten' }, search = vim.fn.input "Grep String > " })
+		require('ui.prompt').grep_string()
 	end,
-	{ desc = 'Grep Strings' }
+{ desc = 'Grep Strings' }
 )
 vim.keymap.set(
 	'n', '<F1>',

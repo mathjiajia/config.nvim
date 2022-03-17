@@ -53,18 +53,19 @@ vim.opt.updatetime = 250
 -- ui
 vim.opt.breakindent = true
 vim.wo.cursorline = true
-vim.opt.linebreak = true
 vim.opt.fillchars = 'eob: '
+vim.opt.laststatus = 3
+vim.opt.linebreak = true
 vim.wo.number = true
-vim.opt.pumheight = 10
 vim.wo.relativenumber = true
+vim.opt.pumheight = 10
 vim.opt.scrolloff = 8
 vim.opt.showbreak = '↳ '
 vim.wo.signcolumn = 'yes'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.termguicolors = true
+vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
 vim.cmd('colorscheme moon')
