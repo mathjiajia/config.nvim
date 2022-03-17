@@ -27,15 +27,13 @@ require('neo-tree').setup {
 			},
 		},
 	},
+	window = { width = 35 },
 	filesystem = {
 		bind_to_cwd = true,
 		filtered_items = { hide_dotfiles = false },
 		follow_current_file = true,
 		hijack_netrw_behavior = 'open_current',
-		window = { width = 35 },
 	},
-	buffers = { window = { width = 35 } },
-	git_status = { window = { width = 35 } },
 }
 
 vim.keymap.set('n', '<M-t>', ':NeoTreeShowToggle<CR>', { silent = true, desc = 'Toggle NeoTree' })
