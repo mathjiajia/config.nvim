@@ -221,7 +221,7 @@ local function find_pattern_match(tbl, val)
 end
 
 local function force_inactive()
-	return find_pattern_match({ '^aerial$', '^neo%-tree$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
+	return find_pattern_match({ '^aerial$', '^neo%-tree$', '^NvimTree$', '^spectre_panel$', '^tsplayground$' }, vim.bo.filetype)
 		or find_pattern_match({ '^help$', '^quickfix$' }, vim.bo.buftype)
 	-- return find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
 end

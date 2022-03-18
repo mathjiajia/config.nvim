@@ -45,7 +45,8 @@ vim.api.nvim_set_hl(0, 'DiffText', { fg = cp.bg0, bg = cp.blue })
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {})
 
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = cp.red, bold = true, underline = true })
-vim.api.nvim_set_hl(0, 'VertSplit', { fg = cp.black })
+vim.api.nvim_set_hl(0, 'WinSeparator', { fg = cp.black }) -- the column separating vertically split windows
+-- vim.api.nvim_set_hl(0, 'VertSplit', { fg = cp.black })
 vim.api.nvim_set_hl(0, 'Folded', { fg = cp.grey, bg = cp.bg1 })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = cp.grey_dim })
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.fg })
@@ -90,7 +91,7 @@ vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.fg, bg = cp.bg3 })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.grey, bg = cp.bg1 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.fg, bg = cp.bg4 })
 vim.api.nvim_set_hl(0, 'TabLineFill', { fg = cp.grey, bg = cp.bg0 })
-vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.bg0, bg = cp.bg_red })
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.fg, bg = cp.bg4 })
 
 vim.api.nvim_set_hl(0, 'Title', { fg = cp.red, bold = true })
 vim.api.nvim_set_hl(0, 'Visual', { bg = cp.bg3 })

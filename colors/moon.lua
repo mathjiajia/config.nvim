@@ -57,7 +57,8 @@ vim.api.nvim_set_hl(0, 'DiffText', { fg = cp.blue, bg = cp.black2 }) -- used for
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {}) -- cursor in a unfocused terminal
 
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = cp.diag.error, bold = true, italic = true }) -- error messages on the command line
-vim.api.nvim_set_hl(0, 'VertSplit', { fg = cp.black0 }) -- the column separating vertically split windows
+vim.api.nvim_set_hl(0, 'WinSeparator', { fg = cp.black0 }) -- the column separating vertically split windows
+-- vim.api.nvim_set_hl(0, 'VertSplit', { fg = cp.black0 }) -- the column separating vertically split windows
 vim.api.nvim_set_hl(0, 'Folded', { fg = cp.sky, bg = cp.black4 }) -- line used for closed folds
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = cp.gray0, bg = cp.black2 }) -- 'foldcolumn'
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.black4, bg = cp.black2 }) -- column where |signs| are displayed
@@ -86,7 +87,7 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { fg = cp.white, bg = cp.black1 }) -- Norm
 vim.api.nvim_set_hl(0, 'NormalNC', { fg = cp.white, bg = cp.black2 }) -- normal text in non-current windows
 
 vim.api.nvim_set_hl(0, 'Pmenu', { fg = cp.gray2, bg = cp.black3 }) -- Popup menu: normal item.
-vim.api.nvim_set_hl(0, 'PmenuSel', { fg = cp.white, bg = cp.black4, bold = true }) -- Popup menu: selected item.
+vim.api.nvim_set_hl(0, 'PmenuSel', { fg = cp.white, bg = cp.black4 }) -- Popup menu: selected item.
 vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = cp.black4 }) -- Popup menu: scrollbar.
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = cp.gray0 }) -- Popup menu: Thumb of the scrollbar.
 
@@ -106,12 +107,12 @@ vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = cp.blue }) -- Word
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = cp.green }) -- Word that is recognized by the spellchecker as one that is hardly ever used.
 -- |spell| Combined with the highlighting used otherwise.
 
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.black2, bg = cp.black3 }) -- status line of current window
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.gray0, bg = cp.black1 }) -- status lines of not-current windows
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.white, bg = cp.black3 }) -- status line of current window
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.gray1, bg = cp.black1 }) -- status lines of not-current windows
 -- Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.black0, bg = cp.lavender }) -- tab pages line, not active tab page label
+vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.gray0, bg = cp.black4 }) -- tab pages line, not active tab page label
 vim.api.nvim_set_hl(0, 'TabLineFill', { fg = cp.gray0, bg = cp.black2 }) -- tab pages line, where there are no labels
-vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.black0, bg = cp.green }) -- tab pages line, active tab page label
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.white, bg = cp.black4 }) -- tab pages line, active tab page label
 
 vim.api.nvim_set_hl(0, 'Title', { fg = cp.blue, bold = true }) -- titles for output from ":set all", ":autocmd" etcp.
 vim.api.nvim_set_hl(0, 'Visual', { bg = cp.black4 }) -- Visual mode selection
