@@ -17,12 +17,8 @@ local function spec(use)
 	use { 'lewis6991/impatient.nvim' }
 
 	use {
-		'kyazdani42/nvim-web-devicons',
-		config = [[require('configs.devicons')]],
-	}
-	use {
 		'rcarriga/nvim-notify',
-		config = [[require('notify').setup {} vim.notify = require('notify')]],
+		config = [[require('notify').setup() vim.notify = require('notify')]],
 	}
 
 	use {
@@ -60,10 +56,9 @@ local function spec(use)
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
 		{ 'nvim-telescope/telescope-ui-select.nvim' },
 	}
-
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
-		branch = 'v2.x',
+		branch = 'v1.x',
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons',
@@ -71,6 +66,11 @@ local function spec(use)
 		},
 		config = [[require('configs.tree')]],
 	}
+	-- use {
+	-- 	'kyazdani42/nvim-tree.lua',
+	-- 	requires = 'kyazdani42/nvim-web-devicons',
+	-- 	config = [[require('configs.nvimtree')]],
+	-- }
 
 	use {
 		'neovim/nvim-lspconfig',
@@ -84,7 +84,7 @@ local function spec(use)
 		},
 		{
 			'j-hui/fidget.nvim',
-			config = [[require('fidget').setup { text = { spinner = 'line' } }]],
+			config = [[require('fidget').setup { text = { spinner = 'line' }, window = { relative = 'editor' } }]],
 		},
 		{ 'kosayoda/nvim-lightbulb' },
 		{ 'folke/lua-dev.nvim' },
@@ -159,10 +159,10 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope' },
 	}
 
-	-- use {
-	-- 	'dstein64/vim-startuptime',
-	-- 	config = [[vim.g.startuptime_tries = 10]],
-	-- }
+	use {
+		'dstein64/vim-startuptime',
+		config = [[vim.g.startuptime_tries = 10]],
+	}
 end
 
 require('packer').startup {
@@ -174,9 +174,9 @@ require('packer').startup {
 		},
 		display = {
 			open_fn = function()
-				return require('packer.util').float { border = 'single' }
+				return require('packer.util').float { border = 'rounded' }
 			end,
-			prompt_border = 'single',
+			prompt_border = 'rounded',
 		},
 	},
 }

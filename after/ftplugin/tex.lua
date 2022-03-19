@@ -6,6 +6,9 @@ vim.opt_local.spell = true
 vim.bo.spelllang = 'en_gb'
 vim.keymap.set('i', '<M-l>', '<C-g>u<Esc>[s1z=`]a<C-g>u', { buffer = true, desc = 'Fix Last Miss-Spelling' })
 
+vim.keymap.set('n', '<M-b>', '<Plug>(vimtex-compile)', { buffer = true, desc = 'Compile LaTeX' })
+vim.keymap.set('n', '<M-v>', '<Plug>(vimtex-view)', { buffer = true, desc = 'View PDF' })
+
 -- A list of groups that are only primitive link targets.
 -- vim.api.nvim_set_hl(0, 'texCmdType', { link = 'Type' })
 -- vim.api.nvim_set_hl(0, 'texError', { link = 'Error' })
@@ -38,7 +41,7 @@ vim.api.nvim_set_hl(0, 'texAuthorOpt', { link = 'texOpt' }) -- \author[OPT]
 vim.api.nvim_set_hl(0, 'texAuthorArg', { link = 'NONE' }) -- \author[...]{AUTHOR LIST}
 vim.api.nvim_set_hl(0, 'texCmdPart', { link = 'texCmd' }) -- \(SUB*)SECTION
 vim.api.nvim_set_hl(0, 'texPartArgTitle', { link = 'String' }) -- \(sub*)section{TITLE}
-vim.api.nvim_set_hl(0, 'texCmdEnv', { link = 'texCmd' }) -- \BEGIN; \END
+vim.api.nvim_set_hl(0, 'texCmdEnv', { link = 'TSEnvironment' }) -- \BEGIN; \END
 vim.api.nvim_set_hl(0, 'texEnvArgName', { link = 'TSEnvironmentName' }) -- PreCondit -- \begin{ENVNAME}
 vim.api.nvim_set_hl(0, 'texTheoremEnvBgn', { link = 'texCmd' }) -- \begin{theorem}
 vim.api.nvim_set_hl(0, 'texCmdRef', { link = 'texCmd' }) -- \CITE; \LABEL
@@ -52,7 +55,7 @@ vim.api.nvim_set_hl(0, 'texBoxOptPosVal', { link = 'texSymbol' }) -- parbox[P][h
 vim.api.nvim_set_hl(0, 'texBoxOptIPosVal', { link = 'texBoxOptPosVal' }) -- \parbox[p][h][I]{w}{c}, \begin{minipage}[p][h][I]{w}
 
 -- A list of math mode groups.
-vim.api.nvim_set_hl(0, 'texMathZone', { link = 'Special' }) -- Special \( HERE \); \[ HERE \]
+vim.api.nvim_set_hl(0, 'texMathZone', { link = 'TSMath' }) -- Special \( HERE \); \[ HERE \]
 vim.api.nvim_set_hl(0, 'texMathZoneEnv', { link = 'texMathZone' }) -- \begin{menv} HERE \end{menv}
 vim.api.nvim_set_hl(0, 'texMathZoneEnvStarred', { link = 'texMathZone' }) -- \begin{menv*} HERE \end{menv*}
 -- vim.api.nvim_set_hl(0, 'texMathZoneX', { link = 'texMathZone' }) -- $ HERE $

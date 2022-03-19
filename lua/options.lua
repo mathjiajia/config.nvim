@@ -52,18 +52,8 @@ vim.opt.updatetime = 250
 
 -- ui
 vim.opt.breakindent = true
-vim.wo.cursorline = true
--- vim.opt.fillchars = 'eob: '
-vim.opt.fillchars = {
-	eob = ' ',
-	-- vert = '║',
-	-- horiz = '═',
-	-- horizup = '╩',
-	-- horizdown = '╦',
-	-- vertleft = '╣',
-	-- vertright = '╠',
-	-- verthoriz = '╬',
-}
+-- vim.wo.cursorline = true
+vim.opt.fillchars = 'eob: '
 vim.opt.laststatus = 3
 vim.opt.linebreak = true
 vim.wo.number = true
@@ -78,9 +68,10 @@ vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
-vim.cmd('colorscheme moon')
+-- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme sonokai')
+require('my_colors').init()
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')

@@ -61,7 +61,7 @@ vim.keymap.set(
 	{ desc = 'File Browser' }
 )
 vim.keymap.set(
-	'n', '<leader>fb',
+	'n', '<leader>fm',
 	function()
 		tb.builtin()
 	end,
@@ -113,14 +113,16 @@ vim.keymap.set(
 vim.keymap.set(
 	'n', '<leader>fz',
 	function()
-		require('ui.prompt').certain_type()
+		-- require('ui.prompt').certain_type()
+		tb.find_files(themes.get_ivy { find_command = { 'rg', '--files', '--type', vim.fn.input 'Type: ' } })
 	end,
 	{ desc = 'Search Certain Type Files' }
 )
 vim.keymap.set(
 	'n', '<leader>f/',
 	function()
-		require('ui.prompt').grep_string()
+		-- require('ui.prompt').grep_string()
+		tb.grep_string ({ path_display = { 'shorten' }, search = vim.fn.input 'Grep String > ' })
 	end,
 { desc = 'Grep Strings' }
 )
@@ -132,7 +134,7 @@ vim.keymap.set(
 	{ desc = 'Command Pallete' }
 )
 vim.keymap.set(
-	'n', '<leader>nv',
+	'n', '<leader>en',
 	function()
 		tb.find_files(themes.get_ivy { cwd = '~/.config/nvim', prompt_title = 'Nvim Configs' })
 	end,

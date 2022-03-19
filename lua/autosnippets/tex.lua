@@ -20,6 +20,7 @@ local rep = require('luasnip.extras').rep
 -- local fmta = require("luasnip.extras.fmt").fmta
 -- local types = require("luasnip.util.types")
 local conds = require('luasnip.extras.expand_conditions')
+-- local ts_math = require('configs.math')
 
 local events = require('luasnip.util.events')
 
@@ -293,7 +294,7 @@ M = {
 	-- phrases which are often used
 	s({ trig = 'iee', name = 'id est' }, { t('i.e., ') }, { condition = vimtex.in_text }),
 	s({ trig = 'egg', name = 'exempli gratia' }, { t('e.g., ') }, { condition = vimtex.in_text }),
-	s({ trig = 'stt', name = 'such that' }, { t('such that ') }, { condition = vimtex.in_text }),
+	s({ trig = 'stt', name = 'such that' }, { t('such that') }, { condition = vimtex.in_text }),
 	s({ trig = 'qf', name = 'Q-factorial' }, { t('\\(\\mathbb{Q}\\)-factorial') }, { condition = vimtex.in_text }),
 	s(
 		{ trig = '([qr])c', name = 'Cartier', regTrig = true },
@@ -646,8 +647,8 @@ M = {
 	s({ trig = 'lben', name = 'Enumerate with labels' }, {
 		t { '\\begin{enumerate}[label=(\\' },
 		c(1, {
-			t('alph'),
 			t('arabic'),
+			t('alph'),
 			t('roman'),
 		}),
 		t { '*)]', '\t\\item ' },

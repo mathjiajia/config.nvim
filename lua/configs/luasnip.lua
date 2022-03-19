@@ -9,10 +9,11 @@ ls.config.setup {
 			active = {
 				-- virt_text = { { '●', 'DiagnosticSignHint' } },
 				-- virt_text = { { '◍', 'DiagnosticSignHint' } },
-				virt_text = { { '<-', 'Error' } },
+				virt_text = { { '<- Current Choice', 'NonText' } },
 			},
 		},
 	},
+	ft_func = require('luasnip.extras.filetype_functions').from_pos_or_filetype,
 }
 
 -- stylua: ignore start
@@ -74,6 +75,7 @@ end
 ls.snippets = setmetatable({}, snipMeta())
 ls.autosnippets = setmetatable({}, snipMeta('auto'))
 
+-- ls.filetype_extend('latex', { 'tex' })
 -- vim.api.nvim_create_augroup('luasnip_clear', { clear = true })
 -- vim.api.nvim_create_autocmd('BufWritePost', {
 -- 	callback = snippets_clear,
