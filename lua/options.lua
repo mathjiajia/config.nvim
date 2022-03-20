@@ -68,10 +68,11 @@ vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
+vim.g.mytheme = 'monokai'
 -- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme sonokai')
-require('my_colors').init()
+require('themes').setup()
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')
