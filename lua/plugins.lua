@@ -104,6 +104,7 @@ local function spec(use)
 	}
 	use {
 		'L3MON4D3/LuaSnip',
+		branch = 'add_snippets',
 		config = [[require('configs.luasnip')]],
 	}
 	use {

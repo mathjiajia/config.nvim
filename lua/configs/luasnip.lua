@@ -13,7 +13,31 @@ ls.config.setup {
 			},
 		},
 	},
-	ft_func = require('luasnip.extras.filetype_functions').from_pos_or_filetype,
+	-- ft_func = require('luasnip.extras.filetype_functions').from_pos_or_filetype,
+	-- globals injected into luasnippet-files.
+	-- snip_env = {
+	-- 	s = require('luasnip.nodes.snippet').S,
+	-- 	sn = require('luasnip.nodes.snippet').SN,
+	-- 	t = require('luasnip.nodes.textNode').T,
+	-- 	f = require('luasnip.nodes.functionNode').F,
+	-- 	i = require('luasnip.nodes.insertNode').I,
+	-- 	c = require('luasnip.nodes.choiceNode').C,
+	-- 	d = require('luasnip.nodes.dynamicNode').D,
+	-- 	r = require('luasnip.nodes.restoreNode').R,
+	-- 	l = require('luasnip.extras').lambda,
+	-- 	rep = require('luasnip.extras').rep,
+	-- 	p = require('luasnip.extras').partial,
+	-- 	m = require('luasnip.extras').match,
+	-- 	n = require('luasnip.extras').nonempty,
+	-- 	dl = require('luasnip.extras').dynamic_lambda,
+	-- 	fmt = require('luasnip.extras.fmt').fmt,
+	-- 	fmta = require('luasnip.extras.fmt').fmta,
+	-- 	conds = require('luasnip.extras.expand_conditions'),
+	-- 	types = require('luasnip.util.types'),
+	-- 	events = require('luasnip.util.events'),
+	-- 	parse = require('luasnip.util.parser').parse_snippet,
+	-- 	ai = require('luasnip.nodes.absolute_indexer'),
+	-- },
 }
 
 -- stylua: ignore start
@@ -46,55 +70,7 @@ vim.keymap.set(
 )
 -- stylua: ignore end
 
-local snipMeta = function(type)
-	local ft = type or ''
-	return {
-		__index = function(t, k)
-			local ok, m = pcall(require, ft .. 'snippets.' .. k)
-			if not ok and not string.match(m, '^module.*not found:') then
-				error(m)
-			end
-			t[k] = ok and m or {}
-
-			return t[k]
-		end,
-	}
-end
-
--- local snippets_clear = function()
--- 	for m, _ in pairs(ls.snippets) do
--- 		package.loaded['snippets.' .. m] = nil
--- 		package.loaded['autosnippets.' .. m] = nil
--- 	end
--- 	ls.snippets = setmetatable({}, snipMeta(''))
--- 	ls.autosnippets = setmetatable({}, snipMeta('auto'))
--- end
-
--- snippets_clear()
-
-ls.snippets = setmetatable({}, snipMeta())
-ls.autosnippets = setmetatable({}, snipMeta('auto'))
-
--- ls.filetype_extend('latex', { 'tex' })
--- vim.api.nvim_create_augroup('luasnip_clear', { clear = true })
--- vim.api.nvim_create_autocmd('BufWritePost', {
--- 	callback = snippets_clear,
--- 	pattern = '~/.config/nvim/lua/snippets/*.lua, ~/.config/nvim/lua/autosnippets/*.lua',
--- 	group = 'luasnip_clear',
--- 	desc = 'Reload snippets whenever they are updated',
--- })
-
--- local edit_ft = function()
--- 	-- returns table like {"lua", "all"}
--- 	local fts = require('luasnip.util.util').get_snippet_filetypes()
--- 	vim.ui.select(fts, {
--- 		prompt = 'Select which filetype to edit:',
--- 	}, function(item, idx)
--- 		-- selection aborted -> idx == nil
--- 		if idx then
--- 			vim.cmd('edit ~/.config/nvim/lua/snippets/' .. item .. '.lua')
--- 		end
--- 	end)
--- end
+-- require('luasnip.loaders.from_lua').lazy_load { include = { 'all', 'cpp' } }
+require('luasnip.loaders.from_lua').lazy_load()
 
 -- vim.api.nvim_add_user_command('LuaSnipEdit', edit_ft, {})
