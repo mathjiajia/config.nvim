@@ -52,7 +52,7 @@ vim.opt.updatetime = 250
 
 -- ui
 vim.opt.breakindent = true
--- vim.wo.cursorline = true
+vim.wo.cursorline = true
 vim.opt.fillchars = 'eob: '
 vim.opt.laststatus = 3
 vim.opt.linebreak = true
@@ -68,12 +68,12 @@ vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
--- vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme catppuccin')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme kanagawa')
 -- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme sonokai')
-vim.cmd('colorscheme vscode')
+-- vim.cmd('colorscheme vscode')
 
 -- require('themes').setup()
 -- require('ui.buftab')

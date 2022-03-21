@@ -59,18 +59,18 @@ vim.api.nvim_create_autocmd('CursorHold', {
 	once = true,
 })
 
--- vim.api.nvim_create_augroup('auto_cursorline', { clear = true })
--- vim.api.nvim_create_autocmd({ 'WinEnter' }, {
--- 	callback = function()
--- 		vim.wo.cursorline = true
--- 	end,
--- 	pattern = '*',
--- 	group = 'auto_cursorline',
--- })
--- vim.api.nvim_create_autocmd({ 'WinLeave' }, {
--- 	callback = function()
--- 		vim.wo.cursorline = false
--- 	end,
--- 	pattern = '*',
--- 	group = 'auto_cursorline',
--- })
+vim.api.nvim_create_augroup('auto_cursorline', { clear = true })
+vim.api.nvim_create_autocmd({ 'WinEnter' }, {
+	callback = function()
+		vim.wo.cursorline = true
+	end,
+	pattern = '*',
+	group = 'auto_cursorline',
+})
+vim.api.nvim_create_autocmd({ 'WinLeave' }, {
+	callback = function()
+		vim.wo.cursorline = false
+	end,
+	pattern = '*',
+	group = 'auto_cursorline',
+})
