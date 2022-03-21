@@ -1,5 +1,5 @@
 return {
-	base00 = '#2b2d3a',
+	base00 = '#181a1c',
 	base01 = '#383830',
 	base02 = '#49483e',
 	base03 = '#75715e',

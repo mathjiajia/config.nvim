@@ -1,44 +1,29 @@
 local M = {}
 
 -- aquarium
--- blossom
 -- catppuccin
--- chadracula
--- chadtain
--- classic-dark
--- doom-chad
+-- coffy
+-- doombox
+-- dracula
+-- edgedark
+-- edgelight
 -- everblush
 -- everforest
+-- github
 -- gruvbox
--- gruvchad
 -- javacafe
--- jellybeans
 -- kanagawa
--- lfgruv
--- monekai
--- monokai
--- mountain
--- night-owl
--- nightlamp
 -- nord
--- one-light
 -- onebright
--- onedark-deep
 -- onedark
--- onejelly
--- onenord
--- palenight
--- paradise
--- penokai
--- solarized
+-- onedarker
+-- onelight
+-- rosepine
 -- sonokai
--- tokyodark
 -- tokyonight
--- tomorrow-night
--- uwu
--- wombat
+-- tokyostorm
 
-local theme = 'kanagawa'
+local theme = 'doomchad'
 
 -- local theme
 -- local time = os.date('*t')

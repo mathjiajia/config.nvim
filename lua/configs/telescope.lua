@@ -12,7 +12,7 @@ require('telescope').setup {
 				width = 0.8,
 			},
 		},
-		prompt_prefix = ' ',
+		prompt_prefix = '   ', -- ' ',
 		selection_caret = ' ',
 		path_display = { 'absolute' },
 		set_env = { ['COLORTERM'] = 'truecolor' },
@@ -37,7 +37,7 @@ require('telescope').setup {
 	},
 }
 
-local extensions = { 'fzf', 'file_browser', 'frecency', 'ui-select', 'aerial', 'notify' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'ui-select', 'aerial', 'neoclip', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
@@ -108,6 +108,14 @@ vim.keymap.set(
 		te.frecency.frecency(themes.get_ivy {})
 	end,
 	{ desc = 'Recent Files' }
+)
+vim.keymap.set(
+	'n', '<leader>fy',
+	function()
+		-- te.neoclip.default(themes.get_cursor {})
+		te.neoclip.default(themes.get_dropdown {})
+	end,
+	{ desc = 'Clipboard History' }
 )
 
 vim.keymap.set(

@@ -1,6 +1,4 @@
 -- Modified from https://github.com/NvChad/nvim-base16.lua
--- Modified from https://github.com/chriskempson/base16-vim
-
 local function apply_base16_theme(theme)
 	-- Neovim terminal colours
 	vim.g.terminal_color_0 = theme.base00
@@ -19,23 +17,20 @@ local function apply_base16_theme(theme)
 	vim.g.terminal_color_13 = theme.base0E
 	vim.g.terminal_color_14 = theme.base0C
 	vim.g.terminal_color_15 = theme.base07
-	-- if vim.o.background == 'light' then
-	-- 	vim.g.terminal_color_background = theme.base05
-	-- 	vim.g.terminal_color_foreground = theme.base0B
-	-- else
 	vim.g.terminal_color_background = theme.base00
 	vim.g.terminal_color_foreground = theme.base0E
-	-- end
+	-- 	vim.g.terminal_color_background = theme.base05
+	-- 	vim.g.terminal_color_foreground = theme.base0B
 
 	-- Vim editor colors
-	vim.api.nvim_set_hl(0, 'Normal', { fg = theme.base05, bg = theme.base00 })
+	vim.api.nvim_set_hl(0, 'Normal', { fg = theme.base07, bg = theme.base00 })
 
 	vim.api.nvim_set_hl(0, 'ColorColumn', { bg = theme.base01 })
-	vim.api.nvim_set_hl(0, 'Conceal', { fg = theme.base04 })
-	vim.api.nvim_set_hl(0, 'Cursor', { fg = theme.base00, bg = theme.base05 })
+	vim.api.nvim_set_hl(0, 'Conceal', { fg = theme.base04, bg = 'NONE' })
+	vim.api.nvim_set_hl(0, 'Cursor', { fg = theme.base00, bg = theme.base07 })
 	vim.api.nvim_set_hl(0, 'CursorColumn', { bg = theme.base01 })
 	-- vim.api.nvim_set_hl(0, 'CursorLine', {})
-	vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = theme.base07 })
+	vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = theme.base07, bold = true })
 	vim.api.nvim_set_hl(0, 'Debug', { fg = theme.base08 })
 	vim.api.nvim_set_hl(0, 'Directory', { fg = theme.base0D })
 	-- vim.api.nvim_set_hl(0, 'EndOfBuffer', {})
@@ -46,7 +41,7 @@ local function apply_base16_theme(theme)
 	vim.api.nvim_set_hl(0, 'Folded', { fg = theme.base03, bg = theme.base01 })
 	-- vim.api.nvim_set_hl(0, 'Ignore', {})
 	vim.api.nvim_set_hl(0, 'IncSearch', { fg = theme.base01, bg = theme.base09 })
-	-- vim.api.nvim_set_hl(0, 'LineNr', {})
+	vim.api.nvim_set_hl(0, 'LineNr', { fg = theme.base03 })
 	vim.api.nvim_set_hl(0, 'Macro', { fg = theme.base08 })
 	vim.api.nvim_set_hl(0, 'MatchParen', { fg = theme.base08, bg = theme.base01 })
 	vim.api.nvim_set_hl(0, 'ModeMsg', { fg = theme.base0B })
@@ -62,7 +57,7 @@ local function apply_base16_theme(theme)
 	vim.api.nvim_set_hl(0, 'Substitute', { fg = theme.base01, bg = theme.base0A })
 	vim.api.nvim_set_hl(0, 'TabLine', { fg = theme.base03, bg = theme.base01 })
 	vim.api.nvim_set_hl(0, 'TabLineFill', { fg = theme.base03, bg = theme.base00 })
-	vim.api.nvim_set_hl(0, 'TabLineSel', { fg = theme.base05, bg = theme.base01 })
+	vim.api.nvim_set_hl(0, 'TabLineSel', { fg = theme.base07, bg = theme.base01 })
 	vim.api.nvim_set_hl(0, 'Title', { fg = theme.base0D, bold = true })
 	-- vim.api.nvim_set_hl(0, 'Underlined', {})
 	-- vim.api.nvim_set_hl(0, 'VertSplit', {})
@@ -78,15 +73,15 @@ local function apply_base16_theme(theme)
 	vim.api.nvim_set_hl(0, 'Conditional', { fg = theme.base0E, bold = true })
 	vim.api.nvim_set_hl(0, 'Constant', { fg = theme.base09 })
 	vim.api.nvim_set_hl(0, 'Define', { fg = theme.base0E })
-	vim.api.nvim_set_hl(0, 'Delimiter', { fg = theme.base0B })
-	vim.api.nvim_set_hl(0, 'Float', { fg = theme.base0A })
+	vim.api.nvim_set_hl(0, 'Delimiter', { fg = theme.base06 })
+	vim.api.nvim_set_hl(0, 'Float', { link = 'Number' })
 	vim.api.nvim_set_hl(0, 'Function', { fg = theme.base0C })
 	vim.api.nvim_set_hl(0, 'Identifier', { fg = theme.base08 })
 	vim.api.nvim_set_hl(0, 'Include', { fg = theme.base0E })
 	vim.api.nvim_set_hl(0, 'Keyword', { fg = theme.base0E })
 	vim.api.nvim_set_hl(0, 'Label', { fg = theme.base0A })
 	vim.api.nvim_set_hl(0, 'Marco', { fg = theme.base0E })
-	vim.api.nvim_set_hl(0, 'Number', { fg = theme.base0A, bold = true })
+	vim.api.nvim_set_hl(0, 'Number', { fg = theme.base0A })
 	vim.api.nvim_set_hl(0, 'Operator', { fg = theme.base0B, bold = true })
 	vim.api.nvim_set_hl(0, 'PreProc', { fg = theme.base0A })
 	vim.api.nvim_set_hl(0, 'Repeat', { fg = theme.base0A })
@@ -96,7 +91,7 @@ local function apply_base16_theme(theme)
 	vim.api.nvim_set_hl(0, 'StorageClass', { fg = theme.base0A })
 	vim.api.nvim_set_hl(0, 'String', { fg = theme.base0B })
 	vim.api.nvim_set_hl(0, 'Structure', { fg = theme.base0E })
-	vim.api.nvim_set_hl(0, 'Tag', { fg = theme.base0A })
+	vim.api.nvim_set_hl(0, 'Tag', {})
 	vim.api.nvim_set_hl(0, 'Todo', { fg = theme.base0A, bg = theme.base01 })
 	vim.api.nvim_set_hl(0, 'Type', { fg = theme.base09 })
 	vim.api.nvim_set_hl(0, 'Typedef', { fg = theme.base0A })

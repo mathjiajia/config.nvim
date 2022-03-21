@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 local function spec(use)
 	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
-
+	use('rebelot/kanagawa.nvim')
 	use {
 		'rcarriga/nvim-notify',
 		config = [[require('notify').setup() vim.notify = require('notify')]],
@@ -55,7 +55,13 @@ local function spec(use)
 		},
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
 		{ 'nvim-telescope/telescope-ui-select.nvim' },
+		{
+			'AckslD/nvim-neoclip.lua',
+			requires = 'tami5/sqlite.lua',
+			config = [[require('neoclip').setup()]],
+		},
 	}
+
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
 		branch = 'main',
@@ -66,11 +72,6 @@ local function spec(use)
 		},
 		config = [[require('configs.tree')]],
 	}
-	-- use {
-	-- 	'kyazdani42/nvim-tree.lua',
-	-- 	requires = 'kyazdani42/nvim-web-devicons',
-	-- 	config = [[require('configs.nvimtree')]],
-	-- }
 
 	use {
 		'neovim/nvim-lspconfig',
@@ -104,7 +105,7 @@ local function spec(use)
 	}
 	use {
 		'L3MON4D3/LuaSnip',
-		branch = 'add_snippets',
+		-- branch = 'add_snippets',
 		config = [[require('configs.luasnip')]],
 	}
 	use {
