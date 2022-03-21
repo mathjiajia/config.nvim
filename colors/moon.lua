@@ -48,8 +48,6 @@ vim.api.nvim_set_hl(0, 'Folded', { fg = cp.sky, bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.black4, bg = cp.pink })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.gray1 })
--- vim.api.nvim_set_hl(0, 'LineNrAbove', {})
--- vim.api.nvim_set_hl(0, 'LineNrBelow', {})
 vim.api.nvim_set_hl(0, 'MatchParen', { bg = cp.black3, bold = true })
 -- vim.api.nvim_set_hl(0, 'ModeMsg', {})
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue, bold = true })
@@ -260,7 +258,6 @@ vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
 
 ---------- RAINBOW ----------
--- local bg_highlight = cnf.transparent_background and 'NONE' or cp.black2
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.teal })
 vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.yellow })

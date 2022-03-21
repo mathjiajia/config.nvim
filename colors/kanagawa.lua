@@ -137,8 +137,6 @@ vim.api.nvim_set_hl(0, 'Folded', { fg = colors.bg_light3, bg = colors.bg_light0 
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = colors.bg_visual, bg = colors.diag.warning })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = colors.bg_light2 })
--- vim.api.nvim_set_hl(0, 'LineNrAbove', {})
--- vim.api.nvim_set_hl(0, 'LineNrBelow', {})
 vim.api.nvim_set_hl(0, 'MatchParen', { fg = colors.diag.warning, bg = 'NONE', bold = true })
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = colors.diag.warning, bold = true, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = colors.diag.info, bg = colors.bg })
