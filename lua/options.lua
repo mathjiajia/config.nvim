@@ -68,12 +68,14 @@ vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
--- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme catppuccin')
 -- vim.cmd('colorscheme gruvbox')
+vim.cmd('colorscheme kanagawa')
+-- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme sonokai')
--- vim.cmd('colorscheme kanagawa')
-require('themes').setup()
+-- vim.cmd('colorscheme vscode')
+
+-- require('themes').setup()
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')

@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 local function spec(use)
 	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
-	use('rebelot/kanagawa.nvim')
+
 	use {
 		'rcarriga/nvim-notify',
 		config = [[require('notify').setup() vim.notify = require('notify')]],
