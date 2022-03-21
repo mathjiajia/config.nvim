@@ -56,6 +56,9 @@ local palette_colors = {
 	peachRed = '#FF5D62',
 	surimiOrange = '#FFA066',
 	katanaGray = '#717C7C',
+
+	teledark = '#191922',
+	teleblack = '#25252e',
 }
 
 local colors = {
@@ -125,7 +128,7 @@ vim.api.nvim_set_hl(0, 'Conceal', { fg = colors.bg_light3, bg = 'NONE', bold = t
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.fg })
 vim.api.nvim_set_hl(0, 'CursorColumn', { link = 'CursorLine' })
 -- vim.api.nvim_set_hl(0, 'CursorIM', {})
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg_light1 })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = palette_colors.teleblack }) -- FIXED
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = colors.diag.warning, bg = 'NONE', bold = true })
 vim.api.nvim_set_hl(0, 'Directory', { fg = colors.fn })
@@ -137,7 +140,7 @@ vim.api.nvim_set_hl(0, 'Folded', { fg = colors.bg_light3, bg = colors.bg_light0 
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = colors.bg_visual, bg = colors.diag.warning })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = colors.bg_light2 })
-vim.api.nvim_set_hl(0, 'MatchParen', { fg = colors.diag.warning, bg = 'NONE', bold = true })
+vim.api.nvim_set_hl(0, 'MatchParen', { bg = colors.bg_light1, bold = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = colors.diag.warning, bold = true, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = colors.diag.info, bg = colors.bg })
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = colors.fg_dark, bg = 'NONE' })
@@ -336,7 +339,7 @@ vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = colors.bg_light3, u
 vim.api.nvim_set_hl(0, 'NotifyERRORBorder', { link = 'DiagnosticError' })
 vim.api.nvim_set_hl(0, 'NotifyWARNBorder', { link = 'DiagnosticWarning' })
 vim.api.nvim_set_hl(0, 'NotifyINFOBorder', { link = 'DiagnosticInfo' })
-vim.api.nvim_set_hl(0, 'NotifyDEBUGBorder', { fg = palette_colors.surimiOrange })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGBorder', { fg = colors.co })
 vim.api.nvim_set_hl(0, 'NotifyTRACEBorder', { link = 'DiagnosticHint' })
 
 vim.api.nvim_set_hl(0, 'NotifyERRORIcon', { link = 'NotifyERRORBorder' })
@@ -348,29 +351,30 @@ vim.api.nvim_set_hl(0, 'NotifyTRACEIcon', { link = 'NotifyTRACEBorder' })
 vim.api.nvim_set_hl(0, 'NotifyERRORTitle', { fg = colors.diag.error, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyWARNTitle', { fg = colors.diag.warning, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = colors.diag.info, italic = true })
-vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = palette_colors.surimiOrange, italic = true })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = colors.co, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = colors.diag.hint, italic = true })
 
 ---------- RAINBOW ----------
-vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = palette_colors.autumnYellow })
-vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = palette_colors.surimiOrange })
-vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = palette_colors.autumnRed })
-vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = palette_colors.springGreen })
-vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = palette_colors.lightBlue })
-vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = palette_colors.crystalBlue })
-vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = palette_colors.oniViolet })
+vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.sp2 })
+vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = colors.ty })
+vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = colors.id })
+vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = colors.sp })
+vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = colors.nu })
+vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = colors.co })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.st })
 
 ------------ TELESCOPE ----------
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.bg_dark })
-vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = colors.bg_status })
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette_colors.teledark })
+vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = palette_colors.teleblack })
 
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.bg_dark, bg = colors.bg_dark })
-vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.bg_status, bg = colors.bg_status })
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = palette_colors.peachRed, bg = colors.bg_status })
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.sp3, bg = palette_colors.teleblack })
 
-vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = colors.bg_dim, bg = palette_colors.springGreen })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.bg_dim, bg = palette_colors.peachRed })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = colors.bg_dark, bg = palette_colors.crystalBlue })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = palette_colors.teledark, bg = palette_colors.teledark })
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = palette_colors.teleblack, bg = palette_colors.teleblack })
+
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = colors.bg, bg = colors.st })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.bg, bg = colors.sp2 })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = palette_colors.teledark, bg = colors.fn })
 
 ---------- TREESITTER ----------
 

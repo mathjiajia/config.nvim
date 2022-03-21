@@ -68,9 +68,9 @@ vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
-vim.cmd('colorscheme catppuccin')
+-- vim.cmd('colorscheme catppuccin')
 -- vim.cmd('colorscheme gruvbox')
--- vim.cmd('colorscheme kanagawa')
+vim.cmd('colorscheme kanagawa')
 -- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme sonokai')
 -- vim.cmd('colorscheme vscode')
