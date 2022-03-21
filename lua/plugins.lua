@@ -34,6 +34,10 @@ local function spec(use)
 			config = [[require('configs.indentline')]],
 		},
 	}
+	-- use {
+	-- 	'lewis6991/spellsitter.nvim',
+	-- 	config = [[require('spellsitter').setup()]],
+	-- }
 	use {
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],

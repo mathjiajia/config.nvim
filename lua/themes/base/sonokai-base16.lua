@@ -1,5 +1,5 @@
 return {
-	base00 = '#181a1c',
+	base00 = '#2b2d3a',
 	base01 = '#383830',
 	base02 = '#49483e',
 	base03 = '#75715e',
@@ -9,7 +9,7 @@ return {
 	base07 = '#e1e3e4',
 	base08 = '#fb617e',
 	base09 = '#fd971f',
-	base0A = '#f0c362',
+	base0A = '#edc763',
 	base0B = '#9ed06c',
 	base0C = '#f89860',
 	base0D = '#6dcae8',

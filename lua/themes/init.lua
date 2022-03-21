@@ -1,8 +1,6 @@
 local M = {}
 
--- aquarium
 -- catppuccin
--- coffy
 -- doombox
 -- dracula
 -- edgedark
@@ -13,6 +11,7 @@ local M = {}
 -- gruvbox
 -- javacafe
 -- kanagawa
+-- moon
 -- nord
 -- onebright
 -- onedark
@@ -23,7 +22,7 @@ local M = {}
 -- tokyonight
 -- tokyostorm
 
-local theme = 'doomchad'
+local theme = 'kanagawa'
 
 -- local theme
 -- local time = os.date('*t')

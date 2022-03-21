@@ -69,10 +69,11 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
 -- vim.cmd('colorscheme moon')
+-- vim.cmd('colorscheme catppuccin')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme sonokai')
-require('themes').setup()
 -- vim.cmd('colorscheme kanagawa')
+require('themes').setup()
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')
