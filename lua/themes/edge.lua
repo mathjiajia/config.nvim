@@ -1,4 +1,4 @@
-vim.g.colors_name = 'edge'
+-- Modified from https://github.com/sainnhe/edge
 
 local cp = {}
 
@@ -301,6 +301,7 @@ vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = cp.white, bg = cp.telebla
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = cp.diff_green })
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.green, bold = true })
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = cp.red, bg = cp.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = cp.fg, bg = cp.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = cp.teledark, bg = cp.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = cp.teleblack, bg = cp.teleblack })
@@ -446,6 +447,7 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.bg0, bg = cp.yellow, bold = true }
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
 
+------ TERMINAL ------
 vim.g.terminal_color_0 = cp.black
 vim.g.terminal_color_1 = cp.red
 vim.g.terminal_color_2 = cp.green

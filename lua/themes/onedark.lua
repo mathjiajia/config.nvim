@@ -1,4 +1,4 @@
-vim.g.colors_name = 'onedark'
+-- Modified from https://github.com/olimorris/onedarkpro.nvim
 
 local colors = {}
 
@@ -381,6 +381,7 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = colors.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.red, bg = colors.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = colors.fg, bg = colors.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.teledark, bg = colors.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.teleblack, bg = colors.teleblack })

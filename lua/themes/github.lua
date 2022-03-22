@@ -1,5 +1,3 @@
-vim.g.colors_name = 'github'
-
 local c = {}
 
 if vim.g.theme_style == 'dark_default' then
@@ -93,7 +91,14 @@ if vim.g.theme_style == 'dark_default' then
 		bright_cyan = '#56d4dd',
 
 		-- Plugin Colors
-		git_signs = { add = '#196c2e', change = '#9e6a03', delete = '#b62324' },
+		git_signs = {
+			add = '#196c2e',
+			change = '#9e6a03',
+			delete = '#b62324',
+		},
+
+		teledark = '#070b11',
+		teleblack = '#13171d',
 	}
 elseif vim.g.theme_style == 'dark' then
 	c = {
@@ -184,7 +189,14 @@ elseif vim.g.theme_style == 'dark' then
 		bright_cyan = '#56d4dd',
 
 		-- Plugin Colors
-		git_signs = { add = '#28a745', change = '#2188ff', delete = '#ea4a5a' },
+		git_signs = {
+			add = '#28a745',
+			change = '#2188ff',
+			delete = '#ea4a5a',
+		},
+
+		teledark = '#1e2328',
+		teleblack = '#2a2f34',
 	}
 elseif vim.g.theme_style == 'light' then
 	c = {
@@ -283,6 +295,9 @@ elseif vim.g.theme_style == 'light' then
 			change = '#f9c513',
 			delete = '#d73a49',
 		},
+
+		teledark = '#f6f8fa',
+		teleblack = '#eaecee',
 	}
 else
 	c = {
@@ -373,7 +388,14 @@ else
 		bright_cyan = '#3192aa',
 
 		-- Plugin Colors
-		git_signs = { add = '#28a745', change = '#2188ff', delete = '#d73a49' },
+		git_signs = {
+			add = '#28a745',
+			change = '#2188ff',
+			delete = '#d73a49',
+		},
+
+		teledark = '#f6f8fa',
+		teleblack = '#eaecee',
 	}
 end
 
@@ -421,7 +443,7 @@ vim.api.nvim_set_hl(0, 'Conceal', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.bg, bg = c.fg })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = c.bg_highlight })
 vim.api.nvim_set_hl(0, 'CursorIM', { link = 'Cursor' })
-vim.api.nvim_set_hl(0, 'CursorLine', { link = 'CursorColumn' })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = c.teleblack }) -- FIXED
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.cursor_line_nr })
 vim.api.nvim_set_hl(0, 'Directory', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = c.eob })
@@ -623,7 +645,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameterDefault', { link = 'CmpItemKindC
 -- vim.api.nvim_set_hl(0, 'HopUnmatched', { fg = c.fg_dark })
 
 -------- INDENT BLANKLINES --------
--- vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {})
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = c.syntax.comment })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {})
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', {})
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.white })
@@ -674,11 +696,21 @@ vim.api.nvim_set_hl(0, 'NotifyTRACEBody', { fg = util.lighten(c.bright_magenta, 
 -- vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.flamingo })
 -- vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.green })
 
--- Telescope
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.border })
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.fg })
+------------ TELESCOPE ----------
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.teledark })
+vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = c.fg, bg = c.teleblack })
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.syntax.constant, bold = true })
 vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = c.syntax.comment })
+
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.fg })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = c.fg, bg = c.teleblack })
+
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.teledark, bg = c.teledark })
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = c.teleblack, bg = c.teleblack })
+
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = c.bg, bg = c.red })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = c.bg, bg = c.blue })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.teledark, bg = c.green })
 
 ------------ TELESCOPE ----------
 -- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = cp.teledark })

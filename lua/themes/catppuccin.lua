@@ -1,4 +1,4 @@
-vim.g.colors_name = 'catppuccin'
+-- Modified from https://github.com/catppuccin/nvim
 
 local cp = {}
 
@@ -26,12 +26,7 @@ if vim.g.theme_style == 'dark' then
 		black2 = '#1E1E2E', -- Black2
 		black1 = '#1A1826', -- Black1
 		black0 = '#161320', -- Black0
-		diag = {
-			error = '#F28FAD',
-			warning = '#FAE3B0',
-			info = '#89DCEB',
-			hint = '#F5E0DC',
-		},
+
 		teledark = '#1A1826',
 		teleblack = '#252434',
 	}
@@ -59,12 +54,7 @@ elseif vim.g.theme_style == 'storm' then
 		black2 = '#24273A', -- Black2				-- done
 		black1 = '#1F2233', -- Black1
 		black0 = '#1A1B26', -- Black0
-		diag = {
-			error = '#F586A2',
-			warning = '#F8DEA9',
-			info = '#89DCFD',
-			hint = '#F5DFDA',
-		},
+
 		teledark = '#1A1826',
 		teleblack = '#252434',
 	}
@@ -75,7 +65,7 @@ else
 		mauve = '#AC61DF', -- Mauve				-- done
 		pink = '#EF9AD9', -- Pink				-- done
 		red = '#E84746', -- Red					-- done -
-		maroon = '#c96765', -- Maroon			-- done
+		maroon = '#C96765', -- Maroon			-- done
 		peach = '#E99726', -- Peach				-- done -
 		yellow = '#EABE24', -- Yellow			-- done -
 		green = '#89B517', -- Green				-- done -
@@ -92,14 +82,9 @@ else
 		black2 = '#FCFCFC', -- Black2			-- done
 		black1 = '#F3F3F3', -- Black1
 		black0 = '#D3D0D2', -- Black0
-		diag = {
-			error = '#E84746',
-			warning = '#EABE24',
-			info = '#3FC4D9',
-			hint = '#E09D90',
-		},
-		teledark = '#ffffff',
-		teleblack = '#f6f6f6',
+
+		teledark = '#FFFFFF',
+		teleblack = '#F6F6F6',
 	}
 end
 
@@ -139,7 +124,7 @@ vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = cp.black4, bold = true })
 vim.api.nvim_set_hl(0, 'Search', { fg = cp.pink, bg = cp.black4, bold = true })
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.black4, bg = cp.black2 })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = cp.white })
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.white, bg = cp.black1 })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.white, bg = cp.black3 }) -- FIXED
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.black4, bg = cp.black1 })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.pink, bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.black1, bg = cp.black4 })
@@ -176,7 +161,7 @@ vim.api.nvim_set_hl(0, 'Constant', { fg = cp.peach })
 -- vim.api.nvim_set_hl(0, 'Debug', {})
 vim.api.nvim_set_hl(0, 'Define', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'Delimiter', { fg = cp.teal })
-vim.api.nvim_set_hl(0, 'Error', { fg = cp.diag.error })
+vim.api.nvim_set_hl(0, 'Error', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'Exception', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'Float', { fg = cp.lavender, bold = true, italic = true })
 vim.api.nvim_set_hl(0, 'Function', { fg = cp.pink, italic = true })
@@ -202,26 +187,26 @@ vim.api.nvim_set_hl(0, 'Struct', { link = 'Type' })
 vim.api.nvim_set_hl(0, 'Structure', { fg = cp.sky })
 vim.api.nvim_set_hl(0, 'Tag', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'Title', { fg = cp.blue, bold = true })
-vim.api.nvim_set_hl(0, 'Todo', { fg = cp.black2, bg = cp.diag.warning, bold = true })
+vim.api.nvim_set_hl(0, 'Todo', { fg = cp.black2, bg = cp.yellow, bold = true })
 vim.api.nvim_set_hl(0, 'Type', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'Typedef', { fg = cp.red })
 -- vim.api.nvim_set_hl(0, 'Underlined', {})
 
 ------ MISC ------
--- vim.api.nvim_set_hl(0, 'healthError', { fg = colors.diag.error })
+-- vim.api.nvim_set_hl(0, 'healthError', { fg = colors.red })
 vim.api.nvim_set_hl(0, 'healthSuccess', { fg = cp.teal })
--- vim.api.nvim_set_hl(0, 'healthWarning', { fg = colors.diag.warning })
+-- vim.api.nvim_set_hl(0, 'healthWarning', { fg = colors.yellow })
 
 ---------- DIAGNOSTIC ----------
-vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = cp.diag.error, underline = true })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = cp.diag.warning, underline = true })
-vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = cp.diag.info, underline = true })
-vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = cp.diag.hint, underline = true })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = cp.red, underline = true })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = cp.yellow, underline = true })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = cp.sky, underline = true })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = cp.rosewater, underline = true })
 
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = true, sp = cp.diag.error })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = cp.diag.warning })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = cp.diag.info })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = true, sp = cp.diag.hint })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = true, sp = cp.red })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = cp.yellow })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = cp.sky })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = true, sp = cp.rosewater })
 
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = cp.black4 })
@@ -329,7 +314,7 @@ vim.api.nvim_set_hl(0, 'NotifyERRORTitle', { fg = cp.red, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyWARNTitle', { fg = cp.yellow, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.blue, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
-vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
+vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.rosewater, italic = true })
 
 ---------- RAINBOW ----------
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.red })
@@ -345,6 +330,7 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = cp.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = cp.white, bg = cp.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = cp.red, bg = cp.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = cp.fg, bg = cp.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = cp.teledark, bg = cp.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = cp.teleblack, bg = cp.teleblack })
@@ -488,3 +474,28 @@ vim.api.nvim_set_hl(0, 'luaTSFuncBuiltin', { fg = cp.teal, italic = true })
 -- vim.api.nvim_set_hl(0, 'pythonTSTypeBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
+
+------ TERMINAL ------
+vim.g.terminal_color_0 = cp.gray0
+vim.g.terminal_color_8 = cp.gray1
+
+vim.g.terminal_color_1 = cp.red
+vim.g.terminal_color_9 = cp.red
+
+vim.g.terminal_color_2 = cp.green
+vim.g.terminal_color_10 = cp.green
+
+vim.g.terminal_color_3 = cp.yellow
+vim.g.terminal_color_11 = cp.yellow
+
+vim.g.terminal_color_4 = cp.blue
+vim.g.terminal_color_12 = cp.blue
+
+vim.g.terminal_color_5 = cp.pink
+vim.g.terminal_color_13 = cp.pink
+
+vim.g.terminal_color_6 = cp.sky
+vim.g.terminal_color_14 = cp.sky
+
+vim.g.terminal_color_7 = cp.white
+vim.g.terminal_color_15 = cp.white

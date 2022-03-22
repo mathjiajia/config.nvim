@@ -66,20 +66,9 @@ vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
-vim.g.theme_style = 'dark'
-
 ---- THEMS & LINES ----
--- vim.cmd('colorscheme catppuccin')
--- vim.cmd('colorscheme edge')
--- vim.cmd('colorscheme everforest')
--- vim.cmd('colorscheme github')
--- vim.cmd('colorscheme gruvbox')
--- vim.cmd('colorscheme kanagawa')
-vim.cmd('colorscheme onedark')
--- vim.cmd('colorscheme sonokai')
--- vim.cmd('colorscheme vscode')
-
--- require('themes').setup()
+vim.g.theme_style = 'light'
+require('themes.github')
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')

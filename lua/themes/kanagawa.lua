@@ -1,4 +1,4 @@
-vim.g.colors_name = 'kanagawa'
+-- Modified from https://github.com/rebelot/kanagawa.nvim
 
 local palette_colors = {
 	-- Bg Shades
@@ -368,6 +368,7 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette_colors.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = palette_colors.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.sp3, bg = palette_colors.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = colors.fg, bg = palette_colors.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = palette_colors.teledark, bg = palette_colors.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = palette_colors.teleblack, bg = palette_colors.teleblack })
