@@ -2,6 +2,43 @@ vim.g.colors_name = 'onedark'
 
 local colors = {}
 
+local utils = {}
+
+utils.bg = '#000000'
+utils.fg = '#ffffff'
+utils.day_brightness = 0.3
+
+local hex_to_rgb = function(hex_str)
+	local hex = '[abcdef0-9][abcdef0-9]'
+	local pat = '^#(' .. hex .. ')(' .. hex .. ')(' .. hex .. ')$'
+	hex_str = string.lower(hex_str)
+
+	assert(string.find(hex_str, pat) ~= nil, 'hex_to_rgb: invalid hex_str: ' .. tostring(hex_str))
+
+	local r, g, b = string.match(hex_str, pat)
+	return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
+end
+
+function utils.blend(fg, bg, alpha)
+	bg = hex_to_rgb(bg)
+	fg = hex_to_rgb(fg)
+
+	local blendChannel = function(i)
+		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
+		return math.floor(math.min(math.max(0, ret), 255) + 0.5)
+	end
+
+	return string.format('#%02X%02X%02X', blendChannel(1), blendChannel(2), blendChannel(3))
+end
+
+function utils.darken(hex, amount, bg)
+	return utils.blend(hex, bg or utils.bg, math.abs(amount))
+end
+
+function utils.lighten(hex, amount, fg)
+	return utils.blend(hex, fg or utils.fg, math.abs(amount))
+end
+
 if vim.g.theme_style == 'dark' then
 	colors = {
 		bg = '#282c34',
@@ -18,32 +55,33 @@ if vim.g.theme_style == 'dark' then
 		gray = '#5c6370',
 		highlight = '#e2be7d',
 
-		-- Additional colors
-		cursorline = '#2b2f37',
-		color_column = '#2b2f37',
-		comment = '#7f848e',
-		error_red = '#c24038',
-		indentline = '#2f333b',
-		menu = '#32363e',
-		menu_scroll = '#2d3139',
-		menu_scroll_thumb = '#4d9bdb',
-		selection = '#3c4048',
-
 		-- Git diff
 		diff_add = '#003e4a',
 		diff_delete = '#501b20',
 		diff_text = '#005869',
 
-		-- Lualine colors
 		teledark = '#22262e',
 		teleblack = '#2e323a',
-		bg_statusline = '#2d3139',
-		fg_sidebar = '#abb2bf',
 
 		Rb1 = '#FFD500',
 		Rb2 = '#D170CD',
 		Rb3 = '#00A2FF',
 	}
+
+	-- Additional colors
+	colors.cursorline = utils.lighten(colors.bg, 0.97)
+	colors.color_column = utils.lighten(colors.bg, 0.97)
+	colors.comment = utils.lighten(colors.gray, 0.80)
+	colors.indentline = utils.lighten(colors.bg, 0.93)
+	colors.menu = utils.lighten(colors.bg, 0.90)
+	colors.menu_scroll = utils.lighten(colors.bg, 0.95)
+	colors.menu_scroll_thumb = utils.darken(colors.blue, 0.80)
+	colors.selection = utils.lighten(colors.bg, 0.8)
+
+	-- Lualine colors
+	colors.bg_statusline = utils.lighten(colors.bg, 0.95)
+	colors.fg_gutter = utils.lighten(colors.bg, 0.90)
+	colors.fg_sidebar = colors.fg
 else
 	colors = {
 		bg = '#FAFAFA',
@@ -60,31 +98,33 @@ else
 		gray = '#bebebe',
 		highlight = '#FFE792',
 
-		-- Additional colors
-		cursorline = '#f7f7f7',
-		color_column = '#f7f7f7',
-		comment = '#A0A1A7',
-		indentline = '#f3f3f3',
-		menu = '#f5f5f5',
-		menu_scroll = '#f0f0f0',
-		menu_scroll_thumb = '#25a1d7',
-		selection = '#f0f0f0',
-
 		-- Git diff
 		diff_add = '#cae3e8',
 		diff_delete = '#f5c6c6',
 		diff_text = '#a6d0d8',
 
-		-- Lualine colors
 		teledark = '#ffffff',
 		teleblack = '#f4f4f4',
-		bg_statusline = '#f5f5f5',
-		fg_sidebar = '#6a6a6a',
 
 		Rb1 = '#0028ff',
 		Rb2 = '#009619',
 		Rb3 = '#853302',
 	}
+
+	-- Additional colors
+	colors.cursorline = utils.darken(colors.bg, 0.97)
+	colors.color_column = utils.darken(colors.bg, 0.97)
+	colors.comment = utils.darken(colors.gray, 0.80)
+	colors.indentline = utils.darken(colors.bg, 0.93)
+	colors.menu = utils.darken(colors.bg, 0.95)
+	colors.menu_scroll = utils.darken(colors.bg, 0.90)
+	colors.menu_scroll_thumb = utils.lighten(colors.blue, 0.80)
+	colors.selection = utils.darken(colors.bg, 0.90)
+
+	-- Lualine colors
+	colors.bg_statusline = utils.darken(colors.bg, 0.95)
+	colors.fg_gutter = utils.darken(colors.bg, 0.90)
+	colors.fg_sidebar = colors.fg
 end
 
 ------ BASICS ------
@@ -123,12 +163,12 @@ vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = colors.cursorline })
 vim.api.nvim_set_hl(0, 'Search', { bg = colors.gray, underline = true })
 vim.api.nvim_set_hl(0, 'SignColumn', {})
 vim.api.nvim_set_hl(0, 'SpecialKey', {})
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.fg, bg = colors.gray })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.fg, bg = colors.bg_statusline })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = colors.fg, bg = colors.color_column })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = colors.bg, bg = colors.yellow })
 vim.api.nvim_set_hl(0, 'TabLine', {})
 vim.api.nvim_set_hl(0, 'TabLineFill', { fg = colors.fg })
-vim.api.nvim_set_hl(0, 'TabLineSel', { fg = colors.purple, bg = colors.selection })
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = colors.purple, bg = colors.bg_statusline })
 -- vim.api.nvim_set_hl(0, 'TermCursor', { bg = colors.purple })
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', { bg = colors.gray })
 -- vim.api.nvim_set_hl(0, 'VertSplit', {})
@@ -257,28 +297,28 @@ vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = colors.cyan })
-vim.api.nvim_set_hl(0, 'CmpItemKindEnum', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindEvent', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindEnum', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindEvent', {})
 vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = colors.fg })
-vim.api.nvim_set_hl(0, 'CmpItemKindFile', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindFolder', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindFile', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindFolder', {})
 vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { link = 'CmpItemKindMethod' })
 vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindClass' })
 vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = colors.purple })
 vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = colors.blue })
-vim.api.nvim_set_hl(0, 'CmpItemKindModule', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindOperator', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindModule', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindOperator', {})
 vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = colors.red })
-vim.api.nvim_set_hl(0, 'CmpItemKindReference', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindReference', {})
 vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = colors.fg })
-vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindUnit', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindUnit', {})
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = colors.orange })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = colors.red })
-vim.api.nvim_set_hl(0, 'CmpItemKindVColor', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindVColor', {})
 
 ------ INDENTBLANKLINE ------
 vim.api.nvim_set_hl(0, 'IndentLine', { fg = colors.indentline })
