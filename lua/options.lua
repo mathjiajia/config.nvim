@@ -69,7 +69,7 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 vim.g.catppuccin_style = 'dawn'
 vim.g.gruvbox_style = 'dark'
-vim.g.edge_style = 'dark'
+vim.g.edge_style = 'light'
 
 ---- THEMS & LINES ----
 -- vim.cmd('colorscheme catppuccin')
