@@ -2,7 +2,7 @@ vim.g.colors_name = 'catppuccin'
 
 local cp = {}
 
-if vim.g.catppuccin_style == 'dusk' then
+if vim.g.theme_style == 'dark' then
 	cp = {
 		rosewater = '#F5E0DC', -- Rosewater
 		flamingo = '#F2CDCD', -- Flamingo
@@ -35,7 +35,7 @@ if vim.g.catppuccin_style == 'dusk' then
 		teledark = '#1A1826',
 		teleblack = '#252434',
 	}
-elseif vim.g.catppuccin_style == 'storm' then
+elseif vim.g.theme_style == 'storm' then
 	cp = {
 		rosewater = '#F5DFDA', -- Rosewater
 		flamingo = '#F2CBCB', -- Flamingo			-- done

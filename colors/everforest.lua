@@ -2,7 +2,7 @@ vim.g.colors_name = 'everforest'
 
 local cp = {}
 
-if vim.g.everforest_style == 'dark' then
+if vim.g.theme_style == 'dark' then
 	cp = {
 		bg0 = '#2b3339',
 		bg1 = '#323c41',

@@ -66,10 +66,7 @@ vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
-vim.g.catppuccin_style = 'dusk'
-vim.g.gruvbox_style = 'dark'
-vim.g.edge_style = 'light'
-vim.g.onedark_style = 'dark'
+-- vim.g.theme_style = 'dark'
 
 ---- THEMS & LINES ----
 -- vim.cmd('colorscheme catppuccin')
@@ -77,10 +74,9 @@ vim.g.onedark_style = 'dark'
 -- vim.cmd('colorscheme everforest')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme kanagawa')
--- vim.cmd('colorscheme moon')
-vim.cmd('colorscheme onedark')
+-- vim.cmd('colorscheme onedark')
 -- vim.cmd('colorscheme sonokai')
--- vim.cmd('colorscheme vscode')
+vim.cmd('colorscheme vscode')
 
 -- require('themes').setup()
 -- require('ui.buftab')

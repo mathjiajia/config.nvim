@@ -2,7 +2,7 @@ vim.g.colors_name = 'onedark'
 
 local colors = {}
 
-if vim.g.onedark_style == 'dark' then
+if vim.g.theme_style == 'dark' then
 	colors = {
 		bg = '#282c34',
 		fg = '#abb2bf',
@@ -39,27 +39,31 @@ if vim.g.onedark_style == 'dark' then
 		teleblack = '#2e323a',
 		bg_statusline = '#2d3139',
 		fg_sidebar = '#abb2bf',
+
+		Rb1 = '#FFD500',
+		Rb2 = '#D170CD',
+		Rb3 = '#00A2FF',
 	}
 else
 	colors = {
-		bg = '#fafafa',
-		fg = '#6a6a6a',
-		red = '#e05661',
-		orange = '#ee9025',
+		bg = '#FAFAFA',
+		fg = '#383A42',
+		red = '#f6483f',
+		orange = '#a06600',
 		yellow = '#eea825',
-		green = '#1da912',
+		green = '#24a442',
 		cyan = '#56b6c2',
-		blue = '#118dc3',
-		purple = '#9a77cf',
-		white = '#fafafa',
+		blue = '#2a77fa',
+		purple = '#A626A4',
+		white = '#FAFAFA',
 		black = '#6a6a6a',
 		gray = '#bebebe',
-		highlight = '#e2be7d',
+		highlight = '#FFE792',
 
 		-- Additional colors
 		cursorline = '#f7f7f7',
 		color_column = '#f7f7f7',
-		comment = '#aaaaaa',
+		comment = '#A0A1A7',
 		indentline = '#f3f3f3',
 		menu = '#f5f5f5',
 		menu_scroll = '#f0f0f0',
@@ -76,15 +80,14 @@ else
 		teleblack = '#f4f4f4',
 		bg_statusline = '#f5f5f5',
 		fg_sidebar = '#6a6a6a',
+
+		Rb1 = '#0028ff',
+		Rb2 = '#009619',
+		Rb3 = '#853302',
 	}
 end
 
-colors.vscRbYellow = '#FFD500'
-colors.vscRbPurple = '#D170CD'
-colors.vscRbBlue = '#00A2FF'
-
 ------ BASICS ------
-
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.color_column })
 vim.api.nvim_set_hl(0, 'Conceal', {})
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.black })
@@ -325,13 +328,13 @@ vim.api.nvim_set_hl(0, 'packerStatusFail', { fg = colors.red })
 vim.api.nvim_set_hl(0, 'packerStatusSuccess', { fg = colors.green })
 
 ------ RAINBOW ------
-vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.vscRbYellow })
-vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = colors.vscRbPurple })
-vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = colors.vscRbBlue })
-vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = colors.vscRbYellow })
-vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = colors.vscRbPurple })
-vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = colors.vscRbBlue })
-vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.vscRbPurple })
+vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.Rb1 })
+vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = colors.Rb2 })
+vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = colors.Rb3 })
+vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = colors.Rb1 })
+vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = colors.Rb2 })
+vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = colors.Rb3 })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.Rb2 })
 
 ------ TELESCOPE ------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.teledark })
@@ -465,7 +468,7 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = colors.yellow })
 -- vim.api.nvim_set_hl(0, 'pythonTSBoolean', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSComment', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSConditional', {})
--- vim.api.nvim_set_hl(0, 'pythonTSConstant', {})
+vim.api.nvim_set_hl(0, 'pythonTSConstant', { fg = colors.orange })
 -- vim.api.nvim_set_hl(0, 'pythonTSConstBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSConstructor', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSField', {})

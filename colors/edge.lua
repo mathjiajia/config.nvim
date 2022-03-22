@@ -2,7 +2,7 @@ vim.g.colors_name = 'edge'
 
 local cp = {}
 
-if vim.g.edge_style == 'dark' then
+if vim.g.theme_style == 'dark' then
 	cp = {
 		black = '#202023',
 		bg0 = '#2b2d37',
