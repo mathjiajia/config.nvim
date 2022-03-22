@@ -1,4 +1,4 @@
-vim.g.colors_name = 'sonokai'
+vim.g.colors_name = 'everforest'
 
 local cp = {
 	black = '#181a1c',

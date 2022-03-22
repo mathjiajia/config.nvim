@@ -5,8 +5,8 @@ local settings = {
 		build = {
 			args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
 			executable = 'latexmk',
-			forwardSearchAfter = false,
-			onSave = false,
+			forwardSearchAfter = true,
+			onSave = true,
 		},
 		chktex = {
 			onEdit = false,

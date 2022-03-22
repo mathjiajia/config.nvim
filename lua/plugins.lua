@@ -158,6 +158,14 @@ local function spec(use)
 		config = [[require('configs.latex')]],
 	}
 	use {
+		'f3fora/nvim-texlabconfig',
+		config = function()
+			require('texlabconfig').setup()
+		end,
+		-- ft = { 'tex', 'bib' },
+		-- cmd = { 'TexlabInverseSearch' },
+	}
+	use {
 		{
 			'nvim-neorg/neorg',
 			config = [[require('configs.neorg')]],

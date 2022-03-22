@@ -1,7 +1,7 @@
 vim.g.colors_name = 'vscode'
 
 local c = {
-	vscFront = '#d4d4d4',
+	vscFront = '#D4D4D4',
 	vscBack = '#1E1E1E',
 
 	vscTeleDark = '#181818',
@@ -19,10 +19,10 @@ local c = {
 	vscContex = '#858585',
 
 	vscPopupFront = '#BBBBBB',
-	vscPopupSelect = '#ffffff',
+	vscPopupSelect = '#FFFFFF',
 	vscPopupBack = '#252526',
 	vscPopupHighlightBlue = '#004873',
-	vscPopupMatchBlue = '#00a6ff',
+	vscPopupMatchBlue = '#00A6FF',
 	vscPopupHighlightGray = '#343B41',
 
 	vscSplitLight = '#898989',
@@ -32,15 +32,15 @@ local c = {
 	vscCursorDarkDark = '#222222',
 	vscCursorDark = '#474747',
 	vscCursorLight = '#AEAFAD',
-	vscSelection = '#21507a',
+	vscSelection = '#21507A',
 	vscLineNumber = '#858585',
-	vscLineNumberSelected = '#c6c6c6',
+	vscLineNumberSelected = '#C8C8C8',
 
 	vscDiffRedDark = '#971713',
 	vscDiffRedLight = '#6F1313',
-	vscDiffGreenDark = '#587a00',
+	vscDiffGreenDark = '#587A00',
 	vscDiffGreenLight = '#4B5632',
-	vscDiffBlue = '#007e9f',
+	vscDiffBlue = '#007E9F',
 	vscSearchCurrent = '#4B5632',
 	vscSearch = '#264F78',
 
@@ -49,25 +49,26 @@ local c = {
 	vscViolet = '#646695',
 	vscBlue = '#569CD6',
 	vscDarkBlue = '#223E55',
-	vscMediumBlue = '#18a2fe',
+	vscMediumBlue = '#18A2FE',
+	vscLighterBlue = '#4FC1FF',
 	vscLightBlue = '#9CDCFE',
 	vscGreen = '#699851',
-	vscBlueGreen = '#43c8b0',
-	vscLightGreen = '#b5cda6',
+	vscBlueGreen = '#4EC9B0',
+	vscLightGreen = '#B5CEA8',
 	vscRed = '#FB617E',
-	vscOrange = '#d09175',
+	vscOrange = '#CE9178',
 	vscLightRed = '#D16969',
 	vscYellowOrange = '#D7BA7D',
-	vscYellow = '#dddba7',
-	vscPink = '#c688c1',
+	vscYellow = '#DDDBA7',
+	vscPink = '#C586C0',
 
 	-- Other ui specific colors
 	vscUiBlue = '#084671',
-	vscUiOrange = '#f28b25',
+	vscUiOrange = '#F28B25',
 
-	vscRbYellow = '#ffd500',
-	vscRbPurple = '#d170cd',
-	vscRbBlue = '#00a2ff',
+	vscRbYellow = '#FFD500',
+	vscRbPurple = '#D170CD',
+	vscRbBlue = '#00A2FF',
 }
 
 ---------- BASICS ----------
@@ -99,7 +100,7 @@ vim.api.nvim_set_hl(0, 'Pmenu', { fg = c.vscPopupFront, bg = c.vscPopupBack })
 vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = c.vscPopupHighlightGray })
 vim.api.nvim_set_hl(0, 'PmenuSel', { fg = c.vscPopupSelect, bg = c.vscPopupHighlightBlue })
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = c.vscPopupFront })
-vim.api.nvim_set_hl(0, 'Question', { fg = c.vscBlue, bg = c.vscBack })
+vim.api.nvim_set_hl(0, 'Question', { fg = c.vscBlue }) -- removed bg
 -- vim.api.nvim_set_hl(0, 'QuickFixLine', {})
 vim.api.nvim_set_hl(0, 'Search', { fg = 'NONE', bg = c.vscSearch })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg = c.vscBack })
@@ -112,7 +113,6 @@ vim.api.nvim_set_hl(0, 'TabLineFill', { fg = c.vscFront, bg = c.vscTabOutside })
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = c.vscFront, bg = c.vscTabCurrent })
 -- vim.api.nvim_set_hl(0, 'TermCursor', {})
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {})
-vim.api.nvim_set_hl(0, 'Title', { fg = 'NONE', bg = 'NONE', bold = true })
 -- vim.api.nvim_set_hl(0, 'VertSplit', { fg = c.vscSplitDark, bg = c.vscBack })
 vim.api.nvim_set_hl(0, 'Visual', { fg = 'NONE', bg = c.vscSelection })
 vim.api.nvim_set_hl(0, 'VisualNOS', { fg = 'NONE', bg = c.vscSelection })
@@ -136,8 +136,8 @@ vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = c.vscRed })
 -- SYNTAX GROUPS
 vim.api.nvim_set_hl(0, 'Boolean', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'Character', { fg = c.vscOrange })
-vim.api.nvim_set_hl(0, 'Comment', { fg = c.vscGreen, bg = c.vscBack })
-vim.api.nvim_set_hl(0, 'Constant', { fg = c.vscBlue })
+vim.api.nvim_set_hl(0, 'Comment', { fg = c.vscGreen }) -- removed bg
+vim.api.nvim_set_hl(0, 'Constant', { fg = c.vscLighterBlue })
 vim.api.nvim_set_hl(0, 'Conditional', { fg = c.vscPink })
 vim.api.nvim_set_hl(0, 'Debug', { fg = c.vscFront })
 vim.api.nvim_set_hl(0, 'Define', { fg = c.vscPink })
@@ -167,6 +167,7 @@ vim.api.nvim_set_hl(0, 'String', { fg = c.vscOrange })
 vim.api.nvim_set_hl(0, 'Structure', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'Struct', { link = 'Type' })
 vim.api.nvim_set_hl(0, 'Tag', { fg = c.vscFront })
+vim.api.nvim_set_hl(0, 'Title', { fg = 'NONE', bg = 'NONE', bold = true })
 vim.api.nvim_set_hl(0, 'Todo', { fg = c.vscYellowOrange, bg = c.vscBack, bold = true })
 vim.api.nvim_set_hl(0, 'Type', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'Typedef', { fg = c.vscBlue })

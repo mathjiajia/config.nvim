@@ -73,8 +73,8 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme kanagawa')
 -- vim.cmd('colorscheme moon')
--- vim.cmd('colorscheme sonokai')
-vim.cmd('colorscheme vscode')
+vim.cmd('colorscheme sonokai')
+-- vim.cmd('colorscheme vscode')
 
 -- require('themes').setup()
 -- require('ui.buftab')
