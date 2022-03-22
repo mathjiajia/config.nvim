@@ -7,7 +7,6 @@ local c = {
 	vscTeleDark = '#181818',
 	vscTeleBlack = '#222222',
 
-	vscTabCurrent = '#1E1E1E',
 	vscTabOther = '#2D2D2D',
 	vscTabOutside = '#252526',
 
@@ -59,7 +58,7 @@ local c = {
 	vscOrange = '#CE9178',
 	vscLightRed = '#D16969',
 	vscYellowOrange = '#D7BA7D',
-	vscYellow = '#DDDBA7',
+	vscYellow = '#DCDCAA',
 	vscPink = '#C586C0',
 
 	-- Other ui specific colors
@@ -109,8 +108,8 @@ vim.api.nvim_set_hl(0, 'StatusLine', { fg = c.vscFront, bg = c.vscLeftMid })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = c.vscFront, bg = c.vscLeftDark })
 -- vim.api.nvim_set_hl(0, 'Substitute', {})
 vim.api.nvim_set_hl(0, 'TabLine', { fg = c.vscFront, bg = c.vscTabOther })
-vim.api.nvim_set_hl(0, 'TabLineFill', { fg = c.vscFront, bg = c.vscTabOutside })
-vim.api.nvim_set_hl(0, 'TabLineSel', { fg = c.vscFront, bg = c.vscTabCurrent })
+vim.api.nvim_set_hl(0, 'TabLineFill', { fg = c.vscFront, bg = c.vscBack }) -- FIXED
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = c.vscFront, bg = c.vscTabOutside })
 -- vim.api.nvim_set_hl(0, 'TermCursor', {})
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {})
 -- vim.api.nvim_set_hl(0, 'VertSplit', { fg = c.vscSplitDark, bg = c.vscBack })
@@ -229,10 +228,11 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
 ------ CMP ------
 vim.api.nvim_set_hl(0, 'CompeDocumentation', { link = 'Pmenu' })
 vim.api.nvim_set_hl(0, 'CompeDocumentationBorder', { link = 'Pmenu' })
-vim.api.nvim_set_hl(0, 'CmpItemKind', { link = 'Pmenu' })
+
 vim.api.nvim_set_hl(0, 'CmpItemAbbr', { link = 'Pmenu' })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = c.vscGray, strikethrough = true })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = c.vscPopupMatchBlue })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = c.vscPopupMatchBlue, bold = true })
+vim.api.nvim_set_hl(0, 'CmpItemKind', { link = 'Pmenu' })
 
 vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'CmpItemKindConstructor' })
 vim.api.nvim_set_hl(0, 'CmpItemKindModule', { link = 'CmpItemKindKeyword' })
@@ -296,7 +296,7 @@ vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = c.vscRbBlue })
 vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = c.vscRbYellow })
 vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = c.vscRbPurple })
 vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = c.vscRbBlue })
-vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = c.vscRbBlue })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = c.vscRbPurple })
 
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.vscTeleDark })
@@ -399,7 +399,7 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = c.vscYellowOrange })
 -- vim.api.nvim_set_hl(0, 'LuaTSComment', {})
 -- vim.api.nvim_set_hl(0, 'luaTSConditional', {})
 -- vim.api.nvim_set_hl(0, 'luaTSConstructor', {})
--- vim.api.nvim_set_hl(0, 'luaTSField', {})
+-- vim.api.nvim_set_hl(0, 'luaTSField', { fg = c.vscYellow })
 -- vim.api.nvim_set_hl(0, 'luaTSFunction', {})
 -- vim.api.nvim_set_hl(0, 'LuaTSKeyword', {})
 -- vim.api.nvim_set_hl(0, 'luaTSKeywordFunction', {})
