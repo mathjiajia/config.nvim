@@ -1,32 +1,76 @@
-vim.g.colors_name = 'sonokai'
+vim.g.colors_name = 'everforest'
 
-local cp = {
-	black = '#181a1c',
-	bg0 = '#1E1E2E',
-	bg1 = '#2F2D41',
-	bg2 = '#333648',
-	bg3 = '#363a4e',
-	bg4 = '#393e53',
-	bg_red = '#ff6188',
-	diff_red = '#55393d',
-	bg_green = '#a9dc76',
-	diff_green = '#394634',
-	bg_blue = '#77d5f0',
-	diff_blue = '#354157',
-	diff_yellow = '#4e432f',
-	fg = '#e1e3e4',
-	red = '#fb617e',
-	orange = '#f89860',
-	yellow = '#edc763',
-	green = '#9ed06c',
-	blue = '#6dcae8',
-	purple = '#bb97ee',
-	grey = '#7e8294',
-	grey_dim = '#5a5e7a',
+local cp
 
-	teledark = '#181828',
-	teleblack = '#242434',
-}
+if vim.g.everforest_style == 'dark' then
+	cp = {
+
+		bg0 = '#2b3339',
+		bg1 = '#323c41',
+		bg2 = '#3a454a',
+		bg3 = '#445055',
+		bg4 = '#4c555b',
+		bg5 = '#53605c',
+		bg_visual = '#503946',
+		bg_red = '#4e3e43',
+		bg_green = '#404d44',
+		bg_blue = '#394f5a',
+		bg_yellow = '#4a4940',
+
+		fg = '#d3c6aa',
+		red = '#e67e80',
+		orange = '#e69875',
+		yellow = '#dbbc7f',
+		green = '#a7c080',
+		aqua = '#83c092',
+		blue = '#7fbbb3',
+		purple = '#d699b6',
+		grey0 = '#7a8478',
+		grey1 = '#859289',
+		grey2 = '#9da9a0',
+		statusline1 = '#a7c080',
+		statusline2 = '#d3c6aa',
+		statusline3 = '#e67e80',
+
+		teledark = '#252731',
+		teleblack = '#31333d',
+	}
+else
+	cp = {
+		black = '#5c6a72',
+		white = '#fff9e8',
+
+		bg0 = '#fff9e8',
+		bg1 = '#f7f4e0',
+		bg2 = '#f0eed9',
+		bg3 = '#e9e8d2',
+		bg4 = '#e1ddcb',
+		bg5 = '#bec5b2',
+		bg_visual = '#edf0cd',
+		bg_red = '#fce5dc',
+		bg_green = '#f1f3d4',
+		bg_blue = '#eaf2eb',
+		bg_yellow = '#fbefd0',
+
+		fg = '#5c6a72',
+		red = '#f85552',
+		orange = '#f57d26',
+		yellow = '#dfa000',
+		green = '#8da101',
+		aqua = '#35a77c',
+		blue = '#3a94c5',
+		purple = '#df69ba',
+		grey0 = '#a6b0a0',
+		grey1 = '#939f91',
+		grey2 = '#829181',
+		statusline1 = '#93b259',
+		statusline2 = '#708089',
+		statusline3 = '#e66868',
+
+		teledark = '#ffffff',
+		teleblack = '#f4f4f4',
+	}
+end
 
 ---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.bg1 })
@@ -96,7 +140,7 @@ vim.api.nvim_set_hl(0, 'Boolean', { fg = cp.purple })
 vim.api.nvim_set_hl(0, 'Character', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'Comment', { fg = cp.grey, italic = true })
 vim.api.nvim_set_hl(0, 'Conditional', { fg = cp.red })
-vim.api.nvim_set_hl(0, 'Constant', { fg = cp.orange, italic = true })
+vim.api.nvim_set_hl(0, 'Constant', { fg = cp.yellow, italic = true })
 vim.api.nvim_set_hl(0, 'Debug', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'Define', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'Delimiter', { fg = cp.fg })
@@ -104,7 +148,7 @@ vim.api.nvim_set_hl(0, 'Error', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'Exception', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'Float', { fg = cp.purple })
 vim.api.nvim_set_hl(0, 'Function', { fg = cp.green })
-vim.api.nvim_set_hl(0, 'Identifier', { fg = cp.orange, italic = true })
+vim.api.nvim_set_hl(0, 'Identifier', { fg = cp.cyan, italic = true })
 vim.api.nvim_set_hl(0, 'Ignore', { fg = cp.grey })
 vim.api.nvim_set_hl(0, 'Include', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'Keyword', { fg = cp.red })
@@ -124,7 +168,7 @@ vim.api.nvim_set_hl(0, 'StorageClass', { fg = cp.blue, italic = true })
 vim.api.nvim_set_hl(0, 'String', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'Structure', { fg = cp.blue, italic = true })
 -- vim.api.nvim_set_hl(0, 'Struct', {})
-vim.api.nvim_set_hl(0, 'Tag', { fg = cp.orange })
+vim.api.nvim_set_hl(0, 'Tag', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'Title', { fg = cp.red, bold = true })
 vim.api.nvim_set_hl(0, 'Todo', { fg = cp.blue, italic = true })
 vim.api.nvim_set_hl(0, 'Type', { fg = cp.blue, italic = true })
@@ -189,7 +233,7 @@ vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = cp.fg })
 
 vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindColor', { fg = cp.yellow })
-vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = cp.orange })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = cp.purple })

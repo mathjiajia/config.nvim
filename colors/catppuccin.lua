@@ -1,37 +1,106 @@
 vim.g.colors_name = 'catppuccin'
 
-local cp = {
-	rosewater = '#F5E0DC', -- Rosewater
-	flamingo = '#F2CDCD', -- Flamingo
-	mauve = '#DDB6F2', -- Mauve
-	pink = '#F5C2E7', -- Pink
-	red = '#F28FAD', -- Red
-	maroon = '#E8A2AF', -- Maroon
-	peach = '#F8BD96', -- Peach
-	yellow = '#FAE3B0', -- Yellow
-	green = '#ABE9B3', -- Green
-	blue = '#96CDFB', -- Blue
-	sky = '#89DCEB', -- Sky
-	teal = '#B5E8E0', -- Teal
-	lavender = '#C9CBFF', -- Lavender
-	white = '#D9E0EE', -- White
-	gray2 = '#C3BAC6', -- Gray2
-	gray1 = '#988BA2', -- Gray1
-	gray0 = '#6E6C7E', -- Gray0
-	black4 = '#575268', -- Black4
-	black3 = '#302D41', -- Black3
-	black2 = '#1E1E2E', -- Black2
-	black1 = '#1A1826', -- Black1
-	black0 = '#161320', -- Black0
-	diag = {
-		error = '#F28FAD',
-		warning = '#FAE3B0',
-		info = '#89DCEB',
-		hint = '#F5E0DC',
-	},
-	teledark = '#1A1826',
-	teleblack = '#252434',
-}
+local cp
+if vim.g.catppuccin_style == 'dusk' then
+	cp = {
+		rosewater = '#F5E0DC', -- Rosewater
+		flamingo = '#F2CDCD', -- Flamingo
+		mauve = '#DDB6F2', -- Mauve
+		pink = '#F5C2E7', -- Pink
+		red = '#F28FAD', -- Red
+		maroon = '#E8A2AF', -- Maroon
+		peach = '#F8BD96', -- Peach
+		yellow = '#FAE3B0', -- Yellow
+		green = '#ABE9B3', -- Green
+		blue = '#96CDFB', -- Blue
+		sky = '#89DCEB', -- Sky
+		teal = '#B5E8E0', -- Teal
+		lavender = '#C9CBFF', -- Lavender
+		white = '#D9E0EE', -- White
+		gray2 = '#C3BAC6', -- Gray2
+		gray1 = '#988BA2', -- Gray1
+		gray0 = '#6E6C7E', -- Gray0
+		black4 = '#575268', -- Black4
+		black3 = '#302D41', -- Black3
+		black2 = '#1E1E2E', -- Black2
+		black1 = '#1A1826', -- Black1
+		black0 = '#161320', -- Black0
+		diag = {
+			error = '#F28FAD',
+			warning = '#FAE3B0',
+			info = '#89DCEB',
+			hint = '#F5E0DC',
+		},
+		teledark = '#1A1826',
+		teleblack = '#252434',
+	}
+elseif vim.g.catppuccin_style == 'storm' then
+	cp = {
+		rosewater = '#F5DFDA', -- Rosewater
+		flamingo = '#F2CBCB', -- Flamingo			-- done
+		mauve = '#C6A4F8', -- Mauve					-- done
+		pink = '#F5BFE7', -- Pink					-- done
+		red = '#F586A2', -- Red						-- done
+		maroon = '#EB9DA4', -- Maroon				-- done
+		peach = '#FCB081', -- Peach					-- done
+		yellow = '#F8DEA9', -- Yellow				-- done
+		green = '#A9E4A3', -- Green					-- done
+		blue = '#8CB3FA', -- Blue					-- done
+		sky = '#89DCFD', -- Sky						-- done
+		teal = '#88DFD2', -- Teal					-- done
+		lavender = '#C7CBFD', -- Lavender			-- done
+		white = '#D2DAF1', -- White					-- done
+		gray2 = '#B9C0DB', -- Gray2
+		gray1 = '#6F7599', -- Gray1
+		gray0 = '#5E6487', -- Gray0
+		black4 = '#3E435E', -- Black4
+		black3 = '#2B3045', -- Black3
+		black2 = '#24273A', -- Black2				-- done
+		black1 = '#1F2233', -- Black1
+		black0 = '#1A1B26', -- Black0
+		diag = {
+			error = '#F586A2',
+			warning = '#F8DEA9',
+			info = '#89DCFD',
+			hint = '#F5DFDA',
+		},
+		teledark = '#1A1826',
+		teleblack = '#252434',
+	}
+else
+	cp = {
+		rosewater = '#E09D90', -- Rosewater
+		flamingo = '#E79C9C', -- Flamingo
+		mauve = '#AC61DF', -- Mauve				-- done
+		pink = '#EF9AD9', -- Pink				-- done
+		red = '#E84746', -- Red					-- done -
+		maroon = '#c96765', -- Maroon			-- done
+		peach = '#E99726', -- Peach				-- done -
+		yellow = '#EABE24', -- Yellow			-- done -
+		green = '#89B517', -- Green				-- done -
+		blue = '#4877D7', -- Blue				-- done -
+		sky = '#3FC4D9', -- Sky					-- done
+		teal = '#149C9B', -- Teal				-- done -
+		lavender = '#939AFB', -- Lavender		-- done
+		white = '#343b58', -- White				-- works?
+		gray2 = '#424968', -- Gray2
+		gray1 = '#505677', -- Gray1
+		gray0 = '#606689', -- Gray0				-- done -
+		black4 = '#cfd8dc', -- Black4
+		black3 = '#eff3f4', -- Black3
+		black2 = '#FCFCFC', -- Black2			-- done
+		black1 = '#F3F3F3', -- Black1
+		black0 = '#D3D0D2', -- Black0
+		diag = {
+			error = '#E84746',
+			warning = '#EABE24',
+			info = '#3FC4D9',
+			hint = '#E09D90',
+		},
+		teledark = '#ffffff',
+		teleblack = '#f6f6f6',
+	}
+end
 
 ---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.black3 })

@@ -1,44 +1,87 @@
 vim.g.colors_name = 'gruvbox'
 
-local cp = {
-	bg0 = '#f9f5d7',
-	bg1 = '#f5edca',
-	bg2 = '#f3eac7',
-	bg3 = '#f2e5bc',
-	bg4 = '#eee0b7',
-	bg5 = '#ebdbb2',
-	bg_statusline1 = '#f5edca',
-	bg_statusline2 = '#f3eac7',
-	bg_statusline3 = '#eee0b7',
-	bg_diff_green = '#e4edc8',
-	bg_visual_green = '#dde5c2',
-	bg_diff_red = '#f8e4c9',
-	bg_visual_red = '#f0ddc3',
-	bg_diff_blue = '#e0e9d3',
-	bg_visual_blue = '#d9e1cc',
-	bg_visual_yellow = '#f9eabf',
-	bg_current_word = '#f3eac7',
+local cp
+if vim.g.gruvbox_style == 'dark' then
+	cp = {
+		bg0 = '#32302f',
+		bg1 = '#282828',
+		bg2 = '#282828',
+		bg3 = '#3c3836',
+		bg4 = '#3c3836',
+		bg5 = '#504945',
+		bg_statusline1 = '#282828',
+		bg_statusline2 = '#32302f',
+		bg_statusline3 = '#504945',
+		bg_diff_green = '#32361a',
+		bg_visual_green = '#333e34',
+		bg_diff_red = '#3c1f1e',
+		bg_visual_red = '#442e2d',
+		bg_diff_blue = '#0d3138',
+		bg_visual_blue = '#2e3b3b',
+		bg_visual_yellow = '#473c29',
+		bg_current_word = '#32302f',
 
-	fg0 = '#654735',
-	fg1 = '#4f3829',
-	red = '#c14a4a',
-	orange = '#c35e0a',
-	yellow = '#b47109',
-	green = '#6c782e',
-	aqua = '#4c7a5d',
-	blue = '#45707a',
-	purple = '#945e80',
-	bg_red = '#ae5858',
-	bg_green = '#6f8352',
-	bg_yellow = '#a96b2c',
+		fg0 = '#d4be98',
+		fg1 = '#ddc7a1',
+		red = '#c14a4a',
+		orange = '#e78a4e',
+		yellow = '#d8a657',
+		green = '#a9b665',
+		aqua = '#89b482',
+		blue = '#7daea3',
+		purple = '#d3869b',
+		bg_red = '#ea6962',
+		bg_green = '#a9b665',
+		bg_yellow = '#d8a657',
 
-	grey0 = '#a89984',
-	grey1 = '#928374',
-	grey2 = '#7c6f64',
+		grey0 = '#7c6f64',
+		grey1 = '#928374',
+		grey2 = '#a89984',
 
-	teledark = '#fffbdd',
-	teleblack = '#f3efd1',
-}
+		teledark = '#2c2a29',
+		teleblack = '#383635',
+	}
+else
+	cp = {
+		bg0 = '#f9f5d7',
+		bg1 = '#f5edca',
+		bg2 = '#f3eac7',
+		bg3 = '#f2e5bc',
+		bg4 = '#eee0b7',
+		bg5 = '#ebdbb2',
+		bg_statusline1 = '#f5edca',
+		bg_statusline2 = '#f3eac7',
+		bg_statusline3 = '#eee0b7',
+		bg_diff_green = '#e4edc8',
+		bg_visual_green = '#dde5c2',
+		bg_diff_red = '#f8e4c9',
+		bg_visual_red = '#f0ddc3',
+		bg_diff_blue = '#e0e9d3',
+		bg_visual_blue = '#d9e1cc',
+		bg_visual_yellow = '#f9eabf',
+		bg_current_word = '#f3eac7',
+
+		fg0 = '#654735',
+		fg1 = '#4f3829',
+		red = '#c14a4a',
+		orange = '#c35e0a',
+		yellow = '#b47109',
+		green = '#6c782e',
+		aqua = '#4c7a5d',
+		blue = '#45707a',
+		purple = '#945e80',
+		bg_red = '#ae5858',
+		bg_green = '#6f8352',
+		bg_yellow = '#a96b2c',
+
+		grey0 = '#a89984',
+		grey1 = '#928374',
+		grey2 = '#7c6f64',
+
+		teledark = '#fffbdd',
+		teleblack = '#f3efd1',
+	}
+end
 
 ---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.bg2 })
@@ -52,7 +95,7 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.grey1 })
 vim.api.nvim_set_hl(0, 'Directory', { fg = cp.green })
 -- vim.api.nvim_set_hl(0, 'EndOfBuffer', {})
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = cp.red, bold = true, underline = true })
-vim.api.nvim_set_hl(0, 'FoldColumn', { fg = cp.grey1, bg = cp.bg2 })
+vim.api.nvim_set_hl(0, 'FoldColumn', { fg = cp.grey1 })
 vim.api.nvim_set_hl(0, 'Folded', { fg = cp.grey1, bg = cp.bg2 })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.bg0, bg = cp.bg_red })
 vim.api.nvim_set_hl(0, 'lCursor', { link = 'Cursor' })
@@ -72,7 +115,7 @@ vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = cp.grey0 })
 vim.api.nvim_set_hl(0, 'Question', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = cp.purple, bold = true })
 vim.api.nvim_set_hl(0, 'Search', { fg = cp.bg0, bg = cp.bg_green })
-vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.fg0, bg = cp.bg2 })
+vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.fg0 })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = cp.bg5 })
 vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.fg1, bg = cp.bg_statusline1 })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.grey1, bg = cp.bg_statusline1 })

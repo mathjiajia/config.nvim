@@ -67,12 +67,15 @@ vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
+vim.g.catppuccin_style = 'dawn'
+vim.g.gruvbox_style = 'dark'
+vim.g.edge_style = 'dark'
+
 ---- THEMS & LINES ----
 -- vim.cmd('colorscheme catppuccin')
--- vim.cmd('colorscheme catppuccin_storm')
--- vim.cmd('colorscheme edge')
+vim.cmd('colorscheme edge')
 -- vim.cmd('colorscheme everforest')
-vim.cmd('colorscheme gruvbox')
+-- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme kanagawa')
 -- vim.cmd('colorscheme moon')
 -- vim.cmd('colorscheme sonokai')
