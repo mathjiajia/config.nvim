@@ -119,7 +119,7 @@ vim.api.nvim_set_hl(0, 'VisualNOS', { fg = 'NONE', bg = c.vscSelection })
 vim.api.nvim_set_hl(0, 'WarningMsg', { fg = c.vscRed, bg = c.vscBack, bold = true })
 vim.api.nvim_set_hl(0, 'Whitespace', { fg = c.vscLineNumber, bg = 'NONE', undercurl = true })
 vim.api.nvim_set_hl(0, 'WildMenu', { fg = 'NONE', bg = c.vscSelection })
-vim.api.nvim_set_hl(0, 'WinSeparator', { fg = c.vscBack })
+vim.api.nvim_set_hl(0, 'WinSeparator', { fg = c.vscPopupHighlightGray })
 
 ------ DIFF ------
 vim.api.nvim_set_hl(0, 'DiffAdd', { fg = c.vscDiffGreenDark, bg = c.vscBack })

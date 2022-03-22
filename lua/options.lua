@@ -14,7 +14,6 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_python3_provider = 0
--- vim.g.python3_host_prog = '/usr/local/bin/python3'
 
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
@@ -67,7 +66,7 @@ vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
-vim.g.catppuccin_style = 'dawn'
+vim.g.catppuccin_style = 'dusk'
 vim.g.gruvbox_style = 'dark'
 vim.g.edge_style = 'light'
 vim.g.onedark_style = 'dark'

@@ -109,7 +109,6 @@ local function spec(use)
 	}
 	use {
 		'L3MON4D3/LuaSnip',
-		-- branch = 'add_snippets',
 		config = [[require('configs.luasnip')]],
 	}
 	use {
@@ -159,11 +158,7 @@ local function spec(use)
 	}
 	use {
 		'f3fora/nvim-texlabconfig',
-		config = function()
-			require('texlabconfig').setup()
-		end,
-		-- ft = { 'tex', 'bib' },
-		-- cmd = { 'TexlabInverseSearch' },
+		config = [[require('texlabconfig').setup()]],
 	}
 	use {
 		{
