@@ -73,8 +73,8 @@ vim.g.edge_style = 'light'
 
 ---- THEMS & LINES ----
 -- vim.cmd('colorscheme catppuccin')
-vim.cmd('colorscheme edge')
--- vim.cmd('colorscheme everforest')
+-- vim.cmd('colorscheme edge')
+vim.cmd('colorscheme everforest')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme kanagawa')
 -- vim.cmd('colorscheme moon')
