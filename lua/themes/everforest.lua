@@ -302,8 +302,9 @@ vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.green })
 ---------- TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = cp.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = cp.fg, bg = cp.teleblack })
-vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = cp.diff_green })
+-- vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = cp.diff_green })
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.green, bold = true })
+
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = cp.orange, bg = cp.teleblack })
 vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = cp.fg, bg = cp.teleblack })
 

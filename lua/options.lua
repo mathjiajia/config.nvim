@@ -67,8 +67,8 @@ vim.opt.termguicolors = true
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
-vim.g.theme_style = 'light'
-require('themes.github')
+vim.g.theme_style = 'dark'
+require('themes.vscode')
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')

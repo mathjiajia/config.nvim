@@ -379,8 +379,12 @@ vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.Rb2 })
 ------ TELESCOPE ------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = colors.teleblack })
+-- vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = colors.purple, bg = colors.cursorline })
+vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = colors.purple })
+-- vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = colors.comment, bg = colors.cursorline })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = colors.green })
 
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.red, bg = colors.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.purple })
 vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = colors.fg, bg = colors.teleblack })
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.teledark, bg = colors.teledark })
@@ -389,15 +393,6 @@ vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.teleblack, bg = co
 vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = colors.menu, bg = colors.green })
 vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.menu, bg = colors.red })
 vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = colors.teledark, bg = colors.blue })
-
-vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = colors.purple, bg = colors.cursorline })
-vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = colors.purple })
-vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = colors.comment, bg = colors.cursorline })
-
-vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { link = 'TelescopeBorder' })
-vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = colors.green, underline = true })
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.purple })
-vim.api.nvim_set_hl(0, 'TelescopePrompt', { link = 'TelescopeNormal' })
 
 ------ TREESITTER ------
 vim.api.nvim_set_hl(0, 'TSAnnotation', { fg = colors.red })

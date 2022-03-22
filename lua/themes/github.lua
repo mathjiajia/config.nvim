@@ -1,106 +1,6 @@
 local c = {}
 
-if vim.g.theme_style == 'dark_default' then
-	c = {
-		-- Background Colors
-		bg = '#0d1117',
-		bg2 = '#090c10',
-
-		-- foreground colors
-		fg = '#c9d1d9',
-		fg_dark = '#4d5566',
-		fg_gutter = '#c5c5c5',
-		fg_light = '#b3b1ad',
-		fg_term = '#b3b1ad',
-
-		-- Background Highlights Colors
-		bg_highlight = '#161b22',
-		bg_search = '#2c2b1c',
-		bg_visual = '#b3b1ad',
-		bg_visual_selection = '#163356',
-		border = '#b3b1ad',
-
-		-- Cursor & LineNumber Colors
-		cursor = '#73b7f2',
-		cursor_line_nr = '#c9d1d9',
-		line_nr = '#8b949e',
-
-		-- LSP & Diagnostic Colors
-		error = '#f85149',
-		warning = '#f0883e',
-		info = '#75beff',
-		hint = '#eeeeb3',
-		lsp = { ref_txt = '#164449' },
-
-		-- Auto-Complication Colors
-		pmenu = { bg = '#161b22', sbar = '#31373d' },
-
-		-- Git & Diff Colors
-		git = {
-			add = '#56d364',
-			change = '#ac8934',
-			delete = '#f85149',
-			conflict = '#e3b341',
-			ignore = '#484f58',
-			renamed = '#73c991',
-		},
-		diff = {
-			add = '#244032',
-			add_fg = '#56d364',
-			change = '#341a00',
-			change_fg = '#e3b341',
-			delete = '#462c32',
-			delete_fg = '#f85149',
-		},
-
-		-- Syntax Colors
-		syntax = {
-			comment = '#8b949e',
-			constant = '#79c0ff',
-			string = '#a5d6ff',
-			variable = '#ffa657',
-			keyword = '#ff7b72',
-			func = '#d2a8ff',
-			func_param = '#c9d1d9',
-			match_paren_bg = '#105357',
-			tag = '#7ee787',
-			html_arg = '#ff7b72',
-			param = '#ffa657',
-			json_label = '#79c0ff',
-		},
-
-		-- Terminal Colors
-		orange = '#d18616',
-		black = '#484f58',
-		bright_black = '#6e7681',
-		white = '#b1bac4',
-		bright_white = '#f0f6fc',
-		red = '#ff7b72',
-		bright_red = '#ffa198',
-		green = '#3fb950',
-		bright_green = '#56d364',
-		yellow = '#d29922',
-		bright_yellow = '#e3b341',
-		blue = '#58a6ff',
-		bright_blue = '#79c0ff',
-		bright_blue_75 = '#60a7e6',
-		bright_blue_80 = '#65aceb',
-		magenta = '#bc8cff',
-		bright_magenta = '#d2a8ff',
-		cyan = '#39c5cf',
-		bright_cyan = '#56d4dd',
-
-		-- Plugin Colors
-		git_signs = {
-			add = '#196c2e',
-			change = '#9e6a03',
-			delete = '#b62324',
-		},
-
-		teledark = '#070b11',
-		teleblack = '#13171d',
-	}
-elseif vim.g.theme_style == 'dark' then
+if vim.g.theme_style == 'dark' then
 	c = {
 		-- Background Colors
 		bg = '#24292e',
@@ -502,41 +402,41 @@ vim.api.nvim_set_hl(0, 'SpellLocal', { sp = c.info, undercurl = true })
 vim.api.nvim_set_hl(0, 'SpellRare', { sp = c.hint, undercurl = true })
 
 -- SYNTAX GROUPS
-vim.api.nvim_set_hl(0, 'Boolean', {})
+-- vim.api.nvim_set_hl(0, 'Boolean', {})
 vim.api.nvim_set_hl(0, 'Character', { fg = c.syntax.variable })
 vim.api.nvim_set_hl(0, 'Comment', { fg = c.syntax.comment, italic = true })
-vim.api.nvim_set_hl(0, 'Conditional', {})
+-- vim.api.nvim_set_hl(0, 'Conditional', {})
 vim.api.nvim_set_hl(0, 'Constant', { fg = c.syntax.constant })
-vim.api.nvim_set_hl(0, 'Debug', {})
-vim.api.nvim_set_hl(0, 'Define', {})
-vim.api.nvim_set_hl(0, 'Delimiter', {})
+-- vim.api.nvim_set_hl(0, 'Debug', {})
+-- vim.api.nvim_set_hl(0, 'Define', {})
+-- vim.api.nvim_set_hl(0, 'Delimiter', {})
 vim.api.nvim_set_hl(0, 'Error', { fg = c.error })
-vim.api.nvim_set_hl(0, 'Exception', {})
-vim.api.nvim_set_hl(0, 'Float', {})
+-- vim.api.nvim_set_hl(0, 'Exception', {})
+-- vim.api.nvim_set_hl(0, 'Float', {})
 vim.api.nvim_set_hl(0, 'Function', { fg = c.syntax.func })
 vim.api.nvim_set_hl(0, 'Identifier', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'Ignore', {})
-vim.api.nvim_set_hl(0, 'Include', {})
+-- vim.api.nvim_set_hl(0, 'Ignore', {})
+-- vim.api.nvim_set_hl(0, 'Include', {})
 vim.api.nvim_set_hl(0, 'Keyword', { fg = c.syntax.keyword, italic = true })
-vim.api.nvim_set_hl(0, 'Label', {})
-vim.api.nvim_set_hl(0, 'Macro', {})
-vim.api.nvim_set_hl(0, 'Number', {})
+-- vim.api.nvim_set_hl(0, 'Label', {})
+-- vim.api.nvim_set_hl(0, 'Macro', {})
+-- vim.api.nvim_set_hl(0, 'Number', {})
 vim.api.nvim_set_hl(0, 'Operator', { fg = c.syntax.keyword })
-vim.api.nvim_set_hl(0, 'PreCondit', {})
+-- vim.api.nvim_set_hl(0, 'PreCondit', {})
 vim.api.nvim_set_hl(0, 'PreProc', { fg = c.syntax.keyword })
-vim.api.nvim_set_hl(0, 'Repeat', {})
+-- vim.api.nvim_set_hl(0, 'Repeat', {})
 vim.api.nvim_set_hl(0, 'Special', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'SpecialChar', {})
-vim.api.nvim_set_hl(0, 'SpecialComment', {})
+-- vim.api.nvim_set_hl(0, 'SpecialChar', {})
+-- vim.api.nvim_set_hl(0, 'SpecialComment', {})
 vim.api.nvim_set_hl(0, 'Statement', { fg = c.syntax.keyword })
-vim.api.nvim_set_hl(0, 'StorageClass', {})
+-- vim.api.nvim_set_hl(0, 'StorageClass', {})
 vim.api.nvim_set_hl(0, 'String', { fg = c.syntax.string })
-vim.api.nvim_set_hl(0, 'Structure', {})
-vim.api.nvim_set_hl(0, 'Tag', {})
+-- vim.api.nvim_set_hl(0, 'Structure', {})
+-- vim.api.nvim_set_hl(0, 'Tag', {})
 vim.api.nvim_set_hl(0, 'Title', { fg = c.syntax.variable, bold = true })
 vim.api.nvim_set_hl(0, 'Todo', { fg = c.bg, bg = c.yellow })
 vim.api.nvim_set_hl(0, 'Type', { fg = c.syntax.keyword })
-vim.api.nvim_set_hl(0, 'Typedef', {})
+-- vim.api.nvim_set_hl(0, 'Typedef', {})
 vim.api.nvim_set_hl(0, 'Underlined', { underline = true })
 
 ------ MISC ------
@@ -708,9 +608,9 @@ vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = c.fg, bg = c.teleblack }
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.teledark, bg = c.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = c.teleblack, bg = c.teleblack })
 
-vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = c.bg, bg = c.red })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = c.bg, bg = c.blue })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.teledark, bg = c.green })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = c.bg, bg = c.green })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = c.bg, bg = c.red })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.teledark, bg = c.blue })
 
 ------------ TELESCOPE ----------
 -- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = cp.teledark })
@@ -742,7 +642,7 @@ vim.api.nvim_set_hl(0, 'commentTSConstant', { fg = c.syntax.keyword })
 -- vim.api.nvim_set_hl(0, 'TSConstMacro', {})
 -- vim.api.nvim_set_hl(0, 'TSError', {})
 -- vim.api.nvim_set_hl(0, 'TSException', {})
--- vim.api.nvim_set_hl(0, 'TSField', { fg = c.fg })
+vim.api.nvim_set_hl(0, 'TSField', { fg = c.fg })
 -- vim.api.nvim_set_hl(0, 'TSFloat', {})
 -- vim.api.nvim_set_hl(0, 'TSFunction', {})
 -- vim.api.nvim_set_hl(0, 'TSFuncBuiltin', {})

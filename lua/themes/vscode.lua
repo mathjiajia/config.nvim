@@ -362,6 +362,9 @@ vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = c.vscRb2 })
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.vscTeleDark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = c.white, bg = c.vscTeleBlack })
+-- vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
+-- vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.vscMediumBlue, bold = true })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.vscFront })
 vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = c.vscFront, bg = c.vscTeleBlack })
@@ -372,12 +375,6 @@ vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = c.vscTeleBlack, bg = c.vs
 vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = c.black, bg = c.vscBlueGreen })
 vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = c.black, bg = c.vscLightRed })
 vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.vscTeleDark, bg = c.vscBlue })
-
-vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = c.vscLineNumber })
-vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = c.vscLineNumber })
-vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
-vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
-vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.vscMediumBlue, bold = true })
 
 ---------- TREESITTER ----------
 vim.api.nvim_set_hl(0, 'TSAnnotation', { fg = c.vscYellow })
