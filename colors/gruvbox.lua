@@ -1,6 +1,7 @@
 vim.g.colors_name = 'gruvbox'
 
-local cp
+local cp = {}
+
 if vim.g.gruvbox_style == 'dark' then
 	cp = {
 		bg0 = '#32302f',

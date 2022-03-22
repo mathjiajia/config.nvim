@@ -70,14 +70,16 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.g.catppuccin_style = 'dawn'
 vim.g.gruvbox_style = 'dark'
 vim.g.edge_style = 'light'
+vim.g.onedark_style = 'dark'
 
 ---- THEMS & LINES ----
 -- vim.cmd('colorscheme catppuccin')
 -- vim.cmd('colorscheme edge')
-vim.cmd('colorscheme everforest')
+-- vim.cmd('colorscheme everforest')
 -- vim.cmd('colorscheme gruvbox')
 -- vim.cmd('colorscheme kanagawa')
 -- vim.cmd('colorscheme moon')
+vim.cmd('colorscheme onedark')
 -- vim.cmd('colorscheme sonokai')
 -- vim.cmd('colorscheme vscode')
 

@@ -1,6 +1,6 @@
 vim.g.colors_name = 'everforest'
 
-local cp
+local cp = {}
 
 if vim.g.everforest_style == 'dark' then
 	cp = {

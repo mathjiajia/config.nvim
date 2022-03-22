@@ -1,6 +1,6 @@
 vim.g.colors_name = 'edge'
 
-local cp
+local cp = {}
 
 if vim.g.edge_style == 'dark' then
 	cp = {

@@ -1,6 +1,7 @@
 vim.g.colors_name = 'catppuccin'
 
-local cp
+local cp = {}
+
 if vim.g.catppuccin_style == 'dusk' then
 	cp = {
 		rosewater = '#F5E0DC', -- Rosewater
@@ -124,6 +125,7 @@ vim.api.nvim_set_hl(0, 'MatchParen', { bg = cp.black3, bold = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.white, bold = true })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = cp.white })
+-- vim.api.nvim_set_hl(0, 'MsgSeparator', { link = 'ModeMsg' })
 vim.api.nvim_set_hl(0, 'NonText', { fg = cp.gray0 })
 vim.api.nvim_set_hl(0, 'Normal', { fg = cp.white, bg = cp.black2 })
 vim.api.nvim_set_hl(0, 'NormalFloat', { fg = cp.white, bg = cp.black1 })
