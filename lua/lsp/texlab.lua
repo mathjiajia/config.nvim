@@ -3,8 +3,10 @@ local settings = {
 		auxDirectory = '.',
 		bibtexFormatter = 'texlab',
 		build = {
-			args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
-			executable = 'latexmk',
+			executable = 'tectonic',
+			args = { '-X', 'compile', '%f', '--synctex', '--keep-logs', '--keep-intermediates' },
+			-- executable = 'latexmk',
+			-- args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
 			forwardSearchAfter = true,
 			onSave = true,
 		},
