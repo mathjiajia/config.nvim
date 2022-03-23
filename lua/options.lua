@@ -68,7 +68,7 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 
 ---- THEMS & LINES ----
 vim.g.theme_style = 'dark'
-require('themes.vscode')
+require('themes.catppuccin')
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')

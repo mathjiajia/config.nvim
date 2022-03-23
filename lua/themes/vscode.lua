@@ -21,8 +21,8 @@ if vim.g.theme_style == 'dark' then
 
 		vscPopupFront = '#BBBBBB',
 		vscPopupBack = '#252526',
-		vscPopupHighlightBlue = '#004873',
 		vscPopupMatchBlue = '#00A6FF',
+		vscPopupHighlightBlue = '#004873',
 		vscPopupHighlightGray = '#343B41',
 
 		vscSplitLight = '#898989',
@@ -46,10 +46,9 @@ if vim.g.theme_style == 'dark' then
 
 		-- Syntax colors
 		vscGray = '#808080',
-		vscViolet = '#646695',
+		vscViolet = '#18A2FE',
 		vscBlue = '#569CD6',
 		vscDarkBlue = '#223E55',
-		vscMediumBlue = '#18A2FE',
 		vscLighterBlue = '#4FC1FF',
 		vscLightBlue = '#9CDCFE',
 		vscGreen = '#699851',
@@ -72,8 +71,8 @@ else
 		vscFront = '#343434',
 		vscBack = '#FFFFFF',
 
-		vscTeleDark = '#f1f7fd',
-		vscTeleBlack = '#E5EBF1',
+		vscTeleDark = '#FDFFFF',
+		vscTeleBlack = '#F1F7FD',
 
 		vscTabOther = '#CECECE',
 		vscTabOutside = '#E8E8E8',
@@ -84,7 +83,8 @@ else
 
 		vscPopupFront = '#000000',
 		vscPopupBack = '#F3F3F3',
-		vscPopupHighlightBlue = '#0064c1',
+		vscPopupMatchBlue = '#0069C2',
+		vscPopupHighlightBlue = '#0069C2',
 		vscPopupHighlightGray = '#767676',
 
 		vscSplitLight = '#EEEEEE',
@@ -92,11 +92,11 @@ else
 		vscSplitThumb = '#DFDFDF',
 
 		vscCursorDarkDark = '#E5EBF1',
-		vscCursorDark = '#6F6F6F',
+		vscCursorDark = '#d5d5d5',
 		vscCursorLight = '#767676',
 		vscSelection = '#ADD6FF',
-		vscLineNumber = '#098658',
-		vscLineNumberSelected = '#007ACC',
+		vscLineNumber = '#157995',
+		vscLineNumberSelected = '#012671',
 
 		vscDiffRedDark = '#FFCCCC',
 		vscDiffRedLight = '#FFA3A3',
@@ -108,35 +108,36 @@ else
 
 		-- Syntax colors
 		vscGray = '#000000',
-		vscViolet = '#000080',
-		vscBlue = '#0000FF',
+		vscViolet = '#18A2FE',
+		vscBlue = '#002EFF',
 		vscDarkBlue = '#007ACC',
-		vscMediumBlue = '#18A2FE',
 		vscLighterBlue = '#4FC1FF',
-		vscLightBlue = '#0451A5',
-		vscGreen = '#008000',
-		vscBlueGreen = '#16825D',
+		vscLightBlue = '#001B83',
+		vscGreen = '#007e00',
+		vscBlueGreen = '#18809B',
 		vscLightGreen = '#098658',
-		vscRed = '#FF0000',
-		vscOrange = '#C72E0F',
+		vscRed = '#EC1C04',
+		vscOrange = '#A61806',
 		vscLightRed = '#A31515',
 		vscYellowOrange = '#800000',
 		vscYellow = '#795E26',
 		vscPink = '#AF00DB',
 
 		-- Rianbow
-		vscRb1 = '#0028ff',
+		vscRb1 = '#002EFF',
 		vscRb2 = '#009619',
 		vscRb3 = '#853302',
 	}
 end
+
+c.vscPopupMatchFront = '#FFFFFF'
 
 ---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.vscCursorDarkDark })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.vscGray, bg = c.vscBack })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.vscCursorDark, bg = c.vscCursorLight })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = c.vscCursorDarkDark })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = c.vscCursorDarkDark })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = c.vscTeleBlack })
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.vscLineNumberSelected, bg = c.vscBack })
 -- vim.api.nvim_set_hl(0, 'CursorLineSign', {})
@@ -157,9 +158,9 @@ vim.api.nvim_set_hl(0, 'Normal', { fg = c.vscFront, bg = c.vscBack })
 -- vim.api.nvim_set_hl(0, 'NormalFloat', {})
 -- vim.api.nvim_set_hl(0, 'NormalNC', {})
 vim.api.nvim_set_hl(0, 'Pmenu', { fg = c.vscPopupFront, bg = c.vscPopupBack })
-vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = c.vscPopupHighlightGray })
-vim.api.nvim_set_hl(0, 'PmenuSel', { fg = c.vscPopupFront, bg = c.vscPopupHighlightBlue })
-vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = c.vscPopupFront })
+vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = c.vscPopupBack })
+vim.api.nvim_set_hl(0, 'PmenuSel', { fg = c.vscPopupMatchFront, bg = c.vscPopupHighlightBlue })
+vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = c.vscCursorDark })
 vim.api.nvim_set_hl(0, 'Question', { fg = c.vscBlue }) -- removed bg
 -- vim.api.nvim_set_hl(0, 'QuickFixLine', {})
 vim.api.nvim_set_hl(0, 'Search', { fg = 'NONE', bg = c.vscSearch })
@@ -364,7 +365,7 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.vscTeleDark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = c.white, bg = c.vscTeleBlack })
 -- vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
 -- vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
-vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.vscMediumBlue, bold = true })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.vscViolet, bold = true })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.vscFront })
 vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = c.vscFront, bg = c.vscTeleBlack })
@@ -504,3 +505,28 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = c.vscYellowOrange })
 -- vim.api.nvim_set_hl(0, 'pythonTSTypeBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
+
+------ TERMINAL ------
+vim.g.terminal_color_0 = c.vscBack
+vim.g.terminal_color_8 = c.vscGray
+
+vim.g.terminal_color_1 = c.vscRed
+vim.g.terminal_color_9 = c.vscRed
+
+vim.g.terminal_color_2 = c.vscGreen
+vim.g.terminal_color_10 = c.vscGreen
+
+vim.g.terminal_color_3 = c.vscYellow
+vim.g.terminal_color_11 = c.vscYellow
+
+vim.g.terminal_color_4 = c.vscBlue
+vim.g.terminal_color_12 = c.vscBlue
+
+vim.g.terminal_color_5 = c.vscPink
+vim.g.terminal_color_13 = c.vscPink
+
+vim.g.terminal_color_6 = c.vscBlueGreen
+vim.g.terminal_color_14 = c.vscBlueGreen
+
+vim.g.terminal_color_7 = c.vscFront
+vim.g.terminal_color_15 = c.vscFront
