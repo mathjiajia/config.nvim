@@ -391,11 +391,7 @@ N = {
 	),
 	s({ trig = 'quad', name = 'quad' }, { t('\\quad ') }, { condition = vimtex.in_mathzone }),
 
-	s(
-		{ trig = 'bar', name = 'overline' },
-		{ t('\\overline{'), i(1), t('}'), i(0) },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'bar', name = 'overline' }, { t('\\overline{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'hat', name = 'widehat' }, { t('\\widehat{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'td', name = 'widetilde' }, { t('\\widetilde{'), i(1), t('}'), i(0) }, {
 		condition = vimtex.in_mathzone,
@@ -812,6 +808,7 @@ N = {
 		{ t('^{-'), i(1), t('}'), i(0) },
 		{ condition = vimtex.in_mathzone }
 	),
+	s({ trig = 'sq', name = 'square root' }, { t('\\sqrt{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = '__', name = 'subscript', wordTrig = false },
 		{ t('_{'), i(1), t('}'), i(0) },
@@ -826,11 +823,7 @@ N = {
 	s({ trig = '...', name = 'dots ...', wordTrig = false }, { t('\\dots') }, { condition = vimtex.in_mathzone }),
 	s({ trig = '||', name = 'mid |', wordTrig = false }, { t('\\mid ') }, { condition = vimtex.in_mathzone }),
 	s({ trig = '::', name = 'colon :', wordTrig = false }, { t('\\colon ') }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = ':=', name = 'coloneqq :=', wordTrig = false },
-		{ t('\\coloneqq ') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t('\\coloneqq ') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'rup', name = 'round up', wordTrig = false },
 		{ t('\\rup{'), i(1), t('}'), i(0) },
@@ -845,16 +838,8 @@ N = {
 	s({ trig = 'lll', wordTrig = false, name = 'ell ℓ' }, { t('\\ell') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'xx', wordTrig = false, name = 'times ×' }, { t('\\times') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'nabl', wordTrig = false, name = 'nabla ∇' }, { t('\\nabla') }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = 'AA', wordTrig = false, name = 'affine 𝔸' },
-		{ t('\\mathbb{A}') },
-		{ condition = vimtex.in_mathzone }
-	),
-	s(
-		{ trig = 'CC', wordTrig = false, name = 'complex ℂ' },
-		{ t('\\mathbb{C}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'AA', wordTrig = false, name = 'affine 𝔸' }, { t('\\mathbb{A}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'CC', wordTrig = false, name = 'complex ℂ' }, { t('\\mathbb{C}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'DD', wordTrig = false, name = 'disc 𝔻' }, { t('\\mathbb{D}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'FF', wordTrig = false, name = 'Hirzebruch 𝔽' },
@@ -866,16 +851,8 @@ N = {
 		{ t('\\mathbb{H}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s(
-		{ trig = 'NN', wordTrig = false, name = 'natural ℕ' },
-		{ t('\\mathbb{N}') },
-		{ condition = vimtex.in_mathzone }
-	),
-	s(
-		{ trig = 'OO', wordTrig = false, name = 'mathcal{O}' },
-		{ t('\\mathcal{O}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'NN', wordTrig = false, name = 'natural ℕ' }, { t('\\mathbb{N}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'OO', wordTrig = false, name = 'mathcal{O}' }, { t('\\mathcal{O}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'PP', wordTrig = false, name = 'projective ℙ' },
 		{ t('\\mathbb{P}') },
@@ -885,11 +862,7 @@ N = {
 		condition = vimtex.in_mathzone,
 	}),
 	s({ trig = 'RR', wordTrig = false, name = 'real ℝ' }, { t('\\mathbb{R}') }, { condition = vimtex.in_mathzone }),
-	s(
-		{ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' },
-		{ t('\\mathbb{Z}') },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t('\\mathbb{Z}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'srt', wordTrig = false, name = 'square root' },
 		{ t('\\sqrt{'), i(1), t('}'), i(0) },
