@@ -2,63 +2,41 @@
 
 local colors = {}
 
-local utils = {}
-
-utils.bg = '#000000'
-utils.fg = '#ffffff'
-utils.day_brightness = 0.3
-
-local hex_to_rgb = function(hex_str)
-	local hex = '[abcdef0-9][abcdef0-9]'
-	local pat = '^#(' .. hex .. ')(' .. hex .. ')(' .. hex .. ')$'
-	hex_str = string.lower(hex_str)
-
-	assert(string.find(hex_str, pat) ~= nil, 'hex_to_rgb: invalid hex_str: ' .. tostring(hex_str))
-
-	local r, g, b = string.match(hex_str, pat)
-	return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
-end
-
-function utils.blend(fg, bg, alpha)
-	bg = hex_to_rgb(bg)
-	fg = hex_to_rgb(fg)
-
-	local blendChannel = function(i)
-		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
-		return math.floor(math.min(math.max(0, ret), 255) + 0.5)
-	end
-
-	return string.format('#%02X%02X%02X', blendChannel(1), blendChannel(2), blendChannel(3))
-end
-
-function utils.darken(hex, amount, bg)
-	return utils.blend(hex, bg or utils.bg, math.abs(amount))
-end
-
-function utils.lighten(hex, amount, fg)
-	return utils.blend(hex, fg or utils.fg, math.abs(amount))
-end
-
 if vim.g.theme_style == 'dark' then
 	colors = {
-		bg = '#282c34',
-		fg = '#abb2bf',
-		red = '#e06c75',
-		orange = '#d19a66',
-		yellow = '#e5c07b',
-		green = '#98c379',
-		cyan = '#56b6c2',
-		blue = '#61afef',
-		purple = '#c678dd',
-		white = '#abb2bf',
-		black = '#282c34',
-		gray = '#5c6370',
-		highlight = '#e2be7d',
+		bg = '#282C34',
+		fg = '#ABB2BF',
+		red = '#E06C75',
+		orange = '#D19A66',
+		yellow = '#E5C07B',
+		green = '#98C379',
+		cyan = '#56B6C2',
+		blue = '#61AFEF',
+		purple = '#C678DD',
+		white = '#ABB2BF',
+		black = '#282C34',
+		gray = '#5C6370',
+		-- highlight = '#E2BE7D',
 
 		-- Git diff
-		diff_add = '#003e4a',
-		diff_delete = '#501b20',
+		diff_add = '#109868',
+		diff_delete = '#9a353d',
+		diff_change = '#e0af68',
 		diff_text = '#005869',
+
+		cursorline = '#2E323A',
+		color_column = '#2E323A',
+		comment = '#7D828D',
+		indentline = '#373B42',
+		menu = '#3D4148',
+		menu_scroll = '#33373E',
+		menu_scroll_thumb = '#4E8CDF',
+		selection = '#53565D',
+
+		-- Lines
+		bg_statusline = '#33373E',
+		fg_gutter = '#3D4148',
+		fg_sidebar = '#ABB2BF',
 
 		teledark = '#22262e',
 		teleblack = '#2e323a',
@@ -67,69 +45,55 @@ if vim.g.theme_style == 'dark' then
 		Rb2 = '#D170CD',
 		Rb3 = '#00A2FF',
 	}
-
-	-- Additional colors
-	colors.cursorline = utils.lighten(colors.bg, 0.97)
-	colors.color_column = utils.lighten(colors.bg, 0.97)
-	colors.comment = utils.lighten(colors.gray, 0.80)
-	colors.indentline = utils.lighten(colors.bg, 0.93)
-	colors.menu = utils.lighten(colors.bg, 0.90)
-	colors.menu_scroll = utils.lighten(colors.bg, 0.95)
-	colors.menu_scroll_thumb = utils.darken(colors.blue, 0.80)
-	colors.selection = utils.lighten(colors.bg, 0.8)
-
-	-- Lualine colors
-	colors.bg_statusline = utils.lighten(colors.bg, 0.95)
-	colors.fg_gutter = utils.lighten(colors.bg, 0.90)
-	colors.fg_sidebar = colors.fg
 else
 	colors = {
 		bg = '#FAFAFA',
 		fg = '#383A42',
 		red = '#f6483f',
-		orange = '#a06600',
-		yellow = '#eea825',
-		green = '#24a442',
-		cyan = '#56b6c2',
-		blue = '#2a77fa',
+		orange = '#A06600',
+		yellow = '#EEA825',
+		green = '#24A442',
+		cyan = '#56B6C2',
+		blue = '#2A77FA',
 		purple = '#A626A4',
 		white = '#FAFAFA',
-		black = '#6a6a6a',
-		gray = '#bebebe',
-		highlight = '#FFE792',
+		black = '#6A6A6A',
+		gray = '#BEBEBE',
+		-- highlight = '#FFE792',
 
 		-- Git diff
-		diff_add = '#cae3e8',
-		diff_delete = '#f5c6c6',
-		diff_text = '#a6d0d8',
+		diff_add = '#CAE3E8',
+		diff_delete = '#F5C6C6',
+		diff_change = '#ADBAC7',
+		diff_text = '#A6D0D8',
 
-		teledark = '#ffffff',
-		teleblack = '#f4f4f4',
+		-- Additional colors
+		cursorline = '#F3F3F3',
+		color_column = '#F3F3F3',
+		comment = '#989898',
+		indentline = '#E9E9E9',
+		menu = '#EEEEEE',
+		menu_scroll = '#E1E1E1',
+		menu_scroll_thumb = '#5592FB',
+		selection = '#E1E1E1',
 
-		Rb1 = '#0028ff',
+		-- Lines
+		bg_statusline = '#EEEEEE',
+		fg_gutter = '#EEEEEE',
+		fg_sidebar = '#383A42',
+
+		teledark = '#FFFFFF',
+		teleblack = '#F4F4F4',
+
+		Rb1 = '#0028FF',
 		Rb2 = '#009619',
 		Rb3 = '#853302',
 	}
-
-	-- Additional colors
-	colors.cursorline = utils.darken(colors.bg, 0.97)
-	colors.color_column = utils.darken(colors.bg, 0.97)
-	colors.comment = utils.darken(colors.gray, 0.80)
-	colors.indentline = utils.darken(colors.bg, 0.93)
-	colors.menu = utils.darken(colors.bg, 0.95)
-	colors.menu_scroll = utils.darken(colors.bg, 0.90)
-	colors.menu_scroll_thumb = utils.lighten(colors.blue, 0.80)
-	colors.selection = utils.darken(colors.bg, 0.90)
-
-	-- Lualine colors
-	colors.bg_statusline = utils.darken(colors.bg, 0.95)
-	colors.fg_gutter = utils.darken(colors.bg, 0.90)
-	colors.fg_sidebar = colors.fg
 end
 
 ------ BASICS ------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.color_column })
-vim.api.nvim_set_hl(0, 'Conceal', {})
+-- vim.api.nvim_set_hl(0, 'Conceal', {})
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.black })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.gray })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.teleblack }) -- FIXED
@@ -181,7 +145,7 @@ vim.api.nvim_set_hl(0, 'WinSeparator', { fg = colors.comment })
 
 ------ DIFF ------
 vim.api.nvim_set_hl(0, 'DiffAdd', { bg = colors.diff_add })
-vim.api.nvim_set_hl(0, 'DiffChange', { underline = true })
+vim.api.nvim_set_hl(0, 'DiffChange', { bg = colors.diff_change })
 vim.api.nvim_set_hl(0, 'DiffDelete', { bg = colors.diff_delete })
 vim.api.nvim_set_hl(0, 'DiffText', { bg = colors.diff_text })
 
@@ -251,6 +215,14 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { fg = colors.red, underline 
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { fg = colors.yellow, underline = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { fg = colors.blue, underline = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { fg = colors.cyan, underline = true })
+
+------ GIT ------
+-- vim.api.nvim_set_hl(0, 'diffAdded', { fg = colors.green })
+-- vim.api.nvim_set_hl(0, 'diffChanged', { fg = colors.yellow })
+-- vim.api.nvim_set_hl(0, 'diffRemoved', { fg = colors.red })
+-- vim.api.nvim_set_hl(0, 'diffFile', { fg = colors.yellow })
+-- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = colors.yellow })
+-- vim.api.nvim_set_hl(0, 'diffLine', { fg = colors.blue })
 
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = colors.selection })
@@ -534,3 +506,20 @@ vim.api.nvim_set_hl(0, 'pythonTSType', { fg = colors.cyan })
 -- vim.api.nvim_set_hl(0, 'pythonTSTypeBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
+
+vim.g.terminal_color_0 = colors.gray
+vim.g.terminal_color_1 = colors.red
+vim.g.terminal_color_2 = colors.green
+vim.g.terminal_color_3 = colors.yellow
+vim.g.terminal_color_4 = colors.blue
+vim.g.terminal_color_5 = colors.purple
+vim.g.terminal_color_6 = colors.cyan
+vim.g.terminal_color_7 = colors.fg
+vim.g.terminal_color_8 = colors.black
+vim.g.terminal_color_9 = colors.red
+vim.g.terminal_color_10 = colors.green
+vim.g.terminal_color_11 = colors.yellow
+vim.g.terminal_color_12 = colors.blue
+vim.g.terminal_color_13 = colors.purple
+vim.g.terminal_color_14 = colors.cyan
+vim.g.terminal_color_15 = colors.fg

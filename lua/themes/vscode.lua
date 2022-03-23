@@ -1,6 +1,7 @@
 -- Modified from https://github.com/Mofiqul/vscode.nvim
 
 local c = {}
+
 if vim.g.theme_style == 'dark' then
 	c = {
 		vscFront = '#D4D4D4',
@@ -144,6 +145,7 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.vscLineNumberSelected, bg = c.vs
 vim.api.nvim_set_hl(0, 'Directory', { fg = c.vscBlue, bg = c.vscBack })
 -- vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = c.vscBack, bg = c.vscBack })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = c.vscRed, bg = c.vscBack })
+-- vim.api.nvim_set_hl(0, 'FloatBorder', {})
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = c.vscLineNumber, bg = c.vscBack })
 vim.api.nvim_set_hl(0, 'Folded', { fg = c.vscLeftLight, bg = c.vscLeftDark, underline = true })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = 'NONE', bg = c.vscSearchCurrent })
@@ -256,6 +258,24 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underdash = true, sp = c.vsc
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underdash = true, sp = c.vscDarkBlue })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underdash = true, sp = c.vscBlueGreen })
 
+------ GIT -----
+-- vim.api.nvim_set_hl(0, 'diffAdded', { link = 'DiffAdd' })
+-- vim.api.nvim_set_hl(0, 'diffChanged', { link = 'DiffChange' })
+-- vim.api.nvim_set_hl(0, 'diffRemoved', { link = 'DiffDelete' })
+
+------ GITCOMMIT -----
+-- vim.api.nvim_set_hl(0, 'gitcommitHeader', { fg = c.vscGray })
+-- vim.api.nvim_set_hl(0, 'gitcommitOnBranch', { fg = c.vscGray })
+-- vim.api.nvim_set_hl(0, 'gitcommitBranch', { fg = c.vscPink })
+-- vim.api.nvim_set_hl(0, 'gitcommitComment', { fg = c.vscGray })
+-- vim.api.nvim_set_hl(0, 'gitcommitSelectedType', { fg = c.vscGreen })
+-- vim.api.nvim_set_hl(0, 'gitcommitSelectedFile', { fg = c.vscGreen })
+-- vim.api.nvim_set_hl(0, 'gitcommitDiscardedType', { fg = c.vscRed })
+-- vim.api.nvim_set_hl(0, 'gitcommitDiscardedFile', { fg = c.vscRed })
+-- vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = c.vscRed })
+-- vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = c.vscPink })
+-- vim.api.nvim_set_hl(0, 'gitcommitBlank', { fg = c.vscPink })
+
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.vscCursorDark })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' })
@@ -319,6 +339,14 @@ vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { link = 'TSConstant' })
 vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { link = 'TSStructure' })
 vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSParameter' })
 
+------ GITSIGNS ------
+-- vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.vscGreen })
+-- vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.vscYellow })
+-- vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.vscRed })
+-- vim.api.nvim_set_hl(0, 'GitSignsAddLn', { fg = c.vscBack, bg = c.vscGreen })
+-- vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { fg = c.vscBack, bg = c.vscYellow })
+-- vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { fg = c.vscBack, bg = c.vscRed })
+
 -------- INDENT BLANKLINES --------
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = c.vscIndent })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {})
@@ -357,7 +385,6 @@ vim.api.nvim_set_hl(0, 'NotifyTRACEIcon', { link = 'NotifyTRACEBorder' })
 -- vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.diag.hint, italic = true })
 
 ---------- RAINBOW ----------
--- local bg_highlight = cnf.transparent_background and 'NONE' or cp.black2
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = c.vscRb1 })
 vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = c.vscRb2 })
 vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = c.vscRb3 })
@@ -369,8 +396,8 @@ vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = c.vscRb2 })
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.vscTeleDark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = c.white, bg = c.vscTeleBlack })
--- vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
--- vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
+vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = c.vscFront, bg = c.vscPopupHighlightBlue })
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.vscViolet, bold = true })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.vscFront })
@@ -478,6 +505,18 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = c.vscYellowOrange })
 -- vim.api.nvim_set_hl(0, 'luaTSPunctDelimiter', {})
 -- vim.api.nvim_set_hl(0, 'luaTSString', {})
 -- vim.api.nvim_set_hl(0, 'LuaTSVariable', {})
+
+------ MARKDOWN ------
+vim.api.nvim_set_hl(0, 'markdownBold', { fg = c.vscBlue, bold = true })
+vim.api.nvim_set_hl(0, 'markdownCode', { fg = c.vscOrange })
+vim.api.nvim_set_hl(0, 'markdownRule', { fg = c.vscBlue, bold = true })
+vim.api.nvim_set_hl(0, 'markdownCodeDelimiter', { fg = c.vscFront })
+vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = c.vscBlue })
+vim.api.nvim_set_hl(0, 'markdownFootnote', { fg = c.vscOrange })
+vim.api.nvim_set_hl(0, 'markdownFootnoteDefinition', { fg = c.vscOrange })
+vim.api.nvim_set_hl(0, 'markdownUrl', { fg = c.vscFront, underline = true })
+vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = c.vscOrange })
+vim.api.nvim_set_hl(0, 'markdownEscape', { fg = c.vscOrange })
 
 ------ NEORG ------
 -- vim.api.nvim_set_hl(0, 'NeorgCodeBlock', {})

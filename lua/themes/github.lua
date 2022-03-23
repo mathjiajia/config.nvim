@@ -1,3 +1,5 @@
+-- Modified from https://github.com/projekt0n/github-nvim-theme
+
 local c = {}
 
 if vim.g.theme_style == 'dark' then
@@ -456,6 +458,19 @@ vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = c.warning })
 vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = c.info })
 vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = c.hint })
 
+------ GIT ------
+-- vim.api.nvim_set_hl(0, 'diffAdded', { link = 'DiffAdd' })
+-- vim.api.nvim_set_hl(0, 'diffChanged', { link = 'DiffChange' })
+-- vim.api.nvim_set_hl(0, 'diffRemoved', { link = 'DiffDelete' })
+-- vim.api.nvim_set_hl(0, 'diffOldFile', { fg = c.yellow })
+-- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = c.orange })
+-- vim.api.nvim_set_hl(0, 'diffFile', { fg = c.blue })
+-- vim.api.nvim_set_hl(0, 'diffLine', { fg = c.fg_gutter })
+-- vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = c.magenta })
+
+------ GITCOMMITS ------
+-- vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = c.syntax.tag })
+
 ---------- NVIM LSPCONFIG ----------
 
 -- vim.api.nvim_set_hl(0, 'LspCodeLens', {})
@@ -690,100 +705,100 @@ vim.api.nvim_set_hl(0, 'luaTSConstructor', { fg = c.fg })
 vim.api.nvim_set_hl(0, 'cTSLabel', { fg = c.fg })
 
 -- CSS
-vim.api.nvim_set_hl(0, 'cssTSProperty', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'cssTSType', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'cssTSProperty', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'cssTSType', { fg = c.syntax.tag })
 
 -- html
 vim.api.nvim_set_hl(0, 'htmlTSConstant', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'htmlTag', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'htmlEndTag', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'htmlTagName', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'htmlArg', { fg = c.syntax.html_arg })
+-- vim.api.nvim_set_hl(0, 'htmlTag', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'htmlEndTag', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'htmlTagName', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'htmlArg', { fg = c.syntax.html_arg })
 
 -- javascript
-vim.api.nvim_set_hl(0, 'javascriptTSType', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'javascriptTSParameter', { fg = c.syntax.param })
-vim.api.nvim_set_hl(0, 'javascriptTSVariable', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'javascriptTSPunctDelimiter', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'javascriptTSStringRegex', { fg = c.syntax.string })
-vim.api.nvim_set_hl(0, 'javascriptTSConstructor', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'javascriptTSProperty', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'regexTSStringEscape', { fg = c.syntax.keyword })
+-- vim.api.nvim_set_hl(0, 'javascriptTSType', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'javascriptTSParameter', { fg = c.syntax.param })
+-- vim.api.nvim_set_hl(0, 'javascriptTSVariable', { fg = c.syntax.variable })
+-- vim.api.nvim_set_hl(0, 'javascriptTSPunctDelimiter', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'javascriptTSStringRegex', { fg = c.syntax.string })
+-- vim.api.nvim_set_hl(0, 'javascriptTSConstructor', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'javascriptTSProperty', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'regexTSStringEscape', { fg = c.syntax.keyword })
 
 -- json
-vim.api.nvim_set_hl(0, 'jsonTSLabel', { fg = c.syntax.json_label })
+-- vim.api.nvim_set_hl(0, 'jsonTSLabel', { fg = c.syntax.json_label })
 
 -- less
-vim.api.nvim_set_hl(0, 'lessVariable', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'lessProperty', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'cssTagName', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'cssPseudoClassId', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'lessClassCall', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'lessClass', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'lessVariable', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'lessProperty', { fg = c.syntax.variable })
+-- vim.api.nvim_set_hl(0, 'cssTagName', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'cssPseudoClassId', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'lessClassCall', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'lessClass', { fg = c.syntax.func })
 
 -- make
-vim.api.nvim_set_hl(0, 'makeSpecial', { fg = c.syntax.keyword })
+-- vim.api.nvim_set_hl(0, 'makeSpecial', { fg = c.syntax.keyword })
 
 -- obj-c
-vim.api.nvim_set_hl(0, 'cBlock', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'cBlock', { fg = c.syntax.func })
 
 -- python
 vim.api.nvim_set_hl(0, 'pythonTSType', { fg = c.syntax.func })
 vim.api.nvim_set_hl(0, 'pythonTSParameter', { fg = c.syntax.param })
 
 -- ruby
-vim.api.nvim_set_hl(0, 'rubyTSType', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'rubyTSType', { fg = c.syntax.func })
 
 -- scss
-vim.api.nvim_set_hl(0, 'scssTSVariable', { fg = c.syntax.param })
-vim.api.nvim_set_hl(0, 'scssTSType', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'scssTSProperty', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'scssTSParameter', { fg = c.syntax.param })
+-- vim.api.nvim_set_hl(0, 'scssTSVariable', { fg = c.syntax.param })
+-- vim.api.nvim_set_hl(0, 'scssTSType', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'scssTSProperty', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'scssTSParameter', { fg = c.syntax.param })
 
 -- sql
-vim.api.nvim_set_hl(0, 'sqlFold', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'sqlKeyword', { fg = c.syntax.keyword })
+-- vim.api.nvim_set_hl(0, 'sqlFold', { fg = c.syntax.variable })
+-- vim.api.nvim_set_hl(0, 'sqlKeyword', { fg = c.syntax.keyword })
 
 -- typescript
-vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'typescriptTSTypeBuiltin', { fg = c.syntax.variable })
+-- vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'typescriptTSTypeBuiltin', { fg = c.syntax.variable })
 
 -- xml
-vim.api.nvim_set_hl(0, 'xmlProcessing', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'xmlTagName', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'xmlTag', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'xmlAttrib', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'xmlProcessing', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'xmlTagName', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'xmlTag', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'xmlAttrib', { fg = c.syntax.tag })
 
 -- yaml
-vim.api.nvim_set_hl(0, 'yamlTSField', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'yamlTSField', { fg = c.syntax.tag })
 
 -- java
-vim.api.nvim_set_hl(0, 'javaTSVariable', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'javaTSType', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'javaTSParameter', { fg = c.syntax.param })
+-- vim.api.nvim_set_hl(0, 'javaTSVariable', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'javaTSType', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'javaTSParameter', { fg = c.syntax.param })
 
 -- Markdown
-vim.api.nvim_set_hl(0, 'mkdCodeDelimiter', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'mkdCodeStart', { fg = c.syntax.variable, bold = true })
-vim.api.nvim_set_hl(0, 'mkdCodeEnd', { fg = c.syntax.variable, bold = true })
-vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = c.syntax.variable, bold = true })
-vim.api.nvim_set_hl(0, 'markdownH1', { fg = c.syntax.variable, bold = true })
-vim.api.nvim_set_hl(0, 'markdownH2', { fg = c.syntax.variable, bold = true })
-vim.api.nvim_set_hl(0, 'markdownH3', { fg = c.syntax.variable, bold = true })
-vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = c.fg, underline = true })
-vim.api.nvim_set_hl(0, 'markdownUrl', { fg = c.fg, underline = true })
+-- vim.api.nvim_set_hl(0, 'mkdCodeDelimiter', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'mkdCodeStart', { fg = c.syntax.variable, bold = true })
+-- vim.api.nvim_set_hl(0, 'mkdCodeEnd', { fg = c.syntax.variable, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = c.syntax.variable, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownH1', { fg = c.syntax.variable, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownH2', { fg = c.syntax.variable, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownH3', { fg = c.syntax.variable, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = c.fg, underline = true })
+-- vim.api.nvim_set_hl(0, 'markdownUrl', { fg = c.fg, underline = true })
 
-vim.api.nvim_set_hl(0, 'markdownHeadingRule', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'markdownListMarker', { fg = c.syntax.param })
-vim.api.nvim_set_hl(0, 'markdownRule', { fg = c.syntax.variable })
-vim.api.nvim_set_hl(0, 'markdownBold', { fg = c.fg, bold = true })
-vim.api.nvim_set_hl(0, 'markdownItalic', { fg = c.fg, italic = true })
-vim.api.nvim_set_hl(0, 'markdownCode', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = c.fg })
-vim.api.nvim_set_hl(0, 'markdownBlockquote', { fg = c.syntax.tag })
-vim.api.nvim_set_hl(0, 'markdownCodeDelimiter', { fg = c.syntax.func })
-vim.api.nvim_set_hl(0, 'markdownUrlTitle', { fg = c.syntax.string, underline = true })
+-- vim.api.nvim_set_hl(0, 'markdownHeadingRule', { fg = c.syntax.variable })
+-- vim.api.nvim_set_hl(0, 'markdownListMarker', { fg = c.syntax.param })
+-- vim.api.nvim_set_hl(0, 'markdownRule', { fg = c.syntax.variable })
+-- vim.api.nvim_set_hl(0, 'markdownBold', { fg = c.fg, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownItalic', { fg = c.fg, italic = true })
+-- vim.api.nvim_set_hl(0, 'markdownCode', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'markdownBlockquote', { fg = c.syntax.tag })
+-- vim.api.nvim_set_hl(0, 'markdownCodeDelimiter', { fg = c.syntax.func })
+-- vim.api.nvim_set_hl(0, 'markdownUrlTitle', { fg = c.syntax.string, underline = true })
 
 -- go
-vim.api.nvim_set_hl(0, 'goTSVariable', { fg = c.fg })
+-- vim.api.nvim_set_hl(0, 'goTSVariable', { fg = c.fg })

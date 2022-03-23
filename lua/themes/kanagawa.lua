@@ -134,7 +134,7 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = colors.diag.warning, bg = 'NONE', 
 vim.api.nvim_set_hl(0, 'Directory', { fg = colors.fn })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = colors.bg })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = colors.diag.error, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'FloatBorder', { fg = colors.fg_border, bg = colors.bg_dark })
+vim.api.nvim_set_hl(0, 'FloatBorder', { fg = colors.fg_border }) -- FIXED
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = colors.bg_light2, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'Folded', { fg = colors.bg_light3, bg = colors.bg_light0 })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = colors.bg_visual, bg = colors.diag.warning })
@@ -152,12 +152,12 @@ vim.api.nvim_set_hl(0, 'Pmenu', { fg = colors.fg, bg = colors.bg_menu })
 vim.api.nvim_set_hl(0, 'PmenuSbar', { link = 'Pmenu' })
 vim.api.nvim_set_hl(0, 'PmenuSel', { fg = 'NONE', bg = colors.bg_menu_sel })
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = colors.bg_search })
-vim.api.nvim_set_hl(0, 'Question', { link = 'MoreMsg' })
+vim.api.nvim_set_hl(0, 'Question', { fg = colors.diag.info }) -- FIXED
 vim.api.nvim_set_hl(0, 'QuickFixLine', { link = 'CursorLine' })
 vim.api.nvim_set_hl(0, 'Search', { fg = colors.fg, bg = colors.bg_search })
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = colors.bg_light2, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'SpecialKey', { link = 'NonText' })
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.fg_dark, bg = colors.bg_status })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.fg_dark, bg = colors.bg_light1 }) -- FIXED
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = colors.fg_comment, bg = colors.bg_status })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = colors.fg, bg = colors.git.removed })
 vim.api.nvim_set_hl(0, 'TabLine', { bg = colors.bg_dark, fg = colors.bg_light3 })
@@ -247,14 +247,25 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { undercurl = true, sp = color
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { undercurl = true, sp = colors.diag.info })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { undercurl = true, sp = colors.diag.hint })
 
+------ GIT ------
+-- vim.api.nvim_set_hl(0, 'diffAdded', { fg = colors.git.added })
+-- vim.api.nvim_set_hl(0, 'diffRemoved', { fg = colors.git.removed })
+-- vim.api.nvim_set_hl(0, 'diffDeleted', { fg = colors.git.removed })
+-- vim.api.nvim_set_hl(0, 'diffChanged', { fg = colors.git.changed })
+-- vim.api.nvim_set_hl(0, 'diffOldFile', { fg = colors.git.removed })
+-- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = colors.git.added })
+-- vim.api.nvim_set_hl(0, 'diffFile', { fg = c.steelGray })
+-- vim.api.nvim_set_hl(0, 'diffLine', { fg = c.steelGray })
+-- vim.api.nvim_set_hl(0, 'diffIndexLine', { link = 'Identifier' })
+
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = colors.diff.text })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
 
--- vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = colors.fg_comment })
+vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = colors.fg_comment })
 -- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', {})
--- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = colors.diag.warning })
+vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = colors.diag.warning })
 
 ---------- AERIAL ----------
 -- vim.api.nvim_set_hl(0, 'AerialArrayIcon', { link = 'Constant' })
@@ -316,6 +327,18 @@ vim.api.nvim_set_hl(0, 'CmpItemKindText', { link = 'TSText' })
 vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'Identifier' })
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { link = 'String' })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = colors.fg_dark, bg = 'NONE' })
+
+-- GitSigns
+-- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'diffAdded' })
+-- vim.api.nvim_set_hl(0, 'GitSignsChange', { link = 'diffChanged' })
+-- vim.api.nvim_set_hl(0, 'GitSignsDelete', { link = 'diffDeleted' })
+-- vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { fg = 'NONE', bg = colors.diff.delete })
+
+------ HOP ------
+-- vim.api.nvim_set_hl(0, 'HopNextKey', {})
+-- vim.api.nvim_set_hl(0, 'HopNextKey1', {})
+-- vim.api.nvim_set_hl(0, 'HopNextKey2', {})
+-- vim.api.nvim_set_hl(0, 'HopUnmatched', {})
 
 -------- INDENT BLANKLINES --------
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = colors.bg_light2 })
@@ -439,6 +462,10 @@ vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = colors.sp2, italic = true })
 vim.api.nvim_set_hl(0, 'TSWarning', { link = 'Todo' })
 
 --- LANGUAGE ---
+------ HTML ------
+-- vim.api.nvim_set_hl(0, 'htmlH1', {})
+-- vim.api.nvim_set_hl(0, 'htmlH2', {})
+
 ------ LATEX ------
 -- vim.api.nvim_set_hl(0, 'latexTSComment', {})
 -- vim.api.nvim_set_hl(0, 'latexTSEmphasis', {})
@@ -476,6 +503,21 @@ vim.api.nvim_set_hl(0, 'TSWarning', { link = 'Todo' })
 -- vim.api.nvim_set_hl(0, 'luaTSString', {})
 -- vim.api.nvim_set_hl(0, 'LuaTSVariable', {})
 
+------ MARKDOWN ------
+-- vim.api.nvim_set_hl(0, 'mkdHeading', {})
+-- vim.api.nvim_set_hl(0, 'mkdCode', {})
+-- vim.api.nvim_set_hl(0, 'mkdCodeDelimiter', {})
+-- vim.api.nvim_set_hl(0, 'mkdCodeStart', {})
+-- vim.api.nvim_set_hl(0, 'mkdCodeEnd', {})
+-- vim.api.nvim_set_hl(0, 'mkdLink', {})
+
+-- vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', {})
+-- vim.api.nvim_set_hl(0, 'markdownCode', {})
+-- vim.api.nvim_set_hl(0, 'markdownCodeBlock', {})
+-- vim.api.nvim_set_hl(0, 'markdownH1', {})
+-- vim.api.nvim_set_hl(0, 'markdownH2', {})
+-- vim.api.nvim_set_hl(0, 'markdownLinkText', {})
+
 ------ NEORG ------
 -- vim.api.nvim_set_hl(0, 'NeorgCodeBlock', {})
 -- vim.api.nvim_set_hl(0, 'NeorgLinkLocationURL', {})
@@ -508,3 +550,20 @@ vim.api.nvim_set_hl(0, 'TSWarning', { link = 'Todo' })
 -- vim.api.nvim_set_hl(0, 'pythonTSTypeBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
+
+vim.g.terminal_color_0 = palette_colors.sumiInk0
+vim.g.terminal_color_1 = palette_colors.autumnRed
+vim.g.terminal_color_2 = palette_colors.autumnGreen
+vim.g.terminal_color_3 = palette_colors.boatYellow2
+vim.g.terminal_color_4 = palette_colors.crystalBlue
+vim.g.terminal_color_5 = palette_colors.oniViolet
+vim.g.terminal_color_6 = palette_colors.waveAqua1
+vim.g.terminal_color_7 = palette_colors.oldWhite
+vim.g.terminal_color_8 = palette_colors.fujiGray
+vim.g.terminal_color_9 = palette_colors.samuraiRed
+vim.g.terminal_color_10 = palette_colors.springGreen
+vim.g.terminal_color_11 = palette_colors.carpYellow
+vim.g.terminal_color_12 = palette_colors.springBlue
+vim.g.terminal_color_13 = palette_colors.springViolet1
+vim.g.terminal_color_14 = palette_colors.waveAqua2
+vim.g.terminal_color_15 = palette_colors.fujiWhite

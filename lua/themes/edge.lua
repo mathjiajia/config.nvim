@@ -189,6 +189,26 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = cp.ye
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = cp.blue })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = true, sp = cp.green })
 
+----- GIT -----
+-- vim.api.nvim_set_hl(0, 'diffAdded', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'diffRemoved', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'diffChanged', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'diffOldFile', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = cp.orange })
+-- vim.api.nvim_set_hl(0, 'diffFile', { fg = cp.aqua })
+-- vim.api.nvim_set_hl(0, 'diffLine', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = cp.purple })
+
+----- GITCOMMIT -----
+-- vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'gitcommitUntracked', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'gitcommitDiscarded', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'gitcommitSelected', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'gitcommitUnmerged', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'gitcommitOnBranch', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'gitcommitArrow', { fg = cp.grey })
+-- vim.api.nvim_set_hl(0, 'gitcommitFile', { fg = cp.green })
+
 ---------- NVIM LSPCONFIG ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = cp.bg2 })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = cp.bg2 })
@@ -260,10 +280,26 @@ vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.red })
 
+----- GITSIGNS -----
+-- vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'GitSignsAddNr', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'GitSignsChangeNr', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'GitSignsDeleteNr', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'GitSignsAddLn', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { fg = cp.grey })
+
+------ HOP ------
+vim.api.nvim_set_hl(0, 'HopNextKey2', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'HopUnmatched', { fg = cp.grey })
+
 -------- INDENT BLANKLINES --------
--- vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {})
--- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {})
--- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', {})
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = cp.grey_dim })
+vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', { fg = cp.grey_dim })
+vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', { fg = cp.grey_dim })
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.grey })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = cp.grey, underdash = true })
 

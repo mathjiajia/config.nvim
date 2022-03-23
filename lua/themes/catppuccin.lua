@@ -214,14 +214,28 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = cp.ye
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = cp.sky })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = true, sp = cp.rosewater })
 
+------ GIT ------
+-- vim.api.nvim_set_hl(0, 'diffAdded', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'diffRemoved', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'diffChanged', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'diffOldFile', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = cp.peach })
+-- vim.api.nvim_set_hl(0, 'diffFile', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'diffLine', { fg = cp.gray0 })
+-- vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = cp.pink })
+-- vim.api.nvim_set_hl(0, 'DiffAdd', { fg = cp.green, bg = cp.black2 })
+-- vim.api.nvim_set_hl(0, 'DiffChange', { fg = cp.yellow, bg = cp.black2 })
+-- vim.api.nvim_set_hl(0, 'DiffDelete', { fg = cp.red, bg = cp.black2 })
+-- vim.api.nvim_set_hl(0, 'DiffText', { fg = cp.blue, bg = cp.black2 })
+
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = cp.black4 })
 
--- vim.api.nvim_set_hl(0, 'LspCodeLens', {})
+vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = cp.gray0 })
 -- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', {})
--- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {})
+vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = cp.peach })
 
 ---------- AERIAL ----------
 -- vim.api.nvim_set_hl(0, 'AerialArrayIcon', { link = 'Constant' })
@@ -284,6 +298,17 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.peach })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.flamingo })
+
+------ GITSIGNS ------
+-- vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = cp.red })
+
+------ HOP ------
+vim.api.nvim_set_hl(0, 'HopNextKey', { bg = cp.black2, fg = cp.peach, bold = true, underline = true })
+vim.api.nvim_set_hl(0, 'HopNextKey1', { bg = cp.black2, fg = cp.blue, bold = true })
+vim.api.nvim_set_hl(0, 'HopNextKey2', { bg = cp.black2, fg = cp.teal, bold = true, italic = true })
+vim.api.nvim_set_hl(0, 'HopUnmatched', { bg = cp.black2, fg = cp.gray0 })
 
 -------- INDENT BLANKLINES --------
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = cp.black3 })
