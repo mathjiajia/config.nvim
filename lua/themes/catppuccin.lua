@@ -193,9 +193,15 @@ vim.api.nvim_set_hl(0, 'Typedef', { fg = cp.red })
 -- vim.api.nvim_set_hl(0, 'Underlined', {})
 
 ------ MISC ------
--- vim.api.nvim_set_hl(0, 'healthError', { fg = colors.red })
+-- vim.api.nvim_set_hl(0, 'debugPC', { bg = cp.black0 })
+-- vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = cp.gray0, bg = cp.black0 })
+
+vim.api.nvim_set_hl(0, 'healthError', { fg = cp.red })
 vim.api.nvim_set_hl(0, 'healthSuccess', { fg = cp.teal })
--- vim.api.nvim_set_hl(0, 'healthWarning', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'healthWarning', { fg = cp.yellow })
+
+vim.api.nvim_set_hl(0, 'qfLineNr', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'qfFileName', { fg = cp.blue })
 
 ---------- DIAGNOSTIC ----------
 vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = cp.red, underline = true })
@@ -280,7 +286,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = cp.peach })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.flamingo })
 
 -------- INDENT BLANKLINES --------
--- vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {})
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = cp.black3 })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {})
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', {})
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.white })
@@ -404,6 +410,10 @@ vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = cp.red, italic = true })
 vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.black2, bg = cp.yellow })
 
 --- LANGUAGE ---
+------ HTML ------
+-- vim.api.nvim_set_hl(0, 'htmlH1', { fg = cp.pink, bold = true })
+-- vim.api.nvim_set_hl(0, 'htmlH2', { fg = cp.blue, bold = true })
+
 ------ LATEX ------
 -- vim.api.nvim_set_hl(0, 'latexTSComment', {})
 -- vim.api.nvim_set_hl(0, 'latexTSEmphasis', {})
@@ -441,6 +451,24 @@ vim.api.nvim_set_hl(0, 'luaTSFuncBuiltin', { fg = cp.teal, italic = true })
 -- vim.api.nvim_set_hl(0, 'luaTSPunctDelimiter', {})
 -- vim.api.nvim_set_hl(0, 'luaTSString', {})
 -- vim.api.nvim_set_hl(0, 'LuaTSVariable', {})
+
+------ MARKDOWN ------
+-- vim.api.nvim_set_hl(0, 'mkdHeading', { fg = cp.peach, bold = true })
+-- vim.api.nvim_set_hl(0, 'mkdCode', { fg = cp.white, bg = cp.gray0 })
+-- vim.api.nvim_set_hl(0, 'mkdCodeDelimiter', { fg = cp.white, bg = cp.black2 })
+-- vim.api.nvim_set_hl(0, 'mkdCodeStart', { fg = cp.peach, bold = true })
+-- vim.api.nvim_set_hl(0, 'mkdLink', { fg = cp.blue, underline = true })
+
+-- vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = cp.peach, bold = true })
+-- vim.api.nvim_set_hl(0, 'markdownCode', { fg = cp.flamingo })
+-- vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = cp.flamingo })
+-- vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = cp.blue, underline = true })
+-- vim.api.nvim_set_hl(0, 'markdownH1', { fg = cp.lavender })
+-- vim.api.nvim_set_hl(0, 'markdownH2', { fg = cp.mauve })
+-- vim.api.nvim_set_hl(0, 'markdownH3', { fg = cp.green })
+-- vim.api.nvim_set_hl(0, 'markdownH4', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'markdownH5', { fg = cp.pink })
+-- vim.api.nvim_set_hl(0, 'markdownH6', { fg = cp.teal })
 
 ------ NEORG ------
 -- vim.api.nvim_set_hl(0, 'NeorgCodeBlock', {})

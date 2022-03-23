@@ -176,7 +176,7 @@ end
 require('packer').startup {
 	spec,
 	config = {
-		max_job = 30,
+		max_jobs = 27,
 		profile = {
 			enable = true,
 			threshold = 1,

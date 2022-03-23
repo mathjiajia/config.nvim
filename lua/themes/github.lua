@@ -440,15 +440,15 @@ vim.api.nvim_set_hl(0, 'Type', { fg = c.syntax.keyword })
 vim.api.nvim_set_hl(0, 'Underlined', { underline = true })
 
 ------ MISC ------
+-- vim.api.nvim_set_hl(0, 'debugPC', { bg = c.bg_sidebar })
+-- vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = c.info, bg = util.darken(c.info, 0.1) })
+
+vim.api.nvim_set_hl(0, 'healthError', { fg = c.error })
+vim.api.nvim_set_hl(0, 'healthSuccess', { fg = c.green })
+vim.api.nvim_set_hl(0, 'healthWarning', { fg = c.warning })
+
 vim.api.nvim_set_hl(0, 'qfLineNr', { fg = c.syntax.keyword })
 vim.api.nvim_set_hl(0, 'qfFileName', { fg = c.blue })
-
-vim.api.nvim_set_hl(0, 'debugPC', { bg = c.bg_sidebar })
-vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = c.info, bg = util.darken(c.info, 0.1) })
-
--- vim.api.nvim_set_hl(0, 'healthError', { fg = c.error })
-vim.api.nvim_set_hl(0, 'healthSuccess', { fg = c.green })
--- vim.api.nvim_set_hl(0, 'healthWarning', { fg = c.warning })
 
 ---------- DIAGNOSTIC ----------
 vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = c.error })

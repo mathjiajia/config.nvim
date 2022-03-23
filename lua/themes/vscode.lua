@@ -235,9 +235,15 @@ vim.api.nvim_set_hl(0, 'Typedef', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'Underlined', { fg = 'NONE', bg = 'NONE', underline = true })
 
 ------ MISC ------
--- vim.api.nvim_set_hl(0, 'healthError', { fg = colors.vscRed })
-vim.api.nvim_set_hl(0, 'healthSuccess', { fg = c.teal })
--- vim.api.nvim_set_hl(0, 'healthWarning', { fg = colors.vscYellowOrange })
+-- vim.api.nvim_set_hl(0, 'debugPC', {})
+-- vim.api.nvim_set_hl(0, 'debugBreakpoint', {})
+
+-- vim.api.nvim_set_hl(0, 'healthError', {})
+vim.api.nvim_set_hl(0, 'healthSuccess', { fg = c.vscBlueGreen })
+-- vim.api.nvim_set_hl(0, 'healthWarning', {})
+
+-- vim.api.nvim_set_hl(0, 'qfLineNr', {})
+-- vim.api.nvim_set_hl(0, 'qfFileName', {})
 
 ---------- DIAGNOSTIC ----------
 vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = c.vscRed })

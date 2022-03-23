@@ -226,8 +226,8 @@ vim.api.nvim_set_hl(0, 'Type', { fg = colors.ty })
 vim.api.nvim_set_hl(0, 'Underlined', { fg = colors.sp, underline = true })
 
 ------ MISC ------
-vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = colors.sp })
-vim.api.nvim_set_hl(0, 'debugPC', { link = 'CursorLine' })
+-- vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = colors.sp })
+-- vim.api.nvim_set_hl(0, 'debugPC', { link = 'CursorLine' })
 
 -- vim.api.nvim_set_hl(0, 'healthError', { fg = colors.diag.error })
 vim.api.nvim_set_hl(0, 'healthSuccess', { fg = colors.springGreen })
