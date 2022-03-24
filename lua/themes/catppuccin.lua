@@ -55,8 +55,8 @@ elseif vim.g.theme_style == 'storm' then
 		black1 = '#1F2233', -- Black1
 		black0 = '#1A1B26', -- Black0
 
-		teledark = '#1A1826',
-		teleblack = '#252434',
+		teledark = '#1E2134',
+		teleblack = '#2A2D40',
 	}
 else
 	cp = {
@@ -124,8 +124,8 @@ vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = cp.black4, bold = true })
 vim.api.nvim_set_hl(0, 'Search', { fg = cp.pink, bg = cp.black4, bold = true })
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.black4, bg = cp.black2 })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = cp.white })
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.white, bg = cp.black3 }) -- FIXED
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.black4, bg = cp.black1 })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.green, bg = cp.black3 }) -- FIXED
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.black4, bg = cp.black1 }) -- FIXED
 vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.pink, bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.black1, bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'TabLineFill', { bg = cp.black2 }) -- FIXED
@@ -348,17 +348,20 @@ vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.rosewater, italic = true })
 
 ---------- RAINBOW ----------
-vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.red })
-vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.teal })
-vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.yellow })
-vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = cp.blue })
-vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = cp.pink })
-vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.flamingo })
-vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.blue }) -- REORDERED
+vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.yellow })
 
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = cp.teledark })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = cp.white, bg = cp.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = cp.white, bg = cp.black3, bold = true })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = cp.blue })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = cp.red, bg = cp.teleblack })
 vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = cp.fg, bg = cp.teleblack })

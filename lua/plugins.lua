@@ -28,6 +28,7 @@ local function spec(use)
 	use {
 		{ 'nvim-treesitter/playground' },
 		{ 'p00f/nvim-ts-rainbow' },
+		-- { 'lewis6991/nvim-treesitter-context' },
 		{
 			'lukas-reineke/indent-blankline.nvim',
 			config = [[require('configs.indentline')]],

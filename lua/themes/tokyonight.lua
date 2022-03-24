@@ -1,10 +1,7 @@
+-- Modofied from https://github.com/folke/tokyonight.nvim
+
 local hsluv = {}
-
 local hexChars = '0123456789abcdef'
-
-local distance_line_from_origin = function(line)
-	return math.abs(line.intercept) / math.sqrt((line.slope ^ 2) + 1)
-end
 
 local length_of_ray_until_intersect = function(theta, line)
 	return line.intercept / (math.sin(theta) - line.slope * math.cos(theta))
@@ -33,19 +30,6 @@ hsluv.get_bounds = function(l)
 		end
 	end
 	return result
-end
-
-hsluv.max_safe_chroma_for_l = function(l)
-	local bounds = hsluv.get_bounds(l)
-	local min = 1.7976931348623157e+308
-
-	for i = 1, 6 do
-		local length = distance_line_from_origin(bounds[i])
-		if length >= 0 then
-			min = math.min(min, length)
-		end
-	end
-	return min
 end
 
 hsluv.max_safe_chroma_for_lh = function(l, h)
@@ -206,32 +190,6 @@ hsluv.lch_to_hsluv = function(tuple)
 	return { H, C / max_chroma * 100, L }
 end
 
-hsluv.hpluv_to_lch = function(tuple)
-	local H = tuple[1]
-	local S = tuple[2]
-	local L = tuple[3]
-	if L > 99.9999999 then
-		return { 100, 0, H }
-	end
-	if L < 0.00000001 then
-		return { 0, 0, H }
-	end
-	return { L, hsluv.max_safe_chroma_for_l(L) / 100 * S, H }
-end
-
-hsluv.lch_to_hpluv = function(tuple)
-	local L = tuple[1]
-	local C = tuple[2]
-	local H = tuple[3]
-	if L > 99.9999999 then
-		return { H, 0, 100 }
-	end
-	if L < 0.00000001 then
-		return { H, 0, 0 }
-	end
-	return { H, C / hsluv.max_safe_chroma_for_l(L) * 100, L }
-end
-
 hsluv.rgb_to_hex = function(tuple)
 	local h = '#'
 	for i = 1, 3 do
@@ -274,28 +232,12 @@ hsluv.rgb_to_hsluv = function(tuple)
 	return hsluv.lch_to_hsluv(hsluv.rgb_to_lch(tuple))
 end
 
-hsluv.hpluv_to_rgb = function(tuple)
-	return hsluv.lch_to_rgb(hsluv.hpluv_to_lch(tuple))
-end
-
-hsluv.rgb_to_hpluv = function(tuple)
-	return hsluv.lch_to_hpluv(hsluv.rgb_to_lch(tuple))
-end
-
 hsluv.hsluv_to_hex = function(tuple)
 	return hsluv.rgb_to_hex(hsluv.hsluv_to_rgb(tuple))
 end
 
-hsluv.hpluv_to_hex = function(tuple)
-	return hsluv.rgb_to_hex(hsluv.hpluv_to_rgb(tuple))
-end
-
 hsluv.hex_to_hsluv = function(s)
 	return hsluv.rgb_to_hsluv(hsluv.hex_to_rgb(s))
-end
-
-hsluv.hex_to_hpluv = function(s)
-	return hsluv.rgb_to_hpluv(hsluv.hex_to_rgb(s))
 end
 
 hsluv.m = {
@@ -375,104 +317,136 @@ function util.invertColor(color)
 	return color
 end
 
-local c = {}
+function util.getColor(color)
+	if vim.g.theme_style ~= 'light' then
+		return color
+	end
+	if not util.colorCache[color] then
+		util.colorCache[color] = util.invertColor(color)
+	end
+	return util.colorCache[color]
+end
+
+function util.light_colors(colors)
+	if type(colors) == 'string' then
+		return util.getColor(colors)
+	end
+	local ret = {}
+	for key, value in pairs(colors) do
+		ret[key] = util.light_colors(value)
+	end
+	return ret
+end
+
+---------
+local function setup(config)
+	local colors = {}
+
+	colors = {
+		none = 'NONE',
+		bg_dark = '#1f2335',
+		bg = '#24283b',
+		bg_highlight = '#292e42',
+		terminal_black = '#414868',
+		fg = '#c0caf5',
+		fg_dark = '#a9b1d6',
+		fg_gutter = '#3b4261',
+		dark3 = '#545c7e',
+		comment = '#565f89',
+		dark5 = '#737aa2',
+		blue0 = '#3d59a1',
+		blue = '#7aa2f7',
+		cyan = '#7dcfff',
+		blue1 = '#2ac3de',
+		blue2 = '#0db9d7',
+		blue5 = '#89ddff',
+		blue6 = '#B4F9F8',
+		blue7 = '#394b70',
+		magenta = '#bb9af7',
+		magenta2 = '#ff007c',
+		purple = '#9d7cd8',
+		orange = '#ff9e64',
+		yellow = '#e0af68',
+		green = '#9ece6a',
+		green1 = '#73daca',
+		green2 = '#41a6b5',
+		teal = '#1abc9c',
+		red = '#f7768e',
+		red1 = '#db4b4b',
+		git = {
+			change = '#6183bb',
+			add = '#449dab',
+			delete = '#914c54',
+			conflict = '#bb7a61',
+		},
+		gitSigns = {
+			add = '#164846',
+			change = '#394b70',
+			delete = '#823c41',
+		},
+	}
+	if vim.g.theme_style ~= 'storm' then
+		colors.bg = '#1a1b26'
+		colors.bg_dark = '#16161e'
+	end
+	util.bg = colors.bg
+	util.day_brightness = config.dayBrightness
+
+	colors.diff = {
+		add = util.darken(colors.green2, 0.15),
+		delete = util.darken(colors.red1, 0.15),
+		change = util.darken(colors.blue7, 0.15),
+		text = colors.blue7,
+	}
+
+	colors.gitSigns = {
+		add = util.brighten(colors.gitSigns.add, 0.2),
+		change = util.brighten(colors.gitSigns.change, 0.2),
+		delete = util.brighten(colors.gitSigns.delete, 0.2),
+	}
+
+	colors.git.ignore = colors.dark3
+	colors.black = util.darken(colors.bg, 0.8, '#000000')
+	colors.border_highlight = colors.blue0
+	colors.border = colors.black
+
+	-- Popups and statusline always get a dark background
+	colors.bg_popup = colors.bg_dark
+	colors.bg_statusline = colors.bg_dark
+
+	-- Sidebar and Floats are configurable
+	colors.bg_sidebar = (config.transparentSidebar and colors.none) or config.darkSidebar and colors.bg_dark or colors.bg
+	colors.bg_float = config.darkFloat and colors.bg_dark or colors.bg
+
+	colors.bg_visual = util.darken(colors.blue0, 0.7)
+	colors.bg_search = colors.blue0
+	colors.fg_sidebar = colors.fg_dark
+
+	colors.error = colors.red1
+	colors.warning = colors.yellow
+	colors.info = colors.blue2
+	colors.hint = colors.teal
+
+	if config.transform_colors and vim.g.theme_style == 'light' then
+		return util.light_colors(colors)
+	end
+
+	return colors
+end
 
 local config = {
-	style = 'night',
 	dayBrightness = 0.3,
 	transparent = false,
-	commentStyle = 'italic',
-	keywordStyle = 'italic',
-	functionStyle = 'italic',
-	variableStyle = 'italic',
-	hideInactiveStatusline = false,
-	terminalColors = true,
 	darkFloat = true,
 	darkSidebar = true,
 	transparentSidebar = false,
-	transform_colors = false,
+	transform_colors = true,
 }
 
-c = {
-	none = 'NONE',
-	bg_dark = '#1f2335',
-	bg = '#24283b',
-	bg_highlight = '#292e42',
-	terminal_black = '#414868',
-	fg = '#c0caf5',
-	fg_dark = '#a9b1d6',
-	fg_gutter = '#3b4261',
-	dark3 = '#545c7e',
-	comment = '#565f89',
-	dark5 = '#737aa2',
-	blue0 = '#3d59a1',
-	blue = '#7aa2f7',
-	cyan = '#7dcfff',
-	blue1 = '#2ac3de',
-	blue2 = '#0db9d7',
-	blue5 = '#89ddff',
-	blue6 = '#B4F9F8',
-	blue7 = '#394b70',
-	magenta = '#bb9af7',
-	magenta2 = '#ff007c',
-	purple = '#9d7cd8',
-	orange = '#ff9e64',
-	yellow = '#e0af68',
-	green = '#9ece6a',
-	green1 = '#73daca',
-	green2 = '#41a6b5',
-	teal = '#1abc9c',
-	red = '#f7768e',
-	red1 = '#db4b4b',
-	git = { change = '#6183bb', add = '#449dab', delete = '#914c54', conflict = '#bb7a61' },
-	gitSigns = { add = '#164846', change = '#394b70', delete = '#823c41' },
-}
-if config.style == 'night' or config.style == 'day' or vim.o.background == 'light' then
-	c.bg = '#1a1b26'
-	c.bg_dark = '#16161e'
-end
-
-util.bg = c.bg
-util.day_brightness = config.dayBrightness
-
-c.diff = {
-	add = util.darken(c.green2, 0.15),
-	delete = util.darken(c.red1, 0.15),
-	change = util.darken(c.blue7, 0.15),
-	text = c.blue7,
-}
-
-c.gitSigns = {
-	add = util.brighten(c.gitSigns.add, 0.2),
-	change = util.brighten(c.gitSigns.change, 0.2),
-	delete = util.brighten(c.gitSigns.delete, 0.2),
-}
-
-c.git.ignore = c.dark3
-c.black = util.darken(c.bg, 0.8, '#000000')
-c.border_highlight = c.blue0
-c.border = c.black
-
--- Popups and statusline always get a dark background
-c.bg_popup = c.bg_dark
-c.bg_statusline = c.bg_dark
-
--- Sidebar and Floats are configurable
-c.bg_sidebar = (config.transparentSidebar and c.none) or config.darkSidebar and c.bg_dark or c.bg
-c.bg_float = config.darkFloat and c.bg_dark or c.bg
-
-c.bg_visual = util.darken(c.blue0, 0.7)
-c.bg_search = c.blue0
-c.fg_sidebar = c.fg_dark
-
-c.error = c.red1
-c.warning = c.yellow
-c.info = c.blue2
-c.hint = c.teal
-
-if config.transform_colors and (config.style == 'day' or vim.o.background == 'light') then
-	return util.light_colors(c)
-end
+local theme = {}
+theme.config = config
+theme.colors = setup(config)
+local c = theme.colors
 
 ------ BASICS ------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.black })
@@ -485,13 +459,13 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.dark5 })
 vim.api.nvim_set_hl(0, 'Directory', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = c.bg })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = c.error })
-vim.api.nvim_set_hl(0, 'FloatBorder', { fg = c.border_highlight, bg = c.bg_float })
+vim.api.nvim_set_hl(0, 'FloatBorder', { fg = c.border_highlight }) -- FIXED
 vim.api.nvim_set_hl(0, 'FoldColumn', { bg = c.bg, fg = c.comment })
 vim.api.nvim_set_hl(0, 'Folded', { fg = c.blue, bg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'IncSearch', { bg = c.orange, fg = c.black })
 vim.api.nvim_set_hl(0, 'lCursor', { fg = c.bg, bg = c.fg })
 vim.api.nvim_set_hl(0, 'LineNr', { fg = c.fg_gutter })
-vim.api.nvim_set_hl(0, 'MatchParen', { fg = c.orange, bold = true })
+vim.api.nvim_set_hl(0, 'MatchParen', { bg = c.terminal_black, bold = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = c.fg_dark, bold = true })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = c.fg_dark })
@@ -511,7 +485,7 @@ vim.api.nvim_set_hl(0, 'Search', { bg = c.bg_search, fg = c.fg })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg = config.transparent and c.none or c.bg, fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'SignColumnSB', { bg = c.bg_sidebar, fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = c.dark3 })
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = c.fg_sidebar, bg = c.bg_statusline })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = c.black, bg = c.blue }) -- FIXED
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = c.fg_gutter, bg = c.bg_statusline })
 vim.api.nvim_set_hl(0, 'Substitute', { bg = c.red, fg = c.black })
 vim.api.nvim_set_hl(0, 'TabLine', { bg = c.bg_statusline, fg = c.fg_gutter })
@@ -685,9 +659,9 @@ vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = c.magenta, bg = c.none })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = c.magenta, bg = c.none })
 
 -- GitSigns
--- vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.gitSigns.add })
--- vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
--- vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
+vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.gitSigns.add })
+vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
+vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 
 -- Hop
 vim.api.nvim_set_hl(0, 'HopNextKey', { fg = c.magenta2, bold = true })
@@ -743,6 +717,7 @@ vim.api.nvim_set_hl(0, 'TSField', { fg = c.green1 })
 vim.api.nvim_set_hl(0, 'TSKeyword', { fg = c.purple, italic = true })
 vim.api.nvim_set_hl(0, 'TSKeywordFunction', { fg = c.magenta, italic = true })
 vim.api.nvim_set_hl(0, 'TSLabel', { fg = c.blue })
+vim.api.nvim_set_hl(0, 'TSMath', { fg = c.yellow }) -- ADDED
 -- vim.api.nvim_set_hl(0, 'TSMethod', {})
 -- vim.api.nvim_set_hl(0, 'TSNamespace', {})
 -- vim.api.nvim_set_hl(0, 'TSNone', {})
@@ -795,3 +770,30 @@ vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.teal })
 -- vim.api.nvim_set_hl(0, 'markdownH1', { fg = c.magenta, bold = true })
 -- vim.api.nvim_set_hl(0, 'markdownH2', { fg = c.blue, bold = true })
 -- vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = c.blue, underline = true })
+
+-- dark
+vim.g.terminal_color_0 = c.black
+vim.g.terminal_color_8 = c.terminal_black
+
+-- light
+vim.g.terminal_color_7 = c.fg_dark
+vim.g.terminal_color_15 = c.fg
+
+-- colors
+vim.g.terminal_color_1 = c.red
+vim.g.terminal_color_9 = c.red
+
+vim.g.terminal_color_2 = c.green
+vim.g.terminal_color_10 = c.green
+
+vim.g.terminal_color_3 = c.yellow
+vim.g.terminal_color_11 = c.yellow
+
+vim.g.terminal_color_4 = c.blue
+vim.g.terminal_color_12 = c.blue
+
+vim.g.terminal_color_5 = c.magenta
+vim.g.terminal_color_13 = c.magenta
+
+vim.g.terminal_color_6 = c.cyan
+vim.g.terminal_color_14 = c.cyan
