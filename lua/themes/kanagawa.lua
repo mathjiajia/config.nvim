@@ -160,7 +160,7 @@ vim.api.nvim_set_hl(0, 'SpecialKey', { link = 'NonText' })
 vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.fg_dark, bg = colors.bg_light1 }) -- FIXED
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = colors.fg_comment, bg = colors.bg_status })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = colors.fg, bg = colors.git.removed })
-vim.api.nvim_set_hl(0, 'TabLine', { bg = colors.bg_dark, fg = colors.bg_light3 })
+vim.api.nvim_set_hl(0, 'TabLine', { fg = colors.bg_light3, bg = colors.bg_dark })
 vim.api.nvim_set_hl(0, 'TabLineFill', { bg = colors.bg })
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = colors.fg_dark, bg = colors.bg_light1 })
 -- vim.api.nvim_set_hl(0, 'TermCursor', {})

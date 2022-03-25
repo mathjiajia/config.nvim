@@ -305,10 +305,10 @@ vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.flamingo })
 -- vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = cp.red })
 
 ------ HOP ------
-vim.api.nvim_set_hl(0, 'HopNextKey', { bg = cp.black2, fg = cp.peach, bold = true, underline = true })
-vim.api.nvim_set_hl(0, 'HopNextKey1', { bg = cp.black2, fg = cp.blue, bold = true })
-vim.api.nvim_set_hl(0, 'HopNextKey2', { bg = cp.black2, fg = cp.teal, bold = true, italic = true })
-vim.api.nvim_set_hl(0, 'HopUnmatched', { bg = cp.black2, fg = cp.gray0 })
+vim.api.nvim_set_hl(0, 'HopNextKey', { fg = cp.peach, bg = cp.black2, bold = true, underline = true })
+vim.api.nvim_set_hl(0, 'HopNextKey1', { fg = cp.blue, bg = cp.black2, bold = true })
+vim.api.nvim_set_hl(0, 'HopNextKey2', { fg = cp.teal, bg = cp.black2, bold = true, italic = true })
+vim.api.nvim_set_hl(0, 'HopUnmatched', { fg = cp.gray0, bg = cp.black2 })
 
 -------- INDENT BLANKLINES --------
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = cp.black3 })
