@@ -136,7 +136,7 @@ N = {
 
 	-- s(
 	-- 	{ trig = '==', name = 'align equls', wordTrig = false },
-	-- 	{ t { '&= ' }, i(1), t { ' \\\\', '' }, i(0) },
+	-- 	{ t { '&= ' }, i(1), t { ' \\\\', '' } },
 	-- 	{ condition = vimtex.align_env }
 	-- ),
 
@@ -201,7 +201,7 @@ N = {
 	s({ trig = 'cod', name = 'codimension' }, { t('\\codim') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'dint', name = 'integral', dscr = 'Insert integral notation.' },
-		{ t('\\int_{'), i(1, '-\\infty'), t('}^{'), i(2, '\\infty'), t('} '), i(0) },
+		{ t('\\int_{'), i(1, '-\\infty'), t('}^{'), i(2, '\\infty'), t('} ') },
 		{ condition = vimtex.in_mathzone }
 	),
 
@@ -265,7 +265,7 @@ N = {
 	-- s({ trig = 'csc', name = 'csc' }, { t('\\csc') }, { condition = vimtex.in_mathzone }),
 	-- s({ trig = 'sec', name = 'sec' }, { t('\\sec') }, { condition = vimtex.in_mathzone }),
 
-	s({ trig = 'abs', name = 'abs' }, { t('\\abs{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'abs', name = 'abs' }, { t('\\abs{'), i(1), t('}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'deg', name = 'deg' }, { t('\\deg') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'det', name = 'det' }, { t('\\det') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'dim', name = 'dim' }, { t('\\dim') }, { condition = vimtex.in_mathzone }),
@@ -391,9 +391,9 @@ N = {
 	),
 	s({ trig = 'quad', name = 'quad' }, { t('\\quad ') }, { condition = vimtex.in_mathzone }),
 
-	s({ trig = 'bar', name = 'overline' }, { t('\\overline{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'hat', name = 'widehat' }, { t('\\widehat{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'td', name = 'widetilde' }, { t('\\widetilde{'), i(1), t('}'), i(0) }, {
+	s({ trig = 'bar', name = 'overline' }, { t('\\overline{'), i(1), t('}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'hat', name = 'widehat' }, { t('\\widehat{'), i(1), t('}') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'td', name = 'widetilde' }, { t('\\widetilde{'), i(1), t('}') }, {
 		condition = vimtex.in_mathzone,
 	}),
 
@@ -418,37 +418,37 @@ N = {
 	}),
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
-		{ t { '\\[', '\t' }, i(1), t { '', '\\]' }, i(0) },
+		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 
-	s({ trig = 'cref', name = '\\cref{}' }, { t('\\cref{'), i(1), t('}'), i(0) }, { condition = vimtex.in_text }),
+	s({ trig = 'cref', name = '\\cref{}' }, { t('\\cref{'), i(1), t('}') }, { condition = vimtex.in_text }),
 	s(
 		{ trig = '(%w)//', name = 'fraction with a single numerator', regTrig = true },
 		{ t('\\frac{'), f(function(_, snip)
 			return snip.captures[1]
-		end, {}), t('}{'), i(1), t('}'), i(0) },
+		end, {}), t('}{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = '//', name = 'fraction' },
-		{ t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0) },
+		{ t('\\frac{'), i(1), t('}{'), i(2), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 
 	s(
 		{ trig = 'rij', name = '(x_n) n ∈ N' },
-		{ t('('), i(1, 'x'), t('_'), i(2, 'n'), t(')_{'), rep(2), t('\\in '), i(3, '\\mathbb{N}'), t('}'), i(0) },
+		{ t('('), i(1, 'x'), t('_'), i(2, 'n'), t(')_{'), rep(2), t('\\in '), i(3, '\\mathbb{N}'), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
-		{ trig = 'range', name = 'i = 1, ..., n' },
+		{ trig = 'rg', name = 'i = 1, ..., n' },
 		{ i(1, 'i'), t(' = '), i(2, '1'), t(' \\dots, '), i(0, 'n') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
-		{ trig = 'list', name = 'a_1, ..., a_n' },
-		{ i(1, 'a'), t('_{'), i(2, '1'), t('}, \\dots, '), rep(1), t('_{'), i(3, 'n'), t('}'), i(0) },
+		{ trig = 'ls', name = 'a_1, ..., a_n' },
+		{ i(1, 'a'), t('_{'), i(2, '1'), t('}, \\dots, '), rep(1), t('_{'), i(3, 'n'), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 
@@ -465,12 +465,12 @@ N = {
 	),
 	s(
 		{ trig = 'ratar', name = 'rational map arrow' },
-		{ t { '\\ar@{-->}[' }, i(1), t { ']' }, i(0) },
+		{ t { '\\ar@{-->}[' }, i(1), t { ']' } },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'injar', name = 'embeddeing map arrow' },
-		{ t { '\\ar@{^{(}->}[' }, i(1), t { ']' }, i(0) },
+		{ t { '\\ar@{^{(}->}[' }, i(1), t { ']' } },
 		{ condition = vimtex.in_mathzone }
 	),
 
@@ -491,12 +491,12 @@ N = {
 	-- variations of brackets
 	s(
 		{ trig = 'bpm', name = 'pmatrix Environment' },
-		{ t { '\\begin{pmatrix}', '\t' }, i(1), t { '', '\\end{pmatrix}' }, i(0) },
+		{ t { '\\begin{pmatrix}', '\t' }, i(1), t { '', '\\end{pmatrix}' } },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'bbm', name = 'bmatrix Environment' },
-		{ t { '\\begin{bmatrix}', '\t' }, i(1), t { '', '\\end{bmatrix}' }, i(0) },
+		{ t { '\\begin{bmatrix}', '\t' }, i(1), t { '', '\\end{bmatrix}' } },
 		{ condition = vimtex.in_mathzone }
 	),
 	s({ trig = 'cvec', name = 'column vector' }, {
@@ -513,18 +513,18 @@ N = {
 	}, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'lra', name = 'leftangle rightangle' },
-		{ t { '\\left\\langle ' }, i(1), t { '\\right\\rangle' }, i(0) },
+		{ t { '\\left\\langle ' }, i(1), t { '\\right\\rangle' } },
 		{ condition = vimtex.in_mathzone }
 	),
 
 	s(
 		{ trig = 'beq', name = 'Equation Environment', dscr = 'Create an equation environment.' },
-		{ t { '\\begin{equation}', '\t' }, i(1), t { '', '\\end{equation}' }, i(0) },
+		{ t { '\\begin{equation}', '\t' }, i(1), t { '', '\\end{equation}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bseq', name = 'Equation Environment without number', dscr = 'Create a star equation environment.' },
-		{ t { '\\begin{equation*}', '\t' }, i(1), t { '', '\\end{equation*}' }, i(0) },
+		{ t { '\\begin{equation*}', '\t' }, i(1), t { '', '\\end{equation*}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
@@ -667,22 +667,22 @@ N = {
 
 	s(
 		{ trig = 'xym', name = 'xymatrix Environment', dscr = 'Create a xymatrix environment.' },
-		{ t { '\\[', '\t\\xymatrix{', '\t' }, i(1), t { ' \\\\', '\t}', '\\]' }, i(0) },
+		{ t { '\\[', '\t\\xymatrix{', '\t' }, i(1), t { ' \\\\', '\t}', '\\]' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bal', name = 'Align Environment', dscr = 'Create an align environment' },
-		{ t { '\\begin{align}', '\t' }, i(0), t { '', '\\end{align}' } },
+		{ t { '\\begin{align}', '\t' }, i(1), t { '', '\\end{align}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bsal', name = 'Align without a number', dscr = 'Create an align environment without number' },
-		{ t { '\\begin{align*}', '\t' }, i(0), t { '', '\\end{align*}' } },
+		{ t { '\\begin{align*}', '\t' }, i(1), t { '', '\\end{align*}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bit', name = 'Itemize Environment', dscr = 'Create an itemize environment' },
-		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{itemize}' }, i(0) },
+		{ t { '\\begin{itemize}', '\t\\item ' }, i(1), d(2, rec_ls, {}), t { '', '\\end{itemize}' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text } }
 	),
 	s(
@@ -744,12 +744,12 @@ N = {
 
 	s(
 		{ trig = 'tt', wordTrig = false, name = 'text' },
-		{ t('\\text{'), i(1), t('}'), i(0) },
+		{ t('\\text{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'tss', wordTrig = false, name = 'text subscript' },
-		{ t('_{\\mathrm{'), i(1), t('}}'), i(0) },
+		{ t('_{\\mathrm{'), i(1), t('}}') },
 		{ condition = vimtex.in_mathzone }
 	),
 
@@ -805,18 +805,18 @@ N = {
 	s({ trig = 'nvs', name = 'inverse', wordTrig = false }, { t('^{-1}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = '^-', name = 'negative exponents', wordTrig = false },
-		{ t('^{-'), i(1), t('}'), i(0) },
+		{ t('^{-'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = 'sq', name = 'square root' }, { t('\\sqrt{'), i(1), t('}'), i(0) }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'sq', name = 'square root' }, { t('\\sqrt{'), i(1), t('}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = '__', name = 'subscript', wordTrig = false },
-		{ t('_{'), i(1), t('}'), i(0) },
+		{ t('_{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = '^^', name = 'supscript', wordTrig = false },
-		{ t('^{'), i(1), t('}'), i(0) },
+		{ t('^{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s({ trig = '**', name = 'upper star *', wordTrig = false }, { t('^{*}') }, { condition = vimtex.in_mathzone }),
@@ -826,12 +826,12 @@ N = {
 	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t('\\coloneqq ') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'rup', name = 'round up', wordTrig = false },
-		{ t('\\rup{'), i(1), t('}'), i(0) },
+		{ t('\\rup{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'rwn', name = 'round down', wordTrig = false },
-		{ t('\\rdown{'), i(1), t('}'), i(0) },
+		{ t('\\rdown{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
 
@@ -865,23 +865,19 @@ N = {
 	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t('\\mathbb{Z}') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = 'srt', wordTrig = false, name = 'square root' },
-		{ t('\\sqrt{'), i(1), t('}'), i(0) },
+		{ t('\\sqrt{'), i(1), t('}') },
 		{ condition = vimtex.in_mathzone }
 	),
-	s({ trig = 'set', name = 'set' }, { t('\\{'), i(1), t('\\}'), i(0) }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'set', name = 'set' }, { t('\\{'), i(1), t('\\}') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'o+', wordTrig = false, name = 'oplus' }, { t('\\oplus') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'ox', wordTrig = false, name = 'otimes' }, { t('\\otimes') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t('\\cap') }, { condition = vimtex.in_mathzone }),
-	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t('\\cup') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t('\\cap ') }, { condition = vimtex.in_mathzone }),
+	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t('\\cup ') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t('\\bigcup') }, { condition = vimtex.in_mathzone }),
 	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t('\\bigcap') }, { condition = vimtex.in_mathzone }),
 
 	-- notations which are often used in math
-	s(
-		{ trig = 'MK', name = 'Mori-Kleiman cone' },
-		{ t('\\cNE('), i(1), t(')'), i(0) },
-		{ condition = vimtex.in_mathzone }
-	),
+	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t('\\cNE('), i(1), t(')') }, { condition = vimtex.in_mathzone }),
 	s(
 		{ trig = '([QRZ])P', name = 'positive', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
@@ -934,59 +930,59 @@ M = {
 	-- variations of brackets
 	s(
 		{ trig = 'lr', name = 'left( right)' },
-		{ t { '\\left( ' }, i(1), t { '\\right)' }, i(0) },
+		{ t { '\\left( ' }, i(1), t { '\\right)' } },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'lr(', name = 'left( right)' },
-		{ t { '\\left( ' }, i(1), t { '\\right)' }, i(0) },
+		{ t { '\\left( ' }, i(1), t { '\\right)' } },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'lr|', name = 'leftvert rightvert' },
-		{ t { '\\left\\lvert ' }, i(1), t { '\\right\\lvert' }, i(0) },
+		{ t { '\\left\\lvert ' }, i(1), t { '\\right\\lvert' } },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'lr{', name = 'left\\{ right\\}' },
-		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' }, i(0) },
+		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' } },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'lrb', name = 'left\\{ right\\}' },
-		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' }, i(0) },
+		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' } },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'lr[', name = 'left[ right]' },
-		{ t { '\\left[ ' }, i(1), t { '\\right]' }, i(0) },
+		{ t { '\\left[ ' }, i(1), t { '\\right]' } },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 
 	-- General text styling like bold and so on
 	s(
 		{ trig = 'bf', name = 'bold', dscr = 'Insert bold text.' },
-		{ t('\\textbf{'), i(1), t('}'), i(0) },
+		{ t('\\textbf{'), i(1), t('}') },
 		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
 	),
 	s(
 		{ trig = 'it', name = 'italic', dscr = 'Insert italic text.' },
-		{ t('\\textit{'), i(1), t('}'), i(0) },
+		{ t('\\textit{'), i(1), t('}') },
 		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
 	),
 	s(
 		{ trig = 'em', name = 'emphasize', dscr = 'Insert emphasize text.' },
-		{ t('\\emph{'), i(1), t('}'), i(0) },
+		{ t('\\emph{'), i(1), t('}') },
 		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
 	),
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
-		{ t { '\\noindent', '' }, i(0) },
+		{ t { '\\noindent', '' } },
 		{ condition = pipe { conds.line_begin, vimtex.in_text }, show_condition = vimtex.in_text }
 	),
 	s(
 		{ trig = 'cite', name = '\\cite[]{}' },
-		{ t('\\cite['), i(1), t(']{'), i(2), t('}'), i(0) },
+		{ t('\\cite['), i(1), t(']{'), i(2), t('}') },
 		{ condition = vimtex.in_text, show_condition = vimtex.in_text }
 	),
 
@@ -1034,28 +1030,28 @@ M = {
 
 	s(
 		{ trig = '/', name = 'fraction', dscr = 'Insert a fraction notation.', wordTrig = false },
-		{ t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0) },
+		{ t('\\frac{'), i(1), t('}{'), i(2), t('}') },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 
 	s(
 		{ trig = 'sum', name = 'sum', dscr = 'Insert a sum notation.' },
-		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}'), i(3), i(0) },
+		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}'), i(3) },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'lim', name = 'limit', dscr = 'Insert a limit notation.' },
-		{ t('\\lim_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} '), i(0) },
+		{ t('\\lim_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} ') },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'limsup', name = 'limsup', dscr = 'Insert a limit superior notation.' },
-		{ t('\\limsup_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} '), i(0) },
+		{ t('\\limsup_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} ') },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 	s(
 		{ trig = 'prod', name = 'product', dscr = 'Insert a product notation.' },
-		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}'), i(4), t(' '), i(0) },
+		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}'), i(4), t(' ') },
 		{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	),
 
@@ -1081,7 +1077,7 @@ M = {
 	-- cycle change sequences
 	-- s(
 	-- 	{ trig = 'spaceseq', name = 'set a white space', dscr = 'Select from 3/4/5/normal/18/36/-3mu.' },
-	-- 	{ c(1, { t('\\, '), t('\\: '), t('\\; '), t('\\  '), t('\\quad '), t('\\qquad '), t('\\! ') }), i(0) },
+	-- 	{ c(1, { t('\\, '), t('\\: '), t('\\; '), t('\\  '), t('\\quad '), t('\\qquad '), t('\\! ') }) },
 	-- 	{ condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }
 	-- ),
 	-- s({
