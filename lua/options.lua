@@ -69,8 +69,8 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 ---- THEMS & LINES ----
 ------ catppuccin (dark, storm, light), edge (dark, light), everforest (dark, light), github (dark, light, light_default)
 ------ gruxbox (dark, light), kanagawa, onedark (dark, light), sonokai, tokyonight (dark, storm, light), vscode (dark, light)
-vim.g.theme_style = 'storm'
-require('themes.catppuccin')
+vim.g.theme_style = 'dark'
+require('themes.tokyonight')
 -- require('ui.buftab')
 -- require('ui.status')
 require('ui.buftabline')

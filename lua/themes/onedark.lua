@@ -16,7 +16,7 @@ if vim.g.theme_style == 'dark' then
 		white = '#ABB2BF',
 		black = '#282C34',
 		gray = '#5C6370',
-		-- highlight = '#E2BE7D',
+		highlight = '#E2BE7D',
 
 		-- Git diff
 		diff_add = '#109868',
@@ -59,7 +59,7 @@ else
 		white = '#FAFAFA',
 		black = '#6A6A6A',
 		gray = '#BEBEBE',
-		-- highlight = '#FFE792',
+		highlight = '#FFE792',
 
 		-- Git diff
 		diff_add = '#CAE3E8',
@@ -93,7 +93,7 @@ end
 
 ------ BASICS ------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.color_column })
--- vim.api.nvim_set_hl(0, 'Conceal', {})
+vim.api.nvim_set_hl(0, 'Conceal', {})
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.black })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.gray })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.teleblack }) -- FIXED
@@ -401,7 +401,7 @@ vim.api.nvim_set_hl(0, 'TSKeywordOperator', { fg = colors.purple, italic = true 
 vim.api.nvim_set_hl(0, 'TSKeywordReturn', { link = 'TSKeyword' })
 vim.api.nvim_set_hl(0, 'TSLabel', { fg = colors.purple, italic = true })
 vim.api.nvim_set_hl(0, 'TSLiteral', { fg = colors.fg })
-vim.api.nvim_set_hl(0, 'TSMath', { fg = colors.fg })
+vim.api.nvim_set_hl(0, 'TSMath', { fg = colors.red }) -- FIXED
 vim.api.nvim_set_hl(0, 'TSMethod', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'TSNamespace', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'TSNone', {})

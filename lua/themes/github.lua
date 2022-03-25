@@ -35,7 +35,10 @@ if vim.g.theme_style == 'dark' then
 		lsp = { ref_txt = '#265459' },
 
 		-- Auto-Complication Colors
-		pmenu = { bg = '#1f2428', sbar = '#32383e' },
+		pmenu = {
+			bg = '#1f2428',
+			sbar = '#32383e',
+		},
 
 		-- Git & Diff Colors
 		git = {
@@ -655,6 +658,8 @@ vim.api.nvim_set_hl(0, 'TSConstant', { fg = c.syntax.constant })
 vim.api.nvim_set_hl(0, 'commentTSConstant', { fg = c.syntax.keyword })
 -- vim.api.nvim_set_hl(0, 'TSConstBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'TSConstMacro', {})
+vim.api.nvim_set_hl(0, 'TSEnvironment', { fg = c.bright_green }) -- ADDED
+vim.api.nvim_set_hl(0, 'TSEnvironmentName', { fg = c.info }) -- ADDED
 -- vim.api.nvim_set_hl(0, 'TSError', {})
 -- vim.api.nvim_set_hl(0, 'TSException', {})
 vim.api.nvim_set_hl(0, 'TSField', { fg = c.fg })
@@ -666,6 +671,7 @@ vim.api.nvim_set_hl(0, 'TSInclude', { fg = c.syntax.keyword })
 vim.api.nvim_set_hl(0, 'TSKeyword', { fg = c.syntax.keyword, italic = true })
 vim.api.nvim_set_hl(0, 'TSKeywordFunction', { fg = c.syntax.keyword })
 vim.api.nvim_set_hl(0, 'TSLabel', { fg = c.blue })
+vim.api.nvim_set_hl(0, 'TSMath', { fg = c.yellow }) -- ADDED
 -- vim.api.nvim_set_hl(0, 'TSMethod', {})
 vim.api.nvim_set_hl(0, 'TSNamespace', { fg = c.fg })
 -- vim.api.nvim_set_hl(0, 'TSNone', {})
@@ -689,7 +695,7 @@ vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = c.syntax.variable })
 vim.api.nvim_set_hl(0, 'TSTag', { fg = c.syntax.tag })
 vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = c.fg })
 -- vim.api.nvim_set_hl(0, 'TSText', {})
-vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.red })
+vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.cyan }) -- FIXED
 -- vim.api.nvim_set_hl(0, 'TSEmphasis', {})
 -- vim.api.nvim_set_hl(0, 'TSUnderline', {})
 -- vim.api.nvim_set_hl(0, 'TSStrike', {})

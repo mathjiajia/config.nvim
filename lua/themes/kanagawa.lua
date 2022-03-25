@@ -42,7 +42,7 @@ local palette_colors = {
 	waveAqua2 = '#7AA89F', -- improve lightness: desaturated greenish Aqua
 
 	-- waveAqua2  = "#68AD99",
-	-- waveAqua4  = "#7AA880",
+	waveAqua4 = '#7AA880',
 	-- waveAqua5  = "#6CAF95",
 	-- waveAqua3  = "#68AD99",
 
@@ -413,6 +413,8 @@ vim.api.nvim_set_hl(0, 'TSAttribute', { link = 'Constant' })
 -- vim.api.nvim_set_hl(0, 'TSConstMacro', {})
 vim.api.nvim_set_hl(0, 'TSConstructor', { fg = colors.kw })
 vim.api.nvim_set_hl(0, 'TSDanger', { link = 'WarningMsg' })
+vim.api.nvim_set_hl(0, 'TSEnvironment', { fg = palette_colors.waveAqua4 }) -- ADDED
+vim.api.nvim_set_hl(0, 'TSEnvironmentName', { fg = palette_colors.crystalBlue, italic = true }) -- ADDED
 vim.api.nvim_set_hl(0, 'TSError', { fg = colors.diag.error })
 vim.api.nvim_set_hl(0, 'TSException', { fg = colors.sp3, italic = true })
 -- vim.api.nvim_set_hl(0, 'TSException', {})
@@ -429,6 +431,7 @@ vim.api.nvim_set_hl(0, 'TSKeywordOperator', { fg = colors.op, bold = true })
 vim.api.nvim_set_hl(0, 'TSKeywordReturn', { fg = colors.sp3, italic = true })
 vim.api.nvim_set_hl(0, 'TSLabel', { link = 'Label' })
 -- vim.api.nvim_set_hl(0, 'TSLiteral', {})
+vim.api.nvim_set_hl(0, 'TSMath', { fg = palette_colors.sakuraPink }) -- ADDED
 vim.api.nvim_set_hl(0, 'TSMethod', { link = 'Function' })
 -- vim.api.nvim_set_hl(0, 'TSNamespace', {})
 -- vim.api.nvim_set_hl(0, 'TSNone', {})

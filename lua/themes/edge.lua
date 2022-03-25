@@ -94,7 +94,7 @@ vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = cp.bg2 })
 vim.api.nvim_set_hl(0, 'PmenuSel', { fg = cp.bg0, bg = cp.blue })
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = cp.bg_grey })
 vim.api.nvim_set_hl(0, 'Question', { fg = cp.yellow })
-vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = cp.blue, bold = true })
+-- vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = cp.blue, bold = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'Search', { fg = cp.bg0, bg = cp.bg_green })
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.fg })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = cp.bg4 })

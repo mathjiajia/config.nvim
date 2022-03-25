@@ -107,7 +107,7 @@ vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.black4, bg = cp.pink })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.black4 })
 vim.api.nvim_set_hl(0, 'MatchParen', { bg = cp.black3, bold = true }) -- FIXED
-vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.white, bold = true })
+vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.flamingo, bold = true })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = cp.white })
 -- vim.api.nvim_set_hl(0, 'MsgSeparator', { link = 'ModeMsg' })

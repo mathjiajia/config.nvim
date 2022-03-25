@@ -489,7 +489,7 @@ vim.api.nvim_set_hl(0, 'StatusLine', { fg = c.black, bg = c.blue }) -- FIXED
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = c.fg_gutter, bg = c.bg_statusline })
 vim.api.nvim_set_hl(0, 'Substitute', { bg = c.red, fg = c.black })
 vim.api.nvim_set_hl(0, 'TabLine', { bg = c.bg_statusline, fg = c.fg_gutter })
-vim.api.nvim_set_hl(0, 'TabLineFill', { bg = c.black })
+vim.api.nvim_set_hl(0, 'TabLineFill', { bg = c.bg }) -- FIXED
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = c.black, bg = c.blue })
 -- vim.api.nvim_set_hl(0, 'TermCursor', {})
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {})
@@ -706,6 +706,8 @@ vim.api.nvim_set_hl(0, 'TSConstructor', { fg = c.magenta })
 -- vim.api.nvim_set_hl(0, 'TSConstant', {})
 -- vim.api.nvim_set_hl(0, 'TSConstBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'TSConstMacro', {})
+vim.api.nvim_set_hl(0, 'TSEnvironment', { fg = c.green1 }) -- ADDED
+vim.api.nvim_set_hl(0, 'TSEnvironmentName', { fg = c.orange }) -- ADDED
 -- vim.api.nvim_set_hl(0, 'TSError', {})
 -- vim.api.nvim_set_hl(0, 'TSException', {})
 vim.api.nvim_set_hl(0, 'TSField', { fg = c.green1 })
