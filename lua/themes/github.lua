@@ -348,7 +348,7 @@ vim.api.nvim_set_hl(0, 'Conceal', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.bg, bg = c.fg })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = c.bg_highlight })
 vim.api.nvim_set_hl(0, 'CursorIM', { link = 'Cursor' })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = c.teleblack }) -- FIXED
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = c.bg_highlight })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.cursor_line_nr })
 vim.api.nvim_set_hl(0, 'Directory', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = c.eob })

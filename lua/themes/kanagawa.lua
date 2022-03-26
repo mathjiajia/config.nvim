@@ -128,7 +128,7 @@ vim.api.nvim_set_hl(0, 'Conceal', { fg = colors.bg_light3, bg = 'NONE', bold = t
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.fg })
 vim.api.nvim_set_hl(0, 'CursorColumn', { link = 'CursorLine' })
 -- vim.api.nvim_set_hl(0, 'CursorIM', {})
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = palette_colors.teleblack }) -- FIXED
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg_light1 })
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = colors.diag.warning, bg = 'NONE', bold = true })
 vim.api.nvim_set_hl(0, 'Directory', { fg = colors.fn })

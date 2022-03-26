@@ -55,6 +55,7 @@ vim.wo.cursorline = true
 vim.opt.fillchars = 'eob: '
 vim.opt.laststatus = 3
 vim.opt.linebreak = true
+vim.opt.mouse = 'n'
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.pumheight = 10

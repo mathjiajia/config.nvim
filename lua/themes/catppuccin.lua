@@ -93,7 +93,7 @@ vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.black3 })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = cp.gray1 })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = cp.black2, bg = cp.white })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = cp.black1 })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.teleblack }) -- FIXED
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.black3 })
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.green })
 -- vim.api.nvim_set_hl(0, 'CursorLineSign', {})
