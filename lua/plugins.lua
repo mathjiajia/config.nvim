@@ -123,7 +123,6 @@ local function spec(use)
 
 	use {
 		'lewis6991/gitsigns.nvim',
-		requires = 'nvim-lua/plenary.nvim',
 		config = [[require('configs.gitsigns')]],
 	}
 	use {

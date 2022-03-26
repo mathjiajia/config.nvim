@@ -62,15 +62,9 @@ require('aerial').setup {
 	min_width = 25,
 	nerd_font = true,
 	on_attach = function(bufnr)
-		-- stylua: ignore start
-		vim.keymap.set(
-			'n', '<M-o>',
-			function()
-				require('aerial').toggle()
-			end,
-			{ buffer = bufnr, desc = 'Toggle aerial window' }
-		)
-		-- stylua: ignore end
+		vim.keymap.set('n', '<M-o>', function()
+			require('aerial').toggle()
+		end, { buffer = bufnr, desc = 'Toggle aerial window' })
 	end,
 	show_guides = true,
 	float = { relative = 'editor' },

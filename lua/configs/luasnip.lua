@@ -40,37 +40,22 @@ ls.config.setup {
 	-- },
 }
 
--- stylua: ignore start
-vim.keymap.set(
-	{ 'i', 's' }, '<C-j>',
-	function()
-		if ls.expand_or_locally_jumpable() then
-			ls.expand_or_jump()
-		end
-	end,
-	{ desc = 'LuaSnip Forward Jump' }
-)
-vim.keymap.set(
-	{ 'i', 's' }, '<C-k>',
-	function()
-		if ls.jumpable(-1) then
-			ls.jump(-1)
-		end
-	end,
-	{ desc = 'LuaSnip Backward Jump' }
-)
-vim.keymap.set(
-	'i', '<C-l>',
-	function()
-		if ls.choice_active() then
-			ls.change_choice(1)
-		end
-	end,
-	{ desc = 'LuaSnip Next Choice' }
-)
--- stylua: ignore end
+vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+	if ls.expand_or_locally_jumpable() then
+		ls.expand_or_jump()
+	end
+end, { desc = 'LuaSnip Forward Jump' })
+vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
+end, { desc = 'LuaSnip Backward Jump' })
+vim.keymap.set('i', '<C-l>', function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, { desc = 'LuaSnip Next Choice' })
 
--- require('luasnip.loaders.from_lua').lazy_load { include = { 'all', 'cpp' } }
 require('luasnip.loaders.from_lua').lazy_load()
 
 -- vim.api.nvim_add_user_command('LuaSnipEdit', edit_ft, {})

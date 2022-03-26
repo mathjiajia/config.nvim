@@ -10,7 +10,7 @@ require('neo-tree').setup {
 			-- default = '',
 		},
 	},
-	window = { width = 35 },
+	window = { width = 30 },
 	filesystem = {
 		-- filtered_items = { hide_dotfiles = false },
 		follow_current_file = true,
@@ -22,6 +22,3 @@ require('neo-tree').setup {
 vim.keymap.set('n', '<M-t>', function()
 	require('neo-tree.command')._command('toggle')
 end, { desc = 'Toggle NeoTree' })
--- vim.keymap.set('n', '<M-b>', function()
--- 	require('neo-tree.command')._command('buffers')
--- end, { desc = 'Toggle NeoTree buffers' })
