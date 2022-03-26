@@ -10,8 +10,15 @@ end
 -- vimtex.in_comment = function()
 -- 	return vim.fn['vimtex#syntax#in_comment']() == 1
 -- end
+-- vimtex.in_beamer = function()
+-- return vim.b.vimtex['documentclass'] == 'beamer'
+-- end
 vimtex.in_beamer = function()
-	return vim.b.vimtex['documentclass'] == 'beamer'
+	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
+	if first_line[1]:match('beamer') then
+		return true
+	end
+	return false
 end
 -- vimtex.env_align = function()
 -- 	local x, y = unpack(vim.eval('vimtex#env#is_inside("align")'))
