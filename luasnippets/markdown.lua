@@ -1,5 +1,27 @@
 local M, N = {}, {}
 
+local util = {}
+
+util.pipe = function(fns)
+	return function(...)
+		for _, fn in ipairs(fns) do
+			if not fn(...) then
+				return false
+			end
+		end
+
+		return true
+	end
+end
+
+util.on_top = function()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	if cursor[1] <= 3 then
+		return true
+	end
+	return false
+end
+
 M = {
 	s(
 		{ trig = '#([2-6])', name = 'Heading', dscr = 'Add Heading', regTrig = true, hidden = true },
@@ -25,7 +47,7 @@ M = {
 		i(4),
 		t { '"]', '---', '', '' },
 		i(0),
-	}, { condition = conds.line_begin }),
+	}, { condition = util.pipe { util.on_top, conds.line_begin }, show_condition = util.on_top }),
 	s({ trig = 'td', name = 'too long, do not read' }, { t('tl;dr: ') }, { condition = conds.line_begin }),
 	s(
 		{ trig = 'link', name = 'Markdown Links', dscr = 'Insert a Link' },

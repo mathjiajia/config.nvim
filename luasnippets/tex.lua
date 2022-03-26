@@ -1,21 +1,22 @@
 local N, M = {}, {}
 
-local vimtex = {}
+local tex, vimtex = {}, {}
 vimtex.in_mathzone = function()
 	return vim.fn['vimtex#syntax#in_mathzone']() == 1
 end
 vimtex.in_text = function()
 	return not vimtex.in_mathzone()
 end
--- vimtex.in_comment = function()
--- 	return vim.fn['vimtex#syntax#in_comment']() == 1
--- end
--- vimtex.in_beamer = function()
--- return vim.b.vimtex['documentclass'] == 'beamer'
--- end
-vimtex.in_beamer = function()
+tex.in_beamer = function()
 	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
-	if first_line[1]:match('beamer') then
+	if first_line[1]:match('\\documentclass{beamer}') then
+		return true
+	end
+	return false
+end
+tex.on_top = function()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	if cursor[1] <= 3 then
 		return true
 	end
 	return false
@@ -112,18 +113,16 @@ local pipe = function(fns)
 	end
 end
 
-local appended_space = function()
-	if string.find(vim.v.char, '%a') then
-		vim.v.char = ' ' .. vim.v.char
-	end
-end
-
 local appended_space_after_insert = function()
 	vim.api.nvim_create_autocmd('InsertCharPre', {
-		callback = appended_space,
+		callback = function()
+			if string.find(vim.v.char, '%a') then
+				vim.v.char = ' ' .. vim.v.char
+			end
+		end,
 		buffer = 0,
 		once = true,
-		desc = 'Auto Add a Space after Math',
+		desc = 'Auto Add a Space after Inline Math',
 	})
 end
 
@@ -426,7 +425,8 @@ N = {
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_text } }
+		-- { condition = pipe { conds.line_begin, vimtex.in_text } }
+		{ condition = vimtex.in_text }
 	),
 
 	s({ trig = 'cref', name = '\\cref{}' }, { t('\\cref{'), i(1), t('}') }, { condition = vimtex.in_text }),
@@ -700,9 +700,9 @@ N = {
 	s({ trig = 'lben', name = 'Enumerate with labels' }, {
 		t { '\\begin{enumerate}[label=(\\' },
 		c(1, {
-			t('arabic'),
 			t('alph'),
 			t('roman'),
+			t('arabic'),
 		}),
 		t { '*)]', '\t\\item ' },
 		i(2),
@@ -715,21 +715,21 @@ N = {
 		t { '}', '\t' },
 		i(0),
 		t { '', '\\end{frame}' },
-	}, { condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }),
+	}, { condition = pipe { conds.line_begin, tex.in_beamer, vimtex.in_text } }),
 	s(
 		{ trig = 'bcor', name = 'Beamer Corollary Environment' },
 		{ t { '\\begin{block}{Corollary}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
+		{ condition = pipe { conds.line_begin, tex.in_beamer, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'bdef', name = 'Beamer Definition Environment' },
 		{ t { '\\begin{block}{Definition}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
+		{ condition = pipe { conds.line_begin, tex.in_beamer, vimtex.in_text } }
 	),
 	s(
 		{ trig = 'brem', name = 'Beamer Remark Environment' },
 		{ t { '\\begin{block}{Remark}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = pipe { conds.line_begin, vimtex.in_beamer, vimtex.in_text } }
+		{ condition = pipe { conds.line_begin, tex.in_beamer, vimtex.in_text } }
 	),
 	s({ trig = 'bfu', name = 'function' }, {
 		t { '\\begin{equation*}', '\t' },
@@ -1140,7 +1140,7 @@ M = {
 	-- 	i(0),
 	-- }, { condition = vimtex.in_mathzone, show_condition = vimtex.in_mathzone }),
 
-	s({ trig = 'tempb', name = 'Basic template', dscr = 'Use the basic template' }, {
+	s({ trig = 'onic template', dscr = 'Use the basic template' }, {
 		t {
 			'\\documentclass{article}',
 			'\\input{~/Tex/preamble_pac}',
@@ -1177,7 +1177,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
+	}, { condition = pipe { tex.on_top, conds.line_begin }, show_condition = tex.on_top }),
 	s({ trig = 'temps', name = 'Slides template', dscr = 'Use the slides template' }, {
 		t {
 			'\\documentclass[8pt]{beamer}',
@@ -1235,7 +1235,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
+	}, { condition = pipe { tex.on_top, conds.line_begin }, show_condition = tex.on_top }),
 	s({ trig = 'tempa', name = 'AMS template', dscr = 'Use the AMS template' }, {
 		t {
 			'\\documentclass[11pt]{amsart}',
@@ -1469,7 +1469,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
+	}, { condition = pipe { tex.on_top, conds.line_begin }, show_condition = tex.on_top }),
 	s({ trig = 'tempr', name = 'report template' }, {
 		t {
 			'',
@@ -1547,7 +1547,7 @@ M = {
 			'',
 			'\\end{document}',
 		},
-	}, { condition = pipe { conds.line_begin, vimtex.in_text } }),
+	}, { condition = pipe { tex.on_top, conds.line_begin }, show_condition = tex.on_top }),
 }
 
 return M, N
