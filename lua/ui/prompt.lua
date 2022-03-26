@@ -6,32 +6,25 @@ local Text = require('nui.text')
 local function editor_popup_opts(top)
 	return {
 		position = '50%',
-		size = { width = 30 },
-		relative = 'editor',
+		size = { width = 25 },
 		border = {
-			style = 'rounded',
+			style = 'single',
 			text = { top = Text(top, 'Special'), top_align = 'left' },
 		},
-		win_options = {
-			winblend = 10,
-			winhighlight = 'Normal:Normal,FloatBorder:DiagnosticInfo',
-		},
+		win_options = { winhighlight = 'Normal:Normal,FloatBorder:DiagnosticInfo' },
 	}
 end
 
 local function cursor_popup_opts(top)
 	return {
 		position = { row = 1, col = 0 },
-		size = { width = 30, height = 2 },
+		size = { width = 25 },
 		relative = 'cursor',
 		border = {
-			style = 'rounded',
+			style = 'single',
 			text = { top = Text(top, 'Special'), top_align = 'left' },
 		},
-		win_options = {
-			winblend = 10,
-			winhighlight = 'Normal:Normal,FloatBorder:DiagnosticInfo',
-		},
+		win_options = { winhighlight = 'Normal:Normal,FloatBorder:DiagnosticInfo' },
 	}
 end
 
@@ -53,7 +46,7 @@ local function popup_input(pop_opts, opts)
 end
 
 local certain_type_opts = {
-	prompt = Text('> ', 'DiagnosticHint'),
+	prompt = Text('➤ ', 'DiagnosticHint'),
 	on_submit = function(value)
 		require('telescope.builtin').find_files(
 			require('telescope.themes').get_ivy { find_command = { 'rg', '--files', '--type', value } }
@@ -62,14 +55,14 @@ local certain_type_opts = {
 }
 
 local grep_string_opts = {
-	prompt = Text('> ', 'DiagnosticHint'),
+	prompt = Text('➤ ', 'DiagnosticHint'),
 	on_submit = function(value)
 		require('telescope.builtin').grep_string { path_display = { 'shorten' }, search = value }
 	end,
 }
 
 function M.certain_type()
-	popup_input(editor_popup_opts('File Type'), certain_type_opts)
+	popup_input(editor_popup_opts('Type'), certain_type_opts)
 end
 
 function M.grep_string()
@@ -89,7 +82,7 @@ function M.lsp_rename()
 	local popup_opts = cursor_popup_opts('New Name')
 
 	local opts = {
-		prompt = '> ',
+		prompt = '➤ ',
 		default_value = vim.fn.expand('<cword>'),
 		on_submit = on_confirm,
 	}
