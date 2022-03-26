@@ -51,15 +51,15 @@ snips = {
 	s({ trig = 'td', name = 'too long, do not read' }, { t('tl;dr: ') }, { condition = conds.line_begin }),
 	s(
 		{ trig = 'link', name = 'Markdown Links', dscr = 'Insert a Link' },
-		{ t('['), i(1, 'title'), t(']('), i(2, 'url'), t(')'), i(0) }
+		{ t('['), i(1, 'title'), t(']('), i(2, 'url'), t(')') }
 	),
 }
 
 autosnips = {
-	s({ trig = ',b', name = 'bold' }, { t('**'), i(1), t('**'), i(0) }),
-	s({ trig = ',i', name = 'italic' }, { t('*'), i(1), t('*'), i(0) }),
-	s({ trig = ',c', name = 'code' }, { t('`'), i(1), t('`'), i(0) }),
-	s({ trig = ',s', name = 'strikethrough' }, { t('~~'), i(1), t('~~'), i(0) }),
+	s({ trig = ',b', name = 'bold' }, { t('**'), i(1), t('**') }),
+	s({ trig = ',i', name = 'italic' }, { t('*'), i(1), t('*') }),
+	s({ trig = ',c', name = 'code' }, { t('`'), i(1), t('`') }),
+	s({ trig = ',s', name = 'strikethrough' }, { t('~~'), i(1), t('~~') }),
 }
 
 return snips, autosnips
