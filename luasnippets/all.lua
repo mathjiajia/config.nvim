@@ -1,5 +1,3 @@
--- local M = {}
-
 local calculate_comment_string = require('Comment.ft').calculate
 local region = require('Comment.utils').get_region
 

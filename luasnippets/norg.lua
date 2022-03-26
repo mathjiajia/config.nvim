@@ -1,6 +1,6 @@
-local M, N = {}, {}
+local snips, autosnips = {}, {}
 
-M = {
+snips = {
 	s(
 		{ trig = '*([2-6])', name = 'Heading', dscr = 'Add Heading', regTrig = true, hidden = true },
 		{ f(function(_, snip)
@@ -65,7 +65,7 @@ M = {
 	),
 }
 
-N = {
+autosnips = {
 	s({ trig = ',b', name = 'bold' }, { t('*'), i(1), t('*'), i(0) }),
 	s({ trig = ',i', name = 'italic' }, { t('/'), i(1), t('/'), i(0) }),
 	s({ trig = ',u', name = 'underline' }, { t('_'), i(1), t('_'), i(0) }),
@@ -79,4 +79,4 @@ N = {
 	s({ trig = ',+', name = 'comment' }, { t('+'), i(1), t('+'), i(0) }),
 }
 
-return M, N
+return snips, autosnips

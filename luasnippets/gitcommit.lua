@@ -1,6 +1,6 @@
-local M = {}
+local snips = {}
 
-M = {
+snips = {
 	s(
 		{ trig = 'feat', name = 'feature' },
 		{ t('feat('), i(1, 'scope'), t('): '), i(0, 'title') },
@@ -32,4 +32,4 @@ M = {
 		{ condition = conds.line_begin }
 	),
 }
-return M
+return snips

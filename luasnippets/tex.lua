@@ -1,4 +1,4 @@
-local N, M = {}, {}
+local snips, autosnips = {}, {}
 
 local tex, vimtex = {}, {}
 vimtex.in_mathzone = function()
@@ -136,7 +136,7 @@ rec_ls = function()
 	})
 end
 
-N = {
+autosnips = {
 
 	-- priority 60:
 
@@ -908,7 +908,7 @@ N = {
 	),
 }
 
-M = {
+snips = {
 	-- priority 1:
 	s(
 		{ trig = 'c(%u)', name = 'mathcal', wordTrig = false, regTrig = true, hidden = true },
@@ -1550,4 +1550,4 @@ M = {
 	}, { condition = pipe { tex.on_top, conds.line_begin }, show_condition = tex.on_top }),
 }
 
-return M, N
+return snips, autosnips

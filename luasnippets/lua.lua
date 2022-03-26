@@ -1,6 +1,6 @@
-local M = {}
+local snips = {}
 
-M = {
+snips = {
 	s(
 		{ trig = 'M', name = 'Module decl.', dscr = 'Declare a lua module' },
 		{ t { 'local M = {}', '', '\t' }, i(0), t { '', '', 'return M' } },
@@ -18,4 +18,4 @@ M = {
 	),
 }
 
-return M
+return snips

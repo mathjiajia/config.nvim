@@ -1,4 +1,4 @@
-local M, N = {}, {}
+local snips, autosnips = {}, {}
 
 local util = {}
 
@@ -22,7 +22,7 @@ util.on_top = function()
 	return false
 end
 
-M = {
+snips = {
 	s(
 		{ trig = '#([2-6])', name = 'Heading', dscr = 'Add Heading', regTrig = true, hidden = true },
 		{ f(function(_, snip)
@@ -55,11 +55,11 @@ M = {
 	),
 }
 
-N = {
+autosnips = {
 	s({ trig = ',b', name = 'bold' }, { t('**'), i(1), t('**'), i(0) }),
 	s({ trig = ',i', name = 'italic' }, { t('*'), i(1), t('*'), i(0) }),
 	s({ trig = ',c', name = 'code' }, { t('`'), i(1), t('`'), i(0) }),
 	s({ trig = ',s', name = 'strikethrough' }, { t('~~'), i(1), t('~~'), i(0) }),
 }
 
-return M, N
+return snips, autosnips
