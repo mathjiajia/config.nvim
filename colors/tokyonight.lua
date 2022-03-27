@@ -1,4 +1,5 @@
 -- Modofied from https://github.com/folke/tokyonight.nvim
+vim.g.colors_name = 'tokyonight'
 
 local hsluv = {}
 local hexChars = '0123456789abcdef'

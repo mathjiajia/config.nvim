@@ -1,4 +1,5 @@
 -- Modified from https://github.com/Mofiqul/vscode.nvim
+vim.g.colors_name = 'vscode'
 
 local c = {}
 

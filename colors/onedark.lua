@@ -1,4 +1,5 @@
 -- Modified from https://github.com/olimorris/onedarkpro.nvim
+vim.g.colors_name = 'onedark'
 
 local colors = {}
 

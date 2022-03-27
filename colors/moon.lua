@@ -1,4 +1,5 @@
 -- Modified from https://github.com/catppuccin/nvim
+vim.g.colors_name = 'moon'
 
 local cp = {
 	rosewater = '#F5E0DC', -- Rosewater

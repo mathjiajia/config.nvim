@@ -1,4 +1,5 @@
 -- Modified from https://github.com/catppuccin/nvim
+vim.g.colors_name = 'catppuccin'
 
 local cp = {}
 

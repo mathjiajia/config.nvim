@@ -1,4 +1,5 @@
 -- Modified from https://github.com/rebelot/kanagawa.nvim
+vim.g.colors_name = 'kanagawa'
 
 local palette_colors = {
 	-- Bg Shades
@@ -213,7 +214,7 @@ vim.api.nvim_set_hl(0, 'PreProc', { fg = colors.pp })
 vim.api.nvim_set_hl(0, 'Special', { fg = colors.sp })
 -- vim.api.nvim_set_hl(0, 'SpecialChar', {})
 -- vim.api.nvim_set_hl(0, 'SpecialComment', {})
-vim.api.nvim_set_hl(0, 'Statement', { fg = colors.sm, bold = true })
+vim.api.nvim_set_hl(0, 'Statement', { fg = colors.sm }) -- FIXED
 -- vim.api.nvim_set_hl(0, 'StorageClass', {})
 vim.api.nvim_set_hl(0, 'String', { fg = colors.st })
 vim.api.nvim_set_hl(0, 'Struct', { link = 'Type' })
@@ -378,13 +379,13 @@ vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = colors.co, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = colors.diag.hint, italic = true })
 
 ---------- RAINBOW ----------
-vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.sp2 })
-vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = colors.ty })
-vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = colors.id })
-vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = colors.sp })
-vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = colors.nu })
-vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = colors.co })
-vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.st })
+vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.co })
+vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = colors.st })
+vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = colors.sp2 })
+vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = colors.ty })
+vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = colors.id })
+vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = colors.sp })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.nu })
 
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette_colors.teledark })
@@ -439,11 +440,10 @@ vim.api.nvim_set_hl(0, 'TSMethod', { link = 'Function' })
 -- vim.api.nvim_set_hl(0, 'TSNumber', {})
 vim.api.nvim_set_hl(0, 'TSOperator', { link = 'Operator' })
 vim.api.nvim_set_hl(0, 'TSParameter', { link = 'Identifier' })
-vim.api.nvim_set_hl(0, 'TSParameterReference', {})
+-- vim.api.nvim_set_hl(0, 'TSParameterReference', {})
 vim.api.nvim_set_hl(0, 'TSProperty', { link = 'Identifier' })
 vim.api.nvim_set_hl(0, 'TSPunctBracket', { fg = colors.br })
 vim.api.nvim_set_hl(0, 'TSPunctDelimiter', { fg = colors.br })
-vim.api.nvim_set_hl(0, 'TSPunctDelimiter', {})
 vim.api.nvim_set_hl(0, 'TSPunctSpecial', { fg = colors.br })
 -- vim.api.nvim_set_hl(0, 'TSRepeat', {})
 -- vim.api.nvim_set_hl(0, 'TSStrike', {})

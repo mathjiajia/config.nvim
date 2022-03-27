@@ -1,4 +1,5 @@
 -- Modified from https://github.com/sainnhe/edge
+vim.g.colors_name = 'edge'
 
 local cp = {}
 

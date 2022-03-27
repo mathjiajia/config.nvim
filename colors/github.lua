@@ -1,4 +1,5 @@
 -- Modified from https://github.com/projekt0n/github-nvim-theme
+vim.g.colors_name = 'github'
 
 local c = {}
 
