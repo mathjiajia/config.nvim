@@ -42,6 +42,11 @@ local function spec(use)
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
+	-- use {
+	-- 	'SmiteshP/nvim-gps',
+	-- 	requires = 'nvim-treesitter/nvim-treesitter',
+	-- 	config = [[require('nvim-gps').setup()]],
+	-- }
 
 	use {
 		'nvim-telescope/telescope.nvim',
