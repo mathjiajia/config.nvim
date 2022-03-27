@@ -1,7 +1,5 @@
 local settings = {
 	texlab = {
-		auxDirectory = '.',
-		bibtexFormatter = 'texlab',
 		build = {
 			-- executable = 'tectonic',
 			-- args = { '-X', 'compile', '%f', '--synctex', '--keep-logs', '--keep-intermediates' },
@@ -14,14 +12,10 @@ local settings = {
 			onEdit = false,
 			onOpenAndSave = false,
 		},
-		diagnosticsDelay = 300,
-		formatterLineLength = 80,
 		forwardSearch = {
 			executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
 			args = { '%l', '%p', '%f' },
 		},
-		latexFormatter = 'latexindent',
-		latexindent = { modifyLineBreaks = false },
 	},
 }
 

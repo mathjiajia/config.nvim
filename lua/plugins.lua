@@ -71,6 +71,12 @@ local function spec(use)
 		},
 	}
 
+	-- use {
+	-- 	'kyazdani42/nvim-tree.lua',
+	-- 	requires = 'kyazdani42/nvim-web-devicons',
+	-- 	config = [[require('nvim-tree').setup()]],
+	-- }
+
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
 		branch = 'main',
@@ -172,10 +178,10 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope' },
 	}
 
-	-- use {
-	-- 	'dstein64/vim-startuptime',
-	-- 	config = [[vim.g.startuptime_tries = 10]],
-	-- }
+	use {
+		'dstein64/vim-startuptime',
+		config = [[vim.g.startuptime_tries = 10]],
+	}
 end
 
 require('packer').startup {
