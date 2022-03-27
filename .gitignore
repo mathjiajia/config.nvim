@@ -1,6 +1,5 @@
 .editorconfig
 benchmarks/
-doc/
+vimhelp/
 plugin/packer_compiled.lua
-
 .luarc.json

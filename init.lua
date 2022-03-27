@@ -6,6 +6,7 @@ else
 end
 
 P = function(v)
+	-- vim.notify(vim.inspect(v))
 	print(vim.inspect(v))
 	return v
 end

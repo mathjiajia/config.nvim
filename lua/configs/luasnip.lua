@@ -16,6 +16,8 @@ ls.config.setup {
 		-- 	},
 		-- },
 	},
+	-- ft_func = require('luasnip.extras.filetype_functions').from_filetype,
+	-- ft_func = require('luasnip.extras.filetype_functions').from_cursor_pos,
 	-- ft_func = require('luasnip.extras.filetype_functions').from_pos_or_filetype,
 	-- globals injected into luasnippet-files.
 	-- snip_env = {
