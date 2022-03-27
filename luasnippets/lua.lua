@@ -1,5 +1,19 @@
 local snips = {}
 
+local require_var = function(args, _)
+	local text = args[1][1] or ''
+	local split = vim.split(text, '.', { plain = true })
+
+	local options = {}
+	for len = 0, #split - 1 do
+		table.insert(options, t(table.concat(vim.list_slice(split, #split - len, #split), '_')))
+	end
+
+	return sn(nil, {
+		c(1, options),
+	})
+end
+
 snips = {
 	s(
 		{ trig = 'M', name = 'Module decl.', dscr = 'Declare a lua module' },
@@ -8,12 +22,12 @@ snips = {
 	),
 	s(
 		{ trig = 'lreq', name = 'local require', dscr = 'Require module as a variable' },
-		{ t('local '), i(1, 'var'), t('= require("'), i(2, 'mod'), t('")'), i(0) },
+		{ t('local '), d(2, require_var, { 1 }), t('= require("'), i(1), t('")') },
 		{ condition = conds.line_begin }
 	),
 	s(
-		{ trig = 'ignore', name = 'stylua ignore', dscr = 'Ignoring parts of a file with stylua' },
-		{ t('-- stylua: ignore '), i(0) },
+		{ trig = 'lf', name = 'table function', dscr = 'table function' },
+		{ t('local '), i(1), t(' = function('), i(2), t { ')', '\t' }, i(0), t { '', 'end' } },
 		{ condition = conds.line_begin }
 	),
 }

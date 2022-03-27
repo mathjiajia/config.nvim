@@ -17,10 +17,7 @@ local ts_install = {
 
 require('nvim-treesitter.configs').setup {
 	ensure_installed = ts_install,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = { 'latex' },
-	},
+	highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
 	incremental_selection = { enable = true },
 	indent = { enable = true },
 	rainbow = { enable = true, extended_mode = false },
