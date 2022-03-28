@@ -349,13 +349,13 @@ vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.rosewater, italic = true })
 
 ---------- RAINBOW ----------
-vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.blue }) -- REORDERED
-vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.pink })
-vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.flamingo })
-vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = cp.green })
-vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = cp.red })
-vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.teal })
-vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.teal })
+vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = cp.pink })
+vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.flamingo })
+vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.green })
 
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = cp.teledark })

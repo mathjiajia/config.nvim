@@ -1,5 +1,5 @@
 vim.g.tex_flavor = 'latex'
-vim.wo.conceallevel = 1
+vim.wo.conceallevel = 2
 
 -- spell
 vim.opt_local.spell = true

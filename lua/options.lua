@@ -73,7 +73,5 @@ vim.opt.whichwrap = 'b,s,<,>,[,]'
 ------ onedark (dark, light), sonokai, tokyonight (dark, storm, light), vscode (dark, light)
 vim.g.theme_style = 'dark'
 vim.cmd('colorscheme moon')
--- require('ui.buftab')
--- require('ui.status')
 require('ui.buftabline')
 require('ui.statusline')

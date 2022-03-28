@@ -26,6 +26,7 @@ local function spec(use)
 		config = [[require('configs.treesitter')]],
 	}
 	use {
+		{ 'nvim-treesitter/nvim-treesitter-textobjects' },
 		{ 'nvim-treesitter/playground' },
 		{ 'p00f/nvim-ts-rainbow' },
 		-- { 'lewis6991/nvim-treesitter-context' },
@@ -42,11 +43,11 @@ local function spec(use)
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
-	-- use {
-	-- 	'SmiteshP/nvim-gps',
-	-- 	requires = 'nvim-treesitter/nvim-treesitter',
-	-- 	config = [[require('nvim-gps').setup()]],
-	-- }
+	use {
+		'SmiteshP/nvim-gps',
+		requires = 'nvim-treesitter/nvim-treesitter',
+		config = [[require('nvim-gps').setup()]],
+	}
 
 	use {
 		'nvim-telescope/telescope.nvim',
@@ -76,7 +77,6 @@ local function spec(use)
 	-- 	requires = 'kyazdani42/nvim-web-devicons',
 	-- 	config = [[require('nvim-tree').setup()]],
 	-- }
-
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
 		branch = 'main',
@@ -178,20 +178,15 @@ local function spec(use)
 		{ 'nvim-neorg/neorg-telescope' },
 	}
 
-	use {
-		'dstein64/vim-startuptime',
-		config = [[vim.g.startuptime_tries = 10]],
-	}
+	-- use {
+	-- 	'dstein64/vim-startuptime',
+	-- 	config = [[vim.g.startuptime_tries = 10]],
+	-- }
 end
 
 require('packer').startup {
 	spec,
 	config = {
-		max_jobs = 27,
-		profile = {
-			enable = true,
-			threshold = 1,
-		},
 		display = {
 			open_fn = function()
 				return require('packer.util').float { border = 'rounded' }

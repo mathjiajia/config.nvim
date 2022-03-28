@@ -13,6 +13,14 @@ local function hunks()
 	return ''
 end
 
+local function gps()
+	local nvim_gps = require('nvim-gps')
+	if nvim_gps.is_available() then
+		return nvim_gps.get_location()
+	end
+	return ''
+end
+
 local bg = vim.api.nvim_get_hl_by_name('StatusLineNC', true).background
 for _, ty in ipairs { 'Warn', 'Error', 'Info', 'Hint' } do
 	local hl = vim.api.nvim_get_hl_by_name('Diagnostic' .. ty, true)
@@ -37,7 +45,7 @@ local function lsp_status()
 		status[#status + 1] = vim.g.metals_status:gsub('%%', '%%%%')
 	end
 	local r = table.concat(status, ' ')
-	return r == '' and '  LSP' or r
+	return r == '' and '  LSP %#StatusLineNC#| ' or r .. ' %#StatusLineNC#| '
 end
 
 local function file_info()
@@ -57,7 +65,8 @@ local function position()
 	local col = vim.fn.col('.')
 	local percent = math.floor(line * 100 / nbline)
 	local pos = string.format(' %s%d%%%%', pad(percent, 100), percent)
-	local ln_col = string.format('Ln %s%d, Col %s%d ', pad(line, nbline), line, pad(col, 100), col)
+	-- local ln_col = string.format('Ln %s%d, Col %s%d ', pad(line, nbline), line, pad(col, 100), col)
+	local ln_col = string.format('%s%d %s%d ', pad(line, nbline), line, pad(col, 100), col)
 	return pos .. ' ' .. ln_col
 end
 
@@ -77,9 +86,10 @@ end
 local function generate_statusline(is_active)
 	if is_active and not force_inactive() then
 		return hunks()
-			.. '%#StatusLineNC#'
+			.. '%#StatusLineNC# '
+			.. gps()
+			.. '%='
 			.. lsp_status()
-			.. '%=%#StatusLineNC#'
 			.. file_info()
 			.. ' %#StatusLine#'
 			.. position()
