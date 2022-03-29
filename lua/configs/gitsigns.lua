@@ -10,22 +10,20 @@ gs.setup {
 		vim.keymap.set('n', ']c', function()
 			if vim.wo.diff then
 				return ']c'
-			else
-				vim.schedule(function()
-					gs.next_hunk()
-				end)
-				return '<Ignore>'
 			end
+			vim.schedule(function()
+				gs.next_hunk()
+			end)
+			return '<Ignore>'
 		end, { buffer = bufnr, expr = true, desc = 'Next Hunk' })
 		vim.keymap.set('n', '[c', function()
 			if vim.wo.diff then
 				return '[c'
-			else
-				vim.schedule(function()
-					gs.prev_hunk()
-				end)
-				return '<Ignore>'
 			end
+			vim.schedule(function()
+				gs.prev_hunk()
+			end)
+			return '<Ignore>'
 		end, { buffer = bufnr, expr = true, desc = 'Previous Hunk' })
 
 		-- Actions

@@ -26,7 +26,7 @@ local function spec(use)
 		config = [[require('configs.treesitter')]],
 	}
 	use {
-		{ 'nvim-treesitter/nvim-treesitter-textobjects' },
+		-- { 'nvim-treesitter/nvim-treesitter-textobjects' },
 		{ 'nvim-treesitter/playground' },
 		{ 'p00f/nvim-ts-rainbow' },
 		-- { 'lewis6991/nvim-treesitter-context' },

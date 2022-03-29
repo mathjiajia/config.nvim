@@ -19,10 +19,11 @@ require('nvim-treesitter.configs').setup {
 	ensure_installed = ts_install,
 	highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
 	incremental_selection = { enable = true },
-	textobjects = { enable = true },
+	-- textobjects = { enable = true },
 	indent = { enable = true },
 	rainbow = { enable = true, extended_mode = false },
 	playground = { enable = true },
+	query_linter = { enable = true },
 }
 
 vim.keymap.set('n', '<leader>th', function()

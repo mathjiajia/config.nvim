@@ -73,7 +73,6 @@ vim.keymap.set('n', '<leader>fr', function()
 	te.frecency.frecency(themes.get_ivy {})
 end, { desc = 'Recent Files' })
 vim.keymap.set('n', '<leader>fy', function()
-	-- te.neoclip.default(themes.get_cursor {})
 	te.neoclip.default(themes.get_dropdown {})
 end, { desc = 'Clipboard History' })
 

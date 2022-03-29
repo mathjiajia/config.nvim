@@ -26,7 +26,6 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<leader>wl', function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, { desc = 'List Workspace Folders' })
-	-- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 	vim.keymap.set('n', '<leader>rn', function()
 		require('ui.prompt').lsp_rename()
 	end, { buffer = bufnr, desc = 'Rename' })
@@ -65,7 +64,12 @@ local on_attach = function(client, bufnr)
 
 	if client.resolved_capabilities.code_action then
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions' })
-		vim.keymap.set('v', '<leader>ca', vim.lsp.buf.range_code_action, { buffer = bufnr, desc = 'Range Code Actions' })
+		vim.keymap.set(
+			'v',
+			'<leader>ca',
+			vim.lsp.buf.range_code_action,
+			{ buffer = bufnr, desc = 'Range Code Actions' }
+		)
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
