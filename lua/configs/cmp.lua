@@ -69,6 +69,16 @@ cmp.setup {
 		{ name = 'buffer', keyword_length = 4 },
 		{ name = 'rg', keyword_length = 5 },
 	},
+	-- window = {
+	-- 	completion = {
+	-- 		border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+	-- 		-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	-- 		winhighlight = {
+	-- 			bordered = 'Normal:CmpBorderedWindow_Normal,FloatBorder:CmpBorderedWindow_FloatBorder,CursorLine:CmpBorderedWindow_CursorLine,Search:None',
+	-- 			default = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+	-- 		},
+	-- 	},
+	-- },
 }
 
 cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })

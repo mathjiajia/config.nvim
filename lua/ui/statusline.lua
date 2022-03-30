@@ -1,14 +1,26 @@
 local M = {}
 
+local nbg = vim.api.nvim_get_hl_by_name('StatusLine', true).background
+local ncbg = vim.api.nvim_get_hl_by_name('StatusLineNC', true).background
+local gitfg = vim.api.nvim_get_hl_by_name('Statement', true).foreground
+local dictfg = vim.api.nvim_get_hl_by_name('Directory', true).foreground
+local posfg = vim.api.nvim_get_hl_by_name('String', true).foreground
+local lnfg = vim.api.nvim_get_hl_by_name('Error', true).foreground
+
+vim.api.nvim_set_hl(0, 'User1', { fg = gitfg, bg = nbg })
+vim.api.nvim_set_hl(0, 'User2', { fg = dictfg, bg = ncbg })
+vim.api.nvim_set_hl(0, 'User3', { fg = posfg, bg = nbg })
+vim.api.nvim_set_hl(0, 'User4', { fg = lnfg, bg = nbg })
+
 local function hunks()
 	if vim.b.gitsigns_status then
-		local status = '  ' .. vim.b.gitsigns_head
+		local status = ' %1* ' .. vim.b.gitsigns_head
 		if vim.b.gitsigns_status ~= '' then
 			status = status .. ' | ' .. vim.b.gitsigns_status
 		end
 		return status .. ' '
 	elseif vim.g.gitsigns_head then
-		return '  ' .. vim.g.gitsigns_head .. ' '
+		return ' %1* ' .. vim.g.gitsigns_head .. ' '
 	end
 	return ''
 end
@@ -21,11 +33,10 @@ local function gps()
 	return ''
 end
 
-local bg = vim.api.nvim_get_hl_by_name('StatusLineNC', true).background
 for _, ty in ipairs { 'Warn', 'Error', 'Info', 'Hint' } do
 	local hl = vim.api.nvim_get_hl_by_name('Diagnostic' .. ty, true)
 	local name = ('Diagnostic%sStatus'):format(ty)
-	vim.api.nvim_set_hl(0, name, { fg = hl.foreground, bg = bg })
+	vim.api.nvim_set_hl(0, name, { fg = hl.foreground, bg = ncbg })
 end
 
 local function lsp_status()
@@ -45,14 +56,14 @@ local function lsp_status()
 		status[#status + 1] = vim.g.metals_status:gsub('%%', '%%%%')
 	end
 	local r = table.concat(status, ' ')
-	return r == '' and '  LSP %#StatusLineNC#| ' or r .. ' %#StatusLineNC#| '
+	return r == '' and '  LSP' or r
 end
 
 local function file_info()
 	local fullname = vim.api.nvim_buf_get_name(0)
 	local shortname = vim.fn.pathshorten(fullname)
 	local simplename = shortname:gsub('^/U/%w+', '~')
-	return simplename
+	return ' %2*' .. simplename
 end
 
 local function pad(c, m)
@@ -67,7 +78,7 @@ local function position()
 	local pos = string.format(' %s%d%%%%', pad(percent, 100), percent)
 	-- local ln_col = string.format('Ln %s%d, Col %s%d ', pad(line, nbline), line, pad(col, 100), col)
 	local ln_col = string.format('%s%d %s%d ', pad(line, nbline), line, pad(col, 100), col)
-	return pos .. ' ' .. ln_col
+	return ' %3*' .. pos .. ' %4*' .. ln_col
 end
 
 local function find_pattern_match(tbl, val)
@@ -91,7 +102,7 @@ local function generate_statusline(is_active)
 			.. '%='
 			.. lsp_status()
 			.. file_info()
-			.. ' %#StatusLine#'
+			-- .. ' %#StatusLine#'
 			.. position()
 	else
 		return '%#StatusLineNC# %y '
