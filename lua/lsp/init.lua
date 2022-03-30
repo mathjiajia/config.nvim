@@ -1,9 +1,9 @@
--- lsp info
+-- LSP INFO
 vim.keymap.set('n', '<leader>li', function()
 	require('lspconfig.ui.lspinfo')()
 end, { desc = 'Lsp Info' })
 
--- Diagnostic
+-- DIAGNOSTIC
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Float diagnostics' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostics' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostics' })

@@ -3,7 +3,6 @@ local opts = {
 		norg = { { '`', '`' } },
 		tex = {
 			{ '``', "''" },
-			{ "'", "'", { ignore_pre = '\\v(\\\\|\\S)' } },
 		},
 	},
 	space = { enable_mapping = false },

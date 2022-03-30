@@ -1,7 +1,7 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
-end
+-- local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+-- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+-- 	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
+-- end
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 	desc = 'Compile whenever plugins.lua is updated',
 })
 
-local function spec(use)
+require('packer').startup(function()
 	use { 'wbthomason/packer.nvim' }
 	use { 'lewis6991/impatient.nvim' }
 
@@ -25,15 +25,13 @@ local function spec(use)
 		run = ':TSUpdate',
 		config = [[require('configs.treesitter')]],
 	}
+	-- use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+	use { 'nvim-treesitter/playground' }
+	use { 'p00f/nvim-ts-rainbow' }
+	-- use { 'lewis6991/nvim-treesitter-context' }
 	use {
-		-- { 'nvim-treesitter/nvim-treesitter-textobjects' },
-		{ 'nvim-treesitter/playground' },
-		{ 'p00f/nvim-ts-rainbow' },
-		-- { 'lewis6991/nvim-treesitter-context' },
-		{
-			'lukas-reineke/indent-blankline.nvim',
-			config = [[require('configs.indentline')]],
-		},
+		'lukas-reineke/indent-blankline.nvim',
+		config = [[require('configs.indentline')]],
 	}
 	-- use {
 	-- 	'lewis6991/spellsitter.nvim',
@@ -50,74 +48,15 @@ local function spec(use)
 	}
 
 	use {
-		'nvim-telescope/telescope.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config = [[require('configs.telescope')]],
-	}
-	use {
-		{
-			'nvim-telescope/telescope-fzf-native.nvim',
-			run = 'make',
-		},
-		{
-			'nvim-telescope/telescope-frecency.nvim',
-			requires = 'tami5/sqlite.lua',
-		},
-		{ 'nvim-telescope/telescope-file-browser.nvim' },
-		{ 'nvim-telescope/telescope-ui-select.nvim' },
-		{
-			'AckslD/nvim-neoclip.lua',
-			requires = 'tami5/sqlite.lua',
-			config = [[require('neoclip').setup()]],
-		},
-	}
-
-	-- use {
-	-- 	'kyazdani42/nvim-tree.lua',
-	-- 	requires = 'kyazdani42/nvim-web-devicons',
-	-- 	config = [[require('nvim-tree').setup()]],
-	-- }
-	use {
-		'nvim-neo-tree/neo-tree.nvim',
-		branch = 'main',
-		requires = {
-			'nvim-lua/plenary.nvim',
-			'kyazdani42/nvim-web-devicons',
-			'MunifTanjim/nui.nvim',
-		},
-		config = [[require('configs.tree')]],
-	}
-
-	use {
-		'neovim/nvim-lspconfig',
-		config = [[require('lsp')]],
-	}
-	use {
-		{
-			'jose-elias-alvarez/null-ls.nvim',
-			requires = 'nvim-lua/plenary.nvim',
-			config = [[require('lsp.null-ls')]],
-		},
-		{
-			'j-hui/fidget.nvim',
-			config = [[require('fidget').setup { text = { spinner = 'line' }, window = { relative = 'editor' } }]],
-		},
-		{ 'kosayoda/nvim-lightbulb' },
-		{ 'folke/lua-dev.nvim' },
-	}
-
-	use {
 		'hrsh7th/nvim-cmp',
 		config = [[require('configs.cmp')]],
 	}
-	use {
-		{ 'hrsh7th/cmp-buffer' },
-		{ 'hrsh7th/cmp-cmdline' },
-		{ 'hrsh7th/cmp-nvim-lsp' },
-		{ 'hrsh7th/cmp-path' },
-		{ 'lukas-reineke/cmp-rg' },
-		{ 'saadparwaiz1/cmp_luasnip' },
-	}
+	use { 'hrsh7th/cmp-buffer' }
+	use { 'hrsh7th/cmp-cmdline' }
+	use { 'hrsh7th/cmp-nvim-lsp' }
+	use { 'hrsh7th/cmp-path' }
+	use { 'lukas-reineke/cmp-rg' }
+	use { 'saadparwaiz1/cmp_luasnip' }
 	use {
 		'L3MON4D3/LuaSnip',
 		config = [[require('configs.luasnip')]],
@@ -130,6 +69,54 @@ local function spec(use)
 		'github/copilot.vim',
 		opt = true,
 		config = [[require('configs.copilot')]],
+	}
+
+	use {
+		'neovim/nvim-lspconfig',
+		config = [[require('lsp')]],
+	}
+	use {
+		'jose-elias-alvarez/null-ls.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = [[require('lsp.null-ls')]],
+	}
+	use {
+		'j-hui/fidget.nvim',
+		config = [[require('fidget').setup { text = { spinner = 'line' }, window = { relative = 'editor' } }]],
+	}
+	use { 'kosayoda/nvim-lightbulb' }
+	use { 'folke/lua-dev.nvim' }
+
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = [[require('configs.telescope')]],
+	}
+	use {
+		'nvim-telescope/telescope-fzf-native.nvim',
+		run = 'make',
+	}
+	use {
+		'nvim-telescope/telescope-frecency.nvim',
+		requires = 'tami5/sqlite.lua',
+	}
+	use { 'nvim-telescope/telescope-file-browser.nvim' }
+	use { 'nvim-telescope/telescope-ui-select.nvim' }
+	use {
+		'AckslD/nvim-neoclip.lua',
+		requires = 'tami5/sqlite.lua',
+		config = [[require('neoclip').setup()]],
+	}
+
+	use {
+		'nvim-neo-tree/neo-tree.nvim',
+		branch = 'main',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'kyazdani42/nvim-web-devicons',
+			'MunifTanjim/nui.nvim',
+		},
+		config = [[require('configs.tree')]],
 	}
 
 	use {
@@ -170,28 +157,15 @@ local function spec(use)
 		'f3fora/nvim-texlabconfig',
 		config = [[require('texlabconfig').setup()]],
 	}
+
 	use {
-		{
-			'nvim-neorg/neorg',
-			config = [[require('configs.neorg')]],
-		},
-		{ 'nvim-neorg/neorg-telescope' },
+		'nvim-neorg/neorg',
+		config = [[require('configs.neorg')]],
 	}
+	use { 'nvim-neorg/neorg-telescope' }
 
 	-- use {
 	-- 	'dstein64/vim-startuptime',
 	-- 	config = [[vim.g.startuptime_tries = 10]],
 	-- }
-end
-
-require('packer').startup {
-	spec,
-	config = {
-		display = {
-			open_fn = function()
-				return require('packer.util').float { border = 'rounded' }
-			end,
-			prompt_border = 'rounded',
-		},
-	},
-}
+end)

@@ -7,12 +7,10 @@ require('neo-tree').setup {
 			folder_closed = '',
 			folder_open = '',
 			folder_empty = '',
-			-- default = '',
 		},
 	},
 	window = { width = 30 },
 	filesystem = {
-		-- filtered_items = { hide_dotfiles = false },
 		follow_current_file = true,
 		hijack_netrw_behavior = 'open_current',
 		-- use_libuv_file_watcher = true,

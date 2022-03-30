@@ -1,14 +1,9 @@
 require('neorg').setup {
 	load = {
-		['core.defaults'] = {}, -- Load all the default modules
-		['core.keybinds'] = { -- Configure core.keybinds
-			config = {
-				default_keybinds = true, -- Generate the default keybinds
-				neorg_leader = '<LocalLeader>',
-			},
-		},
-		['core.norg.concealer'] = {}, -- Allows for use of icons
-		['core.norg.dirman'] = { -- Manage your directories with Neorg
+		['core.defaults'] = {},
+		['core.keybinds'] = {},
+		['core.norg.concealer'] = {},
+		['core.norg.dirman'] = {
 			config = {
 				workspaces = {
 					gtd = '~/Documents/neorg/gtd/',
@@ -20,6 +15,6 @@ require('neorg').setup {
 		['core.gtd.ui'] = {},
 		['core.norg.completion'] = { config = { engine = 'nvim-cmp' } },
 		['core.norg.qol.toc'] = {},
-		['core.integrations.telescope'] = {}, -- Enable the telescope module
+		['core.integrations.telescope'] = {},
 	},
 }

@@ -8,7 +8,6 @@ local sources = {
 	b.formatting.stylua,
 	-- b.diagnostics.chktex,
 	b.diagnostics.markdownlint,
-	-- b.hover.dictionary,
 }
 
 null_ls.setup {

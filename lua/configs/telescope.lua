@@ -12,7 +12,7 @@ require('telescope').setup {
 				width = 0.8,
 			},
 		},
-		prompt_prefix = '   ', -- ' ',
+		prompt_prefix = '   ',
 		selection_caret = ' ',
 		path_display = { 'absolute' },
 		set_env = { ['COLORTERM'] = 'truecolor' },

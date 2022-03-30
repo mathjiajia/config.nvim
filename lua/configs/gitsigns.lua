@@ -6,7 +6,7 @@ gs.setup {
 		change = { text = '┃' },
 	},
 	on_attach = function(bufnr)
-		-- Navigation
+		-- NAVIGATION
 		vim.keymap.set('n', ']c', function()
 			if vim.wo.diff then
 				return ']c'
@@ -26,7 +26,7 @@ gs.setup {
 			return '<Ignore>'
 		end, { buffer = bufnr, expr = true, desc = 'Previous Hunk' })
 
-		-- Actions
+		-- ACTIONS
 		vim.keymap.set({ 'n', 'v' }, '<leader>gs', function()
 			gs.stage_hunk()
 		end, { buffer = bufnr, desc = 'Stage Hunk' })
@@ -46,7 +46,7 @@ gs.setup {
 			gs.preview_hunk()
 		end, { buffer = bufnr, desc = 'Preview Hunk' })
 
-		-- Text object
+		-- TEXT OBJECT
 		vim.keymap.set({ 'o', 'x' }, 'ih', function()
 			gs.select_hunk()
 		end, { buffer = bufnr, desc = 'Select Hunk' })
