@@ -305,44 +305,7 @@ else
 	}
 end
 
-local util = {}
-
-util.colors_name = ''
-
-util.used_color = {}
-util.bg = '#000000'
-util.fg = '#ffffff'
-
-local hex_to_rgb = function(hex_str)
-	local hex = '[abcdef0-9][abcdef0-9]'
-	local pat = string.format('^#(%s)(%s)(%s)$', hex, hex, hex)
-	hex_str = string.lower(hex_str)
-
-	assert(string.find(hex_str, pat) ~= nil, 'hex_to_rgb: invalid hex_str: ' .. tostring(hex_str))
-
-	local r, g, b = string.match(hex_str, pat)
-	return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
-end
-
-util.blend = function(fg, bg, alpha)
-	bg = hex_to_rgb(bg)
-	fg = hex_to_rgb(fg)
-
-	local blend_channel = function(i)
-		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
-		return math.floor(math.min(math.max(0, ret), 255) + 0.5)
-	end
-
-	return string.format('#%02X%02X%02X', blend_channel(1), blend_channel(2), blend_channel(3))
-end
-
-util.darken = function(hex, amount, bg)
-	return util.blend(hex, bg or util.bg, math.abs(amount))
-end
-
-util.lighten = function(hex, amount, fg)
-	return util.blend(hex, fg or util.fg, math.abs(amount))
-end
+local util = require('ui.util')
 
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.fg_gutter })

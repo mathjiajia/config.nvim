@@ -2,6 +2,7 @@
 vim.g.colors_name = 'onedark'
 
 local colors = {}
+local util = require('ui.util')
 
 if vim.g.theme_style == 'dark' then
 	colors = {
@@ -25,20 +26,6 @@ if vim.g.theme_style == 'dark' then
 		diff_change = '#e0af68',
 		diff_text = '#005869',
 
-		cursorline = '#2E323A',
-		color_column = '#2E323A',
-		comment = '#7D828D',
-		indentline = '#373B42',
-		menu = '#3D4148',
-		menu_scroll = '#33373E',
-		menu_scroll_thumb = '#4E8CDF',
-		selection = '#53565D',
-
-		-- Lines
-		bg_statusline = '#33373E',
-		fg_gutter = '#3D4148',
-		fg_sidebar = '#ABB2BF',
-
 		teledark = '#22262e',
 		teleblack = '#2e323a',
 
@@ -46,6 +33,20 @@ if vim.g.theme_style == 'dark' then
 		Rb2 = '#D170CD',
 		Rb3 = '#00A2FF',
 	}
+
+	-- Additional colors
+	colors.cursorline = util.lighten(colors.bg, 0.97)
+	colors.color_column = util.lighten(colors.bg, 0.97)
+	colors.comment = util.lighten(colors.gray, 0.80)
+	colors.indentline = util.lighten(colors.bg, 0.93)
+	colors.menu = util.lighten(colors.bg, 0.90)
+	colors.menu_scroll = util.lighten(colors.bg, 0.95)
+	colors.menu_scroll_thumb = util.darken(colors.blue, 0.80)
+	colors.selection = util.lighten(colors.bg, 0.8)
+
+	colors.bg_statusline = util.lighten(colors.bg, 0.95)
+	colors.fg_gutter = util.lighten(colors.bg, 0.90)
+	colors.fg_sidebar = colors.fg
 else
 	colors = {
 		bg = '#FAFAFA',
@@ -68,21 +69,6 @@ else
 		diff_change = '#ADBAC7',
 		diff_text = '#A6D0D8',
 
-		-- Additional colors
-		cursorline = '#F3F3F3',
-		color_column = '#F3F3F3',
-		comment = '#989898',
-		indentline = '#E9E9E9',
-		menu = '#EEEEEE',
-		menu_scroll = '#E1E1E1',
-		menu_scroll_thumb = '#5592FB',
-		selection = '#E1E1E1',
-
-		-- Lines
-		bg_statusline = '#EEEEEE',
-		fg_gutter = '#EEEEEE',
-		fg_sidebar = '#383A42',
-
 		teledark = '#FFFFFF',
 		teleblack = '#F4F4F4',
 
@@ -90,11 +76,25 @@ else
 		Rb2 = '#009619',
 		Rb3 = '#853302',
 	}
+
+	-- Additional colors
+	colors.cursorline = util.darken(colors.bg, 0.97)
+	colors.color_column = util.darken(colors.bg, 0.97)
+	colors.comment = util.darken(colors.gray, 0.80)
+	colors.indentline = util.darken(colors.bg, 0.93)
+	colors.menu = util.darken(colors.bg, 0.95)
+	colors.menu_scroll = util.darken(colors.bg, 0.90)
+	colors.menu_scroll_thumb = util.lighten(colors.blue, 0.80)
+	colors.selection = util.darken(colors.bg, 0.90)
+
+	colors.bg_statusline = util.darken(colors.bg, 0.95)
+	colors.fg_gutter = util.darken(colors.bg, 0.90)
+	colors.fg_sidebar = colors.fg
 end
 
 ------ BASICS ------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.color_column })
-vim.api.nvim_set_hl(0, 'Conceal', {})
+vim.api.nvim_set_hl(0, 'Conceal', { fg = colors.comment })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.black })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.gray })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.teleblack }) -- FIXED
@@ -115,7 +115,7 @@ vim.api.nvim_set_hl(0, 'ModeMsg', { link = 'Normal' })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'MsgArea', { link = 'ModeMsg' })
 vim.api.nvim_set_hl(0, 'MsgSeparator', { link = 'ModeMsg' })
-vim.api.nvim_set_hl(0, 'NonText', { fg = colors.gray })
+-- vim.api.nvim_set_hl(0, 'NonText', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'Normal', { fg = colors.fg, bg = colors.bg })
 vim.api.nvim_set_hl(0, 'NormalFloat', { fg = colors.fg, bg = colors.color_column })
 vim.api.nvim_set_hl(0, 'NormalNC', { fg = colors.fg, bg = colors.bg })
@@ -126,7 +126,7 @@ vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = colors.menu_scroll_thumb })
 vim.api.nvim_set_hl(0, 'Question', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = colors.cursorline })
 vim.api.nvim_set_hl(0, 'Search', { fg = colors.yellow, bg = colors.selection, underline = true })
--- vim.api.nvim_set_hl(0, 'SignColumn', {})
+vim.api.nvim_set_hl(0, 'SignColumn', { bg = colors.bg })
 -- vim.api.nvim_set_hl(0, 'SpecialKey', {})
 vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.fg, bg = colors.bg_statusline })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = colors.fg, bg = colors.color_column })
