@@ -17,7 +17,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ]]
 
 local hsluv = {}
-local hexChars = '0123456789abcdef'
+local hexChars = '0123456789ABCDEF'
 
 local distance_line_from_origin = function(line)
 	return math.abs(line.intercept) / math.sqrt((line.slope ^ 2) + 1)

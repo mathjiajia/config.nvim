@@ -22,12 +22,12 @@ if vim.g.theme_style == 'dark' then
 
 		-- Git diff
 		diff_add = '#109868',
-		diff_delete = '#9a353d',
-		diff_change = '#e0af68',
+		diff_delete = '#9A353D',
+		diff_change = '#E0AF68',
 		diff_text = '#005869',
 
-		teledark = '#22262e',
-		teleblack = '#2e323a',
+		teledark = '#22262E',
+		teleblack = '#2E323A',
 
 		Rb1 = '#FFD500',
 		Rb2 = '#D170CD',
@@ -51,7 +51,7 @@ else
 	colors = {
 		bg = '#FAFAFA',
 		fg = '#383A42',
-		red = '#f6483f',
+		red = '#F6483F',
 		orange = '#A06600',
 		yellow = '#EEA825',
 		green = '#24A442',

@@ -6,7 +6,7 @@ util.colorsUsed = {}
 util.colorCache = {}
 
 util.bg = '#000000'
-util.fg = '#ffffff'
+util.fg = '#FFFFFF'
 util.day_brightness = 0.3
 
 local function hexToRgb(hex_str)

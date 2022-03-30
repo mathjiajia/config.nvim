@@ -1,6 +1,6 @@
 local settings = {
 	Lua = {
-		diagnostics = { globals = { 'vim', 'packer_plugins' } },
+		diagnostics = { globals = { 'vim', 'use' } },
 	},
 }
 

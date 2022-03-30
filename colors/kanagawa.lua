@@ -59,7 +59,7 @@ local palette_colors = {
 	katanaGray = '#717C7C',
 
 	teledark = '#191922',
-	teleblack = '#25252e',
+	teleblack = '#25252E',
 }
 
 local colors = {

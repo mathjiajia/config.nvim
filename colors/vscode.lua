@@ -94,7 +94,7 @@ else
 		vscSplitThumb = '#DFDFDF',
 
 		vscCursorDarkDark = '#E5EBF1',
-		vscCursorDark = '#d5d5d5',
+		vscCursorDark = '#D5D5D5',
 		vscCursorLight = '#767676',
 		vscSelection = '#ADD6FF',
 		vscLineNumber = '#157995',
@@ -115,7 +115,7 @@ else
 		vscDarkBlue = '#007ACC',
 		vscLighterBlue = '#4FC1FF',
 		vscLightBlue = '#001B83',
-		vscGreen = '#007e00',
+		vscGreen = '#007E00',
 		vscBlueGreen = '#18809B',
 		vscLightGreen = '#098658',
 		vscRed = '#EC1C04',

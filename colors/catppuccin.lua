@@ -74,12 +74,12 @@ else
 		sky = '#3FC4D9', -- Sky					-- done
 		teal = '#149C9B', -- Teal				-- done -
 		lavender = '#939AFB', -- Lavender		-- done
-		white = '#343b58', -- White				-- works?
+		white = '#343B58', -- White				-- works?
 		gray2 = '#424968', -- Gray2
 		gray1 = '#505677', -- Gray1
 		gray0 = '#606689', -- Gray0				-- done -
-		black4 = '#cfd8dc', -- Black4
-		black3 = '#eff3f4', -- Black3
+		black4 = '#CFD8DC', -- Black4
+		black3 = '#EFF3F4', -- Black3
 		black2 = '#FCFCFC', -- Black2			-- done
 		black1 = '#F3F3F3', -- Black1
 		black0 = '#D3D0D2', -- Black0
