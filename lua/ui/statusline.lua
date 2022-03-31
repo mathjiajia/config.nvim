@@ -2,7 +2,7 @@ local M = {}
 
 local nbg = vim.api.nvim_get_hl_by_name('StatusLine', true).background
 local ncbg = vim.api.nvim_get_hl_by_name('StatusLineNC', true).background
-local gitfg = vim.api.nvim_get_hl_by_name('Statement', true).foreground
+local gitfg = vim.api.nvim_get_hl_by_name('keyword', true).foreground
 local dictfg = vim.api.nvim_get_hl_by_name('Directory', true).foreground
 local posfg = vim.api.nvim_get_hl_by_name('String', true).foreground
 local lnfg = vim.api.nvim_get_hl_by_name('Error', true).foreground

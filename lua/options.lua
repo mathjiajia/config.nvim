@@ -1,14 +1,10 @@
 ---- STOP LOADING BUILT IN PLUGINS ----
 vim.g.loaded_gzip = 1
-vim.g.loaded_man = 1
-vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_zipPlugin = 1
-vim.g.loaded_remote_plugins = 1
-vim.g.loaded_shada_plugin = 1
 
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -58,10 +54,8 @@ vim.opt.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
------- catppuccin (dark, storm, light), edge (dark, light), everforest (dark, light)
------- github (dark, light, light_default), gruvbox (dark, hard), kanagawa, moon (dark, storm, light),
------- onedark (dark, light), sonokai, tokyonight (dark, storm, light), vscode (dark, light)
+vim.notify = require('notify')
 vim.g.theme_style = 'hard'
 vim.cmd('colorscheme gruvbox')
--- require('ui.buftabline')
+require('ui.buftabline')
 require('ui.statusline')
