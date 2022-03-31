@@ -1067,8 +1067,13 @@ snips = {
 		{ condition = pipe { conds.line_begin, tex.in_text }, show_condition = tex.in_text }
 	),
 	s(
-		{ trig = 'cite', name = '\\cite[]{}' },
+		{ trig = 'cite', name = 'cross refrence' },
 		{ t('\\cite['), i(1), t(']{'), i(2), t('}') },
+		{ condition = tex.in_text, show_condition = tex.in_text }
+	),
+	s(
+		{ trig = 'cf', name = 'confer/conferatur' },
+		{ t('cf.~') },
 		{ condition = tex.in_text, show_condition = tex.in_text }
 	),
 

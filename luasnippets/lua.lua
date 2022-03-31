@@ -22,7 +22,7 @@ snips = {
 	),
 	s(
 		{ trig = 'lreq', name = 'local require', dscr = 'Require module as a variable' },
-		{ t('local '), d(2, require_var, { 1 }), t('= require("'), i(1), t('")') },
+		{ t('local '), d(2, require_var, { 1 }), t(' = require("'), i(1), t('")') },
 		{ condition = conds.line_begin }
 	),
 	s(
