@@ -33,11 +33,10 @@ require('telescope').setup {
 				['tex'] = home .. '/Tex',
 			},
 		},
-		['ui-select'] = { themes.get_dropdown {} },
 	},
 }
 
-local extensions = { 'fzf', 'file_browser', 'frecency', 'ui-select', 'aerial', 'neoclip', 'notify' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'aerial', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
@@ -72,15 +71,17 @@ end, { desc = 'Projects' })
 vim.keymap.set('n', '<leader>fr', function()
 	te.frecency.frecency(themes.get_ivy {})
 end, { desc = 'Recent Files' })
-vim.keymap.set('n', '<leader>fy', function()
-	te.neoclip.default(themes.get_dropdown {})
-end, { desc = 'Clipboard History' })
 
 vim.keymap.set('n', '<leader>fz', function()
-	require('ui.prompt').certain_type()
+	tb.find_files(themes.get_ivy {
+		find_command = { 'rg', '--files', '--type', vim.fn.input('Type: ') },
+	})
 end, { desc = 'Search Certain Type Files' })
 vim.keymap.set('n', '<leader>f/', function()
-	require('ui.prompt').grep_string()
+	tb.grep_string {
+		path_display = { 'shorten' },
+		search = vim.fn.input('Grep String > '),
+	}
 end, { desc = 'Grep Strings' })
 vim.keymap.set('n', '<F12>', function()
 	tb.commands()

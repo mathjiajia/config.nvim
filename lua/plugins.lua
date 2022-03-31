@@ -15,6 +15,7 @@ require('packer').startup(function()
 	use('wbthomason/packer.nvim')
 	use('lewis6991/impatient.nvim')
 
+	use('stevearc/dressing.nvim')
 	use {
 		'monkoose/matchparen.nvim',
 		config = [[require('matchparen').setup()]],
@@ -102,12 +103,6 @@ require('packer').startup(function()
 		requires = 'tami5/sqlite.lua',
 	}
 	use('nvim-telescope/telescope-file-browser.nvim')
-	use('nvim-telescope/telescope-ui-select.nvim')
-	use {
-		'AckslD/nvim-neoclip.lua',
-		requires = 'tami5/sqlite.lua',
-		config = [[require('neoclip').setup()]],
-	}
 
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
