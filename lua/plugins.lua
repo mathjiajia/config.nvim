@@ -45,11 +45,11 @@ require('packer').startup(function()
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
-	-- use {
-	-- 	'SmiteshP/nvim-gps',
-	-- 	requires = 'nvim-treesitter/nvim-treesitter',
-	-- 	config = [[require('nvim-gps').setup()]],
-	-- }
+	use {
+		'SmiteshP/nvim-gps',
+		requires = 'nvim-treesitter/nvim-treesitter',
+		config = [[require('nvim-gps').setup()]],
+	}
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -154,8 +154,8 @@ require('packer').startup(function()
 	}
 	use('nvim-neorg/neorg-telescope')
 
-	use {
-		'dstein64/vim-startuptime',
-		config = [[vim.g.startuptime_tries = 10]],
-	}
+	-- use {
+	-- 	'dstein64/vim-startuptime',
+	-- 	config = [[vim.g.startuptime_tries = 10]],
+	-- }
 end)

@@ -1,5 +1,4 @@
 .editorconfig
-vimhelp/
-plugin/packer_compiled.lua
 .luarc.json
 doc/mydoc.txt
+plugin/packer_compiled.lua
