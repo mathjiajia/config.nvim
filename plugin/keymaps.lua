@@ -1,5 +1,3 @@
-vim.g.mapleader = ','
-
 -- CURSOR MOVEMENTS
 vim.keymap.set('n', '<M-h>', '<cmd>wincmd h<CR>', { desc = 'Move to Left Window' })
 vim.keymap.set('n', '<M-l>', '<cmd>wincmd l<CR>', { desc = 'Move to Right Window' })
@@ -15,7 +13,7 @@ vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
 vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
 
--- better undo
+-- BETTER UNDO
 -- vim.keymap.set('i', ',', ',<c-g>u')
 -- vim.keymap.set('i', '!', '!<c-g>u')
 -- vim.keymap.set('i', '.', '.<c-g>u')

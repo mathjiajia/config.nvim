@@ -15,7 +15,6 @@ require('packer').startup(function()
 	use('wbthomason/packer.nvim')
 	use('lewis6991/impatient.nvim')
 
-	use('stevearc/dressing.nvim')
 	use {
 		'monkoose/matchparen.nvim',
 		config = [[require('matchparen').setup()]],
@@ -46,11 +45,11 @@ require('packer').startup(function()
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
-	use {
-		'SmiteshP/nvim-gps',
-		requires = 'nvim-treesitter/nvim-treesitter',
-		config = [[require('nvim-gps').setup()]],
-	}
+	-- use {
+	-- 	'SmiteshP/nvim-gps',
+	-- 	requires = 'nvim-treesitter/nvim-treesitter',
+	-- 	config = [[require('nvim-gps').setup()]],
+	-- }
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -103,6 +102,7 @@ require('packer').startup(function()
 		requires = 'tami5/sqlite.lua',
 	}
 	use('nvim-telescope/telescope-file-browser.nvim')
+	use('nvim-telescope/telescope-ui-select.nvim')
 
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
@@ -128,14 +128,8 @@ require('packer').startup(function()
 		requires = 'nvim-lua/plenary.nvim',
 		config = [[require('configs.session')]],
 	}
-	use {
-		'~/Dev/surround.nvim',
-		config = [[require('surround').setup()]],
-	}
-	use {
-		'phaazon/hop.nvim',
-		config = [[require('configs.hop')]],
-	}
+	use('~/Dev/surround.nvim')
+	use('ggandor/lightspeed.nvim')
 	use {
 		'windwp/nvim-spectre',
 		config = [[require('configs.search')]],
@@ -159,4 +153,9 @@ require('packer').startup(function()
 		config = [[require('configs.neorg')]],
 	}
 	use('nvim-neorg/neorg-telescope')
+
+	use {
+		'dstein64/vim-startuptime',
+		config = [[vim.g.startuptime_tries = 10]],
+	}
 end)

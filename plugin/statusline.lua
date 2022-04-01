@@ -96,14 +96,7 @@ end
 
 local function generate_statusline(is_active)
 	if is_active and not force_inactive() then
-		return hunks()
-			.. '%#StatusLineNC# '
-			.. gps()
-			.. '%='
-			.. lsp_status()
-			.. file_info()
-			-- .. ' %#StatusLine#'
-			.. position()
+		return hunks() .. '%#StatusLineNC# ' .. gps() .. '%=' .. lsp_status() .. file_info() .. position()
 	else
 		return '%#StatusLineNC# %y '
 	end

@@ -1,40 +1,40 @@
 require('aerial').setup {
 	default_direction = 'right',
 	filter_kind = {
-		'Array',
-		'Boolean',
-		'Class',
-		'Constant',
-		'Constructor',
-		'Enum',
-		'EnumMember',
+		-- 'Array',
+		-- 'Boolean',
+		'Class', --
+		'Constant', --
+		'Constructor', --
+		'Enum', --
+		'EnumMember', --
 		'Event',
 		'Field',
-		'File',
-		'Function',
-		'Interface',
-		'Key',
-		'Method',
-		'Module',
+		-- 'File',
+		'Function', --
+		'Interface', --
+		-- 'Key',
+		'Method', --
+		'Module', --
 		'Namespace',
 		-- 'Null',
-		'Number',
+		-- 'Number',
 		'Object',
-		'Operator',
-		'Package',
+		-- 'Operator',
+		-- 'Package',
 		'Property',
-		'String',
-		'Struct',
+		-- 'String',
+		'Struct', --
 		'TypeParameter',
-		'Variable',
+		'Variable', --
 	},
 	highlight_on_hover = true,
 	highlight_on_jump = 150,
 	icons = {
-		File = '',
+		-- File = '',
 		Module = '',
 		Namespace = '',
-		Package = '',
+		-- Package = '',
 		Class = '',
 		Method = '',
 		Property = '',
@@ -46,16 +46,16 @@ require('aerial').setup {
 		Variable = '',
 		Constant = '',
 		String = '',
-		Number = '',
-		Boolean = '',
-		Array = '',
+		-- Number = '',
+		-- Boolean = '',
+		-- Array = '',
 		Object = '',
-		Key = '',
+		-- Key = '',
 		-- Null ='',
 		EnumMember = '',
 		Struct = '',
 		Event = '',
-		Operator = '',
+		-- Operator = '',
 		TypeParameter = '',
 		Collapsed = '',
 	},

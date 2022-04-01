@@ -33,10 +33,13 @@ require('telescope').setup {
 				['tex'] = home .. '/Tex',
 			},
 		},
+		['ui-select'] = {
+			themes.get_dropdown {},
+		},
 	},
 }
 
-local extensions = { 'fzf', 'file_browser', 'frecency', 'aerial', 'notify' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'ui-select', 'aerial', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end

@@ -963,7 +963,11 @@ autosnips = {
 	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t('\\bigcap') }, { condition = tex.in_mathzone }),
 
 	-- notations which are often used in math
-	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t('\\cNE('), i(1), t(')') }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'MK', name = 'Mori-Kleiman cone' },
+		{ t('\\overline{NE}('), i(1), t(')') },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '([QRZ])P', name = 'positive', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
