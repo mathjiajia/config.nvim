@@ -387,4 +387,4 @@ snips = {
 	),
 }
 
-return snips, nil
+return snips
