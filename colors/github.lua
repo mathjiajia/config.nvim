@@ -305,7 +305,7 @@ else
 	}
 end
 
-local util = require('ui.util')
+local util = require('utils.colors')
 
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.fg_gutter })

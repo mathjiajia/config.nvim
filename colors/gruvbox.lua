@@ -1,7 +1,7 @@
 -- Modified from https://github.com/eddyekofo94/gruvbox-flat.nvim
 vim.g.colors_name = 'gruvbox'
 
-local util = require('ui.util')
+local util = require('utils.colors')
 
 local c = {}
 c = {
