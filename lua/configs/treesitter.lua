@@ -2,6 +2,7 @@ local ts_install = {
 	'bibtex',
 	'comment',
 	'fish',
+	'help',
 	'html',
 	'latex',
 	'lua',
