@@ -45,7 +45,7 @@ local function lsp_status()
 	end
 
 	local status = {}
-	for _, ty in ipairs { { 'Warn', '' }, { 'Error', '' }, { 'Info', '' }, { 'Hint', '' } } do
+	for _, ty in ipairs { { 'Error', '' }, { 'Warn', '' }, { 'Info', '' }, { 'Hint', '' } } do
 		local n = vim.diagnostic.get(0, { severity = ty[1] })
 		if #n > 0 then
 			table.insert(status, ('%%#Diagnostic%sStatus# %s %s'):format(ty[1], ty[2], #n))
