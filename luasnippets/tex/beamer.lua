@@ -1,4 +1,4 @@
-local autosnips = {}
+local snips, autosnips = {}, {}
 
 local tex = require('utils.latex')
 local in_beamer = function()
@@ -45,4 +45,4 @@ autosnips = {
 	),
 }
 
-return nil, autosnips
+return snips, autosnips
