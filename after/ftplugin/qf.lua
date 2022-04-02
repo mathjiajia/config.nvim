@@ -1,2 +1,2 @@
-vim.opt_local.spell = false
 vim.wo.relativenumber = false
+vim.wo.signcolumn='no'

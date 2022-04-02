@@ -40,4 +40,4 @@ vim.opt.writebackup = false
 vim.g.theme_style = 'hard'
 vim.cmd('colorscheme gruvbox')
 
-vim.filetype.add { filename = { ['kitty.conf'] = 'conf' } }
+-- vim.filetype.add { filename = { ['kitty.conf'] = 'conf' } }
