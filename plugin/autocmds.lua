@@ -8,11 +8,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_augroup('init_nvim', { clear = true })
-vim.api.nvim_create_autocmd('BufEnter', {
-	command = 'silent! lcd %:p:h',
-	group = 'init_nvim',
-	desc = 'change the working directory',
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+-- 	command = 'silent! lcd %:p:h',
+-- 	group = 'init_nvim',
+-- 	desc = 'change the working directory',
+-- })
 vim.api.nvim_create_autocmd('CursorHold', {
 	callback = function()
 		require('plugins')
