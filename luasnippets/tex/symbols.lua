@@ -222,7 +222,7 @@ autosnips = {
 
 	s(
 		{ trig = 'MK', name = 'Mori-Kleiman cone' },
-		{ t('\\overline{NE}('), i(1), t(')') },
+		{ t('\\cNE('), i(1), t(')') },
 		{ condition = tex.in_mathzone }
 	),
 	s(

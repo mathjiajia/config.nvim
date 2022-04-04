@@ -4,11 +4,6 @@ local tex = require('utils.latex')
 
 snips = {
 	s(
-		{ trig = 'lr', name = 'left( right)' },
-		{ t { '\\left( ' }, i(1), t { '\\right)' } },
-		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
-	),
-	s(
 		{ trig = 'lr(', name = 'left( right)' },
 		{ t { '\\left( ' }, i(1), t { '\\right)' } },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
@@ -60,7 +55,7 @@ autosnips = {
 	}, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'lra', name = 'leftangle rightangle' },
-		{ t { '\\left\\langle ' }, i(1), t { '\\right\\rangle' } },
+		{ t { '\\langle ' }, i(1), t { '\\rangle' } },
 		{ condition = tex.in_mathzone }
 	),
 }

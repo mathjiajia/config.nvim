@@ -25,6 +25,11 @@ end
 
 autosnips = {
 	s(
+		{ trig = 'beg', name = 'begin{} end{}' },
+		{ t { '\\begin{' }, i(1), t { '}', '\t' }, i(2), t { '', '\\end{' }, rep(1), t { '}' } },
+		{ condition = conds.line_begin }
+	),
+	s(
 		{ trig = 'beq', name = 'Equation Environment', dscr = 'Create an equation environment.' },
 		{ t { '\\begin{equation}', '\t' }, i(1), t { '', '\\end{equation}' } },
 		{ condition = pipe { conds.line_begin, tex.in_text } }
