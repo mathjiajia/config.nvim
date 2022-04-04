@@ -1,19 +1,5 @@
 local snips = {}
 
-local require_var = function(args, _)
-	local text = args[1][1] or ''
-	local split = vim.split(text, '.', { plain = true })
-
-	local options = {}
-	for len = 0, #split - 1 do
-		table.insert(options, t(table.concat(vim.list_slice(split, #split - len, #split), '_')))
-	end
-
-	return sn(nil, {
-		c(1, options),
-	})
-end
-
 snips = {
 	s(
 		{ trig = 'M', name = 'Module decl.', dscr = 'Declare a lua module' },
@@ -22,7 +8,7 @@ snips = {
 	),
 	s(
 		{ trig = 'lreq', name = 'local require', dscr = 'Require module as a variable' },
-		{ t('local '), d(2, require_var, { 1 }), t(' = require("'), i(1), t('")') },
+		{ t('local '), dl(2, l._1:match('%.([%w_]+)$'), { 1 }), t(' = require("'), i(1), t('")') },
 		{ condition = conds.line_begin }
 	),
 	s(
