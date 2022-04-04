@@ -65,7 +65,7 @@ else
 	}
 end
 
----------- BASICS ----------
+---------- BASIC ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.bg1 })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = cp.grey_dim })
 vim.api.nvim_set_hl(0, 'Cursor', { reverse = true })

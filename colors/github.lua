@@ -307,6 +307,7 @@ end
 
 local util = require('utils.colors')
 
+---------- BASIC ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.bg, bg = c.fg })

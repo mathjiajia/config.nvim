@@ -134,7 +134,7 @@ end
 
 c.vscPopupMatchFront = '#FFFFFF'
 
----------- BASICS ----------
+---------- BASIC ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.vscCursorDarkDark })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.vscGray, bg = c.vscBack })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.vscCursorDark, bg = c.vscCursorLight })

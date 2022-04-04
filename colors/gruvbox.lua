@@ -5,10 +5,6 @@ local util = require('utils.colors')
 
 local c = {}
 c = {
-	-- bg = '#32302F',
-	-- bg2 = '#282828',
-	-- line_cursor = '#45403D',
-	-- prompt_border = '#DDC7A1',
 	border = '#5A524C',
 	bg_highlight = '#32302F',
 	prompt_border = '#45403D',
@@ -84,7 +80,7 @@ vim.api.nvim_set_hl(0, 'Comment', { fg = c.comment, italic = true })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.bg, bg = c.fg })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = c.line_cursor })
-vim.api.nvim_set_hl(0, 'CursorIM', { fg = c.bg, bg = c.fg })
+-- vim.api.nvim_set_hl(0, 'CursorIM', { fg = c.bg, bg = c.fg })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = c.line_cursor })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.purple })
 vim.api.nvim_set_hl(0, 'Directory', { fg = c.blue })
