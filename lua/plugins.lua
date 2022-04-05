@@ -65,8 +65,12 @@ require('packer').startup(function()
 		'L3MON4D3/LuaSnip',
 		config = [[require('configs.luasnip')]],
 	}
+	-- use {
+	-- 	'ZhiyuanLck/smart-pairs',
+	-- 	config = [[require('configs.pairs')]],
+	-- }
 	use {
-		'ZhiyuanLck/smart-pairs',
+		'windwp/nvim-autopairs',
 		config = [[require('configs.pairs')]],
 	}
 	use {
