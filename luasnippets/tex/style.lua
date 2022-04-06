@@ -22,21 +22,21 @@ snips = {
 
 autosnips = {
 	s(
-		{ trig = '(%a)bar', name = 'overline', wordTrig = false, regTrig = true },
+		{ trig = '(%a)bar', name = 'post overline', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
 			return '\\overline{' .. snip.captures[1] .. '}'
 		end, {}) },
 		{ condition = tex.in_mathzone }
 	),
 	s(
-		{ trig = '(%a)hat', name = 'widehat', wordTrig = false, regTrig = true },
+		{ trig = '(%a)hat', name = 'post widehat', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
 			return '\\widehat{' .. snip.captures[1] .. '}'
 		end, {}) },
 		{ condition = tex.in_mathzone }
 	),
 	s(
-		{ trig = '(%a)td', name = 'widetilde', wordTrig = false, regTrig = true },
+		{ trig = '(%a)td', name = 'post widetilde', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
 			return '\\widetilde{' .. snip.captures[1] .. '}'
 		end, {}) },

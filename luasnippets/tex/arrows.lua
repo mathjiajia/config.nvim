@@ -32,8 +32,8 @@ autosnips = {
 		{ t('\\longrightarrow ') },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '!>', wordTrig = false, name = 'mapsto' }, { t('\\mapsto ') }, { condition = tex.in_mathzone }),
-	s({ trig = '=>', name = 'implies', wordTrig = false }, { t('\\implies ') }, { condition = tex.in_mathzone }),
+	s({ trig = '!>', wordTrig = false, name = 'mapsto |->' }, { t('\\mapsto ') }, { condition = tex.in_mathzone }),
+	s({ trig = '=>', name = 'implies =>', wordTrig = false }, { t('\\implies ') }, { condition = tex.in_mathzone }),
 	s({ trig = '=<', name = 'impliedby', wordTrig = false }, { t('\\impliedby ') }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'iff', name = 'if and only if <=>', wordTrig = false },

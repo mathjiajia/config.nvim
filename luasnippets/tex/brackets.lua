@@ -51,7 +51,6 @@ autosnips = {
 		t('_'),
 		i(3, 'n'),
 		t { '', '\\end{pmatrix}' },
-		i(0),
 	}, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'lra', name = 'leftangle rightangle' },

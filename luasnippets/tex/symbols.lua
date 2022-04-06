@@ -33,22 +33,22 @@ snips = {
 
 	s(
 		{ trig = 'sum', name = 'sum', dscr = 'Insert a sum notation.' },
-		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}'), i(3) },
+		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}') },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'lim', name = 'limit', dscr = 'Insert a limit notation.' },
-		{ t('\\lim_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} ') },
+		{ t('\\lim_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('}') },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'limsup', name = 'limsup', dscr = 'Insert a limit superior notation.' },
-		{ t('\\limsup_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('} ') },
+		{ t('\\limsup_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('}') },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'prod', name = 'product', dscr = 'Insert a product notation.' },
-		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}'), i(4), t(' ') },
+		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}') },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 }
@@ -99,7 +99,7 @@ autosnips = {
 	}, { condition = tex.in_mathzone }),
 
 	s({
-		trig = '([%a])(%d)',
+		trig = '(%a)(%d)',
 		name = 'auto subscript 1',
 		dscr = 'Subscript with a single number.',
 		wordTrig = false,
@@ -109,7 +109,13 @@ autosnips = {
 			return string.format('%s_%s', snip.captures[1], snip.captures[2])
 		end, {}),
 	}, { condition = tex.in_mathzone }),
-	s({ trig = '(%a)_(%d%d)', name = 'auto subscript 2', dscr = 'Subscript with two numbers.', regTrig = true }, {
+	s({
+		trig = '(%a)_(%d%d)',
+		name = 'auto subscript 2',
+		dscr = 'Subscript with two numbers.',
+		wordTrig = false,
+		regTrig = true,
+	}, {
 		f(function(_, snip)
 			return string.format('%s_{%s}', snip.captures[1], snip.captures[2])
 		end, {}),
@@ -220,11 +226,7 @@ autosnips = {
 	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t('\\bigcup') }, { condition = tex.in_mathzone }),
 	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t('\\bigcap') }, { condition = tex.in_mathzone }),
 
-	s(
-		{ trig = 'MK', name = 'Mori-Kleiman cone' },
-		{ t('\\cNE('), i(1), t(')') },
-		{ condition = tex.in_mathzone }
-	),
+	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t('\\cNE('), i(1), t(')') }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '([QRZ])P', name = 'positive', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)

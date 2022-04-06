@@ -28,28 +28,28 @@ end
 
 autosnips = {
 	s({
-		trig = '(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+',
+		trig = '%s([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+',
 		name = 'single-letter variable',
 		wordTrig = false,
 		regTrig = true,
 	}, {
 		f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+			return ' \\(' .. snip.captures[1] .. '\\)' .. snip.captures[2]
 		end, {}),
 	}, { condition = tex.in_text }),
 	s({
-		trig = '(%s)([0-9]+[a-zA-Z]+)([,;.%)]?)%s+',
+		trig = '%s([0-9]+[a-zA-Z]+)([,;.%)]?)%s+',
 		name = 'surround word starting with number',
 		wordTrig = false,
 		regTrig = true,
 	}, {
 		f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+			return ' \\(' .. snip.captures[1] .. '\\)' .. snip.captures[2]
 		end, {}),
 	}, { condition = tex.in_text }),
-	s({ trig = '(%s)(%w[-_+=><]%w)([,;.%)]?)%s+', name = 'surround i+1', wordTrig = false, regTrig = true }, {
+	s({ trig = '%s(%w[-_+=><]%w)([,;.%)]?)%s+', name = 'surround i+1', wordTrig = false, regTrig = true }, {
 		f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+			return ' \\(' .. snip.captures[1] .. '\\)' .. snip.captures[2]
 		end, {}),
 	}, { condition = tex.in_text }),
 
@@ -57,7 +57,6 @@ autosnips = {
 		t('\\('),
 		i(1),
 		t('\\)'),
-		i(0),
 	}, {
 		condition = tex.in_text,
 		callbacks = {
