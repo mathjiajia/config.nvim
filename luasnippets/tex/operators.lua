@@ -65,6 +65,11 @@ autosnips = {
 		{ t('\\frac{'), i(1), t('}{'), i(2), t('}') },
 		{ condition = tex.in_mathzone }
 	),
+	s(
+		{ trig = 'bin', name = 'binomial coefficient' },
+		{ t('\\binom{'), i(1), t('}{'), i(2), t('}') },
+		{ condition = tex.in_mathzone }
+	),
 
 	s({ trig = 'ses', name = 'short exact sequence' }, {
 		c(1, { t('0'), t('1') }),

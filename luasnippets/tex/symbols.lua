@@ -270,10 +270,22 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 
-	s({ trig = 'xmm', wordTrig = false, name = 'x_m' }, { t('x_{m}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'xnn', wordTrig = false, name = 'x_n' }, { t('x_{n}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'ymm', wordTrig = false, name = 'y_m' }, { t('y_{m}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'ynn', wordTrig = false, name = 'y_n' }, { t('y_{n}') }, { condition = tex.in_mathzone }),
+	s({ trig = ';0', name = 'emptyset ∅', wordTrig = false }, { t('\\emptyset') }, { condition = tex.in_mathzone }),
+	s({ trig = ';6', name = 'partial ∂', wordTrig = false }, { t('\\partial') }, { condition = tex.in_mathzone }),
+	s({ trig = ';8', name = 'infinity ∞', wordTrig = false }, { t('\\infty') }, { condition = tex.in_mathzone }),
+	s({ trig = ';=', name = 'equiv ≡', wordTrig = false }, { t('\\equiv') }, { condition = tex.in_mathzone }),
+	s({ trig = ';\\', name = 'setminus \\', wordTrig = false }, { t('\\setminus') }, { condition = tex.in_mathzone }),
+	s({ trig = ';.', name = 'emptyset ∅', wordTrig = false }, { t('\\cdot') }, { condition = tex.in_mathzone }),
+	s({ trig = ';[', name = 'subseteq ⊆', wordTrig = false }, { t('\\subseteq') }, { condition = tex.in_mathzone }),
+	s({ trig = ';]', name = 'supseteq ⊇', wordTrig = false }, { t('\\supseteq') }, { condition = tex.in_mathzone }),
+	s({ trig = ';(', name = 'subset ⊂', wordTrig = false }, { t('\\subset') }, { condition = tex.in_mathzone }),
+	s({ trig = ';)', name = 'supset ⊃', wordTrig = false }, { t('\\supset') }, { condition = tex.in_mathzone }),
+	s({ trig = ';A', name = 'forall ∀', wordTrig = false }, { t('\\forall') }, { condition = tex.in_mathzone }),
+	s({ trig = ';E', name = 'exists ∃', wordTrig = false }, { t('\\exists') }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'xmm', wordTrig = false, name = 'x_m' }, { t('x_{m}') }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'xnn', wordTrig = false, name = 'x_n' }, { t('x_{n}') }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'ymm', wordTrig = false, name = 'y_m' }, { t('y_{m}') }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'ynn', wordTrig = false, name = 'y_n' }, { t('y_{n}') }, { condition = tex.in_mathzone }),
 }
 
 return snips, autosnips
