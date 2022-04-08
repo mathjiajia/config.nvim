@@ -106,6 +106,7 @@ require('packer').startup(function()
 		requires = 'tami5/sqlite.lua',
 	}
 	use('nvim-telescope/telescope-file-browser.nvim')
+	use('nvim-telescope/telescope-bibtex.nvim')
 	use('nvim-telescope/telescope-ui-select.nvim')
 
 	use {

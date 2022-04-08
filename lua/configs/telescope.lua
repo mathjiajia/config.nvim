@@ -33,13 +33,18 @@ require('telescope').setup {
 				['tex'] = home .. '/Tex',
 			},
 		},
+		bibtex = {
+			custom_formats = { { id = 'plainkey', cite_marker = '%s' } },
+			format = 'plainkey',
+			global_files = { home .. '/Tex' },
+		},
 		['ui-select'] = {
 			themes.get_dropdown {},
 		},
 	},
 }
 
-local extensions = { 'fzf', 'file_browser', 'frecency', 'ui-select', 'aerial', 'notify' }
+local extensions = { 'fzf', 'file_browser', 'frecency', 'bibtex', 'ui-select', 'aerial', 'notify' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end

@@ -14,11 +14,25 @@ local pipe = function(fns)
 end
 
 snips = {
-	s(
-		{ trig = 'cite', name = 'cross refrence' },
-		{ t('\\cite['), i(1), t(']{'), i(2), t('}') },
-		{ condition = tex.in_text, show_condition = tex.in_text }
-	),
+	s({ trig = 'cite', name = 'cross refrence' }, {
+		t('\\cite['),
+		i(1),
+		t(']{'),
+		i(2),
+		t('}'),
+	}, {
+		condition = tex.in_text,
+		show_condition = tex.in_text,
+		callbacks = {
+			[2] = {
+				[events.enter] = function()
+					require('telescope').extensions.bibtex.bibtex(
+						require('telescope.themes').get_dropdown { previewer = false }
+					)
+				end,
+			},
+		},
+	}),
 	s(
 		{ trig = 'cf', name = 'confer/conferatur' },
 		{ t('cf.~') },
