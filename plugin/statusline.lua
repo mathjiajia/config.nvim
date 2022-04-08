@@ -2,9 +2,9 @@ local M = {}
 
 local nbg = vim.api.nvim_get_hl_by_name('StatusLine', true).background
 local ncbg = vim.api.nvim_get_hl_by_name('StatusLineNC', true).background
-local gitfg = vim.api.nvim_get_hl_by_name('Float', true).foreground
+local gitfg = vim.api.nvim_get_hl_by_name('String', true).foreground
 local dictfg = vim.api.nvim_get_hl_by_name('Directory', true).foreground
-local posfg = vim.api.nvim_get_hl_by_name('String', true).foreground
+local posfg = vim.api.nvim_get_hl_by_name('Float', true).foreground
 local lnfg = vim.api.nvim_get_hl_by_name('Error', true).foreground
 
 vim.api.nvim_set_hl(0, 'User1', { fg = gitfg, bg = nbg })
