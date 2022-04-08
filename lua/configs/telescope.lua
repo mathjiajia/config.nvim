@@ -34,8 +34,7 @@ require('telescope').setup {
 			},
 		},
 		bibtex = {
-			custom_formats = { { id = 'plainkey', cite_marker = '%s' } },
-			format = 'plainkey',
+			format = 'plain',
 			global_files = { home .. '/Tex' },
 		},
 		['ui-select'] = {
