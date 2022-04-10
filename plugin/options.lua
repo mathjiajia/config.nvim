@@ -37,9 +37,9 @@ vim.o.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
-vim.g.theme_style = 'hard'
+vim.g.theme_style = 'storm'
 -- vim.cmd('highlight clear')
 -- vim.cmd('syntax reset')
-vim.cmd('colorscheme gruvbox')
+vim.cmd('colorscheme catppuccin')
 
 -- vim.filetype.add { filename = { ['kitty.conf'] = 'conf' } }
