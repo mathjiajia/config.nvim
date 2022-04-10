@@ -1,4 +1,4 @@
-local hsluv = require('utils.hsluv')
+local hsluv = require 'utils.hsluv'
 
 local util = {}
 

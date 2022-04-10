@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require('utils.latex')
+local tex = require 'utils.latex'
 
 local pipe = function(fns)
 	return function(...)
@@ -54,9 +54,9 @@ autosnips = {
 	}, { condition = tex.in_text }),
 
 	s({ trig = 'mk', name = 'inline math', dscr = 'Insert inline Math Environment.' }, {
-		t('\\('),
+		t '\\(',
 		i(1),
-		t('\\)'),
+		t '\\)',
 	}, {
 		condition = tex.in_text,
 		callbacks = {
@@ -70,7 +70,7 @@ autosnips = {
 	),
 	s(
 		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.' },
-		{ t('&\\phantom{\\;=\\;} ') },
+		{ t '&\\phantom{\\;=\\;} ' },
 		{ condition = pipe { conds.line_begin, tex.in_align }, show_condition = tex.in_align }
 	),
 	s(

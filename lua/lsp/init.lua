@@ -33,8 +33,8 @@ local on_attach = function(client, bufnr)
 	end, { desc = 'List Workspace Folders' })
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 
-	local tb = require('telescope.builtin')
-	local themes = require('telescope.themes')
+	local tb = require 'telescope.builtin'
+	local themes = require 'telescope.themes'
 
 	vim.keymap.set('n', 'gd', function()
 		tb.lsp_definitions(themes.get_dropdown {})

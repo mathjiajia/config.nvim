@@ -40,6 +40,6 @@ vim.opt.writebackup = false
 vim.g.theme_style = 'storm'
 -- vim.cmd('highlight clear')
 -- vim.cmd('syntax reset')
-vim.cmd('colorscheme catppuccin')
+vim.cmd 'colorscheme catppuccin'
 
 -- vim.filetype.add { filename = { ['kitty.conf'] = 'conf' } }

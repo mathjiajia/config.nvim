@@ -62,7 +62,7 @@ local function add_hl(text, hl)
 end
 
 function Buftab:generate_icon()
-	local icon_pos = self.format:find('#{i}')
+	local icon_pos = self.format:find '#{i}'
 
 	local fname = vim.fn.fnamemodify(self.buf.name, ':t')
 	local ext = vim.fn.fnamemodify(self.buf.name, ':e')

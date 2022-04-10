@@ -1,4 +1,4 @@
-local spectre = require('spectre')
+local spectre = require 'spectre'
 
 vim.keymap.set('n', '<leader>rp', function()
 	spectre.open()

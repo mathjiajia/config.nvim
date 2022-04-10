@@ -1,7 +1,7 @@
 local M = {}
 
-local ts = require('vim.treesitter')
-local query = require('vim.treesitter.query')
+local ts = require 'vim.treesitter'
+local query = require 'vim.treesitter.query'
 
 local MATH_ENVIRONMENTS = {
 	['{displaymath}'] = true,
@@ -81,7 +81,7 @@ function M.in_text()
 		end
 		if node:type() == 'generic_environment' then
 			local begin = node:child(0)
-			local names = begin and begin:field('name')
+			local names = begin and begin:field 'name'
 
 			if names and names[1] and MATH_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
 				return false
@@ -106,7 +106,7 @@ function M.in_mathzone()
 		end
 		if node:type() == 'generic_environment' then
 			local begin = node:child(0)
-			local names = begin and begin:field('name')
+			local names = begin and begin:field 'name'
 
 			if names and names[1] and MATH_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
 				return true
@@ -124,7 +124,7 @@ function M.in_align()
 	while node do
 		if node:type() == 'generic_environment' then
 			local begin = node:child(0)
-			local names = begin and begin:field('name')
+			local names = begin and begin:field 'name'
 
 			if names and names[1] and ALIGN_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
 				return true

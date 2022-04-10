@@ -2,7 +2,7 @@
 vim.g.colors_name = 'onedark'
 
 local colors = {}
-local util = require('ui.util')
+local util = require 'ui.util'
 
 if vim.g.theme_style == 'dark' then
 	colors = {

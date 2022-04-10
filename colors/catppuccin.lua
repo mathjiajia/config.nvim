@@ -1,7 +1,7 @@
 -- Modified from https://github.com/catppuccin/nvim
 vim.g.colors_name = 'catppuccin'
 
-local util = require('utils.colors')
+local util = require 'utils.colors'
 local cp = {}
 
 if vim.g.theme_style == 'dark' then

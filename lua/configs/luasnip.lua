@@ -1,5 +1,5 @@
-local ls = require('luasnip')
-local types = require('luasnip.util.types')
+local ls = require 'luasnip'
+local types = require 'luasnip.util.types'
 
 ls.config.setup {
 	update_events = 'TextChanged,TextChangedI',

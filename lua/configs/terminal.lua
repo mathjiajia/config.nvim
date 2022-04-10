@@ -1,4 +1,4 @@
-local fterm = require('FTerm')
+local fterm = require 'FTerm'
 
 vim.keymap.set({ 'n', 't' }, '<M-i>', function()
 	fterm.toggle()

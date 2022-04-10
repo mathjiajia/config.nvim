@@ -26,7 +26,7 @@ local function hunks()
 end
 
 local function gps()
-	local nvim_gps = require('nvim-gps')
+	local nvim_gps = require 'nvim-gps'
 	if nvim_gps.is_available() then
 		return nvim_gps.get_location()
 	end
@@ -70,10 +70,11 @@ local function pad(c, m)
 	local padch = '·'
 	return string.rep(padch, string.len(tostring(m)) - string.len(tostring(c)))
 end
+
 local function position()
-	local nbline = vim.fn.line('$')
-	local line = vim.fn.line('.')
-	local col = vim.fn.col('.')
+	local nbline = vim.fn.line '$'
+	local line = vim.fn.line '.'
+	local col = vim.fn.col '.'
 	local percent = math.floor(line * 100 / nbline)
 	local pos = string.format(' %s%d%%%%', pad(percent, 100), percent)
 	-- local ln_col = string.format('Ln %s%d, Col %s%d ', pad(line, nbline), line, pad(col, 100), col)
@@ -86,6 +87,7 @@ local function find_pattern_match(tbl, val)
 		return val:match(pattern)
 	end, tbl))
 end
+
 local function force_inactive()
 	return find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
 		or find_pattern_match(

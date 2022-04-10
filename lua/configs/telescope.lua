@@ -1,5 +1,5 @@
-local home = os.getenv('HOME')
-local themes = require('telescope.themes')
+local home = os.getenv 'HOME'
+local themes = require 'telescope.themes'
 
 require('telescope').setup {
 	defaults = {
@@ -48,7 +48,7 @@ for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
 
-local tb = require('telescope.builtin')
+local tb = require 'telescope.builtin'
 local te = require('telescope').extensions
 
 vim.keymap.set('n', '<leader><leader>', function()
@@ -78,13 +78,13 @@ end, { desc = 'Recent Files' })
 
 vim.keymap.set('n', '<leader>fz', function()
 	tb.find_files(themes.get_ivy {
-		find_command = { 'rg', '--files', '--type', vim.fn.input('Type: ') },
+		find_command = { 'rg', '--files', '--type', vim.fn.input 'Type: ' },
 	})
 end, { desc = 'Search Certain Type Files' })
 vim.keymap.set('n', '<leader>f/', function()
 	tb.grep_string {
 		path_display = { 'shorten' },
-		search = vim.fn.input('Grep String > '),
+		search = vim.fn.input 'Grep String > ',
 	}
 end, { desc = 'Grep Strings' })
 vim.keymap.set('n', '<F12>', function()

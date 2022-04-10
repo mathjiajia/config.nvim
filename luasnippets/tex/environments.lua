@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require('utils.latex')
+local tex = require 'utils.latex'
 
 local rec_ls
 rec_ls = function()
@@ -82,7 +82,7 @@ autosnips = {
 
 	s(
 		{ trig = 'lprf', name = 'Titled Proof', dscr = 'Create a titled proof environment.' },
-		{ t('\\begin{proof}[Proof of \\cref{'), i(1), t { '}]', '\t' }, i(0), t { '', '\\end{proof}' } },
+		{ t '\\begin{proof}[Proof of \\cref{', i(1), t { '}]', '\t' }, i(0), t { '', '\\end{proof}' } },
 		{ condition = pipe { conds.line_begin, tex.in_text } }
 	),
 	s({
@@ -205,9 +205,9 @@ autosnips = {
 	s({ trig = 'lben', name = 'Enumerate with labels' }, {
 		t { '\\begin{enumerate}[label=(\\' },
 		c(1, {
-			t('alph'),
-			t('roman'),
-			t('arabic'),
+			t 'alph',
+			t 'roman',
+			t 'arabic',
 		}),
 		t { '*)]', '\t\\item ' },
 		i(2),
@@ -218,17 +218,17 @@ autosnips = {
 	s({ trig = 'bfu', name = 'function' }, {
 		t { '\\begin{equation*}', '\t' },
 		i(1),
-		t('\\colon '),
+		t '\\colon ',
 		i(2),
-		t('\\longrightarrow '),
+		t '\\longrightarrow ',
 		i(3),
-		t(', \\quad '),
+		t ', \\quad ',
 		i(4),
-		t('\\longmapsto '),
+		t '\\longmapsto ',
 		rep(1),
-		t('('),
+		t '(',
 		rep(4),
-		t(') = '),
+		t ') = ',
 		i(0),
 		t { '', '\\end{equation*}' },
 	}, { condition = pipe { conds.line_begin, tex.in_text } }),

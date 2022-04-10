@@ -26,7 +26,7 @@ local cmp_kinds = {
 	TypeParameter = '',
 }
 
-local cmp = require('cmp')
+local cmp = require 'cmp'
 
 cmp.setup {
 	mapping = {

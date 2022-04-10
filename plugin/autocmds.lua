@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 vim.api.nvim_create_autocmd('CursorHold', {
 	callback = function()
-		require('plugins')
+		require 'plugins'
 	end,
 	group = 'init_nvim',
 	once = true,

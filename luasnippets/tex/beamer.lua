@@ -1,9 +1,9 @@
 local snips, autosnips = {}, {}
 
-local tex = require('utils.latex')
+local tex = require 'utils.latex'
 local in_beamer = function()
 	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
-	if first_line[1]:match('\\documentclass{beamer}') then
+	if first_line[1]:match '\\documentclass{beamer}' then
 		return true
 	end
 	return false

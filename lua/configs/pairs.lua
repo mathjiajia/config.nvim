@@ -10,7 +10,7 @@
 -- }
 --
 -- require('pairs'):setup(opts)
-local npairs = require('nvim-autopairs')
+local npairs = require 'nvim-autopairs'
 
 npairs.setup()
 

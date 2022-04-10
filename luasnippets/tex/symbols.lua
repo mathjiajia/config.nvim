@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require('utils.latex')
+local tex = require 'utils.latex'
 
 snips = {
 	s(
@@ -27,35 +27,35 @@ snips = {
 
 	s(
 		{ trig = '/', name = 'fraction', dscr = 'Insert a fraction notation.', wordTrig = false },
-		{ t('\\frac{'), i(1), t('}{'), i(2), t('}') },
+		{ t '\\frac{', i(1), t '}{', i(2), t '}' },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 
 	s(
 		{ trig = 'sum', name = 'sum', dscr = 'Insert a sum notation.' },
-		{ t('\\sum_{'), i(1), t('}^{'), i(2), t('}') },
+		{ t '\\sum_{', i(1), t '}^{', i(2), t '}' },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'lim', name = 'limit', dscr = 'Insert a limit notation.' },
-		{ t('\\lim_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('}') },
+		{ t '\\lim_{', i(1, 'n'), t '\\to ', i(2, '\\infty'), t '}' },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'limsup', name = 'limsup', dscr = 'Insert a limit superior notation.' },
-		{ t('\\limsup_{'), i(1, 'n'), t('\\to '), i(2, '\\infty'), t('}') },
+		{ t '\\limsup_{', i(1, 'n'), t '\\to ', i(2, '\\infty'), t '}' },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'prod', name = 'product', dscr = 'Insert a product notation.' },
-		{ t('\\prod_{'), i(1, 'n'), t('='), i(2, '1'), t('}^{'), i(3, '\\infty'), t('}') },
+		{ t '\\prod_{', i(1, 'n'), t '=', i(2, '1'), t '}^{', i(3, '\\infty'), t '}' },
 		{ condition = tex.in_mathzone, show_condition = tex.in_mathzone }
 	),
 }
 
 autosnips = {
-	s({ trig = '\\varpii', name = '\\varpi_i' }, { t('\\varpi_{i}') }, { condition = tex.in_mathzone }),
-	s({ trig = '\\varphii', name = '\\varphi_i' }, { t('\\varphi_{i}') }, { condition = tex.in_mathzone }),
+	s({ trig = '\\varpii', name = '\\varpi_i' }, { t '\\varpi_{i}' }, { condition = tex.in_mathzone }),
+	s({ trig = '\\varphii', name = '\\varphi_i' }, { t '\\varphi_{i}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '\\([xX])ii', name = '\\xi_{i}', regTrig = true },
 		{ f(function(_, snip)
@@ -121,112 +121,112 @@ autosnips = {
 		end, {}),
 	}, { condition = tex.in_mathzone }),
 
-	s({ trig = 'inn', name = 'belongs to ∈', wordTrig = false }, { t('\\in ') }, { condition = tex.in_mathzone }),
+	s({ trig = 'inn', name = 'belongs to ∈', wordTrig = false }, { t '\\in ' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '!in', name = 'does not belong to ∉', wordTrig = false },
-		{ t('\\notin ') },
+		{ t '\\notin ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '!=', name = 'not equal ≠', wordTrig = false }, { t('\\neq ') }, { condition = tex.in_mathzone }),
+	s({ trig = '!=', name = 'not equal ≠', wordTrig = false }, { t '\\neq ' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '<=', name = 'less than or equal to ≤', wordTrig = false },
-		{ t('\\leq ') },
+		{ t '\\leq ' },
 		{ condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = '>=', name = 'greater than or equal to ≥', wordTrig = false },
-		{ t('\\geq ') },
+		{ t '\\geq ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '<<', name = 'much less than ≪', wordTrig = false }, { t('\\ll ') }, {
+	s({ trig = '<<', name = 'much less than ≪', wordTrig = false }, { t '\\ll ' }, {
 		condition = tex.in_mathzone,
 	}),
 	s(
 		{ trig = '>>', name = 'much greater than ≫', wordTrig = false },
-		{ t('\\gg ') },
+		{ t '\\gg ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '~~', name = 'similar ~', wordTrig = false }, { t('\\sim ') }, { condition = tex.in_mathzone }),
+	s({ trig = '~~', name = 'similar ~', wordTrig = false }, { t '\\sim ' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '~=', name = 'is isomorphic to ≃', wordTrig = false },
-		{ t('\\simeq ') },
+		{ t '\\simeq ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'nvs', name = 'inverse', wordTrig = false }, { t('^{-1}') }, { condition = tex.in_mathzone }),
+	s({ trig = 'nvs', name = 'inverse', wordTrig = false }, { t '^{-1}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '^-', name = 'negative exponents', wordTrig = false },
-		{ t('^{-'), i(1), t('}') },
+		{ t '^{-', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'sq', name = 'square root' }, { t('\\sqrt{'), i(1), t('}') }, { condition = tex.in_mathzone }),
+	s({ trig = 'sq', name = 'square root' }, { t '\\sqrt{', i(1), t '}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '__', name = 'subscript', wordTrig = false },
-		{ t('_{'), i(1), t('}') },
+		{ t '_{', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = '^^', name = 'supscript', wordTrig = false },
-		{ t('^{'), i(1), t('}') },
+		{ t '^{', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '**', name = 'upper star *', wordTrig = false }, { t('^{*}') }, { condition = tex.in_mathzone }),
-	s({ trig = '...', name = 'dots ...', wordTrig = false }, { t('\\dots') }, { condition = tex.in_mathzone }),
-	s({ trig = '||', name = 'mid |', wordTrig = false }, { t('\\mid ') }, { condition = tex.in_mathzone }),
-	s({ trig = '::', name = 'colon :', wordTrig = false }, { t('\\colon ') }, { condition = tex.in_mathzone }),
-	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t('\\coloneqq ') }, { condition = tex.in_mathzone }),
+	s({ trig = '**', name = 'upper star *', wordTrig = false }, { t '^{*}' }, { condition = tex.in_mathzone }),
+	s({ trig = '...', name = 'dots ...', wordTrig = false }, { t '\\dots' }, { condition = tex.in_mathzone }),
+	s({ trig = '||', name = 'mid |', wordTrig = false }, { t '\\mid ' }, { condition = tex.in_mathzone }),
+	s({ trig = '::', name = 'colon :', wordTrig = false }, { t '\\colon ' }, { condition = tex.in_mathzone }),
+	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t '\\coloneqq ' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'rup', name = 'round up', wordTrig = false },
-		{ t('\\rup{'), i(1), t('}') },
+		{ t '\\rup{', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'rwn', name = 'round down', wordTrig = false },
-		{ t('\\rdown{'), i(1), t('}') },
+		{ t '\\rdown{', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
 
-	s({ trig = 'lll', wordTrig = false, name = 'ell ℓ' }, { t('\\ell') }, { condition = tex.in_mathzone }),
-	s({ trig = 'xx', wordTrig = false, name = 'times ×' }, { t('\\times') }, { condition = tex.in_mathzone }),
-	s({ trig = 'nabl', wordTrig = false, name = 'nabla ∇' }, { t('\\nabla') }, { condition = tex.in_mathzone }),
-	s({ trig = 'AA', wordTrig = false, name = 'affine 𝔸' }, { t('\\mathbb{A}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'CC', wordTrig = false, name = 'complex ℂ' }, { t('\\mathbb{C}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'DD', wordTrig = false, name = 'disc 𝔻' }, { t('\\mathbb{D}') }, { condition = tex.in_mathzone }),
+	s({ trig = 'lll', wordTrig = false, name = 'ell ℓ' }, { t '\\ell' }, { condition = tex.in_mathzone }),
+	s({ trig = 'xx', wordTrig = false, name = 'times ×' }, { t '\\times' }, { condition = tex.in_mathzone }),
+	s({ trig = 'nabl', wordTrig = false, name = 'nabla ∇' }, { t '\\nabla' }, { condition = tex.in_mathzone }),
+	s({ trig = 'AA', wordTrig = false, name = 'affine 𝔸' }, { t '\\mathbb{A}' }, { condition = tex.in_mathzone }),
+	s({ trig = 'CC', wordTrig = false, name = 'complex ℂ' }, { t '\\mathbb{C}' }, { condition = tex.in_mathzone }),
+	s({ trig = 'DD', wordTrig = false, name = 'disc 𝔻' }, { t '\\mathbb{D}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'FF', wordTrig = false, name = 'Hirzebruch 𝔽' },
-		{ t('\\mathbb{F}') },
+		{ t '\\mathbb{F}' },
 		{ condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'HH', wordTrig = false, name = 'half plane ℍ' },
-		{ t('\\mathbb{H}') },
+		{ t '\\mathbb{H}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'NN', wordTrig = false, name = 'natural ℕ' }, { t('\\mathbb{N}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'OO', wordTrig = false, name = 'mathcal{O}' }, { t('\\mathcal{O}') }, { condition = tex.in_mathzone }),
+	s({ trig = 'NN', wordTrig = false, name = 'natural ℕ' }, { t '\\mathbb{N}' }, { condition = tex.in_mathzone }),
+	s({ trig = 'OO', wordTrig = false, name = 'mathcal{O}' }, { t '\\mathcal{O}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'PP', wordTrig = false, name = 'projective ℙ' },
-		{ t('\\mathbb{P}') },
+		{ t '\\mathbb{P}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'QQ', wordTrig = false, name = 'rational ℚ' }, { t('\\mathbb{Q}') }, {
+	s({ trig = 'QQ', wordTrig = false, name = 'rational ℚ' }, { t '\\mathbb{Q}' }, {
 		condition = tex.in_mathzone,
 	}),
-	s({ trig = 'RR', wordTrig = false, name = 'real ℝ' }, { t('\\mathbb{R}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t('\\mathbb{Z}') }, { condition = tex.in_mathzone }),
+	s({ trig = 'RR', wordTrig = false, name = 'real ℝ' }, { t '\\mathbb{R}' }, { condition = tex.in_mathzone }),
+	s({ trig = 'ZZ', wordTrig = false, name = 'integer ℤ' }, { t '\\mathbb{Z}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'srt', wordTrig = false, name = 'square root' },
-		{ t('\\sqrt{'), i(1), t('}') },
+		{ t '\\sqrt{', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'set', name = 'set' }, { t('\\{'), i(1), t('\\}') }, { condition = tex.in_mathzone }),
-	s({ trig = 'o+', wordTrig = false, name = 'oplus' }, { t('\\oplus') }, { condition = tex.in_mathzone }),
-	s({ trig = 'ox', wordTrig = false, name = 'otimes' }, { t('\\otimes') }, { condition = tex.in_mathzone }),
-	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t('\\cap ') }, { condition = tex.in_mathzone }),
-	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t('\\cup ') }, { condition = tex.in_mathzone }),
-	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t('\\bigcup') }, { condition = tex.in_mathzone }),
-	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t('\\bigcap') }, { condition = tex.in_mathzone }),
+	s({ trig = 'set', name = 'set' }, { t '\\{', i(1), t '\\}' }, { condition = tex.in_mathzone }),
+	s({ trig = 'o+', wordTrig = false, name = 'oplus' }, { t '\\oplus' }, { condition = tex.in_mathzone }),
+	s({ trig = 'ox', wordTrig = false, name = 'otimes' }, { t '\\otimes' }, { condition = tex.in_mathzone }),
+	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t '\\cap ' }, { condition = tex.in_mathzone }),
+	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t '\\cup ' }, { condition = tex.in_mathzone }),
+	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcup' }, { condition = tex.in_mathzone }),
+	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcap' }, { condition = tex.in_mathzone }),
 
-	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t('\\cNE('), i(1), t(')') }, { condition = tex.in_mathzone }),
+	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t '\\cNE(', i(1), t ')' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '([QRZ])P', name = 'positive', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
@@ -270,18 +270,18 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 
-	s({ trig = ';0', name = 'emptyset ∅', wordTrig = false }, { t('\\emptyset') }, { condition = tex.in_mathzone }),
-	s({ trig = ';6', name = 'partial ∂', wordTrig = false }, { t('\\partial') }, { condition = tex.in_mathzone }),
-	s({ trig = ';8', name = 'infinity ∞', wordTrig = false }, { t('\\infty') }, { condition = tex.in_mathzone }),
-	s({ trig = ';=', name = 'equiv ≡', wordTrig = false }, { t('\\equiv') }, { condition = tex.in_mathzone }),
-	s({ trig = ';\\', name = 'setminus \\', wordTrig = false }, { t('\\setminus') }, { condition = tex.in_mathzone }),
-	s({ trig = ';.', name = 'emptyset ∅', wordTrig = false }, { t('\\cdot') }, { condition = tex.in_mathzone }),
-	s({ trig = ';[', name = 'subseteq ⊆', wordTrig = false }, { t('\\subseteq') }, { condition = tex.in_mathzone }),
-	s({ trig = ';]', name = 'supseteq ⊇', wordTrig = false }, { t('\\supseteq') }, { condition = tex.in_mathzone }),
-	s({ trig = ';(', name = 'subset ⊂', wordTrig = false }, { t('\\subset') }, { condition = tex.in_mathzone }),
-	s({ trig = ';)', name = 'supset ⊃', wordTrig = false }, { t('\\supset') }, { condition = tex.in_mathzone }),
-	s({ trig = ';A', name = 'forall ∀', wordTrig = false }, { t('\\forall') }, { condition = tex.in_mathzone }),
-	s({ trig = ';E', name = 'exists ∃', wordTrig = false }, { t('\\exists') }, { condition = tex.in_mathzone }),
+	s({ trig = ';0', name = 'emptyset ∅', wordTrig = false }, { t '\\emptyset' }, { condition = tex.in_mathzone }),
+	s({ trig = ';6', name = 'partial ∂', wordTrig = false }, { t '\\partial' }, { condition = tex.in_mathzone }),
+	s({ trig = ';8', name = 'infinity ∞', wordTrig = false }, { t '\\infty' }, { condition = tex.in_mathzone }),
+	s({ trig = ';=', name = 'equiv ≡', wordTrig = false }, { t '\\equiv' }, { condition = tex.in_mathzone }),
+	s({ trig = ';\\', name = 'setminus \\', wordTrig = false }, { t '\\setminus' }, { condition = tex.in_mathzone }),
+	s({ trig = ';.', name = 'emptyset ∅', wordTrig = false }, { t '\\cdot' }, { condition = tex.in_mathzone }),
+	s({ trig = ';[', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
+	s({ trig = ';]', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
+	s({ trig = ';(', name = 'subset ⊂', wordTrig = false }, { t '\\subset' }, { condition = tex.in_mathzone }),
+	s({ trig = ';)', name = 'supset ⊃', wordTrig = false }, { t '\\supset' }, { condition = tex.in_mathzone }),
+	s({ trig = ';A', name = 'forall ∀', wordTrig = false }, { t '\\forall' }, { condition = tex.in_mathzone }),
+	s({ trig = ';E', name = 'exists ∃', wordTrig = false }, { t '\\exists' }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'xmm', wordTrig = false, name = 'x_m' }, { t('x_{m}') }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'xnn', wordTrig = false, name = 'x_n' }, { t('x_{n}') }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'ymm', wordTrig = false, name = 'y_m' }, { t('y_{m}') }, { condition = tex.in_mathzone }),

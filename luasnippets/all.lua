@@ -95,9 +95,9 @@ snips = {
 	s(
 		{ trig = 'todo', name = 'TODO, NOTE, FIXME' },
 		{ c(1, {
-			t('TODO(jia): '),
-			t('NOTE(jia): '),
-			t('FIXME(jia): '),
+			t 'TODO(jia): ',
+			t 'NOTE(jia): ',
+			t 'FIXME(jia): ',
 		}) },
 		{ condition = in_comment, show_condition = in_comment }
 	),
