@@ -95,6 +95,9 @@ require('packer').startup(function()
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
 
+	-- use { 'mfussenegger/nvim-dap', opt = true, config = [[require('config.dap')]] }
+	-- use 'mfussenegger/nvim-dap-python'
+
 	use {
 		'nvim-telescope/telescope.nvim',
 		requires = 'nvim-lua/plenary.nvim',
@@ -114,7 +117,7 @@ require('packer').startup(function()
 
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
-		branch = 'main',
+		-- branch = 'main',
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons',
