@@ -87,7 +87,10 @@ require('packer').startup(function()
 	}
 	use {
 		'j-hui/fidget.nvim',
-		config = [[require('fidget').setup { text = { spinner = 'line' }, window = { relative = 'editor' } }]],
+		config = [[require('fidget').setup {
+			text = { spinner = 'line' },
+			window = { relative = 'editor' }
+		}]],
 	}
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
@@ -126,7 +129,11 @@ require('packer').startup(function()
 	}
 	use {
 		'numToStr/Comment.nvim',
-		config = [[require('Comment').setup({ padding = function () return vim.bo.filetype ~= 'norg' end })]],
+		config = [[require('Comment').setup({
+			padding = function()
+				return vim.bo.filetype ~= 'norg'
+			end
+		})]],
 	}
 	use {
 		'Shatur/neovim-session-manager',
@@ -159,8 +166,8 @@ require('packer').startup(function()
 	}
 	use 'nvim-neorg/neorg-telescope'
 
-	-- use {
-	-- 	'dstein64/vim-startuptime',
-	-- 	config = [[vim.g.startuptime_tries = 10]],
-	-- }
+	use {
+		'dstein64/vim-startuptime',
+		config = [[vim.g.startuptime_tries = 10]],
+	}
 end)
