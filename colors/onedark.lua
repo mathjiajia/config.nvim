@@ -47,6 +47,11 @@ if vim.g.theme_style == 'dark' then
 	colors.bg_statusline = util.lighten(colors.bg, 0.95)
 	colors.fg_gutter = util.lighten(colors.bg, 0.90)
 	colors.fg_sidebar = colors.fg
+
+	colors.virtual_text_error = util.darken(colors.red, 0.7)
+	colors.virtual_text_warning = util.darken(colors.yellow, 0.7)
+	colors.virtual_text_information = util.darken(colors.blue, 0.7)
+	colors.virtual_text_hint = util.darken(colors.cyan, 0.7)
 else
 	colors = {
 		bg = '#FAFAFA',
@@ -90,6 +95,11 @@ else
 	colors.bg_statusline = util.darken(colors.bg, 0.95)
 	colors.fg_gutter = util.darken(colors.bg, 0.90)
 	colors.fg_sidebar = colors.fg
+
+	colors.virtual_text_error = util.lighten(colors.red, 0.6)
+	colors.virtual_text_warning = util.lighten(colors.yellow, 0.6)
+	colors.virtual_text_information = util.lighten(colors.blue, 0.6)
+	colors.virtual_text_hint = util.lighten(colors.cyan, 0.6)
 end
 
 ------ BASICS ------
@@ -171,7 +181,7 @@ vim.api.nvim_set_hl(0, 'Exception', { fg = colors.purple, italic = true })
 vim.api.nvim_set_hl(0, 'Float', { fg = colors.orange })
 vim.api.nvim_set_hl(0, 'Function', { fg = colors.blue, italic = true })
 vim.api.nvim_set_hl(0, 'Identifier', { fg = colors.red, italic = true })
-vim.api.nvim_set_hl(0, 'Ignore', {})
+-- vim.api.nvim_set_hl(0, 'Ignore', {})
 vim.api.nvim_set_hl(0, 'Include', { fg = colors.purple })
 vim.api.nvim_set_hl(0, 'Italic', { italic = true })
 vim.api.nvim_set_hl(0, 'Label', { fg = colors.red })
@@ -188,7 +198,7 @@ vim.api.nvim_set_hl(0, 'Statement', { fg = colors.purple })
 vim.api.nvim_set_hl(0, 'StorageClass', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'String', { fg = colors.green, italic = true })
 vim.api.nvim_set_hl(0, 'Structure', { fg = colors.purple })
-vim.api.nvim_set_hl(0, 'Tag', {})
+-- vim.api.nvim_set_hl(0, 'Tag', {})
 vim.api.nvim_set_hl(0, 'Title', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'Todo', { fg = colors.purple })
 vim.api.nvim_set_hl(0, 'Type', { fg = colors.yellow })
@@ -207,7 +217,7 @@ vim.api.nvim_set_hl(0, 'healthSuccess', { fg = colors.cyan })
 -- vim.api.nvim_set_hl(0, 'qfFileName', {})
 
 ------ DIAGNOSTIC ------
-vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.red })
 vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = colors.cyan })
@@ -216,6 +226,11 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { fg = colors.red, underline 
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { fg = colors.yellow, underline = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { fg = colors.blue, underline = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { fg = colors.cyan, underline = true })
+
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = colors.virtual_text_error })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { fg = colors.virtual_text_warn })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { fg = colors.virtual_text_info })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { fg = colors.virtual_text_hint })
 
 ------ GIT ------
 -- vim.api.nvim_set_hl(0, 'diffAdded', { fg = colors.green })

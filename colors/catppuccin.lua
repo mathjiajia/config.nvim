@@ -6,86 +6,90 @@ local cp = {}
 
 if vim.g.theme_style == 'dark' then
 	cp = {
-		rosewater = '#F5E0DC', -- Rosewater
-		flamingo = '#F2CDCD', -- Flamingo
-		mauve = '#DDB6F2', -- Mauve
-		pink = '#F5C2E7', -- Pink
-		red = '#F28FAD', -- Red
-		maroon = '#E8A2AF', -- Maroon
-		peach = '#F8BD96', -- Peach
-		yellow = '#FAE3B0', -- Yellow
-		green = '#ABE9B3', -- Green
-		blue = '#96CDFB', -- Blue
-		sky = '#89DCEB', -- Sky
-		teal = '#B5E8E0', -- Teal
-		lavender = '#C9CBFF', -- Lavender
-		white = '#D9E0EE', -- White
-		gray2 = '#C3BAC6', -- Gray2
-		gray1 = '#988BA2', -- Gray1
-		gray0 = '#6E6C7E', -- Gray0
-		black4 = '#575268', -- Black4
-		black3 = '#302D41', -- Black3
-		black2 = '#1E1E2E', -- Black2
-		black1 = '#1A1826', -- Black1
-		black0 = '#161320', -- Black0
+		rosewater = '#F5E0DC',
+		flamingo = '#F2CDCD',
+		pink = '#F5C2E7',
+		mauve = '#CBA6F7',
+		red = '#F38BA8',
+		maroon = '#EBA0AC',
+		peach = '#FAB387',
+		yellow = '#F9E2AF',
+		green = '#A6E3A1',
+		teal = '#94E2D5',
+		sky = '#89DCEB',
+		blue = '#90C1FB',
+		sapphire = '#74C7EC',
+		lavender = '#C9CBFF',
+		white = '#C6D0F5',
+		gray2 = '#ADB5D8',
+		gray1 = '#959BBA',
+		gray0 = '#7C809D',
+		black5 = '#63657F',
+		black4 = '#4B4B62',
+		black3 = '#323044',
+		black2 = '#1E1E2E',
+		black1 = '#181825',
+		black0 = '#101019',
 
 		teledark = '#1A1826',
 		teleblack = '#252434',
 	}
 elseif vim.g.theme_style == 'storm' then
 	cp = {
-		pink = '#F5BFE7', -- Pink					-- done -- cotton
-		flamingo = '#F2CBCB', -- Flamingo			-- done
-		cotton = '#F3DCAC',
-		yellow = '#F1D0D8', -- Yellow				-- done -
-		rosewater = '#F5DFDA', -- Rosewater
-		mauve = '#C59FF6', -- Mauve					-- done -
-		red = '#F67E98', -- Red						-- done
-		maroon = '#F1949B', -- Maroon				-- done
-		peach = '#FEA571', -- Peach					-- done - -
-		green = '#9CDA83', -- Green					-- done -
+		rosewater = '#F5DFDA',
+		flamingo = '#F2CBCB',
+		pink = '#F5BFE7',
+		mauve = '#C59FF6',
+		red = '#F67E98',
+		maroon = '#F1949B',
+		peach = '#FEA571',
+		yellow = '#F1D8A4',
+		green = '#A1DF8E',
+		teal = '#85E0D1',
+		sky = '#89DCFD',
+		blue = '#83ABF9',
 		sapphire = '#34C3DC',
-		blue = '#83ABF9', -- Blue					-- done
-		teal = '#78DCCC', -- Teal					-- done
-		sky = '#89DCFD', -- Sky						-- done
-		lavender = '#C1CAFE', -- Lavender			-- done
-		white = '#C5CFF5', -- White					-- done
-		gray2 = '#B9C0DB', -- Gray2
-		gray1 = '#6F7599', -- Gray1
-		gray0 = '#5E6487', -- Gray0
-		black4 = '#3E435E', -- Black4
-		black3 = '#2B3045', -- Black3
-		black2 = '#24273A', -- Black2				-- done
-		black1 = '#1F2233', -- Black1
-		black0 = '#1A1B26', -- Black0
+		lavender = '#C2CBFE',
+		white = '#C5CFF5',
+		gray2 = '#A6AFD2',
+		gray1 = '#8289AA',
+		gray0 = '#5F6587',
+		black5 = '#4F5473',
+		black4 = '#3E435E',
+		black3 = '#2B3045',
+		black2 = '#24273A',
+		black1 = '#1F2233',
+		black0 = '#1A1B26',
 
 		teledark = '#1E2134',
 		teleblack = '#2A2D40',
 	}
 else
 	cp = {
-		rosewater = '#E09D90', -- Rosewater
-		flamingo = '#E79C9C', -- Flamingo
-		mauve = '#AC61DF', -- Mauve				-- done
-		pink = '#EF9AD9', -- Pink				-- done
-		red = '#E84746', -- Red					-- done -
-		maroon = '#C96765', -- Maroon			-- done
-		peach = '#E99726', -- Peach				-- done -
-		yellow = '#EABE24', -- Yellow			-- done -
-		green = '#89B517', -- Green				-- done -
-		blue = '#4877D7', -- Blue				-- done -
-		sky = '#3FC4D9', -- Sky					-- done
-		teal = '#149C9B', -- Teal				-- done -
-		lavender = '#939AFB', -- Lavender		-- done
-		white = '#343B58', -- White				-- works?
-		gray2 = '#424968', -- Gray2
-		gray1 = '#505677', -- Gray1
-		gray0 = '#606689', -- Gray0				-- done -
-		black4 = '#CFD8DC', -- Black4
-		black3 = '#EFF3F4', -- Black3
-		black2 = '#FCFCFC', -- Black2			-- done
-		black1 = '#EDEDED', -- Black1
-		black0 = '#D3D0D2', -- Black0
+		rosewater = '#E5AC9F',
+		flamingo = '#DF7F7F',
+		pink = '#EC83D0',
+		mauve = '#8F46EF',
+		red = '#D20F39',
+		maroon = '#E63B4A',
+		peach = '#FE6811',
+		yellow = '#E49320',
+		green = '#509E31',
+		teal = '#289886',
+		sky = '#04A5E5',
+		blue = '#1D65F5',
+		sapphire = '#209FB5',
+		lavender = '#7287FD',
+		white = '#575279',
+		gray2 = '#6E6A8B',
+		gray1 = '#86819C',
+		gray0 = '#9D99AE',
+		black5 = '#B5B1BF',
+		black4 = '#CCC9D1',
+		black3 = '#E6E3E5',
+		black2 = '#FBF8F4',
+		black1 = '#EDEDED',
+		black0 = '#D3D0D2',
 
 		teledark = '#FFFFFF',
 		teleblack = '#F6F6F6',
@@ -98,7 +102,6 @@ local info = cp.sky
 local hint = cp.teal
 local darkening_percentage = 0.095
 
-local delimeters = cp.gray2
 local operators = cp.sky
 local math_logic = cp.peach
 
@@ -109,7 +112,7 @@ vim.api.nvim_set_hl(0, 'Cursor', { fg = cp.black2, bg = cp.white })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = cp.black1 })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.teleblack }) -- cp.black3
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.lavender })
 -- vim.api.nvim_set_hl(0, 'CursorLineSign', {})
 vim.api.nvim_set_hl(0, 'Directory', { fg = cp.blue })
 -- vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = cp.black2 })
@@ -120,7 +123,7 @@ vim.api.nvim_set_hl(0, 'Folded', { fg = cp.blue, bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.black4, bg = cp.pink })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.black4 })
-vim.api.nvim_set_hl(0, 'MatchParen', { bg = cp.peach, bold = true })
+vim.api.nvim_set_hl(0, 'MatchParen', { fg = cp.peach, bold = true })
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.flamingo, bold = true })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = cp.white })
@@ -412,7 +415,7 @@ vim.api.nvim_set_hl(0, 'TSBoolean', { fg = math_logic, bold = true })
 vim.api.nvim_set_hl(0, 'TSConditional', { fg = cp.mauve, italic = true })
 vim.api.nvim_set_hl(0, 'TSConstant', { fg = cp.peach })
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = cp.teal, italic = true })
--- vim.api.nvim_set_hl(0, 'TSConstMacro', {})
+vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = cp.mauve })
 vim.api.nvim_set_hl(0, 'TSConstructor', { fg = cp.sapphire })
 vim.api.nvim_set_hl(0, 'TSDanger', { fg = cp.black2, bg = cp.red })
 vim.api.nvim_set_hl(0, 'TSEmphasis', { fg = cp.maroon, italic = true })
@@ -422,7 +425,7 @@ vim.api.nvim_set_hl(0, 'TSEnvironmentName', { fg = cp.flamingo, italic = true })
 vim.api.nvim_set_hl(0, 'TSException', { fg = cp.mauve, italic = true })
 vim.api.nvim_set_hl(0, 'TSField', { fg = cp.teal })
 vim.api.nvim_set_hl(0, 'TSFloat', { fg = math_logic, bold = true })
-vim.api.nvim_set_hl(0, 'TSFuncBuiltin', { fg = cp.sapphire, italic = true })
+vim.api.nvim_set_hl(0, 'TSFuncBuiltin', { fg = cp.peach, italic = true })
 vim.api.nvim_set_hl(0, 'TSFuncMacro', { fg = cp.teal, italic = true })
 vim.api.nvim_set_hl(0, 'TSFunction', { fg = cp.blue, italic = true })
 vim.api.nvim_set_hl(0, 'TSInclude', { fg = cp.mauve, italic = true })
@@ -439,10 +442,10 @@ vim.api.nvim_set_hl(0, 'TSNamespace', { fg = cp.blue, italic = true })
 vim.api.nvim_set_hl(0, 'TSNote', { fg = cp.black2, bg = cp.blue })
 vim.api.nvim_set_hl(0, 'TSNumber', { fg = math_logic, bold = true })
 vim.api.nvim_set_hl(0, 'TSOperator', { fg = operators, bold = true })
-vim.api.nvim_set_hl(0, 'TSParameter', { fg = cp.yellow, italic = true })
+vim.api.nvim_set_hl(0, 'TSParameter', { fg = cp.maroon, italic = true })
 -- vim.api.nvim_set_hl(0, 'TSParameterReference', {})
 vim.api.nvim_set_hl(0, 'TSProperty', { fg = cp.teal, italic = true })
-vim.api.nvim_set_hl(0, 'TSPunctBracket', { fg = delimeters })
+-- vim.api.nvim_set_hl(0, 'TSPunctBracket', { fg = cp.gray2 })
 vim.api.nvim_set_hl(0, 'TSPunctDelimiter', { fg = cp.gray2 })
 vim.api.nvim_set_hl(0, 'TSPunctSpecial', { fg = cp.sky, bold = true })
 vim.api.nvim_set_hl(0, 'TSRepeat', { fg = cp.mauve, italic = true })
@@ -459,8 +462,8 @@ vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = cp.sky })
 vim.api.nvim_set_hl(0, 'TSText', { fg = cp.white })
 vim.api.nvim_set_hl(0, 'TSTextReference', { fg = cp.lavender, bold = true })
 vim.api.nvim_set_hl(0, 'TSTitle', { fg = cp.blue, bold = true })
-vim.api.nvim_set_hl(0, 'TSType', { fg = cp.cotton })
-vim.api.nvim_set_hl(0, 'TSTypeBuiltin', { fg = cp.cotton })
+vim.api.nvim_set_hl(0, 'TSType', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'TSTypeBuiltin', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'TSUnderline', { underline = true })
 vim.api.nvim_set_hl(0, 'TSURI', { fg = cp.rosewater, italic = true, underline = true })
 vim.api.nvim_set_hl(0, 'TSVariable', { fg = cp.white, italic = true })
