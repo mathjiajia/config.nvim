@@ -3,7 +3,7 @@ local snips, autosnips = {}, {}
 local tex = require 'utils.latex'
 
 autosnips = {
-	s({ trig = 'rmap', name = 'rational map arrow' }, {
+	s({ trig = 'rmap', name = 'rational map arrow', wordTrig = false }, {
 		d(1, function()
 			if not tex.in_xymatrix() then
 				return sn(nil, { t '\\dashrightarrow ' })
@@ -12,7 +12,7 @@ autosnips = {
 			end
 		end),
 	}, { condition = tex.in_mathzone }),
-	s({ trig = 'emb', name = 'embeddeing map arrow' }, {
+	s({ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false }, {
 		d(1, function()
 			if not tex.in_xymatrix() then
 				return sn(nil, { t '\\hookrightarrow ' })
