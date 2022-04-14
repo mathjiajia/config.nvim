@@ -66,16 +66,16 @@ elseif vim.g.theme_style == 'storm' then
 	}
 else
 	cp = {
-		rosewater = '#E5AC9F',
-		flamingo = '#DF7F7F',
+		rosewater = '#DC907F',
+		flamingo = '#DD7878',
 		pink = '#EC83D0',
-		mauve = '#8F46EF',
-		red = '#D20F39',
+		mauve = '#822FEE',
+		red = '#BB0D33',
 		maroon = '#E63B4A',
-		peach = '#FE6811',
+		peach = '#FE640B',
 		yellow = '#E49320',
-		green = '#509E31',
-		teal = '#289886',
+		green = '#40A02B',
+		teal = '#179299',
 		sky = '#04A5E5',
 		blue = '#1D65F5',
 		sapphire = '#209FB5',
@@ -471,47 +471,32 @@ vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = cp.red, italic = true })
 vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.black2, bg = cp.yellow })
 
 --- LANGUAGE ---
+------ BASH ------
+-- vim.api.nvim_set_hl(0, 'bashTSFuncBuiltin', { fg = cp.red, italic = true })
+-- vim.api.nvim_set_hl(0, 'bashTSParameter', { fg = cp.yellow, italic = true })
+
+------ CSS ------
+vim.api.nvim_set_hl(0, 'cssTSProperty', { fg = cp.cotton, italic = true })
+
+------ CPP ------
+vim.api.nvim_set_hl(0, 'cppTSProperty', { fg = cp.white })
+
 ------ HTML ------
 -- vim.api.nvim_set_hl(0, 'htmlH1', { fg = cp.pink, bold = true })
 -- vim.api.nvim_set_hl(0, 'htmlH2', { fg = cp.blue, bold = true })
 
------- LATEX ------
--- vim.api.nvim_set_hl(0, 'latexTSComment', {})
--- vim.api.nvim_set_hl(0, 'latexTSEmphasis', {})
--- vim.api.nvim_set_hl(0, 'latexTSEnvironment', {})
--- vim.api.nvim_set_hl(0, 'latexTSEnvironmentName', {})
--- vim.api.nvim_set_hl(0, 'latexTSFuncMacro', {})
--- vim.api.nvim_set_hl(0, 'latexTSFunction', {})
--- vim.api.nvim_set_hl(0, 'latexTSInclude', {})
--- vim.api.nvim_set_hl(0, 'latexTSMath', {})
--- vim.api.nvim_set_hl(0, 'latexTSNamespace', {})
--- vim.api.nvim_set_hl(0, 'latexTSOperator', {})
--- vim.api.nvim_set_hl(0, 'latexTSParameter', {})
--- vim.api.nvim_set_hl(0, 'latexTSPunctBracket', {})
--- vim.api.nvim_set_hl(0, 'latexTSPunctSpecial', {})
--- vim.api.nvim_set_hl(0, 'latexTSString', {})
--- vim.api.nvim_set_hl(0, 'latexTSStringRegex', {})
--- vim.api.nvim_set_hl(0, 'latexTSTextReference', {})
--- vim.api.nvim_set_hl(0, 'latexTSTitle', {})
+------ JAVA ------
+vim.api.nvim_set_hl(0, 'javaTSField', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'javaTSType', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'javaTSConstant', { fg = cp.teal })
+
+------ JSON ------
+vim.api.nvim_set_hl(0, 'jsonTSLabel', { fg = cp.blue })
 
 ------ LUA ------
--- vim.api.nvim_set_hl(0, 'LuaTSBoolean', {})
--- vim.api.nvim_set_hl(0, 'LuaTSComment', {})
--- vim.api.nvim_set_hl(0, 'luaTSConditional', {})
 vim.api.nvim_set_hl(0, 'luaTSConstructor', { fg = cp.lavender })
 -- vim.api.nvim_set_hl(0, 'luaTSField', { fg = cp.rosewater })
--- vim.api.nvim_set_hl(0, 'luaTSFunction', {})
-vim.api.nvim_set_hl(0, 'luaTSFuncBuiltin', { fg = cp.teal, italic = true })
--- vim.api.nvim_set_hl(0, 'LuaTSKeyword', {})
--- vim.api.nvim_set_hl(0, 'luaTSKeywordFunction', {})
--- vim.api.nvim_set_hl(0, 'luaTSMethod', {})
--- vim.api.nvim_set_hl(0, 'luaTSNumber', {})
--- vim.api.nvim_set_hl(0, 'luaTSOperator', {})
--- vim.api.nvim_set_hl(0, 'luaTSParameter', {})
--- vim.api.nvim_set_hl(0, 'luaTSPunctBracket', {})
--- vim.api.nvim_set_hl(0, 'luaTSPunctDelimiter', {})
--- vim.api.nvim_set_hl(0, 'luaTSString', {})
--- vim.api.nvim_set_hl(0, 'LuaTSVariable', {})
+-- vim.api.nvim_set_hl(0, 'luaTSFuncBuiltin', { fg = cp.teal, italic = true })
 
 ------ MARKDOWN ------
 -- vim.api.nvim_set_hl(0, 'mkdHeading', { fg = cp.peach, bold = true })
@@ -531,38 +516,19 @@ vim.api.nvim_set_hl(0, 'luaTSFuncBuiltin', { fg = cp.teal, italic = true })
 -- vim.api.nvim_set_hl(0, 'markdownH5', { fg = cp.pink })
 -- vim.api.nvim_set_hl(0, 'markdownH6', { fg = cp.teal })
 
------- NEORG ------
--- vim.api.nvim_set_hl(0, 'NeorgCodeBlock', {})
--- vim.api.nvim_set_hl(0, 'NeorgLinkLocationURL', {})
+------ TSX ------
+vim.api.nvim_set_hl(0, 'tsxTSConstructor', { fg = cp.lavender })
+vim.api.nvim_set_hl(0, 'tsxTSTagDelimiter', { fg = cp.maroon })
+vim.api.nvim_set_hl(0, 'tsxTSTagAttribute', { fg = cp.mauve })
+vim.api.nvim_set_hl(0, 'tsxTSTagProperty', { fg = cp.cotton })
 
------- PYTHON ------
--- vim.api.nvim_set_hl(0, 'pythonTSBoolean', {})
--- vim.api.nvim_set_hl(0, 'pythonTSComment', {})
--- vim.api.nvim_set_hl(0, 'pythonTSConditional', {})
--- vim.api.nvim_set_hl(0, 'pythonTSConstant', {})
--- vim.api.nvim_set_hl(0, 'pythonTSConstBuiltin', {})
--- vim.api.nvim_set_hl(0, 'pythonTSConstructor', {})
--- vim.api.nvim_set_hl(0, 'pythonTSField', {})
--- vim.api.nvim_set_hl(0, 'pythonTSFuncBuiltin', {})
--- vim.api.nvim_set_hl(0, 'pythonTSFunction', {})
--- vim.api.nvim_set_hl(0, 'pythonTSInclude', {})
--- vim.api.nvim_set_hl(0, 'pythonTSKeyword', {})
--- vim.api.nvim_set_hl(0, 'pythonTSKeywordFunction', {})
--- vim.api.nvim_set_hl(0, 'pythonTSKeywordOperator', {})
--- vim.api.nvim_set_hl(0, 'pythonTSKeywordReturn', {})
--- vim.api.nvim_set_hl(0, 'pythonTSMethod', {})
--- vim.api.nvim_set_hl(0, 'pythonTSNumber', {})
--- vim.api.nvim_set_hl(0, 'pythonTSOperator', {})
--- vim.api.nvim_set_hl(0, 'pythonTSParameter', {})
--- vim.api.nvim_set_hl(0, 'pythonTSPunctBracket', {})
--- vim.api.nvim_set_hl(0, 'pythonTSPunctDelimiter', {})
--- vim.api.nvim_set_hl(0, 'pythonTSRepeat', {})
--- vim.api.nvim_set_hl(0, 'pythonTSString', {})
--- vim.api.nvim_set_hl(0, 'pythonTSStringEscape', {})
--- vim.api.nvim_set_hl(0, 'pythonTSType', {})
--- vim.api.nvim_set_hl(0, 'pythonTSTypeBuiltin', {})
--- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
--- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
+------ TYPESCRIPT ------
+vim.api.nvim_set_hl(0, 'typescriptTSProperty', { fg = cp.lavender, italic = true })
+vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = cp.lavender })
+vim.api.nvim_set_hl(0, 'typescriptTSTagProperty', { fg = cp.cotton })
+
+------ YAML ------
+vim.api.nvim_set_hl(0, 'yamlTSField', { fg = cp.blue })
 
 ------ TERMINAL ------
 vim.g.terminal_color_0 = cp.gray0
