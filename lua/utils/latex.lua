@@ -3,28 +3,6 @@ local M = {}
 local ts = require 'vim.treesitter'
 local query = require 'vim.treesitter.query'
 
-local MATH_ENVIRONMENTS = {
-	['{displaymath}'] = true,
-	-- ['{displaymath*}'] = true,
-	['{equation}'] = true,
-	['{equation*}'] = true,
-	['{multline}'] = true,
-	['{multline*}'] = true,
-	['{eqnarray}'] = true,
-	['{eqnarray*}'] = true,
-	['{align}'] = true,
-	['{align*}'] = true,
-	['{array}'] = true,
-	['{array*}'] = true,
-	['{split}'] = true,
-	['{split*}'] = true,
-	['{alignat}'] = true,
-	['{alignat*}'] = true,
-	['[gather]'] = true,
-	['[gather*]'] = true,
-	['{flalign}'] = true,
-	['{flalign*}'] = true,
-}
 local MATH_NODES = {
 	displayed_equation = true,
 	inline_formula = true,
@@ -69,52 +47,28 @@ local function get_node_at_cursor()
 end
 
 function M.in_text()
-	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
-
 	while node do
 		if node:type() == 'text_mode' then
 			return true
-		end
-		if MATH_NODES[node:type()] then
+		elseif MATH_NODES[node:type()] or node:type() == 'math_environment' then
 			return false
-		end
-		if node:type() == 'generic_environment' then
-			local begin = node:child(0)
-			local names = begin and begin:field 'name'
-
-			if names and names[1] and MATH_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
-				return false
-			end
 		end
 		node = node:parent()
 	end
-
 	return true
 end
 
 function M.in_mathzone()
-	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
-
 	while node do
 		if node:type() == 'text_mode' then
 			return false
-		end
-		if MATH_NODES[node:type()] then
+		elseif MATH_NODES[node:type()] or node:type() == 'math_environment' then
 			return true
-		end
-		if node:type() == 'generic_environment' then
-			local begin = node:child(0)
-			local names = begin and begin:field 'name'
-
-			if names and names[1] and MATH_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
-				return true
-			end
 		end
 		node = node:parent()
 	end
-
 	return false
 end
 
@@ -122,7 +76,7 @@ function M.in_align()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
-		if node:type() == 'generic_environment' then
+		if node:type() == 'math_environment' then
 			local begin = node:child(0)
 			local names = begin and begin:field 'name'
 
