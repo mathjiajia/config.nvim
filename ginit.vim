@@ -1,4 +1,5 @@
-set guifont=JetBrainsMono\ Nerd\ Font:h24
+set guifont=JetBrainsMono\ Nerd\ Font:h26
+let g:neovide_input_use_logo=v:true
 
 nnoremap <silent> <D-q> <Cmd>wq<CR>
 nnoremap <silent> <D-s> <Cmd>write<CR>

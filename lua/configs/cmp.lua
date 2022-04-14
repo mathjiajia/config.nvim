@@ -66,12 +66,12 @@ cmp.setup {
 		{ name = 'buffer', keyword_length = 4 },
 		{ name = 'rg', keyword_length = 5 },
 	},
-	window = {
-		completion = {
-			border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
-			-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-		},
-	},
+	-- window = {
+	-- 	completion = {
+	-- 		border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+	-- 		-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	-- 	},
+	-- },
 }
 
 cmp.setup.cmdline('/', {

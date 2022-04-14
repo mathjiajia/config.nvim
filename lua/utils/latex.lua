@@ -6,6 +6,8 @@ local query = require 'vim.treesitter.query'
 local MATH_NODES = {
 	displayed_equation = true,
 	inline_formula = true,
+	-- math_set = true,
+	math_environment = true,
 }
 local ALIGN_ENVIRONMENTS = {
 	['{multline}'] = true,
@@ -51,7 +53,7 @@ function M.in_text()
 	while node do
 		if node:type() == 'text_mode' then
 			return true
-		elseif MATH_NODES[node:type()] or node:type() == 'math_environment' then
+		elseif MATH_NODES[node:type()] then
 			return false
 		end
 		node = node:parent()
@@ -64,7 +66,7 @@ function M.in_mathzone()
 	while node do
 		if node:type() == 'text_mode' then
 			return false
-		elseif MATH_NODES[node:type()] or node:type() == 'math_environment' then
+		elseif MATH_NODES[node:type()] then
 			return true
 		end
 		node = node:parent()

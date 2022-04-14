@@ -47,11 +47,11 @@ autosnips = {
 	s({ trig = 'det', name = 'det' }, { t '\\det' }, { condition = tex.in_mathzone }),
 	s({ trig = 'dim', name = 'dim' }, { t '\\dim' }, { condition = tex.in_mathzone }),
 	s({ trig = 'hom', name = 'hom' }, { t '\\hom' }, { condition = tex.in_mathzone }),
-	s({ trig = 'inf', name = 'inf' }, { t '\\inf' }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'inf', name = 'inf' }, { t '\\inf' }, { condition = tex.in_mathzone }),
 	s({ trig = 'max', name = 'max' }, { t '\\max' }, { condition = tex.in_mathzone }),
 	s({ trig = 'min', name = 'min' }, { t '\\min' }, { condition = tex.in_mathzone }),
 	s({ trig = 'ker', name = 'ker' }, { t '\\ker' }, { condition = tex.in_mathzone }),
-	s({ trig = 'sup', name = 'sup' }, { t '\\sup' }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'sup', name = 'sup' }, { t '\\sup' }, { condition = tex.in_mathzone }),
 
 	s(
 		{ trig = '(%w)//', name = 'fraction with a single numerator', regTrig = true },

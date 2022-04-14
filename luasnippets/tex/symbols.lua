@@ -226,7 +226,7 @@ autosnips = {
 	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcup' }, { condition = tex.in_mathzone }),
 	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcap' }, { condition = tex.in_mathzone }),
 	s({ trig = 'sub', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
-	s({ trig = 'sup', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
+	-- s({ trig = 'sup', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
 
 	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t '\\cNE(', i(1), t ')' }, { condition = tex.in_mathzone }),
 	s(
