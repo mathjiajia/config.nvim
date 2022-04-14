@@ -297,8 +297,14 @@ vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = colors.diag.warning
 -- vim.api.nvim_set_hl(0, 'AerialVariableIcon', { link = 'TSVariableBuiltin' })
 
 ---------- CMP ----------
--- vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = colors.fg, bg = colors.bg_popup })
--- vim.api.nvim_set_hl(0, 'CmpDocumentationBorder', { fg = colors.fg_border, bg = colors.bg_popup })
+vim.api.nvim_set_hl(0, 'CmpDocumentation', { link = 'NormalFloat' })
+vim.api.nvim_set_hl(0, 'CmpDocumentationBorder', { link = 'FloatBorder' })
+vim.api.nvim_set_hl(0, 'CmpCompletion', { link = 'Pmenu' })
+vim.api.nvim_set_hl(0, 'CmpCompletionSel', { link = 'PmenuSel' })
+vim.api.nvim_set_hl(0, 'CmpCompletionBorder', { fg = colors.bg_search, bg = colors.bg_menu })
+vim.api.nvim_set_hl(0, 'CmpCompletionThumb', { link = 'PmenuThumb' })
+vim.api.nvim_set_hl(0, 'CmpCompletionSbar', { link = 'PmenuSbar' })
+
 vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = colors.fg, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = colors.fg_comment, bg = 'NONE', strikethrough = true })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = colors.fn, bg = 'NONE' })
