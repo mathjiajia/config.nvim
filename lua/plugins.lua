@@ -117,7 +117,6 @@ require('packer').startup(function()
 
 	use {
 		'nvim-neo-tree/neo-tree.nvim',
-		-- branch = 'main',
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons',

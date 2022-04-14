@@ -4,16 +4,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnosti
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostics' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Loclist diagnostics' })
 
-local signs = { Error = '', Warn = '', Info = '', Hint = '' }
-for sign, icon in pairs(signs) do
-	vim.fn.sign_define('DiagnosticSign' .. sign, {
-		text = icon,
-		texthl = 'Diagnostic' .. sign,
-		linehl = false,
-		numhl = 'Diagnostic' .. sign,
-	})
-end
-
 local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })

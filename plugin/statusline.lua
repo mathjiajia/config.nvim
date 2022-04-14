@@ -14,13 +14,13 @@ vim.api.nvim_set_hl(0, 'User4', { fg = lnfg, bg = nbg })
 
 local function hunks()
 	if vim.b.gitsigns_status then
-		local status = ' %1* ' .. vim.b.gitsigns_head
+		local status = ' %1* ' .. vim.b.gitsigns_head
 		if vim.b.gitsigns_status ~= '' then
 			status = status .. ' | ' .. vim.b.gitsigns_status
 		end
 		return status .. ' '
 	elseif vim.g.gitsigns_head then
-		return ' %1* ' .. vim.g.gitsigns_head .. ' '
+		return ' %1* ' .. vim.g.gitsigns_head .. ' '
 	end
 	return ''
 end
@@ -45,7 +45,7 @@ local function lsp_status()
 	end
 
 	local status = {}
-	for _, ty in ipairs { { 'Error', '' }, { 'Warn', '' }, { 'Info', '' }, { 'Hint', '' } } do
+	for _, ty in ipairs { { 'Error', '●' }, { 'Warn', '●' }, { 'Info', '●' }, { 'Hint', '●' } } do
 		local n = vim.diagnostic.get(0, { severity = ty[1] })
 		if #n > 0 then
 			table.insert(status, ('%%#Diagnostic%sStatus# %s %s'):format(ty[1], ty[2], #n))
@@ -56,7 +56,7 @@ local function lsp_status()
 		status[#status + 1] = vim.g.metals_status:gsub('%%', '%%%%')
 	end
 	local r = table.concat(status, ' ')
-	return r == '' and '  LSP' or r
+	return r == '' and ' ◍ LSP' or r
 end
 
 local function file_info()

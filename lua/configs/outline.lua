@@ -8,57 +8,28 @@ require('aerial').setup {
 		'Constructor', --
 		'Enum', --
 		'EnumMember', --
-		'Event',
-		'Field',
+		-- 'Event',
+		-- 'Field',
 		-- 'File',
 		'Function', --
 		'Interface', --
 		-- 'Key',
 		'Method', --
 		'Module', --
-		'Namespace',
+		-- 'Namespace',
 		-- 'Null',
 		-- 'Number',
 		'Object',
 		-- 'Operator',
 		-- 'Package',
-		'Property',
+		-- 'Property',
 		-- 'String',
 		'Struct', --
-		'TypeParameter',
+		-- 'TypeParameter',
 		'Variable', --
 	},
 	highlight_on_hover = true,
 	highlight_on_jump = 150,
-	icons = {
-		-- File = '',
-		Module = '',
-		Namespace = '',
-		-- Package = '',
-		Class = '',
-		Method = '',
-		Property = '',
-		Field = '',
-		Constructor = '',
-		Enum = '',
-		Interface = '',
-		Function = '',
-		Variable = '',
-		Constant = '',
-		String = '',
-		-- Number = '',
-		-- Boolean = '',
-		-- Array = '',
-		Object = '',
-		-- Key = '',
-		-- Null ='',
-		EnumMember = '',
-		Struct = '',
-		Event = '',
-		-- Operator = '',
-		TypeParameter = '',
-		Collapsed = '',
-	},
 	min_width = 25,
 	nerd_font = true,
 	on_attach = function(bufnr)
