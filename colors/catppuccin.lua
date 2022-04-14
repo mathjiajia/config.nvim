@@ -19,7 +19,7 @@ if vim.g.theme_style == 'dark' then
 		sky = '#89DCEB',
 		blue = '#90C1FB',
 		sapphire = '#74C7EC',
-		lavender = '#C9CBFF',
+		lavender = '#B4BEFE',
 		white = '#C6D0F5',
 		gray2 = '#ADB5D8',
 		gray1 = '#959BBA',
@@ -49,7 +49,7 @@ elseif vim.g.theme_style == 'storm' then
 		sky = '#89DCFD',
 		blue = '#83ABF9',
 		sapphire = '#34C3DC',
-		lavender = '#C2CBFE',
+		lavender = '#B8C1FE',
 		white = '#C5CFF5',
 		gray2 = '#A6AFD2',
 		gray1 = '#8289AA',
@@ -475,9 +475,6 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.black2, bg = cp.yellow })
 -- vim.api.nvim_set_hl(0, 'bashTSFuncBuiltin', { fg = cp.red, italic = true })
 -- vim.api.nvim_set_hl(0, 'bashTSParameter', { fg = cp.yellow, italic = true })
 
------- CSS ------
-vim.api.nvim_set_hl(0, 'cssTSProperty', { fg = cp.cotton, italic = true })
-
 ------ CPP ------
 vim.api.nvim_set_hl(0, 'cppTSProperty', { fg = cp.white })
 
@@ -486,17 +483,15 @@ vim.api.nvim_set_hl(0, 'cppTSProperty', { fg = cp.white })
 -- vim.api.nvim_set_hl(0, 'htmlH2', { fg = cp.blue, bold = true })
 
 ------ JAVA ------
-vim.api.nvim_set_hl(0, 'javaTSField', { fg = cp.red })
-vim.api.nvim_set_hl(0, 'javaTSType', { fg = cp.yellow })
-vim.api.nvim_set_hl(0, 'javaTSConstant', { fg = cp.teal })
+-- vim.api.nvim_set_hl(0, 'javaTSField', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'javaTSType', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'javaTSConstant', { fg = cp.teal })
 
 ------ JSON ------
-vim.api.nvim_set_hl(0, 'jsonTSLabel', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'jsonTSLabel', { fg = cp.blue })
 
 ------ LUA ------
 vim.api.nvim_set_hl(0, 'luaTSConstructor', { fg = cp.lavender })
--- vim.api.nvim_set_hl(0, 'luaTSField', { fg = cp.rosewater })
--- vim.api.nvim_set_hl(0, 'luaTSFuncBuiltin', { fg = cp.teal, italic = true })
 
 ------ MARKDOWN ------
 -- vim.api.nvim_set_hl(0, 'mkdHeading', { fg = cp.peach, bold = true })
@@ -518,14 +513,10 @@ vim.api.nvim_set_hl(0, 'luaTSConstructor', { fg = cp.lavender })
 
 ------ TSX ------
 vim.api.nvim_set_hl(0, 'tsxTSConstructor', { fg = cp.lavender })
-vim.api.nvim_set_hl(0, 'tsxTSTagDelimiter', { fg = cp.maroon })
 vim.api.nvim_set_hl(0, 'tsxTSTagAttribute', { fg = cp.mauve })
-vim.api.nvim_set_hl(0, 'tsxTSTagProperty', { fg = cp.cotton })
 
 ------ TYPESCRIPT ------
-vim.api.nvim_set_hl(0, 'typescriptTSProperty', { fg = cp.lavender, italic = true })
 vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = cp.lavender })
-vim.api.nvim_set_hl(0, 'typescriptTSTagProperty', { fg = cp.cotton })
 
 ------ YAML ------
 vim.api.nvim_set_hl(0, 'yamlTSField', { fg = cp.blue })
