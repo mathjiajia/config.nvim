@@ -225,6 +225,8 @@ autosnips = {
 	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t '\\cup ' }, { condition = tex.in_mathzone }),
 	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcup' }, { condition = tex.in_mathzone }),
 	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcap' }, { condition = tex.in_mathzone }),
+	s({ trig = 'sub', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
+	s({ trig = 'sup', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
 
 	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t '\\cNE(', i(1), t ')' }, { condition = tex.in_mathzone }),
 	s(
@@ -251,8 +253,13 @@ autosnips = {
 
 	s(
 		{ trig = '==', name = 'align equls', wordTrig = false },
-		{ t { '&= ' }, i(1), t { ' \\\\', '' } },
+		{ t '&= ' },
 		{ condition = tex.in_align }
+	),
+	s(
+		{ trig = 'ar', name = 'normal arrows' },
+		{ t '\\ar[', i(1), t ']' },
+		{ condition = tex.in_xymatrix }
 	),
 
 	s(
@@ -276,10 +283,6 @@ autosnips = {
 	s({ trig = ';=', name = 'equiv ≡', wordTrig = false }, { t '\\equiv' }, { condition = tex.in_mathzone }),
 	s({ trig = ';\\', name = 'setminus \\', wordTrig = false }, { t '\\setminus' }, { condition = tex.in_mathzone }),
 	s({ trig = ';.', name = 'emptyset ∅', wordTrig = false }, { t '\\cdot' }, { condition = tex.in_mathzone }),
-	s({ trig = ';[', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
-	s({ trig = ';]', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
-	s({ trig = ';(', name = 'subset ⊂', wordTrig = false }, { t '\\subset' }, { condition = tex.in_mathzone }),
-	s({ trig = ';)', name = 'supset ⊃', wordTrig = false }, { t '\\supset' }, { condition = tex.in_mathzone }),
 	s({ trig = ';A', name = 'forall ∀', wordTrig = false }, { t '\\forall' }, { condition = tex.in_mathzone }),
 	s({ trig = ';E', name = 'exists ∃', wordTrig = false }, { t '\\exists' }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'xmm', wordTrig = false, name = 'x_m' }, { t('x_{m}') }, { condition = tex.in_mathzone }),
