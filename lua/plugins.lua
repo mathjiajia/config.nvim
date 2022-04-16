@@ -31,8 +31,9 @@ require('packer').startup(function()
 	}
 	-- use('nvim-treesitter/nvim-treesitter-textobjects')
 	use 'nvim-treesitter/playground'
-	use 'p00f/nvim-ts-rainbow'
 	-- use ('lewis6991/nvim-treesitter-context')
+	-- use 'theHamsta/nvim-treesitter-pairs'
+	use 'p00f/nvim-ts-rainbow'
 	use {
 		'lukas-reineke/indent-blankline.nvim',
 		config = [[require('configs.indentline')]],
@@ -168,8 +169,8 @@ require('packer').startup(function()
 	}
 	use 'nvim-neorg/neorg-telescope'
 
-	use {
-		'dstein64/vim-startuptime',
-		config = [[vim.g.startuptime_tries = 10]],
-	}
+	-- use {
+	-- 	'dstein64/vim-startuptime',
+	-- 	config = [[vim.g.startuptime_tries = 10]],
+	-- }
 end)
