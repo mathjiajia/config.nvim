@@ -1,10 +1,6 @@
 local gs = require 'gitsigns'
 
 gs.setup {
-	signs = {
-		add = { text = '┃' },
-		change = { text = '┃' },
-	},
 	on_attach = function(bufnr)
 		-- NAVIGATION
 		vim.keymap.set('n', ']c', function()
