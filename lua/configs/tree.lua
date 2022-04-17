@@ -3,11 +3,6 @@ vim.g.neo_tree_remove_legacy_commands = 1
 require('neo-tree').setup {
 	default_component_configs = {
 		indent = { padding = 0, with_markers = true },
-		icon = {
-			folder_closed = '',
-			folder_open = '',
-			folder_empty = '',
-		},
 	},
 	window = { width = 30 },
 	filesystem = {
