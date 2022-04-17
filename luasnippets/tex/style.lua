@@ -58,7 +58,7 @@ autosnips = {
 		{ t '_{\\mathrm{', i(1), t '}}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '"', name = 'Quotation' }, { t '``', i(1), t "''" }, { condition = tex.in_text }),
+	-- s({ trig = '[^\\]"', name = 'Quotation', regTrig = true }, { t '``', i(1), t "''" }, { condition = tex.in_text }),
 }
 
 return snips, autosnips
