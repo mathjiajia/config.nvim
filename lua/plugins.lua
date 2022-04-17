@@ -101,7 +101,10 @@ require('packer').startup(function()
 
 	use {
 		'nvim-telescope/telescope.nvim',
-		requires = 'nvim-lua/plenary.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'kyazdani42/nvim-web-devicons'
+		},
 		config = [[require('configs.telescope')]],
 	}
 	use {
@@ -168,9 +171,4 @@ require('packer').startup(function()
 		config = [[require('configs.neorg')]],
 	}
 	use 'nvim-neorg/neorg-telescope'
-
-	-- use {
-	-- 	'dstein64/vim-startuptime',
-	-- 	config = [[vim.g.startuptime_tries = 10]],
-	-- }
 end)
