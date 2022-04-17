@@ -319,30 +319,20 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
 -- vim.api.nvim_set_hl(0, 'AerialVariableIcon', { link = 'TSVariableBuiltin' })
 
 ------ CMP ------
-vim.api.nvim_set_hl(0, 'CompeDocumentation', { link = 'Pmenu' })
-vim.api.nvim_set_hl(0, 'CompeDocumentationBorder', { link = 'Pmenu' })
-
-vim.api.nvim_set_hl(0, 'CmpItemAbbr', { link = 'Pmenu' })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = c.vscGray, strikethrough = true })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = c.vscPopupMatchBlue, bold = true })
-vim.api.nvim_set_hl(0, 'CmpItemKind', { link = 'Pmenu' })
 
-vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'CmpItemKindConstructor' })
-vim.api.nvim_set_hl(0, 'CmpItemKindModule', { link = 'CmpItemKindKeyword' })
-vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { link = 'TSOperator' })
-vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'TSParameterReference' })
-vim.api.nvim_set_hl(0, 'CmpItemKindValue', { link = 'TSField' })
-vim.api.nvim_set_hl(0, 'CmpItemKindField', { link = 'TSField' })
-vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { link = 'TSField' })
-vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { link = 'TSText' })
-vim.api.nvim_set_hl(0, 'CmpItemKindColor', { link = 'cssColor' })
-vim.api.nvim_set_hl(0, 'CmpItemKindFile', { link = 'TSURI' })
-vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { link = 'TSURI' })
-vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { link = 'TSConstant' })
-vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { link = 'TSField' })
-vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { link = 'TSConstant' })
-vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { link = 'TSStructure' })
-vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSParameter' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = c.vscBlue })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = c.vscBlue })
+
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = c.vscLightBlue })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = c.vscLightBlue })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = c.vscLightBlue })
+
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = c.vscPink })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = c.vscPink })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = c.vscFront })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = c.vscFront })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = c.vscFront })
 
 ------ GITSIGNS ------
 vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.vscGreen })
