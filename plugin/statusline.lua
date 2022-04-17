@@ -2,10 +2,10 @@ local M = {}
 
 local nbg = vim.api.nvim_get_hl_by_name('StatusLine', true).background
 local ncbg = vim.api.nvim_get_hl_by_name('StatusLineNC', true).background
-local gitfg = vim.api.nvim_get_hl_by_name('String', true).foreground
+local gitfg = vim.api.nvim_get_hl_by_name('Normal', true).foreground
 local dictfg = vim.api.nvim_get_hl_by_name('Directory', true).foreground
 local posfg = vim.api.nvim_get_hl_by_name('Float', true).foreground
-local lnfg = vim.api.nvim_get_hl_by_name('Error', true).foreground
+local lnfg = vim.api.nvim_get_hl_by_name('String', true).foreground
 
 vim.api.nvim_set_hl(0, 'User1', { fg = gitfg, bg = nbg })
 vim.api.nvim_set_hl(0, 'User2', { fg = dictfg, bg = ncbg })
@@ -45,7 +45,7 @@ local function lsp_status()
 	end
 
 	local status = {}
-	for _, ty in ipairs { { 'Error', '●' }, { 'Warn', '●' }, { 'Info', '●' }, { 'Hint', '●' } } do
+	for _, ty in ipairs { { 'Error', '' }, { 'Warn', '' }, { 'Info', '' }, { 'Hint', '' } } do
 		local n = vim.diagnostic.get(0, { severity = ty[1] })
 		if #n > 0 then
 			table.insert(status, ('%%#Diagnostic%sStatus# %s %s'):format(ty[1], ty[2], #n))
