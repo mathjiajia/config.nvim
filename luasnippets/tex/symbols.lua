@@ -281,7 +281,7 @@ autosnips = {
 	s({ trig = ';6', name = 'partial ∂', wordTrig = false }, { t '\\partial' }, { condition = tex.in_mathzone }),
 	s({ trig = ';8', name = 'infinity ∞', wordTrig = false }, { t '\\infty' }, { condition = tex.in_mathzone }),
 	s({ trig = ';=', name = 'equiv ≡', wordTrig = false }, { t '\\equiv' }, { condition = tex.in_mathzone }),
-	s({ trig = ';\\', name = 'setminus \\', wordTrig = false }, { t '\\setminus' }, { condition = tex.in_mathzone }),
+	s({ trig = ';-', name = 'setminus \\', wordTrig = false }, { t '\\setminus' }, { condition = tex.in_mathzone }),
 	s({ trig = ';.', name = 'emptyset ∅', wordTrig = false }, { t '\\cdot' }, { condition = tex.in_mathzone }),
 	s({ trig = ';A', name = 'forall ∀', wordTrig = false }, { t '\\forall' }, { condition = tex.in_mathzone }),
 	s({ trig = ';E', name = 'exists ∃', wordTrig = false }, { t '\\exists' }, { condition = tex.in_mathzone }),
