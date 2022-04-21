@@ -25,13 +25,13 @@ local function hunks()
 	return ''
 end
 
-local function gps()
-	local nvim_gps = require 'nvim-gps'
-	if nvim_gps.is_available() then
-		return nvim_gps.get_location()
-	end
-	return ''
-end
+-- local function gps()
+-- 	local nvim_gps = require 'nvim-gps'
+-- 	if nvim_gps.is_available() then
+-- 		return nvim_gps.get_location()
+-- 	end
+-- 	return ''
+-- end
 
 for _, ty in ipairs { 'Warn', 'Error', 'Info', 'Hint' } do
 	local hl = vim.api.nvim_get_hl_by_name('Diagnostic' .. ty, true)
@@ -63,7 +63,7 @@ local function file_info()
 	local fullname = vim.api.nvim_buf_get_name(0)
 	local shortname = vim.fn.pathshorten(fullname)
 	local simplename = shortname:gsub('^/U/%w+', '~')
-	return ' %2*' .. simplename
+	return '%2* ' .. simplename
 end
 
 local function pad(c, m)
@@ -98,7 +98,7 @@ end
 
 local function generate_statusline(is_active)
 	if is_active and not force_inactive() then
-		return hunks() .. '%#StatusLineNC# ' .. gps() .. '%=' .. lsp_status() .. file_info() .. position()
+		return hunks() .. file_info() .. '%#StatusLineNC# ' .. '%=' .. lsp_status() .. position()
 	else
 		return '%#StatusLineNC# %y '
 	end

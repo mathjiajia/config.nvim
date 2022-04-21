@@ -29,9 +29,12 @@ require('packer').startup(function()
 		run = ':TSUpdate',
 		config = [[require('configs.treesitter')]],
 	}
-	-- use('nvim-treesitter/nvim-treesitter-textobjects')
+	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
 	use 'nvim-treesitter/playground'
-	-- use ('lewis6991/nvim-treesitter-context')
+	-- use {
+	-- 	'lewis6991/nvim-treesitter-context',
+	-- 	config = [[require('configs.context')]]
+	-- }
 	-- use 'theHamsta/nvim-treesitter-pairs'
 	use 'p00f/nvim-ts-rainbow'
 	use {
@@ -46,11 +49,11 @@ require('packer').startup(function()
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
-	use {
-		'SmiteshP/nvim-gps',
-		requires = 'nvim-treesitter/nvim-treesitter',
-		config = [[require('nvim-gps').setup()]],
-	}
+	-- use {
+	-- 	'SmiteshP/nvim-gps',
+	-- 	requires = 'nvim-treesitter/nvim-treesitter',
+	-- 	config = [[require('nvim-gps').setup()]],
+	-- }
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -147,7 +150,9 @@ require('packer').startup(function()
 		config = [[require('configs.session')]],
 	}
 	use '~/Dev/surround.nvim'
-	use 'ggandor/lightspeed.nvim'
+	use { 'ggandor/leap.nvim',
+		config = [[require('leap').set_default_keymaps()]]
+	}
 	use {
 		'windwp/nvim-spectre',
 		config = [[require('configs.search')]],
