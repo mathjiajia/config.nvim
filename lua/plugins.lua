@@ -49,11 +49,6 @@ require('packer').startup(function()
 		'stevearc/aerial.nvim',
 		config = [[require('configs.outline')]],
 	}
-	-- use {
-	-- 	'SmiteshP/nvim-gps',
-	-- 	requires = 'nvim-treesitter/nvim-treesitter',
-	-- 	config = [[require('nvim-gps').setup()]],
-	-- }
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -98,9 +93,6 @@ require('packer').startup(function()
 	}
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
-
-	-- use { 'mfussenegger/nvim-dap', opt = true, config = [[require('config.dap')]] }
-	-- use 'mfussenegger/nvim-dap-python'
 
 	use {
 		'nvim-telescope/telescope.nvim',
@@ -152,10 +144,6 @@ require('packer').startup(function()
 	use '~/Dev/surround.nvim'
 	use { 'ggandor/leap.nvim',
 		config = [[require('leap').set_default_keymaps()]]
-	}
-	use {
-		'windwp/nvim-spectre',
-		config = [[require('configs.search')]],
 	}
 	use {
 		'numtostr/FTerm.nvim',

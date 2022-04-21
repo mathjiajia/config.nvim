@@ -25,14 +25,6 @@ local function hunks()
 	return ''
 end
 
--- local function gps()
--- 	local nvim_gps = require 'nvim-gps'
--- 	if nvim_gps.is_available() then
--- 		return nvim_gps.get_location()
--- 	end
--- 	return ''
--- end
-
 for _, ty in ipairs { 'Warn', 'Error', 'Info', 'Hint' } do
 	local hl = vim.api.nvim_get_hl_by_name('Diagnostic' .. ty, true)
 	local name = ('Diagnostic%sStatus'):format(ty)
