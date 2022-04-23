@@ -21,12 +21,12 @@ if vim.g.theme_style == 'dark' then
 		sapphire = '#74C7EC',
 		lavender = '#B4BEFE',
 		white = '#C6D0F5',
-		gray2 = '#ADB5D8',
-		gray1 = '#959BBA',
-		gray0 = '#7C809D',
-		black5 = '#63657F',
-		black4 = '#4B4B62',
-		black3 = '#323044',
+		gray2 = '#AEB7D9',
+		gray1 = '#969DBC',
+		gray0 = '#7E84A0',
+		black5 = '#666A83',
+		black4 = '#4E5167',
+		black3 = '#36374A',
 		black2 = '#1E1E2E',
 		black1 = '#181825',
 		black0 = '#101019',
@@ -51,20 +51,20 @@ elseif vim.g.theme_style == 'storm' then
 		sapphire = '#34C3DC',
 		lavender = '#B8C1FE',
 		white = '#C5CFF5',
-		gray2 = '#A6AFD2',
-		gray1 = '#8289AA',
-		gray0 = '#5F6587',
-		black5 = '#4F5473',
-		black4 = '#3E435E',
-		black3 = '#2B3045',
+		gray2 = '#AEB7DA',
+		gray1 = '#979FC0',
+		gray0 = '#8087A5',
+		black5 = '#696F8A',
+		black4 = '#52576F',
+		black3 = '#3B3F55',
 		black2 = '#24273A',
-		black1 = '#1F2233',
-		black0 = '#1A1B26',
+		black1 = '#1F2232',
+		black0 = '#181926',
 
 		teledark = '#1E2134',
 		teleblack = '#2A2D40',
 	}
-else
+elseif vim.g.theme_style == 'dawn' then
 	cp = {
 		rosewater = '#DC907F',
 		flamingo = '#DD7878',
@@ -94,7 +94,49 @@ else
 		teledark = '#FFFFFF',
 		teleblack = '#F6F6F6',
 	}
+else
+	cp = {
+		rosewater = '#F5E0DC', -- not ready
+		flamingo = '#F2CDCD',
+		pink = '#F5C2E7',
+		mauve = '#CB9DDF', -- g +
+		red = '#E78284', -- g +?
+		maroon = '#EA999C', -- g
+		peach = '#EE9E76', -- g +
+		yellow = '#E1C38A', -- g +
+		green = '#A9CA87', -- g +
+		teal = '#81C8BE', -- g +
+		sky = '#99D1DB', -- g? +
+		blue = '#90AAE9', -- g +?
+		sapphire = '#85C1DC', -- gotta tweak this one
+		lavender = '#BFB7E4', -- g
+		white = '#C6CEEF', -- g
+		gray2 = '#B1B8D7',
+		gray1 = '#9BA2BF',
+		gray0 = '#868CA7',
+		black5 = '#707590',
+		black4 = '#5B5F78', --
+		black3 = '#454960', --
+		black2 = '#303348', --
+		black1 = '#252737',
+		black0 = '#181A25',
+
+		teledark = '#FFFFFF',
+		teleblack = '#F6F6F6',
+	}
 end
+
+local function vary_color(palettes, default)
+	local flvr = vim.g.catppuccin_flavour
+
+	if palettes[flvr] ~= nil then
+		return palettes[flvr]
+	end
+	return default
+end
+
+cp.cursorline = vary_color({ dawn = cp.black1 }, util.darken(cp.black3, 0.64, cp.black2))
+cp.linenr = vary_color({ dawn = cp.black0 }, cp.black4)
 
 local error = cp.red
 local warn = cp.yellow
@@ -110,7 +152,7 @@ vim.api.nvim_set_hl(0, 'ColorColumn', { bg = cp.black3 })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = cp.gray1 })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = cp.black2, bg = cp.white })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = cp.black1 })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.teleblack }) -- cp.black3
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = cp.cursorline }) -- cp.black3
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = cp.lavender })
 -- vim.api.nvim_set_hl(0, 'CursorLineSign', {})
@@ -122,7 +164,7 @@ vim.api.nvim_set_hl(0, 'FoldColumn', { fg = cp.gray0, bg = cp.black2 })
 vim.api.nvim_set_hl(0, 'Folded', { fg = cp.blue, bg = cp.black4 })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = cp.black4, bg = cp.pink })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
-vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.black4 })
+vim.api.nvim_set_hl(0, 'LineNr', { fg = cp.linenr })
 vim.api.nvim_set_hl(0, 'MatchParen', { fg = cp.peach, bold = true })
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = cp.flamingo, bold = true })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = cp.blue })
