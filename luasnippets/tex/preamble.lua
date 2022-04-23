@@ -121,7 +121,7 @@ snips = {
 					'% \\usepackage[',
 					'%   backend=biber,',
 					'%   style=alphabetic,',
-					'%   sorting=ynt,',
+					'%   sorting=nyt,',
 					'%   doi=false,',
 					'%   isbn=false,',
 					'%   url=false',
