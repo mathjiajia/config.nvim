@@ -15,10 +15,10 @@ require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use 'lewis6991/impatient.nvim'
 
-	use {
-		'monkoose/matchparen.nvim',
-		config = [[require('matchparen').setup()]],
-	}
+	-- use {
+	-- 	'monkoose/matchparen.nvim',
+	-- 	config = [[require('matchparen').setup()]],
+	-- }
 	use {
 		'rcarriga/nvim-notify',
 		config = [[vim.notify = require('notify')]],
@@ -31,10 +31,8 @@ require('packer').startup(function()
 	}
 	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
 	use 'nvim-treesitter/playground'
-	-- use {
-	-- 	'lewis6991/nvim-treesitter-context',
-	-- 	config = [[require('configs.context')]]
-	-- }
+	use 'lewis6991/nvim-treesitter-context'
+
 	-- use 'theHamsta/nvim-treesitter-pairs'
 	use 'p00f/nvim-ts-rainbow'
 	use {
