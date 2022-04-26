@@ -4,7 +4,7 @@ vim.g.colors_name = 'catppuccin'
 local util = require 'utils.colors'
 local cp = {}
 
-if vim.g.theme_style == 'dark' then
+if vim.g.theme_style == 'moccha' then
 	cp = {
 		rosewater = '#F5E0DC',
 		flamingo = '#F2CDCD',
@@ -34,7 +34,7 @@ if vim.g.theme_style == 'dark' then
 		teledark = '#1A1826',
 		teleblack = '#252434',
 	}
-elseif vim.g.theme_style == 'storm' then
+elseif vim.g.theme_style == 'macchiato' then
 	cp = {
 		rosewater = '#F5DFDA',
 		flamingo = '#F2CBCB',
@@ -64,32 +64,32 @@ elseif vim.g.theme_style == 'storm' then
 		teledark = '#1E2134',
 		teleblack = '#2A2D40',
 	}
-elseif vim.g.theme_style == 'dawn' then
+elseif vim.g.theme_style == 'latte' then
 	cp = {
 		rosewater = '#DC907F',
 		flamingo = '#DD7878',
 		pink = '#EC83D0',
-		mauve = '#822FEE',
+		mauve = '#9247ED', --
 		red = '#BB0D33',
 		maroon = '#E63B4A',
 		peach = '#FE640B',
 		yellow = '#E49320',
-		green = '#40A02B',
-		teal = '#179299',
+		green = '#53A947', --
+		teal = '#23979F',
 		sky = '#04A5E5',
-		blue = '#1D65F5',
+		blue = '#3474EE',
 		sapphire = '#209FB5',
 		lavender = '#7287FD',
 		white = '#575279',
-		gray2 = '#6C6789',
-		gray1 = '#817C98',
-		gray0 = '#9691A8',
-		black5 = '#AAA6B7',
-		black4 = '#BEBAC6',
-		black3 = '#E1DCE0',
-		black2 = '#FBF8F4',
-		black1 = '#ECEBEB',
-		black0 = '#D0CDD4',
+		gray2 = '#696486',
+		gray1 = '#7B7794',
+		gray0 = '#8E89A1',
+		black5 = '#A09BAE',
+		black4 = '#B2AEBC',
+		black0 = '#C4C0C9',
+		black3 = '#D7D2D6',
+		black1 = '#E9E5E4',
+		black2 = '#FBF7F1',
 
 		teledark = '#FFFFFF',
 		teleblack = '#F6F6F6',
@@ -99,15 +99,15 @@ else
 		rosewater = '#F5E0DC', -- not ready
 		flamingo = '#F2CDCD',
 		pink = '#F5C2E7',
-		mauve = '#CB9DDF', -- g +
+		mauve = '#CA9EE6', -- g +
 		red = '#E78284', -- g +?
 		maroon = '#EA999C', -- g
 		peach = '#EE9E76', -- g +
-		yellow = '#E1C38A', -- g +
-		green = '#A9CA87', -- g +
+		yellow = '#E5C890', -- g +
+		green = '#A6D189', -- g +
 		teal = '#81C8BE', -- g +
 		sky = '#99D1DB', -- g? +
-		blue = '#90AAE9', -- g +?
+		blue = '#8CAAEE', -- g +?
 		sapphire = '#85C1DC', -- gotta tweak this one
 		lavender = '#BFB7E4', -- g
 		white = '#C6CEEF', -- g
@@ -135,8 +135,8 @@ local function vary_color(palettes, default)
 	return default
 end
 
-cp.cursorline = vary_color({ dawn = cp.black1 }, util.darken(cp.black3, 0.64, cp.black2))
-cp.linenr = vary_color({ dawn = cp.black0 }, cp.black4)
+cp.cursorline = vary_color({ latte = cp.black1 }, util.darken(cp.black3, 0.64, cp.black2))
+cp.linenr = vary_color({ latte = cp.black0 }, cp.black4)
 
 local error = cp.red
 local warn = cp.yellow
