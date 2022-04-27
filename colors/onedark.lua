@@ -48,10 +48,58 @@ if vim.g.theme_style == 'dark' then
 	colors.fg_gutter = util.lighten(colors.bg, 0.90)
 	colors.fg_sidebar = colors.fg
 
-	colors.virtual_text_error = util.darken(colors.red, 0.7)
-	colors.virtual_text_warning = util.darken(colors.yellow, 0.7)
-	colors.virtual_text_information = util.darken(colors.blue, 0.7)
-	colors.virtual_text_hint = util.darken(colors.cyan, 0.7)
+	colors.virtual_text_error = util.lighten(colors.red, 0.7)
+	colors.virtual_text_warning = util.lighten(colors.yellow, 0.7)
+	colors.virtual_text_information = util.lighten(colors.blue, 0.7)
+	colors.virtual_text_hint = util.lighten(colors.cyan, 0.8)
+elseif vim.g.theme_style == 'vivid' then
+	colors = {
+		bg = '#282C34',
+		fg = '#ABB2BF',
+		red = '#EF596F',
+		orange = '#D19A66',
+		yellow = '#E5C07B',
+		green = '#89CA78',
+		cyan = '#2BBAC5',
+		blue = '#61AFEF',
+		purple = '#D55FDE',
+		white = '#ABB2BF',
+		black = '#282C34',
+		gray = '#5C6370',
+		highlight = '#E2BE7D',
+
+		-- Git diff
+		diff_add = '#109868',
+		diff_delete = '#9A353D',
+		diff_change = '#E0AF68',
+		diff_text = '#005869',
+
+		teledark = '#22262E',
+		teleblack = '#2E323A',
+
+		Rb1 = '#FFD500',
+		Rb2 = '#D170CD',
+		Rb3 = '#00A2FF',
+	}
+
+	-- Additional colors
+	colors.cursorline = util.lighten(colors.bg, 0.97)
+	colors.color_column = util.lighten(colors.bg, 0.97)
+	colors.comment = util.lighten(colors.gray, 0.80)
+	colors.indentline = util.lighten(colors.bg, 0.93)
+	colors.menu = util.lighten(colors.bg, 0.90)
+	colors.menu_scroll = util.lighten(colors.bg, 0.95)
+	colors.menu_scroll_thumb = util.darken(colors.blue, 0.80)
+	colors.selection = util.lighten(colors.bg, 0.8)
+
+	colors.bg_statusline = util.lighten(colors.bg, 0.95)
+	colors.fg_gutter = util.lighten(colors.bg, 0.90)
+	colors.fg_sidebar = colors.fg
+
+	colors.virtual_text_error = util.lighten(colors.red, 0.7)
+	colors.virtual_text_warning = util.lighten(colors.yellow, 0.7)
+	colors.virtual_text_information = util.lighten(colors.blue, 0.7)
+	colors.virtual_text_hint = util.lighten(colors.cyan, 0.8)
 else
 	colors = {
 		bg = '#FAFAFA',
