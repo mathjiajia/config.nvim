@@ -8,10 +8,6 @@ local settings = {
 			forwardSearchAfter = true,
 			onSave = false,
 		},
-		chktex = {
-			onEdit = false,
-			onOpenAndSave = false,
-		},
 		forwardSearch = {
 			executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
 			args = { '%l', '%p', '%f' },

@@ -8,16 +8,8 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, {
-		buffer = bufnr,
-		desc = 'Add Workspace Folder',
-	})
-	vim.keymap.set(
-		'n',
-		'<leader>wr',
-		vim.lsp.buf.remove_workspace_folder,
-		{ buffer = bufnr, desc = 'Remove Workspace Folder' }
-	)
+	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder' })
+	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = bufnr, desc = 'Remove Workspace Folder' })
 	vim.keymap.set('n', '<leader>wl', function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, { desc = 'List Workspace Folders' })
@@ -40,37 +32,28 @@ local on_attach = function(client, bufnr)
 	end, { buffer = bufnr, desc = 'Type Definitions' })
 
 	if client.resolved_capabilities.document_highlight then
-		vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
-		vim.api.nvim_clear_autocmds { buffer = bufnr, group = 'lsp_document_highlight' }
+		vim.api.nvim_create_augroup('lsp_document_highlight', {})
 		vim.api.nvim_create_autocmd('CursorHold', {
 			callback = vim.lsp.buf.document_highlight,
 			buffer = bufnr,
 			group = 'lsp_document_highlight',
-			desc = 'Document Highlight',
 		})
 		vim.api.nvim_create_autocmd('CursorMoved', {
 			callback = vim.lsp.buf.clear_references,
 			buffer = bufnr,
 			group = 'lsp_document_highlight',
-			desc = 'Clear All the References',
 		})
 	end
 
 	if client.resolved_capabilities.code_action then
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions' })
-		vim.keymap.set(
-			'v',
-			'<leader>ca',
-			vim.lsp.buf.range_code_action,
-			{ buffer = bufnr, desc = 'Range Code Actions' }
-		)
+		vim.keymap.set('v', '<leader>ca', vim.lsp.buf.range_code_action, { buffer = bufnr, desc = 'Range Code Actions' })
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
 				require('nvim-lightbulb').update_lightbulb()
 			end,
 			buffer = bufnr,
-			desc = 'Update the LightBulb',
 		})
 	end
 
@@ -88,13 +71,11 @@ local on_attach = function(client, bufnr)
 	-- 		buffer = bufnr,
 	-- 		group = 'lsp_codelens',
 	-- 		once = true,
-	-- 		desc = 'Refresh CodeLens',
 	-- 	})
 	-- 	vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
 	-- 		callback = require('vim.lsp.codelens').refresh,
 	-- 		buffer = bufnr,
 	-- 		group = 'lsp_codelens',
-	-- 		desc = 'Refresh CodeLens',
 	-- 	})
 	-- end
 
@@ -103,8 +84,8 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-for _, server in ipairs { 'pyright', 'sumneko_lua', 'texlab' } do
+local servers = { 'pyright', 'sumneko_lua', 'texlab' }
+for _, server in ipairs(servers) do
 	require('lsp.' .. server).setup(on_attach, capabilities)
 end
