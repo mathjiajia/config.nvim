@@ -15,10 +15,10 @@ require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use 'lewis6991/impatient.nvim'
 
-	-- use {
-	-- 	'monkoose/matchparen.nvim',
-	-- 	config = [[require('matchparen').setup()]],
-	-- }
+	use {
+		'monkoose/matchparen.nvim',
+		config = [[require('matchparen').setup()]],
+	}
 	use {
 		'rcarriga/nvim-notify',
 		config = [[vim.notify = require('notify')]],
