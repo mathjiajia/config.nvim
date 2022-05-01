@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
 		tb.lsp_type_definitions(themes.get_dropdown {})
 	end, { buffer = bufnr, desc = 'Type Definitions' })
 
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_augroup('lsp_document_highlight', {})
 		vim.api.nvim_create_autocmd('CursorHold', {
 			callback = vim.lsp.buf.document_highlight,
@@ -45,7 +45,7 @@ local on_attach = function(client, bufnr)
 		})
 	end
 
-	if client.resolved_capabilities.code_action then
+	if client.server_capabilities.codeActionProvider then
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions' })
 		vim.keymap.set('v', '<leader>ca', vim.lsp.buf.range_code_action, { buffer = bufnr, desc = 'Range Code Actions' })
 
@@ -57,14 +57,14 @@ local on_attach = function(client, bufnr)
 		})
 	end
 
-	if client.resolved_capabilities.document_formatting then
-		vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, { buffer = bufnr, desc = 'Formmating' })
+	if client.server_capabilities.documentFormattingProvider then
+		vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Formmating' })
 	end
-	if client.resolved_capabilities.document_range_formatting then
+	if client.server_capabilities.documentRangeFormattingProvider then
 		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
-	-- if client.resolved_capabilities.code_lens then
+	-- if client.server_capabilities.codeLensProvider then
 	-- 	vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
 	-- 	vim.api.nvim_create_autocmd('BufEnter', {
 	-- 		callback = require('vim.lsp.codelens').refresh,

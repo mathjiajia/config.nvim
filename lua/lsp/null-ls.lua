@@ -14,10 +14,10 @@ local sources = {
 null_ls.setup {
 	sources = sources,
 	on_attach = function(client, bufnr)
-		if client.resolved_capabilities.document_formatting then
-			vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, { buffer = bufnr, desc = 'Formmating' })
+		if client.server_capabilities.documentFormattingProvider then
+			vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Formmating' })
 		end
-		if client.resolved_capabilities.document_range_formatting then
+		if client.server_capabilities.documentRangeFormattingProvider then
 			vim.keymap.set(
 				'v',
 				'<leader>lf',
