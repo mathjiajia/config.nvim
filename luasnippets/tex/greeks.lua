@@ -32,7 +32,7 @@ autosnips = {
 	s({ trig = ';L', name = 'Lambda Λ', wordTrig = false }, { t '\\Lambda' }, { condition = tex.in_mathzone }),
 	s({ trig = ';P', name = 'Pi π', wordTrig = false }, { t '\\Pi' }, { condition = tex.in_mathzone }),
 	s({ trig = ';Q', name = 'Theta Θ', wordTrig = false }, { t '\\Theta' }, { condition = tex.in_mathzone }),
-	s({ trig = ';S', name = 'Sigma Σ', wordTrig = false }, { t '\\delta' }, { condition = tex.in_mathzone }),
+	s({ trig = ';S', name = 'Sigma Σ', wordTrig = false }, { t '\\Sigma' }, { condition = tex.in_mathzone }),
 	s({ trig = ';U', name = 'Upsilon Υ', wordTrig = false }, { t '\\Upsilon' }, { condition = tex.in_mathzone }),
 	s({ trig = ';W', name = 'Omega Ω', wordTrig = false }, { t '\\Omega' }, { condition = tex.in_mathzone }),
 	s({ trig = ';X', name = 'Xi Ξ', wordTrig = false }, { t '\\Xi' }, { condition = tex.in_mathzone }),
