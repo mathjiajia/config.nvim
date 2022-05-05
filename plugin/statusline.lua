@@ -65,11 +65,9 @@ end
 
 local function position()
 	local nbline = vim.fn.line '$'
-	local line = vim.fn.line '.'
-	local col = vim.fn.col '.'
+	local line, col = vim.fn.line '.', vim.fn.col '.'
 	local percent = math.floor(line * 100 / nbline)
 	local pos = string.format(' %s%d%%%%', pad(percent, 100), percent)
-	-- local ln_col = string.format('Ln %s%d, Col %s%d ', pad(line, nbline), line, pad(col, 100), col)
 	local ln_col = string.format('%s%d %s%d ', pad(line, nbline), line, pad(col, 100), col)
 	return ' %3*' .. pos .. ' %4*' .. ln_col
 end
