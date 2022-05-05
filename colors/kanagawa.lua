@@ -84,6 +84,7 @@ local colors = {
 
 	fg_comment = palette_colors.fujiGray,
 	fg = palette_colors.fujiWhite,
+	fg_menu = palette_colors.fujiWhite,
 
 	co = palette_colors.surimiOrange,
 	st = palette_colors.springGreen,
@@ -150,9 +151,9 @@ vim.api.nvim_set_hl(0, 'NonText', { fg = colors.bg_light2 })
 vim.api.nvim_set_hl(0, 'Normal', { fg = colors.fg, bg = colors.bg })
 vim.api.nvim_set_hl(0, 'NormalFloat', { fg = colors.fg, bg = colors.bg_dark })
 vim.api.nvim_set_hl(0, 'NormalNC', { fg = colors.fg, bg = colors.bg })
-vim.api.nvim_set_hl(0, 'Pmenu', { fg = colors.fg, bg = colors.bg_menu })
+vim.api.nvim_set_hl(0, 'Pmenu', { fg = colors.fg_menu, bg = colors.bg_menu })
 vim.api.nvim_set_hl(0, 'PmenuSbar', { link = 'Pmenu' })
-vim.api.nvim_set_hl(0, 'PmenuSel', { fg = 'NONE', bg = colors.bg_menu_sel })
+vim.api.nvim_set_hl(0, 'PmenuSel', { fg = colors.fg_menu, bg = colors.bg_menu_sel })
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = colors.bg_search })
 vim.api.nvim_set_hl(0, 'Question', { fg = colors.diag.info }) -- FIXED
 vim.api.nvim_set_hl(0, 'QuickFixLine', { link = 'CursorLine' })
@@ -229,7 +230,7 @@ vim.api.nvim_set_hl(0, 'Underlined', { fg = colors.sp, underline = true })
 
 ------ MISC ------
 -- vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = colors.sp })
--- vim.api.nvim_set_hl(0, 'debugPC', { link = 'CursorLine' })
+-- vim.api.nvim_set_hl(0, 'debugPC', { bg = colors.diff.delete })
 
 -- vim.api.nvim_set_hl(0, 'healthError', { fg = colors.diag.error })
 vim.api.nvim_set_hl(0, 'healthSuccess', { fg = colors.springGreen })
@@ -306,7 +307,7 @@ vim.api.nvim_set_hl(0, 'CmpCompletionBorder', { fg = colors.bg_search, bg = colo
 vim.api.nvim_set_hl(0, 'CmpCompletionThumb', { link = 'PmenuThumb' })
 vim.api.nvim_set_hl(0, 'CmpCompletionSbar', { link = 'PmenuSbar' })
 
-vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = colors.fg, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = colors.fg_menu, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = colors.fg_comment, bg = 'NONE', strikethrough = true })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = colors.fn, bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpItemAbbrMatch' })
