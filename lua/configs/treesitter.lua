@@ -11,6 +11,7 @@ local ts_install = {
 	'python',
 	'query',
 	'ruby',
+	'swift',
 	'toml',
 	'vim',
 	'yaml',
