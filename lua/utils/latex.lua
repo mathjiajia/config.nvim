@@ -6,7 +6,6 @@ local query = require 'vim.treesitter.query'
 local MATH_NODES = {
 	displayed_equation = true,
 	inline_formula = true,
-	-- math_set = true,
 	math_environment = true,
 }
 local ALIGN_ENVIRONMENTS = {
