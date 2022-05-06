@@ -1,127 +1,127 @@
--- Modified from https://github.com/catppuccin/nvim
+-- Modified from https: //github.com/catppuccin/nvim
 vim.g.colors_name = 'catppuccin'
 
 local util = require 'utils.colors'
-local cp = {}
+local cp   = {}
 
 if vim.g.theme_style == 'moccha' then
 	cp = {
 		rosewater = '#F5E0DC',
-		flamingo = '#F2CDCD',
-		pink = '#F5C2E7',
-		mauve = '#CBA6F7',
-		red = '#F38BA8',
-		maroon = '#EBA0AC',
-		peach = '#FAB387',
-		yellow = '#F9E2AF',
-		green = '#A6E3A1',
-		teal = '#94E2D5',
-		sky = '#89DCEB',
-		blue = '#90C1FB',
-		sapphire = '#74C7EC',
-		lavender = '#B4BEFE',
-		text = '#C6D0F5',
-		overlay2 = '#AEB7D9',
-		overlay1 = '#969DBC',
-		overlay0 = '#7E84A0',
-		surface2 = '#666A83',
-		surface1 = '#4E5167',
-		surface0 = '#36374A',
-		base2 = '#1E1E2E',
-		base1 = '#12121C',
-		base0 = '#07070A',
+		flamingo  = '#F2CDCD',
+		pink      = '#F5C2E7',
+		mauve     = '#CBA6F7',
+		red       = '#F38BA8',
+		maroon    = '#EBA0AC',
+		peach     = '#FAB387',
+		yellow    = '#F9E2AF',
+		green     = '#A6E3A1',
+		teal      = '#94E2D5',
+		sky       = '#89DCEB',
+		blue      = '#90C1FB',
+		sapphire  = '#74C7EC',
+		lavender  = '#B4BEFE',
+		text      = '#C6D0F5',
+		overlay2  = '#AEB7D9',
+		overlay1  = '#969DBC',
+		overlay0  = '#7E84A0',
+		surface2  = '#666A83',
+		surface1  = '#4E5167',
+		surface0  = '#36374A',
+		base2     = '#1E1E2E',
+		base1     = '#12121C',
+		base0     = '#07070A',
 
-		teledark = '#1A1826',
+		teledark  = '#1A1826',
 		teleblack = '#252434',
 	}
 elseif vim.g.theme_style == 'macchiato' then
 	cp = {
 		rosewater = '#F4DBD6',
-		flamingo = '#F0C6C6',
-		pink = '#F5BDE6',
-		mauve = '#C6A0F6',
-		red = '#ED8796',
-		maroon = '#EE99A0',
-		peach = '#F5A97F',
-		yellow = '#EED49F',
-		green = '#A6DA95',
-		teal = '#8BD5CA',
-		sky = '#91D7E3',
-		blue = '#86AEF8',
-		sapphire = '#7DC4E4',
-		lavender = '#B9BEF8',
-		text = '#C5CFF5',
-		overlay2 = '#AEB7DA',
-		overlay1 = '#979FC0',
-		overlay0 = '#8087A5',
-		surface2 = '#696F8A',
-		surface1 = '#52576F',
-		surface0 = '#3B3F55',
-		base2 = '#24273A',
-		base1 = '#181926',
-		base0 = '#0C0D13',
+		flamingo  = '#F0C6C6',
+		pink      = '#F5BDE6',
+		mauve     = '#C6A0F6',
+		red       = '#ED8796',
+		maroon    = '#EE99A0',
+		peach     = '#F5A97F',
+		yellow    = '#EED49F',
+		green     = '#A6DA95',
+		teal      = '#8BD5CA',
+		sky       = '#91D7E3',
+		blue      = '#86AEF8',
+		sapphire  = '#7DC4E4',
+		lavender  = '#B9BEF8',
+		text      = '#C5CFF5',
+		overlay2  = '#AEB7DA',
+		overlay1  = '#979FC0',
+		overlay0  = '#8087A5',
+		surface2  = '#696F8A',
+		surface1  = '#52576F',
+		surface0  = '#3B3F55',
+		base2     = '#24273A',
+		base1     = '#181926',
+		base0     = '#0C0D13',
 
-		teledark = '#1E2134',
+		teledark  = '#1E2134',
 		teleblack = '#2A2D40',
 	}
 elseif vim.g.theme_style == 'latte' then
 	cp = {
 		rosewater = '#DE9584',
-		flamingo = '#DD7878',
-		pink = '#EC83D0',
-		mauve = '#8839EF',
-		red = '#D20F39',
-		maroon = '#E64553',
-		peach = '#FE640B',
-		yellow = '#E49320',
-		green = '#40A02B',
-		teal = '#179299',
-		sky = '#04A5E5',
-		blue = '#2A6EF5',
-		sapphire = '#209FB5',
-		lavender = '#7287FD',
-		text = '#575279',
-		overlay2 = '#696487',
-		overlay1 = '#7B7794',
-		overlay0 = '#8E89A2',
-		surface2 = '#A09BAF',
-		surface1 = '#B2AEBD',
-		base0 = '#C4C0CA',
-		surface0 = '#D7D2D8',
-		base1 = '#E9E5E5',
-		base2 = '#FBF7F3',
+		flamingo  = '#DD7878',
+		pink      = '#EC83D0',
+		mauve     = '#8839EF',
+		red       = '#D20F39',
+		maroon    = '#E64553',
+		peach     = '#FE640B',
+		yellow    = '#E49320',
+		green     = '#40A02B',
+		teal      = '#179299',
+		sky       = '#04A5E5',
+		blue      = '#2A6EF5',
+		sapphire  = '#209FB5',
+		lavender  = '#7287FD',
+		text      = '#575279',
+		overlay2  = '#696487',
+		overlay1  = '#7B7794',
+		overlay0  = '#8E89A2',
+		surface2  = '#A09BAF',
+		surface1  = '#B2AEBD',
+		base0     = '#C4C0CA',
+		surface0  = '#D7D2D8',
+		base1     = '#E9E5E5',
+		base2     = '#FBF7F3',
 
-		teledark = '#FFFFFF',
+		teledark  = '#FFFFFF',
 		teleblack = '#F6F6F6',
 	}
 else
 	cp = {
 		rosewater = '#F2D5CF',
-		flamingo = '#EEBEBE',
-		pink = '#F4B8E4',
-		mauve = '#CA9EE6',
-		red = '#E78284',
-		maroon = '#EA999C',
-		peach = '#EF9F76',
-		yellow = '#E5C890',
-		green = '#A6D189',
-		teal = '#81C8BE',
-		sky = '#99D1DB',
-		blue = '#8CAAEE',
-		sapphire = '#85C1DC',
-		lavender = '#BFB7E4',
-		text = '#C6CEEF',
-		overlay2 = '#B1B8D7',
-		overlay1 = '#9BA2BF',
-		overlay0 = '#868CA7',
-		surface2 = '#707590',
-		surface1 = '#5B5F78',
-		surface0 = '#454960',
-		base2 = '#303348',
-		base1 = '#252737',
-		base0 = '#181A25',
+		flamingo  = '#EEBEBE',
+		pink      = '#F4B8E4',
+		mauve     = '#CA9EE6',
+		red       = '#E78284',
+		maroon    = '#EA999C',
+		peach     = '#EF9F76',
+		yellow    = '#E5C890',
+		green     = '#A6D189',
+		teal      = '#81C8BE',
+		sky       = '#99D1DB',
+		blue      = '#8CAAEE',
+		sapphire  = '#85C1DC',
+		lavender  = '#BFB7E4',
+		text      = '#C6CEEF',
+		overlay2  = '#B1B8D7',
+		overlay1  = '#9BA2BF',
+		overlay0  = '#868CA7',
+		surface2  = '#707590',
+		surface1  = '#5B5F78',
+		surface0  = '#454960',
+		base2     = '#303348',
+		base1     = '#252737',
+		base0     = '#181A25',
 
-		teledark = '#FFFFFF',
+		teledark  = '#FFFFFF',
 		teleblack = '#F6F6F6',
 	}
 end
@@ -136,19 +136,21 @@ local function vary_color(palettes, default)
 end
 
 cp.cursorline = vary_color({ latte = cp.base1 }, util.darken(cp.surface0, 0.64, cp.base2))
-cp.linenr = vary_color({ latte = cp.base0 }, cp.surface1)
+cp.linenr     = vary_color({ latte = cp.base0 }, cp.surface1)
 
 local error = cp.red
-local warn = cp.yellow
-local info = cp.sky
-local hint = cp.teal
-local darkening_percentage = 0.095
-local diag_error = util.darken(error, darkening_percentage, cp.base2)
-local diag_warn = util.darken(warn, darkening_percentage, cp.base2)
-local diag_info = util.darken(info, darkening_percentage, cp.base2)
-local diag_hint = util.darken(hint, darkening_percentage, cp.base2)
+local warn  = cp.yellow
+local info  = cp.sky
+local hint  = cp.teal
 
-local operators = cp.sky
+local darkening_percentage = 0.095
+
+local diag_error = util.darken(error, darkening_percentage, cp.base2)
+local diag_warn  = util.darken(warn, darkening_percentage, cp.base2)
+local diag_info  = util.darken(info, darkening_percentage, cp.base2)
+local diag_hint  = util.darken(hint, darkening_percentage, cp.base2)
+
+local operators  = cp.sky
 local math_logic = cp.peach
 
 ---------- BASIC ----------
@@ -508,20 +510,20 @@ vim.g.terminal_color_8 = cp.overlay1
 vim.g.terminal_color_1 = cp.red
 vim.g.terminal_color_9 = cp.red
 
-vim.g.terminal_color_2 = cp.green
+vim.g.terminal_color_2  = cp.green
 vim.g.terminal_color_10 = cp.green
 
-vim.g.terminal_color_3 = cp.yellow
+vim.g.terminal_color_3  = cp.yellow
 vim.g.terminal_color_11 = cp.yellow
 
-vim.g.terminal_color_4 = cp.blue
+vim.g.terminal_color_4  = cp.blue
 vim.g.terminal_color_12 = cp.blue
 
-vim.g.terminal_color_5 = cp.pink
+vim.g.terminal_color_5  = cp.pink
 vim.g.terminal_color_13 = cp.pink
 
-vim.g.terminal_color_6 = cp.sky
+vim.g.terminal_color_6  = cp.sky
 vim.g.terminal_color_14 = cp.sky
 
-vim.g.terminal_color_7 = cp.text
+vim.g.terminal_color_7  = cp.text
 vim.g.terminal_color_15 = cp.text

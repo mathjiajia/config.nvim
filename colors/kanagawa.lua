@@ -1,124 +1,124 @@
--- Modified from https://github.com/rebelot/kanagawa.nvim
+-- Modified from https: //github.com/rebelot/kanagawa.nvim
 vim.g.colors_name = 'kanagawa'
 
 local palette_colors = {
 	-- Bg Shades
-	sumiInk0 = '#16161D',
+	sumiInk0  = '#16161D',
 	sumiInk1b = '#181820',
-	sumiInk1 = '#1F1F28',
-	sumiInk2 = '#2A2A37',
-	sumiInk3 = '#363646',
-	sumiInk4 = '#54546D',
+	sumiInk1  = '#1F1F28',
+	sumiInk2  = '#2A2A37',
+	sumiInk3  = '#363646',
+	sumiInk4  = '#54546D',
 
 	-- Popup and Floats
 	waveBlue1 = '#223249',
 	waveBlue2 = '#2D4F67',
 
 	-- Diff and Git
-	winterGreen = '#2B3328',
+	winterGreen  = '#2B3328',
 	winterYellow = '#49443C',
-	winterRed = '#43242B',
-	winterBlue = '#252535',
-	autumnGreen = '#76946A',
-	autumnRed = '#C34043',
+	winterRed    = '#43242B',
+	winterBlue   = '#252535',
+	autumnGreen  = '#76946A',
+	autumnRed    = '#C34043',
 	autumnYellow = '#DCA561',
 
 	-- Diag
-	samuraiRed = '#E82424',
+	samuraiRed  = '#E82424',
 	roninYellow = '#FF9E3B',
-	waveAqua1 = '#6A9589',
-	dragonBlue = '#658594',
+	waveAqua1   = '#6A9589',
+	dragonBlue  = '#658594',
 
 	-- Fg and Comments
-	oldWhite = '#C8C093',
-	fujiWhite = '#DCD7BA',
-	fujiGray = '#727169',
+	oldWhite      = '#C8C093',
+	fujiWhite     = '#DCD7BA',
+	fujiGray      = '#727169',
 	springViolet1 = '#938AA9',
 
-	oniViolet = '#957FB8',
-	crystalBlue = '#7E9CD8',
+	oniViolet     = '#957FB8',
+	crystalBlue   = '#7E9CD8',
 	springViolet2 = '#9CABCA',
-	springBlue = '#7FB4CA',
-	lightBlue = '#A3D4D5', -- unused yet
-	waveAqua2 = '#7AA89F', -- improve lightness: desaturated greenish Aqua
+	springBlue    = '#7FB4CA',
+	lightBlue     = '#A3D4D5', -- unused yet
+	waveAqua2     = '#7AA89F', -- improve lightness: desaturated greenish Aqua
 
-	-- waveAqua2  = "#68AD99",
+	-- waveAqua2 = "#68AD99",
 	waveAqua4 = '#7AA880',
-	-- waveAqua5  = "#6CAF95",
-	-- waveAqua3  = "#68AD99",
+	-- waveAqua5 = "#6CAF95",
+	-- waveAqua3 = "#68AD99",
 
 	springGreen = '#98BB6C',
 	boatYellow1 = '#938056',
 	boatYellow2 = '#C0A36E',
-	carpYellow = '#E6C384',
+	carpYellow  = '#E6C384',
 
-	sakuraPink = '#D27E99',
-	waveRed = '#E46876',
-	peachRed = '#FF5D62',
+	sakuraPink   = '#D27E99',
+	waveRed      = '#E46876',
+	peachRed     = '#FF5D62',
 	surimiOrange = '#FFA066',
-	katanaGray = '#717C7C',
+	katanaGray   = '#717C7C',
 
-	teledark = '#191922',
+	teledark  = '#191922',
 	teleblack = '#25252E',
 }
 
 local colors = {
-	bg = palette_colors.sumiInk1,
-	bg_dim = palette_colors.sumiInk1b,
-	bg_dark = palette_colors.sumiInk0,
+	bg        = palette_colors.sumiInk1,
+	bg_dim    = palette_colors.sumiInk1b,
+	bg_dark   = palette_colors.sumiInk0,
 	bg_light0 = palette_colors.sumiInk2,
 	bg_light1 = palette_colors.sumiInk3,
 	bg_light2 = palette_colors.sumiInk4,
 	bg_light3 = palette_colors.springViolet1,
 
-	bg_menu = palette_colors.waveBlue1,
+	bg_menu     = palette_colors.waveBlue1,
 	bg_menu_sel = palette_colors.waveBlue2,
 
 	bg_status = palette_colors.sumiInk0,
 	bg_visual = palette_colors.waveBlue1,
 	bg_search = palette_colors.waveBlue2,
 
-	fg_border = palette_colors.sumiInk4,
-	fg_dark = palette_colors.oldWhite,
+	fg_border  = palette_colors.sumiInk4,
+	fg_dark    = palette_colors.oldWhite,
 	fg_reverse = palette_colors.waveBlue1,
 
 	fg_comment = palette_colors.fujiGray,
-	fg = palette_colors.fujiWhite,
-	fg_menu = palette_colors.fujiWhite,
+	fg         = palette_colors.fujiWhite,
+	fg_menu    = palette_colors.fujiWhite,
 
-	co = palette_colors.surimiOrange,
-	st = palette_colors.springGreen,
-	nu = palette_colors.sakuraPink,
-	id = palette_colors.carpYellow,
-	fn = palette_colors.crystalBlue,
-	sm = palette_colors.oniViolet,
-	kw = palette_colors.oniViolet,
-	op = palette_colors.boatYellow2,
-	pp = palette_colors.surimiOrange,
-	ty = palette_colors.waveAqua2,
-	sp = palette_colors.springBlue,
+	co  = palette_colors.surimiOrange,
+	st  = palette_colors.springGreen,
+	nu  = palette_colors.sakuraPink,
+	id  = palette_colors.carpYellow,
+	fn  = palette_colors.crystalBlue,
+	sm  = palette_colors.oniViolet,
+	kw  = palette_colors.oniViolet,
+	op  = palette_colors.boatYellow2,
+	pp  = palette_colors.surimiOrange,
+	ty  = palette_colors.waveAqua2,
+	sp  = palette_colors.springBlue,
 	sp2 = palette_colors.waveRed,
 	sp3 = palette_colors.peachRed,
-	br = palette_colors.springViolet2,
-	re = palette_colors.boatYellow2,
+	br  = palette_colors.springViolet2,
+	re  = palette_colors.boatYellow2,
 	dep = palette_colors.katanaGray,
 
 	diag = {
-		error = palette_colors.samuraiRed,
+		error   = palette_colors.samuraiRed,
 		warning = palette_colors.roninYellow,
-		info = palette_colors.dragonBlue,
-		hint = palette_colors.waveAqua1,
+		info    = palette_colors.dragonBlue,
+		hint    = palette_colors.waveAqua1,
 	},
 
 	diff = {
-		add = palette_colors.winterGreen,
+		add    = palette_colors.winterGreen,
 		delete = palette_colors.winterRed,
 		change = palette_colors.winterBlue,
-		text = palette_colors.winterYellow,
+		text   = palette_colors.winterYellow,
 	},
 
 	git = {
-		added = palette_colors.autumnGreen,
+		added   = palette_colors.autumnGreen,
 		removed = palette_colors.autumnRed,
 		changed = palette_colors.autumnYellow,
 	},
@@ -563,16 +563,16 @@ vim.api.nvim_set_hl(0, 'markdownEscape', { fg = 'NONE' })
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
 
-vim.g.terminal_color_0 = palette_colors.sumiInk0
-vim.g.terminal_color_1 = palette_colors.autumnRed
-vim.g.terminal_color_2 = palette_colors.autumnGreen
-vim.g.terminal_color_3 = palette_colors.boatYellow2
-vim.g.terminal_color_4 = palette_colors.crystalBlue
-vim.g.terminal_color_5 = palette_colors.oniViolet
-vim.g.terminal_color_6 = palette_colors.waveAqua1
-vim.g.terminal_color_7 = palette_colors.oldWhite
-vim.g.terminal_color_8 = palette_colors.fujiGray
-vim.g.terminal_color_9 = palette_colors.samuraiRed
+vim.g.terminal_color_0  = palette_colors.sumiInk0
+vim.g.terminal_color_1  = palette_colors.autumnRed
+vim.g.terminal_color_2  = palette_colors.autumnGreen
+vim.g.terminal_color_3  = palette_colors.boatYellow2
+vim.g.terminal_color_4  = palette_colors.crystalBlue
+vim.g.terminal_color_5  = palette_colors.oniViolet
+vim.g.terminal_color_6  = palette_colors.waveAqua1
+vim.g.terminal_color_7  = palette_colors.oldWhite
+vim.g.terminal_color_8  = palette_colors.fujiGray
+vim.g.terminal_color_9  = palette_colors.samuraiRed
 vim.g.terminal_color_10 = palette_colors.springGreen
 vim.g.terminal_color_11 = palette_colors.carpYellow
 vim.g.terminal_color_12 = palette_colors.springBlue

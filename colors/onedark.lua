@@ -1,32 +1,32 @@
--- Modified from https://github.com/olimorris/onedarkpro.nvim
+-- Modified from https: //github.com/olimorris/onedarkpro.nvim
 vim.g.colors_name = 'onedark'
 
 local colors = {}
-local util = require 'ui.util'
+local util   = require 'ui.util'
 
 if vim.g.theme_style == 'dark' then
 	colors = {
-		bg = '#282C34',
-		fg = '#ABB2BF',
-		red = '#E06C75',
-		orange = '#D19A66',
-		yellow = '#E5C07B',
-		green = '#98C379',
-		cyan = '#56B6C2',
-		blue = '#61AFEF',
-		purple = '#C678DD',
-		white = '#ABB2BF',
-		black = '#282C34',
-		gray = '#5C6370',
+		bg        = '#282C34',
+		fg        = '#ABB2BF',
+		red       = '#E06C75',
+		orange    = '#D19A66',
+		yellow    = '#E5C07B',
+		green     = '#98C379',
+		cyan      = '#56B6C2',
+		blue      = '#61AFEF',
+		purple    = '#C678DD',
+		white     = '#ABB2BF',
+		black     = '#282C34',
+		gray      = '#5C6370',
 		highlight = '#E2BE7D',
 
 		-- Git diff
-		diff_add = '#109868',
+		diff_add    = '#109868',
 		diff_delete = '#9A353D',
 		diff_change = '#E0AF68',
-		diff_text = '#005869',
+		diff_text   = '#005869',
 
-		teledark = '#22262E',
+		teledark  = '#22262E',
 		teleblack = '#2E323A',
 
 		Rb1 = '#FFD500',
@@ -35,46 +35,47 @@ if vim.g.theme_style == 'dark' then
 	}
 
 	-- Additional colors
-	colors.cursorline = util.lighten(colors.bg, 0.97)
-	colors.color_column = util.lighten(colors.bg, 0.97)
-	colors.comment = util.lighten(colors.gray, 0.80)
-	colors.indentline = util.lighten(colors.bg, 0.93)
-	colors.menu = util.lighten(colors.bg, 0.90)
-	colors.menu_scroll = util.lighten(colors.bg, 0.95)
+	colors.cursorline        = util.lighten(colors.bg, 0.97)
+	colors.color_column      = util.lighten(colors.bg, 0.97)
+	colors.comment           = util.lighten(colors.gray, 0.80)
+	colors.indentline        = util.lighten(colors.bg, 0.93)
+	colors.menu              = util.lighten(colors.bg, 0.90)
+	colors.menu_scroll       = util.lighten(colors.bg, 0.95)
 	colors.menu_scroll_thumb = util.darken(colors.blue, 0.80)
-	colors.selection = util.lighten(colors.bg, 0.8)
+	colors.selection         = util.lighten(colors.bg, 0.8)
 
 	colors.bg_statusline = util.lighten(colors.bg, 0.95)
-	colors.fg_gutter = util.lighten(colors.bg, 0.90)
-	colors.fg_sidebar = colors.fg
+	colors.fg_gutter     = util.lighten(colors.bg, 0.90)
+	colors.fg_sidebar    = colors.fg
 
-	colors.virtual_text_error = util.lighten(colors.red, 0.7)
-	colors.virtual_text_warning = util.lighten(colors.yellow, 0.7)
+	colors.virtual_text_error       = util.lighten(colors.red, 0.7)
+	colors.virtual_text_warning     = util.lighten(colors.yellow, 0.7)
 	colors.virtual_text_information = util.lighten(colors.blue, 0.7)
-	colors.virtual_text_hint = util.lighten(colors.cyan, 0.8)
+	colors.virtual_text_hint        = util.lighten(colors.cyan, 0.8)
+
 elseif vim.g.theme_style == 'vivid' then
 	colors = {
-		bg = '#282C34',
-		fg = '#ABB2BF',
-		red = '#EF596F',
-		orange = '#D19A66',
-		yellow = '#E5C07B',
-		green = '#89CA78',
-		cyan = '#2BBAC5',
-		blue = '#61AFEF',
-		purple = '#D55FDE',
-		white = '#ABB2BF',
-		black = '#282C34',
-		gray = '#5C6370',
+		bg        = '#282C34',
+		fg        = '#ABB2BF',
+		red       = '#EF596F',
+		orange    = '#D19A66',
+		yellow    = '#E5C07B',
+		green     = '#89CA78',
+		cyan      = '#2BBAC5',
+		blue      = '#61AFEF',
+		purple    = '#D55FDE',
+		white     = '#ABB2BF',
+		black     = '#282C34',
+		gray      = '#5C6370',
 		highlight = '#E2BE7D',
 
 		-- Git diff
-		diff_add = '#109868',
+		diff_add    = '#109868',
 		diff_delete = '#9A353D',
 		diff_change = '#E0AF68',
-		diff_text = '#005869',
+		diff_text   = '#005869',
 
-		teledark = '#22262E',
+		teledark  = '#22262E',
 		teleblack = '#2E323A',
 
 		Rb1 = '#FFD500',
@@ -83,46 +84,46 @@ elseif vim.g.theme_style == 'vivid' then
 	}
 
 	-- Additional colors
-	colors.cursorline = util.lighten(colors.bg, 0.97)
-	colors.color_column = util.lighten(colors.bg, 0.97)
-	colors.comment = util.lighten(colors.gray, 0.80)
-	colors.indentline = util.lighten(colors.bg, 0.93)
-	colors.menu = util.lighten(colors.bg, 0.90)
-	colors.menu_scroll = util.lighten(colors.bg, 0.95)
+	colors.cursorline        = util.lighten(colors.bg, 0.97)
+	colors.color_column      = util.lighten(colors.bg, 0.97)
+	colors.comment           = util.lighten(colors.gray, 0.80)
+	colors.indentline        = util.lighten(colors.bg, 0.93)
+	colors.menu              = util.lighten(colors.bg, 0.90)
+	colors.menu_scroll       = util.lighten(colors.bg, 0.95)
 	colors.menu_scroll_thumb = util.darken(colors.blue, 0.80)
-	colors.selection = util.lighten(colors.bg, 0.8)
+	colors.selection         = util.lighten(colors.bg, 0.8)
 
 	colors.bg_statusline = util.lighten(colors.bg, 0.95)
-	colors.fg_gutter = util.lighten(colors.bg, 0.90)
-	colors.fg_sidebar = colors.fg
+	colors.fg_gutter     = util.lighten(colors.bg, 0.90)
+	colors.fg_sidebar    = colors.fg
 
-	colors.virtual_text_error = util.lighten(colors.red, 0.7)
-	colors.virtual_text_warning = util.lighten(colors.yellow, 0.7)
+	colors.virtual_text_error       = util.lighten(colors.red, 0.7)
+	colors.virtual_text_warning     = util.lighten(colors.yellow, 0.7)
 	colors.virtual_text_information = util.lighten(colors.blue, 0.7)
-	colors.virtual_text_hint = util.lighten(colors.cyan, 0.8)
+	colors.virtual_text_hint        = util.lighten(colors.cyan, 0.8)
 else
 	colors = {
-		bg = '#FAFAFA',
-		fg = '#383A42',
-		red = '#F6483F',
-		orange = '#A06600',
-		yellow = '#EEA825',
-		green = '#24A442',
-		cyan = '#56B6C2',
-		blue = '#2A77FA',
-		purple = '#A626A4',
-		white = '#FAFAFA',
-		black = '#6A6A6A',
-		gray = '#BEBEBE',
+		bg        = '#FAFAFA',
+		fg        = '#383A42',
+		red       = '#F6483F',
+		orange    = '#A06600',
+		yellow    = '#EEA825',
+		green     = '#24A442',
+		cyan      = '#56B6C2',
+		blue      = '#2A77FA',
+		purple    = '#A626A4',
+		white     = '#FAFAFA',
+		black     = '#6A6A6A',
+		gray      = '#BEBEBE',
 		highlight = '#FFE792',
 
 		-- Git diff
-		diff_add = '#CAE3E8',
+		diff_add    = '#CAE3E8',
 		diff_delete = '#F5C6C6',
 		diff_change = '#ADBAC7',
-		diff_text = '#A6D0D8',
+		diff_text   = '#A6D0D8',
 
-		teledark = '#FFFFFF',
+		teledark  = '#FFFFFF',
 		teleblack = '#F4F4F4',
 
 		Rb1 = '#0028FF',
@@ -131,23 +132,23 @@ else
 	}
 
 	-- Additional colors
-	colors.cursorline = util.darken(colors.bg, 0.97)
-	colors.color_column = util.darken(colors.bg, 0.97)
-	colors.comment = util.darken(colors.gray, 0.80)
-	colors.indentline = util.darken(colors.bg, 0.93)
-	colors.menu = util.darken(colors.bg, 0.95)
-	colors.menu_scroll = util.darken(colors.bg, 0.90)
+	colors.cursorline        = util.darken(colors.bg, 0.97)
+	colors.color_column      = util.darken(colors.bg, 0.97)
+	colors.comment           = util.darken(colors.gray, 0.80)
+	colors.indentline        = util.darken(colors.bg, 0.93)
+	colors.menu              = util.darken(colors.bg, 0.95)
+	colors.menu_scroll       = util.darken(colors.bg, 0.90)
 	colors.menu_scroll_thumb = util.lighten(colors.blue, 0.80)
-	colors.selection = util.darken(colors.bg, 0.90)
+	colors.selection         = util.darken(colors.bg, 0.90)
 
 	colors.bg_statusline = util.darken(colors.bg, 0.95)
-	colors.fg_gutter = util.darken(colors.bg, 0.90)
-	colors.fg_sidebar = colors.fg
+	colors.fg_gutter     = util.darken(colors.bg, 0.90)
+	colors.fg_sidebar    = colors.fg
 
-	colors.virtual_text_error = util.lighten(colors.red, 0.6)
-	colors.virtual_text_warning = util.lighten(colors.yellow, 0.6)
+	colors.virtual_text_error       = util.lighten(colors.red, 0.6)
+	colors.virtual_text_warning     = util.lighten(colors.yellow, 0.6)
 	colors.virtual_text_information = util.lighten(colors.blue, 0.6)
-	colors.virtual_text_hint = util.lighten(colors.cyan, 0.6)
+	colors.virtual_text_hint        = util.lighten(colors.cyan, 0.6)
 end
 
 ------ BASICS ------
@@ -581,16 +582,16 @@ vim.api.nvim_set_hl(0, 'pythonTSType', { fg = colors.cyan })
 -- vim.api.nvim_set_hl(0, 'pythonTSVariable', {})
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
 
-vim.g.terminal_color_0 = colors.gray
-vim.g.terminal_color_1 = colors.red
-vim.g.terminal_color_2 = colors.green
-vim.g.terminal_color_3 = colors.yellow
-vim.g.terminal_color_4 = colors.blue
-vim.g.terminal_color_5 = colors.purple
-vim.g.terminal_color_6 = colors.cyan
-vim.g.terminal_color_7 = colors.fg
-vim.g.terminal_color_8 = colors.black
-vim.g.terminal_color_9 = colors.red
+vim.g.terminal_color_0  = colors.gray
+vim.g.terminal_color_1  = colors.red
+vim.g.terminal_color_2  = colors.green
+vim.g.terminal_color_3  = colors.yellow
+vim.g.terminal_color_4  = colors.blue
+vim.g.terminal_color_5  = colors.purple
+vim.g.terminal_color_6  = colors.cyan
+vim.g.terminal_color_7  = colors.fg
+vim.g.terminal_color_8  = colors.black
+vim.g.terminal_color_9  = colors.red
 vim.g.terminal_color_10 = colors.green
 vim.g.terminal_color_11 = colors.yellow
 vim.g.terminal_color_12 = colors.blue

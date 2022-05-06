@@ -1,8 +1,8 @@
 vim.opt.clipboard = 'unnamedplus'
 vim.g.clipboard = {
-	name = 'macOS-clipboard',
-	copy = { ['+'] = 'pbcopy', ['*'] = 'pbcopy' },
-	paste = { ['+'] = 'pbpaste', ['*'] = 'pbpaste' },
+	name          = 'macOS-clipboard',
+	copy          = { ['+'] = 'pbcopy', ['*'] = 'pbcopy' },
+	paste         = { ['+'] = 'pbpaste', ['*'] = 'pbpaste' },
 	cache_enabled = 0,
 }
 
@@ -37,7 +37,7 @@ vim.o.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
-vim.g.theme_style = 'hard'
+-- vim.g.theme_style = 'hard'
 -- vim.cmd('highlight clear')
 -- vim.cmd('syntax reset')
-vim.cmd 'colorscheme gruvbox'
+vim.cmd 'colorscheme kanagawa'

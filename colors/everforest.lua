@@ -1,70 +1,70 @@
--- Modified from https://github.com/sainnhe/everforest
+-- Modified from https: //github.com/sainnhe/everforest
 vim.g.colors_name = 'everforest'
 
 local cp = {}
 
 if vim.g.theme_style == 'dark' then
 	cp = {
-		bg0 = '#2B3339',
-		bg1 = '#323C41',
-		bg2 = '#3A454A',
-		bg3 = '#445055',
-		bg4 = '#4C555B',
-		bg5 = '#53605C',
+		bg0       = '#2B3339',
+		bg1       = '#323C41',
+		bg2       = '#3A454A',
+		bg3       = '#445055',
+		bg4       = '#4C555B',
+		bg5       = '#53605C',
 		bg_visual = '#503946',
-		bg_red = '#4E3E43',
-		bg_green = '#404D44',
-		bg_blue = '#394F5A',
+		bg_red    = '#4E3E43',
+		bg_green  = '#404D44',
+		bg_blue   = '#394F5A',
 		bg_yellow = '#4A4940',
 
-		fg = '#D3C6AA',
-		red = '#E67E80',
-		orange = '#E69875',
-		yellow = '#DBBC7F',
-		green = '#A7C080',
-		aqua = '#83C092',
-		blue = '#7FBBB3',
-		purple = '#D699B6',
-		grey0 = '#7A8478',
-		grey1 = '#859289',
-		grey2 = '#9DA9A0',
+		fg          = '#D3C6AA',
+		red         = '#E67E80',
+		orange      = '#E69875',
+		yellow      = '#DBBC7F',
+		green       = '#A7C080',
+		aqua        = '#83C092',
+		blue        = '#7FBBB3',
+		purple      = '#D699B6',
+		grey0       = '#7A8478',
+		grey1       = '#859289',
+		grey2       = '#9DA9A0',
 		statusline1 = '#A7C080',
 		statusline2 = '#D3C6AA',
 		statusline3 = '#E67E80',
 
-		teledark = '#252D33',
+		teledark  = '#252D33',
 		teleblack = '#31393F',
 	}
 else
 	cp = {
-		bg0 = '#FFF9E8',
-		bg1 = '#F7F4E0',
-		bg2 = '#F0EED9',
-		bg3 = '#E9E8D2',
-		bg4 = '#E1DDCB',
-		bg5 = '#BEC5B2',
+		bg0       = '#FFF9E8',
+		bg1       = '#F7F4E0',
+		bg2       = '#F0EED9',
+		bg3       = '#E9E8D2',
+		bg4       = '#E1DDCB',
+		bg5       = '#BEC5B2',
 		bg_visual = '#EDF0CD',
-		bg_red = '#FCE5DC',
-		bg_green = '#F1F3D4',
-		bg_blue = '#EAF2EB',
+		bg_red    = '#FCE5DC',
+		bg_green  = '#F1F3D4',
+		bg_blue   = '#EAF2EB',
 		bg_yellow = '#FBEFD0',
 
-		fg = '#5C6A72',
-		red = '#F85552',
-		orange = '#F57D26',
-		yellow = '#DFA000',
-		green = '#8DA101',
-		aqua = '#35A77C',
-		blue = '#3A94C5',
-		purple = '#DF69BA',
-		grey0 = '#A6B0A0',
-		grey1 = '#939F91',
-		grey2 = '#829181',
+		fg          = '#5C6A72',
+		red         = '#F85552',
+		orange      = '#F57D26',
+		yellow      = '#DFA000',
+		green       = '#8DA101',
+		aqua        = '#35A77C',
+		blue        = '#3A94C5',
+		purple      = '#DF69BA',
+		grey0       = '#A6B0A0',
+		grey1       = '#939F91',
+		grey2       = '#829181',
 		statusline1 = '#93B259',
 		statusline2 = '#708089',
 		statusline3 = '#E66868',
 
-		teledark = '#FFFFEE',
+		teledark  = '#FFFFEE',
 		teleblack = '#F9F3E2',
 	}
 end
@@ -500,16 +500,16 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.bg0, bg = cp.yellow, bold = true }
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
 
 ------ TERMINAL ------
-vim.g.terminal_color_0 = cp.bg0
-vim.g.terminal_color_1 = cp.red
-vim.g.terminal_color_2 = cp.green
-vim.g.terminal_color_3 = cp.yellow
-vim.g.terminal_color_4 = cp.blue
-vim.g.terminal_color_5 = cp.purple
-vim.g.terminal_color_6 = cp.orange
-vim.g.terminal_color_7 = cp.fg
-vim.g.terminal_color_8 = cp.grey
-vim.g.terminal_color_9 = cp.red
+vim.g.terminal_color_0  = cp.bg0
+vim.g.terminal_color_1  = cp.red
+vim.g.terminal_color_2  = cp.green
+vim.g.terminal_color_3  = cp.yellow
+vim.g.terminal_color_4  = cp.blue
+vim.g.terminal_color_5  = cp.purple
+vim.g.terminal_color_6  = cp.orange
+vim.g.terminal_color_7  = cp.fg
+vim.g.terminal_color_8  = cp.grey
+vim.g.terminal_color_9  = cp.red
 vim.g.terminal_color_10 = cp.green
 vim.g.terminal_color_11 = cp.yellow
 vim.g.terminal_color_12 = cp.blue

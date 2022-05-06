@@ -35,13 +35,13 @@ local on_attach = function(client, bufnr)
 		vim.api.nvim_create_augroup('lsp_document_highlight', {})
 		vim.api.nvim_create_autocmd('CursorHold', {
 			callback = vim.lsp.buf.document_highlight,
-			buffer = bufnr,
-			group = 'lsp_document_highlight',
+			buffer   = bufnr,
+			group    = 'lsp_document_highlight',
 		})
 		vim.api.nvim_create_autocmd('CursorMoved', {
 			callback = vim.lsp.buf.clear_references,
-			buffer = bufnr,
-			group = 'lsp_document_highlight',
+			buffer   = bufnr,
+			group    = 'lsp_document_highlight',
 		})
 	end
 
@@ -64,20 +64,20 @@ local on_attach = function(client, bufnr)
 		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
-	-- if client.server_capabilities.codeLensProvider then
-	-- 	vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
-	-- 	vim.api.nvim_create_autocmd('BufEnter', {
-	-- 		callback = require('vim.lsp.codelens').refresh,
-	-- 		buffer = bufnr,
-	-- 		group = 'lsp_codelens',
-	-- 		once = true,
-	-- 	})
-	-- 	vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
-	-- 		callback = require('vim.lsp.codelens').refresh,
-	-- 		buffer = bufnr,
-	-- 		group = 'lsp_codelens',
-	-- 	})
-	-- end
+	if client.server_capabilities.codeLensProvider then
+		vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
+		vim.api.nvim_create_autocmd('BufEnter', {
+			callback = require('vim.lsp.codelens').refresh,
+			buffer   = bufnr,
+			group    = 'lsp_codelens',
+			once     = true,
+		})
+		vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
+			callback = require('vim.lsp.codelens').refresh,
+			buffer   = bufnr,
+			group    = 'lsp_codelens',
+		})
+	end
 
 	require('aerial').on_attach(client, bufnr)
 end

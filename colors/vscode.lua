@@ -1,4 +1,4 @@
--- Modified from https://github.com/Mofiqul/vscode.nvim
+-- Modified from https: //github.com/Mofiqul/vscode.nvim
 vim.g.colors_name = 'vscode'
 
 local c = {}
@@ -6,63 +6,63 @@ local c = {}
 if vim.g.theme_style == 'dark' then
 	c = {
 		vscFront = '#D4D4D4',
-		vscBack = '#1E1E1E',
+		vscBack  = '#1E1E1E',
 
-		vscTeleDark = '#181818',
+		vscTeleDark  = '#181818',
 		vscTeleBlack = '#222222',
 
 		vscTabCurrent = '#252526',
-		vscTabOther = '#2D2D2D',
+		vscTabOther   = '#2D2D2D',
 		vscTabOutside = '#1E1E1E',
 
-		vscLeftDark = '#252526',
-		vscLeftMid = '#373737',
+		vscLeftDark  = '#252526',
+		vscLeftMid   = '#373737',
 		vscLeftLight = '#636369',
 
-		vscPopupFront = '#BBBBBB',
-		vscPopupBack = '#272727',
-		vscPopupMatchBlue = '#00A6FF',
+		vscPopupFront         = '#BBBBBB',
+		vscPopupBack          = '#272727',
+		vscPopupMatchBlue     = '#00A6FF',
 		vscPopupHighlightBlue = '#004b72',
 		vscPopupHighlightGray = '#343B41',
 
 		vscSplitLight = '#898989',
-		vscSplitDark = '#444444',
+		vscSplitDark  = '#444444',
 		vscSplitThumb = '#424242',
 
-		vscCursorDarkDark = '#222222',
-		vscCursorDark = '#51504F',
-		vscCursorLight = '#AEAFAD',
-		vscSelection = '#264F78',
-		vscLineNumber = '#5A5A5A',
+		vscCursorDarkDark     = '#222222',
+		vscCursorDark         = '#51504F',
+		vscCursorLight        = '#AEAFAD',
+		vscSelection          = '#264F78',
+		vscLineNumber         = '#5A5A5A',
 		vscLineNumberSelected = '#C8C8C8',
 
-		vscDiffRedDark = '#971713',
-		vscDiffRedLight = '#6F1313',
-		vscDiffGreenDark = '#587A00',
+		vscDiffRedDark    = '#971713',
+		vscDiffRedLight   = '#6F1313',
+		vscDiffGreenDark  = '#587A00',
 		vscDiffGreenLight = '#4B5632',
-		vscDiffBlue = '#007E9F',
-		vscSearchCurrent = '#4B5632',
-		vscSearch = '#264F78',
+		vscDiffBlue       = '#007E9F',
+		vscSearchCurrent  = '#4B5632',
+		vscSearch         = '#264F78',
 
-		vscContext = '#404040',
+		vscContext        = '#404040',
 		vscContextCurrent = '#707070',
 
 		-- Syntax colors
-		vscGray = '#808080',
-		vscViolet = '#646695',
-		vscBlue = '#569CD6',
-		vscDarkBlue = '#223E55',
-		vscMediumBlue = '#18A2FE',
-		vscLightBlue = '#9CDCFE',
-		vscGreen = '#6A9955',
-		vscBlueGreen = '#4EC9B0',
-		vscLightGreen = '#B5CEA8',
-		vscRed = '#F44747',
-		vscOrange = '#CE9178',
-		vscLightRed = '#D16969',
+		vscGray         = '#808080',
+		vscViolet       = '#646695',
+		vscBlue         = '#569CD6',
+		vscDarkBlue     = '#223E55',
+		vscMediumBlue   = '#18A2FE',
+		vscLightBlue    = '#9CDCFE',
+		vscGreen        = '#6A9955',
+		vscBlueGreen    = '#4EC9B0',
+		vscLightGreen   = '#B5CEA8',
+		vscRed          = '#F44747',
+		vscOrange       = '#CE9178',
+		vscLightRed     = '#D16969',
 		vscYellowOrange = '#D7BA7D',
-		vscYellow = '#DCDCAA',
-		vscPink = '#C586C0',
+		vscYellow       = '#DCDCAA',
+		vscPink         = '#C586C0',
 
 		-- Rianbow
 		vscRb1 = '#FFD700',
@@ -72,62 +72,62 @@ if vim.g.theme_style == 'dark' then
 else
 	c = {
 		vscFront = '#343434',
-		vscBack = '#FFFFFF',
+		vscBack  = '#FFFFFF',
 
-		vscTeleDark = '#FDFDFD',
+		vscTeleDark  = '#FDFDFD',
 		vscTeleBlack = '#F1F7FD',
 
 		vscTabCurrent = '#E8E8E8',
-		vscTabOther = '#CECECE',
+		vscTabOther   = '#CECECE',
 		vscTabOutside = '#FFFFFF',
 
-		vscLeftDark = '#F3F3F3',
-		vscLeftMid = '#E5E5E5',
+		vscLeftDark  = '#F3F3F3',
+		vscLeftMid   = '#E5E5E5',
 		vscLeftLight = '#F3F3F3',
 
-		vscPopupFront = '#000000',
-		vscPopupBack = '#F3F3F3',
-		vscPopupMatchBlue = '#0064C1',
+		vscPopupFront         = '#000000',
+		vscPopupBack          = '#F3F3F3',
+		vscPopupMatchBlue     = '#0064C1',
 		vscPopupHighlightBlue = '#0064C1',
 		vscPopupHighlightGray = '#767676',
 
 		vscSplitLight = '#EEEEEE',
-		vscSplitDark = '#DDDDDD',
+		vscSplitDark  = '#DDDDDD',
 		vscSplitThumb = '#DFDFDF',
 
-		vscCursorDarkDark = '#E5EBF1',
-		vscCursorDark = '#D5D5D5',
-		vscCursorLight = '#767676',
-		vscSelection = '#ADD6FF',
-		vscLineNumber = '#157995',
+		vscCursorDarkDark     = '#E5EBF1',
+		vscCursorDark         = '#D5D5D5',
+		vscCursorLight        = '#767676',
+		vscSelection          = '#ADD6FF',
+		vscLineNumber         = '#157995',
 		vscLineNumberSelected = '#012671',
 
-		vscDiffRedDark = '#FFCCCC',
-		vscDiffRedLight = '#FFA3A3',
+		vscDiffRedDark       = '#FFCCCC',
+		vscDiffRedLight      = '#FFA3A3',
 		vscDiffRedLightLight = '#FFCCCC',
-		vscDiffGreenDark = '#DBE6C2',
-		vscDiffGreenLight = '#EBF1DD',
-		vscSearchCurrent = '#A8AC94',
-		vscSearch = '#F8C9AB',
+		vscDiffGreenDark     = '#DBE6C2',
+		vscDiffGreenLight    = '#EBF1DD',
+		vscSearchCurrent     = '#A8AC94',
+		vscSearch            = '#F8C9AB',
 
-		vscContext = '#D2D2D2',
+		vscContext        = '#D2D2D2',
 		vscContextCurrent = '#929292',
 
 		-- Syntax colors
-		vscGray = '#000000',
-		vscViolet = '#000080',
-		vscBlue = '#0000FF',
-		vscDarkBlue = '#007ACC',
-		vscLightBlue = '#0451A5',
-		vscGreen = '#008000',
-		vscBlueGreen = '#16825D',
-		vscLightGreen = '#098658',
-		vscRed = '#FF0000',
-		vscOrange = '#C72E0F',
-		vscLightRed = '#A31515',
+		vscGray         = '#000000',
+		vscViolet       = '#000080',
+		vscBlue         = '#0000FF',
+		vscDarkBlue     = '#007ACC',
+		vscLightBlue    = '#0451A5',
+		vscGreen        = '#008000',
+		vscBlueGreen    = '#16825D',
+		vscLightGreen   = '#098658',
+		vscRed          = '#FF0000',
+		vscOrange       = '#C72E0F',
+		vscLightRed     = '#A31515',
 		vscYellowOrange = '#800000',
-		vscYellow = '#795E26',
-		vscPink = '#AF00DB',
+		vscYellow       = '#795E26',
+		vscPink         = '#AF00DB',
 
 		-- Rianbow
 		vscRb1 = '#002EFF',
@@ -554,20 +554,20 @@ vim.g.terminal_color_8 = c.vscGray
 vim.g.terminal_color_1 = c.vscRed
 vim.g.terminal_color_9 = c.vscRed
 
-vim.g.terminal_color_2 = c.vscGreen
+vim.g.terminal_color_2  = c.vscGreen
 vim.g.terminal_color_10 = c.vscGreen
 
-vim.g.terminal_color_3 = c.vscYellow
+vim.g.terminal_color_3  = c.vscYellow
 vim.g.terminal_color_11 = c.vscYellow
 
-vim.g.terminal_color_4 = c.vscBlue
+vim.g.terminal_color_4  = c.vscBlue
 vim.g.terminal_color_12 = c.vscBlue
 
-vim.g.terminal_color_5 = c.vscPink
+vim.g.terminal_color_5  = c.vscPink
 vim.g.terminal_color_13 = c.vscPink
 
-vim.g.terminal_color_6 = c.vscBlueGreen
+vim.g.terminal_color_6  = c.vscBlueGreen
 vim.g.terminal_color_14 = c.vscBlueGreen
 
-vim.g.terminal_color_7 = c.vscFront
+vim.g.terminal_color_7  = c.vscFront
 vim.g.terminal_color_15 = c.vscFront

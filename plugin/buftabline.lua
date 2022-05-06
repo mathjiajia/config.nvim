@@ -1,15 +1,15 @@
 local M = {}
 
 local hlgroups = {
-	current = 'TabLineSel',
-	normal = 'TabLineFill',
-	spacing = nil,
-	active = nil,
+	current          = 'TabLineSel',
+	normal           = 'TabLineFill',
+	spacing          = nil,
+	active           = nil,
 	modified_current = nil,
-	modified_normal = nil,
-	modified_active = nil,
-	tabpage_current = nil,
-	tabpage_normal = nil,
+	modified_normal  = nil,
+	modified_active  = nil,
+	tabpage_current  = nil,
+	tabpage_normal   = nil,
 }
 
 local Buftab = {}

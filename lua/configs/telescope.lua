@@ -23,14 +23,14 @@ require('telescope').setup {
 			show_scores = true,
 			workspaces = {
 				['conf'] = home .. '/.config',
-				['cv'] = home .. '/Documents/CV',
-				['ex'] = home .. '/Documents/Exercises',
-				['org'] = home .. '/Documents/neorg',
+				['cv']   = home .. '/Documents/CV',
+				['ex']   = home .. '/Documents/Exercises',
+				['org']  = home .. '/Documents/neorg',
 				['note'] = home .. '/Documents/Notes',
 				['proj'] = home .. '/Documents/Projects',
 				['site'] = home .. '/my_site',
 				['talk'] = home .. '/Documents/Talks',
-				['tex'] = home .. '/Tex',
+				['tex']  = home .. '/Tex',
 			},
 		},
 		bibtex = {

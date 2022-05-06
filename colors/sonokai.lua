@@ -1,31 +1,31 @@
--- Modified from https://github.com/sainnhe/sonokai
+-- Modified from https: //github.com/sainnhe/sonokai
 vim.g.colors_name = 'sonokai'
 
 local cp = {
-	black = '#181A1C',
-	bg0 = '#2B2D3A',
-	bg1 = '#2F2D41',
-	bg2 = '#333648',
-	bg3 = '#363A4E',
-	bg4 = '#393E53',
-	bg_red = '#FF6188',
-	diff_red = '#55393D',
-	bg_green = '#A9DC76',
-	diff_green = '#394634',
-	bg_blue = '#77D5F0',
-	diff_blue = '#354157',
+	black       = '#181A1C',
+	bg0         = '#2B2D3A',
+	bg1         = '#2F2D41',
+	bg2         = '#333648',
+	bg3         = '#363A4E',
+	bg4         = '#393E53',
+	bg_red      = '#FF6188',
+	diff_red    = '#55393D',
+	bg_green    = '#A9DC76',
+	diff_green  = '#394634',
+	bg_blue     = '#77D5F0',
+	diff_blue   = '#354157',
 	diff_yellow = '#4E432F',
-	fg = '#E1E3E4',
-	red = '#FB617E',
-	orange = '#F89860',
-	yellow = '#EDC763',
-	green = '#9ED06C',
-	blue = '#6DCAE8',
-	purple = '#BB97EE',
-	grey = '#7E8294',
-	grey_dim = '#5A5E7A',
+	fg          = '#E1E3E4',
+	red         = '#FB617E',
+	orange      = '#F89860',
+	yellow      = '#EDC763',
+	green       = '#9ED06C',
+	blue        = '#6DCAE8',
+	purple      = '#BB97EE',
+	grey        = '#7E8294',
+	grey_dim    = '#5A5E7A',
 
-	teledark = '#181828',
+	teledark  = '#181828',
 	teleblack = '#242434',
 }
 
@@ -460,16 +460,16 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.bg0, bg = cp.yellow, bold = true }
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
 
 ------ TERMINAL ------
-vim.g.terminal_color_0 = cp.black
-vim.g.terminal_color_1 = cp.red
-vim.g.terminal_color_2 = cp.green
-vim.g.terminal_color_3 = cp.yellow
-vim.g.terminal_color_4 = cp.blue
-vim.g.terminal_color_5 = cp.purple
-vim.g.terminal_color_6 = cp.orange
-vim.g.terminal_color_7 = cp.fg
-vim.g.terminal_color_8 = cp.grey
-vim.g.terminal_color_9 = cp.red
+vim.g.terminal_color_0  = cp.black
+vim.g.terminal_color_1  = cp.red
+vim.g.terminal_color_2  = cp.green
+vim.g.terminal_color_3  = cp.yellow
+vim.g.terminal_color_4  = cp.blue
+vim.g.terminal_color_5  = cp.purple
+vim.g.terminal_color_6  = cp.orange
+vim.g.terminal_color_7  = cp.fg
+vim.g.terminal_color_8  = cp.grey
+vim.g.terminal_color_9  = cp.red
 vim.g.terminal_color_10 = cp.green
 vim.g.terminal_color_11 = cp.yellow
 vim.g.terminal_color_12 = cp.blue

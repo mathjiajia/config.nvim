@@ -324,33 +324,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: fidget.nvim
-time([[Config for fidget.nvim]], true)
-require('fidget').setup {
-			text = { spinner = 'line' },
-			window = { relative = 'editor' }
-		}
-time([[Config for fidget.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-require('Comment').setup({
-			padding = function()
-				return vim.bo.filetype ~= 'norg'
-			end
-		})
-time([[Config for Comment.nvim]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require('configs.cmp')
 time([[Config for nvim-cmp]], false)
+-- Config for: vimtex
+time([[Config for vimtex]], true)
+require('configs.latex')
+time([[Config for vimtex]], false)
 -- Config for: leap.nvim
 time([[Config for leap.nvim]], true)
 require('leap').set_default_keymaps()
 time([[Config for leap.nvim]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-require('configs.luasnip')
-time([[Config for LuaSnip]], false)
 -- Config for: neorg
 time([[Config for neorg]], true)
 require('configs.neorg')
@@ -363,30 +348,41 @@ time([[Config for indent-blankline.nvim]], false)
 time([[Config for null-ls.nvim]], true)
 require('lsp.null-ls')
 time([[Config for null-ls.nvim]], false)
--- Config for: neovim-session-manager
-time([[Config for neovim-session-manager]], true)
-require('configs.session')
-time([[Config for neovim-session-manager]], false)
--- Config for: matchparen.nvim
-time([[Config for matchparen.nvim]], true)
-require('matchparen').setup()
-time([[Config for matchparen.nvim]], false)
--- Config for: nvim-texlabconfig
-time([[Config for nvim-texlabconfig]], true)
-require('texlabconfig').setup()
-time([[Config for nvim-texlabconfig]], false)
--- Config for: vimtex
-time([[Config for vimtex]], true)
-require('configs.latex')
-time([[Config for vimtex]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require('configs.treesitter')
+time([[Config for nvim-treesitter]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 require('configs.gitsigns')
 time([[Config for gitsigns.nvim]], false)
--- Config for: aerial.nvim
-time([[Config for aerial.nvim]], true)
-require('configs.outline')
-time([[Config for aerial.nvim]], false)
+-- Config for: neovim-session-manager
+time([[Config for neovim-session-manager]], true)
+require('configs.session')
+time([[Config for neovim-session-manager]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+require('fidget').setup {
+			text = { spinner = 'line' },
+			window = { relative = 'editor' }
+		}
+time([[Config for fidget.nvim]], false)
+-- Config for: FTerm.nvim
+time([[Config for FTerm.nvim]], true)
+require('configs.terminal')
+time([[Config for FTerm.nvim]], false)
+-- Config for: nvim-texlabconfig
+time([[Config for nvim-texlabconfig]], true)
+require('texlabconfig').setup()
+time([[Config for nvim-texlabconfig]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+require('Comment').setup({
+			padding = function()
+				return vim.bo.filetype ~= 'norg'
+			end
+		})
+time([[Config for Comment.nvim]], false)
 -- Config for: nvim-notify
 time([[Config for nvim-notify]], true)
 vim.notify = require('notify')
@@ -395,22 +391,26 @@ time([[Config for nvim-notify]], false)
 time([[Config for neo-tree.nvim]], true)
 require('configs.tree')
 time([[Config for neo-tree.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require('configs.pairs')
-time([[Config for nvim-autopairs]], false)
--- Config for: FTerm.nvim
-time([[Config for FTerm.nvim]], true)
-require('configs.terminal')
-time([[Config for FTerm.nvim]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+require('configs.luasnip')
+time([[Config for LuaSnip]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 require('configs.telescope')
 time([[Config for telescope.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require('configs.treesitter')
-time([[Config for nvim-treesitter]], false)
+-- Config for: matchparen.nvim
+time([[Config for matchparen.nvim]], true)
+require('matchparen').setup()
+time([[Config for matchparen.nvim]], false)
+-- Config for: aerial.nvim
+time([[Config for aerial.nvim]], true)
+require('configs.outline')
+time([[Config for aerial.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require('configs.pairs')
+time([[Config for nvim-autopairs]], false)
 if should_profile then save_profiles() end
 
 end)

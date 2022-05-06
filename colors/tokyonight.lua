@@ -1,91 +1,91 @@
--- Modofied from https://github.com/folke/tokyonight.nvim
+-- Modofied from https: //github.com/folke/tokyonight.nvim
 vim.g.colors_name = 'tokyonight'
 
 local util = require 'utils.colors'
-local c = {}
+local c    = {}
 
 c = {
-	bg_dark = '#1F2335',
-	bg = '#24283B',
-	bg_highlight = '#292E42',
+	bg_dark        = '#1F2335',
+	bg             = '#24283B',
+	bg_highlight   = '#292E42',
 	terminal_black = '#414868',
-	fg = '#C0CAF5',
-	fg_dark = '#A9B1D6',
-	fg_gutter = '#3B4261',
-	dark3 = '#545C7E',
-	comment = '#565F89',
-	dark5 = '#737AA2',
-	blue0 = '#3D59A1',
-	blue = '#7AA2F7',
-	cyan = '#7DCFFF',
-	blue1 = '#2AC3DE',
-	blue2 = '#0DB9D7',
-	blue5 = '#89DDFF',
-	blue6 = '#B4F9F8',
-	blue7 = '#394B70',
-	magenta = '#BB9AF7',
-	magenta2 = '#FF007C',
-	purple = '#9D7CD8',
-	orange = '#FF9E64',
-	yellow = '#E0AF68',
-	green = '#9ECE6A',
-	green1 = '#73DACA',
-	green2 = '#41A6B5',
-	teal = '#1ABC9C',
-	red = '#F7768E',
-	red1 = '#DB4B4B',
-	git = {
-		change = '#6183BB',
-		add = '#449DAB',
-		delete = '#914C54',
+	fg             = '#C0CAF5',
+	fg_dark        = '#A9B1D6',
+	fg_gutter      = '#3B4261',
+	dark3          = '#545C7E',
+	comment        = '#565F89',
+	dark5          = '#737AA2',
+	blue0          = '#3D59A1',
+	blue           = '#7AA2F7',
+	cyan           = '#7DCFFF',
+	blue1          = '#2AC3DE',
+	blue2          = '#0DB9D7',
+	blue5          = '#89DDFF',
+	blue6          = '#B4F9F8',
+	blue7          = '#394B70',
+	magenta        = '#BB9AF7',
+	magenta2       = '#FF007C',
+	purple         = '#9D7CD8',
+	orange         = '#FF9E64',
+	yellow         = '#E0AF68',
+	green          = '#9ECE6A',
+	green1         = '#73DACA',
+	green2         = '#41A6B5',
+	teal           = '#1ABC9C',
+	red            = '#F7768E',
+	red1           = '#DB4B4B',
+	git            = {
+		change   = '#6183BB',
+		add      = '#449DAB',
+		delete   = '#914C54',
 		conflict = '#BB7A61',
 	},
-	gitSigns = {
-		add = '#164846',
+	gitSigns       = {
+		add    = '#164846',
 		change = '#394B70',
 		delete = '#823C41',
 	},
 }
 
 if vim.g.theme_style == 'dark' then
-	c.bg = '#1A1B26'
+	c.bg      = '#1A1B26'
 	c.bg_dark = '#16161E'
 end
 
 c.diff = {
-	add = util.darken(c.green2, 0.15),
+	add    = util.darken(c.green2, 0.15),
 	delete = util.darken(c.red1, 0.15),
 	change = util.darken(c.blue7, 0.15),
-	text = c.blue7,
+	text   = c.blue7,
 }
 
 c.gitSigns = {
-	add = util.brighten(c.gitSigns.add, 0.2),
+	add    = util.brighten(c.gitSigns.add, 0.2),
 	change = util.brighten(c.gitSigns.change, 0.2),
 	delete = util.brighten(c.gitSigns.delete, 0.2),
 }
 
-c.git.ignore = c.dark3
-c.black = util.darken(c.bg, 0.8, '#000000')
+c.git.ignore       = c.dark3
+c.black            = util.darken(c.bg, 0.8, '#000000')
 c.border_highlight = c.blue0
-c.border = c.black
+c.border           = c.black
 
 -- Popups and statusline always get a dark background
-c.bg_popup = c.bg_dark
+c.bg_popup      = c.bg_dark
 c.bg_statusline = c.bg_dark
 
 -- Sidebar and Floats are configurable
 c.bg_sidebar = c.bg_dark
-c.bg_float = c.bg_dark
+c.bg_float   = c.bg_dark
 
-c.bg_visual = util.darken(c.blue0, 0.7)
-c.bg_search = c.blue0
+c.bg_visual  = util.darken(c.blue0, 0.7)
+c.bg_search  = c.blue0
 c.fg_sidebar = c.fg_dark
 
-c.error = c.red1
+c.error   = c.red1
 c.warning = c.yellow
-c.info = c.blue2
-c.hint = c.teal
+c.info    = c.blue2
+c.hint    = c.teal
 
 if vim.g.theme_style == 'light' then
 	c = util.light_colors(c)
@@ -421,24 +421,24 @@ vim.g.terminal_color_0 = c.black
 vim.g.terminal_color_8 = c.terminal_black
 
 -- light
-vim.g.terminal_color_7 = c.fg_dark
+vim.g.terminal_color_7  = c.fg_dark
 vim.g.terminal_color_15 = c.fg
 
 -- colors
 vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_9 = c.red
 
-vim.g.terminal_color_2 = c.green
+vim.g.terminal_color_2  = c.green
 vim.g.terminal_color_10 = c.green
 
-vim.g.terminal_color_3 = c.yellow
+vim.g.terminal_color_3  = c.yellow
 vim.g.terminal_color_11 = c.yellow
 
-vim.g.terminal_color_4 = c.blue
+vim.g.terminal_color_4  = c.blue
 vim.g.terminal_color_12 = c.blue
 
-vim.g.terminal_color_5 = c.magenta
+vim.g.terminal_color_5  = c.magenta
 vim.g.terminal_color_13 = c.magenta
 
-vim.g.terminal_color_6 = c.cyan
+vim.g.terminal_color_6  = c.cyan
 vim.g.terminal_color_14 = c.cyan

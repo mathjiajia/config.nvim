@@ -1,78 +1,78 @@
--- Modified from https://github.com/eddyekofo94/gruvbox-flat.nvim
+-- Modified from https: //github.com/eddyekofo94/gruvbox-flat.nvim
 vim.g.colors_name = 'gruvbox'
 
 local util = require 'utils.colors'
 
 local c = {}
 c = {
-	border = '#5A524C',
-	bg_highlight = '#32302F',
+	border        = '#5A524C',
+	bg_highlight  = '#32302F',
 	prompt_border = '#45403D',
-	fg = '#D4BE98',
-	fg_light = '#DDC7A1',
-	fg_dark = '#D4BE98',
-	fg_gutter = '#5A524C',
-	dark = '#232323',
-	blue = '#7DAEA3',
-	aqua = '#89B482',
-	purple = '#D3869B',
-	orange = '#E78A4E',
-	yellow = '#D8A657',
-	yellow2 = '#B47109',
-	bg_yellow = '#A96B2C',
-	green = '#A9B665',
-	red = '#EA6962',
-	red1 = '#C14A4A',
-	black = '#1D2021',
-	git = {
+	fg            = '#D4BE98',
+	fg_light      = '#DDC7A1',
+	fg_dark       = '#D4BE98',
+	fg_gutter     = '#5A524C',
+	dark          = '#232323',
+	blue          = '#7DAEA3',
+	aqua          = '#89B482',
+	purple        = '#D3869B',
+	orange        = '#E78A4E',
+	yellow        = '#D8A657',
+	yellow2       = '#B47109',
+	bg_yellow     = '#A96B2C',
+	green         = '#A9B665',
+	red           = '#EA6962',
+	red1          = '#C14A4A',
+	black         = '#1D2021',
+	git           = {
 		delete = '#C14A4A',
-		add = '#6F8352',
+		add    = '#6F8352',
 		change = '#B47109',
 		bg_red = '#AE5858',
 		ignore = '#5A524C',
 	},
-	gitSigns = {
+	gitSigns      = {
 		delete = '#AE5858',
-		add = '#6F8352',
+		add    = '#6F8352',
 		change = '#A96B2C',
 	},
-	error = '#C14A4A',
-	warning = '#D8A657',
-	info = '#7DAEA3',
-	hint = '#89B482',
+	error         = '#C14A4A',
+	warning       = '#D8A657',
+	info          = '#7DAEA3',
+	hint          = '#89B482',
 }
 
 if vim.g.theme_style == 'dark' then
-	c.bg = '#282828'
-	c.bg2 = '#242424'
+	c.bg          = '#282828'
+	c.bg2         = '#242424'
 	c.line_cursor = '#32302F'
-	c.bg_visual = '#45403D'
-	c.comment = '#7C6F64'
+	c.bg_visual   = '#45403D'
+	c.comment     = '#7C6F64'
 else
-	c.bg = '#1D2021'
-	c.bg2 = '#17191A'
+	c.bg          = '#1D2021'
+	c.bg2         = '#17191A'
 	c.line_cursor = util.lighten(c.bg, 0.97)
-	c.bg_visual = '#3C3836'
-	c.comment = '#6A635D'
+	c.bg_visual   = '#3C3836'
+	c.comment     = '#6A635D'
 end
 
 c.diff = {
-	add = util.darken(c.git.add, 0.15),
+	add    = util.darken(c.git.add, 0.15),
 	delete = util.darken(c.git.delete, 0.15),
 	change = util.darken(c.git.change, 0.15),
-	text = c.fg_gutter,
+	text   = c.fg_gutter,
 }
 
 c.gitSigns = {
-	add = util.brighten(c.gitSigns.add, 0.2),
+	add    = util.brighten(c.gitSigns.add, 0.2),
 	change = util.brighten(c.gitSigns.change, 0.2),
 	delete = util.brighten(c.gitSigns.delete, 0.2),
 }
 
-c.black = util.darken(c.bg, 0.8, '#000000')
-c.bg_popup = c.bg2
+c.black         = util.darken(c.bg, 0.8, '#000000')
+c.bg_popup      = c.bg2
 c.bg_statusline = c.bg2
-c.bg_float = c.bg2
+c.bg_float      = c.bg2
 
 ------ BASICS ------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.bg_visual })
@@ -430,30 +430,30 @@ vim.g.terminal_color_0 = dark
 vim.g.terminal_color_8 = dark
 
 -- light
-vim.g.terminal_color_7 = c.fg_dark
+vim.g.terminal_color_7  = c.fg_dark
 vim.g.terminal_color_15 = c.fg
 
 -- colors
 vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_9 = c.red
 
-vim.g.terminal_color_2 = c.green
+vim.g.terminal_color_2  = c.green
 vim.g.terminal_color_10 = c.green
 
-vim.g.terminal_color_3 = c.yellow
+vim.g.terminal_color_3  = c.yellow
 vim.g.terminal_color_11 = c.yellow
 
-vim.g.terminal_color_4 = c.blue
+vim.g.terminal_color_4  = c.blue
 vim.g.terminal_color_12 = c.blue
 
-vim.g.terminal_color_5 = c.purple
+vim.g.terminal_color_5  = c.purple
 vim.g.terminal_color_13 = c.purple
 
-vim.g.terminal_color_6 = c.aqua
+vim.g.terminal_color_6  = c.aqua
 vim.g.terminal_color_14 = c.aqua
 
--- if vim.o.background == 'light' then
--- 	for i = 0, 15, 1 do
--- 		vim.g['terminal_color_' .. i] = util.getColor(vim.g['terminal_color_' .. i])
+-- if vim.o.background =         = 'light' then
+-- for i                         = 0, 15, 1 do
+-- vim.g['terminal_color_' .. i] = util.getColor(vim.g['terminal_color_' .. i])
 -- 	end
 -- end

@@ -7,8 +7,8 @@ vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
 	command = 'source <afile> | PackerCompile',
 	pattern = 'plugins.lua',
-	group = 'packer_user_config',
-	desc = 'Compile whenever plugins.lua is updated',
+	group   = 'packer_user_config',
+	desc    = 'Compile whenever plugins.lua is updated',
 })
 
 require('packer').startup(function()
@@ -26,7 +26,7 @@ require('packer').startup(function()
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
+		run    = ':TSUpdate',
 		config = [[require('configs.treesitter')]],
 	}
 	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -41,7 +41,7 @@ require('packer').startup(function()
 	}
 	-- use {
 	-- 	'lewis6991/spellsitter.nvim',
-	-- 	config = [[require('spellsitter').setup()]],
+	-- config = [[require('spellsitter').setup()]],
 	-- }
 	use {
 		'stevearc/aerial.nvim',
@@ -64,7 +64,7 @@ require('packer').startup(function()
 	}
 	-- use {
 	-- 	'ZhiyuanLck/smart-pairs',
-	-- 	config = [[require('configs.pairs')]],
+	-- config = [[require('configs.pairs')]],
 	-- }
 	use {
 		'windwp/nvim-autopairs',
@@ -72,7 +72,7 @@ require('packer').startup(function()
 	}
 	use {
 		'github/copilot.vim',
-		opt = true,
+		opt    = true,
 		config = [[require('configs.copilot')]],
 	}
 
@@ -80,12 +80,12 @@ require('packer').startup(function()
 	use {
 		'jose-elias-alvarez/null-ls.nvim',
 		requires = 'nvim-lua/plenary.nvim',
-		config = [[require('lsp.null-ls')]],
+		config   = [[require('lsp.null-ls')]],
 	}
 	use {
 		'j-hui/fidget.nvim',
 		config = [[require('fidget').setup {
-			text = { spinner = 'line' },
+			text   = { spinner = 'line' },
 			window = { relative = 'editor' }
 		}]],
 	}
@@ -129,15 +129,15 @@ require('packer').startup(function()
 	use {
 		'numToStr/Comment.nvim',
 		config = [[require('Comment').setup({
-			padding = function()
-				return vim.bo.filetype ~= 'norg'
+			       padding           = function()
+			return vim.bo.filetype ~ = 'norg'
 			end
 		})]],
 	}
 	use {
 		'Shatur/neovim-session-manager',
 		requires = 'nvim-lua/plenary.nvim',
-		config = [[require('configs.session')]],
+		config   = [[require('configs.session')]],
 	}
 	use '~/Dev/surround.nvim'
 	use { 'ggandor/leap.nvim',

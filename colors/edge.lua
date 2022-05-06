@@ -1,66 +1,66 @@
--- Modified from https://github.com/sainnhe/edge
+-- Modified from https: //github.com/sainnhe/edge
 vim.g.colors_name = 'edge'
 
 local cp = {}
 
 if vim.g.theme_style == 'dark' then
 	cp = {
-		black = '#202023',
-		bg0 = '#2B2D37',
-		bg1 = '#333644',
-		bg2 = '#363A49',
-		bg3 = '#3A3E4E',
-		bg4 = '#404455',
-		bg_grey = '#7E869B',
-		bg_red = '#EC7279',
-		diff_red = '#55393D',
-		bg_green = '#A0C980',
-		diff_green = '#394634',
-		bg_blue = '#6CB6EB',
-		diff_blue = '#354157',
-		bg_purple = '#D38AEA',
+		black       = '#202023',
+		bg0         = '#2B2D37',
+		bg1         = '#333644',
+		bg2         = '#363A49',
+		bg3         = '#3A3E4E',
+		bg4         = '#404455',
+		bg_grey     = '#7E869B',
+		bg_red      = '#EC7279',
+		diff_red    = '#55393D',
+		bg_green    = '#A0C980',
+		diff_green  = '#394634',
+		bg_blue     = '#6CB6EB',
+		diff_blue   = '#354157',
+		bg_purple   = '#D38AEA',
 		diff_yellow = '#4E432F',
-		fg = '#C5CDD9',
-		red = '#EC7279',
-		yellow = '#DEB974',
-		green = '#A0C980',
-		cyan = '#5DBBC1',
-		blue = '#6CB6EB',
-		purple = '#D38AEA',
-		grey = '#7E8294',
-		grey_dim = '#5B5E71',
+		fg          = '#C5CDD9',
+		red         = '#EC7279',
+		yellow      = '#DEB974',
+		green       = '#A0C980',
+		cyan        = '#5DBBC1',
+		blue        = '#6CB6EB',
+		purple      = '#D38AEA',
+		grey        = '#7E8294',
+		grey_dim    = '#5B5E71',
 
-		teledark = '#252731',
+		teledark  = '#252731',
 		teleblack = '#31333D',
 	}
 else
 	cp = {
-		black = '#DDE2E7',
-		bg0 = '#FAFAFA',
-		bg1 = '#EEF1F4',
-		bg2 = '#E8EBF0',
-		bg3 = '#E8EBF0',
-		bg4 = '#DDE2E7',
-		bg_grey = '#BCC5CF',
-		bg_red = '#E17373',
-		diff_red = '#F6E4E4',
-		bg_green = '#76AF6F',
-		diff_green = '#E5EEE4',
-		bg_blue = '#6996E0',
-		diff_blue = '#E3EAF6',
-		bg_purple = '#BF75D6',
+		black       = '#DDE2E7',
+		bg0         = '#FAFAFA',
+		bg1         = '#EEF1F4',
+		bg2         = '#E8EBF0',
+		bg3         = '#E8EBF0',
+		bg4         = '#DDE2E7',
+		bg_grey     = '#BCC5CF',
+		bg_red      = '#E17373',
+		diff_red    = '#F6E4E4',
+		bg_green    = '#76AF6F',
+		diff_green  = '#E5EEE4',
+		bg_blue     = '#6996E0',
+		diff_blue   = '#E3EAF6',
+		bg_purple   = '#BF75D6',
 		diff_yellow = '#F0ECE2',
-		fg = '#4B505B',
-		red = '#D05858',
-		yellow = '#BE7E05',
-		green = '#608E32',
-		cyan = '#3A8B84',
-		blue = '#5079BE',
-		purple = '#B05CCC',
-		grey = '#8790A0',
-		grey_dim = '#BAC3CB',
+		fg          = '#4B505B',
+		red         = '#D05858',
+		yellow      = '#BE7E05',
+		green       = '#608E32',
+		cyan        = '#3A8B84',
+		blue        = '#5079BE',
+		purple      = '#B05CCC',
+		grey        = '#8790A0',
+		grey_dim    = '#BAC3CB',
 
-		teledark = '#FFFFFF',
+		teledark  = '#FFFFFF',
 		teleblack = '#F4F4F4',
 	}
 end
@@ -497,16 +497,16 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = cp.bg0, bg = cp.yellow, bold = true }
 -- vim.api.nvim_set_hl(0, 'pythonTSVariableBuiltin', {})
 
 ------ TERMINAL ------
-vim.g.terminal_color_0 = cp.black
-vim.g.terminal_color_1 = cp.red
-vim.g.terminal_color_2 = cp.green
-vim.g.terminal_color_3 = cp.yellow
-vim.g.terminal_color_4 = cp.blue
-vim.g.terminal_color_5 = cp.purple
-vim.g.terminal_color_6 = cp.cyan
-vim.g.terminal_color_7 = cp.fg
-vim.g.terminal_color_8 = cp.grey
-vim.g.terminal_color_9 = cp.red
+vim.g.terminal_color_0  = cp.black
+vim.g.terminal_color_1  = cp.red
+vim.g.terminal_color_2  = cp.green
+vim.g.terminal_color_3  = cp.yellow
+vim.g.terminal_color_4  = cp.blue
+vim.g.terminal_color_5  = cp.purple
+vim.g.terminal_color_6  = cp.cyan
+vim.g.terminal_color_7  = cp.fg
+vim.g.terminal_color_8  = cp.grey
+vim.g.terminal_color_9  = cp.red
 vim.g.terminal_color_10 = cp.green
 vim.g.terminal_color_11 = cp.yellow
 vim.g.terminal_color_12 = cp.blue
