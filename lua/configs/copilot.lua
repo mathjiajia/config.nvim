@@ -1,6 +1,4 @@
-vim.keymap.set(
-	'i',
-	'<C-j>',
+vim.keymap.set('i', '<C-j>',
 	'copilot#Accept("\\<CR>")',
 	{ silent = true, script = true, expr = true, desc = 'Copilot Accept' }
 )

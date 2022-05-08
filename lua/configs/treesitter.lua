@@ -1,20 +1,8 @@
 local ts_install = {
-	'bibtex',
-	'comment',
-	'fish',
-	'help',
-	'html',
-	'latex',
-	'lua',
-	'markdown',
-	'norg',
-	'python',
-	'query',
-	'ruby',
-	'swift',
-	'toml',
-	'vim',
-	'yaml',
+	'bibtex', 'comment', 'fish', 'help',
+	'html', 'latex', 'lua', 'markdown',
+	'norg', 'python', 'query', 'ruby',
+	'swift', 'toml', 'vim', 'yaml',
 }
 
 require('nvim-treesitter.configs').setup {
@@ -31,10 +19,3 @@ require('nvim-treesitter.configs').setup {
 	playground = { enable = true },
 	query_linter = { enable = true },
 }
-
-vim.keymap.set('n', '<leader>th', function()
-	require('nvim-treesitter-playground.hl-info').show_hl_captures()
-end, { desc = 'Highlight captures under cursor' })
-vim.keymap.set('n', '<leader>tp', function()
-	require('nvim-treesitter-playground.internal').toggle()
-end, { desc = 'Tree-Sitter Playground' })

@@ -8,10 +8,11 @@ require('neo-tree').setup {
 	filesystem = {
 		follow_current_file = true,
 		hijack_netrw_behavior = 'open_current',
-		-- use_libuv_file_watcher = true,
-	},
+	}
 }
 
-vim.keymap.set('n', '<M-t>', function()
-	require('neo-tree.command')._command 'toggle'
-end, { desc = 'Toggle NeoTree' })
+vim.keymap.set('n', '<M-t>',
+	function()
+		require('neo-tree.command')._command 'toggle'
+	end,
+	{ desc = 'Toggle NeoTree' })

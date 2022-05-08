@@ -25,9 +25,10 @@ local function hunks()
 	return ''
 end
 
-for _, ty in ipairs { 'Warn', 'Error', 'Info', 'Hint' } do
-	local hl = vim.api.nvim_get_hl_by_name('Diagnostic' .. ty, true)
-	local name = ('Diagnostic%sStatus'):format(ty)
+local diag = { { 'Error', '' }, { 'Warn', '' }, { 'Info', '' }, { 'Hint', '' } }
+for _, ty in ipairs(diag) do
+	local hl = vim.api.nvim_get_hl_by_name('Diagnostic' .. ty[1], true)
+	local name = ('Diagnostic%sStatus'):format(ty[1])
 	vim.api.nvim_set_hl(0, name, { fg = hl.foreground, bg = ncbg })
 end
 
@@ -37,7 +38,7 @@ local function lsp_status()
 	end
 
 	local status = {}
-	for _, ty in ipairs { { 'Error', '' }, { 'Warn', '' }, { 'Info', '' }, { 'Hint', '' } } do
+	for _, ty in ipairs(diag) do
 		local n = vim.diagnostic.get(0, { severity = ty[1] })
 		if #n > 0 then
 			table.insert(status, ('%%#Diagnostic%sStatus# %s %s'):format(ty[1], ty[2], #n))
@@ -81,14 +82,15 @@ end
 local function force_inactive()
 	return find_pattern_match({ '^help$', '^quickfix$', '^nofile$' }, vim.bo.buftype)
 		or find_pattern_match(
-			{ '^$', '^aerial$', '^neo%-tree$', '^NvimTree$', '^spectre_panel$', '^TelescopePrompt$', '^tsplayground$' },
+			{ '^$', '^aerial$', '^neo%-tree$', '^NvimTree$', '^spectre_panel$',
+				'^TelescopePrompt$', '^tsplayground$' },
 			vim.bo.filetype
 		)
 end
 
 local function generate_statusline(is_active)
 	if is_active and not force_inactive() then
-		return hunks() .. file_info() .. '%#StatusLineNC# ' .. '%=' .. lsp_status() .. position()
+		return hunks() .. file_info() .. '%#StatusLineNC# %=' .. lsp_status() .. position()
 	else
 		return '%#StatusLineNC# %y '
 	end
