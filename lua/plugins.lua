@@ -41,7 +41,7 @@ require('packer').startup(function()
 	}
 	-- use {
 	-- 	'lewis6991/spellsitter.nvim',
-	-- config = [[require('spellsitter').setup()]],
+	-- 	config = [[require('spellsitter').setup()]],
 	-- }
 	use {
 		'stevearc/aerial.nvim',
@@ -64,7 +64,7 @@ require('packer').startup(function()
 	}
 	-- use {
 	-- 	'ZhiyuanLck/smart-pairs',
-	-- config = [[require('configs.pairs')]],
+	-- 	config = [[require('configs.pairs')]],
 	-- }
 	use {
 		'windwp/nvim-autopairs',
@@ -84,10 +84,7 @@ require('packer').startup(function()
 	}
 	use {
 		'j-hui/fidget.nvim',
-		config = [[require('fidget').setup {
-			text   = { spinner = 'line' },
-			window = { relative = 'editor' }
-		}]],
+		config = [[require('configs.fidget')]],
 	}
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
@@ -128,11 +125,7 @@ require('packer').startup(function()
 	}
 	use {
 		'numToStr/Comment.nvim',
-		config = [[require('Comment').setup({
-			       padding           = function()
-			return vim.bo.filetype ~ = 'norg'
-			end
-		})]],
+		config = [[require('configs.comment')]],
 	}
 	use {
 		'Shatur/neovim-session-manager',
