@@ -1,6 +1,6 @@
 local ts_install = {
 	'bibtex', 'comment', 'fish', 'help',
-	'html', 'latex', 'lua', 'markdown',
+	'html', 'json', 'latex', 'lua', 'markdown',
 	'norg', 'python', 'query', 'ruby',
 	'swift', 'toml', 'vim', 'yaml',
 }
