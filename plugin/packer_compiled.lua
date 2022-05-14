@@ -232,6 +232,12 @@ _G.packer_plugins = {
     path = "/Users/jia/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
   },
+  ["nvim-surround"] = {
+    config = { "require('configs.surround')" },
+    loaded = true,
+    path = "/Users/jia/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    url = "https://github.com/kylechui/nvim-surround"
+  },
   ["nvim-texlabconfig"] = {
     config = { "require('texlabconfig').setup()" },
     loaded = true,
@@ -247,7 +253,7 @@ _G.packer_plugins = {
   ["nvim-treesitter-context"] = {
     loaded = true,
     path = "/Users/jia/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
-    url = "https://github.com/lewis6991/nvim-treesitter-context"
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
   ["nvim-ts-rainbow"] = {
     loaded = true,
@@ -278,11 +284,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jia/.local/share/nvim/site/pack/packer/start/sqlite.lua",
     url = "https://github.com/tami5/sqlite.lua"
-  },
-  ["surround.nvim"] = {
-    loaded = true,
-    path = "/Users/jia/.local/share/nvim/site/pack/packer/start/surround.nvim",
-    url = "/Users/jia/Dev/surround.nvim"
   },
   ["telescope-bibtex.nvim"] = {
     loaded = true,
@@ -332,10 +333,18 @@ time([[Config for telescope.nvim]], false)
 time([[Config for null-ls.nvim]], true)
 require('lsp.null-ls')
 time([[Config for null-ls.nvim]], false)
--- Config for: aerial.nvim
-time([[Config for aerial.nvim]], true)
-require('configs.outline')
-time([[Config for aerial.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require('configs.treesitter')
+time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require('configs.pairs')
+time([[Config for nvim-autopairs]], false)
+-- Config for: neorg
+time([[Config for neorg]], true)
+require('configs.neorg')
+time([[Config for neorg]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 require('configs.gitsigns')
@@ -344,6 +353,10 @@ time([[Config for gitsigns.nvim]], false)
 time([[Config for neovim-session-manager]], true)
 require('configs.session')
 time([[Config for neovim-session-manager]], false)
+-- Config for: nvim-texlabconfig
+time([[Config for nvim-texlabconfig]], true)
+require('texlabconfig').setup()
+time([[Config for nvim-texlabconfig]], false)
 -- Config for: fidget.nvim
 time([[Config for fidget.nvim]], true)
 require('configs.fidget')
@@ -352,10 +365,6 @@ time([[Config for fidget.nvim]], false)
 time([[Config for FTerm.nvim]], true)
 require('configs.terminal')
 time([[Config for FTerm.nvim]], false)
--- Config for: nvim-texlabconfig
-time([[Config for nvim-texlabconfig]], true)
-require('texlabconfig').setup()
-time([[Config for nvim-texlabconfig]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 require('configs.comment')
@@ -368,22 +377,26 @@ time([[Config for nvim-notify]], false)
 time([[Config for neo-tree.nvim]], true)
 require('configs.tree')
 time([[Config for neo-tree.nvim]], false)
+-- Config for: nvim-surround
+time([[Config for nvim-surround]], true)
+require('configs.surround')
+time([[Config for nvim-surround]], false)
 -- Config for: matchparen.nvim
 time([[Config for matchparen.nvim]], true)
 require('matchparen').setup()
 time([[Config for matchparen.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require('configs.pairs')
-time([[Config for nvim-autopairs]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require('configs.treesitter')
-time([[Config for nvim-treesitter]], false)
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
 require('configs.indentline')
 time([[Config for indent-blankline.nvim]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+require('configs.luasnip')
+time([[Config for LuaSnip]], false)
+-- Config for: aerial.nvim
+time([[Config for aerial.nvim]], true)
+require('configs.outline')
+time([[Config for aerial.nvim]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require('configs.cmp')
@@ -396,14 +409,6 @@ time([[Config for vimtex]], false)
 time([[Config for leap.nvim]], true)
 require('leap').set_default_keymaps()
 time([[Config for leap.nvim]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-require('configs.luasnip')
-time([[Config for LuaSnip]], false)
--- Config for: neorg
-time([[Config for neorg]], true)
-require('configs.neorg')
-time([[Config for neorg]], false)
 if should_profile then save_profiles() end
 
 end)

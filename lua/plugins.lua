@@ -17,27 +17,27 @@ require('packer').startup(function()
 
 	use {
 		'monkoose/matchparen.nvim',
-		config = [[require('matchparen').setup()]],
+		config = [[require('matchparen').setup()]]
 	}
 	use {
 		'rcarriga/nvim-notify',
-		config = [[vim.notify = require('notify')]],
+		config = [[vim.notify = require('notify')]]
 	}
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run    = ':TSUpdate',
-		config = [[require('configs.treesitter')]],
+		config = [[require('configs.treesitter')]]
 	}
 	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
 	use 'nvim-treesitter/playground'
-	use 'lewis6991/nvim-treesitter-context'
+	use 'nvim-treesitter/nvim-treesitter-context'
 
 	-- use 'theHamsta/nvim-treesitter-pairs'
 	use 'p00f/nvim-ts-rainbow'
 	use {
 		'lukas-reineke/indent-blankline.nvim',
-		config = [[require('configs.indentline')]],
+		config = [[require('configs.indentline')]]
 	}
 	-- use {
 	-- 	'lewis6991/spellsitter.nvim',
@@ -45,12 +45,12 @@ require('packer').startup(function()
 	-- }
 	use {
 		'stevearc/aerial.nvim',
-		config = [[require('configs.outline')]],
+		config = [[require('configs.outline')]]
 	}
 
 	use {
 		'hrsh7th/nvim-cmp',
-		config = [[require('configs.cmp')]],
+		config = [[require('configs.cmp')]]
 	}
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-cmdline'
@@ -60,31 +60,31 @@ require('packer').startup(function()
 	use 'saadparwaiz1/cmp_luasnip'
 	use {
 		'L3MON4D3/LuaSnip',
-		config = [[require('configs.luasnip')]],
+		config = [[require('configs.luasnip')]]
 	}
 	-- use {
 	-- 	'ZhiyuanLck/smart-pairs',
-	-- 	config = [[require('configs.pairs')]],
+	-- 	config = [[require('configs.pairs')]]
 	-- }
 	use {
 		'windwp/nvim-autopairs',
-		config = [[require('configs.pairs')]],
+		config = [[require('configs.pairs')]]
 	}
 	use {
 		'github/copilot.vim',
 		opt    = true,
-		config = [[require('configs.copilot')]],
+		config = [[require('configs.copilot')]]
 	}
 
 	use 'neovim/nvim-lspconfig'
 	use {
 		'jose-elias-alvarez/null-ls.nvim',
 		requires = 'nvim-lua/plenary.nvim',
-		config   = [[require('lsp.null-ls')]],
+		config   = [[require('lsp.null-ls')]]
 	}
 	use {
 		'j-hui/fidget.nvim',
-		config = [[require('configs.fidget')]],
+		config = [[require('configs.fidget')]]
 	}
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
@@ -95,15 +95,15 @@ require('packer').startup(function()
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons'
 		},
-		config = [[require('configs.telescope')]],
+		config = [[require('configs.telescope')]]
 	}
 	use {
 		'nvim-telescope/telescope-fzf-native.nvim',
-		run = 'make',
+		run = 'make'
 	}
 	use {
 		'nvim-telescope/telescope-frecency.nvim',
-		requires = 'tami5/sqlite.lua',
+		requires = 'tami5/sqlite.lua'
 	}
 	use 'nvim-telescope/telescope-file-browser.nvim'
 	use 'nvim-telescope/telescope-bibtex.nvim'
@@ -114,45 +114,48 @@ require('packer').startup(function()
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons',
-			'MunifTanjim/nui.nvim',
+			'MunifTanjim/nui.nvim'
 		},
-		config = [[require('configs.tree')]],
+		config = [[require('configs.tree')]]
 	}
 
 	use {
 		'lewis6991/gitsigns.nvim',
-		config = [[require('configs.gitsigns')]],
+		config = [[require('configs.gitsigns')]]
 	}
 	use {
 		'numToStr/Comment.nvim',
-		config = [[require('configs.comment')]],
+		config = [[require('configs.comment')]]
 	}
 	use {
 		'Shatur/neovim-session-manager',
 		requires = 'nvim-lua/plenary.nvim',
-		config   = [[require('configs.session')]],
+		config   = [[require('configs.session')]]
 	}
-	use '~/Dev/surround.nvim'
+	use {
+		'kylechui/nvim-surround',
+		config = [[require('configs.surround')]]
+	}
 	use { 'ggandor/leap.nvim',
 		config = [[require('leap').set_default_keymaps()]]
 	}
 	use {
 		'numtostr/FTerm.nvim',
-		config = [[require('configs.terminal')]],
+		config = [[require('configs.terminal')]]
 	}
 
 	use {
 		'lervag/vimtex',
-		config = [[require('configs.latex')]],
+		config = [[require('configs.latex')]]
 	}
 	use {
 		'f3fora/nvim-texlabconfig',
-		config = [[require('texlabconfig').setup()]],
+		config = [[require('texlabconfig').setup()]]
 	}
 
 	use {
 		'nvim-neorg/neorg',
-		config = [[require('configs.neorg')]],
+		config = [[require('configs.neorg')]]
 	}
 	use 'nvim-neorg/neorg-telescope'
 end)
