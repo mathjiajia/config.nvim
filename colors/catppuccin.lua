@@ -4,7 +4,7 @@ vim.g.colors_name = 'catppuccin'
 local util = require 'utils.colors'
 local cp   = {}
 
-if vim.g.theme_style == 'moccha' then
+if vim.g.theme_style == 'mocha' then
 	cp = {
 		rosewater = '#F5E0DC',
 		flamingo  = '#F2CDCD',
@@ -20,17 +20,20 @@ if vim.g.theme_style == 'moccha' then
 		blue      = '#90C1FB',
 		sapphire  = '#74C7EC',
 		lavender  = '#B4BEFE',
-		text      = '#C6D0F5',
-		overlay2  = '#AEB7D9',
-		overlay1  = '#969DBC',
-		overlay0  = '#7E84A0',
-		surface2  = '#666A83',
-		surface1  = '#4E5167',
-		surface0  = '#36374A',
 
-		crust  = '#11111B',
-		mantle = '#181825',
+		text     = '#C6D0F5',
+		subtext1 = '#B3BCDF',
+		subtext0 = '#A1A8C9',
+		overlay2 = '#8E95B3',
+		overlay1 = '#7B819D',
+		overlay0 = '#696D86',
+		surface2 = '#565970',
+		surface1 = '#43465A',
+		surface0 = '#313244',
+
 		base   = '#1E1E2E',
+		mantle = '#181825',
+		crust  = '#11111B',
 
 		teledark  = '#1A1826',
 		teleblack = '#252434',
@@ -52,16 +55,19 @@ elseif vim.g.theme_style == 'macchiato' then
 		sapphire  = '#7DC4E4',
 		lavender  = '#B9BEF8',
 		text      = '#C5CFF5',
-		overlay2  = '#AEB7DA',
-		overlay1  = '#979FC0',
-		overlay0  = '#8087A5',
-		surface2  = '#696F8A',
-		surface1  = '#52576F',
-		surface0  = '#3B3F55',
 
-		crust = '#181926',
+		subtext1 = '#B3BCE0',
+		subtext0 = '#A1AACB',
+		overlay2 = '#8F97B7',
+		overlay1 = '#7D84A2',
+		overlay0 = '#6C728D',
+		surface2 = '#5A5F78',
+		surface1 = '#484C64',
+		surface0 = '#363A4F',
+
+		base   = '#24273A',
 		mantle = '#1E2030',
-		base = '#24273A',
+		crust  = '#181926',
 
 		teledark  = '#1E2134',
 		teleblack = '#2A2D40',
@@ -83,21 +89,24 @@ elseif vim.g.theme_style == 'latte' then
 		sapphire  = '#209FB5',
 		lavender  = '#7287FD',
 		text      = '#4C4F69',
-		overlay2  = '#60637B',
-		overlay1  = '#74788D',
-		overlay0  = '#888C9F',
-		surface2  = '#9DA1B1',
-		surface1  = '#B1B5C3',
-		surface0  = '#C5CAD5',
 
-		crust = '#D9DEE7',
-		mantle = '#E4E8EE',
-		base = '#EFF1F5',
+		subtext1 = '#5C5F77',
+		subtext0 = '#6C6F85',
+		overlay2 = '#7C7F93',
+		overlay1 = '#8C8FA1',
+		overlay0 = '#9CA0B0',
+		surface2 = '#ACB0BE',
+		surface1 = '#BCC0CC',
+		surface0 = '#CCD0DA',
+
+		base   = '#EFF1F5',
+		mantle = '#E6E9EF',
+		crust  = '#DCE0E8',
 
 		teledark  = '#FFFFFF',
 		teleblack = '#F6F6F6',
 	}
-else
+else -- frappe
 	cp = {
 		rosewater = '#F2D5CF',
 		flamingo  = '#EEBEBE',
@@ -114,16 +123,19 @@ else
 		sapphire  = '#85C1DC',
 		lavender  = '#BFB7E4',
 		text      = '#C6CEEF',
-		overlay2  = '#AFB6D4',
-		overlay1  = '#979EBA',
-		overlay0  = '#80869F',
-		surface2  = '#696E84',
-		surface1  = '#525669',
-		surface0  = '#3A3E4F',
 
-		crust = '#232634',
-		mantle = '#292C3C',
+		subtext1 = '#B5BDDC',
+		subtext0 = '#A5ACC9',
+		overlay2 = '#949BB7',
+		overlay1 = '#838AA4',
+		overlay0 = '#737891',
+		surface2 = '#62677E',
+		surface1 = '#51566C',
+		surface0 = '#414559',
+
 		base = '#303446',
+		mantle = '#292C3C',
+		crust = '#232634',
 
 		teledark  = '#FFFFFF',
 		teleblack = '#F6F6F6',
