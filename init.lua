@@ -1,19 +1,4 @@
-require('impatient')
-
--- SOME GLOBAL FUNCTIONS
-P = function(v)
-	print(vim.inspect(v))
-	return v
-end
-
-RELOAD = function(...)
-	return require('plenary.reload').reload_module(...)
-end
-
-R = function(name)
-	RELOAD(name)
-	return require(name)
-end
+require 'impatient'
 
 vim.g.mapleader = ','
 
@@ -43,5 +28,4 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
 -- NEOVIM BUILTIN LSP CONFIGURATION
-require('lsp')
--- require('plugins')
+require 'lsp'

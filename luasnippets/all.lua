@@ -12,9 +12,11 @@ local function get_node_at_cursor()
 	local cursor_range = { cursor[1] - 1, cursor[2] - 1 }
 	local buf = vim.api.nvim_get_current_buf()
 	local ok, parser = pcall(require('vim.treesitter').get_parser, buf)
+
 	if not ok or not parser then
 		return
 	end
+
 	local root_tree = parser:parse()[1]
 	local root = root_tree and root_tree:root()
 
