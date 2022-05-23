@@ -1,4 +1,4 @@
--- Modified from https: //github.com/sainnhe/everforest
+-- Modified from https://github.com/sainnhe/everforest
 vim.g.colors_name = 'everforest'
 
 local cp = {}

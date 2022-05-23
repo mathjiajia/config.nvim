@@ -1,4 +1,4 @@
--- Modified from https: //github.com/sainnhe/sonokai
+-- Modified from https://github.com/sainnhe/sonokai
 vim.g.colors_name = 'sonokai'
 
 local cp = {

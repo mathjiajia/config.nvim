@@ -22,72 +22,57 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ## Structure
 
 ```txt
+├── LICENSE
+├── README.md
 ├── after
-│   └── ftplugin
-│       ├── gitcommit.lua
-│       ├── markdown.lua
-│       ├── norg.lua
-│       ├── qf.lua
-│       └── tex.lua
+│   └── ftplugin
+│       ├── gitcommit.lua
+│       ├── markdown.lua
+│       ├── python.lua
+│       ├── qf.lua
+│       └── tex.lua
 ├── colors
-│   ├── catppuccin.lua
-│   ├── edge.lua
-│   ├── everforest.lua
-│   ├── github.lua
-│   ├── gruvbox.lua
-│   ├── kanagawa.lua
-│   ├── moon.lua
-│   ├── onedark.lua
-│   ├── sonokai.lua
-│   ├── tokyonight.lua
-│   └── vscode.lua
 ├── ginit.vim
 ├── init.lua
 ├── lua
-│   ├── autocmds.lua
-│   ├── configs
-│   │   ├── cmp.lua
-│   │   ├── copilot.lua
-│   │   ├── gitsigns.lua
-│   │   ├── hop.lua
-│   │   ├── indentline.lua
-│   │   ├── latex.lua
-│   │   ├── luasnip.lua
-│   │   ├── neorg.lua
-│   │   ├── outline.lua
-│   │   ├── pairs.lua
-│   │   ├── search.lua
-│   │   ├── session.lua
-│   │   ├── telescope.lua
-│   │   ├── terminal.lua
-│   │   ├── tree.lua
-│   │   └── treesitter.lua
-│   ├── keymaps.lua
-│   ├── lsp
-│   │   ├── init.lua
-│   │   ├── null-ls.lua
-│   │   ├── pyright.lua
-│   │   ├── sumneko_lua.lua
-│   │   └── texlab.lua
-│   ├── options.lua
-│   ├── plugins.lua
-│   └── ui
-│       ├── buftabline.lua
-│       ├── hsluv.lua
-│       ├── prompt.lua
-│       ├── statusline.lua
-│       └── util.lua
+│   ├── configs
+│   │   ├── cmp.lua
+│   │   ├── comment.lua
+│   │   ├── copilot.lua
+│   │   ├── fidget.lua
+│   │   ├── gitsigns.lua
+│   │   ├── heirline.lua
+│   │   ├── indentline.lua
+│   │   ├── latex.lua
+│   │   ├── luasnip.lua
+│   │   ├── neorg.lua
+│   │   ├── outline.lua
+│   │   ├── pairs.lua
+│   │   ├── session.lua
+│   │   ├── surround.lua
+│   │   ├── telescope.lua
+│   │   ├── terminal.lua
+│   │   ├── tree.lua
+│   │   └── treesitter.lua
+│   ├── lsp
+│   ├── plugins.lua
+│   └── utils
+│       ├── colors.lua
+│       ├── hsluv.lua
+│       └── latex.lua
 ├── luasnippets
-│   ├── all.lua
-│   ├── gitcommit.lua
-│   ├── lua.lua
-│   ├── markdown.lua
-│   ├── norg.lua
-│   └── tex.lua
-├── spell
-│   ├── en.utf-8.add
-│   └── en.utf-8.add.spl
-└── vscode.vim
+│   ├── all.lua
+│   ├── gitcommit.lua
+│   ├── lua.lua
+│   ├── markdown.lua
+│   ├── norg.lua
+│   └── tex
+├── plugin
+│   ├── autocmds.lua
+│   ├── keymaps.lua
+│   ├── options.lua
+│   └── packer_compiled.lua
+└── spell
 ```
 
 - `keybinds.lua` -- Various keymaps

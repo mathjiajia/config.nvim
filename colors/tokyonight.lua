@@ -1,4 +1,4 @@
--- Modofied from https: //github.com/folke/tokyonight.nvim
+-- Modofied from https://github.com/folke/tokyonight.nvim
 vim.g.colors_name = 'tokyonight'
 
 local util = require 'utils.colors'

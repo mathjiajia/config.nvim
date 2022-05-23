@@ -1,4 +1,4 @@
--- Modified from https: //github.com/catppuccin/nvim
+-- Modified from https://github.com/catppuccin/nvim
 vim.g.colors_name = 'catppuccin'
 
 local util = require 'utils.colors'
