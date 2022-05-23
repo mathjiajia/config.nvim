@@ -195,14 +195,14 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = cp.bl
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = true, sp = cp.green })
 
 ----- GIT -----
--- vim.api.nvim_set_hl(0, 'diffAdded', { fg = cp.green })
--- vim.api.nvim_set_hl(0, 'diffRemoved', { fg = cp.red })
--- vim.api.nvim_set_hl(0, 'diffChanged', { fg = cp.blue })
--- vim.api.nvim_set_hl(0, 'diffOldFile', { fg = cp.yellow })
--- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = cp.orange })
--- vim.api.nvim_set_hl(0, 'diffFile', { fg = cp.aqua })
--- vim.api.nvim_set_hl(0, 'diffLine', { fg = cp.grey1 })
--- vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = cp.purple })
+vim.api.nvim_set_hl(0, 'diffAdded', { fg = cp.green })
+vim.api.nvim_set_hl(0, 'diffRemoved', { fg = cp.red })
+vim.api.nvim_set_hl(0, 'diffChanged', { fg = cp.blue })
+vim.api.nvim_set_hl(0, 'diffOldFile', { fg = cp.yellow })
+vim.api.nvim_set_hl(0, 'diffNewFile', { fg = cp.orange })
+vim.api.nvim_set_hl(0, 'diffFile', { fg = cp.aqua })
+vim.api.nvim_set_hl(0, 'diffLine', { fg = cp.grey1 })
+vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = cp.purple })
 
 ----- GITCOMMIT -----
 -- vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = cp.red })

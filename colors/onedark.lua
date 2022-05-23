@@ -282,12 +282,12 @@ vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { fg = colors.virtual_text_i
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { fg = colors.virtual_text_hint })
 
 ------ GIT ------
--- vim.api.nvim_set_hl(0, 'diffAdded', { fg = colors.green })
--- vim.api.nvim_set_hl(0, 'diffChanged', { fg = colors.yellow })
--- vim.api.nvim_set_hl(0, 'diffRemoved', { fg = colors.red })
--- vim.api.nvim_set_hl(0, 'diffFile', { fg = colors.yellow })
--- vim.api.nvim_set_hl(0, 'diffNewFile', { fg = colors.yellow })
--- vim.api.nvim_set_hl(0, 'diffLine', { fg = colors.blue })
+vim.api.nvim_set_hl(0, 'diffAdded', { fg = colors.green })
+vim.api.nvim_set_hl(0, 'diffChanged', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'diffRemoved', { fg = colors.red })
+vim.api.nvim_set_hl(0, 'diffFile', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'diffNewFile', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'diffLine', { fg = colors.blue })
 
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = colors.selection })

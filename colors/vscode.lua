@@ -264,9 +264,9 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underdash = true, sp = c.vsc
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underdash = true, sp = c.vscBlueGreen })
 
 ------ GIT -----
--- vim.api.nvim_set_hl(0, 'diffAdded', { link = 'DiffAdd' })
--- vim.api.nvim_set_hl(0, 'diffChanged', { link = 'DiffChange' })
--- vim.api.nvim_set_hl(0, 'diffRemoved', { link = 'DiffDelete' })
+vim.api.nvim_set_hl(0, 'diffAdded', { link = 'DiffAdd' })
+vim.api.nvim_set_hl(0, 'diffChanged', { link = 'DiffChange' })
+vim.api.nvim_set_hl(0, 'diffRemoved', { link = 'DiffDelete' })
 
 ------ GITCOMMIT -----
 -- vim.api.nvim_set_hl(0, 'gitcommitHeader', { fg = c.vscGray })
@@ -333,6 +333,26 @@ vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = c.vscPink })
 vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = c.vscFront })
 vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = c.vscFront })
 vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = c.vscFront })
+
+vim.api.nvim_set_hl(0, 'CompeDocumentation', { link = 'Pmenu' })
+vim.api.nvim_set_hl(0, 'CompeDocumentationBorder', { link = 'Pmenu' })
+vim.api.nvim_set_hl(0, 'CmpItemKind', { link = 'Pmenu' })
+vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'CmpItemKindConstructor' })
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { link = 'CmpItemKindKeyword' })
+vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { link = 'TSOperator' })
+vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'TSParameterReference' })
+vim.api.nvim_set_hl(0, 'CmpItemKindValue', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'CmpItemKindField', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { link = 'TSText' })
+vim.api.nvim_set_hl(0, 'CmpItemKindColor', { link = 'cssColor' })
+vim.api.nvim_set_hl(0, 'CmpItemKindFile', { link = 'TSURI' })
+vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { link = 'TSURI' })
+vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { link = 'TSConstant' })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { link = 'TSField' })
+vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { link = 'TSConstant' })
+vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { link = 'TSStructure' })
+vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSParameter' })
 
 ------ GITSIGNS ------
 vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.vscGreen })

@@ -21,9 +21,9 @@ function M.setup()
 			info = utils.get_highlight('DiagnosticInfo').fg,
 		},
 		git = {
-			del = utils.get_highlight('DiffDelete').fg,
-			add = utils.get_highlight('DiffAdd').fg,
-			change = utils.get_highlight('DiffChange').fg,
+			del = utils.get_highlight('diffRemoved').fg,
+			add = utils.get_highlight('diffAdded').fg,
+			change = utils.get_highlight('diffChanged').fg,
 		},
 	}
 
@@ -72,7 +72,7 @@ function M.setup()
 		},
 
 		provider = function(self)
-			return ' %2(' .. self.mode_names[self.mode] .. '%)'
+			return '%2(' .. self.mode_names[self.mode] .. '%)'
 		end,
 
 		hl = function(self)
@@ -255,7 +255,6 @@ function M.setup()
 			provider = function(self)
 				return ' ' .. self.status_dict.head
 			end,
-			hl = { bold = true },
 		},
 		{
 			condition = function(self)
@@ -273,14 +272,14 @@ function M.setup()
 		{
 			provider = function(self)
 				local count = self.status_dict.removed or 0
-				return count > 0 and (' -' .. count)
+				return count > 0 and ('-' .. count)
 			end,
 			hl = { fg = colors.git.del },
 		},
 		{
 			provider = function(self)
 				local count = self.status_dict.changed or 0
-				return count > 0 and (' ~' .. count)
+				return count > 0 and ('~' .. count)
 			end,
 			hl = { fg = colors.git.change },
 		},
