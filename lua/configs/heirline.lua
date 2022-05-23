@@ -192,8 +192,8 @@ function M.setup()
 
 	local LSPActive = {
 		condition = conditions.lsp_attached,
-		provider = '◍ LSP',
-		hl = { fg = colors.green, bold = true },
+		provider = '◍ LSP ',
+		hl = { fg = colors.green },
 	}
 
 	local Diagnostics = {
@@ -253,33 +253,33 @@ function M.setup()
 
 		{
 			provider = function(self)
-				return ' ' .. self.status_dict.head
+				return ' ' .. self.status_dict.head .. ' '
 			end,
 		},
 		{
 			condition = function(self)
 				return self.has_changes
 			end,
-			provider = ' (',
+			provider = '(',
 		},
 		{
 			provider = function(self)
 				local count = self.status_dict.added or 0
-				return count > 0 and ('+' .. count)
+				return count > 0 and ('' .. count)
 			end,
 			hl = { fg = colors.git.add },
 		},
 		{
 			provider = function(self)
 				local count = self.status_dict.removed or 0
-				return count > 0 and ('-' .. count)
+				return count > 0 and ('' .. count)
 			end,
 			hl = { fg = colors.git.del },
 		},
 		{
 			provider = function(self)
 				local count = self.status_dict.changed or 0
-				return count > 0 and ('~' .. count)
+				return count > 0 and ('' .. count)
 			end,
 			hl = { fg = colors.git.change },
 		},
@@ -287,17 +287,17 @@ function M.setup()
 			condition = function(self)
 				return self.has_changes
 			end,
-			provider = ')',
+			provider = ') ',
 		},
 	}
 
 	local Snippets = {
 		condition = function()
-			return vim.tbl_contains({ 's', 'i' }, vim.fn.mode())
+			return vim.tbl_contains({ 'i', 's' }, vim.fn.mode())
 		end,
 		provider = function()
-			local forward = (require 'luasnip'.jumpable(1)) and '' or ''
-			local backward = (require 'luasnip'.jumpable(-1)) and ' ' or ''
+			local forward = (require 'luasnip'.jumpable(1)) and ' ' or ''
+			local backward = (require 'luasnip'.jumpable(-1)) and ' ' or ''
 			return backward .. forward
 		end,
 		hl = { fg = colors.red, bold = true },
@@ -305,14 +305,15 @@ function M.setup()
 
 	local WorkDir = {
 		provider = function(self)
-			self.icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
+			-- self.icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. '  '
+			self.icon = ' '
 			local cwd = vim.fn.getcwd(0)
 			self.cwd = vim.fn.fnamemodify(cwd, ':~')
 			if not conditions.width_percent_below(#self.cwd, 0.27) then
 				self.cwd = vim.fn.pathshorten(self.cwd)
 			end
 		end,
-		hl = { fg = colors.blue, bold = true },
+		hl = { fg = colors.blue },
 
 		utils.make_flexible_component(1, {
 			provider = function(self)
@@ -362,7 +363,7 @@ function M.setup()
 				local id = nil
 				return ' ' .. (id or 'Exited')
 			end,
-			hl = { bold = true, fg = colors.blue },
+			hl = { fg = colors.blue, bold = true },
 		},
 	}
 
@@ -370,19 +371,18 @@ function M.setup()
 
 	local Align = { provider = '%=' }
 	local Space = { provider = ' ' }
+	local Trunc = { provider = '%<' }
 
 	local DefaultStatusline = {
 		ViMode,
 		Space,
-		WorkDir,
-		{ provider = '%<' },
-		Space,
 		Git,
+		Trunc,
+		WorkDir,
 		Space,
 		Diagnostics,
 		Align,
 		LSPActive,
-		Space,
 		Ruler,
 		Space,
 		ScrollBar,
@@ -394,7 +394,7 @@ function M.setup()
 		end,
 		{ hl = { fg = colors.gray, force = true }, WorkDir },
 		FileNameBlock,
-		{ provider = '%<' },
+		Trunc,
 		Align,
 	}
 
