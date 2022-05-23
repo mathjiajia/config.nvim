@@ -41,3 +41,12 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	pattern  = 'TelescopePrompt',
 	group    = 'auto_cursorline',
 })
+
+vim.api.nvim_create_augroup('heirline', { clear = true })
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+	callback = function()
+		require 'heirline'.reset_highlights()
+		require 'configs.heirline'.setup()
+	end,
+	group    = 'heirline',
+})
