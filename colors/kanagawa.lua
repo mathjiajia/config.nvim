@@ -468,7 +468,7 @@ vim.api.nvim_set_hl(0, 'TSStringRegex', { fg = colors.re })
 -- vim.api.nvim_set_hl(0, 'TSTypeBuiltin', {})
 -- vim.api.nvim_set_hl(0, 'TSUnderline', {})
 -- vim.api.nvim_set_hl(0, 'TSURI', {})
-vim.api.nvim_set_hl(0, 'TSVariable', { fg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TSVariable', { fg = colors.fg })
 vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = colors.sp2, italic = true })
 vim.api.nvim_set_hl(0, 'TSWarning', { link = 'Todo' })
 
