@@ -17,9 +17,9 @@ snips = {
 	s({ trig = 'ref', name = 'cross refrence' }, {
 		t '\\cite[',
 		i(1),
-		t ']{',
+		t ']',
 		i(2),
-		t '}',
+		t '{}',
 	}, {
 		condition = tex.in_text,
 		show_condition = tex.in_text,
