@@ -29,11 +29,10 @@ local colors = {
 		del = utils.get_highlight('diffRemoved').fg,
 	},
 
-	bg_red = '#db4740',
-	aqua = '#8bba7f',
-	grey2 = '#a89984',
+	shine  = '#db4740',
+	aqua   = '#8bba7f',
+	lsp    = '#43BF6C',
 	yellow = '#e9b143',
-	lsp = '#43BF6C',
 }
 
 local mode_lable = {
@@ -50,16 +49,17 @@ local mode_lable = {
 	R       = 'RPLACE',
 	Rv      = 'VRPLCE',
 	c       = 'CMMAND',
-	ce      = 'EX (R)',
+	ce      = 'EX(R)',
 	cv      = 'PROMPT',
-	rm      = ' MORE ',
+	rm      = 'MORE',
 	['r?']  = 'CNFIRM',
-	['!']   = 'SHELL ',
-	t       = ' TERM ',
+	['!']   = 'SHELL',
+	t       = 'TERM',
+	nt      = 'TERM',
 }
 
 local vim_mode_colors = {
-	n       = colors.grey2,
+	n       = colors.shine,
 	no      = colors.blue,
 	v       = colors.yellow,
 	V       = colors.yellow,
@@ -78,15 +78,16 @@ local vim_mode_colors = {
 	['r?']  = colors.aqua,
 	['!']   = colors.orange,
 	t       = colors.orange,
+	nt      = colors.orange,
 }
 
 local mode_colors = setmetatable({
 	n = { fg = vim_mode_colors.n }
 }, {
-	__index = function(_, vim_mod)
+	__index = function(_, mode)
 		return {
 			fg = colors.statusline_bg,
-			bg = vim_mode_colors[vim_mod],
+			bg = vim_mode_colors[mode],
 		}
 	end
 })
@@ -101,46 +102,28 @@ local LeftCap = {
 
 local VimModeNormal = {
 	condition = function(self)
-		return self.mode == 'n' or not conditions.is_active()
+		return self.mode == 'n'
 	end,
-	Space,
-	{
-		init = utils.pick_child_on_condition,
-
-		{
-			provider = '●',
-			hl = function()
-				if vim.bo.modified then
-					return { fg = mode_colors.insert.bg }
-				elseif conditions.is_active() then
-					return mode_colors.n
-				else
-					return { fg = colors.grey1 }
-				end
-			end
-		}
-	},
+	provider = ' ●',
+	hl = { fg = colors.shine }
 }
 
-local VimModeActive = {
+local VimModeOthers = {
 	condition = function(self)
-		return conditions.is_active() and self.mode ~= 'n'
+		return self.mode ~= 'n'
 	end,
-	hl = { bg = colors.statusline_bg },
+
 	utils.surround(
 		{ '', '' },
+
 		function(self)
 			return mode_colors[self.mode].bg
 		end,
+
 		{
 			{
-				init = utils.pick_child_on_condition,
-				{ provider = '●' }
-			},
-			Space,
-			{
 				provider = function(self)
-					return mode_lable[self.mode]
+					return '● ' .. mode_lable[self.mode]
 				end,
 			},
 			hl = function(self)
@@ -153,9 +136,8 @@ local VimModeActive = {
 local VimMode = {
 	init = function(self)
 		self.mode = vim.fn.mode(1)
-		-- self.mode = mode[vim.fn.mode(1)]
 	end,
-	VimModeActive, VimModeNormal
+	VimModeNormal, VimModeOthers
 }
 
 local Snippets = {
@@ -163,8 +145,9 @@ local Snippets = {
 		return vim.tbl_contains({ 'i', 's' }, vim.fn.mode())
 	end,
 	provider = function()
-		local forward = (require 'luasnip'.jumpable(1)) and ' ' or ''
-		local backward = (require 'luasnip'.jumpable(-1)) and ' ' or ''
+		local ls = require 'luasnip'
+		local forward = ls.jumpable(1) and ' ' or ''
+		local backward = ls.jumpable(-1) and ' ' or ''
 		return backward .. forward
 	end,
 	hl = { fg = colors.red, bold = true },
@@ -336,7 +319,7 @@ local GitBranch = {
 	end,
 }
 
-local GitChanges = {
+local GitDiffs = {
 	condition = function(self)
 		if conditions.is_git_repo() then
 			self.git_status = vim.b.gitsigns_status_dict
@@ -378,7 +361,7 @@ local LSPActive = {
 }
 
 local Ruler = {
-	provider = '%7(%l/%3L%):%2c %P',
+	provider = '%7(%l/%3L%):%2c %P ',
 }
 
 local ScrollBar = {
@@ -395,12 +378,11 @@ local ScrollBar = {
 }
 
 local DefaultStatusline = {
-	LeftCap, VimMode, Snippets, Space,
-	WorkDir,
-	Align,
-	Diagnostics,
-	Space,
-	GitBranch, GitChanges,
+	LeftCap, VimMode,
+	Snippets, Space,
+	WorkDir, Align,
+	Diagnostics, Space,
+	GitBranch, GitDiffs,
 	LSPActive,
 	Ruler, ScrollBar
 }
@@ -409,13 +391,11 @@ local InactiveStatusline = {
 	condition = function()
 		return not conditions.is_active()
 	end,
-	Space, VimMode,
-	FileNameBlock,
-	Align,
-	ScrollBar
+
+	FileType, Space, FileName, Align,
 }
 
-local HelpFilename = {
+local HelpFileName = {
 	condition = function()
 		return vim.bo.filetype == 'help'
 	end,
@@ -437,7 +417,7 @@ local SpecialStatusline = {
 	FileType,
 	{ provider = '%q' },
 	Space,
-	HelpFilename,
+	HelpFileName,
 	Align,
 }
 
@@ -454,11 +434,8 @@ local TerminalStatusline = {
 		return conditions.buffer_matches({ buftype = { 'terminal' } })
 	end,
 	hl = { bg = colors.dark_red },
-	{ condition = conditions.is_active, Space },
-	FileType,
-	Space,
-	TerminalName,
-	Align,
+
+	{ condition = conditions.is_active, LeftCap, VimMode, Space }, FileType, Space, TerminalName, Align,
 }
 
 local StatusLines = {
