@@ -252,7 +252,7 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = colors.selection })
 -- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {})
 
 ------ AERIAL ------
-vim.api.nvim_set_hl(0, 'AerialClass', { fg = colors.purple, bg = true, italic = true })
+vim.api.nvim_set_hl(0, 'AerialClass', { fg = colors.purple, bold = true, italic = true })
 
 ------ CMP ------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = colors.fg, bg = colors.menu })
