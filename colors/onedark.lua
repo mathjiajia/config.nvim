@@ -2,7 +2,7 @@
 vim.g.colors_name = 'onedark'
 
 local colors = {}
-local util   = require 'ui.util'
+local utils = require 'utils.colors'
 
 if vim.g.theme_style == 'dark' then
 	colors = {
@@ -26,81 +26,33 @@ if vim.g.theme_style == 'dark' then
 		diff_change = '#E0AF68',
 		diff_text   = '#005869',
 
-		teledark  = '#22262E',
-		teleblack = '#2E323A',
-
 		Rb1 = '#FFD500',
 		Rb2 = '#D170CD',
 		Rb3 = '#00A2FF',
 	}
 
 	-- Additional colors
-	colors.cursorline        = util.lighten(colors.bg, 0.97)
-	colors.color_column      = util.lighten(colors.bg, 0.97)
-	colors.comment           = util.lighten(colors.gray, 0.80)
-	colors.indentline        = util.lighten(colors.bg, 0.93)
-	colors.menu              = util.lighten(colors.bg, 0.90)
-	colors.menu_scroll       = util.lighten(colors.bg, 0.95)
-	colors.menu_scroll_thumb = util.darken(colors.blue, 0.80)
-	colors.selection         = util.lighten(colors.bg, 0.8)
+	colors.cursorline   = utils.lighten(colors.bg, 0.97)
+	colors.color_column = utils.lighten(colors.bg, 0.97)
+	colors.comment      = utils.lighten(colors.gray, 0.80)
+	colors.indentline   = utils.lighten(colors.bg, 0.93)
+	colors.selection    = utils.lighten(colors.bg, 0.8)
 
-	colors.bg_statusline = util.lighten(colors.bg, 0.95)
-	colors.fg_gutter     = util.lighten(colors.bg, 0.90)
+	colors.bg_statusline = utils.lighten(colors.bg, 0.95)
+	colors.fg_gutter     = utils.lighten(colors.bg, 0.90)
 	colors.fg_sidebar    = colors.fg
 
-	colors.virtual_text_error       = util.lighten(colors.red, 0.7)
-	colors.virtual_text_warning     = util.lighten(colors.yellow, 0.7)
-	colors.virtual_text_information = util.lighten(colors.blue, 0.7)
-	colors.virtual_text_hint        = util.lighten(colors.cyan, 0.8)
+	colors.virtual_text_error       = utils.lighten(colors.red, 0.7)
+	colors.virtual_text_warning     = utils.lighten(colors.yellow, 0.7)
+	colors.virtual_text_information = utils.lighten(colors.blue, 0.7)
+	colors.virtual_text_hint        = utils.lighten(colors.cyan, 0.8)
 
-elseif vim.g.theme_style == 'vivid' then
-	colors = {
-		bg        = '#282C34',
-		fg        = '#ABB2BF',
-		red       = '#EF596F',
-		orange    = '#D19A66',
-		yellow    = '#E5C07B',
-		green     = '#89CA78',
-		cyan      = '#2BBAC5',
-		blue      = '#61AFEF',
-		purple    = '#D55FDE',
-		white     = '#ABB2BF',
-		black     = '#282C34',
-		gray      = '#5C6370',
-		highlight = '#E2BE7D',
+	colors.telescope_prompt = utils.lighten(colors.bg, 0.97)
+	colors.telescope_results = utils.darken(colors.bg, 0.85)
 
-		-- Git diff
-		diff_add    = '#109868',
-		diff_delete = '#9A353D',
-		diff_change = '#E0AF68',
-		diff_text   = '#005869',
-
-		teledark  = '#22262E',
-		teleblack = '#2E323A',
-
-		Rb1 = '#FFD500',
-		Rb2 = '#D170CD',
-		Rb3 = '#00A2FF',
-	}
-
-	-- Additional colors
-	colors.cursorline        = util.lighten(colors.bg, 0.97)
-	colors.color_column      = util.lighten(colors.bg, 0.97)
-	colors.comment           = util.lighten(colors.gray, 0.80)
-	colors.indentline        = util.lighten(colors.bg, 0.93)
-	colors.menu              = util.lighten(colors.bg, 0.90)
-	colors.menu_scroll       = util.lighten(colors.bg, 0.95)
-	colors.menu_scroll_thumb = util.darken(colors.blue, 0.80)
-	colors.selection         = util.lighten(colors.bg, 0.8)
-
-	colors.bg_statusline = util.lighten(colors.bg, 0.95)
-	colors.fg_gutter     = util.lighten(colors.bg, 0.90)
-	colors.fg_sidebar    = colors.fg
-
-	colors.virtual_text_error       = util.lighten(colors.red, 0.7)
-	colors.virtual_text_warning     = util.lighten(colors.yellow, 0.7)
-	colors.virtual_text_information = util.lighten(colors.blue, 0.7)
-	colors.virtual_text_hint        = util.lighten(colors.cyan, 0.8)
+	colors.pmenu = utils.darken(colors.bg, 0.85)
+	colors.pmenusel = utils.lighten(colors.bg, 0.97)
+	colors.pmenuthumb = utils.lighten(colors.bg, 0.5)
 else
 	colors = {
 		bg        = '#FAFAFA',
@@ -123,32 +75,33 @@ else
 		diff_change = '#ADBAC7',
 		diff_text   = '#A6D0D8',
 
-		teledark  = '#FFFFFF',
-		teleblack = '#F4F4F4',
-
 		Rb1 = '#0028FF',
 		Rb2 = '#009619',
 		Rb3 = '#853302',
 	}
 
 	-- Additional colors
-	colors.cursorline        = util.darken(colors.bg, 0.97)
-	colors.color_column      = util.darken(colors.bg, 0.97)
-	colors.comment           = util.darken(colors.gray, 0.80)
-	colors.indentline        = util.darken(colors.bg, 0.93)
-	colors.menu              = util.darken(colors.bg, 0.95)
-	colors.menu_scroll       = util.darken(colors.bg, 0.90)
-	colors.menu_scroll_thumb = util.lighten(colors.blue, 0.80)
-	colors.selection         = util.darken(colors.bg, 0.90)
+	colors.cursorline   = utils.darken(colors.bg, 0.97)
+	colors.color_column = utils.darken(colors.bg, 0.97)
+	colors.comment      = utils.darken(colors.gray, 0.80)
+	colors.indentline   = utils.darken(colors.bg, 0.93)
+	colors.selection    = utils.darken(colors.bg, 0.90)
 
-	colors.bg_statusline = util.darken(colors.bg, 0.95)
-	colors.fg_gutter     = util.darken(colors.bg, 0.90)
+	colors.bg_statusline = utils.darken(colors.bg, 0.95)
+	colors.fg_gutter     = utils.darken(colors.bg, 0.90)
 	colors.fg_sidebar    = colors.fg
 
-	colors.virtual_text_error       = util.lighten(colors.red, 0.6)
-	colors.virtual_text_warning     = util.lighten(colors.yellow, 0.6)
-	colors.virtual_text_information = util.lighten(colors.blue, 0.6)
-	colors.virtual_text_hint        = util.lighten(colors.cyan, 0.6)
+	colors.virtual_text_error       = utils.lighten(colors.red, 0.6)
+	colors.virtual_text_warning     = utils.lighten(colors.yellow, 0.6)
+	colors.virtual_text_information = utils.lighten(colors.blue, 0.6)
+	colors.virtual_text_hint        = utils.lighten(colors.cyan, 0.6)
+
+	colors.telescope_prompt = utils.darken(colors.bg, 0.98)
+	colors.telescope_results = utils.darken(colors.bg, 0.95)
+
+	colors.pmenu = utils.darken(colors.bg, 0.95)
+	colors.pmenusel = utils.darken(colors.bg, 0.98)
+	colors.pmenuthumb = utils.darken(colors.bg, 0.5)
 end
 
 ------ BASICS ------
@@ -165,7 +118,7 @@ vim.api.nvim_set_hl(0, 'Directory', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = colors.red })
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = colors.gray })
-vim.api.nvim_set_hl(0, 'Folded', { fg = colors.gray })
+vim.api.nvim_set_hl(0, 'Folded', { fg = colors.gray, bg = colors.selection }) -- FIXED
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = colors.yellow, bg = colors.selection })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = colors.gray })
@@ -176,12 +129,12 @@ vim.api.nvim_set_hl(0, 'MsgArea', { link = 'ModeMsg' })
 vim.api.nvim_set_hl(0, 'MsgSeparator', { link = 'ModeMsg' })
 -- vim.api.nvim_set_hl(0, 'NonText', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'Normal', { fg = colors.fg, bg = colors.bg })
-vim.api.nvim_set_hl(0, 'NormalFloat', { fg = colors.fg, bg = colors.color_column })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = colors.pmenu })
 vim.api.nvim_set_hl(0, 'NormalNC', { fg = colors.fg, bg = colors.bg })
-vim.api.nvim_set_hl(0, 'Pmenu', { bg = colors.menu })
-vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = colors.menu_scroll })
-vim.api.nvim_set_hl(0, 'PmenuSel', { fg = colors.bg, bg = colors.blue })
-vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = colors.menu_scroll_thumb })
+vim.api.nvim_set_hl(0, 'Pmenu', { bg = colors.pmenu })
+vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = colors.pmenusel })
+vim.api.nvim_set_hl(0, 'PmenuSel', { fg = colors.fg, bg = colors.pmenusel })
+vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = colors.pmenuthumb })
 vim.api.nvim_set_hl(0, 'Question', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = colors.cursorline })
 vim.api.nvim_set_hl(0, 'Search', { fg = colors.yellow, bg = colors.selection, underline = true })
@@ -299,69 +252,44 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = colors.selection })
 -- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {})
 
 ------ AERIAL ------
--- vim.api.nvim_set_hl(0, 'AerialArrayIcon', { link = 'Constant' })
--- vim.api.nvim_set_hl(0, 'AerialBooleanIcon', { link = 'Boolean' })
-vim.api.nvim_set_hl(0, 'AerialClassIcon', { fg = colors.purple })
--- vim.api.nvim_set_hl(0, 'AerialConstantIcon', { link = 'Constant' })
--- vim.api.nvim_set_hl(0, 'AerialConstructorIcon', { link = 'TSConstructor' })
--- vim.api.nvim_set_hl(0, 'AerialEnumIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialEnumMemberIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialEventIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialFieldIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialFileIcon', { link = 'Include' })
--- vim.api.nvim_set_hl(0, 'AerialFunctionIcon', { link = 'Function' })
--- vim.api.nvim_set_hl(0, 'AerialInterfaceIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialKeyIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialMethodIcon', { link = 'TSMethod' })
--- vim.api.nvim_set_hl(0, 'AerialModuleIcon', { link = 'Include' })
--- vim.api.nvim_set_hl(0, 'AerialNamespaceIcon', { link = 'TSNamespace' })
--- vim.api.nvim_set_hl(0, 'AerialNullIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialNumberIcon', { link = 'Number' })
--- vim.api.nvim_set_hl(0, 'AerialObjectIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialOperatorIcon', { link = '' })
--- vim.api.nvim_set_hl(0, 'AerialPackageIcon', { link = 'Include' })
--- vim.api.nvim_set_hl(0, 'AerialPropertyIcon', { link = 'TSProperty' })
--- vim.api.nvim_set_hl(0, 'AerialStringIcon', { link = 'String' })
--- vim.api.nvim_set_hl(0, 'AerialStructIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialTypeParameterIcon', { link = 'TSParameter' })
--- vim.api.nvim_set_hl(0, 'AerialVariableIcon', { link = 'TSVariableBuiltin' })
+vim.api.nvim_set_hl(0, 'AerialClass', { fg = colors.purple, bg = true, italic = true })
 
 ------ CMP ------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = colors.fg, bg = colors.menu })
 vim.api.nvim_set_hl(0, 'CmpDocumentationBorder', { fg = colors.fg, bg = colors.menu })
 
 vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = colors.fg })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = colors.fg, strikethrough = true })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = colors.cyan, bold = true })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = colors.yellow })
-vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = colors.fg })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = colors.fg })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = colors.blue, bold = true })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = colors.blue, underline = true })
+vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = colors.blue })
 
 vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = colors.green })
-vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = colors.cyan })
--- vim.api.nvim_set_hl(0, 'CmpItemKindEnum', {})
--- vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', {})
--- vim.api.nvim_set_hl(0, 'CmpItemKindEvent', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = colors.fg })
--- vim.api.nvim_set_hl(0, 'CmpItemKindFile', {})
--- vim.api.nvim_set_hl(0, 'CmpItemKindFolder', {})
+vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = colors.yellow })
+vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = colors.cyan })
+vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = colors.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindFile', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { link = 'CmpItemKindMethod' })
 vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindClass' })
 vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = colors.purple })
 vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = colors.blue })
--- vim.api.nvim_set_hl(0, 'CmpItemKindModule', {})
--- vim.api.nvim_set_hl(0, 'CmpItemKindOperator', {})
-vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = colors.red })
--- vim.api.nvim_set_hl(0, 'CmpItemKindReference', {})
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = colors.blue })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = colors.yellow })
-vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = colors.fg })
--- vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', {})
--- vim.api.nvim_set_hl(0, 'CmpItemKindUnit', {})
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = colors.orange })
+vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = colors.orange })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = colors.red })
+-- vim.api.nvim_set_hl(0, 'CmpItemKindUnit', {})
 -- vim.api.nvim_set_hl(0, 'CmpItemKindVColor', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindReference', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindFolder', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindEvent', {})
+-- vim.api.nvim_set_hl(0, 'CmpItemKindOperator', {})
 
 ------ INDENTBLANKLINE ------
 vim.api.nvim_set_hl(0, 'IndentLine', { fg = colors.indentline })
@@ -430,22 +358,23 @@ vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = colors.Rb3 })
 vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = colors.Rb2 })
 
 ------ TELESCOPE ------
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.teledark })
-vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = colors.teleblack })
--- vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = colors.purple, bg = colors.cursorline })
-vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = colors.purple })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = colors.telescope_prompt })
+-- vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = colors.purple })
 -- vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', { fg = colors.comment, bg = colors.cursorline })
-vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = colors.green })
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.telescope_results })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.telescope_results, bg = colors.telescope_results })
+-- vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { link = 'TelescopeBorder' })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = colors.purple })
 
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.purple })
-vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = colors.fg, bg = colors.teleblack })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = colors.telescope_results, bg = colors.green })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = colors.telescope_results, bg = colors.telescope_results })
 
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.teledark, bg = colors.teledark })
-vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.teleblack, bg = colors.teleblack })
-
-vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = colors.menu, bg = colors.green })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.menu, bg = colors.red })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = colors.teledark, bg = colors.blue })
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.telescope_prompt, bg = colors.telescope_prompt })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = colors.fg })
+vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = colors.fg, bg = colors.telescope_prompt })
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.purple, bg = colors.telescope_prompt })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.telescope_prompt, bg = colors.purple })
+-- vim.api.nvim_set_hl(0, 'TelescopePrompt', { link = 'TelescopeNormal' })
 
 ------ TREESITTER ------
 vim.api.nvim_set_hl(0, 'TSAnnotation', { fg = colors.red })
