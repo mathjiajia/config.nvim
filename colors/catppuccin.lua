@@ -133,9 +133,9 @@ else -- frappe
 		surface1 = '#51566C',
 		surface0 = '#414559',
 
-		base = '#303446',
+		base   = '#303446',
 		mantle = '#292C3C',
-		crust = '#232634',
+		crust  = '#232634',
 
 		teledark  = '#FFFFFF',
 		teleblack = '#F6F6F6',
@@ -143,7 +143,7 @@ else -- frappe
 end
 
 local function vary_color(palettes, default)
-	local flvr = vim.g.catppuccin_flavour
+	local flvr = vim.g.theme_style
 
 	if palettes[flvr] ~= nil then
 		return palettes[flvr]
@@ -277,10 +277,10 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'qfFileName', { fg = cp.blue })
 
 ---------- DIAGNOSTIC ----------
-vim.api.nvim_set_hl(0, 'DiagnosticError', { bg = diag_error, fg = error, underline = true })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { bg = diag_warn, fg = warn, underline = true })
-vim.api.nvim_set_hl(0, 'DiagnosticInfo', { bg = diag_info, fg = info, underline = true })
-vim.api.nvim_set_hl(0, 'DiagnosticHint', { bg = diag_hint, fg = hint, underline = true })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { bg = diag_error, fg = error, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { bg = diag_warn, fg = warn, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { bg = diag_info, fg = info, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { bg = diag_hint, fg = hint, italic = true })
 
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = true, sp = error })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = warn })
