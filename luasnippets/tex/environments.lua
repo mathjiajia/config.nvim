@@ -179,7 +179,7 @@ autosnips = {
 
 	s(
 		{ trig = 'xym', name = 'xymatrix Environment', dscr = 'Create a xymatrix environment.' },
-		{ t { '\\[', '\t\\xymatrix{', '\t' }, i(1), t { ' \\\\', '\t}', '\\]' } },
+		{ t { '\\[', '\t\\xymatrix{', '\t\t' }, i(1), t { ' \\\\', '\t}', '\\]' } },
 		{ condition = pipe { conds.line_begin, tex.in_text } }
 	),
 	s(
