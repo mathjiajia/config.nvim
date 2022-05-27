@@ -44,20 +44,20 @@ c = {
 }
 
 if vim.g.theme_style == 'dark' then
-	c.bg            = '#282828'
-	c.bg2           = '#242424'
-	c.bg_highlight  = '#45403d'
-	c.line_cursor   = '#32302f'
-	c.prompt_border = '#45403d'
+	c.bg           = '#282828'
+	c.bg2          = '#242424'
+	c.bg_highlight = '#45403d'
+	c.line_cursor  = '#32302f'
+	-- c.prompt_border = '#45403d'
 else
-	c.bg            = '#1D2021'
-	c.bg2           = '#17191a'
-	c.bg_highlight  = '#3C3836'
-	c.line_cursor   = util.lighten(c.bg, 0.97)
-	c.border        = c.bg_highlight
-	c.prompt_border = '#45403D'
-	c.bg_visual     = '#3C3836'
-	c.comment       = '#6A635D'
+	c.bg           = '#1D2021'
+	c.bg2          = '#17191a'
+	c.bg_highlight = '#3C3836'
+	c.line_cursor  = util.lighten(c.bg, 0.97)
+	c.border       = c.bg_highlight
+	-- c.prompt_border = '#45403D'
+	c.bg_visual    = '#3C3836'
+	c.comment      = '#6A635D'
 end
 
 util.bg = c.bg
@@ -86,8 +86,8 @@ c.bg_statusline = c.bg2
 c.bg_sidebar = c.bg2
 c.bg_float   = c.bg2
 
-c.bg_search  = c.bg_highlight -- Disabled
-c.fg_search  = c.fg -- Disabled
+c.bg_search  = c.bg_highlight
+c.fg_search  = c.fg
 c.fg_sidebar = c.fg_dark
 
 c.error   = c.red1
@@ -309,7 +309,7 @@ vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = c.purple })
 ------ TELESCOPE ------
 -- vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = util.darken(c.fg, 0.75) })
 vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.purple, bg = c.bg_visual })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.purple, bg = c.line_cursor }) -- tweak
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.blue })
 
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.dark })
