@@ -5,38 +5,38 @@ local util = require 'utils.colors'
 
 local c = {}
 c = {
-	bg           = '#32302F',
-	bg2          = '#282828',
-	bg_visual    = '#45403D',
-	border       = '#5A524C',
-	line_cursor  = '#45403D',
-	-- prompt_border = '#DDC7A1',
-	bg_highlight = '#5A524C',
-	fg           = '#D4BE98',
-	-- fg_light     = '#DDC7A1',
-	fg_dark      = '#D4BE98',
-	-- tree_normal  = '#AA9987',
-	comment      = '#7C6F64',
-	fg_gutter    = '#5A524C',
-	dark5        = '#5A524C',
-	blue         = '#7DAEA3',
-	aqua         = '#89B482',
-	purple       = '#D3869B',
-	orange       = '#E78A4E',
-	yellow       = '#D8A657',
-	-- yellow2      = '#B47109',
-	-- bg_yellow    = '#A96B2C',
-	green        = '#A9B665',
-	red          = '#EA6962',
-	red1         = '#C14A4A',
-	black        = '#1D2021',
-	git          = {
+	bg            = '#32302F',
+	bg2           = '#282828',
+	bg_visual     = '#45403D',
+	border        = '#5A524C',
+	line_cursor   = '#45403D',
+	prompt_border = '#DDC7A1',
+	bg_highlight  = '#5A524C',
+	fg            = '#D4BE98',
+	fg_light      = '#DDC7A1',
+	fg_dark       = '#D4BE98',
+	tree_normal   = '#AA9987',
+	comment       = '#7C6F64',
+	fg_gutter     = '#5A524C',
+	dark5         = '#5A524C',
+	blue          = '#7DAEA3',
+	aqua          = '#89B482',
+	purple        = '#D3869B',
+	orange        = '#E78A4E',
+	yellow        = '#D8A657',
+	yellow2       = '#B47109',
+	bg_yellow     = '#A96B2C',
+	green         = '#A9B665',
+	red           = '#EA6962',
+	red1          = '#C14A4A',
+	black         = '#1D2021',
+	git           = {
 		delete = '#C14A4A',
 		add    = '#6F8352',
 		change = '#B47109',
 		bg_red = '#AE5858',
 	},
-	gitSigns     = {
+	gitSigns      = {
 		delete = '#AE5858',
 		add    = '#6F8352',
 		change = '#A96B2C',
@@ -44,20 +44,20 @@ c = {
 }
 
 if vim.g.theme_style == 'dark' then
-	c.bg           = '#282828'
-	c.bg2          = '#242424'
-	c.bg_highlight = '#45403d'
-	c.line_cursor  = '#32302f'
-	-- c.prompt_border = '#45403d'
+	c.bg            = '#282828'
+	c.bg2           = '#242424'
+	c.bg_highlight  = '#45403d'
+	c.line_cursor   = '#32302F'
+	c.prompt_border = '#45403D'
 else
-	c.bg           = '#1D2021'
-	c.bg2          = '#17191a'
-	c.bg_highlight = '#3C3836'
-	c.line_cursor  = util.lighten(c.bg, 0.97)
-	c.border       = c.bg_highlight
-	-- c.prompt_border = '#45403D'
-	c.bg_visual    = '#3C3836'
-	c.comment      = '#6A635D'
+	c.bg            = '#1D2021'
+	c.bg2           = '#17191A'
+	c.bg_highlight  = '#3C3836'
+	c.line_cursor   = util.lighten(c.bg, 0.97)
+	c.border        = c.bg_highlight
+	c.prompt_border = '#45403D'
+	c.bg_visual     = '#3C3836'
+	c.comment       = '#6A635D'
 end
 
 util.bg = c.bg
@@ -312,18 +312,18 @@ vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { fg = c.purple })
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = c.purple, bg = c.line_cursor }) -- tweak
 vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = c.blue })
 
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.dark })
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.bg2 })
 vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = c.fg, bg = c.bg_highlight })
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.red, bg = c.bg_highlight })
 vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = c.fg, bg = c.bg_highlight })
 
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.dark, bg = c.dark })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.bg2, bg = c.bg2 })
 vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = c.bg_highlight, bg = c.bg_highlight })
 
 vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = c.bg, bg = c.green })
 vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = c.bg, bg = c.red })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.dark, bg = c.blue })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.bg, bg = c.blue })
 
 ------ TREESITTER ------
 -- vim.api.nvim_set_hl(0, 'TSAnnotation', {})
