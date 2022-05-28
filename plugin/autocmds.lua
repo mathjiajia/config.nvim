@@ -47,7 +47,6 @@ vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
 	callback = function()
 		require 'heirline'.reset_highlights()
 		require 'configs.heirline'
-		-- require 'configs.statusline'.setup()
 	end,
 	group    = 'heirline',
 })

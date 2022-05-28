@@ -341,6 +341,14 @@ local GitBranch = {
 	provider = function(self)
 		return table.concat { ' ', self.git_status.head, ' ' }
 	end,
+	on_click = {
+		callback = function()
+			vim.defer_fn(function()
+				require('FTerm'):new({ cmd = 'lazygit', dimensions = { height = 1, width = 1 } }):open()
+			end, 10)
+		end,
+		name = 'LazyGit',
+	},
 }
 
 local GitDiffs = {
