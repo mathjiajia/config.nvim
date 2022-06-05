@@ -263,24 +263,6 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underdash = true, sp = c.vsc
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underdash = true, sp = c.vscDarkBlue })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underdash = true, sp = c.vscBlueGreen })
 
------- GIT -----
-vim.api.nvim_set_hl(0, 'diffAdded', { link = 'DiffAdd' })
-vim.api.nvim_set_hl(0, 'diffChanged', { link = 'DiffChange' })
-vim.api.nvim_set_hl(0, 'diffRemoved', { link = 'DiffDelete' })
-
------- GITCOMMIT -----
--- vim.api.nvim_set_hl(0, 'gitcommitHeader', { fg = c.vscGray })
--- vim.api.nvim_set_hl(0, 'gitcommitOnBranch', { fg = c.vscGray })
--- vim.api.nvim_set_hl(0, 'gitcommitBranch', { fg = c.vscPink })
--- vim.api.nvim_set_hl(0, 'gitcommitComment', { fg = c.vscGray })
--- vim.api.nvim_set_hl(0, 'gitcommitSelectedType', { fg = c.vscGreen })
--- vim.api.nvim_set_hl(0, 'gitcommitSelectedFile', { fg = c.vscGreen })
--- vim.api.nvim_set_hl(0, 'gitcommitDiscardedType', { fg = c.vscRed })
--- vim.api.nvim_set_hl(0, 'gitcommitDiscardedFile', { fg = c.vscRed })
--- vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = c.vscRed })
--- vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = c.vscPink })
--- vim.api.nvim_set_hl(0, 'gitcommitBlank', { fg = c.vscPink })
-
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.vscCursorDark })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' })

@@ -426,19 +426,6 @@ vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = c.warning })
 vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = c.info })
 vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = c.hint })
 
------- GIT ------
-vim.api.nvim_set_hl(0, 'diffAdded', { link = 'DiffAdd' })
-vim.api.nvim_set_hl(0, 'diffChanged', { link = 'DiffChange' })
-vim.api.nvim_set_hl(0, 'diffRemoved', { link = 'DiffDelete' })
-vim.api.nvim_set_hl(0, 'diffOldFile', { fg = c.yellow })
-vim.api.nvim_set_hl(0, 'diffNewFile', { fg = c.orange })
-vim.api.nvim_set_hl(0, 'diffFile', { fg = c.blue })
-vim.api.nvim_set_hl(0, 'diffLine', { fg = c.fg_gutter })
-vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = c.magenta })
-
------- GITCOMMITS ------
--- vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = c.syntax.tag })
-
 ---------- NVIM LSPCONFIG ----------
 
 -- vim.api.nvim_set_hl(0, 'LspCodeLens', {})

@@ -24,9 +24,9 @@ local colors = {
 		info = utils.get_highlight('DiagnosticInfo').fg,
 	},
 	git = {
-		add = utils.get_highlight('diffAdded').fg,
-		change = utils.get_highlight('diffChanged').fg,
-		del = utils.get_highlight('diffRemoved').fg,
+		add = utils.get_highlight('DiffAdd').fg,
+		change = utils.get_highlight('DiffChange').fg,
+		del = utils.get_highlight('DiffDelete').fg,
 	},
 
 	lsp = '#43BF6C'
@@ -280,6 +280,41 @@ FileNameBlock = utils.insert(
 	utils.insert(FileNameModifer, FileName),
 	unpack(FileFlags)
 )
+
+local CloseButton = {
+	condition = function(self)
+		return not vim.bo.modified
+	end,
+	-- a small performance improvement:
+	-- re register the component callback only on layout/buffer changes.
+	update = { 'WinNew', 'WinClosed', 'BufEnter' },
+	{ provider = ' ' },
+	{
+		provider = '',
+		hl = { fg = 'gray' },
+		on_click = {
+			callback = function(_, winid)
+				vim.api.nvim_win_close(winid, true)
+			end,
+			name = function(self)
+				return 'heirline_close_button_' .. self.winnr
+			end,
+			update = true,
+		},
+	},
+}
+
+-- Use it anywhere!
+local WinBarFileName = utils.surround({ '', '' }, colors.bright_bg, {
+	hl = function()
+		if not conditions.is_active() then
+			return { fg = 'gray', force = true }
+		end
+	end,
+	FileNameBlock,
+	Space,
+	CloseButton,
+})
 
 local FileType = {
 	provider = function()

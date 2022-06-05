@@ -287,16 +287,6 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = warn 
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = info })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = true, sp = hint })
 
------- GIT ------
-vim.api.nvim_set_hl(0, 'diffAdded', { fg = cp.green })
-vim.api.nvim_set_hl(0, 'diffRemoved', { fg = cp.red })
-vim.api.nvim_set_hl(0, 'diffChanged', { fg = cp.yellow })
-vim.api.nvim_set_hl(0, 'diffOldFile', { fg = cp.yellow })
-vim.api.nvim_set_hl(0, 'diffNewFile', { fg = cp.peach })
-vim.api.nvim_set_hl(0, 'diffFile', { fg = cp.blue })
-vim.api.nvim_set_hl(0, 'diffLine', { fg = cp.overlay0 })
-vim.api.nvim_set_hl(0, 'diffIndexLine', { fg = cp.pink })
-
 ---------- NVIM LSP ----------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = cp.surface1 })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = cp.surface1 })
