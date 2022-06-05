@@ -225,7 +225,7 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { undercurl = true, sp = c.war
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { undercurl = true, sp = c.info })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { undercurl = true, sp = c.hint })
 
------- NEOVIM LSP ------
+------ NVIM LSP ------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = c.bg_visual })

@@ -223,41 +223,13 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { undercurl = true, sp = c.war
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { undercurl = true, sp = c.info })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { undercurl = true, sp = c.hint })
 
------- NEOVIM LSP ------
+------ NVIM LSP ------
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = c.fg_gutter })
 
 -- vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = c.comment })
 -- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = c.orange })
-
----------- AERIAL ----------
--- vim.api.nvim_set_hl(0, 'AerialArrayIcon', { link = 'Constant' })
--- vim.api.nvim_set_hl(0, 'AerialBooleanIcon', { link = 'Boolean' })
--- vim.api.nvim_set_hl(0, 'AerialClassIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialConstantIcon', { link = 'Constant' })
--- vim.api.nvim_set_hl(0, 'AerialConstructorIcon', { link = 'TSConstructor' })
--- vim.api.nvim_set_hl(0, 'AerialEnumIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialEnumMemberIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialEventIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialFieldIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialFileIcon', { link = 'Include' })
--- vim.api.nvim_set_hl(0, 'AerialFunctionIcon', { link = 'Function' })
--- vim.api.nvim_set_hl(0, 'AerialInterfaceIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialKeyIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialMethodIcon', { link = 'TSMethod' })
--- vim.api.nvim_set_hl(0, 'AerialModuleIcon', { link = 'Include' })
--- vim.api.nvim_set_hl(0, 'AerialNamespaceIcon', { link = 'TSNamespace' })
--- vim.api.nvim_set_hl(0, 'AerialNullIcon', { link = 'Type' })
--- vim.api.nvim_set_hl(0, 'AerialNumberIcon', { link = 'Number' })
--- vim.api.nvim_set_hl(0, 'AerialObjectIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialOperatorIcon', { link = '' })
--- vim.api.nvim_set_hl(0, 'AerialPackageIcon', { link = 'Include' })
--- vim.api.nvim_set_hl(0, 'AerialPropertyIcon', { link = 'TSProperty' })
--- vim.api.nvim_set_hl(0, 'AerialStringIcon', { link = 'String' })
--- vim.api.nvim_set_hl(0, 'AerialStructIcon', { link = 'TSField' })
--- vim.api.nvim_set_hl(0, 'AerialTypeParameterIcon', { link = 'TSParameter' })
--- vim.api.nvim_set_hl(0, 'AerialVariableIcon', { link = 'TSVariableBuiltin' })
 
 ------ CMP ------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = c.fg, bg = c.bg_float })
