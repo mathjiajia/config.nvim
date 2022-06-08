@@ -38,6 +38,10 @@ require('telescope').setup {
 			global_files = { home .. '/Tex' },
 			wrap = true,
 		},
+		file_browser = {
+			theme = 'ivy',
+			hijack_netrw = true,
+		},
 		['ui-select'] = {
 			themes.get_dropdown {},
 		},
@@ -64,7 +68,7 @@ vim.keymap.set('n', '<leader><leader>',
 	{ desc = 'Buffers' })
 vim.keymap.set('n', '<leader><space>',
 	function()
-		te.file_browser.file_browser(themes.get_ivy {})
+		te.file_browser.file_browser()
 	end,
 	{ desc = 'File Browser' })
 vim.keymap.set('n', '<F12>',
