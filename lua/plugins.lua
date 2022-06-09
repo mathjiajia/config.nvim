@@ -19,6 +19,7 @@ require('packer').startup(function()
 		'monkoose/matchparen.nvim',
 		config = [[require('matchparen').setup()]]
 	}
+	use 'antoinemadec/FixCursorHold.nvim'
 	use 'rebelot/heirline.nvim'
 	use {
 		'rcarriga/nvim-notify',
