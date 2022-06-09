@@ -150,9 +150,9 @@ vim.api.nvim_set_hl(0, 'WildMenu', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = c.bg_highlight })
 
 ------ DIFF ------
-vim.api.nvim_set_hl(0, 'DiffAdd', { bg = c.diff.add })
-vim.api.nvim_set_hl(0, 'DiffChange', { bg = c.diff.change })
-vim.api.nvim_set_hl(0, 'DiffDelete', { bg = c.diff.delete })
+vim.api.nvim_set_hl(0, 'DiffAdd', { fg = c.gitSigns.add, bg = c.diff.add })
+vim.api.nvim_set_hl(0, 'DiffChange', { fg = c.gitSigns.change, bg = c.diff.change })
+vim.api.nvim_set_hl(0, 'DiffDelete', { fg = c.gitSigns.delete, bg = c.diff.delete })
 vim.api.nvim_set_hl(0, 'DiffText', { bg = c.diff.text })
 
 ------ SPELL ------

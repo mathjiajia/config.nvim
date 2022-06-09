@@ -198,8 +198,8 @@ vim.api.nvim_set_hl(0, 'DiffText', { fg = c.vscDiffRedLight, bg = c.vscBack })
 ------ SPELL ------
 vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true, sp = c.vscRed })
 vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true, sp = c.vscRed })
-vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = c.vscRed })
 vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = c.vscRed })
+vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = c.vscRed })
 
 -- SYNTAX GROUPS
 vim.api.nvim_set_hl(0, 'Boolean', { fg = c.vscBlue })
@@ -457,7 +457,7 @@ vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = c.vscGray })
 vim.api.nvim_set_hl(0, 'TSText', { fg = c.vscYellowOrange })
 vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.vscOrange })
 vim.api.nvim_set_hl(0, 'TSTitle', { fg = c.vscBlue, bold = true })
-vim.api.nvim_set_hl(0, 'TSType', { fg = c.vscBlueGreen })
+vim.api.nvim_set_hl(0, 'TSType', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'TSTypeBuiltin', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'TSUnderline', { fg = c.vscYellowOrange })
 vim.api.nvim_set_hl(0, 'TSURI', { fg = c.vscFront })
