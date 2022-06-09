@@ -15,16 +15,16 @@ end
 
 snips = {
 	s({ trig = 'ref', name = 'cross refrence' }, {
-		t '\\cite[',
+		t '\\cite{',
 		i(1),
-		t ']',
+		t '}*{',
 		i(2),
-		t '{}',
+		t '}',
 	}, {
 		condition = tex.in_text,
 		show_condition = tex.in_text,
 		callbacks = {
-			[2] = {
+			[1] = {
 				[events.enter] = function()
 					require('telescope').extensions.bibtex.bibtex(
 						require('telescope.themes').get_dropdown { previewer = false }
