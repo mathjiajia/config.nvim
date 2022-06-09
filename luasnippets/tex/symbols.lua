@@ -253,7 +253,7 @@ autosnips = {
 
 	s(
 		{ trig = '==', name = 'align equls', wordTrig = false },
-		{ t '&= ' },
+		{ t '& = ' },
 		{ condition = tex.in_align }
 	),
 	s(

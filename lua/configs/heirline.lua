@@ -19,7 +19,6 @@ local colors = {
 	git_add = utils.get_highlight('DiffAdd').fg,
 	git_change = utils.get_highlight('DiffChange').fg,
 	status_bg = utils.get_highlight('StatusLine').bg,
-	lsp = '#43BF6C'
 }
 
 require('heirline').load_colors(colors)
@@ -375,7 +374,7 @@ local LSPActive = {
 	update = { 'LspAttach', 'LspDetach' },
 
 	provider = '◍ LSP ',
-	hl = { fg = 'lsp' },
+	hl = { fg = 'green' },
 }
 
 local Ruler = {
