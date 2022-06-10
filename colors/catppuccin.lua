@@ -203,12 +203,12 @@ vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = cp.surface1, bold = true })
 vim.api.nvim_set_hl(0, 'Search', { fg = cp.pink, bg = cp.surface1, bold = true })
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = cp.surface1, bg = cp.base })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = cp.text })
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.text, bg = cp.surface0 }) -- FIXED
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.surface1, bg = cp.mantle }) -- FIXED
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.text, bg = cp.mantle })
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.surface1, bg = cp.mantle })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.pink, bg = cp.surface1 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.mantle, bg = cp.surface1 })
-vim.api.nvim_set_hl(0, 'TabLineFill', { bg = cp.base }) -- FIXED
-vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.green, bg = cp.surface0 }) -- FIXED
+vim.api.nvim_set_hl(0, 'TabLineFill', { bg = cp.teleblack }) -- FIXED
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.green, bg = cp.surface1 })
 vim.api.nvim_set_hl(0, 'Visual', { bg = cp.surface1, bold = true })
 vim.api.nvim_set_hl(0, 'VisualNOS', { bg = cp.surface1, bold = true })
 vim.api.nvim_set_hl(0, 'WarningMsg', { fg = cp.yellow })
@@ -344,7 +344,7 @@ vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', { fg = cp.blue })
 vim.api.nvim_set_hl(0, 'NeoTreeFileNameOpened', { fg = cp.pink })
 vim.api.nvim_set_hl(0, 'NeoTreeGitModified', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'NeoTreeIndentMarker', { fg = cp.overlay0 })
-vim.api.nvim_set_hl(0, 'NeoTreeNormal', { fg = cp.text, bg = cp.base }) -- FIXED
+vim.api.nvim_set_hl(0, 'NeoTreeNormal', { fg = cp.text, bg = cp.mantle })
 vim.api.nvim_set_hl(0, 'NeoTreeRootName', { fg = cp.pink, bold = true })
 vim.api.nvim_set_hl(0, 'NeoTreeSymbolicLinkTarget', { fg = cp.pink })
 vim.api.nvim_set_hl(0, 'NeoTreeUntracked', { fg = cp.blue })

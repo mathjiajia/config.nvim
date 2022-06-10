@@ -67,7 +67,7 @@ vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.fg, bg = cp.bg3 })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.grey, bg = cp.bg1 })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.bg0, bg = cp.yellow })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.fg, bg = cp.bg4 })
-vim.api.nvim_set_hl(0, 'TabLineFill', { fg = cp.grey, bg = cp.bg0 }) -- FIXED
+vim.api.nvim_set_hl(0, 'TabLineFill', { fg = cp.grey, bg = cp.bg1 })
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.bg0, bg = cp.bg_red })
 -- vim.api.nvim_set_hl(0, 'TermCursor', {})
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {})
@@ -209,27 +209,12 @@ vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = cp.orange })
 -- vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { fg = cp.red })
 -- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { fg = cp.grey1 })
 
------- HOP ------
-vim.api.nvim_set_hl(0, 'HopNextKey2', { fg = cp.blue })
-vim.api.nvim_set_hl(0, 'HopUnmatched', { fg = cp.grey })
-
 -------- INDENT BLANKLINES --------
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = cp.grey_dim })
 vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', { fg = cp.grey_dim })
 vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', { fg = cp.grey_dim })
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.grey })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = cp.grey, underdash = true })
-
---------- NEOTREE ---------
--- vim.api.nvim_set_hl(0, 'NeoTreeDirectoryIcon', { fg = cp.blue })
--- vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', { fg = cp.blue })
--- vim.api.nvim_set_hl(0, 'NeoTreeFileNameOpened', { fg = cp.pink })
--- vim.api.nvim_set_hl(0, 'NeoTreeGitModified', { fg = cp.yellow })
--- vim.api.nvim_set_hl(0, 'NeoTreeIndentMarker', { fg = cp.gray0 })
--- vim.api.nvim_set_hl(0, 'NeoTreeNormal', { fg = cp.white, bg = cp.black2 }) -- FIXED
--- vim.api.nvim_set_hl(0, 'NeoTreeRootName', { fg = cp.pink, bold = true })
--- vim.api.nvim_set_hl(0, 'NeoTreeSymbolicLinkTarget', { fg = cp.pink })
--- vim.api.nvim_set_hl(0, 'NeoTreeUntracked', { fg = cp.blue })
 
 ---------- NVIM NOTIFY ----------
 vim.api.nvim_set_hl(0, 'NotifyERRORBorder', { fg = cp.red })

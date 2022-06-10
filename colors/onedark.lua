@@ -118,7 +118,7 @@ vim.api.nvim_set_hl(0, 'Directory', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = colors.red })
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = colors.gray })
-vim.api.nvim_set_hl(0, 'Folded', { fg = colors.gray, bg = colors.selection }) -- FIXED
+vim.api.nvim_set_hl(0, 'Folded', { fg = colors.gray })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = colors.yellow, bg = colors.selection })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = colors.gray })
@@ -397,7 +397,7 @@ vim.api.nvim_set_hl(0, 'TSKeywordOperator', { fg = colors.purple, italic = true 
 vim.api.nvim_set_hl(0, 'TSKeywordReturn', { link = 'TSKeyword' })
 vim.api.nvim_set_hl(0, 'TSLabel', { fg = colors.purple, italic = true })
 vim.api.nvim_set_hl(0, 'TSLiteral', { fg = colors.fg })
-vim.api.nvim_set_hl(0, 'TSMath', { fg = colors.red }) -- FIXED
+vim.api.nvim_set_hl(0, 'TSMath', { fg = colors.red }) -- ADDED
 vim.api.nvim_set_hl(0, 'TSMethod', { fg = colors.blue })
 vim.api.nvim_set_hl(0, 'TSNamespace', { fg = colors.yellow })
 vim.api.nvim_set_hl(0, 'TSNone', {})

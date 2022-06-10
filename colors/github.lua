@@ -479,29 +479,12 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameterDefault', { link = 'CmpItemKindC
 -- vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.git_signs.delete })
 -- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { fg = util.darken(c.syntax.comment, 0.6) })
 
------- HOP ------
--- vim.api.nvim_set_hl(0, 'HopNextKey', { fg = c.magenta, bold = true })
--- vim.api.nvim_set_hl(0, 'HopNextKey1', { fg = c.blue, bold = true })
--- vim.api.nvim_set_hl(0, 'HopNextKey2', { fg = util.darken(c.bright_blue, 0.8) })
--- vim.api.nvim_set_hl(0, 'HopUnmatched', { fg = c.fg_dark })
-
 -------- INDENT BLANKLINES --------
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = c.syntax.comment })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', {})
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', {})
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = cp.white })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = cp.gray, underdash = true })
-
---------- NEOTREE ---------
--- vim.api.nvim_set_hl(0, 'NeoTreeDirectoryIcon', { fg = cp.blue })
--- vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', { fg = cp.blue })
--- vim.api.nvim_set_hl(0, 'NeoTreeFileNameOpened', { fg = cp.pink })
--- vim.api.nvim_set_hl(0, 'NeoTreeGitModified', { fg = cp.yellow })
--- vim.api.nvim_set_hl(0, 'NeoTreeIndentMarker', { fg = cp.gray0 })
--- vim.api.nvim_set_hl(0, 'NeoTreeNormal', { fg = cp.white, bg = cp.black2 }) -- FIXED
--- vim.api.nvim_set_hl(0, 'NeoTreeRootName', { fg = cp.pink, bold = true })
--- vim.api.nvim_set_hl(0, 'NeoTreeSymbolicLinkTarget', { fg = cp.pink })
--- vim.api.nvim_set_hl(0, 'NeoTreeUntracked', { fg = cp.blue })
 
 ---------- NVIM NOTIFY ----------
 vim.api.nvim_set_hl(0, 'NotifyERRORTitle', { fg = util.darken(c.error, 0.9) })
@@ -618,7 +601,7 @@ vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = c.syntax.variable })
 vim.api.nvim_set_hl(0, 'TSTag', { fg = c.syntax.tag })
 vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = c.fg })
 -- vim.api.nvim_set_hl(0, 'TSText', {})
-vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.cyan }) -- FIXED
+vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.red })
 -- vim.api.nvim_set_hl(0, 'TSEmphasis', {})
 -- vim.api.nvim_set_hl(0, 'TSUnderline', {})
 -- vim.api.nvim_set_hl(0, 'TSStrike', {})
