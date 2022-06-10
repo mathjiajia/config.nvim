@@ -1,4 +1,7 @@
+local Path = require 'plenary.path'
+
 require('session_manager').setup {
+	sessions_dir = Path:new(vim.fn.stdpath 'state', 'sessions'), -- The directory where the session files will be saved.
 	autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
 	autosave_last_session = false,
 }
