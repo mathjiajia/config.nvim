@@ -1,4 +1,4 @@
--- Modified from https: //github.com/rebelot/kanagawa.nvim
+-- Modified from https://github.com/rebelot/kanagawa.nvim
 vim.g.colors_name = 'kanagawa'
 
 local palette_colors = {

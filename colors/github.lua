@@ -99,10 +99,7 @@ if vim.g.theme_style == 'dark' then
 			add    = '#28A745',
 			change = '#2188FF',
 			delete = '#EA4A5A',
-		},
-
-		teledark  = '#1E2328',
-		teleblack = '#2A2F34',
+		}
 	}
 elseif vim.g.theme_style == 'light' then
 	c = {
@@ -200,10 +197,7 @@ elseif vim.g.theme_style == 'light' then
 			add    = '#34D058',
 			change = '#F9C513',
 			delete = '#D73A49',
-		},
-
-		teledark  = '#F6F8FA',
-		teleblack = '#EAECEE',
+		}
 	}
 else
 	c = {
@@ -298,14 +292,15 @@ else
 			add    = '#28A745',
 			change = '#2188FF',
 			delete = '#D73A49',
-		},
-
-		teledark  = '#F6F8FA',
-		teleblack = '#EAECEE',
+		}
 	}
 end
 
 local util = require 'utils.colors'
+
+c.teledark = util.darken(c.bg, 0.94)
+c.teleblack = util.lighten(c.bg, 0.94)
+c.tscontext = vim.g.theme_style == 'light' and util.lighten(c.blue, 0.9) or util.darken(c.blue, 0.2)
 
 ---------- BASIC ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.bg_visual })
@@ -437,7 +432,9 @@ vim.api.nvim_set_hl(0, 'CmpDocumentation', { link = 'NormalFloat' })
 vim.api.nvim_set_hl(0, 'CmpDocumentationBorder', { link = 'FloatBorder' })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = c.syntax.comment, strikethrough = true })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = c.blue })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDefault', { fg = c.fg_light })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpItemAbbrMatch' })
+vim.api.nvim_set_hl(0, 'CmpItemMenuDefault', { link = 'CmpItemAbbrDefault' })
 
 -- Cmp Item Kind
 vim.api.nvim_set_hl(0, 'CmpItemKindColorDefault', { fg = c.bright_red })
@@ -608,6 +605,8 @@ vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.red })
 -- vim.api.nvim_set_hl(0, 'TSTitle', {})
 -- vim.api.nvim_set_hl(0, 'TSLiteral', {})
 -- vim.api.nvim_set_hl(0, 'TSURI', {})
+
+vim.api.nvim_set_hl(0, 'TreesitterContext', { bg = c.tscontext })
 
 --- LANGUAGE ---
 -- Lua
