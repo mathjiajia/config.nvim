@@ -277,10 +277,10 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'qfFileName', { fg = cp.blue })
 
 ---------- DIAGNOSTIC ----------
-vim.api.nvim_set_hl(0, 'DiagnosticError', { bg = diag_error, fg = error, italic = true })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { bg = diag_warn, fg = warn, italic = true })
-vim.api.nvim_set_hl(0, 'DiagnosticInfo', { bg = diag_info, fg = info, italic = true })
-vim.api.nvim_set_hl(0, 'DiagnosticHint', { bg = diag_hint, fg = hint, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = error, bg = diag_error, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = warn, bg = diag_warn, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = info, bg = diag_info, italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = hint, bg = diag_hint, italic = true })
 
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = true, sp = error })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = warn })

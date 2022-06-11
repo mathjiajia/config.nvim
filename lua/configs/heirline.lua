@@ -15,9 +15,13 @@ local colors = {
 	diag_error = utils.get_highlight('DiagnosticError').fg,
 	diag_hint = utils.get_highlight('DiagnosticHint').fg,
 	diag_info = utils.get_highlight('DiagnosticInfo').fg,
-	git_del = utils.get_highlight('DiffDelete').fg,
-	git_add = utils.get_highlight('DiffAdd').fg,
-	git_change = utils.get_highlight('DiffChange').fg,
+	-- git_del = utils.get_highlight('DiffDelete').fg,
+	-- git_add = utils.get_highlight('DiffAdd').fg,
+	-- git_change = utils.get_highlight('DiffChange').fg,
+	git_branch = '#D3869B',
+	git_del = '#B0B846',
+	git_add = '#F2594B',
+	git_change = '#E9B143',
 	status_bg = utils.get_highlight('StatusLine').bg,
 }
 
@@ -109,7 +113,7 @@ local mode_colors = setmetatable({
 
 local LeftCap = {
 	provider = '▌',
-	hl = { fg = 'red' }
+	hl = { fg = 'git_branch' }
 }
 
 local VimModeNormal = {
@@ -117,7 +121,7 @@ local VimModeNormal = {
 		return self.mode == 'n'
 	end,
 	provider = ' ●',
-	hl = { fg = 'red' }
+	hl = { fg = 'git_branch' }
 }
 
 local VimModeOthers = {
@@ -194,7 +198,7 @@ local WorkDir = {
 			return self.icon .. cwd .. trail .. ' '
 		end,
 	}, {
-		-- evaluates to "", hiding the component
+		-- evaluates to empty string, hiding the component
 		provider = '',
 	}),
 }
@@ -328,7 +332,7 @@ local Git = {
 		self.status_dict = vim.b.gitsigns_status_dict
 	end,
 
-	hl = { fg = 'orange' },
+	hl = { fg = 'git_branch' },
 
 	{ -- git branch name
 		provider = function(self)
