@@ -228,6 +228,9 @@ autosnips = {
 	s({ trig = 'sub', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'sup', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
 
+	s({ trig = '<|', name = 'triangleleft <|', wordTrig = false }, { t '\\triangleleft ' }, { condition = tex.in_mathzone }),
+	-- s({ trig = '|>', name = 'triangleright |>', wordTrig = false }, { t '\\triangleright ' }, { condition = tex.in_mathzone }),
+
 	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t '\\cNE(', i(1), t ')' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = '([QRZ])P', name = 'positive', wordTrig = false, regTrig = true },
