@@ -20,6 +20,7 @@ require('telescope').setup {
 				['dev']  = home .. '/Developer',
 				['doc']  = home .. '/Documents',
 				['site'] = home .. '/my_site',
+				['snip'] = home .. '/.config/nvim/luasnippets',
 				['tex']  = home .. '/Tex',
 			},
 		},
