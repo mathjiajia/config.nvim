@@ -32,7 +32,10 @@ require('packer').startup(function()
 		config = [[require('configs.treesitter')]]
 	}
 	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
-	use 'nvim-treesitter/playground'
+	use {
+		'nvim-treesitter/playground',
+		opt = true,
+	}
 	use 'nvim-treesitter/nvim-treesitter-context'
 
 	-- use 'theHamsta/nvim-treesitter-pairs'
