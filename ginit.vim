@@ -1,5 +1,5 @@
 if exists('g:neovide')
-    set guifont=JetBrainsMono\ Nerd\ Font:h28
+    set guifont=JetBrainsMono\ Nerd\ Font:h24
     let g:neovide_input_use_logo=v:true
 
     nnoremap <silent> <D-q> <Cmd>wq<CR>
