@@ -37,3 +37,8 @@ vim.opt.writebackup = false
 
 -- vim.g.theme_style = 'dark'
 vim.cmd 'colorscheme kanagawa'
+
+-- PACKER PLUGINS
+vim.defer_fn(function()
+	require 'plugins'
+end, 1000)

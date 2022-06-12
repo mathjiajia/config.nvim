@@ -13,13 +13,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
 	group   = 'init_nvim',
 	desc    = 'change the working directory',
 })
-vim.api.nvim_create_autocmd('CursorHold', {
-	callback = function()
-		require 'plugins'
-	end,
-	group    = 'init_nvim',
-	once     = true,
-})
 
 vim.api.nvim_create_augroup('auto_cursorline', { clear = true })
 vim.api.nvim_create_autocmd({ 'WinEnter' }, {
