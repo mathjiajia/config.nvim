@@ -5,16 +5,10 @@ require('telescope').setup {
 	defaults = {
 		sorting_strategy = 'ascending',
 		layout_config = {
-			horizontal = {
-				height = 0.9,
-				preview_cutoff = 120,
-				prompt_position = 'top',
-				width = 0.8,
-			},
+			horizontal = { prompt_position = 'top' }
 		},
 		prompt_prefix = '   ',
 		selection_caret = ' ',
-		path_display = { 'absolute' },
 		set_env = { ['COLORTERM'] = 'truecolor' },
 		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
 	},
@@ -23,13 +17,9 @@ require('telescope').setup {
 			show_scores = true,
 			workspaces = {
 				['conf'] = home .. '/.config',
-				['cv']   = home .. '/Documents/CV',
-				['ex']   = home .. '/Documents/Exercises',
-				['org']  = home .. '/Documents/neorg',
-				['note'] = home .. '/Documents/Notes',
-				['proj'] = home .. '/Documents/Projects',
+				['dev']  = home .. '/Developer',
+				['doc']  = home .. '/Documents',
 				['site'] = home .. '/my_site',
-				['talk'] = home .. '/Documents/Talks',
 				['tex']  = home .. '/Tex',
 			},
 		},
