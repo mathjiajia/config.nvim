@@ -64,6 +64,12 @@ cmp.setup {
 		{ name = 'neorg' },
 		{ name = 'buffer', keyword_length = 4 },
 		{ name = 'rg', keyword_length = 5 }
+	},
+	window = {
+		completion = {
+			col_offset = -2,
+			side_padding = 1,
+		}
 	}
 }
 
