@@ -207,13 +207,14 @@ vim.api.nvim_set_hl(0, 'StatusLine', { fg = cp.text, bg = cp.mantle })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = cp.surface1, bg = cp.mantle })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = cp.pink, bg = cp.surface1 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = cp.mantle, bg = cp.surface1 })
-vim.api.nvim_set_hl(0, 'TabLineFill', { bg = cp.teleblack }) -- FIXED
+vim.api.nvim_set_hl(0, 'TabLineFill', { bg = cp.mantle }) -- FIXED
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = cp.green, bg = cp.surface1 })
 vim.api.nvim_set_hl(0, 'Visual', { bg = cp.surface1, bold = true })
 vim.api.nvim_set_hl(0, 'VisualNOS', { bg = cp.surface1, bold = true })
 vim.api.nvim_set_hl(0, 'WarningMsg', { fg = cp.yellow })
 vim.api.nvim_set_hl(0, 'Whitespace', { fg = cp.surface1 })
 vim.api.nvim_set_hl(0, 'WildMenu', { bg = cp.overlay0 })
+vim.api.nvim_set_hl(0, 'WinBar', { fg = cp.rosewater })
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = cp.crust })
 
 ------ DIFF ------
