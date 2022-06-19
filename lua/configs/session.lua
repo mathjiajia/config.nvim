@@ -6,7 +6,7 @@ require('session_manager').setup {
 	autosave_last_session = false,
 }
 
-local sc = require('session_manager.commands').run_command
+local sc = require('session_manager.subcommands').run
 
 vim.keymap.set('n', '<leader>sd',
 	function()
