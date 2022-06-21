@@ -196,6 +196,7 @@ autosnips = {
 		{ t '\\mathbb{F}' },
 		{ condition = tex.in_mathzone }
 	),
+	s({ trig = 'GG', wordTrig = false, name = 'algebraic group 𝔾' }, { t '\\mathbb{G}' }, { condition = tex.in_mathzone }),
 	s(
 		{ trig = 'HH', wordTrig = false, name = 'half plane ℍ' },
 		{ t '\\mathbb{H}' },
