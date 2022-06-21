@@ -8,8 +8,9 @@ vim.g.clipboard = {
 
 vim.opt.undofile = true
 vim.opt.autowrite = true
-vim.o.breakindent = true
-vim.o.completeopt = 'menu,menuone,noselect'
+vim.opt.breakindent = true
+vim.opt.cmdheight = 0
+vim.opt.completeopt = 'menu,menuone,noselect'
 vim.wo.cursorline = true
 vim.o.ignorecase = true
 vim.opt.laststatus = 3
@@ -35,8 +36,8 @@ vim.o.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
--- vim.g.theme_style = 'dark'
-vim.cmd 'colorscheme kanagawa'
+vim.g.theme_style = 'hard'
+vim.cmd 'colorscheme gruvbox'
 
 -- PACKER PLUGINS
 vim.defer_fn(function()
