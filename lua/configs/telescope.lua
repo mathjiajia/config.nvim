@@ -26,7 +26,7 @@ require('telescope').setup {
 		},
 		bibtex = {
 			format = 'plain',
-			global_files = { home .. '/Tex' },
+			-- global_files = { home .. '/Tex' },
 			wrap = true,
 		},
 		file_browser = {
