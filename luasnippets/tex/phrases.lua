@@ -14,7 +14,7 @@ local pipe = function(fns)
 end
 
 snips = {
-	s({ trig = 'ref', name = 'cross refrence' }, {
+	s({ trig = 'cite', name = 'cross refrence' }, {
 		t '\\cite{',
 		i(1),
 		t '}*{',
