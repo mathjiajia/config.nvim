@@ -224,8 +224,8 @@ autosnips = {
 	s({ trig = 'ox', wordTrig = false, name = 'otimes' }, { t '\\otimes' }, { condition = tex.in_mathzone }),
 	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t '\\cap ' }, { condition = tex.in_mathzone }),
 	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t '\\cup ' }, { condition = tex.in_mathzone }),
-	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcup' }, { condition = tex.in_mathzone }),
-	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcap' }, { condition = tex.in_mathzone }),
+	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcap' }, { condition = tex.in_mathzone }),
+	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcup' }, { condition = tex.in_mathzone }),
 	s({ trig = 'sub', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'sup', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
 
