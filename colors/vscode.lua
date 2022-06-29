@@ -47,6 +47,8 @@ if vim.g.theme_style == 'dark' then
 		vscContext        = '#404040',
 		vscContextCurrent = '#707070',
 
+		vscFoldBackground = '#202d39',
+
 		-- Syntax colors
 		vscGray         = '#808080',
 		vscViolet       = '#646695',
@@ -113,6 +115,8 @@ else
 		vscContext        = '#D2D2D2',
 		vscContextCurrent = '#929292',
 
+		vscFoldBackground = '#e6f3ff',
+
 		-- Syntax colors
 		vscGray         = '#000000',
 		vscViolet       = '#000080',
@@ -152,7 +156,7 @@ vim.api.nvim_set_hl(0, 'Directory', { fg = c.vscBlue, bg = c.vscBack })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = c.vscRed, bg = c.vscBack })
 -- vim.api.nvim_set_hl(0, 'FloatBorder', {})
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = c.vscLineNumber, bg = c.vscBack })
-vim.api.nvim_set_hl(0, 'Folded', { fg = c.vscLeftLight, bg = c.vscLeftDark, underline = true })
+vim.api.nvim_set_hl(0, 'Folded', { bg = c.vscFoldBackground, underline = true })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = 'NONE', bg = c.vscSearchCurrent })
 -- vim.api.nvim_set_hl(0, 'lCursor', {})
 vim.api.nvim_set_hl(0, 'LineNr', { fg = c.vscLineNumber, bg = c.vscBack })
@@ -465,17 +469,9 @@ vim.api.nvim_set_hl(0, 'luaTSPunctBracket', {})
 -- vim.api.nvim_set_hl(0, 'LuaTSVariable', {})
 
 ------ MARKDOWN ------
--- vim.api.nvim_set_hl(0, 'markdownBold', { fg = c.vscBlue, bold = true })
--- vim.api.nvim_set_hl(0, 'markdownCode', { fg = c.vscOrange })
--- vim.api.nvim_set_hl(0, 'markdownRule', { fg = c.vscBlue, bold = true })
--- vim.api.nvim_set_hl(0, 'markdownCodeDelimiter', { fg = c.vscFront })
--- vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = c.vscBlue })
--- vim.api.nvim_set_hl(0, 'markdownFootnote', { fg = c.vscOrange })
--- vim.api.nvim_set_hl(0, 'markdownFootnoteDefinition', { fg = c.vscOrange })
--- vim.api.nvim_set_hl(0, 'markdownUrl', { fg = c.vscFront, underline = true })
--- vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = c.vscOrange })
--- vim.api.nvim_set_hl(0, 'markdownEscape', { fg = c.vscOrange })
 -- vim.api.nvim_set_hl(0, 'markdownTSPunctSpecial', { fg = c.vscBlue, bold = true })
+vim.api.nvim_set_hl(0, 'markdownTSLiteral', { fg = c.vscOrange })
+vim.api.nvim_set_hl(0, 'markdown_inlineTSLiteral', { fg = c.vscOrange })
 
 ------ NEORG ------
 -- vim.api.nvim_set_hl(0, 'NeorgCodeBlock', {})
