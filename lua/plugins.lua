@@ -21,6 +21,10 @@ require('packer').startup(function()
 	}
 	use 'antoinemadec/FixCursorHold.nvim'
 	use 'rebelot/heirline.nvim'
+	-- use {
+	-- 	'b0o/incline.nvim',
+	-- 	config = [[require('incline').setup()]]
+	-- }
 	use {
 		'rcarriga/nvim-notify',
 		config = [[vim.notify = require('notify')]]
@@ -140,7 +144,7 @@ require('packer').startup(function()
 	}
 	use {
 		'kylechui/nvim-surround',
-		config = [[require('configs.surround')]]
+		config = [[require('nvim-surround').setup({})]]
 	}
 	use { 'ggandor/leap.nvim',
 		config = [[require('leap').set_default_keymaps()]]
@@ -156,6 +160,7 @@ require('packer').startup(function()
 	}
 	use {
 		'f3fora/nvim-texlabconfig',
+		run = 'go build',
 		config = [[require('texlabconfig').setup()]]
 	}
 
