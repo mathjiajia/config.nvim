@@ -220,16 +220,16 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 	s({ trig = 'set', name = 'set' }, { t '\\{', i(1), t '\\}' }, { condition = tex.in_mathzone }),
-	s({ trig = 'o+', wordTrig = false, name = 'oplus' }, { t '\\oplus' }, { condition = tex.in_mathzone }),
+	s({ trig = 'o+', wordTrig = false, name = 'oplus' }, { t '\\oplus ' }, { condition = tex.in_mathzone }),
 	s({ trig = 'ox', wordTrig = false, name = 'otimes' }, { t '\\otimes' }, { condition = tex.in_mathzone }),
 	s({ trig = 'cap', wordTrig = false, name = 'cap' }, { t '\\cap ' }, { condition = tex.in_mathzone }),
 	s({ trig = 'cup', wordTrig = false, name = 'cup' }, { t '\\cup ' }, { condition = tex.in_mathzone }),
-	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcap' }, { condition = tex.in_mathzone }),
-	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcup' }, { condition = tex.in_mathzone }),
-	s({ trig = 'sub', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq' }, { condition = tex.in_mathzone }),
+	s({ trig = 'nnn', wordTrig = false, name = 'bigcup' }, { t '\\bigcap ' }, { condition = tex.in_mathzone }),
+	s({ trig = 'uuu', wordTrig = false, name = 'bigcap' }, { t '\\bigcup ' }, { condition = tex.in_mathzone }),
+	s({ trig = 'sub', name = 'subseteq ⊆', wordTrig = false }, { t '\\subseteq ' }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'sup', name = 'supseteq ⊇', wordTrig = false }, { t '\\supseteq' }, { condition = tex.in_mathzone }),
 
-	s({ trig = '<|', name = 'triangleleft <|', wordTrig = false }, { t '\\triangleleft ' }, { condition = tex.in_mathzone }),
+	-- s({ trig = '<|', name = 'triangleleft <|', wordTrig = false }, { t '\\triangleleft ' }, { condition = tex.in_mathzone }),
 	-- s({ trig = '|>', name = 'triangleright |>', wordTrig = false }, { t '\\triangleright ' }, { condition = tex.in_mathzone }),
 
 	s({ trig = 'MK', name = 'Mori-Kleiman cone' }, { t '\\cNE(', i(1), t ')' }, { condition = tex.in_mathzone }),

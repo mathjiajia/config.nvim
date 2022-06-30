@@ -88,10 +88,13 @@ autosnips = {
 	s({ trig = 'snc', name = 'simple normal crossing' }, { t 'simple normal crossing' }, { condition = tex.in_text }),
 	s({ trig = 'lmm', name = 'log minimal model' }, { t 'log minimal model' }, { condition = tex.in_text }),
 	s(
-		{ trig = '([tT])fae', name = 'the following are equivalent', regTrig = true },
-		{ f(function(_, snip)
-			return snip.captures[1] .. 'he following are equivalent'
-		end, {}) },
+		{ trig = 'tfae', name = 'the following are equivalent' },
+		{ t 'the following are equivalent' },
+		{ condition = tex.in_text }
+	),
+	s(
+		{ trig = 'Tfae', name = 'The following are equivalent' },
+		{ t 'The following are equivalent' },
 		{ condition = pipe { conds.line_begin, tex.in_text } }
 	),
 	s(
