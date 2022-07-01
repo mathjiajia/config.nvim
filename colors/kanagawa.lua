@@ -188,7 +188,7 @@ vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true, sp = colors.diag.warning 
 vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = colors.diag.warning })
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = colors.diag.warning })
 
--- SYNTAX GROUPS
+------ SYNTAX ------
 vim.api.nvim_set_hl(0, 'Boolean', { fg = colors.co, bold = true })
 vim.api.nvim_set_hl(0, 'Character', { link = 'String' })
 vim.api.nvim_set_hl(0, 'Comment', { fg = colors.fg_comment, italic = true })

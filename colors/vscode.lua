@@ -205,7 +205,7 @@ vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true, sp = c.vscRed })
 vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = c.vscRed })
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = c.vscRed })
 
--- SYNTAX GROUPS
+------ SYNTAX ------
 vim.api.nvim_set_hl(0, 'Boolean', { fg = c.vscBlue })
 vim.api.nvim_set_hl(0, 'Character', { fg = c.vscOrange })
 vim.api.nvim_set_hl(0, 'Comment', { fg = c.vscGreen }) -- removed bg

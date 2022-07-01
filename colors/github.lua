@@ -366,7 +366,7 @@ vim.api.nvim_set_hl(0, 'SpellCap', { sp = c.warning, undercurl = true })
 vim.api.nvim_set_hl(0, 'SpellLocal', { sp = c.info, undercurl = true })
 vim.api.nvim_set_hl(0, 'SpellRare', { sp = c.hint, undercurl = true })
 
--- SYNTAX GROUPS
+------ SYNTAX ------
 -- vim.api.nvim_set_hl(0, 'Boolean', {})
 vim.api.nvim_set_hl(0, 'Character', { fg = c.syntax.variable })
 vim.api.nvim_set_hl(0, 'Comment', { fg = c.syntax.comment, italic = true })

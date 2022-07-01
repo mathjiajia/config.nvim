@@ -1,3 +1,4 @@
+-- Modified from https://github.com/kaiuri/nvim-mariana
 vim.g.colors_name = 'mariana'
 
 ------ BASICS ------

@@ -161,7 +161,7 @@ vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true, sp = c.warning })
 vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = c.info })
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = c.hint })
 
--- SYNTAX GROUPS
+------ SYNTAX ------
 -- vim.api.nvim_set_hl(0, 'Boolean', {})
 vim.api.nvim_set_hl(0, 'Character', { fg = c.green })
 -- vim.api.nvim_set_hl(0, 'Conditional', {})

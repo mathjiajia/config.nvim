@@ -128,7 +128,7 @@ vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true, sp = cp.yellow })
 vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = cp.blue })
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = cp.purple })
 
--- SYNTAX GROUPS
+------ SYNTAX ------
 vim.api.nvim_set_hl(0, 'Boolean', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'Character', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'Comment', { fg = cp.grey, italic = true })
