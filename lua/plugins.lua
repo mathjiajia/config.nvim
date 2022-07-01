@@ -160,7 +160,8 @@ require('packer').startup(function()
 	}
 	use {
 		'f3fora/nvim-texlabconfig',
-		run = 'go build',
+		-- run = 'go build',
+		tag = 'v0.1.0',
 		config = [[require('texlabconfig').setup()]]
 	}
 

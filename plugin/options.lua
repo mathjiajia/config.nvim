@@ -36,7 +36,7 @@ vim.o.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
-vim.g.theme_style = 'hard'
+-- vim.g.theme_style = 'hard'
 vim.cmd 'colorscheme mariana'
 
 -- PACKER PLUGINS
