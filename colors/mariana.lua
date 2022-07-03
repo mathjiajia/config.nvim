@@ -192,6 +192,10 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = '#FAAE57', bold = true })
 ------ COMMENT ------
 vim.api.nvim_set_hl(0, 'commentTSConstant', { fg = '#8C99A6' })
 
+------ HELP ------
+vim.api.nvim_set_hl(0, 'helpTSTitle', { fg = '#CBD3E2' })
+vim.api.nvim_set_hl(0, 'helpTSTextReference', { link = 'TSURI' })
+
 ------ HTML ------
 vim.api.nvim_set_hl(0, 'htmlTSOperator', { fg = '#A6ACB9' })
 vim.api.nvim_set_hl(0, 'htmlTSTag', { fg = '#EF5D64' })
@@ -225,3 +229,4 @@ vim.api.nvim_set_hl(0, 'yamlTSField', { link = 'TSLabel' })
 
 -- typescript
 vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EF5D64' })
+vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = '#5FB4B4' })
