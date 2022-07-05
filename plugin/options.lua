@@ -36,8 +36,8 @@ vim.o.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
--- vim.g.theme_style = 'hard'
-vim.cmd 'colorscheme mariana'
+vim.g.theme_style = 'hard'
+vim.cmd 'colorscheme gruvbox'
 
 -- PACKER PLUGINS
 vim.defer_fn(function()

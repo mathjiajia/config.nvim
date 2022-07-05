@@ -112,7 +112,7 @@ require('packer').startup(function()
 	}
 	use {
 		'nvim-telescope/telescope-frecency.nvim',
-		requires = 'tami5/sqlite.lua'
+		requires = 'kkharji/sqlite.lua'
 	}
 	use 'nvim-telescope/telescope-file-browser.nvim'
 	use 'nvim-telescope/telescope-bibtex.nvim'
@@ -144,7 +144,7 @@ require('packer').startup(function()
 	}
 	use {
 		'kylechui/nvim-surround',
-		config = [[require('nvim-surround').setup({})]]
+		config = [[require('nvim-surround').setup()]]
 	}
 	use { 'ggandor/leap.nvim',
 		config = [[require('leap').set_default_keymaps()]]
