@@ -192,6 +192,16 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = '#FAAE57', bold = true })
 ------ COMMENT ------
 vim.api.nvim_set_hl(0, 'commentTSConstant', { fg = '#8C99A6' })
 
+------ FENNEL ------
+-- vim.api.nvim_set_hl(0, 'fennelTSFuncMacro', { link = 'TSKeywordFunction' })
+-- vim.api.nvim_set_hl(0, 'fennelTSField', { link = 'luaTSField' })
+
+------ GOLANG ------
+-- vim.api.nvim_set_hl(0, 'goTSKeyword', { fg = '#EF5D64' })
+-- vim.api.nvim_set_hl(0, 'goTSType', { fg = '#5FB4B4' })
+-- vim.api.nvim_set_hl(0, 'goTSFunction', { link = 'TSFunction' })
+-- vim.api.nvim_set_hl(0, 'goTSNamespace', { fg = '#95B2D6' })
+
 ------ HELP ------
 vim.api.nvim_set_hl(0, 'helpTSTitle', { fg = '#CBD3E2' })
 vim.api.nvim_set_hl(0, 'helpTSTextReference', { link = 'TSURI' })
@@ -209,17 +219,17 @@ vim.api.nvim_set_hl(0, 'luaTSField', { fg = '#95B2D6' })
 vim.api.nvim_set_hl(0, 'markdownTSPunctSpecial', { fg = '#EF7A5D', bold = true })
 
 ------ RUST ------
-vim.api.nvim_set_hl(0, 'rustTSConstant', { fg = '#5E99D4' })
-vim.api.nvim_set_hl(0, 'rustTSConstBuiltin', { fg = '#5E99D4', italic = true })
-vim.api.nvim_set_hl(0, 'rustTSField', { fg = '#CBD3E2' })
-vim.api.nvim_set_hl(0, 'rustTSFuncMacro', { fg = '#5E99D4' })
-vim.api.nvim_set_hl(0, 'rustTSFunction', { fg = '#5FB4B4' })
-vim.api.nvim_set_hl(0, 'rustTSKeyword', { fg = '#C992C9' })
-vim.api.nvim_set_hl(0, 'rustTSOperator', { fg = '#FA7A57' })
-vim.api.nvim_set_hl(0, 'rustTSPunctBracket', { fg = '#CBD3E2' })
-vim.api.nvim_set_hl(0, 'rustTSPunctDelimiter', { fg = '#A6ACB9' })
-vim.api.nvim_set_hl(0, 'rustTSType', { fg = '#FAAE57' })
-vim.api.nvim_set_hl(0, 'rustTSTypeBuiltin', { fg = '#C695C6', italic = true })
+-- vim.api.nvim_set_hl(0, 'rustTSConstant', { fg = '#5E99D4' })
+-- vim.api.nvim_set_hl(0, 'rustTSConstBuiltin', { fg = '#5E99D4', italic = true })
+-- vim.api.nvim_set_hl(0, 'rustTSField', { fg = '#CBD3E2' })
+-- vim.api.nvim_set_hl(0, 'rustTSFuncMacro', { fg = '#5E99D4' })
+-- vim.api.nvim_set_hl(0, 'rustTSFunction', { fg = '#5FB4B4' })
+-- vim.api.nvim_set_hl(0, 'rustTSKeyword', { fg = '#C992C9' })
+-- vim.api.nvim_set_hl(0, 'rustTSOperator', { fg = '#FA7A57' })
+-- vim.api.nvim_set_hl(0, 'rustTSPunctBracket', { fg = '#CBD3E2' })
+-- vim.api.nvim_set_hl(0, 'rustTSPunctDelimiter', { fg = '#A6ACB9' })
+-- vim.api.nvim_set_hl(0, 'rustTSType', { fg = '#FAAE57' })
+-- vim.api.nvim_set_hl(0, 'rustTSTypeBuiltin', { fg = '#C695C6', italic = true })
 
 ------- TOML ------
 vim.api.nvim_set_hl(0, 'tomlTSProperty', { link = 'TSLabel' })
@@ -228,5 +238,5 @@ vim.api.nvim_set_hl(0, 'tomlTSProperty', { link = 'TSLabel' })
 vim.api.nvim_set_hl(0, 'yamlTSField', { link = 'TSLabel' })
 
 -- typescript
-vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EF5D64' })
-vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = '#5FB4B4' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EF5D64' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = '#5FB4B4' })

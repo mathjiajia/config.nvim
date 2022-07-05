@@ -428,8 +428,8 @@ vim.g.terminal_color_13 = c.purple
 vim.g.terminal_color_6  = c.aqua
 vim.g.terminal_color_14 = c.aqua
 
--- if vim.o.background =         = 'light' then
--- for i                         = 0, 15, 1 do
--- vim.g['terminal_color_' .. i] = util.getColor(vim.g['terminal_color_' .. i])
+-- if vim.o.background == 'light' then
+-- 	for i = 0, 15, 1 do
+-- 		vim.g['terminal_color_' .. i] = util.getColor(vim.g['terminal_color_' .. i])
 -- 	end
 -- end
