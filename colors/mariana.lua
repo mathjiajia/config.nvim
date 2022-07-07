@@ -167,7 +167,6 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = '#FAAE57', bold = true })
 vim.api.nvim_set_hl(0, 'commentTSConstant', { fg = '#8C99A6' })
 
 -- git.vim
-
 vim.api.nvim_set_hl(0, 'gitCommitSelectedFile', { italic = true })
 vim.api.nvim_set_hl(0, 'gitCommitSummary', { bold = true })
 vim.api.nvim_set_hl(0, 'gitCommitTrailerToken', { fg = colors.pink, italic = true })
@@ -205,37 +204,23 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { bold = true })
 -- vim.api.nvim_set_hl(0, 'rustTSTypeBuiltin', { fg = colors.pink, italic = true })
 
 -- golangTS
-vim.api.nvim_set_hl(0, 'goTSKeyword', { fg = '#EF5D64' })
-vim.api.nvim_set_hl(0, 'goTSType', { fg = '#5FB4B4' })
-vim.api.nvim_set_hl(0, 'goTSFunction', { link = 'TSFunction' })
-vim.api.nvim_set_hl(0, 'goTSNamespace', { link = 'TSNamespace' })
-
--- tmux
-vim.api.nvim_set_hl(0, 'tmuxCommands', { fg = colors.pink })
-vim.api.nvim_set_hl(0, 'tmuxFlags', { fg = '#FAAE57' })
-vim.api.nvim_set_hl(0, 'tmuxFormatString', { fg = '#5FB4B4' })
+-- vim.api.nvim_set_hl(0, 'goTSKeyword', { fg = '#EF5D64' })
+-- vim.api.nvim_set_hl(0, 'goTSType', { fg = '#5FB4B4' })
+-- vim.api.nvim_set_hl(0, 'goTSFunction', { link = 'TSFunction' })
+-- vim.api.nvim_set_hl(0, 'goTSNamespace', { link = 'TSNamespace' })
 
 -- typescriptTS
-
-vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EF5D64' })
-vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = '#5E99D4', italic = true })
-vim.api.nvim_set_hl(0, 'typescriptTSProperty', { fg = '#CBD3E2' })
-vim.api.nvim_set_hl(0, 'typescriptTSFunction', { fg = '#5FB4B4' })
-vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = '#FAAE57' })
-vim.api.nvim_set_hl(0, 'typescriptTSOperator', { link = 'TSOperator' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EF5D64' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = '#5E99D4', italic = true })
+-- vim.api.nvim_set_hl(0, 'typescriptTSProperty', { fg = '#CBD3E2' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSFunction', { fg = '#5FB4B4' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = '#FAAE57' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSOperator', { link = 'TSOperator' })
 
 --- fennelTS
-
 -- NOTE: Very weird queries
-vim.api.nvim_set_hl(0, 'fennelTSFuncMacro', { link = 'TSKeywordFunction' })
-vim.api.nvim_set_hl(0, 'fennelTSField', { link = 'luaTSField' })
-
--- fennel.vim
-vim.api.nvim_set_hl(0, 'FennelStringDelimiter', { fg = '#5FB4B4' })
-vim.api.nvim_set_hl(0, 'FennelParen', { link = 'TSPunctBracket' })
-vim.api.nvim_set_hl(0, 'FennelSpecialForm', { fg = colors.pink, italic = true })
-vim.api.nvim_set_hl(0, 'FennelKeyword', { fg = '#84C2BB' })
-vim.api.nvim_set_hl(0, 'FennelTable', { link = 'luaTSPunctDelimiter' })
+-- vim.api.nvim_set_hl(0, 'fennelTSFuncMacro', { link = 'TSKeywordFunction' })
+-- vim.api.nvim_set_hl(0, 'fennelTSField', { link = 'luaTSField' })
 
 --- tomlTS
 vim.api.nvim_set_hl(0, 'tomlTSProperty', { link = 'TSLabel' })
@@ -244,13 +229,11 @@ vim.api.nvim_set_hl(0, 'tomlTSProperty', { link = 'TSLabel' })
 vim.api.nvim_set_hl(0, 'yamlTSField', { link = 'TSLabel' })
 
 -- helpTS
-
 vim.api.nvim_set_hl(0, 'helpTSTitle', { fg = '#CBD3E2' })
 vim.api.nvim_set_hl(0, 'helpTSTextReference', { link = 'TSURI' })
 
 --- Plugins
 -- Rainbow Parentheses
-
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = '#FEDB95' })
 vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = '#A3FE95' })
 vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = '#95F7FE' })
@@ -264,7 +247,6 @@ vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = '#4E5A65' })
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = '#4E5A65', underline = true })
 
 --- nvim-cmp
-
 vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { link = 'Structure' })
 vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { link = 'Function' })
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { link = 'Number' })
@@ -285,10 +267,6 @@ vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'TSSymbol' })
 vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { link = 'TSText' })
 vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSType' })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { link = 'TSVariable' })
-
---- Sneak.vim
--- vim.api.nvim_set_hl(0, 'Sneak', { link = 'Search' })
--- vim.api.nvim_set_hl(0, 'SneakLabel', { link = 'Search' })
 
 --- Nvim-tree
 -- vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = '#272E35' })
