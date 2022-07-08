@@ -309,7 +309,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = colors.fg_dark, bg = 'NONE'
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', { fg = colors.bg_light2 })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', { fg = colors.bg_light2 })
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = colors.bg_light3 })
-vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = colors.bg_light3, underdash = true })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = colors.bg_light3, underdashed = true })
 
 --------- NEOTREE ---------
 -- vim.api.nvim_set_hl(0, 'NeoTreeDirectoryIcon', {})
