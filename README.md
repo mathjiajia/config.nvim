@@ -25,41 +25,16 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ├── LICENSE
 ├── README.md
 ├── after
-│   └── ftplugin
-│       ├── gitcommit.lua
-│       ├── markdown.lua
-│       ├── python.lua
-│       ├── qf.lua
-│       └── tex.lua
+│   ├── ftplugin
+│   └── plugin
 ├── colors
 ├── ginit.vim
 ├── init.lua
 ├── lua
 │   ├── configs
-│   │   ├── cmp.lua
-│   │   ├── comment.lua
-│   │   ├── copilot.lua
-│   │   ├── fidget.lua
-│   │   ├── gitsigns.lua
-│   │   ├── heirline.lua
-│   │   ├── indentline.lua
-│   │   ├── latex.lua
-│   │   ├── luasnip.lua
-│   │   ├── neorg.lua
-│   │   ├── outline.lua
-│   │   ├── pairs.lua
-│   │   ├── session.lua
-│   │   ├── surround.lua
-│   │   ├── telescope.lua
-│   │   ├── terminal.lua
-│   │   ├── tree.lua
-│   │   └── treesitter.lua
 │   ├── lsp
 │   ├── plugins.lua
 │   └── utils
-│       ├── colors.lua
-│       ├── hsluv.lua
-│       └── latex.lua
 ├── luasnippets
 │   ├── all.lua
 │   ├── gitcommit.lua
@@ -71,7 +46,7 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 │   ├── autocmds.lua
 │   ├── keymaps.lua
 │   ├── options.lua
-│   └── packer_compiled.lua
+│   └── settings.lua
 └── spell
 ```
 

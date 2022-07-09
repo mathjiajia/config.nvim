@@ -38,8 +38,3 @@ vim.opt.writebackup = false
 
 vim.g.theme_style = 'hard'
 vim.cmd 'colorscheme gruvbox'
-
--- PLUGINS LIST
-vim.defer_fn(function()
-	require 'plugins'
-end, 800)
