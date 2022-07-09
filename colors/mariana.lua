@@ -4,8 +4,9 @@ vim.g.colors_name = 'mariana'
 local colors = {
     blue2 = '#46525C',
     blue3 = '#303841',
+    blue5 = '#5FB4B4',
     blue6 = '#A6ACB8',
-    blue_vibrant = '#5c99d6',
+    blue_vibrant = '#5C99d6',
     gray = '#333333',
     green = '#99C794',
     orange = '#F9AE58',
@@ -16,6 +17,7 @@ local colors = {
     white = '#FFFFFF',
     white3 = '#D8DEE3',
 }
+
 --- NOTE: Those are a few of sublime-mariana's globals
 local background = colors.blue3
 local foreground = colors.white3
@@ -78,27 +80,27 @@ vim.api.nvim_set_hl(0, 'Winseparator', { fg = '#4E5A65' })
 
 -- Diagnostics
 vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.red })
-vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = '#FBC760' })
-vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = '#5FB4B4' })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = '#D8DEE9' })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = colors.blue5 })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = colors.orange })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { sp = colors.red, underdotted = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { sp = '#D8DEE9', underdotted = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { sp = '#5FB4B4', underdotted = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { sp = '#FAAE57', underdotted = true })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = '#FAAE57' })
 
 -- VimSyntax hl-groups
 vim.api.nvim_set_hl(0, 'MatchParen', { link = 'Visual', bold = true })
 vim.api.nvim_set_hl(0, 'Boolean', { link = 'Constant' })
 vim.api.nvim_set_hl(0, 'Character', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'String', { fg = colors.green })
-vim.api.nvim_set_hl(0, 'Comment', { fg = colors.blue6, italic = true })
+vim.api.nvim_set_hl(0, 'Comment', { fg = colors.blue6 })
 vim.api.nvim_set_hl(0, 'Conditional', { fg = colors.pink })
 vim.api.nvim_set_hl(0, 'Constant', { fg = colors.pink })
 vim.api.nvim_set_hl(0, 'Define', { link = 'Macro' })
 vim.api.nvim_set_hl(0, 'Delimiter', { fg = colors.blue6 })
 vim.api.nvim_set_hl(0, 'Float', { link = 'Number' })
-vim.api.nvim_set_hl(0, 'Function', { fg = '#5E99D4' })
-vim.api.nvim_set_hl(0, 'Identifier', { fg = '#CBD3E2', bg = '#2B333B' })
+vim.api.nvim_set_hl(0, 'Function', { fg = colors.blue_vibrant })
+vim.api.nvim_set_hl(0, 'Identifier', { fg = '#CBD3E2' })
 vim.api.nvim_set_hl(0, 'Include', { fg = '#7999B9' })
 vim.api.nvim_set_hl(0, 'Keyword', { fg = colors.pink })
 vim.api.nvim_set_hl(0, 'Label', { fg = colors.pink })
@@ -117,7 +119,7 @@ vim.api.nvim_set_hl(0, 'StorageClass', { fg = colors.red })
 vim.api.nvim_set_hl(0, 'Structure', { fg = colors.pink })
 vim.api.nvim_set_hl(0, 'Tag', { fg = colors.pink })
 vim.api.nvim_set_hl(0, 'Title', { fg = colors.pink })
-vim.api.nvim_set_hl(0, 'Todo', { fg = '#5E99D4', bold = true })
+vim.api.nvim_set_hl(0, 'Todo', { fg = colors.blue_vibrant, bold = true })
 vim.api.nvim_set_hl(0, 'Type', { fg = colors.pink, italic = true })
 vim.api.nvim_set_hl(0, 'Typedef', { link = 'Structure' })
 vim.api.nvim_set_hl(0, 'Underlined', { underdotted = true })
@@ -126,6 +128,7 @@ vim.api.nvim_set_hl(0, 'Whitespace', { fg = '#5C75A3' })
 -- TS-hl globals
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = '#EF5D64', italic = true })
 vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = colors.pink, italic = true })
+vim.api.nvim_set_hl(0, 'TSComment', { link = 'Comment' })
 vim.api.nvim_set_hl(0, 'TSConstant', { fg = colors.blue_vibrant })
 vim.api.nvim_set_hl(0, 'TSDanger', { fg = '#EF5D64', bold = true })
 vim.api.nvim_set_hl(0, 'TSEmphasis', { italic = true })
@@ -155,7 +158,7 @@ vim.api.nvim_set_hl(0, 'TSSymbol', { fg = '#7EBFC4' })
 vim.api.nvim_set_hl(0, 'TSText', { fg = '#CBD3E2' })
 vim.api.nvim_set_hl(0, 'TSTextReference', { fg = '#CBD3E2', underdotted = true })
 vim.api.nvim_set_hl(0, 'TSTitle', { fg = '#CBD3E2', bold = true })
-vim.api.nvim_set_hl(0, 'TSType', { fg = colors.pink, italic = true })
+vim.api.nvim_set_hl(0, 'TSType', { fg = colors.orange })
 vim.api.nvim_set_hl(0, 'TSTypeBuiltin', { fg = '#5E99D4', italic = true })
 vim.api.nvim_set_hl(0, 'TSURI', { fg = '#5FB4B4', underdotted = true })
 vim.api.nvim_set_hl(0, 'TSUnderline', { underline = true })
@@ -210,17 +213,24 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { bold = true })
 -- vim.api.nvim_set_hl(0, 'goTSNamespace', { link = 'TSNamespace' })
 
 -- typescriptTS
--- vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EF5D64' })
--- vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = '#5E99D4', italic = true })
 -- vim.api.nvim_set_hl(0, 'typescriptTSProperty', { fg = '#CBD3E2' })
 -- vim.api.nvim_set_hl(0, 'typescriptTSFunction', { fg = '#5FB4B4' })
 -- vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = '#FAAE57' })
 -- vim.api.nvim_set_hl(0, 'typescriptTSOperator', { link = 'TSOperator' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSPunctSpecial', { fg = colors.red })
 
 --- fennelTS
 -- NOTE: Very weird queries
 -- vim.api.nvim_set_hl(0, 'fennelTSFuncMacro', { link = 'TSKeywordFunction' })
 -- vim.api.nvim_set_hl(0, 'fennelTSField', { link = 'luaTSField' })
+
+--- clojureTS
+-- vim.api.nvim_set_hl(0, 'clojureTSKeywordFunction', { fg = colors.red })
+-- vim.api.nvim_set_hl(0, 'clojureTSKeyword', { fg = colors.red })
+-- vim.api.nvim_set_hl(0, 'clojureTSSymbol', { fg = colors.pink })
+-- vim.api.nvim_set_hl(0, 'clojureTSVariableBuiltin', { link = 'TSVariable' })
+-- vim.api.nvim_set_hl(0, 'clojureTSPunctSpecial', { fg = colors.red2 })
+
 
 --- tomlTS
 vim.api.nvim_set_hl(0, 'tomlTSProperty', { link = 'TSLabel' })
@@ -275,3 +285,9 @@ vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { link = 'TSVariable' })
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = colors.red, bold = true })
 vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = colors.orange, bold = true })
 vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = colors.green, bold = true })
+
+--- vim.lsp
+vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = '#38424c' })
+vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' })
+vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
+

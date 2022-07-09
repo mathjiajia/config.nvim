@@ -1,173 +1,73 @@
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/paqs/start/paq-nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
+    vim.fn.termopen(('git clone --depth=1 https://github.com/savq/paq-nvim.git %q'):format(install_path))
 end
 
-vim.api.nvim_create_augroup('packer_user_config', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-	command = 'source <afile> | PackerCompile',
-	pattern = 'plugins.lua',
-	group   = 'packer_user_config',
-	desc    = 'Compile whenever plugins.lua is updated',
-})
+require 'paq' {
+    'savq/paq-nvim'; -- Let Paq manage itself
+    'lewis6991/impatient.nvim';
 
-require('packer').startup(function()
-	use 'wbthomason/packer.nvim'
-	use 'lewis6991/impatient.nvim'
+    -- common
+    'nvim-lua/plenary.nvim';
+    'kyazdani42/nvim-web-devicons';
+    'kkharji/sqlite.lua';
+    'MunifTanjim/nui.nvim';
 
-	use {
-		'monkoose/matchparen.nvim',
-		config = [[require('matchparen').setup()]]
-	}
-	use 'antoinemadec/FixCursorHold.nvim'
-	use 'rebelot/heirline.nvim'
-	-- use {
-	-- 	'b0o/incline.nvim',
-	-- 	config = [[require('incline').setup()]]
-	-- }
-	use {
-		'rcarriga/nvim-notify',
-		config = [[vim.notify = require('notify')]]
-	}
+    'monkoose/matchparen.nvim';
+    'antoinemadec/FixCursorHold.nvim';
+    'rcarriga/nvim-notify';
+    'rebelot/heirline.nvim';
 
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run    = ':TSUpdate',
-		config = [[require('configs.treesitter')]]
-	}
-	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
-	use {
-		'nvim-treesitter/playground',
-		opt = true,
-	}
-	use 'nvim-treesitter/nvim-treesitter-context'
+    -- TreeSitter
+    { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' };
+    { 'nvim-treesitter/playground', opt = true };
+    'p00f/nvim-ts-rainbow';
+    'lukas-reineke/indent-blankline.nvim';
 
-	-- use 'theHamsta/nvim-treesitter-pairs'
-	use 'p00f/nvim-ts-rainbow'
-	use {
-		'lukas-reineke/indent-blankline.nvim',
-		config = [[require('configs.indentline')]]
-	}
-	-- use {
-	-- 	'lewis6991/spellsitter.nvim',
-	-- 	config = [[require('spellsitter').setup()]],
-	-- }
-	use {
-		'stevearc/aerial.nvim',
-		config = [[require('configs.outline')]]
-	}
+    -- LSP
+    'neovim/nvim-lspconfig';
+    'jose-elias-alvarez/null-ls.nvim';
+    'j-hui/fidget.nvim';
+    'kosayoda/nvim-lightbulb';
+    'folke/lua-dev.nvim';
+    'stevearc/aerial.nvim';
 
-	use {
-		'hrsh7th/nvim-cmp',
-		config = [[require('configs.cmp')]]
-	}
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-path'
-	use 'lukas-reineke/cmp-rg'
-	use 'saadparwaiz1/cmp_luasnip'
-	use {
-		'L3MON4D3/LuaSnip',
-		config = [[require('configs.luasnip')]]
-	}
-	-- use {
-	-- 	'ZhiyuanLck/smart-pairs',
-	-- 	config = [[require('configs.pairs')]]
-	-- }
-	use {
-		'windwp/nvim-autopairs',
-		config = [[require('configs.pairs')]]
-	}
-	use {
-		'github/copilot.vim',
-		opt    = true,
-		config = [[require('configs.copilot')]]
-	}
+    -- Autocompletion
+    'hrsh7th/nvim-cmp';
+    'hrsh7th/cmp-buffer';
+    'hrsh7th/cmp-cmdline';
+    'hrsh7th/cmp-nvim-lsp';
+    'hrsh7th/cmp-path';
+    'lukas-reineke/cmp-rg';
+    'saadparwaiz1/cmp_luasnip';
+    'L3MON4D3/LuaSnip';
 
-	use 'neovim/nvim-lspconfig'
-	use {
-		'jose-elias-alvarez/null-ls.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config   = [[require('lsp.null-ls')]]
-	}
-	use {
-		'j-hui/fidget.nvim',
-		config = [[require('configs.fidget')]]
-	}
-	use 'kosayoda/nvim-lightbulb'
-	use 'folke/lua-dev.nvim'
+    'windwp/nvim-autopairs';
 
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = {
-			'nvim-lua/plenary.nvim',
-			'kyazdani42/nvim-web-devicons'
-		},
-		config = [[require('configs.telescope')]]
-	}
-	use {
-		'nvim-telescope/telescope-fzf-native.nvim',
-		run = 'make'
-	}
-	use {
-		'nvim-telescope/telescope-frecency.nvim',
-		requires = 'kkharji/sqlite.lua'
-	}
-	use 'nvim-telescope/telescope-file-browser.nvim'
-	use 'nvim-telescope/telescope-bibtex.nvim'
-	use 'nvim-telescope/telescope-ui-select.nvim'
+    { 'github/copilot.vim', opt = true };
 
-	use {
-		'nvim-neo-tree/neo-tree.nvim',
-		branch = 'v2.x',
-		requires = {
-			'nvim-lua/plenary.nvim',
-			'kyazdani42/nvim-web-devicons',
-			'MunifTanjim/nui.nvim'
-		},
-		config = [[require('configs.tree')]]
-	}
+    -- Telescope
+    'nvim-telescope/telescope.nvim';
+    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' };
+    'nvim-telescope/telescope-frecency.nvim';
+    'nvim-telescope/telescope-file-browser.nvim';
+    'nvim-telescope/telescope-bibtex.nvim';
+    'nvim-telescope/telescope-ui-select.nvim';
 
-	use {
-		'lewis6991/gitsigns.nvim',
-		config = [[require('configs.gitsigns')]]
-	}
-	use {
-		'numToStr/Comment.nvim',
-		config = [[require('configs.comment')]]
-	}
-	use {
-		'Shatur/neovim-session-manager',
-		requires = 'nvim-lua/plenary.nvim',
-		config   = [[require('configs.session')]]
-	}
-	use {
-		'kylechui/nvim-surround',
-		config = [[require('nvim-surround').setup()]]
-	}
-	use { 'ggandor/leap.nvim',
-		config = [[require('leap').set_default_keymaps()]]
-	}
-	use {
-		'numtostr/FTerm.nvim',
-		config = [[require('configs.terminal')]]
-	}
+    { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x' };
 
-	use {
-		'lervag/vimtex',
-		config = [[require('configs.latex')]]
-	}
-	use {
-		'f3fora/nvim-texlabconfig',
-		-- run = 'go build',
-		tag = 'v0.1.0',
-		config = [[require('texlabconfig').setup()]]
-	}
+    'lewis6991/gitsigns.nvim';
+    'numToStr/Comment.nvim';
+    'Shatur/neovim-session-manager';
+    'kylechui/nvim-surround';
+    'ggandor/leap.nvim';
+    'numtostr/FTerm.nvim';
 
-	use {
-		'nvim-neorg/neorg',
-		config = [[require('configs.neorg')]]
-	}
-	use 'nvim-neorg/neorg-telescope'
-end)
+    -- LaTeX
+    'lervag/vimtex';
+    { 'f3fora/nvim-texlabconfig', tag = 'v0.1.0' };
+
+    -- Neorg
+    'nvim-neorg/neorg';
+    'nvim-neorg/neorg-telescope';
+}

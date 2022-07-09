@@ -33,9 +33,7 @@ require('telescope').setup {
 			theme = 'ivy',
 			hijack_netrw = true,
 		},
-		['ui-select'] = {
-			themes.get_dropdown {},
-		},
+		['ui-select'] = themes.get_dropdown(),
 	},
 }
 
