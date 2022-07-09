@@ -1,6 +1,12 @@
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.termopen(('git clone https://github.com/wbthomason/packer.nvim %q'):format(install_path))
+	vim.fn.system({
+		'git',
+		'clone',
+		'--depth',
+		'1',
+		'https://github.com/wbthomason/packer.nvim',
+		install_path })
 end
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
@@ -15,11 +21,6 @@ require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use 'lewis6991/impatient.nvim'
 
-	use {
-		'monkoose/matchparen.nvim',
-		config = [[require('matchparen').setup()]]
-	}
-	use 'antoinemadec/FixCursorHold.nvim'
 	use 'rebelot/heirline.nvim'
 	use {
 		'rcarriga/nvim-notify',
@@ -111,29 +112,24 @@ require('packer').startup(function()
 	}
 
 	use {
+		'numToStr/Comment.nvim',
+		config = [[require('Comment').setup()]]
+	}
+	use {
+		'numtostr/FTerm.nvim',
+		config = [[require('configs.terminal')]]
+	}
+	use {
 		'lewis6991/gitsigns.nvim',
 		config = [[require('configs.gitsigns')]]
-	}
-	use {
-		'numToStr/Comment.nvim',
-		config = [[require('configs.comment')]]
-	}
-	-- use {
-	-- 	'Shatur/neovim-session-manager',
-	-- 	requires = 'nvim-lua/plenary.nvim',
-	-- 	config   = [[require('configs.session')]]
-	-- }
-	use {
-		'kylechui/nvim-surround',
-		config = [[require('nvim-surround').setup()]]
 	}
 	use {
 		'ggandor/leap.nvim',
 		config = [[require('leap').set_default_keymaps()]]
 	}
 	use {
-		'numtostr/FTerm.nvim',
-		config = [[require('configs.terminal')]]
+		'kylechui/nvim-surround',
+		config = [[require('nvim-surround').setup()]]
 	}
 
 	use {
@@ -152,6 +148,4 @@ require('packer').startup(function()
 	--     config = [[require('configs.neorg')]]
 	-- }
 	-- use 'nvim-neorg/neorg-telescope'
-
-	use 'dstein64/vim-startuptime'
 end)

@@ -7,15 +7,10 @@ ls.config.setup {
 	ext_opts = {
 		[types.choiceNode] = {
 			active = {
-				virt_text = { { '<- Current Choice', 'NonText' } },
+				virt_text = { { '<- Current Choice', 'NonText' } }
 			},
-		},
-		-- [types.insertNode] = {
-		-- 	active = {
-		-- virt_text = { { '◍', 'DiagnosticSignHint' } },
-		-- 	},
-		-- },
-	},
+		}
+	}
 }
 
 vim.keymap.set({ 'i', 's' }, '<C-j>',

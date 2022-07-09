@@ -7,13 +7,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	desc     = 'Highlight the yanked text',
 })
 
-vim.api.nvim_create_augroup('init_nvim', { clear = true })
-vim.api.nvim_create_autocmd('BufEnter', {
-	command = 'silent! lcd %:p:h',
-	group   = 'init_nvim',
-	desc    = 'change the working directory',
-})
-
 vim.api.nvim_create_augroup('auto_cursorline', { clear = true })
 vim.api.nvim_create_autocmd({ 'WinEnter' }, {
 	callback = function()
@@ -35,6 +28,20 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	group    = 'auto_cursorline',
 })
 
+vim.api.nvim_create_augroup('mdtex', { clear = true })
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+	callback = function()
+		vim.wo.conceallevel = 2
+		vim.opt_local.spell = true
+		vim.bo.spelllang = 'en_gb'
+		vim.keymap.set('i', '<M-l>',
+			'<C-g>u<Esc>[s1z=`]a<C-g>u',
+			{ buffer = true, desc = 'Fix Last Miss-Spelling' })
+	end,
+	pattern  = { 'tex', 'markdown' },
+	group    = 'mdtex',
+})
+
 vim.api.nvim_create_augroup('heirline', { clear = true })
 vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
 	callback = function()
@@ -42,26 +49,4 @@ vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
 		require 'utils.status'
 	end,
 	group    = 'heirline',
-})
-
-vim.api.nvim_create_augroup('linenumber', { clear = true })
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-	callback = function()
-		vim.wo.relativenumber = false
-		vim.wo.signcolumn = 'no'
-	end,
-	pattern  = { 'gitcommit', 'qf' },
-	group    = 'linenumber',
-})
-
-vim.api.nvim_create_augroup('mdtex', { clear = true })
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-	callback = function()
-		vim.wo.conceallevel = 2
-		vim.opt_local.spell = true
-		vim.bo.spelllang = 'en_gb'
-		vim.keymap.set('i', '<M-l>', '<C-g>u<Esc>[s1z=`]a<C-g>u', { buffer = true, desc = 'Fix Last Miss-Spelling' })
-	end,
-	pattern  = { 'tex', 'markdown', 'md' },
-	group    = 'linenumber',
 })
