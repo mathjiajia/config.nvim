@@ -6,9 +6,6 @@ vim.keymap.set('n', '<M-k>', '<cmd>wincmd k<CR>', { desc = 'Move to Upper Window
 -- REMAP FOR DEALING WITH WORD WRAP
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
--- BUFFER NAVIGATION
-vim.keymap.set('n', '<leader>bp', '<Cmd>bprev<CR>', { desc = 'Previous Buffer' })
-vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>', { desc = 'Next Buffer' })
 -- INSERT
 vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })

@@ -43,3 +43,13 @@ vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
 	end,
 	group    = 'heirline',
 })
+
+vim.api.nvim_create_augroup('linenumber', { clear = true })
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+	callback = function()
+		vim.wo.relativenumber = false
+		vim.wo.signcolumn = 'no'
+	end,
+	pattern  = { '*.gitcommit', 'qf' },
+	group    = 'linenumber',
+})

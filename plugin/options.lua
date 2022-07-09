@@ -16,7 +16,6 @@ vim.o.ignorecase = true
 vim.opt.laststatus = 3
 vim.wo.linebreak = true
 vim.o.mouse = 'nvi'
--- vim.o.mousescroll = 'ver:1'
 vim.wo.number = true
 vim.opt.pumheight = 10
 vim.wo.relativenumber = true
@@ -37,10 +36,10 @@ vim.o.updatetime = 250
 vim.opt.whichwrap = 'b,s,<,>,[,]'
 vim.opt.writebackup = false
 
--- vim.g.theme_style = 'hard'
-vim.cmd 'colorscheme mariana'
+vim.g.theme_style = 'hard'
+vim.cmd 'colorscheme gruvbox'
 
 -- PLUGINS LIST
 vim.defer_fn(function()
 	require 'plugins'
-end, 1000)
+end, 500)
