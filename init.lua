@@ -1,4 +1,4 @@
-require 'impatient'.enable_profile()
+require 'impatient'
 
 vim.g.mapleader = ','
 
@@ -6,3 +6,5 @@ vim.g.mapleader = ','
 vim.defer_fn(function()
     require 'plugins'
 end, 800)
+
+require 'lsp'
