@@ -22,7 +22,6 @@ vim.wo.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.shiftwidth = 4
 vim.opt.showbreak = '> '
-vim.opt.showmode = false
 vim.wo.signcolumn = 'yes'
 vim.o.smartcase = true
 vim.opt.smartindent = true

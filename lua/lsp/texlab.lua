@@ -25,4 +25,7 @@ M.setup = function(on_attach, capabilities)
 	}
 end
 
+vim.keymap.set('n', '<M-b>', '<Cmd>TexlabBuild<CR>', { buffer = true, desc = 'Compile LaTeX' })
+vim.keymap.set('n', '<M-v>', '<Cmd>TexlabForward<CR>', { buffer = true, desc = 'View PDF' })
+
 return M
