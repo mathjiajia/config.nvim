@@ -64,7 +64,7 @@ require 'paq' {
 	'numtostr/FTerm.nvim';
 	'lewis6991/gitsigns.nvim';
 	'ggandor/leap.nvim';
-	'Shatur/neovim-session-manager';
+	-- 'Shatur/neovim-session-manager';
 	'kylechui/nvim-surround';
 
 	-- LaTeX
@@ -72,6 +72,8 @@ require 'paq' {
 	{ 'f3fora/nvim-texlabconfig', run = 'go build' };
 
 	-- Neorg
-	'nvim-neorg/neorg';
-	'nvim-neorg/neorg-telescope';
+	-- 'nvim-neorg/neorg';
+	-- 'nvim-neorg/neorg-telescope';
+
+	'dstein64/vim-startuptime'
 }

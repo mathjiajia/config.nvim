@@ -50,6 +50,6 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 		vim.wo.relativenumber = false
 		vim.wo.signcolumn = 'no'
 	end,
-	pattern  = { '*.gitcommit', 'qf' },
+	pattern  = { 'gitcommit', 'qf' },
 	group    = 'linenumber',
 })

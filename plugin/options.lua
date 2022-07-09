@@ -42,4 +42,4 @@ vim.cmd 'colorscheme gruvbox'
 -- PLUGINS LIST
 vim.defer_fn(function()
 	require 'plugins'
-end, 500)
+end, 800)
