@@ -1,3 +1,6 @@
+vim.g.tex_flavor = 'latex'
+vim.g.tex_comment_nospell = 1
+
 local custom_cmds = {
     { name = 'longrightarrow', mathmode = 1, concealchar = '→', opt = false, arg = false },
     { name = 'dashrightarrow', mathmode = 1, concealchar = '⇢', opt = false, arg = false },
