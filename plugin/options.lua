@@ -15,7 +15,6 @@ vim.wo.cursorline = true
 vim.o.ignorecase = true
 vim.opt.laststatus = 3
 vim.wo.linebreak = true
-vim.o.mouse = 'nvi'
 vim.wo.number = true
 vim.opt.pumheight = 10
 vim.wo.relativenumber = true
