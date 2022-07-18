@@ -1,22 +1,26 @@
 --[[
 Lua implementation of HSLuv and HPLuv color spaces
 Homepage: http://www.hsluv.org/
+
 Copyright (C) 2019 Alexei Boronine
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction, including
 without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
 following conditions:
+
 The above copyright notice and this permission notice shall be included in all copies or substantial
 portions of the Software.
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
 LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ]]
-
 local hsluv = {}
+
 local hexChars = '0123456789abcdef'
 
 local distance_line_from_origin = function(line)
@@ -223,6 +227,32 @@ hsluv.lch_to_hsluv = function(tuple)
 	return { H, C / max_chroma * 100, L }
 end
 
+hsluv.hpluv_to_lch = function(tuple)
+	local H = tuple[1]
+	local S = tuple[2]
+	local L = tuple[3]
+	if L > 99.9999999 then
+		return { 100, 0, H }
+	end
+	if L < 0.00000001 then
+		return { 0, 0, H }
+	end
+	return { L, hsluv.max_safe_chroma_for_l(L) / 100 * S, H }
+end
+
+hsluv.lch_to_hpluv = function(tuple)
+	local L = tuple[1]
+	local C = tuple[2]
+	local H = tuple[3]
+	if L > 99.9999999 then
+		return { H, 0, 100 }
+	end
+	if L < 0.00000001 then
+		return { H, 0, 0 }
+	end
+	return { H, C / hsluv.max_safe_chroma_for_l(L) * 100, L }
+end
+
 hsluv.rgb_to_hex = function(tuple)
 	local h = '#'
 	for i = 1, 3 do
@@ -265,12 +295,28 @@ hsluv.rgb_to_hsluv = function(tuple)
 	return hsluv.lch_to_hsluv(hsluv.rgb_to_lch(tuple))
 end
 
+hsluv.hpluv_to_rgb = function(tuple)
+	return hsluv.lch_to_rgb(hsluv.hpluv_to_lch(tuple))
+end
+
+hsluv.rgb_to_hpluv = function(tuple)
+	return hsluv.lch_to_hpluv(hsluv.rgb_to_lch(tuple))
+end
+
 hsluv.hsluv_to_hex = function(tuple)
 	return hsluv.rgb_to_hex(hsluv.hsluv_to_rgb(tuple))
 end
 
+hsluv.hpluv_to_hex = function(tuple)
+	return hsluv.rgb_to_hex(hsluv.hpluv_to_rgb(tuple))
+end
+
 hsluv.hex_to_hsluv = function(s)
 	return hsluv.rgb_to_hsluv(hsluv.hex_to_rgb(s))
+end
+
+hsluv.hex_to_hpluv = function(s)
+	return hsluv.rgb_to_hpluv(hsluv.hex_to_rgb(s))
 end
 
 hsluv.m = {

@@ -1,24 +1,23 @@
--- Modified from https://github.com/kaiuri/nvim-mariana
+-- Modified from https://github.com/kaiuri/nvim-juliana
 vim.g.colors_name = 'mariana'
 
 local colors = {
-    blue2 = '#46525C',
-    blue3 = '#303841',
-    blue5 = '#5FB4B4',
-    blue6 = '#A6ACB8',
-    blue_vibrant = '#5C99d6',
-    gray = '#333333',
-    green = '#99C794',
-    orange = '#F9AE58',
-    orange3 = '#FAC761',
-    red = '#EC5F66',
-    red2 = '#F97B58',
-    pink = '#C694C1',
-    white = '#FFFFFF',
-    white3 = '#D8DEE3',
+	blue2 = '#46525C',
+	blue3 = '#303841',
+	blue5 = '#5FB4B4',
+	blue6 = '#A6ACB8',
+	blue_vibrant = '#5C99d6',
+	gray = '#333333',
+	green = '#99C794',
+	orange = '#F9AE58',
+	orange3 = '#FAC761',
+	red = '#EC5F66',
+	red2 = '#F97B58',
+	pink = '#C694C1',
+	white = '#FFFFFF',
+	white3 = '#D8DEE3',
 }
 
---- NOTE: Those are a few of sublime-mariana's globals
 local background = colors.blue3
 local foreground = colors.white3
 local selection = colors.blue2
@@ -126,6 +125,7 @@ vim.api.nvim_set_hl(0, 'Underlined', { underdotted = true })
 vim.api.nvim_set_hl(0, 'Whitespace', { fg = '#5C75A3' })
 
 -- TS-hl globals
+vim.api.nvim_set_hl(0, 'TSBoolean', { fg = colors.red, italic = true })
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = '#EF5D64', italic = true })
 vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = colors.pink, italic = true })
 vim.api.nvim_set_hl(0, 'TSComment', { link = 'Comment' })
@@ -147,7 +147,7 @@ vim.api.nvim_set_hl(0, 'TSNamespace', { fg = colors.orange })
 vim.api.nvim_set_hl(0, 'TSNote', { fg = '#93CF8C', bold = true })
 vim.api.nvim_set_hl(0, 'TSOperator', { link = 'Operator' })
 vim.api.nvim_set_hl(0, 'TSParameter', { fg = '#FAAE57' })
-vim.api.nvim_set_hl(0, 'TSProperty', { link = 'TSVariable' })
+vim.api.nvim_set_hl(0, 'TSProperty', { fg = foreground })
 vim.api.nvim_set_hl(0, 'TSPunctBracket', { fg = colors.white })
 vim.api.nvim_set_hl(0, 'TSPunctDelimiter', { link = 'Delimiter' })
 vim.api.nvim_set_hl(0, 'TSPunctSpecial', { fg = '#5EBBD4' })
@@ -220,7 +220,6 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { bold = true })
 -- vim.api.nvim_set_hl(0, 'typescriptTSPunctSpecial', { fg = colors.red })
 
 --- fennelTS
--- NOTE: Very weird queries
 -- vim.api.nvim_set_hl(0, 'fennelTSFuncMacro', { link = 'TSKeywordFunction' })
 -- vim.api.nvim_set_hl(0, 'fennelTSField', { link = 'luaTSField' })
 
@@ -228,9 +227,9 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { bold = true })
 -- vim.api.nvim_set_hl(0, 'clojureTSKeywordFunction', { fg = colors.red })
 -- vim.api.nvim_set_hl(0, 'clojureTSKeyword', { fg = colors.red })
 -- vim.api.nvim_set_hl(0, 'clojureTSSymbol', { fg = colors.pink })
--- vim.api.nvim_set_hl(0, 'clojureTSVariableBuiltin', { link = 'TSVariable' })
+-- vim.api.nvim_set_hl(0, 'clojureTSVariableBuiltin', { link = 'TSConstBuiltin' })
 -- vim.api.nvim_set_hl(0, 'clojureTSPunctSpecial', { fg = colors.red2 })
-
+-- vim.api.nvim_set_hl(0, 'clojureTSFuncMacro', { fg = colors.red2 })
 
 --- tomlTS
 vim.api.nvim_set_hl(0, 'tomlTSProperty', { link = 'TSLabel' })
@@ -241,6 +240,9 @@ vim.api.nvim_set_hl(0, 'yamlTSField', { link = 'TSLabel' })
 -- helpTS
 vim.api.nvim_set_hl(0, 'helpTSTitle', { fg = '#CBD3E2' })
 vim.api.nvim_set_hl(0, 'helpTSTextReference', { link = 'TSURI' })
+
+-- Python
+vim.api.nvim_set_hl(0, 'pyTSField', { fg = '#95B2D6' })
 
 --- Plugins
 -- Rainbow Parentheses
@@ -279,7 +281,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSType' })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { link = 'TSVariable' })
 
 --- Nvim-tree
--- vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = '#272E35' })
+vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = '#272E35' })
 
 --- gitsigns.nvim
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = colors.red, bold = true })
@@ -290,4 +292,3 @@ vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = colors.green, bold = true })
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = '#38424c' })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
-

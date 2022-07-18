@@ -91,7 +91,7 @@ if vim.g.theme_style == 'light' then
 	c = util.light_colors(c)
 end
 
------- BASICS ------
+---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.black })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.dark5 })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = c.bg, bg = c.fg })
@@ -144,19 +144,19 @@ vim.api.nvim_set_hl(0, 'Whitespace', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'WildMenu', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = c.border })
 
------- DIFF ------
+---------- DIFF ----------
 vim.api.nvim_set_hl(0, 'DiffAdd', { bg = c.diff.add })
 vim.api.nvim_set_hl(0, 'DiffChange', { bg = c.diff.change })
 vim.api.nvim_set_hl(0, 'DiffDelete', { bg = c.diff.delete })
 vim.api.nvim_set_hl(0, 'DiffText', { bg = c.diff.text })
 
------- SPELL ------
+---------- SPELL ----------
 vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true, sp = c.error })
 vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true, sp = c.warning })
 vim.api.nvim_set_hl(0, 'SpellLocal', { undercurl = true, sp = c.info })
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true, sp = c.hint })
 
------- SYNTAX ------
+---------- SYNTAX ----------
 vim.api.nvim_set_hl(0, 'Bold', { bold = true })
 -- vim.api.nvim_set_hl(0, 'Boolean', {})
 vim.api.nvim_set_hl(0, 'Character', { fg = c.green })
@@ -196,7 +196,7 @@ vim.api.nvim_set_hl(0, 'Type', { fg = c.blue1 })
 -- vim.api.nvim_set_hl(0, 'Typedef', {})
 vim.api.nvim_set_hl(0, 'Underlined', { underline = true })
 
------- MISC ------
+---------- MISC ----------
 -- vim.api.nvim_set_hl(0, 'debugPC', { bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = c.info , bg = util.darken(c.info, 0.1)})
 
@@ -228,10 +228,14 @@ vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = c.fg_gutter })
 
--- vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = c.comment })
--- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = c.orange })
+vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = c.comment })
+vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = c.orange })
 
------- CMP ------
+---------- BUFFERLINE ----------
+vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
+vim.api.nvim_set_hl(0, 'BufferLineFill', { fg = c.black })
+
+---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = c.fg, bg = c.bg_float })
 vim.api.nvim_set_hl(0, 'CmpDocumentationBorder', { fg = c.border_highlight, bg = c.bg_float })
 
@@ -264,16 +268,23 @@ vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = c.orange })
 vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = c.magenta })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = c.magenta })
 
------- GITSIGNS ------
+---------- GITSIGNS ----------
 vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.gitSigns.add })
 vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 
------- HOP ------
-vim.api.nvim_set_hl(0, 'HopNextKey', { fg = c.magenta2, bold = true })
-vim.api.nvim_set_hl(0, 'HopNextKey1', { fg = c.blue2, bold = true })
-vim.api.nvim_set_hl(0, 'HopNextKey2', { fg = util.darken(c.blue2, 0.3) })
-vim.api.nvim_set_hl(0, 'HopUnmatched', { fg = c.dark3 })
+---------- NVIM TREE ----------
+vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.fg_sidebar, bg = c.bg_sidebar })
+vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { fg = c.fg_sidebar, bg = c.bg_sidebar })
+vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.blue, bold = true })
+vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.git.change })
+vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.git.add })
+vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = c.git.delete })
+vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.purple, underline = true })
+vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = c.fg_gutter })
+vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.fg_sidebar })
+vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
+-- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.fg_float })
 
 ---------- RAINBOW ----------
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = c.red })
@@ -284,21 +295,7 @@ vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = c.cyan })
 vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = c.purple })
 
------- TELESCOPE ------
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = c.bg_dark })
-vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = c.fg, bg = c.bg_highlight })
-
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = c.red, bg = c.bg_highlight })
-vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = c.fg, bg = c.bg_highlight })
-
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.bg_dark, bg = c.bg_dark })
-vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = c.bg_highlight, bg = c.bg_highlight })
-
-vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = c.bg, bg = c.green })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = c.bg, bg = c.red })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = c.bg_dark, bg = c.blue })
-
------- TREESITTER ------
+---------- TREESITTER ----------
 -- vim.api.nvim_set_hl(0, 'TSAnnotation', {})
 -- vim.api.nvim_set_hl(0, 'TSAttribute', {})
 -- vim.api.nvim_set_hl(0, 'TSBoolean', {})
@@ -357,14 +354,14 @@ vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.teal })
 -- vim.api.nvim_set_hl(0, 'TSLiteral', {})
 -- vim.api.nvim_set_hl(0, 'TSURI', {})
 
------- HTML ------
+---------- HTML ----------
 -- vim.api.nvim_set_hl(0, 'htmlH1', { fg = c.magenta, bold = true })
 -- vim.api.nvim_set_hl(0, 'htmlH2', { fg = c.blue, bold = true })
 
------- LUA ------
+---------- LUA ----------
 -- vim.api.nvim_set_hl(0, 'luaTSProperty', { fg = c.red })
 
------- MARKDOWN ------
+---------- MARKDOWN ----------
 -- vim.api.nvim_set_hl(0, 'mkdHeading', { fg = c.orange, bold = true })
 -- vim.api.nvim_set_hl(0, 'mkdCode', { fg = c.fg , bg = c.terminal_black})
 -- vim.api.nvim_set_hl(0, 'mkdCodeDelimiter', { fg = c.fg , bg = c.terminal_black})
@@ -379,6 +376,7 @@ vim.api.nvim_set_hl(0, 'TSTextReference', { fg = c.teal })
 -- vim.api.nvim_set_hl(0, 'markdownH2', { fg = c.blue, bold = true })
 -- vim.api.nvim_set_hl(0, 'markdownLinkText', { fg = c.blue, underline = true })
 
+---------- TERMINAL COLORS ----------
 -- dark
 vim.g.terminal_color_0 = c.black
 vim.g.terminal_color_8 = c.terminal_black
