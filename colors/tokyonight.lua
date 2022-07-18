@@ -87,10 +87,6 @@ c.warning = c.yellow
 c.info    = c.blue2
 c.hint    = c.teal
 
-if vim.g.theme_style == 'light' then
-	c = util.light_colors(c)
-end
-
 ---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.black })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = c.dark5 })
