@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 	desc    = 'Compile whenever plugins.lua is updated',
 })
 
-require('packer').startup(function()
+require('packer').startup({ function()
 	use 'wbthomason/packer.nvim'
 	use 'lewis6991/impatient.nvim'
 
@@ -26,16 +26,12 @@ require('packer').startup(function()
 		config = [[require('matchparen').setup()]]
 	}
 
+	use 'rcarriga/nvim-notify'
 	use 'rebelot/heirline.nvim'
-	use {
-		'rcarriga/nvim-notify',
-		config = [[vim.notify = require('notify')]]
-	}
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		run    = ':TSUpdate',
-		config = [[require('configs.treesitter')]]
+		run = ':TSUpdate',
 	}
 	use {
 		'nvim-treesitter/playground',
@@ -54,7 +50,7 @@ require('packer').startup(function()
 	}
 	use {
 		'stevearc/aerial.nvim',
-		config = [[require('configs.outline')]]
+		config = [[require('configs.aerial')]]
 	}
 
 	use {
@@ -73,7 +69,7 @@ require('packer').startup(function()
 	}
 	use {
 		'windwp/nvim-autopairs',
-		config = [[require('configs.pairs')]]
+		config = [[require('configs.autopairs')]]
 	}
 	use {
 		'github/copilot.vim',
@@ -81,14 +77,10 @@ require('packer').startup(function()
 		config = [[require('configs.copilot')]]
 	}
 
-	use {
-		'neovim/nvim-lspconfig',
-		config = [[require('lsp')]]
-	}
+	use 'neovim/nvim-lspconfig'
 	use {
 		'jose-elias-alvarez/null-ls.nvim',
 		requires = 'nvim-lua/plenary.nvim',
-		config   = [[require('lsp.null-ls')]]
 	}
 	use {
 		'j-hui/fidget.nvim',
@@ -121,17 +113,14 @@ require('packer').startup(function()
 	use {
 		'kyazdani42/nvim-tree.lua',
 		requires = 'kyazdani42/nvim-web-devicons',
-		config = [[require('configs.tree')]]
+		config = [[require('nvim-tree').setup()]]
 	}
 
 	use {
 		'numToStr/Comment.nvim',
 		config = [[require('Comment').setup()]]
 	}
-	use {
-		'numtostr/FTerm.nvim',
-		config = [[require('configs.terminal')]]
-	}
+	use 'numtostr/FTerm.nvim'
 	use {
 		'lewis6991/gitsigns.nvim',
 		config = [[require('configs.gitsigns')]]
@@ -145,10 +134,7 @@ require('packer').startup(function()
 		config = [[require('nvim-surround').setup()]]
 	}
 
-	use {
-		'lervag/vimtex',
-		config = [[require('configs.vimtex')]]
-	}
+	use 'lervag/vimtex'
 	use {
 		'f3fora/nvim-texlabconfig',
 		-- run = 'go build',
@@ -161,4 +147,10 @@ require('packer').startup(function()
 	--     config = [[require('configs.neorg')]]
 	-- }
 	-- use 'nvim-neorg/neorg-telescope'
-end)
+
+	use 'dstein64/vim-startuptime'
+end,
+	config = {
+		display = { open_fn = require('packer.util').float }
+	}
+})
