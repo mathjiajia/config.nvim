@@ -1,5 +1,5 @@
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { 'markdown_inline' },
+	ensure_installed = { 'markdown_inline', 'query' },
 	auto_install = true,
 	highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
 	-- custom_captures = {

@@ -49,7 +49,7 @@ cmp.setup {
 				cmdline  = '[Cmd]',
 				luasnip  = '[Snip]',
 				nvim_lsp = '[LSP]',
-				neorg    = '[Norg]',
+				-- neorg    = '[Norg]',
 				path     = '[Path]',
 				rg       = '[RG]',
 			})[entry.source.name]
@@ -61,7 +61,7 @@ cmp.setup {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
-		{ name = 'neorg' },
+		-- { name = 'neorg' },
 		{ name = 'buffer', keyword_length = 4 },
 		{ name = 'rg', keyword_length = 5 }
 	},

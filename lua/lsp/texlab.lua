@@ -4,9 +4,15 @@ local settings = {
 			-- executable = 'tectonic',
 			-- args = { '-X', 'compile', '%f', '--synctex', '--keep-logs', '--keep-intermediates' },
 			executable = 'latexmk',
-			args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
-			forwardSearchAfter = true,
-			onSave = false,
+			args = {
+				'-xelatex',
+				-- '-verbose',
+				'-synctex=1',
+				'-interaction=nonstopmode',
+				'%f',
+			},
+			-- forwardSearchAfter = true,
+			-- onSave = false,
 		},
 		forwardSearch = {
 			executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',

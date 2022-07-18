@@ -21,6 +21,11 @@ require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use 'lewis6991/impatient.nvim'
 
+	use {
+		'monkoose/matchparen.nvim',
+		config = [[require('matchparen').setup()]]
+	}
+
 	use 'rebelot/heirline.nvim'
 	use {
 		'rcarriga/nvim-notify',
@@ -37,6 +42,10 @@ require('packer').startup(function()
 		opt = true,
 	}
 	use 'nvim-treesitter/nvim-treesitter-context'
+	use {
+		'lewis6991/spellsitter.nvim',
+		config = [[require('spellsitter').setup()]]
+	}
 
 	use 'p00f/nvim-ts-rainbow'
 	use {
@@ -80,13 +89,14 @@ require('packer').startup(function()
 	}
 	use {
 		'j-hui/fidget.nvim',
-		config = [[require('configs.fidget')]]
+		config = [[require('fidget').setup()]]
 	}
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
 
 	use {
 		'nvim-telescope/telescope.nvim',
+		branch = '0.1.x',
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'kyazdani42/nvim-web-devicons'

@@ -91,7 +91,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local servers = { 'pyright', 'sumneko_lua', 'sourcekit', 'texlab' }
+local servers = { 'pyright', 'sourcekit', 'sumneko_lua', 'texlab' }
 for _, server in ipairs(servers) do
 	require('lsp.' .. server).setup(on_attach, capabilities)
 end

@@ -1,7 +1,11 @@
 local fterm = require 'FTerm'
 
-vim.keymap.set({ 'n', 't' }, '<C-\\>', function() fterm.toggle() end, { desc = 'Terminal Toggle' })
-vim.keymap.set('t', '<Esc>', function() fterm.exit() end, { desc = 'Terminal Exit' })
+vim.keymap.set({ 'n', 't' }, '<C-\\>', function()
+    fterm.toggle()
+end, { desc = 'Terminal Toggle' })
+vim.keymap.set('t', '<Esc>', function()
+    fterm.exit()
+end, { desc = 'Terminal Exit' })
 vim.keymap.set('n', '<M-g>',
     function()
         fterm:new({

@@ -28,20 +28,6 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	group    = 'auto_cursorline',
 })
 
-vim.api.nvim_create_augroup('mdtex', { clear = true })
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-	callback = function()
-		vim.wo.conceallevel = 2
-		vim.opt_local.spell = true
-		vim.bo.spelllang = 'en_gb'
-		vim.keymap.set('i', '<M-l>',
-			'<C-g>u<Esc>[s1z=`]a<C-g>u',
-			{ buffer = true, desc = 'Fix Last Miss-Spelling' })
-	end,
-	pattern  = { 'tex', 'markdown' },
-	group    = 'mdtex',
-})
-
 vim.api.nvim_create_augroup('heirline', { clear = true })
 vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
 	callback = function()
