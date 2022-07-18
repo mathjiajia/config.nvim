@@ -30,4 +30,3 @@ vim.defer_fn(function()
     require 'plugins'
 end, 800)
 
-require 'lsp'
