@@ -24,5 +24,5 @@ vim.g.loaded_perl_provider = 0
 
 -- PLUGINS LIST
 vim.defer_fn(function()
-    require 'plugins'
+	require 'plugins'
 end, 800)

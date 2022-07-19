@@ -2,15 +2,15 @@ local conditions = require 'heirline.conditions'
 local utils = require 'heirline.utils'
 
 local colors = {
-	bright_bg  = '#5A524C',
+	bright_bg  = '#2A2A37',
 	red        = '#C14A4A',
 	dark_red   = '#362627',
-	green      = '#A9B665',
-	blue       = '#7DAEA3',
-	gray       = '#5A524C',
-	orange     = '#E78A4E',
-	purple     = '#D3869B',
-	cyan       = '#EA6962',
+	green      = utils.get_highlight('String').fg,
+	blue       = utils.get_highlight('Function').fg,
+	gray       = utils.get_highlight('NonText').fg,
+	orange     = utils.get_highlight('Constant').fg,
+	purple     = utils.get_highlight('Statement').fg,
+	cyan       = utils.get_highlight('Special').fg,
 	diag_warn  = '#D8A657',
 	diag_error = '#C14A4A',
 	diag_hint  = '#89B482',
@@ -19,7 +19,7 @@ local colors = {
 	git_del    = '#B0B846',
 	git_add    = '#F2594B',
 	git_change = '#E9B143',
-	status_bg  = '#242424',
+	mode_fg    = '#242424',
 }
 
 require('heirline').load_colors(colors)
@@ -102,7 +102,7 @@ local mode_colors = setmetatable({
 }, {
 	__index = function(_, mode)
 		return {
-			fg = 'status_bg',
+			fg = 'mode_fg',
 			bg = mode_colors_table[mode],
 		}
 	end

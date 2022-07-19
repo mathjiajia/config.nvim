@@ -111,9 +111,14 @@ require('packer').startup({ function()
 	use 'nvim-telescope/telescope-ui-select.nvim'
 
 	use {
-		'kyazdani42/nvim-tree.lua',
-		requires = 'kyazdani42/nvim-web-devicons',
-		config = [[require('nvim-tree').setup()]]
+		'nvim-neo-tree/neo-tree.nvim',
+		branch = 'v2.x',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'kyazdani42/nvim-web-devicons',
+			'MunifTanjim/nui.nvim',
+		},
+		config = [[require('configs.neotree')]]
 	}
 
 	use {
@@ -137,8 +142,7 @@ require('packer').startup({ function()
 	use 'lervag/vimtex'
 	use {
 		'f3fora/nvim-texlabconfig',
-		-- run = 'go build',
-		tag = 'v0.1.0',
+		run = 'go build',
 		config = [[require('texlabconfig').setup()]]
 	}
 

@@ -23,8 +23,3 @@ vim.keymap.set('n', '<M-g>', function()
         dimensions = { height = 1, width = 1 }
     }):open()
 end, { desc = 'LazyGit' })
-
--- nvim-tree
-vim.keymap.set('n', '<M-t>', function()
-    require('nvim-tree').toggle(false, false)
-end, { desc = 'nvim-tree toggle' })
