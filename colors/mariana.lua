@@ -281,7 +281,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSType' })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { link = 'TSVariable' })
 
 --- Nvim-tree
-vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = '#272E35' })
+-- vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = '#272E35' })
 
 --- gitsigns.nvim
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = colors.red, bold = true })

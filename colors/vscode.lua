@@ -245,8 +245,8 @@ vim.api.nvim_set_hl(0, 'LspReferenceWrite',
 	{ fg = 'NONE', bg = isDark and c.vscPopupHighlightGray or c.vscPopupHighlightLightBlue })
 
 ---------- BUFFERLINE ----------
-vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.vscLeftDark, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'BufferLineFill', { fg = 'NONE', bg = c.vscLeftDark })
+-- vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.vscLeftDark, bg = 'NONE' })
+-- vim.api.nvim_set_hl(0, 'BufferLineFill', { fg = 'NONE', bg = c.vscLeftDark })
 
 ---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = c.vscLightBlue, bg = 'NONE' })
@@ -299,18 +299,18 @@ vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceChar', { fg = c.vscContext, bg = 'NO
 vim.api.nvim_set_hl(0, 'IndentBlanklineSpaceCharBlankline', { fg = c.vscContext, bg = 'NONE', nocombine = true })
 
 ---------- NVIM TREE ----------
-vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.vscFront, bg = 'NONE', bold = true })
-vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.vscYellow, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.vscGreen, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.vscViolet, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'NvimTreeEmptyFolderName', { fg = c.vscGray, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.vscFront, bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.vscPink, bg = 'NONE', underline = true })
-vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.vscFront, bg = c.vscBack })
-vim.api.nvim_set_hl(0, 'NvimTreeCursorLine', { fg = 'NONE', bg = c.vscCursorDarkDark })
-vim.api.nvim_set_hl(0, 'NvimTreeVertSplit', { fg = c.vscSplitDark, bg = c.vscBack })
-vim.api.nvim_set_hl(0, 'NvimTreeEndOfBuffer', { fg = c.vscCursorDarkDark })
-vim.api.nvim_set_hl(0, 'NvimTreeOpenedFolderName', { fg = 'NONE', bg = c.vscCursorDarkDark })
+-- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.vscFront, bg = 'NONE', bold = true })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.vscYellow, bg = 'NONE' })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.vscGreen, bg = 'NONE' })
+-- vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.vscViolet, bg = 'NONE' })
+-- vim.api.nvim_set_hl(0, 'NvimTreeEmptyFolderName', { fg = c.vscGray, bg = 'NONE' })
+-- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.vscFront, bg = 'NONE' })
+-- vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.vscPink, bg = 'NONE', underline = true })
+-- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.vscFront, bg = c.vscBack })
+-- vim.api.nvim_set_hl(0, 'NvimTreeCursorLine', { fg = 'NONE', bg = c.vscCursorDarkDark })
+-- vim.api.nvim_set_hl(0, 'NvimTreeVertSplit', { fg = c.vscSplitDark, bg = c.vscBack })
+-- vim.api.nvim_set_hl(0, 'NvimTreeEndOfBuffer', { fg = c.vscCursorDarkDark })
+-- vim.api.nvim_set_hl(0, 'NvimTreeOpenedFolderName', { fg = 'NONE', bg = c.vscCursorDarkDark })
 
 ---------- RAINBOW ----------
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = c.vscRb1 })

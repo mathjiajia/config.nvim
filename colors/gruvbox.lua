@@ -230,6 +230,10 @@ vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = c.bg_visual })
 
+-- vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = c.blue })
+-- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', { bg = c.green })
+-- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { link = 'Search' })
+
 ---------- AERIAL ----------
 vim.api.nvim_set_hl(0, 'AerialLine', { link = 'CursorLine' })
 vim.api.nvim_set_hl(0, 'AerialGuide', { link = 'LineNr' })
@@ -261,8 +265,8 @@ vim.api.nvim_set_hl(0, 'AerialOperatorIcon', { fg = c.orange })
 vim.api.nvim_set_hl(0, 'AerialTypeParameterIcon', { fg = c.yellow })
 
 ---------- BUFFERLINE ----------
-vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
-vim.api.nvim_set_hl(0, 'BufferLineFill', { bg = c.black })
+-- vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
+-- vim.api.nvim_set_hl(0, 'BufferLineFill', { bg = c.black })
 
 ---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = c.fg, bg = c.bg_float })
@@ -303,20 +307,20 @@ vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 
 ---------- NVIM TREE ----------
-vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.tree_normal, bg = c.bg_sidebar })
-vim.api.nvim_set_hl(0, 'NvimTreeFolderIcon', { fg = c.comment })
-vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.fg_light, bold = true })
-vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
-vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.tree_normal })
-vim.api.nvim_set_hl(0, 'NvimTreeEmptyFolderName', { fg = c.comment })
-vim.api.nvim_set_hl(0, 'NvimTreeOpenedFolderName', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'NvimTreeOpenedFile', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.yellow2 })
-vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.git.add })
-vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = c.git.delete })
-vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.yellow, underline = true })
-vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = c.fg_gutter })
-vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.fg_sidebar })
+-- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.tree_normal, bg = c.bg_sidebar })
+-- vim.api.nvim_set_hl(0, 'NvimTreeFolderIcon', { fg = c.comment })
+-- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.fg_light, bold = true })
+-- vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
+-- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.tree_normal })
+-- vim.api.nvim_set_hl(0, 'NvimTreeEmptyFolderName', { fg = c.comment })
+-- vim.api.nvim_set_hl(0, 'NvimTreeOpenedFolderName', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'NvimTreeOpenedFile', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.yellow2 })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.git.add })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = c.git.delete })
+-- vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.yellow, underline = true })
+-- vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = c.fg_gutter })
+-- vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.fg_sidebar })
 
 ---------- RAINBOW ----------
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = c.red })
@@ -404,23 +408,9 @@ vim.api.nvim_set_hl(0, 'latexTSParameter', { fg = c.orange })
 ---------- LUA ----------
 -- vim.api.nvim_set_hl(0, 'luaTSProperty', { fg = c.red })
 
----------- TEX ----------
-vim.api.nvim_set_hl(0, 'texCmd', { fg = c.red, italic = true })
-vim.api.nvim_set_hl(0, 'texCmdClass', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texCmdTitle', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texCmdAuthor', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texFileArg', { fg = c.blue })
-vim.api.nvim_set_hl(0, 'texCmdDef', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texDefArgName', { fg = c.yellow })
-vim.api.nvim_set_hl(0, 'texPartArgTitle', { fg = c.yellow })
-vim.api.nvim_set_hl(0, 'texCmdEnv', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texCmdPart', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texEnvArgName', { fg = c.green })
-vim.api.nvim_set_hl(0, 'texMathEnvArgName', { fg = c.green })
-
-
 ---------- TERMINAL COLORS ----------
 local dark = c.comment
+
 -- dark
 vim.g.terminal_color_0 = dark
 vim.g.terminal_color_8 = dark

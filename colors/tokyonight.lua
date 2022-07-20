@@ -228,8 +228,8 @@ vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = c.comment })
 vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = c.orange })
 
 ---------- BUFFERLINE ----------
-vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
-vim.api.nvim_set_hl(0, 'BufferLineFill', { fg = c.black })
+-- vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
+-- vim.api.nvim_set_hl(0, 'BufferLineFill', { fg = c.black })
 
 ---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = c.fg, bg = c.bg_float })
@@ -270,17 +270,17 @@ vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 
 ---------- NVIM TREE ----------
-vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.fg_sidebar, bg = c.bg_sidebar })
-vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { fg = c.fg_sidebar, bg = c.bg_sidebar })
-vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.blue, bold = true })
-vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.git.change })
-vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.git.add })
-vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = c.git.delete })
-vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.purple, underline = true })
-vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = c.fg_gutter })
-vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.fg_sidebar })
-vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
--- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.fg_float })
+-- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.fg_sidebar, bg = c.bg_sidebar })
+-- vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { fg = c.fg_sidebar, bg = c.bg_sidebar })
+-- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.blue, bold = true })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.git.change })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.git.add })
+-- vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = c.git.delete })
+-- vim.api.nvim_set_hl(0, 'NvimTreeSpecialFile', { fg = c.purple, underline = true })
+-- vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = c.fg_gutter })
+-- vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.fg_sidebar })
+-- vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
+-- -- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.fg_float })
 
 ---------- RAINBOW ----------
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = c.red })
