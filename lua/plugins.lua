@@ -6,7 +6,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 		'--depth',
 		'1',
 		'https://github.com/wbthomason/packer.nvim',
-		install_path })
+		install_path
+	})
 end
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
@@ -17,7 +18,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 	desc    = 'Compile whenever plugins.lua is updated',
 })
 
-require('packer').startup({ function()
+require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use 'lewis6991/impatient.nvim'
 
@@ -152,9 +153,5 @@ require('packer').startup({ function()
 	-- }
 	-- use 'nvim-neorg/neorg-telescope'
 
-	use 'dstein64/vim-startuptime'
-end,
-	config = {
-		display = { open_fn = require('packer.util').float }
-	}
-})
+	-- use 'dstein64/vim-startuptime'
+end)
