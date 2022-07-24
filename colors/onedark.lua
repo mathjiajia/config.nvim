@@ -105,7 +105,7 @@ end
 ------ BASICS ------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.color_column })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = colors.comment })
-vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.black })
+vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.bg, bg = colors.purple })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.gray })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.cursorline })
 -- vim.api.nvim_set_hl(0, 'CursorLineFold', {})
