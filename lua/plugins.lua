@@ -126,7 +126,9 @@ require('packer').startup(function()
 		'numToStr/Comment.nvim',
 		config = [[require('Comment').setup()]]
 	}
-	use 'numtostr/FTerm.nvim'
+	use { 'numtostr/FTerm.nvim',
+		config = [[require('configs.fterm')]]
+	}
 	use {
 		'lewis6991/gitsigns.nvim',
 		config = [[require('configs.gitsigns')]]
