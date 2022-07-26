@@ -58,12 +58,14 @@ require('packer').startup(function()
 		'hrsh7th/nvim-cmp',
 		config = [[require('configs.cmp')]]
 	}
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-path'
-	use 'lukas-reineke/cmp-rg'
-	use 'saadparwaiz1/cmp_luasnip'
+	use {
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/cmp-cmdline',
+		'hrsh7th/cmp-nvim-lsp',
+		'hrsh7th/cmp-path',
+		'lukas-reineke/cmp-rg',
+		'saadparwaiz1/cmp_luasnip'
+	}
 	use {
 		'L3MON4D3/LuaSnip',
 		config = [[require('configs.luasnip')]]
@@ -80,8 +82,11 @@ require('packer').startup(function()
 
 	use {
 		'williamboman/mason.nvim',
+		config = [[require('mason').setup()]]
+	}
+	use {
 		'williamboman/mason-lspconfig.nvim',
-		'neovim/nvim-lspconfig',
+		'neovim/nvim-lspconfig'
 	}
 	use {
 		'jose-elias-alvarez/null-ls.nvim',
@@ -111,9 +116,11 @@ require('packer').startup(function()
 		'nvim-telescope/telescope-frecency.nvim',
 		requires = 'kkharji/sqlite.lua'
 	}
-	use 'nvim-telescope/telescope-file-browser.nvim'
-	use 'nvim-telescope/telescope-bibtex.nvim'
-	use 'nvim-telescope/telescope-ui-select.nvim'
+	use {
+		'nvim-telescope/telescope-file-browser.nvim',
+		'nvim-telescope/telescope-bibtex.nvim',
+		'nvim-telescope/telescope-ui-select.nvim'
+	}
 
 	use {
 		'nvim-neo-tree/neo-tree.nvim',

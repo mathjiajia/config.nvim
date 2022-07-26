@@ -1,14 +1,3 @@
-vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
-vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
-vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
-vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
-
--- DIAGNOSTIC
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Float diagnostics' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostics' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostics' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Loclist diagnostics' })
-
 local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
@@ -97,45 +86,51 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local nvim_lsp = require 'lspconfig'
 
-
-local luadev = require('lua-dev').setup {
-	lspconfig = {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	},
+require('mason-lspconfig').setup()
+require('mason-lspconfig').setup_handlers {
+	function(server_name)
+		nvim_lsp[server_name].setup {
+			on_attach = on_attach,
+			capabilities = capabilities,
+		}
+	end,
+	['sumneko_lua'] = function()
+		nvim_lsp.sumneko_lua.setup(require('lua-dev').setup {
+			lspconfig = {
+				on_attach = on_attach,
+				capabilities = capabilities,
+			}
+		})
+	end,
+	['texlab'] = function()
+		nvim_lsp.texlab.setup {
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = {
+				texlab = {
+					build = {
+						args = {
+							'-xelatex',
+							-- '-verbose',
+							'-synctex=1',
+							'-interaction=nonstopmode',
+							'%f',
+						},
+						-- forwardSearchAfter = true,
+						-- onSave = false,
+					},
+					forwardSearch = {
+						executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
+						args = { '%l', '%p', '%f' },
+					},
+				},
+			},
+		}
+	end
 }
 
-nvim_lsp.sumneko_lua.setup(luadev)
-
-nvim_lsp.texlab.setup {
+-- config sourcekit alone
+nvim_lsp.sourcekit.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
-	settings = {
-		texlab = {
-			build = {
-				args = {
-					'-xelatex',
-					-- '-verbose',
-					'-synctex=1',
-					'-interaction=nonstopmode',
-					'%f',
-				},
-				-- forwardSearchAfter = true,
-				-- onSave = false,
-			},
-			forwardSearch = {
-				executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
-				args = { '%l', '%p', '%f' },
-			},
-		},
-	},
 }
-
-local servers = { 'pyright', 'sourcekit' }
-
-for _, server in ipairs(servers) do
-	nvim_lsp[server].setup {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	}
-end
