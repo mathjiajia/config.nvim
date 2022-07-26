@@ -11,7 +11,7 @@ vim.keymap.set('n', '<M-g>', function()
     }):open()
 end, { desc = 'LazyGit' })
 
-local runners = { lua = 'lua', py = 'python3', swift = 'swift' }
+local runners = { lua = 'lua', python = 'python3', swift = 'swift' }
 
 vim.keymap.set('n', '<leader><Enter>', function()
     local buf = vim.api.nvim_buf_get_name(0)

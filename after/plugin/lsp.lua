@@ -74,20 +74,20 @@ local on_attach = function(client, bufnr)
 		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
-	if client.server_capabilities.codeLensProvider then
-		vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
-		vim.api.nvim_create_autocmd('BufEnter', {
-			callback = require('vim.lsp.codelens').refresh,
-			buffer   = bufnr,
-			group    = 'lsp_codelens',
-			once     = true,
-		})
-		vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
-			callback = require('vim.lsp.codelens').refresh,
-			buffer   = bufnr,
-			group    = 'lsp_codelens',
-		})
-	end
+	-- if client.server_capabilities.codeLensProvider then
+	-- 	vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
+	-- 	vim.api.nvim_create_autocmd('BufEnter', {
+	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 		buffer   = bufnr,
+	-- 		group    = 'lsp_codelens',
+	-- 		once     = true,
+	-- 	})
+	-- 	vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
+	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 		buffer   = bufnr,
+	-- 		group    = 'lsp_codelens',
+	-- 	})
+	-- end
 
 	require('aerial').on_attach(client, bufnr)
 end
@@ -96,6 +96,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local nvim_lsp = require 'lspconfig'
+
 
 local luadev = require('lua-dev').setup {
 	lspconfig = {

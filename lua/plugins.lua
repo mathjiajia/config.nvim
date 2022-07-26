@@ -78,7 +78,11 @@ require('packer').startup(function()
 		config = [[require('configs.copilot')]]
 	}
 
-	use 'neovim/nvim-lspconfig'
+	use {
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim',
+		'neovim/nvim-lspconfig',
+	}
 	use {
 		'jose-elias-alvarez/null-ls.nvim',
 		requires = 'nvim-lua/plenary.nvim',
