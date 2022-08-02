@@ -1,7 +1,6 @@
 require 'impatient'
 
 vim.g.mapleader = ','
-vim.notify = require 'notify'
 
 -- TURN OFF SOME BUILTIN PLUGINS
 vim.g.loaded_gzip = 1
