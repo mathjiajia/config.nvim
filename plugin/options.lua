@@ -1,4 +1,4 @@
-vim.opt.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus'
 vim.g.clipboard = {
 	name          = 'macOS-clipboard',
 	copy          = { ['+'] = 'pbcopy', ['*'] = 'pbcopy' },
@@ -6,33 +6,33 @@ vim.g.clipboard = {
 	cache_enabled = 0,
 }
 
-vim.opt.undofile = true
-vim.opt.autowrite = true
-vim.opt.breakindent = true
-vim.opt.cmdheight = 0
-vim.opt.completeopt = 'menu,menuone,noselect'
+vim.o.undofile = true
+vim.o.autowrite = true
+vim.o.breakindent = true
+vim.o.cmdheight = 0
+vim.o.completeopt = 'menu,menuone,noselect'
 vim.wo.cursorline = true
 vim.o.ignorecase = true
-vim.opt.laststatus = 3
+vim.o.laststatus = 3
 vim.wo.linebreak = true
 vim.wo.number = true
-vim.opt.pumheight = 10
+vim.o.pumheight = 10
 vim.wo.relativenumber = true
-vim.opt.scrolloff = 8
-vim.opt.shiftwidth = 4
-vim.opt.showbreak = '> '
+vim.o.scrolloff = 8
+vim.o.shiftwidth = 4
+vim.o.showbreak = '> '
 vim.wo.signcolumn = 'yes'
 vim.o.smartcase = true
-vim.opt.smartindent = true
-vim.opt.softtabstop = 4
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+vim.o.smartindent = true
+vim.o.softtabstop = 4
+vim.o.splitbelow = true
+vim.o.splitright = true
 vim.bo.swapfile = false
-vim.opt.tabstop = 4
+vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.updatetime = 250
-vim.opt.whichwrap = 'b,s,<,>,[,]'
-vim.opt.writebackup = false
+vim.o.whichwrap = 'b,s,<,>,[,]'
+vim.o.writebackup = false
 
 vim.g.theme_style = 'hard'
 vim.cmd 'colorscheme gruvbox'
