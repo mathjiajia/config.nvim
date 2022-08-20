@@ -258,7 +258,7 @@ vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.grey })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.purple })
 
----------- NVIMTREE ----------
+---------- NVIM-TREE ----------
 -- vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = cp.fg })
 -- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = cp.green })
 -- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = cp.grey })

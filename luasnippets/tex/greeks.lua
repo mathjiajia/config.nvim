@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
+local tex = require 'snips.latex'
 
 autosnips = {
 	s({ trig = ';a', name = 'alpha α', wordTrig = false }, { t '\\alpha' }, { condition = tex.in_mathzone }),

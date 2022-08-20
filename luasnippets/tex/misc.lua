@@ -1,17 +1,7 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
-
-local pipe = function(fns)
-	return function(...)
-		for _, fn in ipairs(fns) do
-			if not fn(...) then
-				return false
-			end
-		end
-		return true
-	end
-end
+local tex = require 'snips.latex'
+local pipe = require 'snips.util'.pipe
 
 local appended_space_after_insert = function()
 	vim.api.nvim_create_autocmd('InsertCharPre', {
@@ -27,42 +17,47 @@ local appended_space_after_insert = function()
 end
 
 autosnips = {
-	s({
-		trig = '(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+',
-		name = 'single-letter variable',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
-		end, {}),
-	}, { condition = tex.in_text }),
-	s({
-		trig = '(%s)([0-9]+[a-zA-Z]+)([,;.%)]?)%s+',
-		name = 'surround word starting with number',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
-		end, {}),
-	}, { condition = tex.in_text }),
-	s({ trig = '(%s)(%w[-_+=><]%w)([,;.%)]?)%s+', name = 'surround i+1', wordTrig = false, regTrig = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
-		end, {}),
-	}, { condition = tex.in_text }),
-
-	s({ trig = 'mk', name = 'inline math', dscr = 'Insert inline Math Environment.' }, {
-		t '\\(',
-		i(1),
-		t '\\)',
-	}, {
-		condition = tex.in_text,
-		callbacks = {
-			[-1] = { [events.leave] = appended_space_after_insert },
+	s(
+		{
+			trig = '(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+',
+			name = 'single-letter variable',
+			wordTrig = false,
+			regTrig = true,
 		},
-	}),
+		{ f(function(_, snip)
+			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+		end, {}) },
+		{ condition = tex.in_text }
+	),
+	s(
+		{
+			trig = '(%s)([0-9]+[a-zA-Z]+)([,;.%)]?)%s+',
+			name = 'surround word starting with number',
+			wordTrig = false,
+			regTrig = true
+		},
+		{ f(function(_, snip)
+			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+		end, {}) },
+		{ condition = tex.in_text }
+	),
+	s(
+		{ trig = '(%s)(%w[-_+=><]%w)([,;.%)]?)%s+', name = 'surround i+1', wordTrig = false, regTrig = true },
+		{ f(function(_, snip)
+			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+		end, {}) },
+		{ condition = tex.in_text }
+	),
+
+	s(
+		{ trig = 'mk', name = 'inline math', dscr = 'Insert inline Math Environment.' },
+		{ t '\\(', i(1), t '\\)' },
+		{
+			condition = tex.in_text,
+			callbacks = {
+				[-1] = { [events.leave] = appended_space_after_insert },
+			},
+		}),
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },

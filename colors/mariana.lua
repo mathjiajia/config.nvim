@@ -1,81 +1,82 @@
 -- Modified from https://github.com/kaiuri/nvim-juliana
 vim.g.colors_name = 'mariana'
 
-local st = {
-	gray = '#333333',
-	blue3 = '#303841',
-	blue2 = '#46525C',
-	blue6 = '#A6ACB8',
-	white3 = '#D5DEE6',
-	white = '#FFFFFF',
-	blue_vibrant = '#5C99D6',
-	blue5 = '#5FB4B4',
-	green = '#99C794',
-	orange3 = '#FAC761',
-	orange = '#F9AE58',
-	red2 = '#F97B58',
-	red = '#EC5F66',
-	pink = '#CC8EC6',
-}
-
 local c = {
-	gray0 = st.gray,
-	gray1 = st.blue3,
-	gray2 = st.blue2,
-	gray3 = st.blue6,
-	gray4 = st.white3,
-	white = st.white,
-	blue = st.blue_vibrant,
-	teal = st.blue5,
-	green = st.green,
-	yellow = st.orange3,
-	orange1 = st.orange,
-	orange2 = st.red2,
-	red = st.red,
-	pink = st.pink,
+	black   = '#333333',
+	bg0     = '#272E35',
+	bg1     = '#303841',
+	gray0   = '#46525C',
+	gray1   = '#A6ACB8',
+	white0  = '#d5dee6',
+	white1  = '#FFFFFF',
+	blue    = '#5C99D6',
+	cyan    = '#5FB4B4',
+	green   = '#99C794',
+	yellow  = '#FAC761',
+	orange1 = '#F9AE58',
+	orange2 = '#F97B58',
+	red     = '#EC5F66',
+	pink    = '#CC8EC6',
 }
 
-local background = c.gray1
-local foreground = c.gray4
-local selection = c.gray2
-local find_highlight_foreground = c.gray0
-local find_highlight = c.yellow
+local background = c.bg1
+local foreground = c.white0
+local selection = c.gray0
+-- local find_highlight_foreground = c.gray0
+-- local find_highlight = c.yellow
+
+local error = c.red
+local hint = c.yellow
+local info = c.cyan
+local warn = c.orange1
 
 --- Modes
 vim.api.nvim_set_hl(0, 'Normal', { fg = foreground, bg = background })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#272E35' })
 vim.api.nvim_set_hl(0, 'Visual', { bg = selection })
 
 --- UI
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = c.bg0 })
+vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#7999B9', bg = background })
+
+vim.api.nvim_set_hl(0, 'Pmenu', { bg = c.bg0 })
+vim.api.nvim_set_hl(0, 'PmenuSbar', { fg = c.gray0 })
+vim.api.nvim_set_hl(0, 'PmenuSel', { bg = c.bg1, bold = true })
+vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#58657E' })
+
+vim.api.nvim_set_hl(0, 'NonText', { fg = c.gray0 })
+
 vim.api.nvim_set_hl(0, 'ColorColumn', { fg = '#CBD3E2', bg = '#2B333B' })
-vim.api.nvim_set_hl(0, 'Conceal', { fg = c.gray3 })
+
+vim.api.nvim_set_hl(0, 'Conceal', { fg = c.gray1 })
+
 vim.api.nvim_set_hl(0, 'CursorColumn', { link = 'CursorLine' })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#38424c' })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { link = 'LineNr' })
+
 vim.api.nvim_set_hl(0, 'DiffAdd', { sp = c.green, underdotted = true })
 vim.api.nvim_set_hl(0, 'DiffChange', { sp = c.red, underdotted = true })
-vim.api.nvim_set_hl(0, 'DiffDelete', { fg = c.gray3 })
+vim.api.nvim_set_hl(0, 'DiffDelete', { fg = c.gray1 })
 vim.api.nvim_set_hl(0, 'DiffText', { italic = true })
-vim.api.nvim_set_hl(0, 'Directory', { underdotted = true })
+
+vim.api.nvim_set_hl(0, 'Directory', { fg = c.cyan })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { fg = '#2B333B' })
 vim.api.nvim_set_hl(0, 'Error', { fg = c.orange2 })
 vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = c.red })
 vim.api.nvim_set_hl(0, 'Exception', { fg = c.pink })
+
+-- Folds
+vim.api.nvim_set_hl(0, 'Folded', { sp = c.gray1 })
 vim.api.nvim_set_hl(0, 'FoldColumn', { bg = background })
-vim.api.nvim_set_hl(0, 'Folded', { sp = c.gray3 })
+
 vim.api.nvim_set_hl(0, 'LineNr', { link = 'Visual' })
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = c.gray3 })
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = c.gray1 })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { link = 'LineNrAbove' })
+
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = '#DEE1E8' })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = '#DEE1E8', bold = true })
-vim.api.nvim_set_hl(0, 'NonText', { fg = c.gray2 })
-vim.api.nvim_set_hl(0, 'Pmenu', { link = 'NormalFloat' })
-vim.api.nvim_set_hl(0, 'PmenuSbar', { fg = '#CBD3E2', bg = '#2B333B' })
-vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#272E35', bold = true })
-vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#58657E' })
 vim.api.nvim_set_hl(0, 'Question', { link = 'MoreMsg' })
 
-vim.api.nvim_set_hl(0, 'Search', { fg = find_highlight_foreground, bg = find_highlight })
+vim.api.nvim_set_hl(0, 'Search', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'IncSearch', { link = 'Search' })
 
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = foreground, bg = background })
@@ -95,30 +96,35 @@ vim.api.nvim_set_hl(0, 'WildMenu', { link = 'Pmenu' })
 vim.api.nvim_set_hl(0, 'Winseparator', { fg = '#4E5A65' })
 
 -- Diagnostics
-vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = c.red })
-vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = '#D8DEE9' })
-vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = c.teal })
-vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = c.orange1 })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { sp = c.red, underdotted = true })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { sp = '#D8DEE9', underdotted = true })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { sp = c.teal, underdotted = true })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { sp = c.orange1, underdotted = true })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = error, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = hint, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = info, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = warn, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { sp = error, undercurl = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { sp = hint, undercurl = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { sp = info, undercurl = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { sp = warn, undercurl = true })
+
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { bg = c.bg0, fg = c.error })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = c.bg0, fg = c.hint })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { bg = c.bg0, fg = c.info })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { bg = c.bg0, fg = c.warn })
 
 -- VimSyntax hl-groups
 vim.api.nvim_set_hl(0, 'MatchParen', { link = 'Visual', bold = true })
-vim.api.nvim_set_hl(0, 'Boolean', { link = 'Constant' })
+vim.api.nvim_set_hl(0, 'Boolean', { fg = c.red, italic = true })
 vim.api.nvim_set_hl(0, 'Character', { fg = c.green })
 vim.api.nvim_set_hl(0, 'String', { fg = c.green })
-vim.api.nvim_set_hl(0, 'Comment', { fg = c.gray3 })
+vim.api.nvim_set_hl(0, 'Comment', { fg = c.gray1 })
 vim.api.nvim_set_hl(0, 'Conditional', { fg = c.pink })
-vim.api.nvim_set_hl(0, 'Constant', { fg = c.pink })
+vim.api.nvim_set_hl(0, 'Constant', { link = 'TSConstant' })
 vim.api.nvim_set_hl(0, 'Define', { link = 'Macro' })
-vim.api.nvim_set_hl(0, 'Delimiter', { fg = c.gray3 })
+vim.api.nvim_set_hl(0, 'Delimiter', { fg = c.gray1 })
 vim.api.nvim_set_hl(0, 'Float', { link = 'Number' })
 vim.api.nvim_set_hl(0, 'Function', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'Identifier', { fg = foreground })
 vim.api.nvim_set_hl(0, 'Include', { fg = '#7999B9' })
-vim.api.nvim_set_hl(0, 'Keyword', { fg = c.pink })
+vim.api.nvim_set_hl(0, 'Keyword', { fg = c.pink, italic = true })
 vim.api.nvim_set_hl(0, 'Label', { fg = c.pink })
 vim.api.nvim_set_hl(0, 'Macro', { fg = '#8DADE7' })
 vim.api.nvim_set_hl(0, 'Number', { fg = c.orange1 })
@@ -132,8 +138,9 @@ vim.api.nvim_set_hl(0, 'SpecialComment', { fg = '#788797', underline = true })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = c.teal })
 vim.api.nvim_set_hl(0, 'Statement', { fg = c.pink })
 vim.api.nvim_set_hl(0, 'StorageClass', { fg = c.red })
-vim.api.nvim_set_hl(0, 'Structure', { fg = c.pink })
-vim.api.nvim_set_hl(0, 'Tag', { fg = c.pink })
+vim.api.nvim_set_hl(0, 'Structure', { link = 'StorageClass' })
+vim.api.nvim_set_hl(0, 'Struct', { link = 'Structure' })
+vim.api.nvim_set_hl(0, 'Tag', { fg = c.red })
 vim.api.nvim_set_hl(0, 'Title', { fg = c.pink })
 vim.api.nvim_set_hl(0, 'Todo', { fg = c.blue, bold = true })
 vim.api.nvim_set_hl(0, 'Type', { fg = c.pink, italic = true })
@@ -142,7 +149,7 @@ vim.api.nvim_set_hl(0, 'Underlined', { underdotted = true })
 vim.api.nvim_set_hl(0, 'Whitespace', { fg = '#5C75A3' })
 
 -- TS-hl globals
-vim.api.nvim_set_hl(0, 'TSBoolean', { fg = c.red, italic = true })
+vim.api.nvim_set_hl(0, 'TSBoolean', { link = 'Boolean' })
 vim.api.nvim_set_hl(0, 'TSConstBuiltin', { fg = c.red, italic = true })
 vim.api.nvim_set_hl(0, 'TSConstMacro', { fg = c.pink, italic = true })
 vim.api.nvim_set_hl(0, 'TSComment', { link = 'Comment' })
@@ -154,10 +161,10 @@ vim.api.nvim_set_hl(0, 'TSField', { fg = c.pink })
 vim.api.nvim_set_hl(0, 'TSFuncMacro', { fg = c.blue, italic = true })
 vim.api.nvim_set_hl(0, 'TSFunction', { link = 'Function' })
 vim.api.nvim_set_hl(0, 'TSInclude', { fg = c.pink })
-vim.api.nvim_set_hl(0, 'TSKeyword', { fg = c.pink, italic = true })
+vim.api.nvim_set_hl(0, 'TSKeyword', { link = 'Keyword' })
 vim.api.nvim_set_hl(0, 'TSKeywordFunction', { fg = c.pink, italic = true })
-vim.api.nvim_set_hl(0, 'TSKeywordOperator', { fg = c.pink })
-vim.api.nvim_set_hl(0, 'TSKeywordReturn', { fg = c.pink })
+vim.api.nvim_set_hl(0, 'TSKeywordOperator', { link = 'Keyword' })
+vim.api.nvim_set_hl(0, 'TSKeywordReturn', { link = 'Keyword' })
 vim.api.nvim_set_hl(0, 'TSLabel', { fg = c.teal })
 vim.api.nvim_set_hl(0, 'TSMethod', { link = 'Function' })
 vim.api.nvim_set_hl(0, 'TSNamespace', { fg = c.orange1 })
@@ -186,7 +193,7 @@ vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = c.red, italic = true })
 vim.api.nvim_set_hl(0, 'TSWarning', { fg = c.orange1, bold = true })
 vim.api.nvim_set_hl(0, 'TSNumber', { fg = c.orange2 })
 
-vim.api.nvim_set_hl(0, 'TSTag', { fg = c.red })
+vim.api.nvim_set_hl(0, 'TSTag', { link = 'Tag' })
 vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = c.teal })
 vim.api.nvim_set_hl(0, 'TSTagAttribute', { fg = c.pink })
 
@@ -204,6 +211,7 @@ vim.api.nvim_set_hl(0, 'healthSuccess', { fg = c.green })
 
 -- luaTS
 vim.api.nvim_set_hl(0, 'luaTSField', { fg = '#95B2D6' })
+vim.api.nvim_set_hl(0, 'luaTSConstructor', { link = 'TSPunctBracket' })
 
 -- markdownTS
 vim.api.nvim_set_hl(0, 'markdownTSPunctSpecial', { fg = c.orange2, bold = true })
@@ -220,7 +228,7 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { bold = true })
 -- vim.api.nvim_set_hl(0, 'rustTSKeyword', { fg = c.pink })
 -- vim.api.nvim_set_hl(0, 'rustTSOperator', { link = 'TSOperator' })
 -- vim.api.nvim_set_hl(0, 'rustTSPunctBracket', { fg = '#CBD3E2' })
--- vim.api.nvim_set_hl(0, 'rustTSPunctDelimiter', { fg = c.gray3 })
+-- vim.api.nvim_set_hl(0, 'rustTSPunctDelimiter', { fg = c.gray1 })
 -- vim.api.nvim_set_hl(0, 'rustTSType', { fg = c.orange1 })
 -- vim.api.nvim_set_hl(0, 'rustTSTypeBuiltin', { fg = c.pink, italic = true })
 
@@ -232,10 +240,14 @@ vim.api.nvim_set_hl(0, 'qfLineNr', { bold = true })
 
 -- typescriptTS
 -- vim.api.nvim_set_hl(0, 'typescriptTSProperty', { fg = '#CBD3E2' })
--- vim.api.nvim_set_hl(0, 'typescriptTSFunction', { fg = c.teal })
+-- vim.api.nvim_set_hl(0, 'typescriptTSFunction', { link = 'Function' })
 -- vim.api.nvim_set_hl(0, 'typescriptTSConstructor', { fg = c.orange1 })
 -- vim.api.nvim_set_hl(0, 'typescriptTSOperator', { link = 'TSOperator' })
--- vim.api.nvim_set_hl(0, 'typescriptTSPunctSpecial', { fg = c.red })
+-- vim.api.nvim_set_hl(0, 'typescriptTSParameter', { link = 'TSVariable' })
+-- vim.api.nvim_set_hl(0, 'typescriptTSType', { fg = c.cyan })
+-- vim.api.nvim_set_hl(0, 'typescriptTSKeyword', { fg = '#EC5F89', italic = true })
+-- JavaScript
+-- vim.api.nvim_set_hl(0, 'jsdocTSKeyword', { link = 'typescriptType' })
 
 --- fennelTS
 -- vim.api.nvim_set_hl(0, 'fennelTSFuncMacro', { link = 'TSKeywordFunction' })
@@ -292,7 +304,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { link = 'TSType' })
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { link = 'TSVariable' })
 
 --- Nvim-tree
--- vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = '#272E35' })
+-- vim.api.nvim_set_hl(0, 'NvimTreePopup', { fg = '#CBD3E2', bg = c.bg0 })
 
 --- gitsigns.nvim
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.red, bold = true })
@@ -303,3 +315,14 @@ vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.green, bold = true })
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = '#38424c' })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'LspReferenceText' })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'LspReferenceText' })
+
+--- Telescope
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = 'NonText' })
+vim.api.nvim_set_hl(0, 'TelescopeTitle', { fg = foreground, bold = true })
+vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = foreground })
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { bg = background })
+vim.api.nvim_set_hl(0, 'TelescopeSelectionCaret', { link = 'CursorLine' })
+
+-- Trouble
+-- vim.api.nvim_set_hl(0, 'TroubleIndent', { bg = c.bg1 })
+-- vim.api.nvim_set_hl(0, 'TroubleLocation', { bold = true })

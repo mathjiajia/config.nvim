@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
+local tex = require 'snips.latex'
 
 snips = {
 	s(
@@ -41,17 +41,19 @@ autosnips = {
 		{ t { '\\begin{bmatrix}', '\t' }, i(1), t { '', '\\end{bmatrix}' } },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'cvec', name = 'column vector' }, {
-		t { '\\begin{pmatrix}', '\t' },
-		i(1, 'x'),
-		t '}_',
-		i(2, '1'),
-		t { '\\\\', '\\vdots \\\\', '' },
-		rep(1),
-		t '_',
-		i(3, 'n'),
-		t { '', '\\end{pmatrix}' },
-	}, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'cvec', name = 'column vector' }, {
+			t { '\\begin{pmatrix}', '\t' },
+			i(1, 'x'),
+			t '}_',
+			i(2, '1'),
+			t { '\\\\', '\\vdots \\\\', '' },
+			rep(1),
+			t '_',
+			i(3, 'n'),
+			t { '', '\\end{pmatrix}' },
+		}, { condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = 'lra', name = 'leftangle rightangle' },
 		{ t { '\\langle ' }, i(1), t { '\\rangle' } },

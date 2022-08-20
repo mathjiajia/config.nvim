@@ -60,7 +60,7 @@ cmp.setup {
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-		{ name = 'path' },
+		{ name = 'path', keyword_length = 4 },
 		-- { name = 'neorg' },
 		{ name = 'buffer', keyword_length = 4 },
 		{ name = 'rg', keyword_length = 5 }
@@ -82,5 +82,6 @@ cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = 'path' },
-		{ name = 'cmdline' } }
+		{ name = 'cmdline' }
+	}
 })

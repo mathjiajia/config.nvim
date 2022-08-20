@@ -8,16 +8,7 @@ local on_top = function()
 	return false
 end
 
-local pipe = function(fns)
-	return function(...)
-		for _, fn in ipairs(fns) do
-			if not fn(...) then
-				return false
-			end
-		end
-		return true
-	end
-end
+local pipe = require 'snips.util'.pipe
 
 snips = {
 	s(
@@ -306,7 +297,7 @@ snips = {
 					'',
 					'\\begin{document}',
 					'',
-					'\\title{Answers to  queries of the referee}',
+					'\\title{Answers to queries of the referee}',
 					'\\maketitle',
 					'',
 					'Many thanks to the referee for very careful reading, critical questions, and the valuable suggestions',

@@ -7,7 +7,7 @@ ls.config.setup {
 	ext_opts = {
 		[types.choiceNode] = {
 			active = {
-				virt_text = { { '<- Current Choice', 'NonText' } }
+				virt_text = { { '« ', 'NonText' } }
 			},
 		}
 	}

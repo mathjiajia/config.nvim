@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
+local tex = require 'snips.latex'
 
 snips = {
 	s(
@@ -54,8 +54,16 @@ snips = {
 }
 
 autosnips = {
-	s({ trig = '\\varpii', name = '\\varpi_i' }, { t '\\varpi_{i}' }, { condition = tex.in_mathzone }),
-	s({ trig = '\\varphii', name = '\\varphi_i' }, { t '\\varphi_{i}' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '\\varpii', name = '\\varpi_i' },
+		{ t '\\varpi_{i}' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '\\varphii', name = '\\varphi_i' },
+		{ t '\\varphi_{i}' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '\\([xX])ii', name = '\\xi_{i}', regTrig = true },
 		{ f(function(_, snip)
@@ -92,42 +100,51 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 
-	s({ trig = 'O([A-NP-Za-z])', name = 'local ring, structure sheaf', wordTrig = false, regTrig = true }, {
-		f(function(_, snip)
+	s(
+		{ trig = 'O([A-NP-Za-z])', name = 'local ring, structure sheaf', wordTrig = false, regTrig = true },
+		{ f(function(_, snip)
 			return '\\mathcal{O}_{' .. snip.captures[1] .. '}'
-		end, {}),
-	}, { condition = tex.in_mathzone }),
+		end, {}) },
+		{ condition = tex.in_mathzone }),
 
-	s({
-		trig = '(%a)(%d)',
-		name = 'auto subscript 1',
-		dscr = 'Subscript with a single number.',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
+	s(
+		{ trig = '(%a)(%d)',
+			name = 'auto subscript 1',
+			dscr = 'Subscript with a single number.',
+			wordTrig = false,
+			regTrig = true },
+		{ f(function(_, snip)
 			return string.format('%s_%s', snip.captures[1], snip.captures[2])
-		end, {}),
-	}, { condition = tex.in_mathzone }),
-	s({
-		trig = '(%a)_(%d%d)',
-		name = 'auto subscript 2',
-		dscr = 'Subscript with two numbers.',
-		wordTrig = false,
-		regTrig = true,
-	}, {
-		f(function(_, snip)
+		end, {}) },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '(%a)_(%d%d)',
+			name = 'auto subscript 2',
+			dscr = 'Subscript with two numbers.',
+			wordTrig = false,
+			regTrig = true,
+		},
+		{ f(function(_, snip)
 			return string.format('%s_{%s}', snip.captures[1], snip.captures[2])
-		end, {}),
-	}, { condition = tex.in_mathzone }),
+		end, {}) },
+		{ condition = tex.in_mathzone }
+	),
 
-	s({ trig = 'inn', name = 'belongs to ∈', wordTrig = false }, { t '\\in ' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'inn', name = 'belongs to ∈', wordTrig = false },
+		{ t '\\in ' },
+		{ condition = tex.in_mathzone }),
 	s(
 		{ trig = '!in', name = 'does not belong to ∉', wordTrig = false },
 		{ t '\\notin ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '!=', name = 'not equal ≠', wordTrig = false }, { t '\\neq ' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '!=', name = 'not equal ≠', wordTrig = false },
+		{ t '\\neq ' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '<=', name = 'less than or equal to ≤', wordTrig = false },
 		{ t '\\leq ' },
@@ -138,27 +155,41 @@ autosnips = {
 		{ t '\\geq ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '<<', name = 'much less than ≪', wordTrig = false }, { t '\\ll ' }, {
-		condition = tex.in_mathzone,
-	}),
+	s(
+		{ trig = '<<', name = 'much less than ≪', wordTrig = false },
+		{ t '\\ll ' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '>>', name = 'much greater than ≫', wordTrig = false },
 		{ t '\\gg ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '~~', name = 'similar ~', wordTrig = false }, { t '\\sim ' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '~~', name = 'similar ~', wordTrig = false },
+		{ t '\\sim ' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '~=', name = 'is isomorphic to ≃', wordTrig = false },
 		{ t '\\simeq ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'nvs', name = 'inverse', wordTrig = false }, { t '^{-1}' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'nvs', name = 'inverse', wordTrig = false },
+		{ t '^{-1}' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '^-', name = 'negative exponents', wordTrig = false },
 		{ t '^{-', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'sq', name = 'square root' }, { t '\\sqrt{', i(1), t '}' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'sq', name = 'square root' },
+		{ t '\\sqrt{', i(1), t '}' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '__', name = 'subscript', wordTrig = false },
 		{ t '_{', i(1), t '}' },
@@ -169,11 +200,31 @@ autosnips = {
 		{ t '^{', i(1), t '}' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '**', name = 'upper star *', wordTrig = false }, { t '^{*}' }, { condition = tex.in_mathzone }),
-	s({ trig = '...', name = 'dots ...', wordTrig = false }, { t '\\dots' }, { condition = tex.in_mathzone }),
-	s({ trig = '||', name = 'mid |', wordTrig = false }, { t '\\mid ' }, { condition = tex.in_mathzone }),
-	s({ trig = '::', name = 'colon :', wordTrig = false }, { t '\\colon ' }, { condition = tex.in_mathzone }),
-	s({ trig = ':=', name = 'coloneqq :=', wordTrig = false }, { t '\\coloneqq ' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '**', name = 'upper star *', wordTrig = false },
+		{ t '^{*}' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '...', name = 'dots ...', wordTrig = false },
+		{ t '\\dots' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '||', name = 'mid |', wordTrig = false },
+		{ t '\\mid ' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '::', name = 'colon :', wordTrig = false },
+		{ t '\\colon ' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = ':=', name = 'coloneqq :=', wordTrig = false },
+		{ t '\\coloneqq ' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = 'rup', name = 'round up', wordTrig = false },
 		{ t '\\rup{', i(1), t '}' },

@@ -1,7 +1,7 @@
 -- Modofied from https://github.com/folke/tokyonight.nvim
 vim.g.colors_name = 'tokyonight'
 
-local util = require 'utils.colors'
+local util = require 'themes.util'
 local c    = {}
 
 c = {
@@ -47,7 +47,7 @@ c = {
 	},
 }
 
-if vim.g.theme_style == 'dark' then
+if vim.o.background == 'dark' then
 	c.bg      = '#1A1B26'
 	c.bg_dark = '#16161E'
 end
@@ -86,6 +86,10 @@ c.error   = c.red1
 c.warning = c.yellow
 c.info    = c.blue2
 c.hint    = c.teal
+
+if vim.o.background == 'light' then
+	c = util.light_colors(c)
+end
 
 ---------- BASICS ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.black })
@@ -269,7 +273,7 @@ vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.gitSigns.add })
 vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 
----------- NVIM TREE ----------
+---------- NVIM-TREE ----------
 -- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.fg_sidebar, bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { fg = c.fg_sidebar, bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.blue, bold = true })
@@ -280,7 +284,7 @@ vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 -- vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = c.fg_gutter })
 -- vim.api.nvim_set_hl(0, 'NvimTreeImageFile', { fg = c.fg_sidebar })
 -- vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
--- -- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.fg_float })
+-- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.fg_float })
 
 ---------- RAINBOW ----------
 vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = c.red })

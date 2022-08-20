@@ -3,7 +3,7 @@ vim.g.colors_name = 'everforest'
 
 local cp = {}
 
-if vim.g.theme_style == 'dark' then
+if vim.o.background == 'dark' then
 	cp = {
 		bg0       = '#2B3339',
 		bg1       = '#323C41',
@@ -295,7 +295,7 @@ vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = cp.green })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = cp.grey })
 vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = cp.purple })
 
----------- NVIM TREE ----------
+---------- NVIM-TREE ----------
 -- vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = cp.fg })
 -- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = cp.green })
 -- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = cp.grey })

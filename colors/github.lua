@@ -1,9 +1,10 @@
 -- Modified from https://github.com/projekt0n/github-nvim-theme
 vim.g.colors_name = 'github'
 
+local util = require 'themes.util'
 local c = {}
 
-if vim.g.theme_style == 'dark' then
+if vim.o.background == 'dark' then
 	c = {
 		-- Background Colors
 		bg  = '#24292E',
@@ -101,7 +102,7 @@ if vim.g.theme_style == 'dark' then
 			delete = '#EA4A5A',
 		}
 	}
-elseif vim.g.theme_style == 'light' then
+elseif vim.o.background == 'light' then
 	c = {
 		-- Background Colors
 		bg  = '#FFFFFF',
@@ -296,9 +297,7 @@ else
 	}
 end
 
-local util = require 'utils.colors'
-
-c.tscontext = vim.g.theme_style == 'light' and util.lighten(c.blue, 0.9) or util.darken(c.blue, 0.2)
+c.tscontext = vim.o.background == 'light' and util.lighten(c.blue, 0.9) or util.darken(c.blue, 0.2)
 
 ---------- BASIC ----------
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = c.bg_visual })
@@ -510,7 +509,7 @@ vim.api.nvim_set_hl(0, 'NotifyINFOBody', { fg = util.lighten(c.green, 0.1) })
 vim.api.nvim_set_hl(0, 'NotifyDEBUGBody', { link = 'NotifyDEBUGTitle' })
 vim.api.nvim_set_hl(0, 'NotifyTRACEBody', { fg = util.lighten(c.bright_magenta, 0.1) })
 
----------- NVIMTREE ----------
+---------- NVIM-TREE ----------
 -- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.fg_light, bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'NvimTreeEndOfBuffer', { fg = c.sidebar_eob })
 -- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.fg_light, bold = true })
@@ -528,13 +527,13 @@ vim.api.nvim_set_hl(0, 'NotifyTRACEBody', { fg = util.lighten(c.bright_magenta, 
 -- vim.api.nvim_set_hl(0, 'NvimTreeOpenedFile', { fg = c.bright_blue })
 
 ---------- RAINBOW ----------
--- vim.api.nvim_set_hl(0, 'rainbowcol1', {})
--- vim.api.nvim_set_hl(0, 'rainbowcol2', {})
--- vim.api.nvim_set_hl(0, 'rainbowcol3', {})
--- vim.api.nvim_set_hl(0, 'rainbowcol4', {})
--- vim.api.nvim_set_hl(0, 'rainbowcol5', {})
--- vim.api.nvim_set_hl(0, 'rainbowcol6', {})
--- vim.api.nvim_set_hl(0, 'rainbowcol7', {})
+-- vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = cp.red })
+-- vim.api.nvim_set_hl(0, 'rainbowcol2', { fg = cp.teal })
+-- vim.api.nvim_set_hl(0, 'rainbowcol3', { fg = cp.yellow })
+-- vim.api.nvim_set_hl(0, 'rainbowcol4', { fg = cp.blue })
+-- vim.api.nvim_set_hl(0, 'rainbowcol5', { fg = cp.pink })
+-- vim.api.nvim_set_hl(0, 'rainbowcol6', { fg = cp.flamingo })
+-- vim.api.nvim_set_hl(0, 'rainbowcol7', { fg = cp.green })
 
 ------------ TELESCOPE ----------
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = c.border })

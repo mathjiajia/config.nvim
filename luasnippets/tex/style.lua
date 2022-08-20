@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
+local tex = require 'snips.latex'
 
 snips = {
 	s(
@@ -42,12 +42,26 @@ autosnips = {
 		end, {}) },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'bar', name = 'overline' }, { t '\\overline{', i(1), t '}' }, { condition = tex.in_mathzone }),
-	s({ trig = 'hat', name = 'widehat' }, { t '\\widehat{', i(1), t '}' }, { condition = tex.in_mathzone }),
-	s({ trig = 'td', name = 'widetilde' }, { t '\\widetilde{', i(1), t '}' }, {
-		condition = tex.in_mathzone,
-	}),
-	s({ trig = 'quad', name = 'quad' }, { t '\\quad ' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'bar', name = 'overline' },
+		{ t '\\overline{', i(1), t '}' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = 'hat', name = 'widehat' },
+		{ t '\\widehat{', i(1), t '}' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = 'td', name = 'widetilde' },
+		{ t '\\widetilde{', i(1), t '}' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = 'quad', name = 'quad' },
+		{ t '\\quad ' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = 'tt', wordTrig = false, name = 'text' },
 		{ t '\\text{', i(1), t '}' },
@@ -58,7 +72,11 @@ autosnips = {
 		{ t '_{\\mathrm{', i(1), t '}}' },
 		{ condition = tex.in_mathzone }
 	),
-	-- s({ trig = '[^\\]"', name = 'Quotation', regTrig = true }, { t '``', i(1), t "''" }, { condition = tex.in_text }),
+	-- s(
+	-- 	{ trig = '[^\\]"', name = 'Quotation', regTrig = true },
+	-- 	{ t '``', i(1), t "''" },
+	-- 	{ condition = tex.in_text }
+	-- ),
 }
 
 return snips, autosnips

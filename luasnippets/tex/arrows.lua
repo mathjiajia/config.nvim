@@ -1,26 +1,29 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
+local tex = require 'snips.latex'
 
 autosnips = {
-	s({ trig = 'rmap', name = 'rational map arrow', wordTrig = false }, {
-		d(1, function()
+	s(
+		{ trig = 'rmap', name = 'rational map arrow', wordTrig = false },
+		{ d(1, function()
 			if not tex.in_xymatrix() then
 				return sn(nil, { t '\\dashrightarrow ' })
 			else
 				return sn(nil, { t { '\\ar@{-->}[' }, i(1), t { ']' } })
 			end
-		end),
-	}, { condition = tex.in_mathzone }),
-	s({ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false }, {
-		d(1, function()
+		end) },
+		{ condition = tex.in_mathzone }),
+	s(
+		{ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false },
+		{ d(1, function()
 			if not tex.in_xymatrix() then
 				return sn(nil, { t '\\hookrightarrow ' })
 			else
 				return sn(nil, { t { '\\ar@{^{(}->}[' }, i(1), t { ']' } })
 			end
-		end),
-	}, { condition = tex.in_mathzone }),
+		end) },
+		{ condition = tex.in_mathzone }
+	),
 
 	s(
 		{ trig = '<->', wordTrig = false, name = 'leftrightarrow <->' },
@@ -32,9 +35,21 @@ autosnips = {
 		{ t '\\longrightarrow ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = '!>', wordTrig = false, name = 'mapsto |->' }, { t '\\mapsto ' }, { condition = tex.in_mathzone }),
-	s({ trig = '=>', name = 'implies =>', wordTrig = false }, { t '\\implies ' }, { condition = tex.in_mathzone }),
-	s({ trig = '=<', name = 'impliedby', wordTrig = false }, { t '\\impliedby ' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '!>', wordTrig = false, name = 'mapsto |->' },
+		{ t '\\mapsto ' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '=>', name = 'implies =>', wordTrig = false },
+		{ t '\\implies ' },
+		{ condition = tex.in_mathzone }
+	),
+	s(
+		{ trig = '=<', name = 'impliedby', wordTrig = false },
+		{ t '\\impliedby ' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = 'iff', name = 'if and only if <=>', wordTrig = false },
 		{ t '\\iff ' },

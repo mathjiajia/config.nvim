@@ -86,7 +86,9 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local nvim_lsp = require 'lspconfig'
 
-require('mason-lspconfig').setup()
+require('mason-lspconfig').setup {
+	ensure_installed = { 'pyright', 'sumneko_lua', 'texlab' }
+}
 require('mason-lspconfig').setup_handlers {
 	function(server_name)
 		nvim_lsp[server_name].setup {

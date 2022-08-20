@@ -1,16 +1,20 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'utils.latex'
+local tex = require 'snips.latex'
 
 autosnips = {
-	s({ trig = '([hH])_(%d)(%u)', name = 'cohomology-d', regTrig = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. '^{' .. snip.captures[2] .. '}(' .. snip.captures[3] .. ','
-		end, {}),
-		i(1),
-		t ')',
-		i(0),
-	}, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '([hH])_(%d)(%u)', name = 'cohomology-d', regTrig = true },
+		{
+			f(function(_, snip)
+				return snip.captures[1] .. '^{' .. snip.captures[2] .. '}(' .. snip.captures[3] .. ','
+			end, {}),
+			i(1),
+			t ')',
+			i(0),
+		},
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = '(%a)p(%d)', name = 'x[n+1]', regTrig = true },
 		{ f(function(_, snip)
@@ -19,13 +23,21 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 
-	s({ trig = 'cod', name = 'codimension' }, { t '\\codim' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'cod', name = 'codimension' },
+		{ t '\\codim' },
+		{ condition = tex.in_mathzone }
+	),
 	s(
 		{ trig = 'dint', name = 'integral', dscr = 'Insert integral notation.' },
 		{ t '\\int_{', i(1, '-\\infty'), t '}^{', i(2, '\\infty'), t '} ' },
 		{ condition = tex.in_mathzone }
 	),
-	s({ trig = 'coker', name = 'cokernel' }, { t '\\coker' }, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'coker', name = 'cokernel' },
+		{ t '\\coker' },
+		{ condition = tex.in_mathzone }
+	),
 
 	-- s({ trig = 'arcsin', name = 'arcsin' }, { t('\\arcsin') }, { condition = tex.in_mathzone }),
 	-- s({ trig = 'arccos', name = 'arccos' }, { t('\\arccos') }, { condition = tex.in_mathzone }),
@@ -71,27 +83,33 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 
-	s({ trig = 'ses', name = 'short exact sequence' }, {
-		c(1, { t '0', t '1' }),
-		t '\\longrightarrow ',
-		i(2),
-		t '\\longrightarrow ',
-		i(3),
-		t '\\longrightarrow ',
-		i(4),
-		t '\\longrightarrow ',
-		rep(1),
-		i(0),
-	}, { condition = tex.in_mathzone }),
+	s(
+		{ trig = 'ses', name = 'short exact sequence' },
+		{
+			c(1, { t '0', t '1' }),
+			t '\\longrightarrow ',
+			i(2),
+			t '\\longrightarrow ',
+			i(3),
+			t '\\longrightarrow ',
+			i(4),
+			t '\\longrightarrow ',
+			rep(1),
+			i(0),
+		},
+		{ condition = tex.in_mathzone }),
 
-	s({ trig = '([hH])([i-npq])(%u)', name = 'cohomology-a', regTrig = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. '^{' .. snip.captures[2] .. '}(' .. snip.captures[3] .. ','
-		end, {}),
-		i(1),
-		t ')',
-		i(0),
-	}, { condition = tex.in_mathzone }),
+	s(
+		{ trig = '([hH])([i-npq])(%u)', name = 'cohomology-a', regTrig = true },
+		{
+			f(function(_, snip)
+				return snip.captures[1] .. '^{' .. snip.captures[2] .. '}(' .. snip.captures[3] .. ','
+			end, {}),
+			i(1),
+			t ')',
+			i(0),
+		},
+		{ condition = tex.in_mathzone }),
 
 	s(
 		{ trig = 'rij', name = '(x_n) n ∈ N' },

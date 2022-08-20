@@ -1,22 +1,22 @@
 -- Modified from https://github.com/eddyekofo94/gruvbox-flat.nvim
 vim.g.colors_name = 'gruvbox'
 
-local util = require 'utils.colors'
-
+local util = require 'themes.util'
 local c = {}
+
 c = {
-	bg            = '#32302F',
-	bg2           = '#282828',
-	bg_visual     = '#45403D',
-	border        = '#5A524C',
+	bg            = '#1D2021',
+	bg2           = '#17191A',
+	bg_visual     = '#3C3836',
+	border        = '#3C3836',
 	line_cursor   = '#45403D',
-	prompt_border = '#DDC7A1',
-	bg_highlight  = '#5A524C',
+	prompt_border = '#45403D',
+	bg_highlight  = '#3C3836',
 	fg            = '#D4BE98',
 	fg_light      = '#DDC7A1',
 	fg_dark       = '#D4BE98',
 	tree_normal   = '#AA9987',
-	comment       = '#7C6F64',
+	comment       = '#6A635D',
 	fg_gutter     = '#5A524C',
 	dark5         = '#5A524C',
 	blue          = '#7DAEA3',
@@ -43,22 +43,7 @@ c = {
 	}
 }
 
-if vim.g.theme_style == 'dark' then
-	c.bg            = '#282828'
-	c.bg2           = '#242424'
-	c.bg_highlight  = '#45403d'
-	c.line_cursor   = '#32302F'
-	c.prompt_border = '#45403D'
-else
-	c.bg            = '#1D2021'
-	c.bg2           = '#17191A'
-	c.bg_highlight  = '#3C3836'
-	c.line_cursor   = util.lighten(c.bg, 0.97)
-	c.border        = c.bg_highlight
-	c.prompt_border = '#45403D'
-	c.bg_visual     = '#3C3836'
-	c.comment       = '#6A635D'
-end
+c.line_cursor = util.lighten(c.bg, 0.97)
 
 util.bg = c.bg
 
@@ -141,6 +126,7 @@ vim.api.nvim_set_hl(0, 'TabLineFill', { bg = c.black })
 vim.api.nvim_set_hl(0, 'TabLineSel', { fg = c.black, bg = c.blue })
 -- vim.api.nvim_set_hl(0, 'TermCursor', {})
 -- vim.api.nvim_set_hl(0, 'TermCursorNC', {})
+vim.api.nvim_set_hl(0, 'Title', { fg = c.blue, bold = true })
 -- vim.api.nvim_set_hl(0, 'VertSplit', { fg = c.bg_highlight })
 vim.api.nvim_set_hl(0, 'Visual', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'VisualNOS', { bg = c.bg_visual })
@@ -192,7 +178,6 @@ vim.api.nvim_set_hl(0, 'Statement', { fg = c.purple })
 vim.api.nvim_set_hl(0, 'String', { fg = c.green })
 -- vim.api.nvim_set_hl(0, 'Structure', {})
 -- vim.api.nvim_set_hl(0, 'Tag', {})
-vim.api.nvim_set_hl(0, 'Title', { fg = c.blue, bold = true })
 vim.api.nvim_set_hl(0, 'Todo', { fg = c.bg, bg = c.yellow })
 vim.api.nvim_set_hl(0, 'Type', { fg = c.yellow })
 -- vim.api.nvim_set_hl(0, 'Typedef', {})
@@ -229,10 +214,6 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { undercurl = true, sp = c.hin
 vim.api.nvim_set_hl(0, 'LspReferenceText', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = c.bg_visual })
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = c.bg_visual })
-
--- vim.api.nvim_set_hl(0, 'LspCodeLens', { fg = c.blue })
--- vim.api.nvim_set_hl(0, 'LspCodeLensSeparator', { bg = c.green })
--- vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { link = 'Search' })
 
 ---------- AERIAL ----------
 vim.api.nvim_set_hl(0, 'AerialLine', { link = 'CursorLine' })
@@ -306,7 +287,7 @@ vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = c.gitSigns.add })
 vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = c.gitSigns.change })
 vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = c.gitSigns.delete })
 
----------- NVIM TREE ----------
+---------- NVIM-TREE ----------
 -- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { fg = c.tree_normal, bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'NvimTreeFolderIcon', { fg = c.comment })
 -- vim.api.nvim_set_hl(0, 'NvimTreeRootFolder', { fg = c.fg_light, bold = true })
@@ -408,9 +389,23 @@ vim.api.nvim_set_hl(0, 'latexTSParameter', { fg = c.orange })
 ---------- LUA ----------
 -- vim.api.nvim_set_hl(0, 'luaTSProperty', { fg = c.red })
 
+---------- TEX ----------
+vim.api.nvim_set_hl(0, 'texCmd', { fg = c.red, italic = true })
+vim.api.nvim_set_hl(0, 'texCmdClass', { fg = c.purple })
+vim.api.nvim_set_hl(0, 'texCmdTitle', { fg = c.purple })
+vim.api.nvim_set_hl(0, 'texCmdAuthor', { fg = c.purple })
+vim.api.nvim_set_hl(0, 'texFileArg', { fg = c.blue })
+vim.api.nvim_set_hl(0, 'texCmdDef', { fg = c.purple })
+vim.api.nvim_set_hl(0, 'texDefArgName', { fg = c.yellow })
+vim.api.nvim_set_hl(0, 'texPartArgTitle', { fg = c.yellow })
+vim.api.nvim_set_hl(0, 'texCmdEnv', { fg = c.purple })
+vim.api.nvim_set_hl(0, 'texCmdPart', { fg = c.purple })
+vim.api.nvim_set_hl(0, 'texEnvArgName', { fg = c.green })
+vim.api.nvim_set_hl(0, 'texMathEnvArgName', { fg = c.green })
+
+
 ---------- TERMINAL COLORS ----------
 local dark = c.comment
-
 -- dark
 vim.g.terminal_color_0 = dark
 vim.g.terminal_color_8 = dark
@@ -437,3 +432,9 @@ vim.g.terminal_color_13 = c.purple
 
 vim.g.terminal_color_6  = c.aqua
 vim.g.terminal_color_14 = c.aqua
+
+-- if vim.o.background == 'light' then
+-- 	for i = 0, 15, 1 do
+-- 		vim.g['terminal_color_' .. i] = util.getColor(vim.g['terminal_color_' .. i])
+-- 	end
+-- end
