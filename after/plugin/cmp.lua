@@ -26,6 +26,16 @@ local cmp_kinds = {
 	TypeParameter = ''
 }
 
+local source_names = {
+	buffer   = { '[Buf]', 'String' },
+	nvim_lsp = { '[LSP]', 'Question' },
+	path     = { '[Path]', 'WarningMsg' },
+	cmdline  = { '[Cmd]', 'CmpItemMenu' },
+	luasnip  = { '[Snip]', 'CmpItemMenu' },
+	-- neorg    = { '[Org]', 'CmpItemMenu' },
+	rg       = { '[RG]', 'CmpItemMenu' },
+}
+
 local cmp = require 'cmp'
 
 cmp.setup {
@@ -44,15 +54,20 @@ cmp.setup {
 		fields = { 'kind', 'abbr', 'menu' },
 		format = function(entry, vim_item)
 			vim_item.kind = cmp_kinds[vim_item.kind]
-			vim_item.menu = ({
-				buffer   = '[Buf]',
-				cmdline  = '[Cmd]',
-				luasnip  = '[Snip]',
-				nvim_lsp = '[LSP]',
-				-- neorg    = '[Norg]',
-				path     = '[Path]',
-				rg       = '[RG]',
-			})[entry.source.name]
+
+			local nm = source_names[entry.source.name]
+			if nm then
+				vim_item.menu = nm[1]
+				vim_item.menu_hl_group = nm[2]
+				vim_item.kind_hl_group = nm[2]
+			else
+				vim_item.menu = entry.source.name
+			end
+
+			local maxwidth = 50
+			if #vim_item.abbr > maxwidth then
+				vim_item.abbr = vim_item.abbr:sub(1, maxwidth) .. '...'
+			end
 			return vim_item
 		end
 	},
