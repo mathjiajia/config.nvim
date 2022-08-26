@@ -15,18 +15,18 @@ local colors = {
 	diag_error = utils.get_highlight('DiagnosticError').fg,
 	diag_hint  = utils.get_highlight('DiagnosticHint').fg,
 	diag_info  = utils.get_highlight('DiagnosticInfo').fg,
-	-- git_del    = utils.get_highlight('DiffDelete').fg,
-	-- git_add    = utils.get_highlight('DiffAdd').fg,
-	-- git_change = utils.get_highlight('DiffChange').fg,
+	git_del    = utils.get_highlight('GitSignsDelete').fg,
+	git_add    = utils.get_highlight('GitSignsAdd').fg,
+	git_change = utils.get_highlight('GitSignsChange').fg,
 	-- red        = '#C14A4A',
 	-- diag_warn  = '#D8A657',
 	-- diag_error = '#C14A4A',
 	-- diag_hint  = '#89B482',
 	-- diag_info  = '#7DAEA3',
 	git_branch = '#D3869B',
-	git_del    = '#B0B846',
-	git_add    = '#F2594B',
-	git_change = '#E9B143',
+	-- git_del    = '#B0B846',
+	-- git_add    = '#F2594B',
+	-- git_change = '#E9B143',
 	mode_fg    = '#242424',
 }
 
@@ -153,18 +153,12 @@ local VimModeOthers = {
 
 local VimMode = {
 	init = function(self)
-		self.mode = vim.fn.mode(1) -- :h mode()
-
-		-- execute this only once, this is required if you want the VimMode
-		-- component to be updated on operator pending mode
-		if not self.once then
-			vim.api.nvim_create_autocmd('ModeChanged', { command = 'redrawstatus' })
-			self.once = true
-		end
+		self.mode = vim.fn.mode(1)
 	end,
 
 	VimModeNormal, VimModeOthers,
-	update = 'ModeChanged'
+
+	update = { 'ModeChanged' }
 }
 
 local Snippets = {
@@ -368,14 +362,14 @@ local Git = {
 		hl = { fg = 'git_del' },
 	},
 
-	on_click = {
-		callback = function()
-			vim.defer_fn(function()
-				require('FTerm'):new({ cmd = 'lazygit', dimensions = { height = 1, width = 1 } }):open()
-			end, 100)
-		end,
-		name = 'LazyGit',
-	},
+	-- on_click = {
+	-- 	callback = function()
+	-- 		vim.defer_fn(function()
+	-- 			require('FTerm'):new({ cmd = 'lazygit', dimensions = { height = 1, width = 1 } }):open()
+	-- 		end, 100)
+	-- 	end,
+	-- 	name = 'LazyGit',
+	-- },
 }
 
 local LSPActive = {
@@ -430,9 +424,7 @@ local DefaultStatusline = {
 }
 
 local InactiveStatusline = {
-	condition = function()
-		return not conditions.is_active()
-	end,
+	condition = conditions.is_not_active,
 
 	Space, FileType, Space, FileName, Align,
 }
@@ -495,23 +487,13 @@ local WinBars = {
 	{ -- Hide the winbar for special buffers
 		condition = function()
 			return conditions.buffer_matches({
-				buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
+				buftype = { 'nofile', 'prompt', 'help', 'quickfix', 'terminal' },
 				filetype = { '^git.*' },
 			})
 		end,
 		init = function()
 			vim.opt_local.winbar = nil
 		end
-	},
-	{ -- A special winbar for terminals
-		condition = function()
-			return conditions.buffer_matches({ buftype = { 'terminal' } })
-		end,
-		utils.surround({ '', '' }, 'dark_red', {
-			FileType,
-			Space,
-			TerminalName,
-		}),
 	},
 	{ -- An inactive winbar for regular files
 		condition = function()
