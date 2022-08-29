@@ -13,12 +13,3 @@ vim.api.nvim_create_autocmd('BufEnter', {
 	group   = 'init_nvim',
 	desc    = 'change the working directory',
 })
-
-vim.api.nvim_create_augroup('heirline', { clear = true })
-vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-	callback = function()
-		require 'heirline'.reset_highlights()
-		require 'lines.status'
-	end,
-	group    = 'heirline',
-})
