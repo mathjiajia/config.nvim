@@ -177,7 +177,7 @@ local Snippets = {
 
 local WorkDir = {
 	provider = function()
-		local icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
+		local icon = ' '
 		local cwd = vim.fn.getcwd(0)
 		cwd = vim.fn.fnamemodify(cwd, ':~')
 		if not conditions.width_percent_below(#cwd, 0.25) then
@@ -334,7 +334,7 @@ local Git = {
 
 	{ -- git branch name
 		provider = function(self)
-			return ' ' .. self.status_dict.head
+			return ' ' .. self.status_dict.head
 		end,
 		hl = { bold = true }
 	},
