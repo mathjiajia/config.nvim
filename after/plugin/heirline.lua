@@ -18,15 +18,7 @@ local colors = {
 	git_del    = utils.get_highlight('GitSignsDelete').fg,
 	git_add    = utils.get_highlight('GitSignsAdd').fg,
 	git_change = utils.get_highlight('GitSignsChange').fg,
-	-- red        = '#C14A4A',
-	-- diag_warn  = '#D8A657',
-	-- diag_error = '#C14A4A',
-	-- diag_hint  = '#89B482',
-	-- diag_info  = '#7DAEA3',
 	git_branch = '#D3869B',
-	-- git_del    = '#B0B846',
-	-- git_add    = '#F2594B',
-	-- git_change = '#E9B143',
 	mode_fg    = '#242424',
 }
 
@@ -484,35 +476,35 @@ local StatusLines = {
 		end
 	end,
 
-	-- the first statusline with no condition, or which condition returns true is used
-	-- think of it as a switch case without fallthrough.
-	init = utils.pick_child_on_condition,
+	-- the first statusline with no condition, or which condition returns true is used.
+	-- think of it as a switch case with breaks to stop fallthrough.
+	fallthrough = false,
 
 	SpecialStatusline, TerminalStatusline, InactiveStatusline, DefaultStatusline,
 }
 
-local WinBar = {
-	init = utils.pick_child_on_condition,
-	{ -- Hide the winbar for special buffers
-		condition = function()
-			return conditions.buffer_matches({
-				buftype = { 'nofile', 'prompt', 'help', 'quickfix', 'terminal' },
-				filetype = { '^git.*' },
-			})
-		end,
-		init = function()
-			vim.opt_local.winbar = nil
-		end
-	},
-	{ -- An inactive winbar for regular files
-		condition = function()
-			return not conditions.is_active()
-		end,
-		utils.surround({ '', '' }, 'bright_bg', { hl = { fg = 'gray', force = true }, FileNameBlock }),
-	},
-	-- A winbar for regular files
-	utils.surround({ '', '' }, 'bright_bg', FileNameBlock),
-}
+-- local WinBar = {
+-- 	fallthrough = false,
+-- 	{ -- Hide the winbar for special buffers
+-- 		condition = function()
+-- 			return conditions.buffer_matches({
+-- 				buftype = { 'nofile', 'prompt', 'help', 'quickfix', 'terminal' },
+-- 				filetype = { '^git.*' },
+-- 			})
+-- 		end,
+-- 		init = function()
+-- 			vim.opt_local.winbar = nil
+-- 		end
+-- 	},
+-- 	{ -- An inactive winbar for regular files
+-- 		condition = function()
+-- 			return not conditions.is_active()
+-- 		end,
+-- 		utils.surround({ '', '' }, 'bright_bg', { hl = { fg = 'gray', force = true }, FileNameBlock }),
+-- 	},
+-- 	-- A winbar for regular files
+-- 	utils.surround({ '', '' }, 'bright_bg', FileNameBlock),
+-- }
 
 local TablineBufnr = {
 	provider = function(self)
@@ -680,7 +672,7 @@ local TabLineOffset = {
 
 local TabLine = { TabLineOffset, BufferLine, TabPages }
 
-require('heirline').setup(StatusLines, WinBar, TabLine)
+require('heirline').setup(StatusLines, nil, TabLine)
 
 -- Yep, with heirline we're driving manual!
 vim.api.nvim_create_autocmd({ 'FileType' }, {
