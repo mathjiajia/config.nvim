@@ -1,5 +1,6 @@
+set guifont=JetBrainsMono\ Nerd\ Font:h26
+
 if exists('g:neovide')
-    set guifont=JetBrainsMono\ Nerd\ Font:h26
 	let g:neovide_input_macos_alt_is_meta=v:true
 	let g:neovide_background_color='#1D2021'
 
