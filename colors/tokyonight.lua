@@ -5,45 +5,40 @@ local util = require 'themes.util'
 local c    = {}
 
 c = {
-	bg_dark        = '#1F2335',
-	bg             = '#24283B',
-	bg_highlight   = '#292E42',
+	none           = 'NONE',
+	bg_dark        = '#1f2335',
+	bg             = '#24283b',
+	bg_highlight   = '#292e42',
 	terminal_black = '#414868',
-	fg             = '#C0CAF5',
-	fg_dark        = '#A9B1D6',
-	fg_gutter      = '#3B4261',
-	dark3          = '#545C7E',
-	comment        = '#565F89',
-	dark5          = '#737AA2',
-	blue0          = '#3D59A1',
-	blue           = '#7AA2F7',
-	cyan           = '#7DCFFF',
-	blue1          = '#2AC3DE',
-	blue2          = '#0DB9D7',
-	blue5          = '#89DDFF',
-	blue6          = '#B4F9F8',
-	blue7          = '#394B70',
-	magenta        = '#BB9AF7',
-	magenta2       = '#FF007C',
-	purple         = '#9D7CD8',
-	orange         = '#FF9E64',
-	yellow         = '#E0AF68',
-	green          = '#9ECE6A',
-	green1         = '#73DACA',
-	green2         = '#41A6B5',
-	teal           = '#1ABC9C',
-	red            = '#F7768E',
-	red1           = '#DB4B4B',
+	fg             = '#c0caf5',
+	fg_dark        = '#a9b1d6',
+	fg_gutter      = '#3b4261',
+	dark3          = '#545c7e',
+	comment        = '#565f89',
+	dark5          = '#737aa2',
+	blue0          = '#3d59a1',
+	blue           = '#7aa2f7',
+	cyan           = '#7dcfff',
+	blue1          = '#2ac3de',
+	blue2          = '#0db9d7',
+	blue5          = '#89ddff',
+	blue6          = '#b4f9f8',
+	blue7          = '#394b70',
+	magenta        = '#bb9af7',
+	magenta2       = '#ff007c',
+	purple         = '#9d7cd8',
+	orange         = '#ff9e64',
+	yellow         = '#e0af68',
+	green          = '#9ece6a',
+	green1         = '#73daca',
+	green2         = '#41a6b5',
+	teal           = '#1abc9c',
+	red            = '#f7768e',
+	red1           = '#db4b4b',
 	git            = {
-		change   = '#6183BB',
-		add      = '#449DAB',
-		delete   = '#914C54',
-		conflict = '#BB7A61',
-	},
-	gitSigns       = {
-		add    = '#164846',
-		change = '#394B70',
-		delete = '#823C41',
+		change = '#6183bb',
+		add    = '#449dab',
+		delete = '#914c54'
 	},
 }
 
@@ -60,9 +55,9 @@ c.diff = {
 }
 
 c.gitSigns = {
-	add    = util.brighten(c.gitSigns.add, 0.2),
-	change = util.brighten(c.gitSigns.change, 0.2),
-	delete = util.brighten(c.gitSigns.delete, 0.2),
+	add    = '#266d6a',
+	change = '#536c9e',
+	delete = '#b2555b',
 }
 
 c.git.ignore       = c.dark3
@@ -88,7 +83,7 @@ c.info    = c.blue2
 c.hint    = c.teal
 
 if vim.o.background == 'light' then
-	c = util.light_colors(c)
+	util.invert_colors(c)
 end
 
 ---------- BASICS ----------
@@ -124,7 +119,7 @@ vim.api.nvim_set_hl(0, 'MsgArea', { fg = c.fg_dark })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'NonText', { fg = c.dark3 })
 vim.api.nvim_set_hl(0, 'Normal', { fg = c.fg, bg = c.bg })
-vim.api.nvim_set_hl(0, 'NormalNC', { fg = c.fg, bg = c.bg })
+vim.api.nvim_set_hl(0, 'NormalNC', { fg = c.fg, bg = c.bg_dark })
 -- vim.api.nvim_set_hl(0, 'NormalSB', { fg = c.fg_sidebar, bg = c.bg_sidebar })
 vim.api.nvim_set_hl(0, 'NormalFloat', { fg = c.fg, bg = c.bg_float })
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = c.border_highlight, bg = c.bg_float })
@@ -333,6 +328,12 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', { fg = c.fg })
 -- vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
 -- vim.api.nvim_set_hl(0, 'BufferLineFill', { fg = c.black })
 
+---------- LEAP ----------
+vim.api.nvim_set_hl(0, 'LeapMatch', { bg = c.magenta2, fg = c.fg, bold = true })
+vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { fg = c.magenta2, bold = true })
+vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { fg = c.green1, bold = true })
+vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = c.dark3 })
+
 ---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpDocumentation', { fg = c.fg, bg = c.bg_float })
 vim.api.nvim_set_hl(0, 'CmpDocumentationBorder', { fg = c.border_highlight, bg = c.bg_float })
@@ -372,6 +373,10 @@ vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = c.green1 })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = c.green1 })
 vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = c.green1 })
 vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = c.dark5 })
+
+---------- INDENT BLANKLINE ----------
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = c.fg_gutter })
+vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = c.purple })
 
 ---------- TERMINAL COLORS ----------
 -- dark
