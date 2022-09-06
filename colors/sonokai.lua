@@ -189,7 +189,7 @@ vim.api.nvim_set_hl(0, 'AerialTypeParameterIcon', { fg = cp.yellow })
 
 ---------- CMP ----------
 vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = cp.fg })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.fg, strikethrough = true }) -- FIXED
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = cp.grey, strikethrough = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = cp.green, bold = true })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = cp.green, bold = true })
 vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = cp.blue })

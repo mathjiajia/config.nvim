@@ -236,7 +236,7 @@ vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = palette.blue, bold = true })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = palette.blue, bold = true })
 
 vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = palette.fg })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = palette.fg, strikethrough = true }) -- FIXED
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = palette.grey, strikethrough = true }) -- FIXED
 
 vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = palette.purple })
 vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = palette.fg })

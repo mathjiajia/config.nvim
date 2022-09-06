@@ -382,27 +382,26 @@ vim.api.nvim_set_hl(0, 'TSWarning', { fg = c.bg, bg = c.warning })
 ---------- LANGUAGES ----------
 
 ---------- LATEX ----------
-vim.api.nvim_set_hl(0, 'latexTSEnvironment', { fg = c.blue })
-vim.api.nvim_set_hl(0, 'latexTSEnvironmentName', { fg = c.yellow })
-vim.api.nvim_set_hl(0, 'latexTSParameter', { fg = c.orange })
+-- vim.api.nvim_set_hl(0, 'latexTSEnvironment', { fg = c.blue })
+-- vim.api.nvim_set_hl(0, 'latexTSEnvironmentName', { fg = c.yellow })
+-- vim.api.nvim_set_hl(0, 'latexTSParameter', { fg = c.orange })
 
 ---------- LUA ----------
 -- vim.api.nvim_set_hl(0, 'luaTSProperty', { fg = c.red })
 
 ---------- TEX ----------
-vim.api.nvim_set_hl(0, 'texCmd', { fg = c.red, italic = true })
-vim.api.nvim_set_hl(0, 'texCmdClass', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texCmdTitle', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texCmdAuthor', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texFileArg', { fg = c.blue })
-vim.api.nvim_set_hl(0, 'texCmdDef', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texDefArgName', { fg = c.yellow })
-vim.api.nvim_set_hl(0, 'texPartArgTitle', { fg = c.yellow })
-vim.api.nvim_set_hl(0, 'texCmdEnv', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texCmdPart', { fg = c.purple })
-vim.api.nvim_set_hl(0, 'texEnvArgName', { fg = c.green })
-vim.api.nvim_set_hl(0, 'texMathEnvArgName', { fg = c.green })
-
+-- vim.api.nvim_set_hl(0, 'texCmd', { fg = c.red, italic = true })
+-- vim.api.nvim_set_hl(0, 'texCmdClass', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'texCmdTitle', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'texCmdAuthor', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'texFileArg', { fg = c.blue })
+-- vim.api.nvim_set_hl(0, 'texCmdDef', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'texDefArgName', { fg = c.yellow })
+-- vim.api.nvim_set_hl(0, 'texPartArgTitle', { fg = c.yellow })
+-- vim.api.nvim_set_hl(0, 'texCmdEnv', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'texCmdPart', { fg = c.purple })
+-- vim.api.nvim_set_hl(0, 'texEnvArgName', { fg = c.green })
+-- vim.api.nvim_set_hl(0, 'texMathEnvArgName', { fg = c.green })
 
 ---------- TERMINAL COLORS ----------
 local dark = c.comment
