@@ -1,8 +1,8 @@
 require('nvim-treesitter.configs').setup {
 	ensure_installed = {
 		'bibtex', 'comment', 'gitignore',
-		'latex', 'lua', 'markdown_inline',
-		'python', 'query', 'regex', 'swift',
+		'latex', 'markdown_inline', 'python',
+		'query', 'regex', 'swift',
 	},
 	auto_install = true,
 	highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
