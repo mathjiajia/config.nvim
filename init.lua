@@ -26,4 +26,4 @@ vim.g.loaded_zipPlugin = 1
 -- PLUGINS LIST
 vim.defer_fn(function()
 	require 'plugins'
-end, 800)
+end, 500)
