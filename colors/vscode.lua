@@ -444,13 +444,13 @@ vim.api.nvim_set_hl(0, 'markdownTSLiteral', { fg = c.vscOrange })
 vim.api.nvim_set_hl(0, 'markdownTSPunctSpecial', { fg = isDark and c.vscBlue or c.vscYellowOrange, bold = true })
 
 ------ TEX ------
--- vim.api.nvim_set_hl(0, 'texStatement', { fg = c.vscBlue, bg = 'NONE' })
--- vim.api.nvim_set_hl(0, 'texBeginEnd', { fg = c.vscYellow, bg = 'NONE' })
--- vim.api.nvim_set_hl(0, 'texBeginEndName', { fg = c.vscLightBlue, bg = 'NONE' })
--- vim.api.nvim_set_hl(0, 'texOption', { fg = c.vscLightBlue, bg = 'NONE' })
--- vim.api.nvim_set_hl(0, 'texBeginEndModifier', { fg = c.vscLightBlue, bg = 'NONE' })
--- vim.api.nvim_set_hl(0, 'texDocType', { fg = c.vscPink, bg = 'NONE' })
--- vim.api.nvim_set_hl(0, 'texDocTypeArgs', { fg = c.vscLightBlue, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texStatement', { fg = c.vscBlue, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texBeginEnd', { fg = c.vscYellow, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texBeginEndName', { fg = c.vscLightBlue, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texOption', { fg = c.vscLightBlue, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texBeginEndModifier', { fg = c.vscLightBlue, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texDocType', { fg = c.vscPink, bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'texDocTypeArgs', { fg = c.vscLightBlue, bg = 'NONE' })
 
 ---------- TERMINAL COLORS ----------
 vim.g.terminal_color_0 = c.vscBack
