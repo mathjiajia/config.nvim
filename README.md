@@ -52,8 +52,8 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 
 - `lua/plugins.lua` -- Neovim plugins installed
 - `after/plugin` -- A folder full of the configurations needed for each individual plugin,
-- `after/plugin/lsp.lua` -- configurations for language serves
+  stored in the form `[pluginName].lua`
+- `after/plugin/lsp.lua` -- The configuration for language serves
 - `plugin/keymaps.lua` -- Various keymaps
 - `plugin/options.lua` -- General settings and options
-  stored in the form `[pluginName].lua`
-- `luasnippets` -- useful snippets for different languages
+- `luasnippets` -- Useful snippets for different languages
