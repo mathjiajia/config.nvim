@@ -89,20 +89,15 @@ local nvim_lsp = require 'lspconfig'
 require('mason-lspconfig').setup {
 	ensure_installed = { 'pyright', 'sumneko_lua', 'texlab' }
 }
+
+require('lua-dev').setup()
+
 require('mason-lspconfig').setup_handlers {
 	function(server_name)
 		nvim_lsp[server_name].setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
-	end,
-	['sumneko_lua'] = function()
-		nvim_lsp.sumneko_lua.setup(require('lua-dev').setup {
-			lspconfig = {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			}
-		})
 	end,
 	['texlab'] = function()
 		nvim_lsp.texlab.setup {
