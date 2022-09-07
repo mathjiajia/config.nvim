@@ -32,9 +32,9 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ├── init.lua
 ├── lua
 │   ├── configs
-│   ├── lsp
 │   ├── plugins.lua
-│   └── utils
+│   ├── snips
+│   └── themes
 ├── luasnippets
 │   ├── all.lua
 │   ├── gitcommit.lua
@@ -46,13 +46,14 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 │   ├── autocmds.lua
 │   ├── keymaps.lua
 │   ├── options.lua
-│   └── settings.lua
+│   └── packer_compiled.lua
 └── spell
 ```
 
-- `keybinds.lua` -- Various keymaps
-- `plugins.lua` -- Neovim plugins installed
-- `options.lua` -- General settings and options
-- `configs` -- A folder full of the configurations needed for each individual plugin,
-  stored in the form `config/[pluginName].lua`
-- `lsp` -- configurations for each language serves
+- `lua/plugins.lua` -- Neovim plugins installed
+- `after/plugin` -- A folder full of the configurations needed for each individual plugin,
+- `after/plugin/lsp.lua` -- configurations for language serves
+- `plugin/keymaps.lua` -- Various keymaps
+- `plugin/options.lua` -- General settings and options
+  stored in the form `[pluginName].lua`
+- `luasnippets` -- useful snippets for different languages
