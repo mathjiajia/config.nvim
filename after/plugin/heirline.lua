@@ -535,10 +535,11 @@ local TablineFileName = {
 
 -- this looks exactly like the FileFlags component that we saw in
 -- #crash-course-part-ii-filename-and-friends, but we are indexing the bufnr explicitly
+-- also, we are adding a nice icon for terminal buffers.
 local TablineFileFlags = {
 	{
 		condition = function(self)
-			vim.api.nvim_buf_get_option(self.bufnr, 'modified')
+			return vim.api.nvim_buf_get_option(self.bufnr, 'modified')
 		end,
 		provider = '[+]',
 		hl = { fg = 'green' },
@@ -575,8 +576,12 @@ local TablineFileNameBlock = {
 		end
 	end,
 	on_click = {
-		callback = function(_, minwid)
-			vim.api.nvim_win_set_buf(0, minwid)
+		callback = function(_, minwid, _, button)
+			if (button == 'm') then -- close on mouse middle click
+				vim.api.nvim_buf_delete(minwid, { force = false })
+			else
+				vim.api.nvim_win_set_buf(0, minwid)
+			end
 		end,
 		minwid = function(self)
 			return self.bufnr
@@ -661,8 +666,8 @@ local TabLineOffset = {
 		local bufnr = vim.api.nvim_win_get_buf(win)
 		self.winid = win
 
-		if vim.bo[bufnr].filetype == 'NvimTree' then
-			self.title = 'NvimTree'
+		if vim.bo[bufnr].filetype == 'neo-tree' then
+			self.title = 'neotree'
 			return true
 			-- elseif vim.bo[bufnr].filetype == "TagBar" then
 			--     ...
