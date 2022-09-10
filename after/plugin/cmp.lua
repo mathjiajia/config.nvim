@@ -77,8 +77,8 @@ cmp.setup {
 		{ name = 'luasnip' },
 		{ name = 'path', keyword_length = 4 },
 		-- { name = 'neorg' },
-		{ name = 'buffer', keyword_length = 4 },
-		{ name = 'rg', keyword_length = 5 }
+		{ name = 'buffer', keyword_length = 3 },
+		{ name = 'rg', keyword_length = 4 }
 	},
 	window = {
 		completion = {
