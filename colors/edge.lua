@@ -391,7 +391,6 @@ vim.api.nvim_set_hl(0, 'TSString', { fg = palette.green })
 vim.api.nvim_set_hl(0, 'TSStringEscape', { fg = palette.yellow })
 vim.api.nvim_set_hl(0, 'TSStringRegex', { fg = palette.yellow })
 
-vim.api.nvim_set_hl(0, 'TSStructure', { fg = palette.cayn, italic = true })
 vim.api.nvim_set_hl(0, 'TSSymbol', { fg = palette.red })
 vim.api.nvim_set_hl(0, 'TSTag', { fg = palette.red, italic = true })
 vim.api.nvim_set_hl(0, 'TSTagDelimiter', { fg = palette.purple })
