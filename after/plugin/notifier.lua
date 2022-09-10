@@ -1,1 +1,6 @@
-require 'notifier'.setup()
+require 'notifier'.setup {
+    components = {
+        -- 'nvim',
+        'lsp'
+    }
+}
