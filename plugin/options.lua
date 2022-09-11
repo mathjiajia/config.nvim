@@ -31,4 +31,4 @@ vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
 -- vim.o.background = 'light'
-vim.cmd.colorscheme 'vscode'
+vim.cmd.colorscheme 'tokyonight'

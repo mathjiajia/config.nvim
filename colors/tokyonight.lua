@@ -1,8 +1,9 @@
 -- Modofied from https://github.com/folke/tokyonight.nvim
 vim.g.colors_name = 'tokyonight'
 
-local util = require 'themes.util'
-local c    = {}
+local util  = require 'themes.util'
+local style = 'storm'
+local c     = {}
 
 c = {
 	none           = 'NONE',
@@ -42,7 +43,7 @@ c = {
 	},
 }
 
-if vim.o.background == 'dark' then
+if style == 'night' then
 	c.bg      = '#1A1B26'
 	c.bg_dark = '#16161E'
 end
@@ -197,6 +198,9 @@ vim.api.nvim_set_hl(0, 'Todo', { fg = c.bg, bg = c.yellow })
 vim.api.nvim_set_hl(0, 'qfLineNr', { fg = c.dark5 })
 vim.api.nvim_set_hl(0, 'qfFileName', { fg = c.blue })
 
+vim.api.nvim_set_hl(0, '@punctuation.special.markdown', { fg = c.orange, bold = true })
+vim.api.nvim_set_hl(0, '@text.literal.markdown_inline', { bg = c.terminal_black, fg = c.blue })
+
 -- vim.api.nvim_set_hl(0, 'debugPC', { bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'debugBreakpoint', { fg = c.info , bg = util.darken(c.info, 0.1)})
 
@@ -323,6 +327,10 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', { fg = c.fg })
 -- vim.api.nvim_set_hl(0, 'NvimTreeSymlink', { fg = c.blue })
 -- vim.api.nvim_set_hl(0, 'NvimTreeFolderIcon', { bg = c.none, fg = c.yellow })
 -- vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { fg = c.fg_float })
+
+---------- NEOTREE ----------
+vim.api.nvim_set_hl(0, 'NeoTreeNormal', { fg = c.fg_sidebar, bg = c.bg_sidebar })
+vim.api.nvim_set_hl(0, 'NeoTreeNormalNC', { fg = c.fg_sidebar, bg = c.bg_sidebar })
 
 ---------- BUFFERLINE ----------
 -- vim.api.nvim_set_hl(0, 'BufferLineIndicatorSelected', { fg = c.git.change })
