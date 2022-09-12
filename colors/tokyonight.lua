@@ -2,7 +2,7 @@
 vim.g.colors_name = 'tokyonight'
 
 local util  = require 'themes.util'
-local style = 'storm'
+local style = 'night'
 local c     = {}
 
 c = {
@@ -115,7 +115,7 @@ vim.api.nvim_set_hl(0, 'LineNr', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.dark5 })
 vim.api.nvim_set_hl(0, 'MatchParen', { bg = c.terminal_black, bold = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = c.fg_dark, bold = true })
-vim.api.nvim_set_hl(0, 'MsgArea', { fg = c.fg_dark })
+vim.api.nvim_set_hl(0, 'MsgArea', { fg = c.fg_dark, bg = c.bg_sidebar })
 -- vim.api.nvim_set_hl(0, 'MsgSeparator', {})
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = c.blue })
 vim.api.nvim_set_hl(0, 'NonText', { fg = c.dark3 })
