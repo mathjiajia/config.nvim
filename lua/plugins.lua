@@ -56,7 +56,6 @@ require('packer').startup(function(use)
 	use { 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' }
 
 	use 'stevearc/aerial.nvim'
-	-- use 'j-hui/fidget.nvim'
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/lua-dev.nvim'
 
