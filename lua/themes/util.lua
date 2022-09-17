@@ -4,14 +4,18 @@ M.bg = '#000000'
 M.fg = '#ffffff'
 M.day_brightness = 0.3
 
+---@param c string
 local function hexToRgb(c)
 	c = string.lower(c)
 	return { tonumber(c:sub(2, 3), 16), tonumber(c:sub(4, 5), 16), tonumber(c:sub(6, 7), 16) }
 end
 
-function M.blend(fg, bg, alpha)
-	bg = hexToRgb(bg)
-	fg = hexToRgb(fg)
+---@param foreground string foreground color
+---@param background string background color
+---@param alpha number number between 0 and 1. 0 results in bg, 1 results in fg
+function M.blend(foreground, background, alpha)
+	local fg = hexToRgb(foreground)
+	local bg = hexToRgb(background)
 
 	local blendChannel = function(i)
 		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
