@@ -4,6 +4,7 @@ local COMMENTS = {
     ['comment'] = true,
     ['line_comment'] = true,
     ['block_comment'] = true,
+    ['multiline_comment'] = true,
     ['comment_environment'] = true,
 }
 
