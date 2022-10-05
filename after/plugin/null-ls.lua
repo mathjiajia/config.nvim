@@ -15,10 +15,12 @@ null_ls.setup {
 	sources = sources,
 	on_attach = function(client, bufnr)
 		if client.server_capabilities.documentFormattingProvider then
-			vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Formmating' })
+			vim.keymap.set('n', '<leader>lf', function()
+				vim.lsp.buf.format { async = true }
+			end, { buffer = bufnr, desc = 'Formmating' })
 		end
 		if client.server_capabilities.documentRangeFormattingProvider then
-			vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
+			vim.keymap.set('v', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
 		end
 	end,
 }

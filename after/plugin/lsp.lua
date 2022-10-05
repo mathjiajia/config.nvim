@@ -45,8 +45,7 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.server_capabilities.codeActionProvider then
-		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions' })
-		vim.keymap.set('v', '<leader>ca', vim.lsp.buf.range_code_action, { buffer = bufnr, desc = 'Range Code Actions' })
+		vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = '(Range) Code Actions' })
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
@@ -57,10 +56,12 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.server_capabilities.documentFormattingProvider then
-		vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Formmating' })
+		vim.keymap.set('n', '<leader>lf', function()
+			vim.lsp.buf.format { async = true }
+		end, { buffer = bufnr, desc = 'Formmating' })
 	end
 	if client.server_capabilities.documentRangeFormattingProvider then
-		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, { buffer = bufnr, desc = 'Range Formmating' })
+		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
 	-- if client.server_capabilities.codeLensProvider then
