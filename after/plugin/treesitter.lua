@@ -4,7 +4,7 @@ require('nvim-treesitter.configs').setup {
 		'latex', 'markdown_inline', 'python',
 		'query', 'regex', 'swift',
 	},
-	auto_install = true,
+	-- auto_install = true,
 	highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
 	-- custom_captures = {
 	-- 	['text.math.marker'] = 'Identifier',
