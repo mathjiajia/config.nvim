@@ -1,6 +1,6 @@
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 vim.wo.cursorline = true
 vim.o.ignorecase = true
 vim.o.laststatus = 3
