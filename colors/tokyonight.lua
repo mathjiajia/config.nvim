@@ -1,14 +1,13 @@
 -- Modofied from https://github.com/folke/tokyonight.nvim
 vim.g.colors_name = 'tokyonight'
 
-local util  = require 'themes.util'
-local style = 'night'
-local c     = {}
+local util = require 'themes.util'
+local c    = {}
 
 c = {
 	none           = 'NONE',
-	bg_dark        = '#1f2335',
-	bg             = '#24283b',
+	bg_dark        = '#16161e',
+	bg             = '#1a1b26',
 	bg_highlight   = '#292e42',
 	terminal_black = '#414868',
 	fg             = '#c0caf5',
@@ -48,10 +47,10 @@ c = {
 	}
 }
 
-if style == 'night' then
-	c.bg = '#1a1b26'
-	c.bg_dark = '#16161e'
-end
+-- if style == 'storm' then
+-- 	c.bg = '#24283b'
+-- 	c.bg_dark = '#1f2335'
+-- end
 
 c.diff = {
 	add    = util.darken(c.green2, 0.15),
@@ -113,7 +112,7 @@ vim.api.nvim_set_hl(0, 'SignColumnSB', { bg = c.bg_sidebar, fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'Substitute', { bg = c.red, fg = c.black })
 vim.api.nvim_set_hl(0, 'LineNr', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = c.dark5 })
-vim.api.nvim_set_hl(0, 'MatchParen', { fg = c.orange, bold = true })
+vim.api.nvim_set_hl(0, 'MatchParen', { bold = true }) -- FIXED
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = c.fg_dark, bold = true })
 vim.api.nvim_set_hl(0, 'MsgArea', { fg = c.fg_dark })
 -- vim.api.nvim_set_hl(0, 'MsgSeparator', {})
@@ -429,9 +428,35 @@ vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = c.green1, bg = c.none })
 vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = c.green1, bg = c.none })
 vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = c.dark5, bg = c.none })
 
----------- INDENT BLANKLINE ----------
+-- Indent Blankline
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = c.fg_gutter })
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = c.purple })
+
+-- Notify
+--- Border
+vim.api.nvim_set_hl(0, 'NotifyERRORBorder', { fg = util.darken(c.error, 0.3), bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyWARNBorder', { fg = util.darken(c.warning, 0.3), bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyINFOBorder', { fg = util.darken(c.info, 0.3), bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGBorder', { fg = util.darken(c.comment, 0.3), bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyTRACEBorder', { fg = util.darken(c.purple, 0.3), bg = c.bg })
+--- Icons
+vim.api.nvim_set_hl(0, 'NotifyERRORIcon', { fg = c.error })
+vim.api.nvim_set_hl(0, 'NotifyWARNIcon', { fg = c.warning })
+vim.api.nvim_set_hl(0, 'NotifyINFOIcon', { fg = c.info })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGIcon', { fg = c.comment })
+vim.api.nvim_set_hl(0, 'NotifyTRACEIcon', { fg = c.purple })
+--- Title
+vim.api.nvim_set_hl(0, 'NotifyERRORTitle', { fg = c.error })
+vim.api.nvim_set_hl(0, 'NotifyWARNTitle', { fg = c.warning })
+vim.api.nvim_set_hl(0, 'NotifyINFOTitle', { fg = c.info })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGTitle', { fg = c.comment })
+vim.api.nvim_set_hl(0, 'NotifyTRACETitle', { fg = c.purple })
+--- Body
+vim.api.nvim_set_hl(0, 'NotifyERRORBody', { fg = c.fg, bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyWARNBody', { fg = c.fg, bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyINFOBody', { fg = c.fg, bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyDEBUGBody', { fg = c.fg, bg = c.bg })
+vim.api.nvim_set_hl(0, 'NotifyTRACEBody', { fg = c.fg, bg = c.bg })
 
 ---------- TERMINAL COLORS ----------
 -- dark

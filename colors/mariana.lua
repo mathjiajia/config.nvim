@@ -2,26 +2,26 @@
 vim.g.colors_name = 'mariana'
 
 local c = {
-	shadeemphasis = '#2e363e',
-	gray1         = '#000000',
-	gray2         = '#2e353e', --'#272e35', -- float bg
-	gray3         = '#2f373f',
-	gray4         = '#303841', -- bg
-	gray5         = '#46525c',
-	gray6         = '#a6acb8',
-	gray7         = '#d8dee9', -- '#d5dee6', -- fg
-	gray8         = '#f7f7f7',
-	gray9         = '#ffffff',
-	green         = '#99c794',
-	blue0         = '#5c99d6',
-	blue1         = '#95b2d6', -- '#6699cc'
-	cyan          = '#5fb4b4',
-	orange1       = '#ee932b',
-	orange2       = '#f9ae58',
-	pink          = '#cc8ec6',
-	red           = '#ec5f66',
-	red2          = '#f97b58',
-	yellow        = '#fac761',
+	gray0   = '#000000',
+	gray1   = '#2e363e',
+	gray2   = '#2e353e',
+	gray3   = '#2f373f',
+	gray4   = '#303841',
+	gray5   = '#46525c',
+	gray6   = '#a6acb8',
+	gray7   = '#d8dee9',
+	gray8   = '#f7f7f7',
+	gray9   = '#ffffff',
+	green   = '#99c794',
+	blue0   = '#5c99d6',
+	blue1   = '#95b2d6',
+	cyan    = '#5fb4b4',
+	orange1 = '#ee932b',
+	orange2 = '#f9ae58',
+	pink    = '#cc8ec6',
+	red     = '#ec5f66',
+	red2    = '#f97b58',
+	yellow  = '#fac761',
 }
 
 local Foreground = {
@@ -30,10 +30,10 @@ local Foreground = {
 	default = c.gray7,
 	emphasis = c.gray8,
 }
---- Background to make color more visible
+
 local Shade = {
 	default = c.gray3,
-	emphasis = c.shadeemphasis,
+	emphasis = c.gray1,
 }
 local Background = {
 	emphasis = c.gray2,
@@ -88,8 +88,8 @@ vim.api.nvim_set_hl(0, 'ModeMsg', { fg = Foreground.default })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = Foreground.default, bold = true })
 vim.api.nvim_set_hl(0, 'Question', { link = 'MoreMsg' })
 
-vim.api.nvim_set_hl(0, 'Search', { fg = c.gray1, bg = c.orange2 })
-vim.api.nvim_set_hl(0, 'IncSearch', { fg = c.gray1, bg = c.orange2 })
+vim.api.nvim_set_hl(0, 'Search', { fg = c.gray0, bg = c.orange2 })
+vim.api.nvim_set_hl(0, 'IncSearch', { fg = c.gray0, bg = c.orange2 })
 
 vim.api.nvim_set_hl(0, 'SignColumn', { fg = Foreground.default, bg = Background.default })
 vim.api.nvim_set_hl(0, 'SpellBad', { sp = c.red, undercurl = true })
