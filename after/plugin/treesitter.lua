@@ -1,6 +1,6 @@
 require('nvim-treesitter.configs').setup {
 	ensure_installed = {
-		'bibtex', 'comment', 'gitignore',
+		'bibtex', 'comment', 'fish', 'gitignore',
 		'latex', 'markdown', 'markdown_inline', 'python',
 		'query', 'regex', 'swift',
 	},
