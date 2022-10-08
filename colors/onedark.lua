@@ -437,6 +437,31 @@ vim.api.nvim_set_hl(0, 'TSTypeBuiltin', { fg = palette.yellow })
 vim.api.nvim_set_hl(0, 'TSVariable', { fg = palette.red })
 vim.api.nvim_set_hl(0, 'TSVariableBuiltin', { fg = palette.yellow, italic = true })
 
+-- markdown
+vim.api.nvim_set_hl(0, '@text.literal.markdown', { fg = palette.green })
+vim.api.nvim_set_hl(0, '@text.reference.markdown', { fg = palette.blue })
+vim.api.nvim_set_hl(0, '@text.title.markdown', { fg = palette.red, bold = true })
+vim.api.nvim_set_hl(0, '@parameter.markdown', { fg = palette.fg })
+vim.api.nvim_set_hl(0, '@punctuation.special.markdown', { fg = palette.red })
+vim.api.nvim_set_hl(0, '@punctuation.delimiter.markdown', { fg = palette.gray })
+vim.api.nvim_set_hl(0, '@uri.markdown', { fg = palette.gray })
+vim.api.nvim_set_hl(0, '@text.uri.markdown', { fg = palette.green })
+
+-- python
+vim.api.nvim_set_hl(0, '@method.call.python', { fg = palette.yellow })
+vim.api.nvim_set_hl(0, '@constructor.python', { fg = palette.cyan, bold = true })
+
+-- ruby
+vim.api.nvim_set_hl(0, '@function.ruby', { fg = palette.blue, bold = true })
+vim.api.nvim_set_hl(0, '@function.call.ruby', { fg = palette.blue, bold = true })
+vim.api.nvim_set_hl(0, '@include.ruby', { fg = palette.blue, italic = true })
+vim.api.nvim_set_hl(0, '@parameter.ruby', { fg = palette.fg, italic = true })
+vim.api.nvim_set_hl(0, '@symbol.ruby', { fg = palette.cyan })
+
+-- yaml
+vim.api.nvim_set_hl(0, '@field.yaml', { fg = palette.red, italic = true })
+vim.api.nvim_set_hl(0, '@string.yaml', { fg = palette.green })
+
 ---------- TERMINAL COLORS ----------
 vim.g.terminal_color_0  = palette.gray
 vim.g.terminal_color_1  = palette.red
