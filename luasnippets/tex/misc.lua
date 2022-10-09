@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
 local tex = require 'snips.latex'
-local pipe = require 'snips.util'.pipe
+local conds = require 'luasnip.extras.conditions.expand'
 
 local appended_space_after_insert = function()
 	vim.api.nvim_create_autocmd('InsertCharPre', {
@@ -61,17 +61,17 @@ autosnips = {
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },
-		{ condition = pipe { conds.line_begin, tex.in_text } }
+		{ condition = conds.line_begin * tex.in_text }
 	),
 	s(
 		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.' },
 		{ t '&\\phantom{\\;=\\;} ' },
-		{ condition = pipe { conds.line_begin, tex.in_align }, show_condition = tex.in_align }
+		{ condition = conds.line_begin * tex.in_align, show_condition = tex.in_align }
 	),
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
 		{ t { '\\noindent', '' } },
-		{ condition = pipe { conds.line_begin, tex.in_text }, show_condition = tex.in_text }
+		{ condition = conds.line_begin * tex.in_text, show_condition = tex.in_text }
 	),
 }
 

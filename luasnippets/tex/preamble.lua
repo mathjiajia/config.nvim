@@ -8,7 +8,7 @@ local on_top = function()
 	return false
 end
 
-local pipe = require 'snips.util'.pipe
+local conds = require 'luasnip.extras.conditions.expand'
 
 snips = {
 	s(
@@ -334,7 +334,7 @@ snips = {
 				},
 			}),
 		}),
-		{ condition = pipe { on_top, conds.line_begin }, show_condition = on_top }
+		{ condition = on_top * conds.line_begin, show_condition = on_top }
 	),
 }
 

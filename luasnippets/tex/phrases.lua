@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
 local tex = require 'snips.latex'
-local pipe = require 'snips.util'.pipe
+local conds = require 'luasnip.extras.conditions.expand'
 
 snips = {
 	s(
@@ -153,14 +153,14 @@ autosnips = {
 	s(
 		{ trig = 'Tfae', name = 'The following are equivalent' },
 		{ t 'The following are equivalent' },
-		{ condition = pipe { conds.line_begin, tex.in_text } }
+		{ condition = conds.line_begin * tex.in_text }
 	),
 	s(
 		{ trig = '([wW])log', name = 'without loss of generality', regTrig = true },
 		{ f(function(_, snip)
 			return snip.captures[1] .. 'ithout loss of generality'
 		end, {}) },
-		{ condition = pipe { conds.line_begin, tex.in_text } }
+		{ condition = conds.line_begin * tex.in_text }
 	),
 
 	s(

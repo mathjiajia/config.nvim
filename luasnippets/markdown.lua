@@ -1,6 +1,5 @@
 local snips, autosnips = {}, {}
-
-local pipe = require 'snips.util'.pipe
+local conds = require 'luasnip.extras.conditions.expand'
 
 local on_top = function()
 	local cursor = vim.api.nvim_win_get_cursor(0)
@@ -38,7 +37,7 @@ snips = {
 			t { '"]', '---', '', '' },
 			i(0),
 		},
-		{ condition = pipe { on_top, conds.line_begin }, show_condition = on_top }
+		{ condition = on_top * conds.line_begin, show_condition = on_top }
 	),
 	s(
 		{ trig = 'td', name = 'too long, do not read' },
