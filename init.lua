@@ -1,7 +1,5 @@
 require 'impatient'
 
-vim.notify = require 'notify'
-
 vim.g.mapleader = ','
 
 -- DISABLE REMOTE PLUGINS
