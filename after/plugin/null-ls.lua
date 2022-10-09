@@ -8,6 +8,7 @@ local sources = {
 	b.formatting.prettierd.with { filetypes = { 'html', 'json', 'yaml', 'markdown' } },
 	-- b.formatting.stylua,
 	-- b.diagnostics.chktex,
+	b.diagnostics.fish,
 	b.diagnostics.markdownlint.with { args = { '--config', '~/.config/markdownlint/markdownlint.yaml', '--stdin' } },
 }
 
