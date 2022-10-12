@@ -5,10 +5,10 @@ require('nvim-treesitter.configs').setup {
 		'python', 'query', 'regex', 'swift',
 	},
 	-- auto_install = true,
-	highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
-	-- custom_captures = {
-	-- 	['text.math.marker'] = 'Identifier',
-	-- },
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = { 'latex' }
+	},
 	incremental_selection = { enable = true },
 	-- textobjects = { enable = true },
 	indent = { enable = true },
@@ -18,6 +18,10 @@ require('nvim-treesitter.configs').setup {
 	query_linter = { enable = true },
 }
 
+-- require 'nvim-treesitter.highlight'.set_custom_captures {
+-- 	['text.math.marker'] = 'Identifier',
+-- }
+
 -- Folding
-vim.opt_local.foldmethod = 'expr'
-vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+-- vim.opt_local.foldmethod = 'expr'
+-- vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
