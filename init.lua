@@ -10,7 +10,6 @@ vim.g.loaded_perl_provider = 0
 
 -- TURN OFF SOME BUILTIN PLUGINS
 vim.g.loaded_gzip = 1
-vim.g.loaded_man = 1
 vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
 vim.g.loaded_netrwPlugin = 1
