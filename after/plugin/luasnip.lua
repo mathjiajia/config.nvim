@@ -29,6 +29,6 @@ vim.keymap.set('i', '<C-l>', function()
 	end
 end, { desc = 'LuaSnip Next Choice' })
 
-require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnip/' })
+require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnips/' })
 
 -- vim.api.nvim_add_user_command('LuaSnipEdit', edit_ft, {})
