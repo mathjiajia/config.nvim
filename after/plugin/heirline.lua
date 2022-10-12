@@ -615,8 +615,8 @@ local TablineCloseButton = {
 	},
 }
 
--- The final touch!
-local TablineBufferBlock = utils.surround({ '', '' }, function(self)
+-- The final touch! '', ''
+local TablineBufferBlock = utils.surround({ ' ', ' ' }, function(self)
 	if self.is_active then
 		return utils.get_highlight('TabLineSel').bg
 	else
