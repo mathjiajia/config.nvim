@@ -4,7 +4,7 @@ local ts = require 'vim.treesitter'
 local query = require 'vim.treesitter.query'
 
 ---Check if cursor is in treesitter capture
----@param capture string | string[]
+---@param capture (string|string[])
 ---@return boolean
 local in_ts_capture = function(capture)
 	local buf = vim.api.nvim_get_current_buf()
@@ -69,7 +69,6 @@ local function get_node_at_cursor()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	row = row - 1
 	col = col - 1
-	local ts_range = { row, col, row, col }
 
 	local parser = ts.get_parser(buf, 'latex')
 	if not parser then
@@ -83,7 +82,7 @@ local function get_node_at_cursor()
 		return
 	end
 
-	return root:named_descendant_for_range(ts_range)
+	return root:named_descendant_for_range(row, col, row, col)
 end
 
 ---Check if cursor is in treesitter node of 'math_environment': 'align'
