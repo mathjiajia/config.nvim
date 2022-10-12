@@ -3,11 +3,54 @@ local M = {}
 local ts = require 'vim.treesitter'
 local query = require 'vim.treesitter.query'
 
-local MATH_NODES = {
-	displayed_equation = true,
-	inline_formula = true,
-	math_environment = true,
-}
+
+---Check if cursor is in treesitter capture of 'text.math'
+---@return boolean
+function M.in_mathzone()
+	local buf = vim.api.nvim_get_current_buf()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	row = row - 1
+	col = col - 1
+
+	local get_captures_at_pos = ts.get_captures_at_pos
+
+	local captures_at_cursor = vim.tbl_map(function(x)
+		return x.capture
+	end, get_captures_at_pos(buf, row, col))
+
+	if vim.tbl_isempty(captures_at_cursor) then
+		return false
+	elseif vim.tbl_contains(captures_at_cursor, 'text.math') then
+		return true
+	end
+
+	return false
+end
+
+---Check if cursor is in treesitter node of 'text'
+---@return boolean
+function M.in_text()
+	local buf = vim.api.nvim_get_current_buf()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	row = row - 1
+	col = col - 1
+
+	local get_captures_at_pos = ts.get_captures_at_pos
+
+	local captures_at_cursor = vim.tbl_map(function(x)
+		return x.capture
+	end, get_captures_at_pos(buf, row, col))
+
+	if vim.tbl_contains(captures_at_cursor, 'text.math') or
+		vim.tbl_contains(captures_at_cursor, 'function') or
+		vim.tbl_contains(captures_at_cursor, 'include') or
+		vim.tbl_contains(captures_at_cursor, '_name') then
+		return false
+	end
+
+	return true
+end
+
 local ALIGN_ENVIRONMENTS = {
 	['{multline}']  = true,
 	['{multline*}'] = true,
@@ -32,11 +75,13 @@ local function get_node_at_cursor()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	row = row - 1
 	col = col - 1
+	local ts_range = { row, col, row, col }
 
 	local parser = ts.get_parser(buf, 'latex')
 	if not parser then
 		return
 	end
+
 	local root_tree = parser:parse()[1]
 	local root = root_tree and root_tree:root()
 
@@ -44,35 +89,11 @@ local function get_node_at_cursor()
 		return
 	end
 
-	return root:named_descendant_for_range(row, col, row, col)
+	return root:named_descendant_for_range(ts_range)
 end
 
-function M.in_text()
-	local node = get_node_at_cursor()
-	while node do
-		if node:type() == 'text_mode' then
-			return true
-		elseif MATH_NODES[node:type()] then
-			return false
-		end
-		node = node:parent()
-	end
-	return true
-end
-
-function M.in_mathzone()
-	local node = get_node_at_cursor()
-	while node do
-		if node:type() == 'text_mode' then
-			return false
-		elseif MATH_NODES[node:type()] then
-			return true
-		end
-		node = node:parent()
-	end
-	return false
-end
-
+---Check if cursor is in treesitter node of 'math_environment': 'align'
+---@return boolean
 function M.in_align()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
@@ -90,6 +111,8 @@ function M.in_align()
 	return false
 end
 
+---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
+---@return boolean
 function M.in_xymatrix()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
