@@ -1,5 +1,6 @@
 local snips, autosnips = {}, {}
 
+local postfix = require('luasnip.extras.postfix').postfix
 local tex = require 'snips.latex'
 
 snips = {
@@ -21,42 +22,19 @@ snips = {
 }
 
 autosnips = {
-	s(
-		{ trig = '(%a)bar', name = 'post overline', wordTrig = false, regTrig = true },
-		{ f(function(_, snip)
-			return '\\overline{' .. snip.captures[1] .. '}'
-		end, {}) },
+	postfix({ trig = 'bar', name = 'post overline' },
+		{ l('\\overline{' .. l.POSTFIX_MATCH .. '}') },
 		{ condition = tex.in_mathzone }
 	),
-	s(
-		{ trig = '(%a)hat', name = 'post widehat', wordTrig = false, regTrig = true },
-		{ f(function(_, snip)
-			return '\\widehat{' .. snip.captures[1] .. '}'
-		end, {}) },
+	postfix({ trig = 'hat', name = 'post widehat' },
+		{ l('\\widehat{' .. l.POSTFIX_MATCH .. '}') },
 		{ condition = tex.in_mathzone }
 	),
-	s(
-		{ trig = '(%a)td', name = 'post widetilde', wordTrig = false, regTrig = true },
-		{ f(function(_, snip)
-			return '\\widetilde{' .. snip.captures[1] .. '}'
-		end, {}) },
+	postfix({ trig = 'td', name = 'post widetilde' },
+		{ l('\\widetilde{' .. l.POSTFIX_MATCH .. '}') },
 		{ condition = tex.in_mathzone }
 	),
-	s(
-		{ trig = 'bar', name = 'overline' },
-		{ t '\\overline{', i(1), t '}' },
-		{ condition = tex.in_mathzone }
-	),
-	s(
-		{ trig = 'hat', name = 'widehat' },
-		{ t '\\widehat{', i(1), t '}' },
-		{ condition = tex.in_mathzone }
-	),
-	s(
-		{ trig = 'td', name = 'widetilde' },
-		{ t '\\widetilde{', i(1), t '}' },
-		{ condition = tex.in_mathzone }
-	),
+
 	s(
 		{ trig = 'quad', name = 'quad' },
 		{ t '\\quad ' },
