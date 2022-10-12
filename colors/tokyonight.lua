@@ -1,6 +1,9 @@
 -- Modofied from https://github.com/folke/tokyonight.nvim
 vim.g.colors_name = 'tokyonight'
 
+vim.g.skip_ts_default_groups = true
+vim.o.termguicolors = true
+
 local util = require 'themes.util'
 local c    = {}
 
@@ -283,7 +286,7 @@ vim.api.nvim_set_hl(0, '@label', { fg = c.blue })
 vim.api.nvim_set_hl(0, '@operator', { fg = c.blue5 })
 
 vim.api.nvim_set_hl(0, '@parameter', { fg = c.yellow })
--- vim.api.nvim_set_hl(0, 'parameter.reference', {})
+-- vim.api.nvim_set_hl(0, '@parameter.reference', {})
 
 vim.api.nvim_set_hl(0, '@preproc', { fg = c.yellow })
 

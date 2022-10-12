@@ -16,7 +16,6 @@ vim.o.smartindent = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.bo.swapfile = false
-vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.updatetime = 200
 vim.o.whichwrap = 'b,s,[,]'
@@ -31,4 +30,4 @@ vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
 -- vim.o.background = 'light'
-vim.cmd.colorscheme 'tokyonight'
+vim.cmd.colorscheme 'mariana'
