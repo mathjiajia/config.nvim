@@ -3,10 +3,10 @@ local M = {}
 local ts = require 'vim.treesitter'
 local query = require 'vim.treesitter.query'
 
-
----Check if cursor is in treesitter capture of 'text.math'
+---Check if cursor is in treesitter capture
+---@param capture string | string[]
 ---@return boolean
-function M.in_mathzone()
+local in_ts_capture = function(capture)
 	local buf = vim.api.nvim_get_current_buf()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	row = row - 1
@@ -20,35 +20,29 @@ function M.in_mathzone()
 
 	if vim.tbl_isempty(captures_at_cursor) then
 		return false
-	elseif vim.tbl_contains(captures_at_cursor, 'text.math') then
+	elseif type(capture) == 'string' and vim.tbl_contains(captures_at_cursor, capture) then
 		return true
+	elseif type(capture) == 'table' then
+		for _, v in ipairs(capture) do
+			if vim.tbl_contains(captures_at_cursor, v) then
+				return true
+			end
+		end
 	end
 
 	return false
 end
 
+---Check if cursor is in treesitter capture of 'text.math'
+---@return boolean
+function M.in_mathzone()
+	return in_ts_capture 'text.math'
+end
+
 ---Check if cursor is in treesitter node of 'text'
 ---@return boolean
 function M.in_text()
-	local buf = vim.api.nvim_get_current_buf()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	row = row - 1
-	col = col - 1
-
-	local get_captures_at_pos = ts.get_captures_at_pos
-
-	local captures_at_cursor = vim.tbl_map(function(x)
-		return x.capture
-	end, get_captures_at_pos(buf, row, col))
-
-	if vim.tbl_contains(captures_at_cursor, 'text.math') or
-		vim.tbl_contains(captures_at_cursor, 'function') or
-		vim.tbl_contains(captures_at_cursor, 'include') or
-		vim.tbl_contains(captures_at_cursor, '_name') then
-		return false
-	end
-
-	return true
+	return not in_ts_capture({ 'text.math', 'function', 'include', '_name' })
 end
 
 local ALIGN_ENVIRONMENTS = {
