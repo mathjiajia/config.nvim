@@ -7,6 +7,7 @@ vim.o.laststatus = 3
 vim.wo.linebreak = true
 vim.wo.number = true
 vim.wo.relativenumber = true
+vim.bo.spelllang = 'en_gb'
 vim.o.pumheight = 10
 vim.o.scrolloff = 8
 vim.o.showbreak = '> '
@@ -30,4 +31,4 @@ vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
 -- vim.o.background = 'light'
-vim.cmd.colorscheme 'mariana'
+vim.cmd.colorscheme 'vscode'
