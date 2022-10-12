@@ -19,8 +19,7 @@ local colors = {
 	git_del    = utils.get_highlight('GitSignsDelete').fg,
 	git_add    = utils.get_highlight('GitSignsAdd').fg,
 	git_change = utils.get_highlight('GitSignsChange').fg,
-	git_branch = '#D3869B',
-	mode_fg    = '#242424',
+	git_branch = utils.get_highlight('DiffText').bg,
 }
 
 require('heirline').load_colors(colors)
@@ -103,7 +102,6 @@ local mode_colors = setmetatable({
 }, {
 	__index = function(_, mode)
 		return {
-			fg = 'mode_fg',
 			bg = mode_colors_table[mode],
 		}
 	end
