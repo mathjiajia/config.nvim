@@ -1,41 +1,27 @@
 local M = {}
 
-local COMMENTS = {
-    ['comment'] = true,
-    ['line_comment'] = true,
-    ['block_comment'] = true,
-    ['multiline_comment'] = true,
-    ['comment_environment'] = true,
-}
-
-local function get_node_at_cursor()
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    local cursor_range = { cursor[1] - 1, cursor[2] - 1 }
-    local buf = vim.api.nvim_get_current_buf()
-    local ok, parser = pcall(require('vim.treesitter').get_parser, buf)
-
-    if not ok or not parser then
-        return
-    end
-
-    local root_tree = parser:parse()[1]
-    local root = root_tree and root_tree:root()
-
-    if not root then
-        return
-    end
-
-    return root:named_descendant_for_range(cursor_range[1], cursor_range[2], cursor_range[1], cursor_range[2])
-end
-
+---Check if cursor is in treesitter capture of 'comment'
+---@return boolean
 function M.in_comments()
-    local node = get_node_at_cursor()
-    while node do
-        if COMMENTS[node:type()] then
-            return true
-        end
-        node = node:parent()
+    local buf = vim.api.nvim_get_current_buf()
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    row = row - 1
+    if vim.api.nvim_get_mode().mode == 'i' then
+        col = col - 1
     end
+
+    local get_captures_at_pos = require('vim.treesitter').get_captures_at_pos
+
+    local captures_at_cursor = vim.tbl_map(function(x)
+        return x.capture
+    end, get_captures_at_pos(buf, row, col))
+
+    if vim.tbl_isempty(captures_at_cursor) then
+        return false
+    elseif vim.tbl_contains(captures_at_cursor, 'comment') then
+        return true
+    end
+
     return false
 end
 
