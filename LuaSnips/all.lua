@@ -4,7 +4,7 @@ local in_comments = require 'snips.comments'.in_comments
 
 snips = {
 	s(
-		{ trig = 'todo', name = 'TODO, NOTE, FIXME' },
+		{ trig = 'todo', name = 'TODO, NOTE, FIXME', dscr = 'TODO, NOTE, FIXME' },
 		{ c(1, {
 			t 'TODO(jia): ',
 			t 'NOTE(jia): ',

@@ -42,6 +42,8 @@ end
 ---Check if cursor is in treesitter node of 'text'
 ---@return boolean
 function M.in_text()
+	-- TODO: maybe use 'spell' when they fix it
+	-- return in_ts_capture 'spell'
 	return not in_ts_capture({ 'text.math', 'function', 'include', '_name' })
 end
 
