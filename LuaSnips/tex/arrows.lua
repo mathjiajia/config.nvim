@@ -29,32 +29,32 @@ autosnips = {
 	s(
 		{ trig = '<->', wordTrig = false, name = 'leftrightarrow <->' },
 		{ t '\\leftrightarrow ' },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '->', wordTrig = false, name = 'rightarrow -->' },
 		{ t '\\longrightarrow ' },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '!>', wordTrig = false, name = 'mapsto |->' },
 		{ t '\\mapsto ' },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '=>', name = 'implies =>', wordTrig = false },
 		{ t '\\implies ' },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '=<', name = 'impliedby', wordTrig = false },
 		{ t '\\impliedby ' },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'iff', name = 'if and only if <=>', wordTrig = false },
 		{ t '\\iff ' },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 }
 
