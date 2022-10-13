@@ -1,7 +1,8 @@
 local snips, autosnips = {}, {}
 
-local tex = require 'snips.latex'
 local conds = require 'luasnip.extras.conditions.expand'
+local context = require 'snips.context'
+local tex = require 'snips.latex'
 
 local appended_space_after_insert = function()
 	vim.api.nvim_create_autocmd('InsertCharPre', {
@@ -27,7 +28,7 @@ autosnips = {
 		{ f(function(_, snip)
 			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
 		end, {}) },
-		{ condition = tex.in_text }
+		{ condition = context.in_text }
 	),
 	s(
 		{
@@ -39,21 +40,21 @@ autosnips = {
 		{ f(function(_, snip)
 			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
 		end, {}) },
-		{ condition = tex.in_text }
+		{ condition = context.in_text }
 	),
 	s(
 		{ trig = '(%s)(%w[-_+=><]%w)([,;.%)]?)%s+', name = 'surround i+1', wordTrig = false, regTrig = true },
 		{ f(function(_, snip)
 			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
 		end, {}) },
-		{ condition = tex.in_text }
+		{ condition = context.in_text }
 	),
 
 	s(
 		{ trig = 'mk', name = 'inline math', dscr = 'Insert inline Math Environment.' },
 		{ t '\\(', i(1), t '\\)' },
 		{
-			condition = tex.in_text,
+			condition = context.in_text,
 			callbacks = {
 				[-1] = { [events.leave] = appended_space_after_insert },
 			},
@@ -61,7 +62,7 @@ autosnips = {
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },
-		{ condition = conds.line_begin * tex.in_text }
+		{ condition = conds.line_begin * context.in_text }
 	),
 	s(
 		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.' },
@@ -71,7 +72,7 @@ autosnips = {
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
 		{ t { '\\noindent', '' } },
-		{ condition = conds.line_begin * tex.in_text, show_condition = tex.in_text }
+		{ condition = conds.line_begin * context.in_text, show_condition = context.in_text }
 	),
 }
 

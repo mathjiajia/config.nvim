@@ -107,5 +107,5 @@ require('packer').startup(function(use)
 	-- use 'nvim-neorg/neorg'
 	-- use 'nvim-neorg/neorg-telescope'
 
-	-- use 'dstein64/vim-startuptime'
+	use 'dstein64/vim-startuptime'
 end)

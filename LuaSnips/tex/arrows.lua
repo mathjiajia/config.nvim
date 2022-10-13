@@ -1,5 +1,6 @@
 local snips, autosnips = {}, {}
 
+local context = require 'snips.context'
 local tex = require 'snips.latex'
 
 autosnips = {
@@ -12,7 +13,7 @@ autosnips = {
 				return sn(nil, { t { '\\ar@{-->}[' }, i(1), t { ']' } })
 			end
 		end) },
-		{ condition = tex.in_mathzone }),
+		{ condition = context.in_mathzone }),
 	s(
 		{ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false },
 		{ d(1, function()
@@ -22,7 +23,7 @@ autosnips = {
 				return sn(nil, { t { '\\ar@{^{(}->}[' }, i(1), t { ']' } })
 			end
 		end) },
-		{ condition = tex.in_mathzone }
+		{ condition = context.in_mathzone }
 	),
 
 	s(

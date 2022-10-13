@@ -1,6 +1,6 @@
 local snips = {}
 
-local in_comments = require 'snips.comments'.in_comments
+local in_comments = require 'snips.context'.in_comments
 
 snips = {
 	s(
