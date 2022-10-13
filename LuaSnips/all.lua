@@ -1,6 +1,6 @@
 local snips = {}
 
-local in_comments = require 'snips.context'.in_comments
+local context = require 'snips.context'
 
 snips = {
 	s(
@@ -10,7 +10,7 @@ snips = {
 			t 'NOTE(jia): ',
 			t 'FIXME(jia): ',
 		}) },
-		{ condition = in_comments, show_condition = in_comments }
+		{ condition = context.in_comments, show_condition = context.in_comments }
 	),
 }
 
