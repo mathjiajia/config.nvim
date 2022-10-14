@@ -19,7 +19,7 @@ local colors = {
 	git_del    = utils.get_highlight('GitSignsDelete').fg,
 	git_add    = utils.get_highlight('GitSignsAdd').fg,
 	git_change = utils.get_highlight('GitSignsChange').fg,
-	git_branch = utils.get_highlight('String').fg,
+	work_dir   = utils.get_highlight('@property').fg,
 }
 
 require('heirline').load_colors(colors)
@@ -110,7 +110,7 @@ local mode_colors = setmetatable({
 
 local LeftCap = {
 	provider = '▌',
-	hl = { fg = 'git_branch' }
+	hl = { fg = 'work_dir' }
 }
 
 local VimModeNormal = {
@@ -118,7 +118,7 @@ local VimModeNormal = {
 		return self.mode == 'n'
 	end,
 	provider = ' ●',
-	hl = { fg = 'git_branch' }
+	hl = { fg = 'work_dir' }
 }
 
 local VimModeOthers = {
@@ -327,7 +327,7 @@ local Git = {
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
 
-	hl = { fg = 'git_branch' },
+	hl = { fg = 'work_dir' },
 
 
 	{ -- git branch name
@@ -431,7 +431,7 @@ local HelpFileName = {
 		local filename = vim.api.nvim_buf_get_name(0)
 		return vim.fn.fnamemodify(filename, ':t')
 	end,
-	hl = { fg = colors.blue },
+	hl = { fg = 'blue' },
 }
 
 local Align = { provider = '%=' }
@@ -614,8 +614,8 @@ local TablineCloseButton = {
 	},
 }
 
--- The final touch! '', ''
-local TablineBufferBlock = utils.surround({ ' ', ' ' }, function(self)
+-- The final touch!
+local TablineBufferBlock = utils.surround({ '', '' }, function(self)
 	if self.is_active then
 		return utils.get_highlight('TabLineSel').bg
 	else
@@ -665,8 +665,8 @@ local TabLineOffset = {
 		local bufnr = vim.api.nvim_win_get_buf(win)
 		self.winid = win
 
-		if vim.bo[bufnr].filetype == 'neo-tree' then
-			self.title = 'neotree'
+		if vim.bo[bufnr].filetype == 'NvimTree' then
+			self.title = 'NvimTree'
 			return true
 			-- elseif vim.bo[bufnr].filetype == "TagBar" then
 			--     ...
