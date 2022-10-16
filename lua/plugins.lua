@@ -63,7 +63,7 @@ require('packer').startup(function(use)
 
 	use 'stevearc/aerial.nvim'
 	use 'kosayoda/nvim-lightbulb'
-	use 'folke/lua-dev.nvim'
+	use 'folke/neodev.nvim'
 
 	-- Telescope
 	use {
