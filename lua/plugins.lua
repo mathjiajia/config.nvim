@@ -65,6 +65,8 @@ require('packer').startup(function(use)
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/neodev.nvim'
 
+	use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+
 	-- Telescope
 	use {
 		'nvim-telescope/telescope.nvim',
@@ -107,5 +109,5 @@ require('packer').startup(function(use)
 	-- use 'nvim-neorg/neorg'
 	-- use 'nvim-neorg/neorg-telescope'
 
-	-- use 'dstein64/vim-startuptime'
+	use 'dstein64/vim-startuptime'
 end)

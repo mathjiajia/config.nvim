@@ -1,30 +1,12 @@
 local on_attach = function(client, bufnr)
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Declaration' })
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder' })
-	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
-		{ buffer = bufnr, desc = 'Remove Workspace Folder' })
-	vim.keymap.set('n', '<leader>wl', function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, { desc = 'List Workspace Folders' })
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
-
-	local tb = require 'telescope.builtin'
-	local themes = require 'telescope.themes'
-
-	vim.keymap.set('n', 'gd', function()
-		tb.lsp_definitions(themes.get_dropdown {})
-	end, { buffer = bufnr, desc = 'Go to Definitions' })
-	vim.keymap.set('n', 'gr', function()
-		tb.lsp_references(themes.get_dropdown {})
-	end, { buffer = bufnr, desc = 'Go to References' })
-	vim.keymap.set('n', 'gi', function()
-		tb.lsp_implementations(themes.get_dropdown {})
-	end, { buffer = bufnr, desc = 'Go to Implementations' })
-	vim.keymap.set('n', '<leader>D', function()
-		tb.lsp_type_definitions(themes.get_dropdown {})
-	end, { buffer = bufnr, desc = 'Type Definitions' })
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
+	vim.keymap.set('n', 'gr', function() require('trouble').toggle 'lsp_references' end,
+		{ buffer = bufnr, desc = 'Trouble References' })
+	vim.keymap.set('n', 'gR', function() require('telescope.builtin').lsp_references() end,
+		{ buffer = bufnr, desc = 'Telescope References' })
 
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
@@ -45,7 +27,7 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.server_capabilities.codeActionProvider then
-		vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = '(Range) Code Actions' })
+		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = '(Range) Code Actions' })
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
