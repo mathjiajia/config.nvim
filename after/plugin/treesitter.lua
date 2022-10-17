@@ -5,6 +5,7 @@ require('nvim-treesitter.configs').setup {
 		'python', 'query', 'regex', 'swift',
 	},
 	-- auto_install = true,
+	ignore_install = { 'c', 'help', 'lua', 'vim' },
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = { 'latex' }
