@@ -8,7 +8,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gR', function() require('telescope.builtin').lsp_references() end,
 		{ buffer = bufnr, desc = 'Telescope References' })
 
-	if client.server_capabilities.documentHighlightProvider then
+	local caps = client.server_capabilities
+
+	if caps.documentHighlightProvider then
 		vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
 		vim.api.nvim_clear_autocmds({
 			buffer = bufnr,
@@ -26,7 +28,7 @@ local on_attach = function(client, bufnr)
 		})
 	end
 
-	if client.server_capabilities.codeActionProvider then
+	if caps.codeActionProvider then
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = '(Range) Code Actions' })
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -37,16 +39,16 @@ local on_attach = function(client, bufnr)
 		})
 	end
 
-	if client.server_capabilities.documentFormattingProvider then
+	if caps.documentFormattingProvider then
 		vim.keymap.set('n', '<leader>lf', function()
 			vim.lsp.buf.format { async = true }
 		end, { buffer = bufnr, desc = 'Formmating' })
 	end
-	if client.server_capabilities.documentRangeFormattingProvider then
+	if caps.documentRangeFormattingProvider then
 		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
-	-- if client.server_capabilities.codeLensProvider then
+	-- if caps.codeLensProvider then
 	-- 	vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
 	-- 	vim.api.nvim_create_autocmd('BufEnter', {
 	-- 		callback = require('vim.lsp.codelens').refresh,
