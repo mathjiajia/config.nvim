@@ -32,4 +32,4 @@ vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
 vim.g.skip_ts_default_groups = true
-vim.cmd.colorscheme 'tokyonight'
+vim.cmd.colorscheme 'vscode'
