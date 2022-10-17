@@ -2,7 +2,32 @@ local snips, autosnips = {}, {}
 
 local context = require 'snips.context'
 
+-- local texpairs = {
+-- 	{ '(', ')' },
+-- 	{ '\\left(', '\\right)' },
+-- 	{ '\\big(', '\\big)' },
+-- 	{ '\\Big(', '\\Big)' },
+-- 	{ '\\bigg(', '\\bigg)' },
+-- 	{ '\\Bigg(', '\\Bigg)' },
+-- }
+
+-- local function choices_from_pairlist(ji, list)
+-- 	local choices = {}
+-- 	for _, pair in ipairs(list) do
+-- 		table.insert(choices, {
+-- 			t(pair[1]), r(1, 'inside_pairs', dl(1, l.LS_SELECT_DEDENT)), t(pair[2])
+-- 		})
+-- 	end
+-- 	return c(ji, choices)
+-- end
+
 snips = {
+	-- s(
+	-- 	{ trig = '(', name = 'parenthesis', dscr = 'Different kinds of parenthesis' },
+	-- 	{ choices_from_pairlist(1, texpairs) },
+	-- 	{ condition = context.in_text }
+	-- ),
+
 	s(
 		{ trig = 'lr(', name = 'left( right)' },
 		{ t { '\\left( ' }, i(1), t { '\\right)' } },
