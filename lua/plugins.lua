@@ -28,13 +28,13 @@ require('packer').startup(function(use)
 	use 'vigoux/notifier.nvim'
 	use 'rebelot/heirline.nvim'
 	use 'lukas-reineke/indent-blankline.nvim'
-	use({
+	use {
 		'folke/noice.nvim',
 		requires = {
 			'MunifTanjim/nui.nvim',
 			'rcarriga/nvim-notify',
 		}
-	})
+	}
 
 	-- Treesitter
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
