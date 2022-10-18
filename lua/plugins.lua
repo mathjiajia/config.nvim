@@ -66,6 +66,7 @@ require('packer').startup(function(use)
 	use 'folke/neodev.nvim'
 
 	use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+	-- use 'theHamsta/nvim-semantic-tokens'
 
 	-- Telescope
 	use {
