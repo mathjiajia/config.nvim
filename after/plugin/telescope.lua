@@ -1,4 +1,7 @@
 local home = os.getenv 'HOME'
+
+local actions = require 'telescope.actions'
+local actions_layout = require 'telescope.actions.layout'
 local themes = require 'telescope.themes'
 
 require('telescope').setup {
@@ -9,6 +12,16 @@ require('telescope').setup {
 		},
 		prompt_prefix = '   ',
 		selection_caret = ' ',
+		mappings = {
+			i = {
+				['<M-a>'] = actions.toggle_all,
+				['<M-o>'] = actions_layout.toggle_preview,
+			},
+			n = {
+				['<M-a>'] = actions.toggle_all,
+				['<M-o>'] = actions_layout.toggle_preview,
+			},
+		},
 		set_env = { ['COLORTERM'] = 'truecolor' },
 		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
 	},
