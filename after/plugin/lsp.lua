@@ -1,12 +1,34 @@
 local on_attach = function(client, bufnr)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
-	vim.keymap.set('n', 'gr', function() require('trouble').toggle 'lsp_references' end,
-		{ buffer = bufnr, desc = 'Trouble References' })
-	vim.keymap.set('n', 'gR', function() require('telescope.builtin').lsp_references() end,
-		{ buffer = bufnr, desc = 'Telescope References' })
+	vim.keymap.set(
+		'n',
+		'K',
+		vim.lsp.buf.hover,
+		{ buffer = bufnr, desc = 'Docs Hover' }
+	)
+	vim.keymap.set(
+		'n',
+		'<C-k>',
+		vim.lsp.buf.signature_help,
+		{ buffer = bufnr, desc = 'Signature' }
+	)
+	vim.keymap.set(
+		'n',
+		'<leader>rn',
+		vim.lsp.buf.rename,
+		{ buffer = bufnr, desc = 'Rename' }
+	)
+	vim.keymap.set(
+		'n',
+		'gd',
+		vim.lsp.buf.definition,
+		{ buffer = bufnr, desc = 'Go to Definition' }
+	)
+	vim.keymap.set(
+		'n',
+		'gr',
+		require('telescope.builtin').lsp_references,
+		{ buffer = bufnr, desc = 'Telescope References' }
+	)
 
 	local caps = client.server_capabilities
 
@@ -42,7 +64,12 @@ local on_attach = function(client, bufnr)
 	-- end
 
 	if caps.codeActionProvider then
-		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = '(Range) Code Actions' })
+		vim.keymap.set(
+			{ 'n', 'x' },
+			'<leader>ca',
+			vim.lsp.buf.code_action,
+			{ buffer = bufnr, desc = '(Range) Code Actions' }
+		)
 
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = function()
@@ -54,11 +81,13 @@ local on_attach = function(client, bufnr)
 
 	if caps.documentFormattingProvider then
 		vim.keymap.set('n', '<leader>lf', function()
-			vim.lsp.buf.format { async = true }
+			vim.lsp.buf.format({ bufnr = bufnr, async = true })
 		end, { buffer = bufnr, desc = 'Formmating' })
 	end
 	if caps.documentRangeFormattingProvider then
-		vim.keymap.set('v', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
+		vim.keymap.set('x', '<leader>lf', function()
+			vim.lsp.buf.format({ bufnr = bufnr, async = true })
+		end, { buffer = bufnr, desc = 'Range Formmating' })
 	end
 
 	-- if caps.codeLensProvider then
