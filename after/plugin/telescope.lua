@@ -12,8 +12,29 @@ require('telescope').setup {
 		set_env = { ['COLORTERM'] = 'truecolor' },
 		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
 	},
+	pickers = {
+		buffers = {
+			theme = 'dropdown',
+			sort_mru = true,
+			previewer = false
+		},
+		current_buffer_fuzzy_find = {
+			previewer = false
+		},
+		find_files = {
+			theme = 'ivy',
+			follow = true,
+		},
+		grep_string = {
+			path_display = { 'shorten' },
+		},
+		live_grep = {
+			path_display = { 'shorten' },
+		},
+	},
 	extensions = {
 		frecency = {
+			theme = themes.get_dropdown,
 			show_scores = true,
 			workspaces = {
 				['conf'] = home .. '/.config',
@@ -42,50 +63,32 @@ for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end
 
-local tb = require 'telescope.builtin'
-local te = require('telescope').extensions
+vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').buffers, { desc = 'Buffers' })
+vim.keymap.set('n', '<leader><space>', require('telescope').extensions.file_browser.file_browser,
+	{ desc = 'File Browser' })
+vim.keymap.set('n', '<F12>', require('telescope.builtin').commands, { desc = 'Command Pallete' })
 
-vim.keymap.set('n', '<leader><leader>', function()
-	tb.buffers(themes.get_dropdown {
-		sort_lastused = true, previewer = false
-	})
-end, { desc = 'Buffers' })
-vim.keymap.set('n', '<leader><space>', function()
-	te.file_browser.file_browser()
-end, { desc = 'File Browser' })
-vim.keymap.set('n', '<F12>', function()
-	tb.commands()
-end, { desc = 'Command Pallete' })
-vim.keymap.set('n', '<leader>fm', function()
-	tb.builtin()
-end, { desc = 'Telescope Meta' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').find_files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').current_buffer_fuzzy_find,
+	{ desc = 'Current Buffer Fuzzy Find' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Help Tags' })
+vim.keymap.set('n', '<leader>fm', require('telescope.builtin').builtin, { desc = 'Telescope Meta' })
 
-vim.keymap.set('n', '<leader>fd', function()
-	tb.find_files(themes.get_ivy {})
-end, { desc = 'Find Files' })
-vim.keymap.set('n', '<leader>ff', function()
-	tb.current_buffer_fuzzy_find { winblend = 10, previewer = false }
-end, { desc = 'Current Buffer Fuzzy Find' })
-vim.keymap.set('n', '<leader>fg', function()
-	tb.live_grep { previewer = false }
-end, { desc = 'Live Grep' })
-vim.keymap.set('n', '<leader>fh', function()
-	tb.help_tags { show_version = true }
-end, { desc = 'Help Tags' })
 vim.keymap.set('n', '<leader>fr', function()
-	te.frecency.frecency(themes.get_ivy {})
+	require('telescope').extensions.frecency.frecency(themes.get_ivy {})
 end, { desc = 'Recent Files' })
 
 vim.keymap.set('n', '<leader>fz', function()
-	tb.find_files(themes.get_ivy {
-		find_command = { 'rg', '--files', '--type', vim.fn.input 'Type: ' }
-	})
+	require('telescope.builtin').find_files { find_command = { 'rg', '--files', '--type', vim.fn.input 'Type: ' } }
 end, { desc = 'Search Certain Type Files' })
 vim.keymap.set('n', '<leader>f/', function()
-	tb.grep_string { path_display = { 'shorten' }, search = vim.fn.input 'Grep String > ' }
+	require('telescope.builtin').grep_string { search = vim.fn.input 'Grep String > ' }
 end, { desc = 'Grep Strings' })
+
 vim.keymap.set('n', '<leader>en', function()
-	tb.find_files(themes.get_ivy {
-		cwd = '~/.config/nvim', prompt_title = 'Nvim Configs'
+	require('telescope.builtin').find_files({
+		cwd = '~/.config/nvim',
+		prompt_title = 'Nvim Configs'
 	})
 end, { desc = 'Neovim Config Files' })

@@ -5,9 +5,7 @@ require('aerial').setup {
 		'Module', 'Object', 'Struct', 'Variable',
 	},
 	on_attach = function(bufnr)
-		vim.keymap.set('n', '<M-o>', function()
-			require('aerial').toggle()
-		end, { buffer = bufnr, desc = 'Toggle aerial window' })
+		vim.keymap.set('n', '<M-o>', require('aerial').toggle, { buffer = bufnr, desc = 'Toggle aerial window' })
 	end,
 	show_guides = true,
 }

@@ -1,9 +1,5 @@
-vim.keymap.set({ 'n', 't' }, '<C-\\>', function()
-    require 'FTerm'.toggle()
-end, { desc = 'Terminal Toggle' })
-vim.keymap.set('t', '<Esc>', function()
-    require 'FTerm'.exit()
-end, { desc = 'Terminal Exit' })
+vim.keymap.set({ 'n', 't' }, '<C-\\>', require 'FTerm'.toggle, { desc = 'Terminal Toggle' })
+vim.keymap.set('t', '<Esc>', require 'FTerm'.exit, { desc = 'Terminal Exit' })
 vim.keymap.set('n', '<M-g>', function()
     require 'FTerm':new({
         cmd = 'lazygit',
