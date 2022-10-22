@@ -1,5 +1,3 @@
-# config.nvim
-
 <p>
     <a>
         <img alt="macOS" src="https://img.shields.io/badge/macOS-%23.svg?style=flat-square&logo=apple&color=000000&logoColor=white" />
@@ -7,10 +5,12 @@
     <a href="https://github.com/neovim/neovim/releases/tag/nightly">
         <img src="https://img.shields.io/badge/Neovim-0.9-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=green" alt="Neovim minimum version"/>
     </a>
-    <a href="https://github.com/jdhao/nvim-config/blob/master/LICENSE">
+    <a href="https://github.com/mathjiajia/config.nvim/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/mathjiajia/config.nvim?style=flat-square&logo=GNU&label=License" alt="License"/>
     </a>
 </p>
+
+# config.nvim
 
 My personal Neovim configuration files on &#63743; macOS.
 
@@ -55,4 +55,4 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 - `after/plugin/lsp.lua` -- The configuration for language serves
 - `plugin/keymaps.lua` -- Various keymaps
 - `plugin/options.lua` -- General settings and options
-- `luasnippets` -- Useful snippets for different languages
+- `LuaSnips` -- Useful snippets for different languages
