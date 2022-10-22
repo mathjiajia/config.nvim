@@ -1,9 +1,21 @@
 <p>
     <a>
-        <img alt="macOS" src="https://img.shields.io/badge/macOS-%23.svg?style=flat-square&logo=apple&color=000000&logoColor=white" />
+        <img alt="macOS" src="https://img.shields.io/badge/macOS-%23.svg?style=flat-square&logo=apple&color=grey&logoColor=white" />
     </a>
     <a href="https://github.com/neovim/neovim/releases/tag/nightly">
         <img src="https://img.shields.io/badge/Neovim-0.9-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=green" alt="Neovim minimum version"/>
+    </a>
+    <a href="https://github.com/mathjiajia/config.nvim/search?l=lua">
+      <img src="https://img.shields.io/github/languages/top/mathjiajia/config.nvim" alt="Top languages"/>
+    </a>
+    <a href="https://github.com/mathjiajia/config.nvim/graphs/commit-activity">
+      <img src="https://img.shields.io/github/commit-activity/m/mathjiajia/config.nvim?style=flat-square" />
+    </a>
+    <a href="https://github.com/mathjiajia/config.nvim/graphs/contributors">
+      <img src="https://img.shields.io/github/contributors/mathjiajia/config.nvim?style=flat-square" />
+    </a>
+    <a>
+      <img src="https://img.shields.io/github/repo-size/mathjiajia/config.nvim?style=flat-square" />
     </a>
     <a href="https://github.com/mathjiajia/config.nvim/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/mathjiajia/config.nvim?style=flat-square&logo=GNU&label=License" alt="License"/>
