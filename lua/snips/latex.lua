@@ -1,7 +1,7 @@
 local M = {}
 
-local ts = require 'vim.treesitter'
-local query = require 'vim.treesitter.query'
+-- local ts = require 'vim.treesitter'
+-- local query = require 'vim.treesitter.query'
 
 local ALIGN_ENVIRONMENTS = {
 	['{multline}']  = true,
@@ -28,7 +28,7 @@ local function get_node_at_cursor()
 	row = row - 1
 	col = col - 1
 
-	local parser = ts.get_parser(buf, 'latex')
+	local parser = vim.treesitter.get_parser(buf, 'latex')
 	if not parser then
 		return
 	end
@@ -53,7 +53,7 @@ function M.in_align()
 			local begin = node:child(0)
 			local names = begin and begin:field 'name'
 
-			if names and names[1] and ALIGN_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
+			if names and names[1] and ALIGN_ENVIRONMENTS[vim.treesitter.query.get_node_text(names[1], buf)] then
 				return true
 			end
 		end
@@ -70,7 +70,7 @@ function M.in_xymatrix()
 	while node do
 		if node:type() == 'generic_command' then
 			local names = node:child(0)
-			if names and query.get_node_text(names, buf) == '\\xymatrix' then
+			if names and vim.treesitter.query.get_node_text(names, buf) == '\\xymatrix' then
 				return true
 			end
 		end

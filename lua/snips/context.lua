@@ -1,8 +1,5 @@
 local M = {}
 
-local ts = require 'vim.treesitter'
-
-
 ---Check if cursor is in treesitter capture
 ---@param capture (string|string[])
 ---@return boolean
@@ -12,7 +9,7 @@ local in_ts_capture = function(capture)
     row = row - 1
     col = col - 1
 
-    local get_captures_at_pos = ts.get_captures_at_pos
+    local get_captures_at_pos = vim.treesitter.get_captures_at_pos
 
     local captures_at_cursor = vim.tbl_map(function(x)
         return x.capture
