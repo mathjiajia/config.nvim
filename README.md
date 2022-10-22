@@ -5,7 +5,7 @@
         <img alt="macOS" src="https://img.shields.io/badge/macOS-%23.svg?style=flat-square&logo=apple&color=000000&logoColor=white" />
     </a>
     <a href="https://github.com/neovim/neovim/releases/tag/nightly">
-        <img src="https://img.shields.io/badge/Neovim-0.7-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=green" alt="Neovim minimum version"/>
+        <img src="https://img.shields.io/badge/Neovim-0.9-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=green" alt="Neovim minimum version"/>
     </a>
     <a href="https://github.com/jdhao/nvim-config/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/mathjiajia/config.nvim?style=flat-square&logo=GNU&label=License" alt="License"/>
@@ -23,6 +23,13 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 
 ```txt
 ├── LICENSE
+├── LuaSnips
+│   ├── all.lua
+│   ├── gitcommit.lua
+│   ├── lua.lua
+│   ├── markdown.lua
+│   ├── norg.lua
+│   └── tex
 ├── README.md
 ├── after
 │   ├── ftplugin
@@ -33,15 +40,7 @@ and [使用 Neovim 和 vimtex 高效撰写 LaTeX 学术论文](https://sspai.com
 ├── lua
 │   ├── configs
 │   ├── plugins.lua
-│   ├── snips
-│   └── themes
-├── luasnippets
-│   ├── all.lua
-│   ├── gitcommit.lua
-│   ├── lua.lua
-│   ├── markdown.lua
-│   ├── norg.lua
-│   └── tex
+│   └── snips
 ├── plugin
 │   ├── autocmds.lua
 │   ├── keymaps.lua
