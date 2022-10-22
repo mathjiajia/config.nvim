@@ -489,28 +489,38 @@ local StatusLines = {
 	SpecialStatusline, TerminalStatusline, InactiveStatusline, DefaultStatusline,
 }
 
--- local WinBar = {
--- 	fallthrough = false,
--- 	{ -- Hide the winbar for special buffers
--- 		condition = function()
--- 			return conditions.buffer_matches({
--- 				buftype = { 'nofile', 'prompt', 'help', 'quickfix', 'terminal' },
--- 				filetype = { '^git.*' },
--- 			})
--- 		end,
--- 		init = function()
--- 			vim.opt_local.winbar = nil
--- 		end
--- 	},
--- 	{ -- An inactive winbar for regular files
--- 		condition = function()
--- 			return not conditions.is_active()
--- 		end,
--- 		utils.surround({ '', '' }, 'bright_bg', { hl = { fg = 'gray', force = true }, FileNameBlock }),
--- 	},
--- 	-- A winbar for regular files
--- 	utils.surround({ '', '' }, 'bright_bg', FileNameBlock),
--- }
+local WinBar = {
+	fallthrough = false,
+	{ -- Hide the winbar for special buffers
+		condition = function()
+			return conditions.buffer_matches({
+				buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
+				filetype = { '^git.*' },
+			})
+		end,
+		init = function()
+			vim.opt_local.winbar = nil
+		end
+	},
+	{ -- A special winbar for terminals
+		condition = function()
+			return conditions.buffer_matches({ buftype = { 'terminal' } })
+		end,
+		utils.surround({ '', '' }, 'dark_red', {
+			FileType,
+			Space,
+			TerminalName,
+		}),
+	},
+	{ -- An inactive winbar for regular files
+		condition = function()
+			return not conditions.is_active()
+		end,
+		utils.surround({ '', '' }, 'bright_bg', { hl = { fg = 'gray', force = true }, FileNameBlock }),
+	},
+	-- A winbar for regular files
+	utils.surround({ '', '' }, 'bright_bg', FileNameBlock),
+}
 
 local TablineBufnr = {
 	provider = function(self)
@@ -599,8 +609,8 @@ local TablineCloseButton = {
 		return not vim.api.nvim_buf_get_option(self.bufnr, 'modified')
 	end,
 	{ provider = ' ' },
-	{
-		provider = '',
+	{ -- ✗    
+		provider = ' ',
 		hl = { fg = 'gray' },
 		on_click = {
 			callback = function(_, minwid)
@@ -691,7 +701,7 @@ local TabLineOffset = {
 
 local TabLine = { TabLineOffset, BufferLine, TabPages }
 
-require('heirline').setup(StatusLines, nil, TabLine)
+require('heirline').setup(StatusLines, WinBar, TabLine)
 
 -- Yep, with heirline we're driving manual!
 vim.api.nvim_create_autocmd({ 'FileType' }, {
