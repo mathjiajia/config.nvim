@@ -107,10 +107,10 @@ require('packer').startup(function(use)
 	use { 'f3fora/nvim-texlabconfig', run = 'go build' }
 
 	-- Norg
-	use {
-		'nvim-neorg/neorg',
-		requires = 'nvim-neorg/neorg-telescope'
-	}
+	-- use {
+	-- 	'nvim-neorg/neorg',
+	-- 	requires = 'nvim-neorg/neorg-telescope'
+	-- }
 
 	-- use 'dstein64/vim-startuptime'
 end)
