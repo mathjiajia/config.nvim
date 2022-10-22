@@ -9,7 +9,4 @@ require('noice').setup {
 	-- 		opts = { skip = true },
 	-- 	},
 	-- },
-	lsp_progress = {
-		enabled = true,
-	},
 }
