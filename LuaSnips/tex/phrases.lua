@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local conds = require('luasnip.extras.conditions.expand')
+local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
 
 snips = {
@@ -153,14 +153,14 @@ autosnips = {
 	s(
 		{ trig = 'Tfae', name = 'The following are equivalent' },
 		{ t 'The following are equivalent' },
-		{ condition = conds.line_begin * context.in_text }
+		{ condition = conds_expand.line_begin * context.in_text }
 	),
 	s(
 		{ trig = '([wW])log', name = 'without loss of generality', regTrig = true },
 		{ f(function(_, snip)
 			return snip.captures[1] .. 'ithout loss of generality'
 		end, {}) },
-		{ condition = conds.line_begin * context.in_text }
+		{ condition = conds_expand.line_begin * context.in_text }
 	),
 
 	s(

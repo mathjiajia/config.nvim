@@ -1,5 +1,7 @@
 local snips = {}
 
+local conds_expand = require('luasnip.extras.conditions.expand')
+
 snips = {
 	s(
 		{ trig = 'cha', name = 'Chapter', dscr = 'Insert a new chapter.' },
@@ -10,7 +12,7 @@ snips = {
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 			t { '}', '', '' }
 		},
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'sec', name = 'Section', dscr = 'Insert a new section.', regTrig = true },
@@ -21,7 +23,7 @@ snips = {
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 			t { '}', '', '' }
 		},
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'ssec', name = 'star Section', dscr = 'Insert a section without index.', regTrig = true },
@@ -32,7 +34,7 @@ snips = {
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 			t { '}', '', '' }
 		},
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'sub', name = 'subSection', dscr = 'Insert a new subsection.', regTrig = true },
@@ -43,7 +45,7 @@ snips = {
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 			t { '}', '', '' }
 		},
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'ssub', name = 'star subSection', dscr = 'Insert a subsection without index.', regTrig = true },
@@ -54,7 +56,7 @@ snips = {
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
 			t { '}', '', '' },
 		},
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 }
 

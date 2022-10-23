@@ -1,5 +1,5 @@
 local snips, autosnips = {}, {}
-local conds = require('luasnip.extras.conditions.expand')
+local conds_expand = require('luasnip.extras.conditions.expand')
 
 local on_top = function()
 	local cursor = vim.api.nvim_win_get_cursor(0)
@@ -15,7 +15,7 @@ snips = {
 		{ f(function(_, snip)
 			return string.rep('#', tonumber(snip.captures[1], 10)) .. ' '
 		end, {}) },
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'code', name = 'Insert fenced code block' },
@@ -37,12 +37,12 @@ snips = {
 			t { '"]', '---', '', '' },
 			i(0),
 		},
-		{ condition = on_top * conds.line_begin, show_condition = on_top }
+		{ condition = on_top * conds_expand.line_begin, show_condition = on_top }
 	),
 	s(
 		{ trig = 'td', name = 'too long, do not read' },
 		{ t 'tl;dr: ' },
-		{ condition = conds.line_begin }
+		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'link', name = 'Markdown Links', dscr = 'Insert a Link' },

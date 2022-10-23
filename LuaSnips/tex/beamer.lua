@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local conds = require('luasnip.extras.conditions.expand')
+local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
 
 local in_beamer = function()
@@ -21,21 +21,21 @@ autosnips = {
 			i(0),
 			t { '', '\\end{frame}' },
 		},
-		{ condition = conds.line_begin * in_beamer * context.in_text }),
+		{ condition = conds_expand.line_begin * in_beamer * context.in_text }),
 	s(
 		{ trig = 'bcor', name = 'Beamer Corollary Environment' },
 		{ t { '\\begin{block}{Corollary}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = conds.line_begin * in_beamer * context.in_text }
+		{ condition = conds_expand.line_begin * in_beamer * context.in_text }
 	),
 	s(
 		{ trig = 'bdef', name = 'Beamer Definition Environment' },
 		{ t { '\\begin{block}{Definition}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = conds.line_begin * in_beamer * context.in_text }
+		{ condition = conds_expand.line_begin * in_beamer * context.in_text }
 	),
 	s(
 		{ trig = 'brem', name = 'Beamer Remark Environment' },
 		{ t { '\\begin{block}{Remark}', '\t' }, i(0), t { '', '\\end{block}' } },
-		{ condition = conds.line_begin * in_beamer * context.in_text }
+		{ condition = conds_expand.line_begin * in_beamer * context.in_text }
 	),
 }
 

@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local conds = require('luasnip.extras.conditions.expand')
+local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
 local tex = require('snips.latex')
 
@@ -62,17 +62,17 @@ autosnips = {
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },
-		{ condition = conds.line_begin * context.in_text }
+		{ condition = conds_expand.line_begin * context.in_text }
 	),
 	s(
 		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.' },
 		{ t '&\\phantom{\\;=\\;} ' },
-		{ condition = conds.line_begin * tex.in_align, show_condition = tex.in_align }
+		{ condition = conds_expand.line_begin * tex.in_align, show_condition = tex.in_align }
 	),
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
 		{ t { '\\noindent', '' } },
-		{ condition = conds.line_begin * context.in_text, show_condition = context.in_text }
+		{ condition = conds_expand.line_begin * context.in_text, show_condition = context.in_text }
 	),
 }
 
