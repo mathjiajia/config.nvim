@@ -25,7 +25,6 @@ require('packer').startup(function(use)
 	use 'monkoose/matchparen.nvim'
 
 	-- UI
-	-- use 'vigoux/notifier.nvim'
 	use 'rebelot/heirline.nvim'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use {
