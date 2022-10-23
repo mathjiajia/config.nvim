@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
-local context = require 'snips.context'
-local tex = require 'snips.latex'
+local context = require('snips.context')
+local tex = require('snips.latex')
 
 autosnips = {
 	s(

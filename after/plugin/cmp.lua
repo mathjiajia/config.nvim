@@ -36,7 +36,7 @@ local source_names = {
 	rg       = { '[RG]', 'CmpItemMenu' },
 }
 
-local cmp = require 'cmp'
+local cmp = require('cmp')
 
 cmp.setup {
 	mapping = cmp.mapping.preset.insert({

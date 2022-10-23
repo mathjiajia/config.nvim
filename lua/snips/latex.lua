@@ -1,8 +1,5 @@
 local M = {}
 
--- local ts = require 'vim.treesitter'
--- local query = require 'vim.treesitter.query'
-
 local ALIGN_ENVIRONMENTS = {
 	['{multline}']  = true,
 	['{multline*}'] = true,

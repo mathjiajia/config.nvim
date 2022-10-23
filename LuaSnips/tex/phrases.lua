@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
-local conds = require 'luasnip.extras.conditions.expand'
-local context = require 'snips.context'
+local conds = require('luasnip.extras.conditions.expand')
+local context = require('snips.context')
 
 snips = {
 	s(

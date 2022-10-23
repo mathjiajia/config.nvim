@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
 local postfix = require('luasnip.extras.postfix').postfix
-local context = require 'snips.context'
+local context = require('snips.context')
 
 snips = {
 	s(

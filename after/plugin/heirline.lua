@@ -1,5 +1,5 @@
-local conditions = require 'heirline.conditions'
-local utils = require 'heirline.utils'
+local conditions = require('heirline.conditions')
+local utils = require('heirline.utils')
 
 local colors = {
 	bright_bg  = utils.get_highlight('Folded').bg,
@@ -159,7 +159,7 @@ local Snippets = {
 		return vim.tbl_contains({ 'i', 's' }, vim.fn.mode())
 	end,
 	provider = function()
-		local ls = require 'luasnip'
+		local ls = require('luasnip')
 		local forward = ls.jumpable(1) and ' ' or ''
 		local backward = ls.jumpable(-1) and ' ' or ''
 		return backward .. forward
@@ -382,7 +382,7 @@ local LSPActive = {
 	on_click = {
 		callback = function()
 			vim.defer_fn(function()
-				require 'lspconfig.ui.lspinfo' ()
+				require('lspconfig.ui.lspinfo')()
 			end, 100)
 		end,
 		name = 'heirline_LSP'

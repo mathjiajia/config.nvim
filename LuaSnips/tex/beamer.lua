@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
-local conds = require 'luasnip.extras.conditions.expand'
-local context = require 'snips.context'
+local conds = require('luasnip.extras.conditions.expand')
+local context = require('snips.context')
 
 local in_beamer = function()
 	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)

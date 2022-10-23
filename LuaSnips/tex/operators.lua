@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local context = require 'snips.context'
+local context = require('snips.context')
 
 autosnips = {
 	s(

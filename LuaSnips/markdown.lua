@@ -1,5 +1,5 @@
 local snips, autosnips = {}, {}
-local conds = require 'luasnip.extras.conditions.expand'
+local conds = require('luasnip.extras.conditions.expand')
 
 local on_top = function()
 	local cursor = vim.api.nvim_win_get_cursor(0)

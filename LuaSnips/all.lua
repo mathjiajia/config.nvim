@@ -1,6 +1,6 @@
 local snips = {}
 
-local context = require 'snips.context'
+local context = require('snips.context')
 
 snips = {
 	s(

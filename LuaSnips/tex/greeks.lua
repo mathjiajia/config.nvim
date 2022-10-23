@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local context = require 'snips.context'
+local context = require('snips.context')
 
 autosnips = {
 	s({ trig = ';a', name = 'alpha α', wordTrig = false }, { t '\\alpha' }, { condition = context.in_mathzone }),

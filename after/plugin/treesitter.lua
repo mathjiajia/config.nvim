@@ -19,10 +19,7 @@ require('nvim-treesitter.configs').setup {
 	query_linter = { enable = true },
 }
 
--- require 'nvim-treesitter.highlight'.set_custom_captures {
--- 	['text.math.marker'] = 'Identifier',
--- }
-
 -- Folding
--- vim.opt_local.foldmethod = 'expr'
--- vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt_local.foldmethod = 'expr'
+vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt_local.foldenable = false

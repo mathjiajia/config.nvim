@@ -1,4 +1,4 @@
-require 'impatient'
+require('impatient')
 
 vim.g.mapleader = ','
 
@@ -22,5 +22,5 @@ vim.g.loaded_zipPlugin = 1
 
 -- PLUGINS LIST
 vim.defer_fn(function()
-	require 'plugins'
+	require('plugins')
 end, 500)

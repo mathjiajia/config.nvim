@@ -1,8 +1,8 @@
-local home = os.getenv 'HOME'
+local home = os.getenv('HOME')
 
-local actions = require 'telescope.actions'
-local actions_layout = require 'telescope.actions.layout'
-local themes = require 'telescope.themes'
+local actions = require('telescope.actions')
+local actions_layout = require('telescope.actions.layout')
+local themes = require('telescope.themes')
 
 require('telescope').setup {
 	defaults = {
@@ -28,7 +28,7 @@ require('telescope').setup {
 	pickers = {
 		buffers = {
 			theme = 'dropdown',
-			sort_mru = true,
+			sort_lastused = true,
 			previewer = false
 		},
 		current_buffer_fuzzy_find = {
@@ -93,10 +93,10 @@ vim.keymap.set('n', '<leader>fr', function()
 end, { desc = 'Recent Files' })
 
 vim.keymap.set('n', '<leader>fz', function()
-	require('telescope.builtin').find_files { find_command = { 'rg', '--files', '--type', vim.fn.input 'Type: ' } }
+	require('telescope.builtin').find_files { find_command = { 'rg', '--files', '--type', vim.fn.input({ 'Type: ' }) } }
 end, { desc = 'Search Certain Type Files' })
 vim.keymap.set('n', '<leader>f/', function()
-	require('telescope.builtin').grep_string { search = vim.fn.input 'Grep String > ' }
+	require('telescope.builtin').grep_string { search = vim.fn.input({ 'Grep String > ' }) }
 end, { desc = 'Grep Strings' })
 
 vim.keymap.set('n', '<leader>en', function()

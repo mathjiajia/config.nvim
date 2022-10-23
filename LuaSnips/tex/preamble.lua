@@ -8,7 +8,7 @@ local on_top = function()
 	return false
 end
 
-local conds = require 'luasnip.extras.conditions.expand'
+local conds = require('luasnip.extras.conditions.expand')
 
 snips = {
 	s(
