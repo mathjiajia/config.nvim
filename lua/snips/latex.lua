@@ -44,7 +44,7 @@ end
 
 ---Check if cursor is in treesitter node of 'math_environment': 'align'
 ---@return boolean
-local function in_align()
+function M.in_align()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
@@ -63,7 +63,7 @@ end
 
 ---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
 ---@return boolean
-local function in_xymatrix()
+function M.in_xymatrix()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
@@ -77,17 +77,5 @@ local function in_xymatrix()
 	end
 	return false
 end
-
-local in_beamer = function()
-	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
-	if first_line[1]:match '\\documentclass.*{beamer}' then
-		return true
-	end
-	return false
-end
-
-M.in_align = cond_obj.make_condition(in_align)
-M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
-M.in_beamer = cond_obj.make_condition(in_beamer)
 
 return M

@@ -10,6 +10,15 @@ local on_top = function()
 	return false
 end
 
+local in_beamer = function()
+	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
+	if first_line[1]:match '\\documentclass.*{beamer}' then
+		return true
+	end
+	return false
+end
+
 M.on_top = cond_obj.make_condition(on_top)
+M.in_beamer = cond_obj.make_condition(in_beamer)
 
 return M
