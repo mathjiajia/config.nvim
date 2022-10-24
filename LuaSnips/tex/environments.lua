@@ -80,7 +80,8 @@ autosnips = {
 			trig = 'lthm',
 			name = 'Theorem Environment with name and lable',
 			dscr = 'Create a theorem environment with name and lable.',
-		}, {
+		},
+		{
 			t { '\\begin{theorem}[' },
 			i(1),
 			t { ']\\label{thm:' },
@@ -96,7 +97,8 @@ autosnips = {
 			trig = 'llem',
 			name = 'Lemma Environment with name and lable',
 			dscr = 'Create a lemma environment with name and lable.',
-		}, {
+		},
+		{
 			t { '\\begin{lemma}[' },
 			i(1),
 			t { ']\\label{lem:' },
@@ -111,7 +113,8 @@ autosnips = {
 			trig = 'ldef',
 			name = 'Definition Environment with name and lable',
 			dscr = 'Create a definition environment with name and lable.',
-		}, {
+		},
+		{
 			t { '\\begin{definition}[' },
 			i(1),
 			t { ']\\label{def:' },
@@ -127,7 +130,8 @@ autosnips = {
 			trig = 'lprop',
 			name = 'Proposition Environment with name and lable',
 			dscr = 'Create a proposition environment with name and lable.',
-		}, {
+		},
+		{
 			t { '\\begin{proposition}[' },
 			i(1),
 			t { ']\\label{prop:' },
@@ -158,7 +162,8 @@ autosnips = {
 			trig = 'lrem',
 			name = 'Remark Environment with name and lable',
 			dscr = 'Create a remark environment with name and lable.',
-		}, {
+		},
+		{
 			t { '\\begin{remark}[' },
 			i(1),
 			t { ']\\label{rem:' },
@@ -174,7 +179,8 @@ autosnips = {
 			trig = 'lconj',
 			name = 'Conjecture Environment with name and lable',
 			dscr = 'Create a conjecture environment with name and lable.',
-		}, {
+		},
+		{
 			t { '\\begin{conjecture}[' },
 			i(1),
 			t { ']\\label{conj:' },
