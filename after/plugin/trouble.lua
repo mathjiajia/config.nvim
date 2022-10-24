@@ -1,3 +1,8 @@
 require('trouble').setup()
 
-vim.keymap.set('n', '<leader>xx', require('trouble').toggle, { desc = 'Trouble' })
+vim.keymap.set(
+    'n',
+    '<leader>xx',
+    require('trouble').toggle,
+    { desc = 'Trouble' }
+)

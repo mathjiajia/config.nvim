@@ -80,14 +80,24 @@ local on_attach = function(client, bufnr)
 	end
 
 	if caps.documentFormattingProvider then
-		vim.keymap.set('n', '<leader>lf', function()
-			vim.lsp.buf.format({ bufnr = bufnr, async = true })
-		end, { buffer = bufnr, desc = 'Formmating' })
+		vim.keymap.set(
+			'n',
+			'<leader>lf',
+			function()
+				vim.lsp.buf.format({ bufnr = bufnr, async = true })
+			end,
+			{ buffer = bufnr, desc = 'Formmating' }
+		)
 	end
 	if caps.documentRangeFormattingProvider then
-		vim.keymap.set('x', '<leader>lf', function()
-			vim.lsp.buf.format({ bufnr = bufnr, async = true })
-		end, { buffer = bufnr, desc = 'Range Formmating' })
+		vim.keymap.set(
+			'x',
+			'<leader>lf',
+			function()
+				vim.lsp.buf.format({ bufnr = bufnr, async = true })
+			end,
+			{ buffer = bufnr, desc = 'Range Formmating' }
+		)
 	end
 
 	-- if caps.codeLensProvider then
@@ -109,7 +119,7 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local nvim_lsp = require 'lspconfig'
+local nvim_lsp = require('lspconfig')
 
 require('mason-lspconfig').setup {
 	ensure_installed = { 'pyright', 'sumneko_lua', 'texlab' }

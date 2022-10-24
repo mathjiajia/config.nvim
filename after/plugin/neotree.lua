@@ -9,8 +9,11 @@ require('neo-tree').setup({
 	source_selector = { winbar = true }
 })
 
-vim.keymap.set('n', '<M-t>',
+vim.keymap.set(
+	'n',
+	'<M-t>',
 	function()
 		require('neo-tree.command')._command('toggle')
 	end,
-	{ desc = 'Toggle NeoTree' })
+	{ desc = 'Toggle NeoTree' }
+)

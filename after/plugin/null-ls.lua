@@ -18,14 +18,24 @@ null_ls.setup({
 		local caps = client.server_capabilities
 
 		if caps.documentFormattingProvider then
-			vim.keymap.set('n', '<leader>lf', function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = true })
-			end, { buffer = bufnr, desc = 'Formmating' })
+			vim.keymap.set(
+				'n',
+				'<leader>lf',
+				function()
+					vim.lsp.buf.format({ bufnr = bufnr, async = true })
+				end,
+				{ buffer = bufnr, desc = 'Formmating' }
+			)
 		end
 		if caps.documentRangeFormattingProvider then
-			vim.keymap.set('x', '<leader>lf', function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = true })
-			end, { buffer = bufnr, desc = 'Range Formmating' })
+			vim.keymap.set(
+				'x',
+				'<leader>lf',
+				function()
+					vim.lsp.buf.format({ bufnr = bufnr, async = true })
+				end,
+				{ buffer = bufnr, desc = 'Range Formmating' }
+			)
 		end
 	end,
 })
