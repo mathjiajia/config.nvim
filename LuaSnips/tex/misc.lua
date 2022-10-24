@@ -26,9 +26,11 @@ autosnips = {
 			regTrig = true,
 			hidden = true
 		},
-		{ f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
-		end, {}) },
+		{
+			f(function(_, snip)
+				return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+			end, {})
+		},
 		{ condition = context.in_text }
 	),
 	s(
@@ -39,9 +41,11 @@ autosnips = {
 			regTrig = true,
 			hidden = true
 		},
-		{ f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
-		end, {}) },
+		{
+			f(function(_, snip)
+				return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+			end, {})
+		},
 		{ condition = context.in_text }
 	),
 	s(
@@ -52,9 +56,11 @@ autosnips = {
 			regTrig = true,
 			hidden = true
 		},
-		{ f(function(_, snip)
-			return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
-		end, {}) },
+		{
+			f(function(_, snip)
+				return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
+			end, {})
+		},
 		{ condition = context.in_text }
 	),
 
@@ -63,6 +69,7 @@ autosnips = {
 		{ t('\\('), i(1), t('\\)') },
 		{
 			condition = context.in_text,
+			show_condition = context.in_text,
 			callbacks = {
 				[-1] = { [events.leave] = appended_space_after_insert },
 			},
@@ -71,17 +78,23 @@ autosnips = {
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t({ '\\[', '\t' }), i(1), t({ '', '\\]' }) },
-		{ condition = conds_expand.line_begin * context.in_text }
+		{
+			condition = conds_expand.line_begin * context.in_text,
+			show_condition = context.in_text
+		}
 	),
 	s(
 		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.', hidden = true },
 		{ t('&\\phantom{\\;=\\;} ') },
-		{ condition = conds_expand.line_begin * tex.in_align, show_condition = tex.in_align }
+		{ condition = conds_expand.line_begin * tex.in_align }
 	),
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
 		{ t({ '\\noindent', '' }) },
-		{ condition = conds_expand.line_begin * context.in_text, show_condition = context.in_text }
+		{
+			condition = conds_expand.line_begin * context.in_text,
+			show_condition = context.in_text
+		}
 	),
 }
 
