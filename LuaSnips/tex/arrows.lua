@@ -5,54 +5,58 @@ local tex = require('snips.latex')
 
 autosnips = {
 	s(
-		{ trig = 'rmap', name = 'rational map arrow', wordTrig = false },
-		{ d(1, function()
-			if not tex.in_xymatrix() then
-				return sn(nil, { t '\\dashrightarrow ' })
-			else
-				return sn(nil, { t { '\\ar@{-->}[' }, i(1), t { ']' } })
-			end
-		end) },
+		{ trig = 'rmap', name = 'rational map arrow', wordTrig = false, hidden = true },
+		{
+			d(1, function()
+				if not tex.in_xymatrix() then
+					return sn(nil, { t '\\dashrightarrow ' })
+				else
+					return sn(nil, { t { '\\ar@{-->}[' }, i(1), t { ']' } })
+				end
+			end)
+		},
 		{ condition = context.in_mathzone }),
 	s(
-		{ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false },
-		{ d(1, function()
-			if not tex.in_xymatrix() then
-				return sn(nil, { t '\\hookrightarrow ' })
-			else
-				return sn(nil, { t { '\\ar@{^{(}->}[' }, i(1), t { ']' } })
-			end
-		end) },
+		{ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false, hidden = true },
+		{
+			d(1, function()
+				if not tex.in_xymatrix() then
+					return sn(nil, { t '\\hookrightarrow ' })
+				else
+					return sn(nil, { t { '\\ar@{^{(}->}[' }, i(1), t { ']' } })
+				end
+			end)
+		},
 		{ condition = context.in_mathzone }
 	),
 
 	s(
-		{ trig = '<->', wordTrig = false, name = 'leftrightarrow <->' },
+		{ trig = '<->', wordTrig = false, name = 'leftrightarrow <->', hidden = true },
 		{ t '\\leftrightarrow ' },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = '->', wordTrig = false, name = 'rightarrow -->' },
+		{ trig = '->', wordTrig = false, name = 'rightarrow -->', hidden = true },
 		{ t '\\longrightarrow ' },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = '!>', wordTrig = false, name = 'mapsto |->' },
+		{ trig = '!>', wordTrig = false, name = 'mapsto |->', hidden = true },
 		{ t '\\mapsto ' },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = '=>', name = 'implies =>', wordTrig = false },
+		{ trig = '=>', name = 'implies =>', wordTrig = false, hidden = true },
 		{ t '\\implies ' },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = '=<', name = 'impliedby', wordTrig = false },
+		{ trig = '=<', name = 'impliedby', wordTrig = false, hidden = true },
 		{ t '\\impliedby ' },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'iff', name = 'if and only if <=>', wordTrig = false },
+		{ trig = 'iff', name = 'if and only if <=>', wordTrig = false, hidden = true },
 		{ t '\\iff ' },
 		{ condition = context.in_mathzone }
 	),
