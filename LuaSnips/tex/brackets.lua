@@ -29,27 +29,27 @@ snips = {
 	-- ),
 
 	s(
-		{ trig = 'lr(', name = 'left( right)' },
+		{ trig = 'lr(', name = 'left( right)', hidden = true },
 		{ t { '\\left( ' }, i(1), t { '\\right)' } },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'lr|', name = 'leftvert rightvert' },
+		{ trig = 'lr|', name = 'leftvert rightvert', hidden = true },
 		{ t { '\\left\\lvert ' }, i(1), t { '\\right\\lvert' } },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'lr{', name = 'left\\{ right\\}' },
+		{ trig = 'lr{', name = 'left\\{ right\\}', hidden = true },
 		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' } },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'lrb', name = 'left\\{ right\\}' },
+		{ trig = 'lrb', name = 'left\\{ right\\}', hidden = true },
 		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' } },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'lr[', name = 'left[ right]' },
+		{ trig = 'lr[', name = 'left[ right]', hidden = true },
 		{ t { '\\left[ ' }, i(1), t { '\\right]' } },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
@@ -57,17 +57,17 @@ snips = {
 
 autosnips = {
 	s(
-		{ trig = 'bpm', name = 'pmatrix Environment' },
+		{ trig = 'bpm', name = 'pmatrix Environment', hidden = true },
 		{ t { '\\begin{pmatrix}', '\t' }, i(1), t { '', '\\end{pmatrix}' } },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'bbm', name = 'bmatrix Environment' },
+		{ trig = 'bbm', name = 'bmatrix Environment', hidden = true },
 		{ t { '\\begin{bmatrix}', '\t' }, i(1), t { '', '\\end{bmatrix}' } },
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'cvec', name = 'column vector' }, {
+		{ trig = 'cvec', name = 'column vector', hidden = true }, {
 			t { '\\begin{pmatrix}', '\t' },
 			i(1, 'x'),
 			t '}_',
@@ -80,7 +80,7 @@ autosnips = {
 		}, { condition = context.in_mathzone }
 	),
 	s(
-		{ trig = 'lra', name = 'leftangle rightangle' },
+		{ trig = 'lra', name = 'leftangle rightangle', hidden = true },
 		{ t { '\\langle ' }, i(1), t { '\\rangle' } },
 		{ condition = context.in_mathzone }
 	),
