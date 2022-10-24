@@ -2,6 +2,7 @@ local snips, autosnips = {}, {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
+local position = require('snips.position')
 
 snips = {
 	s(
@@ -178,7 +179,7 @@ autosnips = {
 		{ t('The following are equivalent') },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -190,7 +191,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 

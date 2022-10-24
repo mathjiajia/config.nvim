@@ -2,6 +2,7 @@ local snips, autosnips = {}, {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
+local position = require('snips.position')
 
 local rec_ls
 rec_ls = function()
@@ -19,7 +20,7 @@ autosnips = {
 		{ t({ '\\begin{' }), i(1), t({ '}', '\t' }), i(0), t({ '', '\\end{' }), rep(1), t({ '}' }) },
 		{
 			condition = conds_expand.line_begin,
-			-- show_condition = conds_expand.line_begin,
+			show_condition = position.line_begin,
 		}
 	),
 	s(
@@ -27,7 +28,7 @@ autosnips = {
 		{ t({ '\\begin{equation}', '\t' }), i(1), t({ '', '\\end{equation}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -35,7 +36,7 @@ autosnips = {
 		{ t({ '\\begin{equation*}', '\t' }), i(1), t({ '', '\\end{equation*}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -43,7 +44,7 @@ autosnips = {
 		{ t({ '\\begin{proof}', '\t' }), i(0), t({ '', '\\end{proof}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -51,7 +52,7 @@ autosnips = {
 		{ t({ '\\begin{theorem}', '\t' }), i(0), t({ '', '\\end{theorem}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -59,7 +60,7 @@ autosnips = {
 		{ t({ '\\begin{lemma}', '\t' }), i(0), t({ '', '\\end{lemma}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -67,7 +68,7 @@ autosnips = {
 		{ t({ '\\begin{definition}', '\t' }), i(0), t({ '', '\\end{definition}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -75,7 +76,7 @@ autosnips = {
 		{ t({ '\\begin{proposition}', '\t' }), i(0), t({ '', '\\end{proposition}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -83,7 +84,7 @@ autosnips = {
 		{ t({ '\\begin{corollary}', '\t' }), i(0), t({ '', '\\end{corollary}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -91,7 +92,7 @@ autosnips = {
 		{ t({ '\\begin{remark}', '\t' }), i(0), t({ '', '\\end{remark}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -99,7 +100,7 @@ autosnips = {
 		{ t({ '\\begin{conjecture}', '\t' }), i(0), t({ '', '\\end{conjecture}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 
@@ -108,7 +109,7 @@ autosnips = {
 		{ t('\\begin{proof}[Proof of \\cref{'), i(1), t({ '}]', '\t' }), i(0), t({ '', '\\end{proof}' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -128,7 +129,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -148,7 +149,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -168,7 +169,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -188,7 +189,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -207,7 +208,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -227,7 +228,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -332,7 +333,7 @@ autosnips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text,
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 }

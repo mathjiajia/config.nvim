@@ -2,6 +2,7 @@ local snips, autosnips = {}, {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
+local position = require('snips.position')
 local tex = require('snips.latex')
 
 local appended_space_after_insert = function()
@@ -80,7 +81,7 @@ autosnips = {
 		{ t({ '\\[', '\t' }), i(1), t({ '', '\\]' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -93,7 +94,7 @@ autosnips = {
 		{ t({ '\\noindent', '' }) },
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 }

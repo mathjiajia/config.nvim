@@ -2,6 +2,7 @@ local snips = {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
+local position = require('snips.position')
 
 snips = {
 	s(
@@ -15,7 +16,7 @@ snips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -29,7 +30,7 @@ snips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -43,7 +44,7 @@ snips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -57,7 +58,7 @@ snips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 	s(
@@ -71,7 +72,7 @@ snips = {
 		},
 		{
 			condition = conds_expand.line_begin * context.in_text,
-			show_condition = context.in_text
+			show_condition = position.line_begin * context.in_text,
 		}
 	),
 }

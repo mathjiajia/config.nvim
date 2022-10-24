@@ -329,7 +329,7 @@ snips = {
 		}),
 		{
 			condition = position.on_top * conds_expand.line_begin,
-			show_condition = position.on_top
+			show_condition = position.on_top * position.line_begin
 		}
 	),
 }
