@@ -4,7 +4,7 @@ local actions = require('telescope.actions')
 local actions_layout = require('telescope.actions.layout')
 local themes = require('telescope.themes')
 
-require('telescope').setup {
+require('telescope').setup({
 	defaults = {
 		sorting_strategy = 'ascending',
 		layout_config = {
@@ -66,7 +66,7 @@ require('telescope').setup {
 		},
 		['ui-select'] = themes.get_dropdown(),
 	},
-}
+})
 
 local extensions = {
 	'fzf', 'file_browser', 'frecency', 'bibtex', 'ui-select',

@@ -1,7 +1,7 @@
 local ls    = require('luasnip')
 local types = require('luasnip.util.types')
 
-ls.config.setup {
+ls.config.setup({
 	update_events = 'TextChanged,TextChangedI',
 	enable_autosnippets = true,
 	ext_opts = {
@@ -11,7 +11,7 @@ ls.config.setup {
 			},
 		}
 	}
-}
+})
 
 vim.keymap.set({ 'i', 's' }, '<C-j>', function()
 	if ls.expand_or_locally_jumpable() then

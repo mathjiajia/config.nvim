@@ -12,7 +12,7 @@ local sources = {
 	b.diagnostics.markdownlint.with { args = { '--config', '~/.config/markdownlint/markdownlint.yaml', '--stdin' } },
 }
 
-null_ls.setup {
+null_ls.setup({
 	sources = sources,
 	on_attach = function(client, bufnr)
 		local caps = client.server_capabilities
@@ -28,4 +28,4 @@ null_ls.setup {
 			end, { buffer = bufnr, desc = 'Range Formmating' })
 		end
 	end,
-}
+})

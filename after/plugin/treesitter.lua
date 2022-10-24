@@ -1,4 +1,4 @@
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
 	ensure_installed = {
 		'bash', 'bibtex', 'comment', 'fish', 'gitignore',
 		'html', 'latex', 'markdown', 'markdown_inline',
@@ -17,9 +17,9 @@ require('nvim-treesitter.configs').setup {
 	rainbow = { enable = true, extended_mode = false },
 	playground = { enable = true },
 	query_linter = { enable = true },
-}
+})
 
 -- Folding
-vim.opt_local.foldmethod = 'expr'
-vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt_local.foldenable = false
+-- vim.opt_local.foldmethod = 'expr'
+-- vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+-- vim.opt_local.foldenable = false

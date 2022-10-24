@@ -1,4 +1,4 @@
-require('aerial').setup {
+require('aerial').setup({
 	filter_kind = {
 		'Class', 'Constant', 'Constructor', 'Enum',
 		'EnumMember', 'Function', 'Interface', 'Method',
@@ -8,4 +8,4 @@ require('aerial').setup {
 		vim.keymap.set('n', '<M-o>', require('aerial').toggle, { buffer = bufnr, desc = 'Toggle aerial window' })
 	end,
 	show_guides = true,
-}
+})

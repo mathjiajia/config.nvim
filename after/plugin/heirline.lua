@@ -145,7 +145,7 @@ local VimModeOthers = {
 
 local VimMode = {
 	init = function(self)
-		self.mode = vim.fn.mode(1)
+		self.mode = vim.fn.mode()
 	end,
 
 	VimModeNormal, VimModeOthers,
@@ -655,7 +655,7 @@ local Tabpage = {
 }
 
 local TabpageClose = {
-	provider = '%999X  %X',
+	provider = ' %999X %X',
 	hl = 'TabLine',
 }
 
@@ -675,8 +675,8 @@ local TabLineOffset = {
 		local bufnr = vim.api.nvim_win_get_buf(win)
 		self.winid = win
 
-		if vim.bo[bufnr].filetype == 'NvimTree' then
-			self.title = 'NvimTree'
+		if vim.bo[bufnr].filetype == 'neo-tree' then
+			self.title = 'neo-tree'
 			return true
 			-- elseif vim.bo[bufnr].filetype == "TagBar" then
 			--     ...
