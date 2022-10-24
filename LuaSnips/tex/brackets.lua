@@ -30,27 +30,27 @@ snips = {
 
 	s(
 		{ trig = 'lr(', name = 'left( right)', hidden = true },
-		{ t { '\\left( ' }, i(1), t { '\\right)' } },
+		{ t({ '\\left( ' }), i(1), t({ '\\right)' }) },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'lr|', name = 'leftvert rightvert', hidden = true },
-		{ t { '\\left\\lvert ' }, i(1), t { '\\right\\lvert' } },
+		{ t({ '\\left\\lvert ' }), i(1), t({ '\\right\\lvert' }) },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'lr{', name = 'left\\{ right\\}', hidden = true },
-		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' } },
+		{ t({ '\\left\\{ ' }), i(1), t({ '\\right\\}' }) },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'lrb', name = 'left\\{ right\\}', hidden = true },
-		{ t { '\\left\\{ ' }, i(1), t { '\\right\\}' } },
+		{ t({ '\\left\\{ ' }), i(1), t({ '\\right\\}' }) },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'lr[', name = 'left[ right]', hidden = true },
-		{ t { '\\left[ ' }, i(1), t { '\\right]' } },
+		{ t({ '\\left[ ' }), i(1), t({ '\\right]' }) },
 		{ condition = context.in_mathzone, show_condition = context.in_mathzone }
 	),
 }
@@ -58,30 +58,30 @@ snips = {
 autosnips = {
 	s(
 		{ trig = 'bpm', name = 'pmatrix Environment', hidden = true },
-		{ t { '\\begin{pmatrix}', '\t' }, i(1), t { '', '\\end{pmatrix}' } },
+		{ t({ '\\begin{pmatrix}', '\t' }), i(1), t({ '', '\\end{pmatrix}' }) },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'bbm', name = 'bmatrix Environment', hidden = true },
-		{ t { '\\begin{bmatrix}', '\t' }, i(1), t { '', '\\end{bmatrix}' } },
+		{ t({ '\\begin{bmatrix}', '\t' }), i(1), t({ '', '\\end{bmatrix}' }) },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'cvec', name = 'column vector', hidden = true }, {
-			t { '\\begin{pmatrix}', '\t' },
+			t({ '\\begin{pmatrix}', '\t' }),
 			i(1, 'x'),
-			t '}_',
+			t('}_'),
 			i(2, '1'),
-			t { '\\\\', '\\vdots \\\\', '' },
+			t({ '\\\\', '\\vdots \\\\', '' }),
 			rep(1),
-			t '_',
+			t('_'),
 			i(3, 'n'),
-			t { '', '\\end{pmatrix}' },
+			t({ '', '\\end{pmatrix}' }),
 		}, { condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'lra', name = 'leftangle rightangle', hidden = true },
-		{ t { '\\langle ' }, i(1), t { '\\rangle' } },
+		{ t({ '\\langle ' }), i(1), t({ '\\rangle' }) },
 		{ condition = context.in_mathzone }
 	),
 }

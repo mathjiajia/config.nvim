@@ -9,9 +9,9 @@ autosnips = {
 		{
 			d(1, function()
 				if not tex.in_xymatrix() then
-					return sn(nil, { t '\\dashrightarrow ' })
+					return sn(nil, { t('\\dashrightarrow ') })
 				else
-					return sn(nil, { t { '\\ar@{-->}[' }, i(1), t { ']' } })
+					return sn(nil, { t({ '\\ar@{-->}[' }), i(1), t({ ']' }) })
 				end
 			end)
 		},
@@ -21,9 +21,9 @@ autosnips = {
 		{
 			d(1, function()
 				if not tex.in_xymatrix() then
-					return sn(nil, { t '\\hookrightarrow ' })
+					return sn(nil, { t('\\hookrightarrow ') })
 				else
-					return sn(nil, { t { '\\ar@{^{(}->}[' }, i(1), t { ']' } })
+					return sn(nil, { t({ '\\ar@{^{(}->}[' }), i(1), t({ ']' }) })
 				end
 			end)
 		},
@@ -32,32 +32,32 @@ autosnips = {
 
 	s(
 		{ trig = '<->', wordTrig = false, name = 'leftrightarrow <->', hidden = true },
-		{ t '\\leftrightarrow ' },
+		{ t('\\leftrightarrow ') },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '->', wordTrig = false, name = 'rightarrow -->', hidden = true },
-		{ t '\\longrightarrow ' },
+		{ t('\\longrightarrow ') },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '!>', wordTrig = false, name = 'mapsto |->', hidden = true },
-		{ t '\\mapsto ' },
+		{ t('\\mapsto ') },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '=>', name = 'implies =>', wordTrig = false, hidden = true },
-		{ t '\\implies ' },
+		{ t('\\implies ') },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = '=<', name = 'impliedby', wordTrig = false, hidden = true },
-		{ t '\\impliedby ' },
+		{ t('\\impliedby ') },
 		{ condition = context.in_mathzone }
 	),
 	s(
 		{ trig = 'iff', name = 'if and only if <=>', wordTrig = false, hidden = true },
-		{ t '\\iff ' },
+		{ t('\\iff ') },
 		{ condition = context.in_mathzone }
 	),
 }

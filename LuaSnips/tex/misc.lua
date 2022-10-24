@@ -60,7 +60,7 @@ autosnips = {
 
 	s(
 		{ trig = 'mk', name = 'inline math', dscr = 'Insert inline Math Environment.' },
-		{ t '\\(', i(1), t '\\)' },
+		{ t('\\('), i(1), t('\\)') },
 		{
 			condition = context.in_text,
 			callbacks = {
@@ -70,17 +70,17 @@ autosnips = {
 	),
 	s(
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
-		{ t { '\\[', '\t' }, i(1), t { '', '\\]' } },
+		{ t({ '\\[', '\t' }), i(1), t({ '', '\\]' }) },
 		{ condition = conds_expand.line_begin * context.in_text }
 	),
 	s(
 		{ trig = 'pha', name = 'sum', dscr = 'Insert a sum notation.', hidden = true },
-		{ t '&\\phantom{\\;=\\;} ' },
+		{ t('&\\phantom{\\;=\\;} ') },
 		{ condition = conds_expand.line_begin * tex.in_align, show_condition = tex.in_align }
 	),
 	s(
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
-		{ t { '\\noindent', '' } },
+		{ t({ '\\noindent', '' }) },
 		{ condition = conds_expand.line_begin * context.in_text, show_condition = context.in_text }
 	),
 }

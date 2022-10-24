@@ -6,55 +6,55 @@ snips = {
 	s(
 		{ trig = 'cha', name = 'Chapter', dscr = 'Insert a new chapter.' },
 		{
-			t { '\\chapter{' },
+			t({ '\\chapter{' }),
 			i(1),
-			t { '}\\label{cha:' },
+			t({ '}\\label{cha:' }),
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
-			t { '}', '', '' }
+			t({ '}', '', '' })
 		},
 		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'sec', name = 'Section', dscr = 'Insert a new section.', regTrig = true },
 		{
-			t { '\\section{' },
+			t({ '\\section{' }),
 			i(1),
-			t { '}\\label{sec:' },
+			t({ '}\\label{sec:' }),
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
-			t { '}', '', '' }
+			t({ '}', '', '' })
 		},
 		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'ssec', name = 'star Section', dscr = 'Insert a section without index.', regTrig = true },
 		{
-			t { '\\section*{' },
+			t({ '\\section*{' }),
 			i(1),
-			t { '}\\label{sec:' },
+			t({ '}\\label{sec:' }),
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
-			t { '}', '', '' }
+			t({ '}', '', '' })
 		},
 		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'sub', name = 'subSection', dscr = 'Insert a new subsection.', regTrig = true },
 		{
-			t { '\\subsection{' },
+			t({ '\\subsection{' }),
 			i(1),
-			t { '}\\label{sub:' },
+			t({ '}\\label{sub:' }),
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
-			t { '}', '', '' }
+			t({ '}', '', '' })
 		},
 		{ condition = conds_expand.line_begin }
 	),
 	s(
 		{ trig = 'ssub', name = 'star subSection', dscr = 'Insert a subsection without index.', regTrig = true },
 		{
-			t { '\\subsection*{' },
+			t({ '\\subsection*{' }),
 			i(1),
-			t { '}\\label{sub:' },
+			t({ '}\\label{sub:' }),
 			l(l._1:gsub('[^%w]+', '_'):gsub('_*$', ''):lower(), 1),
-			t { '}', '', '' },
+			t({ '}', '', '' }),
 		},
 		{ condition = conds_expand.line_begin }
 	),
