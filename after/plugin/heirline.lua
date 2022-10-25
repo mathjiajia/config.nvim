@@ -625,7 +625,7 @@ local TablineCloseButton = {
 }
 
 -- The final touch!
-local TablineBufferBlock = utils.surround({ '', '' }, function(self)
+local TablineBufferBlock = utils.surround({ '', '' }, function(self)
 	if self.is_active then
 		return utils.get_highlight('TabLineSel').bg
 	else
@@ -704,6 +704,7 @@ local TabLine = { TabLineOffset, BufferLine, TabPages }
 require('heirline').setup(StatusLines, WinBar, TabLine)
 
 -- Yep, with heirline we're driving manual!
+vim.o.showtabline = 2
 vim.api.nvim_create_autocmd({ 'FileType' }, {
 	pattern = '*',
 	command = 'if index(["wipe", "delete"], &bufhidden) >= 0 | set nobuflisted | endif'
