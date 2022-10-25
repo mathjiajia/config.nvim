@@ -69,7 +69,8 @@ require('telescope').setup({
 })
 
 local extensions = {
-	'fzf', 'file_browser', 'frecency', 'bibtex', 'ui-select',
+	'fzf', 'file_browser', 'frecency',
+	'bibtex', 'ui-select',
 	'aerial', 'notify', 'noice'
 }
 for _, ext in ipairs(extensions) do
@@ -95,23 +96,33 @@ vim.keymap.set(
 	{ desc = 'Command Pallete' }
 )
 
-vim.keymap.set('n', '<leader>fd',
+vim.keymap.set(
+	'n',
+	'<leader>fd',
 	require('telescope.builtin').find_files,
 	{ desc = 'Find Files' }
 )
-vim.keymap.set('n', '<leader>ff',
+vim.keymap.set(
+	'n',
+	'<leader>ff',
 	require('telescope.builtin').current_buffer_fuzzy_find,
 	{ desc = 'Current Buffer Fuzzy Find' }
 )
-vim.keymap.set('n', '<leader>fg',
+vim.keymap.set(
+	'n',
+	'<leader>fg',
 	require('telescope.builtin').live_grep,
 	{ desc = 'Live Grep' }
 )
-vim.keymap.set('n', '<leader>fh',
+vim.keymap.set(
+	'n',
+	'<leader>fh',
 	require('telescope.builtin').help_tags,
 	{ desc = 'Help Tags' }
 )
-vim.keymap.set('n', '<leader>fm',
+vim.keymap.set(
+	'n',
+	'<leader>fm',
 	require('telescope.builtin').builtin,
 	{ desc = 'Telescope Meta' }
 )
