@@ -36,8 +36,8 @@ autosnips = {
 		{ condition = context.in_mathzone }
 	),
 	s(
-		{ trig = '->', wordTrig = false, name = 'rightarrow -->', hidden = true },
-		{ t('\\longrightarrow ') },
+		{ trig = '->', wordTrig = false, name = 'rightarrow ->', hidden = true },
+		{ t('\\to ') },
 		{ condition = context.in_mathzone }
 	),
 	s(

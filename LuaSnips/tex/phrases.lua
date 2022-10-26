@@ -65,6 +65,12 @@ autosnips = {
 
 	),
 	s(
+		{ trig = 'resp', name = '`respectively' },
+		{ t('resp.\\ ') },
+		{ condition = context.in_text, show_condition = context.in_text }
+
+	),
+	s(
 		{ trig = 'qf', name = 'Q-factorial' },
 		{ t('\\(\\mathbb{Q}\\)-factorial') },
 		{ condition = context.in_text, show_condition = context.in_text }
