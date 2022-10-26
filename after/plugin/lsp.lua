@@ -114,8 +114,6 @@ local on_attach = function(client, bufnr)
 	-- 		group    = 'lsp_codelens',
 	-- 	})
 	-- end
-
-	require('aerial').on_attach(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
