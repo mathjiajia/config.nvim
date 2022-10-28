@@ -19,7 +19,7 @@ local colors = {
 	git_del    = utils.get_highlight('GitSignsDelete').fg,
 	git_add    = utils.get_highlight('GitSignsAdd').fg,
 	git_change = utils.get_highlight('GitSignsChange').fg,
-	work_dir   = utils.get_highlight('@property').fg,
+	work_dir   = utils.get_highlight('Directory').fg,
 }
 
 require('heirline').load_colors(colors)
@@ -110,7 +110,7 @@ local mode_colors = setmetatable({
 
 local LeftCap = {
 	provider = '▌',
-	hl = { fg = 'work_dir' }
+	hl = { fg = 'fg' }
 }
 
 local VimModeNormal = {
@@ -118,7 +118,7 @@ local VimModeNormal = {
 		return self.mode == 'n'
 	end,
 	provider = ' ●',
-	hl = { fg = 'work_dir' }
+	hl = { fg = 'fg' }
 }
 
 local VimModeOthers = {
@@ -217,7 +217,7 @@ local FileName = {
 		end
 		return filename
 	end,
-	hl = { fg = utils.get_highlight('Directory').fg },
+	hl = { fg = 'work_dir' },
 }
 
 local FileFlags = {
@@ -610,7 +610,7 @@ local TablineCloseButton = {
 	end,
 	{ provider = ' ' },
 	{ -- ✗    
-		provider = ' ',
+		provider = '✗',
 		hl = { fg = 'gray' },
 		on_click = {
 			callback = function(_, minwid)
@@ -678,8 +678,9 @@ local TabLineOffset = {
 		if vim.bo[bufnr].filetype == 'neo-tree' then
 			self.title = 'neo-tree'
 			return true
-			-- elseif vim.bo[bufnr].filetype == "TagBar" then
-			--     ...
+			-- elseif vim.bo[bufnr].filetype == 'aerial' then
+			-- 	self.title = 'aerial'
+			-- 	return true
 		end
 	end,
 
