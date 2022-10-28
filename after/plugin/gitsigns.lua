@@ -1,27 +1,56 @@
-require('gitsigns').setup({
-	on_attach = function(bufnr)
-		local gs = package.loaded.gitsigns
+local gitsigns = require('gitsigns')
 
-		vim.keymap.set(
-			'n',
-			']c',
-			function()
-				if vim.wo.diff then return ']c' end
-				vim.schedule(function() gs.next_hunk() end)
-				return '<Ignore>'
-			end,
-			{ expr = true, buffer = bufnr }
-		)
+local function on_attach(bufnr)
+	vim.keymap.set(
+		'n',
+		']c',
+		function()
+			if vim.wo.diff then return ']c' end
+			vim.schedule(gitsigns.next_hunk)
+			return '<Ignore>'
+		end,
+		{ expr = true, buffer = bufnr }
+	)
 
-		vim.keymap.set(
-			'n',
-			'[c',
-			function()
-				if vim.wo.diff then return '[c' end
-				vim.schedule(function() gs.prev_hunk() end)
-				return '<Ignore>'
-			end,
-			{ expr = true, buffer = bufnr }
-		)
-	end
+	vim.keymap.set(
+		'n',
+		'[c',
+		function()
+			if vim.wo.diff then return '[c' end
+			vim.schedule(gitsigns.prev_hunk)
+			return '<Ignore>'
+		end,
+		{ expr = true, buffer = bufnr }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>hs',
+		gitsigns.stage_hunk,
+		{ buffer = bufnr, desc = 'Stage Hunk' }
+	)
+	vim.keymap.set(
+		'n',
+		'<leader>hr',
+		gitsigns.reset_hunk,
+		{ buffer = bufnr, desc = 'Reset Hunk' }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>hp',
+		gitsigns.preview_hunk,
+		{ buffer = bufnr, desc = 'Preview Hunk' }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>hd',
+		gitsigns.diffthis,
+		{ buffer = bufnr, desc = 'Diff This' }
+	)
+end
+
+gitsigns.setup({
+	on_attach = on_attach
 })

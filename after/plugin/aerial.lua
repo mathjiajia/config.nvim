@@ -11,5 +11,5 @@ vim.keymap.set(
 	'n',
 	'<M-o>',
 	require('aerial').toggle,
-	{ buffer = true, desc = 'Toggle aerial window' }
+	{ buffer = true, desc = 'Toggle Aerial' }
 )

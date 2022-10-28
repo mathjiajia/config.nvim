@@ -4,5 +4,5 @@ vim.keymap.set(
     'n',
     '<leader>xx',
     require('trouble').toggle,
-    { desc = 'Trouble' }
+    { desc = 'Toggle Trouble' }
 )

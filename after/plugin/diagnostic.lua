@@ -9,23 +9,23 @@ vim.keymap.set(
     'n',
     '<leader>e',
     vim.diagnostic.open_float,
-    { desc = 'Float diagnostics' }
+    { desc = 'Float Diagnostics' }
 )
 vim.keymap.set(
     'n',
     '[d',
     vim.diagnostic.goto_prev,
-    { desc = 'Previous diagnostics' }
+    { desc = 'Previous Diagnostics' }
 )
 vim.keymap.set(
     'n',
     ']d',
     vim.diagnostic.goto_next,
-    { desc = 'Next diagnostics' }
+    { desc = 'Next Diagnostics' }
 )
 vim.keymap.set(
     'n',
     '<leader>q',
     vim.diagnostic.setloclist,
-    { desc = 'Loclist diagnostics' }
+    { desc = 'Loclist Diagnostics' }
 )

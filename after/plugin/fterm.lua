@@ -2,13 +2,13 @@ vim.keymap.set(
 	{ 'n', 't' },
 	'<C-\\>',
 	require('FTerm').toggle,
-	{ desc = 'Terminal Toggle' }
+	{ desc = 'Toggle Terminal' }
 )
 vim.keymap.set(
 	't',
 	'<Esc>',
 	require('FTerm').exit,
-	{ desc = 'Terminal Exit' }
+	{ desc = 'Exit Terminal' }
 )
 vim.keymap.set(
 	'n',
