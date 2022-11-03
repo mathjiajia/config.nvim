@@ -1,28 +1,8 @@
 local on_attach = function(client, bufnr)
-	vim.keymap.set(
-		'n',
-		'K',
-		vim.lsp.buf.hover,
-		{ buffer = bufnr, desc = 'Docs Hover' }
-	)
-	vim.keymap.set(
-		'n',
-		'<C-k>',
-		vim.lsp.buf.signature_help,
-		{ buffer = bufnr, desc = 'Signature' }
-	)
-	vim.keymap.set(
-		'n',
-		'<leader>rn',
-		vim.lsp.buf.rename,
-		{ buffer = bufnr, desc = 'Rename' }
-	)
-	vim.keymap.set(
-		'n',
-		'gd',
-		vim.lsp.buf.definition,
-		{ buffer = bufnr, desc = 'Go to Definition' }
-	)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
 	vim.keymap.set(
 		'n',
 		'gr',
@@ -120,7 +100,10 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local nvim_lsp = require('lspconfig')
 
 require('mason-lspconfig').setup {
-	ensure_installed = { 'pyright', 'sumneko_lua', 'texlab' }
+	ensure_installed = {
+		'cssls', 'eslint', 'html', 'jsonls',
+		'pyright', 'sumneko_lua', 'texlab'
+	}
 }
 
 require('neodev').setup({})

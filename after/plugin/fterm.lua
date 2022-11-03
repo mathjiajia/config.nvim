@@ -1,15 +1,5 @@
-vim.keymap.set(
-	{ 'n', 't' },
-	'<C-\\>',
-	require('FTerm').toggle,
-	{ desc = 'Toggle Terminal' }
-)
-vim.keymap.set(
-	't',
-	'<Esc>',
-	require('FTerm').exit,
-	{ desc = 'Exit Terminal' }
-)
+vim.keymap.set({ 'n', 't' }, '<C-\\>', require('FTerm').toggle, { desc = 'Toggle Terminal' })
+vim.keymap.set('t', '<Esc>', require('FTerm').exit, { desc = 'Exit Terminal' })
 vim.keymap.set(
 	'n',
 	'<M-g>',
