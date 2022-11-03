@@ -1,8 +1,7 @@
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		'bash', 'bibtex', 'comment', 'fish', 'gitignore',
-		'html', 'latex', 'markdown', 'markdown_inline',
-		'python', 'query', 'regex', 'swift',
+		'bash', 'css', 'bibtex', 'comment', 'fish', 'gitignore', 'html', 'javascript', 'json', 'latex',
+		'markdown', 'markdown_inline', 'python', 'query', 'regex', 'swift',
 	},
 	-- auto_install = true,
 	ignore_install = { 'c', 'help', 'lua', 'vim' },

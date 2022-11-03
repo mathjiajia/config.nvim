@@ -5,7 +5,7 @@ local sources = {
 	b.formatting.black,
 	b.formatting.fish_indent,
 	-- b.formatting.latexindent,
-	b.formatting.prettierd.with { filetypes = { 'html', 'json', 'yaml', 'markdown' } },
+	b.formatting.prettierd.with { filetypes = { 'css', 'javascript', 'yaml', 'markdown' } },
 	-- b.formatting.stylua,
 	-- b.diagnostics.chktex,
 	b.diagnostics.fish,
