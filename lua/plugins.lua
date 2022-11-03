@@ -64,7 +64,7 @@ require('packer').startup(function(use)
 	use 'kosayoda/nvim-lightbulb'
 	use 'folke/neodev.nvim'
 
-	use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+	use { 'folke/trouble.nvim', requires = 'nvim-tree/nvim-web-devicons' }
 	-- use 'theHamsta/nvim-semantic-tokens'
 
 	-- Telescope
@@ -73,7 +73,7 @@ require('packer').startup(function(use)
 		branch = '0.1.x',
 		requires = {
 			'nvim-lua/plenary.nvim',
-			'kyazdani42/nvim-web-devicons'
+			'nvim-tree/nvim-web-devicons'
 		}
 	}
 
@@ -89,7 +89,7 @@ require('packer').startup(function(use)
 		branch = 'v2.x',
 		requires = {
 			'nvim-lua/plenary.nvim',
-			'kyazdani42/nvim-web-devicons',
+			'nvim-tree/nvim-web-devicons',
 			'MunifTanjim/nui.nvim'
 		}
 	}
