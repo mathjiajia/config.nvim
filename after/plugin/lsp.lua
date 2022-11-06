@@ -99,14 +99,10 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local nvim_lsp = require('lspconfig')
 
-require('mason-lspconfig').setup {
-	ensure_installed = {
-		'cssls', 'eslint', 'html', 'jsonls',
-		'pyright', 'sumneko_lua', 'texlab'
-	}
-}
+require('neodev').setup()
 
-require('neodev').setup({})
+require('mason').setup()
+require('mason-lspconfig').setup()
 
 require('mason-lspconfig').setup_handlers {
 	function(server_name)

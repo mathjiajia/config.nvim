@@ -1,10 +1,20 @@
+local builtin = { 'c', 'help', 'lua', 'vim' }
+local langs = {
+	'bash',
+	'comment',
+	'fish',
+	'latex',
+	'markdown',
+	'markdown_inline',
+	'python',
+	'query',
+	'regex',
+	'swift',
+}
+
 require('nvim-treesitter.configs').setup({
-	ensure_installed = {
-		'bash', 'css', 'bibtex', 'comment', 'fish', 'gitignore', 'html', 'javascript', 'json', 'latex',
-		'markdown', 'markdown_inline', 'python', 'query', 'regex', 'swift',
-	},
-	-- auto_install = true,
-	ignore_install = { 'c', 'help', 'lua', 'vim' },
+	ensure_installed = langs,
+	ignore_install = builtin,
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = { 'latex' }

@@ -23,7 +23,7 @@ require('telescope').setup({
 			},
 		},
 		set_env = { ['COLORTERM'] = 'truecolor' },
-		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
+		file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$', '.DS_Store' },
 	},
 	pickers = {
 		buffers = {
