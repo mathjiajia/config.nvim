@@ -17,16 +17,3 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Float Diag
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous Diagnostics' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next Diagnostics' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Loclist Diagnostics' })
-
-local in_ts_capture = function()
-	local buf = vim.api.nvim_get_current_buf()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	row = row - 1
-	col = col - 1
-
-	local captures = vim.treesitter.get_captures_at_pos(buf, row, col)
-
-	print(vim.inspect(captures))
-end
-
-vim.keymap.set({ 'n', 'i', 'v' }, '<F4>', in_ts_capture)
