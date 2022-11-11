@@ -76,7 +76,6 @@ local extensions = {
 	'ui-select',
 	'aerial',
 	'noice',
-	-- 'notify'
 }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
