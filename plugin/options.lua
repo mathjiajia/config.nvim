@@ -1,6 +1,5 @@
 -- global
 vim.o.clipboard = 'unnamedplus'
-vim.o.diffopt = 'internal,filler,closeoff,linematch:60'
 vim.o.laststatus = 3
 vim.o.pumheight = 10
 vim.o.scrolloff = 6
@@ -9,10 +8,14 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.termguicolors = true
 vim.o.updatetime = 200
-vim.o.whichwrap = 'b,s,[,]'
+
+-- opt
+vim.opt.diffopt:append('linematch:60')
+vim.opt.shortmess:append('c')
+vim.opt.whichwrap:append('[,]')
 
 -- Completion
-vim.o.completeopt = 'menu,menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
 
 -- Search
 vim.o.ignorecase = true
@@ -44,4 +47,4 @@ vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSig
 vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
 -- Theme
-vim.cmd.colorscheme 'vscode'
+vim.cmd.colorscheme('vscode')
