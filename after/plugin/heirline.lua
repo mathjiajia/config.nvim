@@ -154,7 +154,6 @@ local VimMode = {
 }
 
 local Snippets = {
-	-- check that we are in insert or select mode
 	condition = function()
 		return vim.tbl_contains({ 'i', 's' }, vim.fn.mode())
 	end,
@@ -168,26 +167,46 @@ local Snippets = {
 }
 
 local WorkDir = {
-	provider = function()
-		local icon = ' '
+	init = function(self)
+		self.icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
 		local cwd = vim.fn.getcwd(0)
-		cwd = vim.fn.fnamemodify(cwd, ':~')
-		if not conditions.width_percent_below(#cwd, 0.25) then
-			cwd = vim.fn.pathshorten(cwd)
+		self.cwd = vim.fn.fnamemodify(cwd, ':~')
+		if not conditions.width_percent_below(#self.cwd, 0.27) then
+			self.cwd = vim.fn.pathshorten(self.cwd)
 		end
-		local trail = cwd:sub(-1) == '/' and '' or '/'
-		return icon .. cwd .. trail
 	end,
 	hl = { fg = 'blue', bold = true },
+	on_click = {
+		callback = function()
+			require('neo-tree.command')._command('toggle')
+		end,
+		name = 'heirline_workdir',
+	},
+
+	flexible = 1,
+	{
+		provider = function(self)
+			local trail = self.cwd:sub(-1) == '/' and '' or '/'
+			return self.icon .. self.cwd .. trail .. ' '
+		end,
+	},
+	{
+		provider = function(self)
+			local cwd = vim.fn.pathshorten(self.cwd)
+			local trail = self.cwd:sub(-1) == '/' and '' or '/'
+			return self.icon .. cwd .. trail .. ' '
+		end,
+	},
+	{
+		provider = '',
+	},
 }
 
 local FileNameBlock = {
-	-- let's first set up some attributes needed by this component and it's children
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
 }
--- We can now define some children separately and add them later
 
 local FileIcon = {
 	init = function(self)
@@ -204,20 +223,27 @@ local FileIcon = {
 }
 
 local FileName = {
-	provider = function(self)
-		-- first, trim the pattern relative to the current directory. For other
-		-- options, see :h filename-modifers
-		local filename = vim.fn.fnamemodify(self.filename, ':.')
-		if filename == '' then return '[No Name]' end
-		-- now, if the filename would occupy more than 1/4th of the available
-		-- space, we trim the file path to its initials
-		-- See Flexible Components section below for dynamic truncation
-		if not conditions.width_percent_below(#filename, 0.25) then
-			filename = vim.fn.pathshorten(filename)
+	init = function(self)
+		self.lfilename = vim.fn.fnamemodify(self.filename, ':.')
+		if self.lfilename == '' then
+			self.lfilename = '[No Name]'
 		end
-		return filename
+		if not conditions.width_percent_below(#self.lfilename, 0.27) then
+			self.lfilename = vim.fn.pathshorten(self.lfilename)
+		end
 	end,
-	hl = { fg = 'work_dir' },
+	hl = 'Directory',
+	flexible = 2,
+	{
+		provider = function(self)
+			return self.lfilename
+		end,
+	},
+	{
+		provider = function(self)
+			return vim.fn.pathshorten(self.lfilename)
+		end,
+	},
 }
 
 local FileFlags = {
@@ -237,26 +263,19 @@ local FileFlags = {
 	},
 }
 
--- Now, let's say that we want the filename color to change if the buffer is
--- modified. Of course, we could do that directly using the FileName.hl field,
--- but we'll see how easy it is to alter existing components using a "modifier"
--- component
-
 local FileNameModifer = {
 	hl = function()
 		if vim.bo.modified then
-			-- use `force` because we need to override the child's hl foreground
 			return { fg = 'cyan', bold = true, force = true }
 		end
 	end,
 }
 
--- let's add the children to our FileNameBlock component
 FileNameBlock = utils.insert(FileNameBlock,
 	FileIcon,
-	utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
-	unpack(FileFlags), -- A small optimisation, since their parent does nothing
-	{ provider = '%<' }-- this means that the statusline is cut here when there's not enough space
+	utils.insert(FileNameModifer, FileName),
+	unpack(FileFlags),
+	{ provider = '%<' }
 )
 
 local FileType = {
@@ -269,6 +288,13 @@ local FileType = {
 local Diagnostics = {
 
 	condition = conditions.has_diagnostics,
+	update = { 'DiagnosticChanged', 'BufEnter' },
+	on_click = {
+		callback = function()
+			require('trouble').toggle({ mode = 'document_diagnostics' })
+		end,
+		name = 'heirline_diagnostics',
+	},
 
 	static = {
 		error_icon = ' ',
@@ -284,14 +310,13 @@ local Diagnostics = {
 		self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 	end,
 
-	update = { 'DiagnosticChanged', 'BufEnter' },
 
 	{
 		provider = '![',
 	},
 	{
 		provider = function(self)
-			-- 0 is just another output, we can decide to print it or not!
+
 			return self.errors > 0 and (self.error_icon .. self.errors .. ' ')
 		end,
 		hl = { fg = 'diag_error' },
@@ -327,16 +352,30 @@ local Git = {
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
 
+	on_click = {
+		callback = function()
+			vim.defer_fn(function()
+				require('FTerm')
+					:new({
+						cmd = 'lazygit',
+						dimensions = { height = 1, width = 1 }
+					})
+					:open()
+			end, 100)
+		end,
+		name = 'heirline_git',
+		update = false,
+	},
+
 	hl = { fg = 'work_dir' },
 
-
-	{ -- git branch name
+	{
 		provider = function(self)
 			return ' ' .. self.status_dict.head
 		end,
 		hl = { bold = true }
 	},
-	-- You could handle delimiters, icons and counts similar to Diagnostics
+
 	{
 		condition = function(self)
 			return self.has_changes
@@ -397,11 +436,10 @@ local Ruler = {
 	provider = '%7(%l/%3L%):%2c %P',
 }
 
--- I take no credits for this! :lion:
+
 local ScrollBar = {
 	static = {
 		sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
-		-- Another variant, because the more choice the better.
 		-- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
 	},
 	provider = function(self)
@@ -414,8 +452,6 @@ local ScrollBar = {
 }
 
 local TerminalName = {
-	-- we could add a condition to check that buftype == 'terminal'
-	-- or we could do that later (see #conditional-statuslines below)
 	provider = function()
 		local tname, _ = vim.api.nvim_buf_get_name(0):gsub('.*:', '')
 		return ' ' .. tname
@@ -482,45 +518,43 @@ local StatusLines = {
 		end
 	end,
 
-	-- the first statusline with no condition, or which condition returns true is used.
-	-- think of it as a switch case with breaks to stop fallthrough.
 	fallthrough = false,
 
 	SpecialStatusline, TerminalStatusline, InactiveStatusline, DefaultStatusline,
 }
 
-local WinBar = {
-	fallthrough = false,
-	{ -- Hide the winbar for special buffers
-		condition = function()
-			return conditions.buffer_matches({
-				buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-				filetype = { '^git.*' },
-			})
-		end,
-		init = function()
-			vim.opt_local.winbar = nil
-		end
-	},
-	{ -- A special winbar for terminals
-		condition = function()
-			return conditions.buffer_matches({ buftype = { 'terminal' } })
-		end,
-		utils.surround({ '', '' }, 'dark_red', {
-			FileType,
-			Space,
-			TerminalName,
-		}),
-	},
-	{ -- An inactive winbar for regular files
-		condition = function()
-			return not conditions.is_active()
-		end,
-		utils.surround({ '', '' }, 'bright_bg', { hl = { fg = 'gray', force = true }, FileNameBlock }),
-	},
-	-- A winbar for regular files
-	utils.surround({ '', '' }, 'bright_bg', FileNameBlock),
-}
+-- local WinBar = {
+-- 	fallthrough = false,
+-- 	{
+-- 		condition = function()
+-- 			return conditions.buffer_matches({
+-- 				buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
+-- 				filetype = { '^git.*' },
+-- 			})
+-- 		end,
+-- 		init = function()
+-- 			vim.opt_local.winbar = nil
+-- 		end
+-- 	},
+-- 	{
+-- 		condition = function()
+-- 			return conditions.buffer_matches({ buftype = { 'terminal' } })
+-- 		end,
+-- 		utils.surround({ '', '' }, 'dark_red', {
+-- 			FileType,
+-- 			Space,
+-- 			TerminalName,
+-- 		}),
+-- 	},
+-- 	{
+-- 		condition = function()
+-- 			return not conditions.is_active()
+-- 		end,
+-- 		utils.surround({ '', '' }, 'bright_bg', { hl = { fg = 'gray', force = true }, FileNameBlock }),
+-- 	},
+
+-- 	utils.surround({ '', '' }, 'bright_bg', FileNameBlock),
+-- }
 
 local TablineBufnr = {
 	provider = function(self)
@@ -529,10 +563,9 @@ local TablineBufnr = {
 	hl = 'Comment',
 }
 
--- we redefine the filename component, as we probably only want the tail and not the relative path
 local TablineFileName = {
 	provider = function(self)
-		-- self.filename will be defined later, just keep looking at the example!
+
 		local filename = self.filename
 		filename = filename == '' and '[No Name]' or vim.fn.fnamemodify(filename, ':t')
 		return filename
@@ -542,9 +575,6 @@ local TablineFileName = {
 	end,
 }
 
--- this looks exactly like the FileFlags component that we saw in
--- #crash-course-part-ii-filename-and-friends, but we are indexing the bufnr explicitly
--- also, we are adding a nice icon for terminal buffers.
 local TablineFileFlags = {
 	{
 		condition = function(self)
@@ -569,7 +599,6 @@ local TablineFileFlags = {
 	},
 }
 
--- Here the filename block finally comes together
 local TablineFileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(self.bufnr)
@@ -577,16 +606,15 @@ local TablineFileNameBlock = {
 	hl = function(self)
 		if self.is_active then
 			return 'TabLineSel'
-			-- why not?
 			-- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
-			--     return { fg = "gray" }
+			-- 	return { fg = 'gray' }
 		else
 			return 'TabLine'
 		end
 	end,
 	on_click = {
 		callback = function(_, minwid, _, button)
-			if (button == 'm') then -- close on mouse middle click
+			if (button == 'm') then
 				vim.api.nvim_buf_delete(minwid, { force = false })
 			else
 				vim.api.nvim_win_set_buf(0, minwid)
@@ -598,12 +626,11 @@ local TablineFileNameBlock = {
 		name = 'heirline_tabline_buffer_callback',
 	},
 	TablineBufnr,
-	FileIcon, -- turns out the version defined in #crash-course-part-ii-filename-and-friends can be reutilized as is here!
+	FileIcon,
 	TablineFileName,
 	TablineFileFlags,
 }
 
--- a nice "x" button to close the buffer
 local TablineCloseButton = {
 	condition = function(self)
 		return not vim.api.nvim_buf_get_option(self.bufnr, 'modified')
@@ -615,6 +642,7 @@ local TablineCloseButton = {
 		on_click = {
 			callback = function(_, minwid)
 				vim.api.nvim_buf_delete(minwid, { force = false })
+				vim.cmd.redrawtabline()
 			end,
 			minwid = function(self)
 				return self.bufnr
@@ -624,7 +652,6 @@ local TablineCloseButton = {
 	},
 }
 
--- The final touch!
 local TablineBufferBlock = utils.surround({ '', '' }, function(self)
 	if self.is_active then
 		return utils.get_highlight('TabLineSel').bg
@@ -633,12 +660,12 @@ local TablineBufferBlock = utils.surround({ '', '' }, function(self)
 	end
 end, { TablineFileNameBlock, TablineCloseButton })
 
--- and here we go
+
 local BufferLine = utils.make_buflist(
 	TablineBufferBlock,
-	{ provider = ' ', hl = { fg = 'gray' } }, -- left truncation, optional (defaults to "<")
-	{ provider = ' ', hl = { fg = 'gray' } }-- right trunctation, also optional (defaults to ...... yep, ">")
--- by the way, open a lot of buffers and try clicking them ;)
+	{ provider = ' ', hl = { fg = 'gray' } },
+	{ provider = ' ', hl = { fg = 'gray' } }
+
 )
 
 local Tabpage = {
@@ -660,7 +687,6 @@ local TabpageClose = {
 }
 
 local TabPages = {
-	-- only show this component if there's 2 or more tabpages
 	condition = function()
 		return #vim.api.nvim_list_tabpages() >= 2
 	end,
@@ -702,9 +728,8 @@ local TabLineOffset = {
 
 local TabLine = { TabLineOffset, BufferLine, TabPages }
 
-require('heirline').setup(StatusLines, WinBar, TabLine)
+require('heirline').setup(StatusLines, nil, TabLine)
 
--- Yep, with heirline we're driving manual!
 vim.o.showtabline = 2
 vim.api.nvim_create_autocmd({ 'FileType' }, {
 	pattern = '*',
