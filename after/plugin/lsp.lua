@@ -1,8 +1,37 @@
 local on_attach = function(client, bufnr)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
+	vim.keymap.set(
+		'n',
+		'K',
+		function()
+			require('lspsaga.hover'):render_hover_doc()
+		end,
+		{ buffer = bufnr, desc = 'Docs Hover' }
+	)
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
+	vim.keymap.set(
+		'n',
+		'<leader>rn',
+		function()
+			require('lspsaga.rename'):lsp_rename()
+		end,
+		{ buffer = bufnr, desc = 'Rename' }
+	)
+	vim.keymap.set(
+		'n',
+		'gd',
+		function()
+			require('lspsaga.definition'):peek_definition()
+		end,
+		{ buffer = bufnr, desc = 'Go to Definition' }
+	)
+	vim.keymap.set(
+		'n',
+		'gh',
+		function()
+			require('lspsaga.finder'):lsp_finder()
+		end,
+		{ buffer = bufnr, desc = 'Telescope References' }
+	)
 	vim.keymap.set(
 		'n',
 		'gr',
@@ -47,16 +76,11 @@ local on_attach = function(client, bufnr)
 		vim.keymap.set(
 			{ 'n', 'x' },
 			'<leader>ca',
-			vim.lsp.buf.code_action,
+			function()
+				require('lspsaga.codeaction'):code_action()
+			end,
 			{ buffer = bufnr, desc = '(Range) Code Actions' }
 		)
-
-		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-			callback = function()
-				require('nvim-lightbulb').update_lightbulb()
-			end,
-			buffer = bufnr,
-		})
 	end
 
 	if caps.documentFormattingProvider then
@@ -109,6 +133,22 @@ require('mason-lspconfig').setup_handlers {
 		nvim_lsp[server_name].setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
+		}
+	end,
+	['sumneko_lua'] = function()
+		nvim_lsp.sumneko_lua.setup {
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					workspace = {
+						checkThirdParty = false,
+					},
+					telemetry = {
+						enable = false,
+					},
+				},
+			},
 		}
 	end,
 	['texlab'] = function()
