@@ -8,10 +8,10 @@ autosnips = {
 		{ trig = 'rmap', name = 'rational map arrow', wordTrig = false, hidden = true },
 		{
 			d(1, function()
-				if not tex.in_xymatrix() then
-					return sn(nil, { t('\\dashrightarrow ') })
-				else
+				if tex.in_xymatrix() then
 					return sn(nil, { t({ '\\ar@{-->}[' }), i(1), t({ ']' }) })
+				else
+					return sn(nil, { t('\\dashrightarrow ') })
 				end
 			end)
 		},
@@ -20,10 +20,10 @@ autosnips = {
 		{ trig = 'emb', name = 'embeddeing map arrow', wordTrig = false, hidden = true },
 		{
 			d(1, function()
-				if not tex.in_xymatrix() then
-					return sn(nil, { t('\\hookrightarrow ') })
-				else
+				if tex.in_xymatrix() then
 					return sn(nil, { t({ '\\ar@{^{(}->}[' }), i(1), t({ ']' }) })
+				else
+					return sn(nil, { t('\\hookrightarrow ') })
 				end
 			end)
 		},

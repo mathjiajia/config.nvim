@@ -44,13 +44,13 @@ end
 
 ---Check if cursor is in treesitter node of 'math_environment': 'align'
 ---@return boolean
-function M.in_align()
+local in_align = function()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'math_environment' then
 			local begin = node:child(0)
-			local names = begin and begin:field 'name'
+			local names = begin and begin:field('name')
 
 			if names and names[1] and ALIGN_ENVIRONMENTS[vim.treesitter.query.get_node_text(names[1], buf)] then
 				return true
@@ -63,7 +63,7 @@ end
 
 ---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
 ---@return boolean
-function M.in_xymatrix()
+local in_xymatrix = function()
 	local buf = vim.api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
@@ -77,5 +77,8 @@ function M.in_xymatrix()
 	end
 	return false
 end
+
+M.in_align = cond_obj.make_condition(in_align)
+M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
 
 return M
