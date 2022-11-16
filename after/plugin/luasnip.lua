@@ -1,7 +1,7 @@
 local ls    = require('luasnip')
 local types = require('luasnip.util.types')
 
-ls.config.setup({
+ls.setup({
 	update_events = 'TextChanged,TextChangedI',
 	enable_autosnippets = true,
 	ext_opts = {
@@ -10,7 +10,17 @@ ls.config.setup({
 				virt_text = { { '« ', 'NonText' } }
 			},
 		}
-	}
+	},
+	-- snip_env = {
+	-- 	s = function(...)
+	-- 		local snip = ls.s(...)
+	-- 		table.insert(getfenv(2).ls_file_snippets, snip)
+	-- 	end,
+	-- parse = function(...)
+	-- 	local snip = ls.parser.parse(...)
+	-- 	table.insert(getfenv(2).ls_file_snippets, snip)
+	-- end,
+	-- },
 })
 
 vim.keymap.set(
