@@ -128,6 +128,23 @@ require('neodev').setup()
 require('mason').setup()
 require('mason-lspconfig').setup()
 
+local binary_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/nvim-texlabconfig/nvim-texlabconfig'
+local cache_root = vim.fn.stdpath('cache')
+
+local executable = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+local args = {
+	'--inverse-search',
+	binary_path .. ' -file %1 -line %2 -cache_root ' .. cache_root,
+	'--reuse-instance',
+	'--forward-search-file',
+	'%f',
+	'--forward-search-line',
+	'%l',
+	'%p'
+}
+-- executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
+-- args = { '%l', '%p', '%f' },
+
 require('mason-lspconfig').setup_handlers {
 	function(server_name)
 		nvim_lsp[server_name].setup {
@@ -169,8 +186,8 @@ require('mason-lspconfig').setup_handlers {
 						-- onSave = false,
 					},
 					forwardSearch = {
-						executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
-						args = { '%l', '%p', '%f' },
+						executable = executable,
+						args = args
 					},
 				},
 			},
