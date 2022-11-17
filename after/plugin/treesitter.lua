@@ -2,6 +2,7 @@ local builtin = { 'c', 'help', 'lua', 'vim' }
 local langs = {
 	'bash',
 	'comment',
+	'diff',
 	'fish',
 	'latex',
 	'markdown',

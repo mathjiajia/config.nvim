@@ -142,8 +142,8 @@ local args = {
 	'%l',
 	'%p'
 }
--- executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
--- args = { '%l', '%p', '%f' },
+-- local executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
+-- local args = { '%l', '%p', '%f' },
 
 require('mason-lspconfig').setup_handlers {
 	function(server_name)
