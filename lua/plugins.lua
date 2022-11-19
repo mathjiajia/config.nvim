@@ -5,24 +5,27 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 		'clone',
 		'--depth',
 		'1',
-		'https://github.com/lewis6991/packer.nvim',
+		'https://github.com/wbthomason/packer.nvim',
 		install_path
 	})
 end
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-	command = 'source',
+	command = 'source | PackerCompile',
 	pattern = 'plugins.lua',
 	group   = 'packer_user_config',
 	desc    = 'reload whenever plugins.lua is updated',
 })
 
 local plugins = {
-	'lewis6991/packer.nvim',
-	'lewis6991/impatient.nvim',
+	'wbthomason/packer.nvim',
 
-	'monkoose/matchparen.nvim',
+	'lewis6991/impatient.nvim',
+	{
+		'monkoose/matchparen.nvim',
+		config = [[require('matchparen').setup({})]]
+	},
 
 	-- UI
 	'rebelot/heirline.nvim',
@@ -36,13 +39,22 @@ local plugins = {
 	},
 
 	-- Treesitter
-	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-	{ 'nvim-treesitter/playground', opt = true },
-	-- 'nvim-treesitter/nvim-treesitter-context',
+	{
+		'nvim-treesitter/nvim-treesitter',
+		run = function()
+			require('nvim-treesitter.install').update({ with_sync = true })
+		end
+	},
+	{
+		'nvim-treesitter/playground',
+		opt = true
+	},
+	'nvim-treesitter/nvim-treesitter-context',
 	'p00f/nvim-ts-rainbow',
 
 	-- Completion
 	'hrsh7th/nvim-cmp',
+
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/cmp-nvim-lsp',
@@ -52,21 +64,36 @@ local plugins = {
 
 	'L3MON4D3/LuaSnip',
 	'windwp/nvim-autopairs',
-	-- 'zbirenbaum/copilot.lua',
-	-- 'zbirenbaum/copilot-cmp',
+	-- {
+	-- 	'zbirenbaum/copilot.lua',
+	-- 	config = [[require('copilot').setup()]]
+	-- },
+	-- {
+	-- 	'zbirenbaum/copilot-cmp.lua',
+	-- 	config = [[require('copilot_cmp').setup()]]
+	-- },
 
 	-- LSP
-	'williamboman/mason.nvim',
-	'williamboman/mason-lspconfig.nvim',
-	'neovim/nvim-lspconfig',
-	{ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' },
+	{
+		'neovim/nvim-lspconfig',
+		requires = {
+			'williamboman/mason.nvim',
+			'williamboman/mason-lspconfig.nvim',
+		}
+	},
+	{
+		'jose-elias-alvarez/null-ls.nvim',
+		requires = 'nvim-lua/plenary.nvim'
+	},
 
-	'glepnir/lspsaga.nvim',
 	'stevearc/aerial.nvim',
+	-- 'glepnir/lspsaga.nvim',
 	'folke/neodev.nvim',
-
-	{ 'folke/trouble.nvim', requires = 'nvim-tree/nvim-web-devicons' },
-	-- 'theHamsta/nvim-semantic-tokens',
+	-- {
+	-- 	'folke/trouble.nvim',
+	-- 	requires = 'nvim-tree/nvim-web-devicons',
+	-- 	config = [[require('trouble').setup()]]
+	-- },
 
 	-- Telescope
 	{
@@ -77,8 +104,14 @@ local plugins = {
 		}
 	},
 
-	{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-	{ 'nvim-telescope/telescope-frecency.nvim', requires = 'kkharji/sqlite.lua' },
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		run = 'make'
+	},
+	{
+		'nvim-telescope/telescope-frecency.nvim',
+		requires = 'kkharji/sqlite.lua'
+	},
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-bibtex.nvim',
 	'nvim-telescope/telescope-ui-select.nvim',
@@ -96,14 +129,27 @@ local plugins = {
 
 	-- Utils
 	'numtostr/FTerm.nvim',
-	'numToStr/Comment.nvim',
 	'lewis6991/gitsigns.nvim',
-	'ggandor/leap.nvim',
-	'kylechui/nvim-surround',
+	{
+		'numToStr/Comment.nvim',
+		config = [[require('Comment').setup()]]
+	},
+	{
+		'ggandor/leap.nvim',
+		config = [[require('leap').add_default_mappings()]]
+	},
+	{
+		'kylechui/nvim-surround',
+		config = [[require('nvim-surround').setup()]]
+	},
 
 	-- Tex
 	{ 'lervag/vimtex' },
-	{ 'f3fora/nvim-texlabconfig', run = 'go build' },
+	{
+		'f3fora/nvim-texlabconfig',
+		run = 'go build',
+		config = [[require('texlabconfig').setup()]]
+	},
 
 	-- Norg
 	-- {

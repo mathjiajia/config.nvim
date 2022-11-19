@@ -114,7 +114,9 @@ vim.keymap.set(
 	'n',
 	'<leader>fz',
 	function()
-		require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--type', vim.fn.input({ 'Type: ' }) } })
+		require('telescope.builtin').find_files(
+			{ find_command = { 'rg', '--files', '--type', vim.fn.input({ 'Type: ' }) } }
+		)
 	end,
 	{ desc = 'Search Certain Type Files' }
 )
