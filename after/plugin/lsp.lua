@@ -1,37 +1,13 @@
+local api = vim.api
+local augroup = api.nvim_create_augroup
+local autocmd = api.nvim_create_autocmd
+local lsp = vim.lsp
+
 local on_attach = function(client, bufnr)
-	vim.keymap.set(
-		'n',
-		'K',
-		function()
-			require('lspsaga.hover'):render_hover_doc()
-		end,
-		{ buffer = bufnr, desc = 'Docs Hover' }
-	)
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-	vim.keymap.set(
-		'n',
-		'<leader>rn',
-		function()
-			require('lspsaga.rename'):lsp_rename()
-		end,
-		{ buffer = bufnr, desc = 'Rename' }
-	)
-	vim.keymap.set(
-		'n',
-		'gd',
-		function()
-			require('lspsaga.definition'):peek_definition()
-		end,
-		{ buffer = bufnr, desc = 'Go to Definition' }
-	)
-	vim.keymap.set(
-		'n',
-		'gh',
-		function()
-			require('lspsaga.finder'):lsp_finder()
-		end,
-		{ buffer = bufnr, desc = 'Telescope References' }
-	)
+	vim.keymap.set('n', 'K', lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
+	vim.keymap.set('n', '<C-k>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
+	vim.keymap.set('n', '<leader>rn', lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
+	vim.keymap.set('n', 'gd', lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
 	vim.keymap.set(
 		'n',
 		'gr',
@@ -42,34 +18,34 @@ local on_attach = function(client, bufnr)
 	local caps = client.server_capabilities
 
 	if caps.documentHighlightProvider then
-		vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
-		vim.api.nvim_clear_autocmds({
+		augroup('lsp_document_highlight', { clear = false })
+		api.nvim_clear_autocmds({
 			buffer = bufnr,
 			group = 'lsp_document_highlight',
 		})
-		vim.api.nvim_create_autocmd('CursorHold', {
-			callback = vim.lsp.buf.document_highlight,
+		autocmd('CursorHold', {
+			callback = lsp.buf.document_highlight,
 			buffer   = bufnr,
 			group    = 'lsp_document_highlight',
 		})
-		vim.api.nvim_create_autocmd('CursorMoved', {
-			callback = vim.lsp.buf.clear_references,
+		autocmd('CursorMoved', {
+			callback = lsp.buf.clear_references,
 			buffer   = bufnr,
 			group    = 'lsp_document_highlight',
 		})
 	end
 
 	-- if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-	-- 	local augroup = vim.api.nvim_create_augroup('SemanticTokens', {})
-	-- 	vim.api.nvim_create_autocmd('TextChanged', {
+	-- 	local augroup = augroup('SemanticTokens', {})
+	-- 	autocmd('TextChanged', {
 	-- 		group = augroup,
 	-- 		buffer = bufnr,
 	-- 		callback = function()
-	-- 			vim.lsp.buf.semantic_tokens_full()
+	-- 			lsp.buf.semantic_tokens_full()
 	-- 		end,
 	-- 	})
 	-- 	-- fire it first time on load as well
-	-- 	vim.lsp.buf.semantic_tokens_full()
+	-- 	lsp.buf.semantic_tokens_full()
 	-- end
 
 	if caps.codeActionProvider then
@@ -88,7 +64,7 @@ local on_attach = function(client, bufnr)
 			'n',
 			'<leader>lf',
 			function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = true })
+				lsp.buf.format({ bufnr = bufnr, async = true })
 			end,
 			{ buffer = bufnr, desc = 'Formmating' }
 		)
@@ -98,22 +74,22 @@ local on_attach = function(client, bufnr)
 			'x',
 			'<leader>lf',
 			function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = true })
+				lsp.buf.format({ bufnr = bufnr, async = true })
 			end,
 			{ buffer = bufnr, desc = 'Range Formmating' }
 		)
 	end
 
 	-- if caps.codeLensProvider then
-	-- 	vim.api.nvim_create_augroup('lsp_codelens', { clear = true })
-	-- 	vim.api.nvim_create_autocmd('BufEnter', {
-	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 	augroup('lsp_codelens', { clear = true })
+	-- 	autocmd('BufEnter', {
+	-- 		callback = require('lsp.codelens').refresh,
 	-- 		buffer   = bufnr,
 	-- 		group    = 'lsp_codelens',
 	-- 		once     = true,
 	-- 	})
-	-- 	vim.api.nvim_create_autocmd({ 'BufWritePost', 'CursorHold' }, {
-	-- 		callback = require('vim.lsp.codelens').refresh,
+	-- 	autocmd({ 'BufWritePost', 'CursorHold' }, {
+	-- 		callback = require('lsp.codelens').refresh,
 	-- 		buffer   = bufnr,
 	-- 		group    = 'lsp_codelens',
 	-- 	})

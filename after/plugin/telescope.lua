@@ -1,10 +1,13 @@
 local home = os.getenv('HOME')
+local fn = vim.fn
 
+local telescope = require('telescope')
+local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local actions_layout = require('telescope.actions.layout')
 local themes = require('telescope.themes')
 
-require('telescope').setup({
+telescope.setup({
 	defaults = {
 		sorting_strategy = 'ascending',
 		layout_config = {
@@ -68,7 +71,7 @@ require('telescope').setup({
 	},
 })
 
-local extensions = {
+local extns = {
 	'fzf',
 	'file_browser',
 	'frecency',
@@ -77,35 +80,25 @@ local extensions = {
 	'aerial',
 	'noice',
 }
-for _, ext in ipairs(extensions) do
-	require('telescope').load_extension(ext)
+for _, extn in ipairs(extns) do
+	telescope.load_extension(extn)
 end
 
-vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').buffers, { desc = 'Buffers' })
-vim.keymap.set(
-	'n',
-	'<leader><space>',
-	require('telescope').extensions.file_browser.file_browser,
-	{ desc = 'File Browser' }
-)
-vim.keymap.set('n', '<F12>', require('telescope.builtin').commands, { desc = 'Command Pallete' })
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Buffers' })
+vim.keymap.set('n', '<leader><space>', telescope.extensions.file_browser.file_browser, { desc = 'File Browser' })
+vim.keymap.set('n', '<F12>', builtin.commands, { desc = 'Command Pallete' })
 
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').find_files, { desc = 'Find Files' })
-vim.keymap.set(
-	'n',
-	'<leader>ff',
-	require('telescope.builtin').current_buffer_fuzzy_find,
-	{ desc = 'Current Buffer Fuzzy Find' }
-)
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live Grep' })
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Help Tags' })
-vim.keymap.set('n', '<leader>fm', require('telescope.builtin').builtin, { desc = 'Telescope Meta' })
+vim.keymap.set('n', '<leader>fd', builtin.find_files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>ff', builtin.current_buffer_fuzzy_find, { desc = 'Current Buffer Fuzzy Find' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help Tags' })
+vim.keymap.set('n', '<leader>fm', builtin.builtin, { desc = 'Telescope Meta' })
 
 vim.keymap.set(
 	'n',
 	'<leader>fr',
 	function()
-		require('telescope').extensions.frecency.frecency(themes.get_ivy {})
+		telescope.extensions.frecency.frecency(themes.get_ivy {})
 	end,
 	{ desc = 'Recent Files' }
 )
@@ -114,9 +107,7 @@ vim.keymap.set(
 	'n',
 	'<leader>fz',
 	function()
-		require('telescope.builtin').find_files(
-			{ find_command = { 'rg', '--files', '--type', vim.fn.input({ 'Type: ' }) } }
-		)
+		builtin.find_files({ find_command = { 'rg', '--files', '--type', fn.input({ 'Type: ' }) } })
 	end,
 	{ desc = 'Search Certain Type Files' }
 )
@@ -124,7 +115,7 @@ vim.keymap.set(
 	'n',
 	'<leader>f/',
 	function()
-		require('telescope.builtin').grep_string { search = vim.fn.input({ 'Grep String > ' }) }
+		builtin.grep_string({ search = fn.input({ 'Grep String > ' }) })
 	end,
 	{ desc = 'Grep Strings' }
 )
@@ -133,7 +124,7 @@ vim.keymap.set(
 	'n',
 	'<leader>en',
 	function()
-		require('telescope.builtin').find_files({
+		builtin.find_files({
 			cwd = '~/.config/nvim',
 			prompt_title = 'Nvim Configs'
 		})

@@ -1,7 +1,9 @@
-vim.keymap.set({ 'n', 't' }, '<C-\\>', require('FTerm').toggle, { desc = 'Toggle Terminal' })
-vim.keymap.set('t', '<Esc>', require('FTerm').exit, { desc = 'Exit Terminal' })
+local term = require('FTerm')
 
-local lazygit = require('FTerm'):new({
+vim.keymap.set({ 'n', 't' }, '<C-\\>', term.toggle, { desc = 'Toggle Terminal' })
+vim.keymap.set('t', '<Esc>', term.exit, { desc = 'Exit Terminal' })
+
+local lazygit = term:new({
 	ft = 'fterm_gitui',
 	cmd = 'lazygit',
 	dimensions = {
@@ -30,7 +32,7 @@ vim.keymap.set(
 		local ftype = vim.filetype.match({ filename = buf })
 		local exec = runners[ftype]
 		if exec ~= nil then
-			require('FTerm').scratch({ cmd = { exec, buf } })
+			term.scratch({ cmd = { exec, buf } })
 		end
 	end,
 	{ desc = 'Code Runner' }

@@ -55,5 +55,3 @@ vim.keymap.set(
 )
 
 require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnips/' })
-
--- vim.api.nvim_add_user_command('LuaSnipEdit', edit_ft, {})

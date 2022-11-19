@@ -1,5 +1,6 @@
 local conditions = require('heirline.conditions')
 local utils = require('heirline.utils')
+local api, fn = vim.api, vim.fn
 
 local colors = {
 	bright_bg  = utils.get_highlight('Folded').bg,
@@ -145,7 +146,7 @@ local VimModeOthers = {
 
 local VimMode = {
 	init = function(self)
-		self.mode = vim.fn.mode()
+		self.mode = fn.mode()
 	end,
 
 	VimModeNormal, VimModeOthers,
@@ -155,7 +156,7 @@ local VimMode = {
 
 local Snippets = {
 	condition = function()
-		return vim.tbl_contains({ 'i', 's' }, vim.fn.mode())
+		return vim.tbl_contains({ 'i', 's' }, fn.mode())
 	end,
 	provider = function()
 		local ls = require('luasnip')
@@ -168,11 +169,11 @@ local Snippets = {
 
 local WorkDir = {
 	init = function(self)
-		self.icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
-		local cwd = vim.fn.getcwd(0)
-		self.cwd = vim.fn.fnamemodify(cwd, ':~')
+		self.icon = (fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
+		local cwd = fn.getcwd(0)
+		self.cwd = fn.fnamemodify(cwd, ':~')
 		if not conditions.width_percent_below(#self.cwd, 0.27) then
-			self.cwd = vim.fn.pathshorten(self.cwd)
+			self.cwd = fn.pathshorten(self.cwd)
 		end
 	end,
 	hl = { fg = 'blue', bold = true },
@@ -192,7 +193,7 @@ local WorkDir = {
 	},
 	{
 		provider = function(self)
-			local cwd = vim.fn.pathshorten(self.cwd)
+			local cwd = fn.pathshorten(self.cwd)
 			local trail = self.cwd:sub(-1) == '/' and '' or '/'
 			return self.icon .. cwd .. trail .. ' '
 		end,
@@ -204,14 +205,14 @@ local WorkDir = {
 
 local FileNameBlock = {
 	init = function(self)
-		self.filename = vim.api.nvim_buf_get_name(0)
+		self.filename = api.nvim_buf_get_name(0)
 	end,
 }
 
 local FileIcon = {
 	init = function(self)
 		local filename = self.filename
-		local extension = vim.fn.fnamemodify(filename, ':e')
+		local extension = fn.fnamemodify(filename, ':e')
 		self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
 	end,
 	provider = function(self)
@@ -224,12 +225,12 @@ local FileIcon = {
 
 local FileName = {
 	init = function(self)
-		self.lfilename = vim.fn.fnamemodify(self.filename, ':.')
+		self.lfilename = fn.fnamemodify(self.filename, ':.')
 		if self.lfilename == '' then
 			self.lfilename = '[No Name]'
 		end
 		if not conditions.width_percent_below(#self.lfilename, 0.27) then
-			self.lfilename = vim.fn.pathshorten(self.lfilename)
+			self.lfilename = fn.pathshorten(self.lfilename)
 		end
 	end,
 	hl = 'Directory',
@@ -241,7 +242,7 @@ local FileName = {
 	},
 	{
 		provider = function(self)
-			return vim.fn.pathshorten(self.lfilename)
+			return fn.pathshorten(self.lfilename)
 		end,
 	},
 }
@@ -442,8 +443,8 @@ local ScrollBar = {
 		-- sbar = { '🭶🭶', '🭷🭷', '🭸🭸', '🭹🭹', '🭺🭺', '🭻🭻' }
 	},
 	provider = function(self)
-		local curr_line = vim.api.nvim_win_get_cursor(0)[1]
-		local lines = vim.api.nvim_buf_line_count(0)
+		local curr_line = api.nvim_win_get_cursor(0)[1]
+		local lines = api.nvim_buf_line_count(0)
 		local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
 		return self.sbar[i]
 	end,
@@ -452,7 +453,7 @@ local ScrollBar = {
 
 local TerminalName = {
 	provider = function()
-		local tname, _ = vim.api.nvim_buf_get_name(0):gsub('.*:', '')
+		local tname, _ = api.nvim_buf_get_name(0):gsub('.*:', '')
 		return ' ' .. tname
 	end,
 	hl = { fg = 'blue', bold = true },
@@ -463,8 +464,8 @@ local HelpFileName = {
 		return vim.bo.filetype == 'help'
 	end,
 	provider = function()
-		local filename = vim.api.nvim_buf_get_name(0)
-		return vim.fn.fnamemodify(filename, ':t')
+		local filename = api.nvim_buf_get_name(0)
+		return fn.fnamemodify(filename, ':t')
 	end,
 	hl = { fg = 'blue' },
 }
@@ -566,7 +567,7 @@ local TablineFileName = {
 	provider = function(self)
 
 		local filename = self.filename
-		filename = filename == '' and '[No Name]' or vim.fn.fnamemodify(filename, ':t')
+		filename = filename == '' and '[No Name]' or fn.fnamemodify(filename, ':t')
 		return filename
 	end,
 	hl = function(self)
@@ -577,18 +578,18 @@ local TablineFileName = {
 local TablineFileFlags = {
 	{
 		condition = function(self)
-			return vim.api.nvim_buf_get_option(self.bufnr, 'modified')
+			return api.nvim_buf_get_option(self.bufnr, 'modified')
 		end,
 		provider = '[+]',
 		hl = { fg = 'green' },
 	},
 	{
 		condition = function(self)
-			return not vim.api.nvim_buf_get_option(self.bufnr, 'modifiable')
-				or vim.api.nvim_buf_get_option(self.bufnr, 'readonly')
+			return not api.nvim_buf_get_option(self.bufnr, 'modifiable')
+				or api.nvim_buf_get_option(self.bufnr, 'readonly')
 		end,
 		provider = function(self)
-			if vim.api.nvim_buf_get_option(self.bufnr, 'buftype') == 'terminal' then
+			if api.nvim_buf_get_option(self.bufnr, 'buftype') == 'terminal' then
 				return '  '
 			else
 				return ''
@@ -600,12 +601,12 @@ local TablineFileFlags = {
 
 local TablineFileNameBlock = {
 	init = function(self)
-		self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+		self.filename = api.nvim_buf_get_name(self.bufnr)
 	end,
 	hl = function(self)
 		if self.is_active then
 			return 'TabLineSel'
-			-- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
+			-- elseif not api.nvim_buf_is_loaded(self.bufnr) then
 			-- 	return { fg = 'gray' }
 		else
 			return 'TabLine'
@@ -614,9 +615,9 @@ local TablineFileNameBlock = {
 	on_click = {
 		callback = function(_, minwid, _, button)
 			if (button == 'm') then
-				vim.api.nvim_buf_delete(minwid, { force = false })
+				api.nvim_buf_delete(minwid, { force = false })
 			else
-				vim.api.nvim_win_set_buf(0, minwid)
+				api.nvim_win_set_buf(0, minwid)
 			end
 		end,
 		minwid = function(self)
@@ -632,7 +633,7 @@ local TablineFileNameBlock = {
 
 local TablineCloseButton = {
 	condition = function(self)
-		return not vim.api.nvim_buf_get_option(self.bufnr, 'modified')
+		return not api.nvim_buf_get_option(self.bufnr, 'modified')
 	end,
 	{ provider = ' ' },
 	{ -- ✗    
@@ -640,7 +641,7 @@ local TablineCloseButton = {
 		hl = { fg = 'gray' },
 		on_click = {
 			callback = function(_, minwid)
-				vim.api.nvim_buf_delete(minwid, { force = false })
+				api.nvim_buf_delete(minwid, { force = false })
 				vim.cmd.redrawtabline()
 			end,
 			minwid = function(self)
@@ -687,7 +688,7 @@ local TabpageClose = {
 
 local TabPages = {
 	condition = function()
-		return #vim.api.nvim_list_tabpages() >= 2
+		return #api.nvim_list_tabpages() >= 2
 	end,
 	{ provider = '%=' },
 	utils.make_tablist(Tabpage),
@@ -696,8 +697,8 @@ local TabPages = {
 
 local TabLineOffset = {
 	condition = function(self)
-		local win = vim.api.nvim_tabpage_list_wins(0)[1]
-		local bufnr = vim.api.nvim_win_get_buf(win)
+		local win = api.nvim_tabpage_list_wins(0)[1]
+		local bufnr = api.nvim_win_get_buf(win)
 		self.winid = win
 
 		if vim.bo[bufnr].filetype == 'neo-tree' then
@@ -711,13 +712,13 @@ local TabLineOffset = {
 
 	provider = function(self)
 		local title = self.title
-		local width = vim.api.nvim_win_get_width(self.winid)
+		local width = api.nvim_win_get_width(self.winid)
 		local pad = math.ceil((width - #title) / 2)
 		return string.rep(' ', pad) .. title .. string.rep(' ', pad)
 	end,
 
 	hl = function(self)
-		if vim.api.nvim_get_current_win() == self.winid then
+		if api.nvim_get_current_win() == self.winid then
 			return 'TablineSel'
 		else
 			return 'Tabline'
@@ -730,7 +731,7 @@ local TabLine = { TabLineOffset, BufferLine, TabPages }
 require('heirline').setup(StatusLines, nil, TabLine)
 
 vim.o.showtabline = 2
-vim.api.nvim_create_autocmd({ 'FileType' }, {
+api.nvim_create_autocmd({ 'FileType' }, {
 	pattern = '*',
 	command = 'if index(["wipe", "delete"], &bufhidden) >= 0 | set nobuflisted | endif'
 })

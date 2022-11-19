@@ -1,33 +1,7 @@
-require('aerial').setup({
-	-- filter_kind = {
-	-- 	'Array',
-	-- 	'Boolean',
-	-- 	'Class',
-	-- 	'Constant',
-	-- 	'Constructor',
-	-- 	'Enum',
-	-- 	'EnumMember',
-	-- 	'Event',
-	-- 	'Field',
-	-- 	'File',
-	-- 	'Function',
-	-- 	'Interface',
-	-- 	'Key',
-	-- 	'Method',
-	-- 	'Module',
-	-- 	'Namespace',
-	-- 	'Null',
-	-- 	'Number',
-	-- 	'Object',
-	-- 	'Operator',
-	-- 	'Package',
-	-- 	'Property',
-	-- 	'String',
-	-- 	'Struct',
-	-- 	'TypeParameter',
-	-- 	'Variable',
-	-- },
+local aerial = require('aerial')
+
+aerial.setup({
 	show_guides = true,
 })
 
-vim.keymap.set('n', '<M-o>', require('aerial').toggle, { buffer = true, desc = 'Toggle Aerial' })
+vim.keymap.set('n', '<M-o>', aerial.toggle, { buffer = true, desc = 'Toggle Aerial' })
