@@ -107,7 +107,7 @@ vim.keymap.set(
 	'n',
 	'<leader>fz',
 	function()
-		builtin.find_files({ find_command = { 'rg', '--files', '--type', fn.input({ 'Type: ' }) } })
+		builtin.find_files({ find_command = { 'rg', '--files', '--type', fn.input({ prompt = 'Type: ' }) } })
 	end,
 	{ desc = 'Search Certain Type Files' }
 )
@@ -115,7 +115,7 @@ vim.keymap.set(
 	'n',
 	'<leader>f/',
 	function()
-		builtin.grep_string({ search = fn.input({ 'Grep String > ' }) })
+		builtin.grep_string({ search = fn.input({ prompt = 'Grep String > ' }) })
 	end,
 	{ desc = 'Grep Strings' }
 )

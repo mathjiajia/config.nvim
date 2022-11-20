@@ -9,11 +9,3 @@ autocmd('TextYankPost', {
 	group    = 'HighlightYank',
 	desc     = 'Highlight the yanked text',
 })
-
-autocmd('FileType', {
-	callback = function()
-		vim.keymap.set('n', 'q', '<Cmd>close<CR>', { buffer = true, silent = true })
-		vim.keymap.set('n', '<Esc>', '<Cmd>close<CR>', { buffer = true, silent = true })
-	end,
-	pattern = { 'help', 'man', 'qf', 'tsplaygound' }
-})

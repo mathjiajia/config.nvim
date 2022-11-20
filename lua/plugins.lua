@@ -154,7 +154,10 @@ local plugins = {
 	-- Norg
 	-- {
 	-- 	'nvim-neorg/neorg',
-	-- 	requires = 'nvim-neorg/neorg-telescope'
+	-- 	requires = {
+	-- 		'nvim-lua/plenary.nvim',
+	-- 		'nvim-neorg/neorg-telescope'
+	-- 	},
 	-- },
 }
 
