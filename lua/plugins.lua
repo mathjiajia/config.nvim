@@ -28,14 +28,21 @@ local plugins = {
 	},
 
 	-- UI
-	'rebelot/heirline.nvim',
-	'lukas-reineke/indent-blankline.nvim',
+	{
+		'rebelot/heirline.nvim',
+		config = [[require('configs.heirline')]]
+	},
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		config = [[require('configs.indentline')]]
+	},
 	{
 		'folke/noice.nvim',
 		requires = {
 			'MunifTanjim/nui.nvim',
 			'rcarriga/nvim-notify',
-		}
+		},
+		config = [[require('configs.noice')]]
 	},
 
 	-- Treesitter
@@ -43,17 +50,18 @@ local plugins = {
 		'nvim-treesitter/nvim-treesitter',
 		run = function()
 			require('nvim-treesitter.install').update({ with_sync = true })
-		end
+		end,
+		config = [[require('configs.treesitter')]]
 	},
-	{
-		'nvim-treesitter/playground',
-		opt = true
-	},
+	-- 'nvim-treesitter/playground',
 	'nvim-treesitter/nvim-treesitter-context',
 	'p00f/nvim-ts-rainbow',
 
 	-- Completion
-	'hrsh7th/nvim-cmp',
+	{
+		'hrsh7th/nvim-cmp',
+		config = [[require('configs.cmp')]]
+	},
 
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-cmdline',
@@ -62,8 +70,14 @@ local plugins = {
 	'lukas-reineke/cmp-rg',
 	'saadparwaiz1/cmp_luasnip',
 
-	'L3MON4D3/LuaSnip',
-	'windwp/nvim-autopairs',
+	{
+		'L3MON4D3/LuaSnip',
+		config = [[require('configs.luasnip')]]
+	},
+	{
+		'windwp/nvim-autopairs',
+		config = [[require('configs.autopairs')]]
+	},
 	-- {
 	-- 	'zbirenbaum/copilot.lua',
 	-- 	config = [[require('copilot').setup()]]
@@ -79,14 +93,19 @@ local plugins = {
 		requires = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
-		}
+		},
+		config = [[require('configs.lsp')]]
 	},
 	{
 		'jose-elias-alvarez/null-ls.nvim',
-		requires = 'nvim-lua/plenary.nvim'
+		requires = 'nvim-lua/plenary.nvim',
+		config = [[require('configs.null-ls')]]
 	},
 
-	'stevearc/aerial.nvim',
+	{
+		'stevearc/aerial.nvim',
+		config = [[require('configs.aerial')]]
+	},
 	-- 'glepnir/lspsaga.nvim',
 	'folke/neodev.nvim',
 	-- {
@@ -101,7 +120,8 @@ local plugins = {
 		requires = {
 			'nvim-lua/plenary.nvim',
 			'nvim-tree/nvim-web-devicons'
-		}
+		},
+		config = [[require('configs.telescope')]]
 	},
 
 	{
@@ -124,15 +144,22 @@ local plugins = {
 			'nvim-lua/plenary.nvim',
 			'nvim-tree/nvim-web-devicons',
 			'MunifTanjim/nui.nvim'
-		}
+		},
+		config = [[require('configs.neotree')]]
 	},
 
 	-- Utils
-	'numtostr/FTerm.nvim',
-	'lewis6991/gitsigns.nvim',
 	{
 		'numToStr/Comment.nvim',
 		config = [[require('Comment').setup()]]
+	},
+	{
+		'numtostr/FTerm.nvim',
+		config = [[require('configs.fterm')]]
+	},
+	{
+		'lewis6991/gitsigns.nvim',
+		config = [[require('configs.gitsigns')]]
 	},
 	{
 		'ggandor/leap.nvim',
@@ -144,7 +171,10 @@ local plugins = {
 	},
 
 	-- Tex
-	{ 'lervag/vimtex' },
+	{
+		'lervag/vimtex',
+		config = [[require('configs.vimtex')]]
+	},
 	{
 		'f3fora/nvim-texlabconfig',
 		run = 'go build',

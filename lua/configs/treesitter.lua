@@ -25,8 +25,8 @@ require('nvim-treesitter.configs').setup({
 	indent = { enable = true },
 	-- pairs = { enable = true },
 	rainbow = { enable = true, extended_mode = false },
-	playground = { enable = true },
-	query_linter = { enable = true },
+	-- playground = { enable = true },
+	-- query_linter = { enable = true },
 })
 
 -- Folding
