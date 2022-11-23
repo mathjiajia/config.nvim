@@ -27,20 +27,14 @@ require('nvim-surround').buffer_setup({
 			find = "``.-''",
 			delete = "^(``)().-('')()$",
 		},
-		['c'] = {
+		['$'] = {
+			add = { '\\(', '\\)' },
+		},
+		['e'] = {
 			add = function()
-				local cmd = fn.input({ prompt = 'Enter a command: ' })
-				return { { '\\' .. cmd .. '{' }, { '}' } }
+				local env = fn.input({ prompt = 'Environment: ' })
+				return { { '\\begin{' .. env .. '}' }, { '\\end{' .. env .. '}' } }
 			end,
-			find = '\\%a+%b{}',
-			delete = '^(\\%a+{)().-(})()$',
-			change = {
-				target = '^\\(%a+)(){.-}()()$',
-				replacement = function()
-					local cmd = fn.input({ prompt = 'Enter a command: ' })
-					return { { cmd }, { '' } }
-				end,
-			},
 		},
 	},
 })
