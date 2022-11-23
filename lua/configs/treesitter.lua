@@ -1,4 +1,3 @@
-local builtin = { 'c', 'help', 'lua', 'vim' }
 local langs = {
 	'bash',
 	'comment',
@@ -15,7 +14,6 @@ local langs = {
 
 require('nvim-treesitter.configs').setup({
 	ensure_installed = langs,
-	ignore_install = builtin,
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = { 'latex' }
