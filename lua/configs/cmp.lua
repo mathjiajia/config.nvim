@@ -58,12 +58,12 @@ cmp.setup({
 	},
 	matching = { disallow_prefix_unmatching = true },
 	sources = {
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip', option = { show_autosnippets = true } },
-		{ name = 'path', keyword_length = 4 },
-		-- { name = 'neorg' },
-		{ name = 'buffer', keyword_length = 3 },
-		{ name = 'rg', keyword_length = 4 }
+		{ name = 'nvim_lsp', max_item_count = 10 },
+		{ name = 'luasnip', max_item_count = 10, option = { show_autosnippets = true } },
+		{ name = 'path', keyword_length = 4, max_item_count = 10 },
+		-- { name = 'neorg', max_item_count = 10 },
+		{ name = 'buffer', keyword_length = 3, max_item_count = 10 },
+		{ name = 'rg', keyword_length = 4, max_item_count = 10 }
 	},
 	window = {
 		completion = {
