@@ -439,14 +439,19 @@ local Ruler = {
 
 local ScrollBar = {
 	static = {
-		sbar = { '▁▁', '▂▂', '▃▃', '▄▄', '▅▅', '▆▆', '▇▇', '██' }
-		-- sbar = { '🭶🭶', '🭷🭷', '🭸🭸', '🭹🭹', '🭺🭺', '🭻🭻' }
+		sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+		-- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
 	},
 	provider = function(self)
-		local curr_line = api.nvim_win_get_cursor(0)[1]
-		local lines = api.nvim_buf_line_count(0)
-		local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-		return self.sbar[i]
+		local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+		local lines = vim.api.nvim_buf_line_count(0)
+		local i
+		if lines > 0 then
+			i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+		else
+			i = #self.sbar
+		end
+		return string.rep(self.sbar[i], 2)
 	end,
 	hl = { fg = 'blue', bg = 'bright_bg' },
 }
@@ -651,8 +656,8 @@ local TablineCloseButton = {
 		},
 	},
 }
-
-local TablineBufferBlock = utils.surround({ '', '' }, function(self)
+-- '', ''
+local TablineBufferBlock = utils.surround({ ' ', ' ' }, function(self)
 	if self.is_active then
 		return utils.get_highlight('TabLineSel').bg
 	else
