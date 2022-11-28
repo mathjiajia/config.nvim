@@ -570,7 +570,6 @@ local TablineBufnr = {
 
 local TablineFileName = {
 	provider = function(self)
-
 		local filename = self.filename
 		filename = filename == '' and '[No Name]' or fn.fnamemodify(filename, ':t')
 		return filename
@@ -642,12 +641,11 @@ local TablineCloseButton = {
 	end,
 	{ provider = ' ' },
 	{ -- ✗    
-		provider = '✗',
+		provider = '',
 		hl = { fg = 'gray' },
 		on_click = {
 			callback = function(_, minwid)
 				api.nvim_buf_delete(minwid, { force = false })
-				vim.cmd.redrawtabline()
 			end,
 			minwid = function(self)
 				return self.bufnr
@@ -656,8 +654,8 @@ local TablineCloseButton = {
 		},
 	},
 }
--- '', ''
-local TablineBufferBlock = utils.surround({ ' ', ' ' }, function(self)
+
+local TablineBufferBlock = utils.surround({ '', '' }, function(self)
 	if self.is_active then
 		return utils.get_highlight('TabLineSel').bg
 	else
@@ -670,7 +668,6 @@ local BufferLine = utils.make_buflist(
 	TablineBufferBlock,
 	{ provider = ' ', hl = { fg = 'gray' } },
 	{ provider = ' ', hl = { fg = 'gray' } }
-
 )
 
 local Tabpage = {
