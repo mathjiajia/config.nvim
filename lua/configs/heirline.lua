@@ -160,8 +160,8 @@ local Snippets = {
 	end,
 	provider = function()
 		local ls = require('luasnip')
-		local forward = ls.jumpable(1) and ' ' or ''
-		local backward = ls.jumpable(-1) and ' ' or ''
+		local forward = ls.locally_jumpable(1) and ' ' or ''
+		local backward = ls.locally_jumpable(-1) and ' ' or ''
 		return backward .. forward
 	end,
 	hl = { fg = 'red', bold = true },
