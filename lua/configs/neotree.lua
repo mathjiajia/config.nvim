@@ -8,10 +8,14 @@ require('neo-tree').setup({
 				row = 0,
 				col = '100%',
 			},
-			size = {
-				width = 37,
-				height = '50%'
-			},
+			size = function(state)
+				local root_name = vim.fn.fnamemodify(state.path, ':~')
+				local root_len = string.len(root_name) + 2
+				return {
+					width = math.max(root_len, 32),
+					height = '50%'
+				}
+			end,
 			border = {
 				style = 'rounded',
 			},
@@ -21,7 +25,12 @@ require('neo-tree').setup({
 		follow_current_file = true,
 		hijack_netrw_behavior = 'open_current',
 	},
-	source_selector = { winbar = true }
+	source_selector = {
+		winbar = true,
+		tab_labels = {
+			buffers = '  Bufs ',
+		},
+	}
 })
 
 vim.keymap.set(
