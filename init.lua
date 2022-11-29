@@ -18,9 +18,3 @@ vim.g.loaded_shada_plugin = 1
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_zipPlugin = 1
-
-
--- PLUGINS LIST
-vim.defer_fn(function()
-	require('plugins')
-end, 500)
