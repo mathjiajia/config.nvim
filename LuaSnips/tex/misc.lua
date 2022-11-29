@@ -1,12 +1,14 @@
 local snips, autosnips = {}, {}
 
+local api = vim.api
+
 local conds_expand = require('luasnip.extras.conditions.expand')
 local context = require('snips.context')
 local position = require('snips.position')
 local tex = require('snips.latex')
 
 local appended_space_after_insert = function()
-	vim.api.nvim_create_autocmd('InsertCharPre', {
+	api.nvim_create_autocmd('InsertCharPre', {
 		callback = function()
 			if string.find(vim.v.char, '%a') then
 				vim.v.char = ' ' .. vim.v.char

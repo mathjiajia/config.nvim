@@ -1,4 +1,4 @@
-local api = vim.api
+local api, fn = vim.api, vim.fn
 local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
 local lsp = vim.lsp
@@ -104,8 +104,8 @@ require('neodev').setup()
 require('mason').setup()
 require('mason-lspconfig').setup()
 
-local binary_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/nvim-texlabconfig/nvim-texlabconfig'
-local cache_root = vim.fn.stdpath('cache')
+local binary_path = fn.stdpath('data') .. '/site/pack/packer/start/nvim-texlabconfig/nvim-texlabconfig'
+local cache_root = fn.stdpath('cache')
 
 local executable = '/Applications/sioyek.app/Contents/MacOS/sioyek'
 local args = {

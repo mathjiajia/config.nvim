@@ -1,5 +1,6 @@
 local null_ls = require('null-ls')
 local b = null_ls.builtins
+local lsp = vim.lsp
 
 local sources = {
 	b.formatting.black,
@@ -22,7 +23,7 @@ null_ls.setup({
 				'n',
 				'<leader>lf',
 				function()
-					vim.lsp.buf.format({ bufnr = bufnr, async = true })
+					lsp.buf.format({ bufnr = bufnr, async = true })
 				end,
 				{ buffer = bufnr, desc = 'Formmating' }
 			)
@@ -32,7 +33,7 @@ null_ls.setup({
 				'x',
 				'<leader>lf',
 				function()
-					vim.lsp.buf.format({ bufnr = bufnr, async = true })
+					lsp.buf.format({ bufnr = bufnr, async = true })
 				end,
 				{ buffer = bufnr, desc = 'Range Formmating' }
 			)

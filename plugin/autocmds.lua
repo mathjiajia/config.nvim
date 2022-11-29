@@ -1,5 +1,6 @@
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
+local api, fn = vim.api, vim.fn
+local augroup = api.nvim_create_augroup
+local autocmd = api.nvim_create_autocmd
 
 -- Highlight yanked text
 augroup('HighlightYank', { clear = true })
@@ -18,10 +19,10 @@ autocmd('BufReadPost', {
 		'*.pdf',
 	},
 	callback = function()
-		vim.fn.jobstart('/Applications/sioyek.app/Contents/MacOS/sioyek "' .. vim.fn.expand('%') .. '"', {
+		fn.jobstart('/Applications/sioyek.app/Contents/MacOS/sioyek "' .. fn.expand('%') .. '"', {
 			detach = true,
 		})
-		vim.api.nvim_buf_delete(0, {})
+		api.nvim_buf_delete(0, {})
 	end,
 	group = openPDF,
 })

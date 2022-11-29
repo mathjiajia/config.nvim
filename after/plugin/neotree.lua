@@ -1,5 +1,7 @@
 vim.g.neo_tree_remove_legacy_commands = 1
 
+local fn = vim.fn
+
 require('neo-tree').setup({
 	window = {
 		position = 'float',
@@ -9,7 +11,7 @@ require('neo-tree').setup({
 				col = '100%',
 			},
 			size = function(state)
-				local root_name = vim.fn.fnamemodify(state.path, ':~')
+				local root_name = fn.fnamemodify(state.path, ':~')
 				local root_len = string.len(root_name) + 2
 				return {
 					width = math.max(root_len, 32),

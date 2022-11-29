@@ -1,8 +1,12 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.system({
+local api, fn = vim.api, vim.fn
+
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+	fn.system({
 		'git',
 		'clone',
+		'--branch',
+		'main',
 		'--depth',
 		'1',
 		'https://github.com/wbthomason/packer.nvim',
@@ -10,19 +14,20 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	})
 end
 
-vim.api.nvim_create_augroup('packer_user_config', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-	command = 'source | PackerCompile',
+api.nvim_create_augroup('packer_user_config', { clear = true })
+api.nvim_create_autocmd('BufWritePost', {
+	command = 'source | PackerSync --preview',
 	pattern = 'plugins.lua',
 	group   = 'packer_user_config',
 	desc    = 'reload whenever plugins.lua is updated',
 })
 
 local plugins = {
-	'wbthomason/packer.nvim',
+	{ 'wbthomason/packer.nvim', branch = 'main' },
 
 	'lewis6991/impatient.nvim',
 	'monkoose/matchparen.nvim',
+	'dstein64/vim-startuptime',
 
 	-- UI
 	'rebelot/heirline.nvim',

@@ -1,17 +1,19 @@
 local M = {}
 
+local api = vim.api
+local ts = vim.treesitter
 local cond_obj = require('luasnip.extras.conditions')
 
 ---Check if cursor is in treesitter capture
 ---@param capture string
 ---@return boolean
 local in_ts_capture = function(capture)
-	local buf = vim.api.nvim_get_current_buf()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local buf = api.nvim_get_current_buf()
+	local row, col = unpack(api.nvim_win_get_cursor(0))
 	row = row - 1
 	col = col - 1
 
-	local captures = vim.treesitter.get_captures_at_pos(buf, row, col)
+	local captures = ts.get_captures_at_pos(buf, row, col)
 
 	for _, c in ipairs(captures) do
 		if c.capture == capture then

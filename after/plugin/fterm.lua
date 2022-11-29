@@ -1,5 +1,7 @@
 local term = require('FTerm')
 
+local api = vim.api
+
 vim.keymap.set({ 'n', 't' }, '<C-\\>', term.toggle, { desc = 'Toggle Terminal' })
 vim.keymap.set('t', '<Esc>', term.exit, { desc = 'Exit Terminal' })
 
@@ -28,7 +30,7 @@ vim.keymap.set(
 	'n',
 	'<leader><Enter>',
 	function()
-		local buf = vim.api.nvim_buf_get_name(0)
+		local buf = api.nvim_buf_get_name(0)
 		local ftype = vim.filetype.match({ filename = buf })
 		local exec = runners[ftype]
 		if exec ~= nil then

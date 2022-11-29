@@ -1,5 +1,7 @@
 local M = {}
 
+local api = vim.api
+local ts = vim.treesitter
 local cond_obj = require('luasnip.extras.conditions')
 
 local ALIGN_ENVIRONMENTS = {
@@ -22,12 +24,12 @@ local ALIGN_ENVIRONMENTS = {
 }
 
 local function get_node_at_cursor()
-	local buf = vim.api.nvim_get_current_buf()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local buf = api.nvim_get_current_buf()
+	local row, col = unpack(api.nvim_win_get_cursor(0))
 	row = row - 1
 	col = col - 1
 
-	local parser = vim.treesitter.get_parser(buf, 'latex')
+	local parser = ts.get_parser(buf, 'latex')
 	if not parser then
 		return
 	end
@@ -45,14 +47,14 @@ end
 ---Check if cursor is in treesitter node of 'math_environment': 'align'
 ---@return boolean
 local in_align = function()
-	local buf = vim.api.nvim_get_current_buf()
+	local buf = api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'math_environment' then
 			local begin = node:child(0)
 			local names = begin and begin:field('name')
 
-			if names and names[1] and ALIGN_ENVIRONMENTS[vim.treesitter.query.get_node_text(names[1], buf)] then
+			if names and names[1] and ALIGN_ENVIRONMENTS[ts.query.get_node_text(names[1], buf)] then
 				return true
 			end
 		end
@@ -64,12 +66,12 @@ end
 ---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
 ---@return boolean
 local in_xymatrix = function()
-	local buf = vim.api.nvim_get_current_buf()
+	local buf = api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'generic_command' then
 			local names = node:child(0)
-			if names and vim.treesitter.query.get_node_text(names, buf) == '\\xymatrix' then
+			if names and ts.query.get_node_text(names, buf) == '\\xymatrix' then
 				return true
 			end
 		end
