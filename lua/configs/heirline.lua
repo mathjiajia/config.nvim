@@ -63,7 +63,7 @@ local mode_lable = {
 }
 
 local mode_colors_table = {
-	n        = 'red',
+	n        = 'fg',
 	no       = 'blue',
 	nov      = 'blue',
 	noV      = 'blue',
@@ -99,7 +99,7 @@ local mode_colors_table = {
 }
 
 local mode_colors = setmetatable({
-	n = { fg = 'red' }
+	n = { fg = 'fg' }
 }, {
 	__index = function(_, mode)
 		return {
@@ -434,7 +434,7 @@ local Ruler = {
 	-- %L = number of lines in the buffer
 	-- %c = column number
 	-- %P = percentage through file of displayed window
-	provider = '%7(%l/%3L%):%2c %P',
+	provider = ' %3p%% %2l(%02c)/%-3L'
 }
 
 local ScrollBar = {

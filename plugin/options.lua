@@ -37,7 +37,7 @@ vim.bo.undofile = true
 
 -- local to window
 vim.wo.breakindent = true
-vim.wo.cursorline = true
+-- vim.wo.cursorline = true
 vim.wo.linebreak = true
 vim.wo.number = true
 vim.wo.relativenumber = true
