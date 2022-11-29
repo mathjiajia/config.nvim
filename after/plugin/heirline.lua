@@ -287,15 +287,14 @@ local FileType = {
 }
 
 local Diagnostics = {
-
 	condition = conditions.has_diagnostics,
 	update = { 'DiagnosticChanged', 'BufEnter' },
-	on_click = {
-		callback = function()
-			require('trouble').toggle({ mode = 'document_diagnostics' })
-		end,
-		name = 'heirline_diagnostics',
-	},
+	-- on_click = {
+	-- 	callback = function()
+	-- 		require('trouble').toggle({ mode = 'document_diagnostics' })
+	-- 	end,
+	-- 	name = 'heirline_diagnostics',
+	-- },
 
 	static = {
 		error_icon = ' ',
