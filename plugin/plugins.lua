@@ -27,7 +27,6 @@ local plugins = {
 
 	'lewis6991/impatient.nvim',
 	'monkoose/matchparen.nvim',
-	'dstein64/vim-startuptime',
 
 	-- UI
 	'rebelot/heirline.nvim',
