@@ -1,5 +1,6 @@
 local snips = {}
 
+local texdir = os.getenv('HOME') .. '/TeX/'
 local conds_expand = require('luasnip.extras.conditions.expand')
 local position = require('snips.position')
 
@@ -10,14 +11,14 @@ snips = {
 			sn(nil, {
 				t {
 					'\\documentclass{article}',
-					'\\input{~/Tex/preamble_meta}',
+					'\\input{' .. texdir .. 'preamble_meta}',
 					'',
 					'\\usepackage[margin=1in]{geometry}',
 					'\\linespread{1.3}',
 					'\\pagestyle{headings}',
 					'',
-					'% \\input{~/Tex/bibtexref}',
-					'\\input{~/Tex/preamble_ref}',
+					'% \\input{' .. texdir .. 'bibtexref}',
+					'\\input{' .. texdir .. 'preamble_ref}',
 					'',
 					'\\title{',
 				},
@@ -42,7 +43,7 @@ snips = {
 				t {
 					'\\documentclass[aspectratio=169]{beamer}',
 					'\\usetheme[mode=light]{nord}',
-					'\\input{~/Tex/preamble_meta_b}',
+					'\\input{' .. texdir .. 'preamble_meta_b}',
 					'',
 					'\\graphicspath{{./assets/}}',
 					'',
@@ -281,13 +282,13 @@ snips = {
 				t {
 					'% version 27 March 2022',
 					'\\documentclass[11pt,a4paper]{amsart}',
-					'\\input{~/Tex/preamble_meta}',
+					'\\input{' .. texdir .. 'preamble_meta}',
 					'',
 					'\\usepackage[margin=1in]{geometry}',
 					'\\linespread{1.3}',
 					'\\pagestyle{headings}',
 					'',
-					'\\input{~/Tex/bibtexref}',
+					'\\input{' .. texdir .. '/bibtexref}',
 					'',
 					'\\title{Answers to queries of the referee}',
 					'\\author{}',

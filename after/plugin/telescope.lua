@@ -56,7 +56,7 @@ telescope.setup({
 				['conf'] = home .. '/.config',
 				['dev']  = home .. '/Developer',
 				['doc']  = home .. '/Documents',
-				['tex']  = home .. '/Tex',
+				['tex']  = home .. '/TeX',
 			},
 		},
 		bibtex = {
