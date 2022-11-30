@@ -38,6 +38,9 @@ vim.bo.undofile = true
 -- local to window
 vim.wo.breakindent = true
 -- vim.wo.cursorline = true
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldenable = false
 vim.wo.linebreak = true
 vim.wo.number = true
 vim.wo.relativenumber = true
