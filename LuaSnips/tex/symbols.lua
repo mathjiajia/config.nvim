@@ -460,21 +460,6 @@ autosnips = {
 	),
 
 	s(
-		{ trig = ';0', name = 'emptyset ∅', wordTrig = false, hidden = true },
-		{ t('\\emptyset') },
-		{ condition = context.in_mathzone }
-	),
-	s(
-		{ trig = ';6', name = 'partial ∂', wordTrig = false, hidden = true },
-		{ t('\\partial') },
-		{ condition = context.in_mathzone }
-	),
-	s(
-		{ trig = ';8', name = 'infinity ∞', wordTrig = false, hidden = true },
-		{ t('\\infty') },
-		{ condition = context.in_mathzone }
-	),
-	s(
 		{ trig = ';=', name = 'equiv ≡', wordTrig = false, hidden = true },
 		{ t('\\equiv ') },
 		{ condition = context.in_mathzone }
@@ -482,11 +467,6 @@ autosnips = {
 	s(
 		{ trig = ';-', name = 'setminus \\', wordTrig = false, hidden = true },
 		{ t('\\setminus ') },
-		{ condition = context.in_mathzone }
-	),
-	s(
-		{ trig = ';.', name = 'emptyset ∅', wordTrig = false, hidden = true },
-		{ t('\\cdot') },
 		{ condition = context.in_mathzone }
 	),
 	s(
