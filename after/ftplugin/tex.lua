@@ -40,9 +40,9 @@ require('nvim-surround').buffer_setup({
 			find = '\\%(.-\\%)',
 			delete = '^(\\%()().-(\\%))()$',
 			change = {
-				target = '^(\\%()().-(\\%))()}$',
+				target = '^\\(%()().-(\\%))()$',
 				replacement = function()
-					return { { '\\%[\n\t' }, { '\n\\%]' } }
+					return { { '[', '\t' }, { '', '\\]' } }
 				end,
 			},
 		},
@@ -54,7 +54,7 @@ require('nvim-surround').buffer_setup({
 			find = '\\begin%b{}\n.-\n\\end%b{}',
 			delete = '^(\\begin%b{}\n)().-(\n\\end%b{})()$',
 			change = {
-				target = '^\\begin%{(.-)()%}.-\\end%{(.-)()%}$',
+				target = '^\\begin%{(.-)()%}\n.-\n\\end%{(.-)()%}$',
 				replacement = function()
 					local env = fn.input({ prompt = 'Environment: ' })
 					return { { env }, { env } }
