@@ -178,6 +178,12 @@ require('mason-lspconfig').setup_handlers {
 						executable = forward_executable,
 						args = forward_args
 					},
+					diagnostics = {
+						ignoredPatterns = {
+							'^Overfull',
+							'^Underfull',
+						}
+					}
 				},
 			},
 		}
