@@ -47,6 +47,7 @@ local plugins = {
 		end,
 	},
 	-- 'nvim-treesitter/playground',
+	'nvim-treesitter/nvim-treesitter-textobjects',
 	'nvim-treesitter/nvim-treesitter-context',
 	'p00f/nvim-ts-rainbow',
 
@@ -124,9 +125,8 @@ local plugins = {
 
 
 	-- Tex
-	{
-		'lervag/vimtex',
-	},
+	-- 'lervag/vimtex',
+	'ryleelyman/latex.nvim',
 	{ 'f3fora/nvim-texlabconfig', run = 'go build', },
 
 	-- Norg

@@ -12,6 +12,19 @@ local langs = {
 	'swift',
 }
 
+local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+
+parser_config.latex = {
+	install_info = {
+		url = 'https://github.com/ryleelyman/tree-sitter-latex',
+		files = { 'src/parser.c', 'src/scanner.c' },
+		generate_requires_npm = false,
+		requires_generate_from_grammar = false,
+		revision = '4e1c009f58f4e285ec4b8dfbaece3453bacc756a',
+	},
+	filetype = 'tex'
+}
+
 require('nvim-treesitter.configs').setup({
 	ensure_installed = langs,
 	highlight = {
@@ -19,15 +32,10 @@ require('nvim-treesitter.configs').setup({
 		additional_vim_regex_highlighting = { 'latex' }
 	},
 	incremental_selection = { enable = true },
-	-- textobjects = { enable = true },
+	textobjects = { enable = true },
 	indent = { enable = true },
 	-- pairs = { enable = true },
 	rainbow = { enable = true, extended_mode = false },
 	-- playground = { enable = true },
 	-- query_linter = { enable = true },
 })
-
--- Folding
--- vim.opt_local.foldmethod = 'expr'
--- vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
--- vim.opt_local.foldenable = false
