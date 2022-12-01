@@ -35,7 +35,7 @@ require('nvim-treesitter.configs').setup({
 	textobjects = { enable = true },
 	indent = { enable = true },
 	-- pairs = { enable = true },
-	rainbow = { enable = true, extended_mode = false },
+	rainbow = { enable = true },
 	-- playground = { enable = true },
 	-- query_linter = { enable = true },
 })
