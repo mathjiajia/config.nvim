@@ -172,7 +172,7 @@ require('mason-lspconfig').setup_handlers {
 						executable = build_executable,
 						args = build_args,
 						-- forwardSearchAfter = true,
-						-- onSave = false,
+						onSave = true,
 					},
 					forwardSearch = {
 						executable = forward_executable,
