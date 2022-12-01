@@ -51,10 +51,10 @@ require('nvim-surround').buffer_setup({
 				local env = fn.input({ prompt = 'Environment: ' })
 				return { { '\\begin{' .. env .. '}' }, { '\\end{' .. env .. '}' } }
 			end,
-			find = '\\begin%b{}\n.-\n\\end%b{}',
-			delete = '^(\\begin%b{}\n)().-(\n\\end%b{})()$',
+			find = '\\begin%b{}.-\n\\end%b{}',
+			delete = '^(\\begin%b{})().-(\n\\end%b{})()$',
 			change = {
-				target = '^\\begin%{(.-)()%}\n.-\n\\end%{(.-)()%}$',
+				target = '^\\begin%{(.-)()%}.-\n\\end%{(.-)()%}$',
 				replacement = function()
 					local cword = fn.expand('<cword>')
 					local env = fn.input({ prompt = 'Environment: ', default = cword })
