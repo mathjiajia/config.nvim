@@ -56,7 +56,8 @@ require('nvim-surround').buffer_setup({
 			change = {
 				target = '^\\begin%{(.-)()%}\n.-\n\\end%{(.-)()%}$',
 				replacement = function()
-					local env = fn.input({ prompt = 'Environment: ' })
+					local cword = vim.fn.expand('<cword>')
+					local env = fn.input({ prompt = 'Environment: ', default = cword })
 					return { { env }, { env } }
 				end,
 			},
