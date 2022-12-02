@@ -26,7 +26,10 @@ local plugins = {
 	{ 'wbthomason/packer.nvim', branch = 'main' },
 
 	'lewis6991/impatient.nvim',
-	'monkoose/matchparen.nvim',
+	{
+		'monkoose/matchparen.nvim',
+		config = [[require('matchparen').setup()]]
+	},
 
 	-- UI
 	'rebelot/heirline.nvim',
@@ -117,17 +120,30 @@ local plugins = {
 	},
 
 	-- Utils
-	'numToStr/Comment.nvim',
 	'numtostr/FTerm.nvim',
 	'lewis6991/gitsigns.nvim',
-	'ggandor/leap.nvim',
-	'kylechui/nvim-surround',
+	{
+		'numToStr/Comment.nvim',
+		config = [[require('Comment').setup()]]
+	},
+	{
+		'ggandor/leap.nvim',
+		config = [[require('leap').add_default_mappings()]]
+	},
+	{
+		'kylechui/nvim-surround',
+		config = [[require('nvim-surround').setup()]]
+	},
 
 
 	-- Tex
 	-- 'lervag/vimtex',
 	'ryleelyman/latex.nvim',
-	{ 'f3fora/nvim-texlabconfig', run = 'go build', },
+	{
+		'f3fora/nvim-texlabconfig',
+		run = 'go build',
+		config = [[require('texlabconfig').setup()]]
+	},
 
 	-- Norg
 	-- {

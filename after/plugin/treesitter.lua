@@ -20,7 +20,7 @@ parser_config.latex = {
 		files = { 'src/parser.c', 'src/scanner.c' },
 		generate_requires_npm = false,
 		requires_generate_from_grammar = false,
-		revision = '4e1c009f58f4e285ec4b8dfbaece3453bacc756a',
+		revision = 'baf4bddd3c4e00e5a196a41a31f03d8cc7d08bba'
 	},
 	filetype = 'tex'
 }
