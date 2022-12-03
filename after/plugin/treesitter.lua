@@ -12,19 +12,6 @@ local langs = {
 	'swift',
 }
 
-local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
-
-parser_config.latex = {
-	install_info = {
-		url = 'https://github.com/ryleelyman/tree-sitter-latex',
-		files = { 'src/parser.c', 'src/scanner.c' },
-		generate_requires_npm = false,
-		requires_generate_from_grammar = false,
-		revision = 'baf4bddd3c4e00e5a196a41a31f03d8cc7d08bba'
-	},
-	filetype = 'tex'
-}
-
 require('nvim-treesitter.configs').setup({
 	ensure_installed = langs,
 	highlight = {
