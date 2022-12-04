@@ -50,7 +50,7 @@ local function get_node_at_cursor()
 	return root:named_descendant_for_range(row, col, row, col)
 end
 
----Check if cursor is in treesitter node of 'math_environment': 'align'
+---Check if cursor is in treesitter node of 'math_environment': 'tikzcd'
 ---@return boolean
 -- local function in_tikzcd()
 -- 	local buf = api.nvim_get_current_buf()
@@ -69,6 +69,7 @@ end
 -- 	return false
 -- end
 
+---Check if cursor is in treesitter node of 'text'
 local function in_text()
 	local node = get_node_at_cursor()
 	while node do
@@ -82,6 +83,7 @@ local function in_text()
 	return true
 end
 
+---Check if cursor is in treesitter node of 'math'
 local function in_mathzone()
 	local node = get_node_at_cursor()
 	while node do
