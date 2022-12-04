@@ -12,7 +12,7 @@ end
 
 ---Check if cursor is in the top 3 lines of a file
 ---@return boolean
-local on_top = function()
+local function on_top()
 	local cursor = api.nvim_win_get_cursor(0)
 	if cursor[1] <= 3 then
 		return true
@@ -22,7 +22,7 @@ end
 
 ---Check if the current tex file is a beamer class
 ---@return boolean
-local in_beamer = function()
+local function in_beamer()
 	local first_line = api.nvim_buf_get_lines(0, 0, 1, false)
 	if first_line[1]:match '\\documentclass.*{beamer}' then
 		return true

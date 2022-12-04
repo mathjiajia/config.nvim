@@ -3,9 +3,8 @@ local snips, autosnips = {}, {}
 local api = vim.api
 
 local conds_expand = require('luasnip.extras.conditions.expand')
-local context = require('snips.context')
-local position = require('snips.position')
 local tex = require('snips.latex')
+local position = require('snips.position')
 
 local appended_space_after_insert = function()
 	api.nvim_create_autocmd('InsertCharPre', {
@@ -34,7 +33,7 @@ autosnips = {
 				return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
 			end, {})
 		},
-		{ condition = context.in_text }
+		{ condition = tex.in_text }
 	),
 	s(
 		{
@@ -49,7 +48,7 @@ autosnips = {
 				return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
 			end, {})
 		},
-		{ condition = context.in_text }
+		{ condition = tex.in_text }
 	),
 	s(
 		{
@@ -64,15 +63,15 @@ autosnips = {
 				return snip.captures[1] .. '\\(' .. snip.captures[2] .. '\\)' .. snip.captures[3]
 			end, {})
 		},
-		{ condition = context.in_text }
+		{ condition = tex.in_text }
 	),
 
 	s(
 		{ trig = 'mk', name = 'inline math', dscr = 'Insert inline Math Environment.' },
 		{ t('\\('), i(1), t('\\)') },
 		{
-			condition = context.in_text,
-			show_condition = context.in_text,
+			condition = tex.in_text,
+			show_condition = tex.in_text,
 			callbacks = {
 				[-1] = { [events.leave] = appended_space_after_insert },
 			},
@@ -82,8 +81,8 @@ autosnips = {
 		{ trig = 'dm', name = 'dispaly math', dscr = 'Insert display Math Environment.' },
 		{ t({ '\\[', '\t' }), i(1), t({ '', '\\]' }) },
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 	s(
@@ -95,8 +94,8 @@ autosnips = {
 		{ trig = 'ni', name = 'non-indented paragraph', dscr = 'Insert non-indented paragraph.' },
 		{ t({ '\\noindent', '' }) },
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 }

@@ -1,7 +1,7 @@
 local snips = {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
-local context = require('snips.context')
+local tex = require('snips.latex')
 local position = require('snips.position')
 
 snips = {
@@ -15,8 +15,8 @@ snips = {
 			t({ '}', '', '' })
 		},
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 	s(
@@ -29,8 +29,8 @@ snips = {
 			t({ '}', '', '' })
 		},
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 	s(
@@ -43,8 +43,8 @@ snips = {
 			t({ '}', '', '' })
 		},
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 	s(
@@ -57,8 +57,8 @@ snips = {
 			t({ '}', '', '' })
 		},
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 	s(
@@ -71,8 +71,8 @@ snips = {
 			t({ '}', '', '' }),
 		},
 		{
-			condition = conds_expand.line_begin * context.in_text,
-			show_condition = position.line_begin * context.in_text,
+			condition = conds_expand.line_begin * tex.in_text,
+			show_condition = position.line_begin * tex.in_text,
 		}
 	),
 }

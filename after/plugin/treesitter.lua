@@ -14,10 +14,7 @@ local langs = {
 
 require('nvim-treesitter.configs').setup({
 	ensure_installed = langs,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = { 'latex' }
-	},
+	highlight = { enable = true },
 	incremental_selection = { enable = true },
 	indent = { enable = true },
 	-- pairs = { enable = true },
