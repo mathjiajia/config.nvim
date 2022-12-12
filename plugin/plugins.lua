@@ -5,8 +5,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	fn.system({
 		'git',
 		'clone',
-		'--branch',
-		'main',
 		'--depth',
 		'1',
 		'https://github.com/wbthomason/packer.nvim',
@@ -16,14 +14,14 @@ end
 
 api.nvim_create_augroup('packer_user_config', { clear = true })
 api.nvim_create_autocmd('BufWritePost', {
-	command = 'source | PackerSync --preview',
+	command = 'source | PackerCompile',
 	pattern = 'plugins.lua',
 	group   = 'packer_user_config',
 	desc    = 'reload whenever plugins.lua is updated',
 })
 
 local plugins = {
-	{ 'wbthomason/packer.nvim', branch = 'main' },
+	'wbthomason/packer.nvim',
 
 	'lewis6991/impatient.nvim',
 	{
@@ -49,7 +47,7 @@ local plugins = {
 			pcall(require('nvim-treesitter.install').update({ with_sync = true }))
 		end,
 	},
-	-- 'nvim-treesitter/playground',
+	'nvim-treesitter/playground',
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'nvim-treesitter/nvim-treesitter-context',
 	'p00f/nvim-ts-rainbow',
@@ -75,7 +73,7 @@ local plugins = {
 		requires = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
-		},
+		}
 	},
 	{
 		'jose-elias-alvarez/null-ls.nvim',
@@ -99,7 +97,7 @@ local plugins = {
 		},
 	},
 
-	{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+	'natecraddock/telescope-zf-native.nvim',
 	{
 		'nvim-telescope/telescope-frecency.nvim',
 		requires = 'kkharji/sqlite.lua'

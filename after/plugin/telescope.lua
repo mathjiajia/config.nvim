@@ -72,7 +72,7 @@ telescope.setup({
 })
 
 local extns = {
-	'fzf',
+	'zf-native',
 	'file_browser',
 	'frecency',
 	'bibtex',
