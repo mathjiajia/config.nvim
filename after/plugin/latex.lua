@@ -8,6 +8,7 @@ require('latex').setup({
 			'font'
 		},
 		add = {
+			['colon'] = ':',
 			['coloneqq'] = '≔',
 		}
 	},
@@ -16,5 +17,10 @@ require('latex').setup({
 			['\\emptyset'] = '0',
 		},
 		default_leader = ';'
-	}
+	},
+	surrounds = {
+		enabled = true,
+		command = 'c',
+		environment = 'e',
+	},
 })

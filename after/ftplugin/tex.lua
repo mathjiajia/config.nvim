@@ -3,7 +3,7 @@ vim.g.tex_comment_nospell = 1
 
 vim.wo.conceallevel = 2
 
--- vim.wo.spell = true
+vim.wo.spell = true
 -- vim.keymap.set(
 -- 	'i',
 -- 	'<M-l>',
@@ -26,8 +26,6 @@ vim.keymap.set(
 
 local fn = vim.fn
 
-local config = require('nvim-surround.config')
-
 require('nvim-surround').buffer_setup({
 	surrounds = {
 		['"'] = {
@@ -43,22 +41,6 @@ require('nvim-surround').buffer_setup({
 				target = '^\\(%()().-(\\%))()$',
 				replacement = function()
 					return { { '[', '\t' }, { '', '\\]' } }
-				end,
-			},
-		},
-		['e'] = {
-			add = function()
-				local env = fn.input({ prompt = 'Environment: ' })
-				return { { '\\begin{' .. env .. '}' }, { '\\end{' .. env .. '}' } }
-			end,
-			find = '\\begin%b{}.-\n\\end%b{}',
-			delete = '^(\\begin%b{})().-(\n\\end%b{})()$',
-			change = {
-				target = '^\\begin%{(.-)()%}.-\n\\end%{(.-)()%}$',
-				replacement = function()
-					local cword = fn.expand('<cword>')
-					local env = fn.input({ prompt = 'Environment: ', default = cword })
-					return { { env }, { env } }
 				end,
 			},
 		},

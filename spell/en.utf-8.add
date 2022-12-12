@@ -95,11 +95,9 @@ summands
 summand
 Noetherian
 functoriality
-K\"ahler
 Koll\'ar
 B\'ezout
 Siu
-tocdepth
 jia
 desingularisation
 preimage
@@ -124,7 +122,6 @@ submanifold
 compactification
 subvarieties
 Bott
-De Rham
 Dolbeault
 diffeomorphism
 adjunction
@@ -211,3 +208,5 @@ Beauville
 Bogomolov
 hyperk\"ahler
 Albanese
+K\"ahler
+de Rham
