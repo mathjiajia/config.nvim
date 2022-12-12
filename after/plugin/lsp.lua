@@ -127,14 +127,11 @@ local cache_root = fn.stdpath('cache')
 
 local forward_executable = '/Applications/sioyek.app/Contents/MacOS/sioyek'
 local forward_args = {
+	'--reuse-instance',
 	'--inverse-search',
 	binary_path .. ' -file %1 -line %2 -cache_root ' .. cache_root,
-	'--reuse-instance',
-	'--forward-search-file',
-	'%f',
-	'--forward-search-line',
-	'%l',
-	'%p'
+	'--forward-search-file', '%f',
+	'--forward-search-line', '%l', '%p'
 }
 -- local executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
 -- local args = { '%l', '%p', '%f' },
