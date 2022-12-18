@@ -23,7 +23,7 @@ local cmp_kinds = {
 	Struct        = '',
 	Event         = '',
 	Operator      = '',
-	TypeParameter = ''
+	TypeParameter = '',
 }
 
 local cmp = require('cmp')
@@ -47,6 +47,7 @@ cmp.setup({
 			vim_item.menu = ({
 				buffer   = '[Buf]',
 				cmdline  = '[Cmd]',
+				copilot  = '[Cop]',
 				luasnip  = '[Snip]',
 				nvim_lsp = '[LSP]',
 				-- neorg    = '[Norg]',
@@ -63,6 +64,7 @@ cmp.setup({
 		{ name = 'path', keyword_length = 4, max_item_count = 10 },
 		-- { name = 'neorg', max_item_count = 10 },
 		{ name = 'buffer', keyword_length = 3, max_item_count = 10 },
+		{ name = 'copilot', max_item_count = 3 },
 		{ name = 'rg', keyword_length = 4, max_item_count = 10 }
 	},
 	window = {

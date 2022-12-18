@@ -24,8 +24,6 @@ vim.keymap.set(
 	{ buffer = true, desc = 'Build LaTeX' }
 )
 
-local fn = vim.fn
-
 require('nvim-surround').buffer_setup({
 	surrounds = {
 		['"'] = {

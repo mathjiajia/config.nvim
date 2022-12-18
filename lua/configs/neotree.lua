@@ -1,5 +1,3 @@
-vim.g.neo_tree_remove_legacy_commands = 1
-
 local fn = vim.fn
 
 require('neo-tree').setup({

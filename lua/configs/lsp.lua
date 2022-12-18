@@ -4,16 +4,12 @@ local autocmd = api.nvim_create_autocmd
 local lsp = vim.lsp
 
 local on_attach = function(client, bufnr)
+	vim.keymap.set('n', 'gD', lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Definition' })
+	vim.keymap.set('n', 'gd', lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
 	vim.keymap.set('n', 'K', lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
 	vim.keymap.set('n', '<C-k>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
 	vim.keymap.set('n', '<leader>rn', lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
-	vim.keymap.set('n', 'gd', lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
-	vim.keymap.set(
-		'n',
-		'gr',
-		require('telescope.builtin').lsp_references,
-		{ buffer = bufnr, desc = 'Telescope References' }
-	)
+	vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'Telescope References' })
 
 	local caps = client.server_capabilities
 
