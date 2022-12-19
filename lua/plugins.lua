@@ -1,6 +1,6 @@
-local api, fn = vim.api, vim.fn
+local fn = vim.fn
 
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
 	fn.system({
 		'git',
@@ -12,25 +12,18 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	})
 end
 
-api.nvim_create_augroup('packer_user_config', { clear = true })
-api.nvim_create_autocmd('BufWritePost', {
-	command = 'source | PackerCompile',
-	pattern = 'plugins.lua',
-	group   = 'packer_user_config',
-	desc    = 'reload whenever plugins.lua is updated',
-})
-
+vim.cmd.packadd('packer.nvim')
 local plugins = {
-	'wbthomason/packer.nvim',
+	{ 'wbthomason/packer.nvim', opt = true },
 
 	'lewis6991/impatient.nvim',
-	{
-		'monkoose/matchparen.nvim',
-		config = [[require('matchparen').setup()]]
-	},
+	'monkoose/matchparen.nvim',
 
 	-- UI
-	'rebelot/heirline.nvim',
+	{
+		'rebelot/heirline.nvim',
+		requires = 'nvim-tree/nvim-web-devicons',
+	},
 	'lukas-reineke/indent-blankline.nvim',
 	{
 		'folke/noice.nvim',
@@ -46,21 +39,26 @@ local plugins = {
 		run = function()
 			pcall(require('nvim-treesitter.install').update({ with_sync = true }))
 		end,
+		requires = {
+			'nvim-treesitter/playground',
+			'nvim-treesitter/nvim-treesitter-textobjects',
+			'nvim-treesitter/nvim-treesitter-context',
+			'p00f/nvim-ts-rainbow',
+		}
 	},
-	'nvim-treesitter/playground',
-	'nvim-treesitter/nvim-treesitter-textobjects',
-	'nvim-treesitter/nvim-treesitter-context',
-	'p00f/nvim-ts-rainbow',
 
 	-- Completion
-	'hrsh7th/nvim-cmp',
-
-	'hrsh7th/cmp-buffer',
-	'hrsh7th/cmp-cmdline',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/cmp-path',
-	'lukas-reineke/cmp-rg',
-	'saadparwaiz1/cmp_luasnip',
+	{
+		'hrsh7th/nvim-cmp',
+		requires = {
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-cmdline',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-path',
+			'lukas-reineke/cmp-rg',
+			'saadparwaiz1/cmp_luasnip',
+		}
+	},
 
 	'L3MON4D3/LuaSnip',
 	'windwp/nvim-autopairs',
@@ -118,38 +116,46 @@ local plugins = {
 	},
 
 	-- Utils
+	'numToStr/Comment.nvim',
 	'numtostr/FTerm.nvim',
 	'lewis6991/gitsigns.nvim',
+	'ggandor/leap.nvim',
+	'kylechui/nvim-surround',
 	{
-		'numToStr/Comment.nvim',
-		config = [[require('Comment').setup()]]
+		'sindrets/diffview.nvim',
+		requires = 'nvim-lua/plenary.nvim',
 	},
 	{
-		'ggandor/leap.nvim',
-		config = [[require('leap').add_default_mappings()]]
-	},
-	{
-		'kylechui/nvim-surround',
-		config = [[require('nvim-surround').setup()]]
+		'kevinhwang91/nvim-bqf',
+		requires = 'junegunn/fzf',
+		config = [[require('configs.bqf')]],
+		ft = 'qf',
 	},
 
-
-	-- Tex
+	-- TeX
 	-- 'lervag/vimtex',
-	'ryleelyman/latex.nvim',
+	{
+		'ryleelyman/latex.nvim',
+		ft = 'tex',
+		config = [[require('configs.latex')]],
+	},
 	{
 		'f3fora/nvim-texlabconfig',
 		run = 'go build',
+		ft = 'tex',
 		config = [[require('texlabconfig').setup()]]
 	},
 
 	-- Norg
 	-- {
 	-- 	'nvim-neorg/neorg',
+	-- 	run = ':Neorg sync-parsers',
 	-- 	requires = {
 	-- 		'nvim-lua/plenary.nvim',
 	-- 		'nvim-neorg/neorg-telescope'
 	-- 	},
+	-- 	config = [[require('configs.neorg')]],
+	-- 	ft = 'norg'
 	-- },
 }
 

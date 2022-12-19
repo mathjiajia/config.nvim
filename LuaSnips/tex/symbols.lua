@@ -209,12 +209,14 @@ autosnips = {
 	s(
 		{ trig = '__', name = 'subscript', wordTrig = false, hidden = true },
 		{ t('_{'), i(1), t('}') },
-		{ condition = tex.in_mathzone }
+		{}
+	-- { condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = '^^', name = 'supscript', wordTrig = false, hidden = true },
 		{ t('^{'), i(1), t('}') },
-		{ condition = tex.in_mathzone }
+		{}
+	-- { condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = '**', name = 'upper star *', wordTrig = false, hidden = true },

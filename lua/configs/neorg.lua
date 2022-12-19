@@ -1,4 +1,4 @@
-require('neorg').setup {
+require('neorg').setup({
 	load = {
 		['core.defaults'] = {},
 		['core.keybinds'] = {},
@@ -17,4 +17,4 @@ require('neorg').setup {
 		['core.norg.qol.toc'] = {},
 		['core.integrations.telescope'] = {},
 	},
-}
+})
