@@ -4,9 +4,10 @@ local autocmd = api.nvim_create_autocmd
 local lsp = vim.lsp
 
 local on_attach = function(client, bufnr)
-	vim.keymap.set('n', 'gD', lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Definition' })
+	vim.keymap.set('n', 'gD', lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Declaration' })
 	vim.keymap.set('n', 'gd', lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
 	vim.keymap.set('n', 'K', lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
+	vim.keymap.set('n', 'gi', lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
 	vim.keymap.set('n', '<C-k>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
 	vim.keymap.set('n', '<leader>rn', lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 	vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'Telescope References' })
@@ -100,38 +101,6 @@ require('neodev').setup()
 require('mason').setup()
 require('mason-lspconfig').setup()
 
--- local build_executable = 'tectonic'
--- local build_args = {
--- 	'-X',
--- 	'compile',
--- 	'%f',
--- 	'--synctex',
--- 	'--keep-logs',
--- 	'--keep-intermediates',
--- }
-local build_executable = 'latexmk'
-local build_args = {
-	'-xelatex',
-	-- '-verbose',
-	'-synctex=1',
-	'-interaction=nonstopmode',
-	'%f',
-}
-
-local binary_path = fn.stdpath('data') .. '/site/pack/packer/start/nvim-texlabconfig/nvim-texlabconfig'
-local cache_root = fn.stdpath('cache')
-
-local forward_executable = '/Applications/sioyek.app/Contents/MacOS/sioyek'
-local forward_args = {
-	'--reuse-instance',
-	'--inverse-search',
-	binary_path .. ' -file %1 -line %2 -cache_root ' .. cache_root,
-	'--forward-search-file', '%f',
-	'--forward-search-line', '%l', '%p'
-}
--- local executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
--- local args = { '%l', '%p', '%f' },
-
 require('mason-lspconfig').setup_handlers {
 	function(server_name)
 		nvim_lsp[server_name].setup {
@@ -156,6 +125,38 @@ require('mason-lspconfig').setup_handlers {
 		}
 	end,
 	['texlab'] = function()
+		-- local build_executable = 'tectonic'
+		-- local build_args = {
+		-- 	'-X',
+		-- 	'compile',
+		-- 	'%f',
+		-- 	'--synctex',
+		-- 	'--keep-logs',
+		-- 	'--keep-intermediates',
+		-- }
+		local build_executable = 'latexmk'
+		local build_args = {
+			'-xelatex',
+			-- '-verbose',
+			'-synctex=1',
+			'-interaction=nonstopmode',
+			'%f',
+		}
+
+		local binary_path = fn.stdpath('data') .. '/site/pack/packer/start/nvim-texlabconfig/nvim-texlabconfig'
+		local cache_root = fn.stdpath('cache')
+
+		local forward_executable = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+		local forward_args = {
+			'--reuse-instance',
+			'--inverse-search',
+			binary_path .. ' -file %1 -line %2 -cache_root ' .. cache_root,
+			'--forward-search-file', '%f',
+			'--forward-search-line', '%l', '%p'
+		}
+		-- local executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
+		-- local args = { '%l', '%p', '%f' },
+
 		nvim_lsp.texlab.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,

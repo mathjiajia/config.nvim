@@ -20,7 +20,7 @@ vim.keymap.set(
 	'n',
 	'<M-f>',
 	vim.cmd.TexlabForward,
-	{ buffer = true, desc = 'Build LaTeX' }
+	{ buffer = true, desc = 'Forward Search' }
 )
 
 require('nvim-surround').buffer_setup({

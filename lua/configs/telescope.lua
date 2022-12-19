@@ -122,7 +122,7 @@ vim.keymap.set(
 
 vim.keymap.set(
 	'n',
-	'<leader>en',
+	'<leader>fn',
 	function()
 		builtin.find_files({
 			cwd = '~/.config/nvim',
