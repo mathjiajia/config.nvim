@@ -1,8 +1,8 @@
 -- CURSOR MOVEMENTS
-vim.keymap.set('n', '<M-h>', '<cmd>wincmd h<CR>', { desc = 'Move to Left Window' })
-vim.keymap.set('n', '<M-l>', '<cmd>wincmd l<CR>', { desc = 'Move to Right Window' })
-vim.keymap.set('n', '<M-j>', '<cmd>wincmd j<CR>', { desc = 'Move to Bottom Window' })
-vim.keymap.set('n', '<M-k>', '<cmd>wincmd k<CR>', { desc = 'Move to Upper Window' })
+vim.keymap.set('n', '<M-h>', function() vim.cmd.wincmd('h') end, { desc = 'Move to Left Window' })
+vim.keymap.set('n', '<M-l>', function() vim.cmd.wincmd('l') end, { desc = 'Move to Right Window' })
+vim.keymap.set('n', '<M-j>', function() vim.cmd.wincmd('j') end, { desc = 'Move to Bottom Window' })
+vim.keymap.set('n', '<M-k>', function() vim.cmd.wincmd('k') end, { desc = 'Move to Upper Window' })
 
 -- REMAP FOR DEALING WITH WORD WRAP
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

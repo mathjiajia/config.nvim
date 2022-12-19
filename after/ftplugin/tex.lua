@@ -2,25 +2,24 @@ vim.g.tex_flavor = 'latex'
 vim.g.tex_comment_nospell = 1
 
 vim.wo.conceallevel = 2
-
 vim.wo.spell = true
+
 -- vim.keymap.set(
 -- 	'i',
 -- 	'<M-l>',
 -- 	'<C-g>u<Esc>[s1z=`]a<C-g>u',
 -- 	{ buffer = true, desc = 'Fix Last Miss-Spelling' }
 -- )
-
 vim.keymap.set(
 	'n',
 	'<M-b>',
-	'<Cmd>TexlabBuild<CR>',
+	vim.cmd.TexlabBuild,
 	{ buffer = true, desc = 'Build LaTeX' }
 )
 vim.keymap.set(
 	'n',
 	'<M-f>',
-	'<Cmd>TexlabForward<CR>',
+	vim.cmd.TexlabForward,
 	{ buffer = true, desc = 'Build LaTeX' }
 )
 
