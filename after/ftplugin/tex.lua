@@ -1,7 +1,6 @@
 vim.g.tex_flavor = 'latex'
 vim.g.tex_comment_nospell = 1
 
-vim.wo.conceallevel = 2
 vim.wo.spell = true
 
 -- vim.keymap.set(

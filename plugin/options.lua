@@ -18,10 +18,11 @@ o.shortmess:append('c')
 o.whichwrap:append('[,]')
 
 -- Completion
-o.completeopt = 'menu,menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
 
 -- Search
 vim.o.ignorecase = true
+-- vim.o.hlsearch = false
 vim.o.smartcase = true
 
 -- Tabs
@@ -37,6 +38,7 @@ vim.bo.undofile = true
 
 -- local to window
 vim.wo.breakindent = true
+vim.wo.conceallevel = 2
 -- vim.wo.cursorline = true
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
