@@ -101,15 +101,15 @@ require('neodev').setup()
 require('mason').setup()
 require('mason-lspconfig').setup()
 
-require('mason-lspconfig').setup_handlers {
+require('mason-lspconfig').setup_handlers({
 	function(server_name)
-		nvim_lsp[server_name].setup {
+		nvim_lsp[server_name].setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
-		}
+		})
 	end,
 	['sumneko_lua'] = function()
-		nvim_lsp.sumneko_lua.setup {
+		nvim_lsp.sumneko_lua.setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
@@ -122,7 +122,7 @@ require('mason-lspconfig').setup_handlers {
 					},
 				},
 			},
-		}
+		})
 	end,
 	['texlab'] = function()
 		-- local build_executable = 'tectonic'
@@ -157,7 +157,7 @@ require('mason-lspconfig').setup_handlers {
 		-- local executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
 		-- local args = { '%l', '%p', '%f' },
 
-		nvim_lsp.texlab.setup {
+		nvim_lsp.texlab.setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
@@ -180,12 +180,12 @@ require('mason-lspconfig').setup_handlers {
 					}
 				},
 			},
-		}
+		})
 	end
-}
+})
 
 -- config sourcekit alone
-nvim_lsp.sourcekit.setup {
+nvim_lsp.sourcekit.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-}
+})

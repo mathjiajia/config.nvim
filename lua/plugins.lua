@@ -20,11 +20,11 @@ local plugins = {
 	'monkoose/matchparen.nvim',
 
 	-- UI
+	'lukas-reineke/indent-blankline.nvim',
 	{
 		'rebelot/heirline.nvim',
 		requires = 'nvim-tree/nvim-web-devicons',
 	},
-	'lukas-reineke/indent-blankline.nvim',
 	{
 		'folke/noice.nvim',
 		requires = {
@@ -40,7 +40,7 @@ local plugins = {
 			pcall(require('nvim-treesitter.install').update({ with_sync = true }))
 		end,
 		requires = {
-			'nvim-treesitter/playground',
+			-- 'nvim-treesitter/playground',
 			'nvim-treesitter/nvim-treesitter-textobjects',
 			'nvim-treesitter/nvim-treesitter-context',
 			'p00f/nvim-ts-rainbow',
@@ -127,7 +127,12 @@ local plugins = {
 	},
 	{
 		'kevinhwang91/nvim-bqf',
-		requires = 'junegunn/fzf',
+		requires = {
+			'junegunn/fzf',
+			run = function()
+				fn['fzf#install']()
+			end
+		},
 		config = [[require('configs.bqf')]],
 		ft = 'qf',
 	},
