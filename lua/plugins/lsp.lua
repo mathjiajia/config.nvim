@@ -3,6 +3,7 @@ local M = {
 	dependencies = {
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
+		'hrsh7th/cmp-nvim-lsp',
 		'folke/neodev.nvim',
 	},
 	event = 'BufReadPre',
@@ -10,7 +11,6 @@ local M = {
 
 
 M.config = function()
-
 	local api, fn = vim.api, vim.fn
 	local augroup = api.nvim_create_augroup
 	local autocmd = api.nvim_create_autocmd

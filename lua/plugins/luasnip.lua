@@ -4,7 +4,7 @@ local M = {
 }
 
 M.config = function()
-	local ls    = require('luasnip')
+	local ls = require('luasnip')
 	local types = require('luasnip.util.types')
 
 	ls.setup({
@@ -37,7 +37,7 @@ M.config = function()
 				ls.expand_or_jump()
 			end
 		end,
-		{ desc = 'LuaSnip Forward Jump' }
+		{ buffer = true, desc = 'LuaSnip Forward Jump' }
 	)
 	vim.keymap.set(
 		{ 'i', 's' },
@@ -47,7 +47,7 @@ M.config = function()
 				ls.jump(-1)
 			end
 		end,
-		{ desc = 'LuaSnip Backward Jump' }
+		{ buffer = true, desc = 'LuaSnip Backward Jump' }
 	)
 	vim.keymap.set(
 		'i',
@@ -57,7 +57,7 @@ M.config = function()
 				ls.change_choice(1)
 			end
 		end,
-		{ desc = 'LuaSnip Next Choice' }
+		{ buffer = true, desc = 'LuaSnip Next Choice' }
 	)
 
 	require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnips/' })

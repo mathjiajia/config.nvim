@@ -1,6 +1,10 @@
-return {
+local M = {
 	'kylechui/nvim-surround',
-	config = function()
-		require('nvim-surround').setup()
-	end
+	event = 'InsertEnter',
 }
+
+M.config = function()
+	require('nvim-surround').setup()
+end
+
+return M

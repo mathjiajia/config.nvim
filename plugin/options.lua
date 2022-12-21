@@ -10,6 +10,7 @@ vim.o.scrolloff = 6
 vim.o.showbreak = '> '
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.splitkeep = 'screen'
 vim.o.termguicolors = true
 vim.o.updatetime = 200
 
@@ -27,9 +28,10 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Tabs
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.tabstop = 4
+local indent = 4
+vim.o.shiftwidth = indent
+vim.o.softtabstop = indent
+vim.o.tabstop = indent
 
 -- local to buffer
 vim.bo.smartindent = true

@@ -1,12 +1,12 @@
 local M = {
 	'nvim-neorg/neorg',
-	build = ':Neorg sync-parsers',
+	enabled = false,
 	dependencies = {
 		'nvim-lua/plenary.nvim',
 		'nvim-neorg/neorg-telescope'
 	},
+	build = ':Neorg sync-parsers',
 	ft = 'norg',
-	enabled = false,
 }
 
 M.config = function()

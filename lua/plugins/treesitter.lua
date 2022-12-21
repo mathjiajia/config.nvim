@@ -3,13 +3,13 @@ local M = {
 	build = function()
 		pcall(require('nvim-treesitter.install').update({ with_sync = true }))
 	end,
-	event = 'BufReadPost',
 	dependencies = {
-		-- 'nvim-treesitter/playground',
+		{ 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		'nvim-treesitter/nvim-treesitter-context',
 		'p00f/nvim-ts-rainbow',
-	}
+	},
+	event = 'BufReadPost',
 }
 
 M.config = function()
@@ -29,10 +29,7 @@ M.config = function()
 
 	require('nvim-treesitter.configs').setup({
 		ensure_installed = langs,
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		},
+		highlight = { enable = true },
 		incremental_selection = { enable = true },
 		indent = { enable = true },
 		-- pairs = { enable = true },

@@ -3,30 +3,40 @@ local M = {
 	keys = { '<C-\\>', '<M-g>' }
 }
 
-M.config = function()
-	local term = require('FTerm')
-
+M.init = function()
 	local api = vim.api
 
-	vim.keymap.set({ 'n', 't' }, '<C-\\>', term.toggle, { desc = 'Toggle Terminal' })
-	vim.keymap.set('t', '<Esc>', term.exit, { desc = 'Exit Terminal' })
-
-	local lazygit = term:new({
-		ft = 'fterm_gitui',
-		cmd = 'lazygit',
-		dimensions = {
-			height = 1,
-			width = 1
-		}
-	})
+	vim.keymap.set(
+		{ 'n', 't' },
+		'<C-\\>',
+		function()
+			require('FTerm').toggle()
+		end,
+		{ buffer = true, desc = 'Toggle Terminal' }
+	)
+	vim.keymap.set(
+		't',
+		'<Esc>',
+		function()
+			require('FTerm').exit()
+		end,
+		{ buffer = true, desc = 'Exit Terminal' }
+	)
 
 	vim.keymap.set(
 		'n',
 		'<M-g>',
 		function()
-			lazygit:open()
+			require('FTerm'):new({
+				ft = 'fterm_gitui',
+				cmd = 'lazygit',
+				dimensions = {
+					height = 1,
+					width = 1
+				}
+			}):open()
 		end,
-		{ desc = 'LazyGit' }
+		{ buffer = true, desc = 'LazyGit' }
 	)
 
 	-- Code Runner - execute commands in a floating terminal
@@ -40,10 +50,10 @@ M.config = function()
 			local ftype = vim.filetype.match({ filename = buf })
 			local exec = runners[ftype]
 			if exec ~= nil then
-				term.scratch({ cmd = { exec, buf } })
+				require('FTerm').scratch({ cmd = { exec, buf } })
 			end
 		end,
-		{ desc = 'Code Runner' }
+		{ buffer = true, desc = 'Code Runner' }
 	)
 end
 

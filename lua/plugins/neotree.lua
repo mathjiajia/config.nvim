@@ -7,8 +7,18 @@ local M = {
 		'MunifTanjim/nui.nvim'
 	},
 	cmd = 'Neotree',
-	keys = '<M-t>',
 }
+
+M.init = function()
+	vim.keymap.set(
+		'n',
+		'<M-t>',
+		function()
+			require('neo-tree.command')._command('toggle')
+		end,
+		{ buffer = true, desc = 'Toggle NeoTree' }
+	)
+end
 
 M.config = function()
 	local fn = vim.fn
@@ -45,15 +55,6 @@ M.config = function()
 			},
 		}
 	})
-
-	vim.keymap.set(
-		'n',
-		'<M-t>',
-		function()
-			require('neo-tree.command')._command('toggle')
-		end,
-		{ desc = 'Toggle NeoTree' }
-	)
 end
 
 return M

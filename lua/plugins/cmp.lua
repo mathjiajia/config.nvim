@@ -8,38 +8,38 @@ local M = {
 		'lukas-reineke/cmp-rg',
 		'saadparwaiz1/cmp_luasnip',
 	},
-	-- event = 'InsertEnter',
-}
-
-local cmp_kinds = {
-	Text          = '',
-	Method        = '',
-	Function      = '',
-	Constructor   = '',
-	Field         = '',
-	Variable      = '',
-	Class         = '',
-	Interface     = '',
-	Module        = '',
-	Property      = '',
-	Unit          = '',
-	Value         = '',
-	Enum          = '',
-	Keyword       = '',
-	Snippet       = '',
-	Color         = '',
-	File          = '',
-	Reference     = '',
-	Folder        = '',
-	EnumMember    = '',
-	Constant      = '',
-	Struct        = '',
-	Event         = '',
-	Operator      = '',
-	TypeParameter = '',
+	event = 'VeryLazy',
 }
 
 M.config = function()
+	local cmp_kinds = {
+		Text          = '',
+		Method        = '',
+		Function      = '',
+		Constructor   = '',
+		Field         = '',
+		Variable      = '',
+		Class         = '',
+		Interface     = '',
+		Module        = '',
+		Property      = '',
+		Unit          = '',
+		Value         = '',
+		Enum          = '',
+		Keyword       = '',
+		Snippet       = '',
+		Color         = '',
+		File          = '',
+		Reference     = '',
+		Folder        = '',
+		EnumMember    = '',
+		Constant      = '',
+		Struct        = '',
+		Event         = '',
+		Operator      = '',
+		TypeParameter = '',
+	}
+
 	local cmp = require('cmp')
 
 	cmp.setup({
@@ -61,7 +61,7 @@ M.config = function()
 				vim_item.menu = ({
 					buffer   = '[Buf]',
 					cmdline  = '[Cmd]',
-					copilot  = '[Cop]',
+					-- copilot  = '[Cop]',
 					luasnip  = '[Snip]',
 					nvim_lsp = '[LSP]',
 					-- neorg    = '[Norg]',

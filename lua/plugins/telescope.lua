@@ -7,22 +7,129 @@ local M = {
 		'natecraddock/telescope-zf-native.nvim',
 		{
 			'nvim-telescope/telescope-frecency.nvim',
-			dependencies = 'kkharji/sqlite.lua'
+			dependencies = { 'kkharji/sqlite.lua' }
 		},
 		'nvim-telescope/telescope-file-browser.nvim',
 		'nvim-telescope/telescope-bibtex.nvim',
 		'nvim-telescope/telescope-ui-select.nvim',
 	},
 	cmd = 'Telescope',
-	keys = { '<leader>f', '<F12>', '<leader><leader>', '<leader><space>' }
 }
+
+M.init = function()
+	local fn = vim.fn
+
+	vim.keymap.set(
+		'n',
+		'<leader><leader>',
+		function()
+			require('telescope.builtin').buffers()
+		end,
+		{ buffer = true, desc = 'Buffers' }
+	)
+	vim.keymap.set(
+		'n',
+		'<leader><space>',
+		function()
+			require('telescope').extensions.file_browser.file_browser()
+		end,
+		{ buffer = true, desc = 'File Browser' }
+	)
+	vim.keymap.set(
+		'n',
+		'<F12>',
+		function()
+			require('telescope.builtin').commands()
+		end,
+		{ buffer = true, desc = 'Command Pallete' }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>fd',
+		function()
+			require('telescope.builtin').find_files()
+		end,
+		{ buffer = true, desc = 'Find Files' }
+	)
+	vim.keymap.set(
+		'n',
+		'<leader>ff',
+		function()
+			require('telescope.builtin').current_buffer_fuzzy_find()
+		end,
+		{ buffer = true, desc = 'Current Buffer Fuzzy Find' }
+	)
+	vim.keymap.set(
+		'n', '<leader>fg',
+		function()
+			require('telescope.builtin').live_grep()
+		end,
+		{ buffer = true, desc = 'Live Grep' }
+	)
+	vim.keymap.set(
+		'n', '<leader>fh',
+		function()
+			require('telescope.builtin').help_tags()
+		end,
+		{ buffer = true, desc = 'Help Tags' }
+	)
+	vim.keymap.set(
+		'n',
+		'<leader>fm',
+		function()
+			require('telescope.builtin').builtin()
+		end,
+		{ buffer = true, desc = 'Telescope Meta' }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>fr',
+		function()
+			require('telescope').extensions.frecency.frecency(require('telescope.themes').get_ivy())
+		end,
+		{ buffer = true, desc = 'Recent Files' }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>fz',
+		function()
+			require('telescope.builtin').find_files({
+				find_command = { 'rg', '--files', '--type', fn.input({ prompt = 'Type: ' }) }
+			})
+		end,
+		{ buffer = true, desc = 'Search Certain Type Files' }
+	)
+	vim.keymap.set(
+		'n',
+		'<leader>f/',
+		function()
+			require('telescope.builtin').grep_string({
+				search = fn.input({ prompt = 'Grep String > ' })
+			})
+		end,
+		{ buffer = true, desc = 'Grep Strings' }
+	)
+
+	vim.keymap.set(
+		'n',
+		'<leader>fn',
+		function()
+			require('telescope.builtin').find_files({
+				cwd = '~/.config/nvim',
+				prompt_title = 'Nvim Configs'
+			})
+		end,
+		{ buffer = true, desc = 'Neovim Config Files' }
+	)
+end
 
 M.config = function()
 	local home = os.getenv('HOME')
-	local fn = vim.fn
 
 	local telescope = require('telescope')
-	local builtin = require('telescope.builtin')
 	local actions = require('telescope.actions')
 	local actions_layout = require('telescope.actions.layout')
 	local themes = require('telescope.themes')
@@ -103,55 +210,6 @@ M.config = function()
 	for _, extn in ipairs(extns) do
 		telescope.load_extension(extn)
 	end
-
-	vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Buffers' })
-	vim.keymap.set('n', '<leader><space>', telescope.extensions.file_browser.file_browser, { desc = 'File Browser' })
-	vim.keymap.set('n', '<F12>', builtin.commands, { desc = 'Command Pallete' })
-
-	vim.keymap.set('n', '<leader>fd', builtin.find_files, { desc = 'Find Files' })
-	vim.keymap.set('n', '<leader>ff', builtin.current_buffer_fuzzy_find, { desc = 'Current Buffer Fuzzy Find' })
-	vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live Grep' })
-	vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help Tags' })
-	vim.keymap.set('n', '<leader>fm', builtin.builtin, { desc = 'Telescope Meta' })
-
-	vim.keymap.set(
-		'n',
-		'<leader>fr',
-		function()
-			telescope.extensions.frecency.frecency(themes.get_ivy {})
-		end,
-		{ desc = 'Recent Files' }
-	)
-
-	vim.keymap.set(
-		'n',
-		'<leader>fz',
-		function()
-			builtin.find_files({ find_command = { 'rg', '--files', '--type', fn.input({ prompt = 'Type: ' }) } })
-		end,
-		{ desc = 'Search Certain Type Files' }
-	)
-	vim.keymap.set(
-		'n',
-		'<leader>f/',
-		function()
-			builtin.grep_string({ search = fn.input({ prompt = 'Grep String > ' }) })
-		end,
-		{ desc = 'Grep Strings' }
-	)
-
-	vim.keymap.set(
-		'n',
-		'<leader>fn',
-		function()
-			builtin.find_files({
-				cwd = '~/.config/nvim',
-				prompt_title = 'Nvim Configs'
-			})
-		end,
-		{ desc = 'Neovim Config Files' }
-	)
-
 end
 
 return M

@@ -1,9 +1,6 @@
 local M = {
 	'ryleelyman/latex.nvim',
 	ft = 'tex',
-	config = function()
-		require('configs.latex')
-	end,
 }
 
 M.config = function()

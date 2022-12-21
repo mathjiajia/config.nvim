@@ -1,7 +1,7 @@
 local M = {
 	'zbirenbaum/nvim-copilot',
-	dependencies = 'zbirenbaum/copilot_cmp',
 	enabled = false,
+	dependencies = { 'zbirenbaum/copilot_cmp' },
 }
 
 M.config = function()
