@@ -22,23 +22,23 @@ vim.keymap.set(
 	{ buffer = true, desc = 'Forward Search' }
 )
 
-require('nvim-surround').buffer_setup({
-	surrounds = {
-		['"'] = {
-			add = { '``', "''" },
-			find = "``.-''",
-			delete = "^(``)().-('')()$",
-		},
-		['$'] = {
-			add = { '\\(', '\\)' },
-			find = '\\%(.-\\%)',
-			delete = '^(\\%()().-(\\%))()$',
-			change = {
-				target = '^\\(%()().-(\\%))()$',
-				replacement = function()
-					return { { '[', '\t' }, { '', '\\]' } }
-				end,
-			},
-		},
-	},
-})
+-- require('nvim-surround').buffer_setup({
+-- 	surrounds = {
+-- 		['"'] = {
+-- 			add = { '``', "''" },
+-- 			find = "``.-''",
+-- 			delete = "^(``)().-('')()$",
+-- 		},
+-- 		['$'] = {
+-- 			add = { '\\(', '\\)' },
+-- 			find = '\\%(.-\\%)',
+-- 			delete = '^(\\%()().-(\\%))()$',
+-- 			change = {
+-- 				target = '^\\(%()().-(\\%))()$',
+-- 				replacement = function()
+-- 					return { { '[', '\t' }, { '', '\\]' } }
+-- 				end,
+-- 			},
+-- 		},
+-- 	},
+-- })

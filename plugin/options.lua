@@ -2,6 +2,7 @@ local o = vim.opt
 
 -- global
 vim.o.clipboard = 'unnamedplus'
+vim.o.cmdheight = 0
 vim.o.fillchars = 'eob: ,diff: '
 vim.o.laststatus = 3
 vim.o.pumheight = 10
