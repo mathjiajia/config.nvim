@@ -2,6 +2,16 @@ local M = {
 	'numtostr/FTerm.nvim',
 }
 
+function M.config()
+	vim.keymap.set('t', '<C-\\>', function()
+		require('FTerm').toggle()
+	end, { desc = 'Toggle Terminal' })
+
+	vim.keymap.set('t', '<Esc>', function()
+		require('FTerm').exit()
+	end, { desc = 'Exit Terminal' })
+end
+
 M.keys = {
 	{ '<C-\\>', function()
 		require('FTerm').toggle()
@@ -30,15 +40,5 @@ M.keys = {
 		end
 	end, buffer = true, desc = 'Code Runner' },
 }
-
-function M.config()
-	vim.keymap.set('t', '<C-\\>', function()
-		require('FTerm').toggle()
-	end, { desc = 'Toggle Terminal' })
-
-	vim.keymap.set('t', '<Esc>', function()
-		require('FTerm').exit()
-	end, { desc = 'Exit Terminal' })
-end
 
 return M

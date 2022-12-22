@@ -13,7 +13,7 @@ function M.config()
 end
 
 M.keys = {
-	{ 'n', '<M-o>', function()
+	{ '<M-o>', function()
 		require('aerial').toggle()
 	end, desc = 'Toggle Aerial' },
 }
