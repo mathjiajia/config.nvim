@@ -9,7 +9,7 @@ M.init = function()
 		function()
 			require('aerial').toggle()
 		end,
-		{ buffer = true, desc = 'Toggle Aerial' }
+		{ desc = 'Toggle Aerial' }
 	)
 end
 

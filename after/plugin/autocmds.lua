@@ -8,16 +8,14 @@ autocmd('TextYankPost', {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
-	group    = 'HighlightYank',
-	desc     = 'Highlight the yanked text',
+	group = 'HighlightYank',
+	desc = 'Highlight the yanked text',
 })
 
 -- Opens PDF files in sioyek instead of viewing the binary in Neovim
 local openPDF = augroup('openPDF', {})
 autocmd('BufReadPost', {
-	pattern = {
-		'*.pdf',
-	},
+	pattern = { '*.pdf' },
 	callback = function()
 		fn.jobstart('/Applications/sioyek.app/Contents/MacOS/sioyek "' .. fn.expand('%') .. '"', {
 			detach = true,

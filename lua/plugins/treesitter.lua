@@ -4,7 +4,7 @@ local M = {
 		pcall(require('nvim-treesitter.install').update({ with_sync = true }))
 	end,
 	dependencies = {
-		{ 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
+		-- { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		'nvim-treesitter/nvim-treesitter-context',
 		'p00f/nvim-ts-rainbow',

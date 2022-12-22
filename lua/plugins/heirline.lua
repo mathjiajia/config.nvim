@@ -2,6 +2,7 @@ local M = {
 	'rebelot/heirline.nvim',
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
 	event = 'BufReadPre',
+	-- lazy = false,
 }
 
 M.config = function()

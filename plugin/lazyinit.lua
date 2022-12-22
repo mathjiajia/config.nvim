@@ -15,7 +15,7 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
--- load lazy
 require('lazy').setup('plugins', {
 	defaults = { lazy = true },
+	ui = { border = 'rounded' },
 })

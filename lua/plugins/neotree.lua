@@ -10,13 +10,15 @@ local M = {
 }
 
 M.init = function()
+	vim.g.neo_tree_remove_legacy_commands = 1
+
 	vim.keymap.set(
 		'n',
 		'<M-t>',
 		function()
 			require('neo-tree.command')._command('toggle')
 		end,
-		{ buffer = true, desc = 'Toggle NeoTree' }
+		{ desc = 'Toggle NeoTree' }
 	)
 end
 

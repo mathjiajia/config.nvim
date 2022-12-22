@@ -5,10 +5,15 @@ local M = {
 		'williamboman/mason-lspconfig.nvim',
 		'hrsh7th/cmp-nvim-lsp',
 		'folke/neodev.nvim',
+		{
+			'folke/trouble.nvim',
+			config = function()
+				require('trouble').setup {}
+			end,
+		},
 	},
 	event = 'BufReadPre',
 }
-
 
 M.config = function()
 	local api, fn = vim.api, vim.fn
@@ -111,7 +116,10 @@ M.config = function()
 
 	require('neodev').setup()
 
-	require('mason').setup()
+	require('mason').setup({
+		ui = { border = 'rounded' }
+	})
+
 	require('mason-lspconfig').setup()
 
 	require('mason-lspconfig').setup_handlers({
@@ -194,6 +202,19 @@ M.config = function()
 					},
 				},
 			})
+
+			vim.keymap.set(
+				'n',
+				'<M-b>',
+				vim.cmd.TexlabBuild,
+				{ buffer = true, desc = 'Build LaTeX' }
+			)
+			vim.keymap.set(
+				'n',
+				'<M-f>',
+				vim.cmd.TexlabForward,
+				{ buffer = true, desc = 'Forward Search' }
+			)
 		end
 	})
 

@@ -25,7 +25,7 @@ M.init = function()
 		function()
 			require('telescope.builtin').buffers()
 		end,
-		{ buffer = true, desc = 'Buffers' }
+		{ desc = 'Buffers' }
 	)
 	vim.keymap.set(
 		'n',
@@ -33,7 +33,7 @@ M.init = function()
 		function()
 			require('telescope').extensions.file_browser.file_browser()
 		end,
-		{ buffer = true, desc = 'File Browser' }
+		{ desc = 'File Browser' }
 	)
 	vim.keymap.set(
 		'n',
@@ -41,7 +41,7 @@ M.init = function()
 		function()
 			require('telescope.builtin').commands()
 		end,
-		{ buffer = true, desc = 'Command Pallete' }
+		{ desc = 'Command Pallete' }
 	)
 
 	vim.keymap.set(
@@ -50,7 +50,7 @@ M.init = function()
 		function()
 			require('telescope.builtin').find_files()
 		end,
-		{ buffer = true, desc = 'Find Files' }
+		{ desc = 'Find Files' }
 	)
 	vim.keymap.set(
 		'n',
@@ -58,21 +58,21 @@ M.init = function()
 		function()
 			require('telescope.builtin').current_buffer_fuzzy_find()
 		end,
-		{ buffer = true, desc = 'Current Buffer Fuzzy Find' }
+		{ desc = 'Current Buffer Fuzzy Find' }
 	)
 	vim.keymap.set(
 		'n', '<leader>fg',
 		function()
 			require('telescope.builtin').live_grep()
 		end,
-		{ buffer = true, desc = 'Live Grep' }
+		{ desc = 'Live Grep' }
 	)
 	vim.keymap.set(
 		'n', '<leader>fh',
 		function()
 			require('telescope.builtin').help_tags()
 		end,
-		{ buffer = true, desc = 'Help Tags' }
+		{ desc = 'Help Tags' }
 	)
 	vim.keymap.set(
 		'n',
@@ -80,7 +80,7 @@ M.init = function()
 		function()
 			require('telescope.builtin').builtin()
 		end,
-		{ buffer = true, desc = 'Telescope Meta' }
+		{ desc = 'Telescope Meta' }
 	)
 
 	vim.keymap.set(
@@ -89,7 +89,7 @@ M.init = function()
 		function()
 			require('telescope').extensions.frecency.frecency(require('telescope.themes').get_ivy())
 		end,
-		{ buffer = true, desc = 'Recent Files' }
+		{ desc = 'Recent Files' }
 	)
 
 	vim.keymap.set(
@@ -100,7 +100,7 @@ M.init = function()
 				find_command = { 'rg', '--files', '--type', fn.input({ prompt = 'Type: ' }) }
 			})
 		end,
-		{ buffer = true, desc = 'Search Certain Type Files' }
+		{ desc = 'Search Certain Type Files' }
 	)
 	vim.keymap.set(
 		'n',
@@ -110,7 +110,7 @@ M.init = function()
 				search = fn.input({ prompt = 'Grep String > ' })
 			})
 		end,
-		{ buffer = true, desc = 'Grep Strings' }
+		{ desc = 'Grep Strings' }
 	)
 
 	vim.keymap.set(
@@ -122,17 +122,17 @@ M.init = function()
 				prompt_title = 'Nvim Configs'
 			})
 		end,
-		{ buffer = true, desc = 'Neovim Config Files' }
+		{ desc = 'Neovim Config Files' }
 	)
 end
 
 M.config = function()
-	local home = os.getenv('HOME')
-
 	local telescope = require('telescope')
 	local actions = require('telescope.actions')
 	local actions_layout = require('telescope.actions.layout')
 	local themes = require('telescope.themes')
+
+	local home = vim.fn.expand('~')
 
 	telescope.setup({
 		defaults = {

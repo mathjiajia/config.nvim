@@ -41,7 +41,6 @@ vim.bo.undofile = true
 
 -- local to window
 vim.wo.breakindent = true
-vim.wo.conceallevel = 2
 -- vim.wo.cursorline = true
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -52,4 +51,4 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = 'yes'
 
 -- Theme
-vim.cmd.colorscheme('vscode')
+vim.cmd.colorscheme('tokyonight')

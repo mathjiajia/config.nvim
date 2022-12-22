@@ -1,26 +1,15 @@
 local M = {
 	'numtostr/FTerm.nvim',
-	keys = { '<C-\\>', '<M-g>' }
 }
 
 M.init = function()
-	local api = vim.api
-
 	vim.keymap.set(
 		{ 'n', 't' },
 		'<C-\\>',
 		function()
 			require('FTerm').toggle()
 		end,
-		{ buffer = true, desc = 'Toggle Terminal' }
-	)
-	vim.keymap.set(
-		't',
-		'<Esc>',
-		function()
-			require('FTerm').exit()
-		end,
-		{ buffer = true, desc = 'Exit Terminal' }
+		{ desc = 'Toggle Terminal' }
 	)
 
 	vim.keymap.set(
@@ -41,6 +30,7 @@ M.init = function()
 
 	-- Code Runner - execute commands in a floating terminal
 	local runners = { lua = 'lua', python = 'python3', swift = 'swift' }
+	local api = vim.api
 
 	vim.keymap.set(
 		'n',
@@ -54,6 +44,17 @@ M.init = function()
 			end
 		end,
 		{ buffer = true, desc = 'Code Runner' }
+	)
+end
+
+M.config = function()
+	vim.keymap.set(
+		't',
+		'<Esc>',
+		function()
+			require('FTerm').exit()
+		end,
+		{ desc = 'Exit Terminal' }
 	)
 end
 

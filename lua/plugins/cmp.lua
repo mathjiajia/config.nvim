@@ -8,7 +8,8 @@ local M = {
 		'lukas-reineke/cmp-rg',
 		'saadparwaiz1/cmp_luasnip',
 	},
-	event = 'VeryLazy',
+	-- event = 'VeryLazy',
+	event = 'InsertEnter',
 }
 
 M.config = function()
