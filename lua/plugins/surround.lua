@@ -3,7 +3,7 @@ local M = {
 	keys = { 'cs', 'ds', 'ys' },
 }
 
-M.config = function()
+function M.config()
 	require('nvim-surround').setup()
 end
 

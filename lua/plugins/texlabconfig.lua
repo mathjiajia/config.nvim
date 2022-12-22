@@ -4,7 +4,7 @@ local M = {
 	ft = 'tex',
 }
 
-M.config = function()
+function M.config()
 	require('texlabconfig').setup()
 end
 

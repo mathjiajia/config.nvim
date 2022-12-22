@@ -1,8 +1,5 @@
 local M = {
 	'nvim-treesitter/nvim-treesitter',
-	build = function()
-		pcall(require('nvim-treesitter.install').update({ with_sync = true }))
-	end,
 	dependencies = {
 		-- { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
 		'nvim-treesitter/nvim-treesitter-textobjects',
@@ -12,7 +9,11 @@ local M = {
 	event = 'BufReadPost',
 }
 
-M.config = function()
+function M.build()
+	pcall(require('nvim-treesitter.install').update({ with_sync = true }))
+end
+
+function M.config()
 	local langs = {
 		'bash',
 		-- 'comment',

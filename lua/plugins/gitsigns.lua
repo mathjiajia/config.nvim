@@ -3,7 +3,7 @@ local M = {
 	event = 'BufReadPre',
 }
 
-M.config = function()
+function M.config()
 	local gitsigns = require('gitsigns')
 
 	local function on_attach(bufnr)

@@ -1,9 +1,9 @@
 local M = {
 	'jose-elias-alvarez/null-ls.nvim',
-	dependencies = { 'nvim-lua/plenary.nvim' },
+	dependencies = 'nvim-lua/plenary.nvim',
 }
 
-M.config = function()
+function M.config()
 	local null_ls = require('null-ls')
 	local b = null_ls.builtins
 	local lsp = vim.lsp

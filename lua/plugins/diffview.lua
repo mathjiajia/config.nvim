@@ -1,10 +1,10 @@
 local M = {
 	'sindrets/diffview.nvim',
-	dependencies = { 'nvim-lua/plenary.nvim' },
+	dependencies = 'nvim-lua/plenary.nvim',
 	cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
 }
 
-M.config = function()
+function M.config()
 	require('diffview').setup({
 		enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
 		show_help_hints = true, -- Show hints for how to open the help panel

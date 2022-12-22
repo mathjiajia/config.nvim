@@ -5,17 +5,11 @@ local M = {
 		'williamboman/mason-lspconfig.nvim',
 		'hrsh7th/cmp-nvim-lsp',
 		'folke/neodev.nvim',
-		{
-			'folke/trouble.nvim',
-			config = function()
-				require('trouble').setup {}
-			end,
-		},
 	},
 	event = 'BufReadPre',
 }
 
-M.config = function()
+function M.config()
 	local api, fn = vim.api, vim.fn
 	local augroup = api.nvim_create_augroup
 	local autocmd = api.nvim_create_autocmd
@@ -188,18 +182,8 @@ M.config = function()
 				},
 			})
 
-			vim.keymap.set(
-				'n',
-				'<M-b>',
-				vim.cmd.TexlabBuild,
-				{ buffer = true, desc = 'Build LaTeX' }
-			)
-			vim.keymap.set(
-				'n',
-				'<M-f>',
-				vim.cmd.TexlabForward,
-				{ buffer = true, desc = 'Forward Search' }
-			)
+			vim.keymap.set('n', '<M-b>', vim.cmd.TexlabBuild, { buffer = true, desc = 'Build LaTeX' })
+			vim.keymap.set('n', '<M-f>', vim.cmd.TexlabForward, { buffer = true, desc = 'Forward Search' })
 		end
 	})
 

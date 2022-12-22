@@ -9,7 +9,7 @@ local M = {
 	ft = 'qf',
 }
 
-M.config = function()
+function M.config()
 	require('bqf').setup({
 		preview = {
 			win_height = 5,

@@ -12,7 +12,7 @@ local M = {
 	event = 'InsertEnter',
 }
 
-M.config = function()
+function M.config()
 	local cmp_kinds = {
 		Text          = '',
 		Method        = '',

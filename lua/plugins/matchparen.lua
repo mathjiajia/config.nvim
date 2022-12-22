@@ -2,7 +2,7 @@ local M = {
 	'monkoose/matchparen.nvim',
 }
 
-M.config = function()
+function M.config()
 	require('matchparen').setup({})
 end
 

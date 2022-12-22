@@ -3,7 +3,7 @@ local M = {
 	ft = 'tex',
 }
 
-M.config = function()
+function M.config()
 	require('latex').setup({
 		conceals = {
 			enabled = {

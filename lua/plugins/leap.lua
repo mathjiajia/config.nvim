@@ -7,7 +7,7 @@ local M = {
 	event = 'VeryLazy',
 }
 
-M.config = function()
+function M.config()
 	require('leap').add_default_mappings()
 	-- require('flit').setup({
 	-- 	labeled_modes = 'nv',

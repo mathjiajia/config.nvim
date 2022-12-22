@@ -9,15 +9,11 @@ local M = {
 	cmd = 'Neotree',
 }
 
-M.init = function()
+function M.init()
 	vim.g.neo_tree_remove_legacy_commands = 1
-
-	vim.keymap.set('n', '<M-t>', function()
-		require('neo-tree.command')._command('toggle')
-	end, { desc = 'Toggle NeoTree' })
 end
 
-M.config = function()
+function M.config()
 	local fn = vim.fn
 
 	require('neo-tree').setup({
@@ -53,5 +49,11 @@ M.config = function()
 		}
 	})
 end
+
+M.keys = {
+	{ '<M-t>', function()
+		require('neo-tree.command')._command('toggle')
+	end, desc = 'Toggle NeoTree' },
+}
 
 return M

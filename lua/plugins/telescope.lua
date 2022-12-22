@@ -16,66 +16,7 @@ local M = {
 	cmd = 'Telescope',
 }
 
-M.init = function()
-	local fn = vim.fn
-
-	vim.keymap.set('n', '<leader><leader>', function()
-		require('telescope.builtin').buffers()
-	end, { desc = 'Buffers' })
-
-	vim.keymap.set('n', '<leader><space>', function()
-		require('telescope').extensions.file_browser.file_browser()
-	end, { desc = 'File Browser' })
-
-	vim.keymap.set('n', '<F12>', function()
-		require('telescope.builtin').commands()
-	end, { desc = 'Command Pallete' })
-
-	vim.keymap.set('n', '<leader>fd', function()
-		require('telescope.builtin').find_files()
-	end, { desc = 'Find Files' })
-
-	vim.keymap.set('n', '<leader>ff', function()
-		require('telescope.builtin').current_buffer_fuzzy_find()
-	end, { desc = 'Current Buffer Fuzzy Find' })
-
-	vim.keymap.set('n', '<leader>fg', function()
-		require('telescope.builtin').live_grep()
-	end, { desc = 'Live Grep' })
-
-	vim.keymap.set('n', '<leader>fh', function()
-		require('telescope.builtin').help_tags()
-	end, { desc = 'Help Tags' })
-
-	vim.keymap.set('n', '<leader>fm', function()
-		require('telescope.builtin').builtin()
-	end, { desc = 'Telescope Meta' })
-
-	vim.keymap.set('n', '<leader>fr', function()
-		require('telescope').extensions.frecency.frecency(require('telescope.themes').get_ivy())
-	end, { desc = 'Recent Files' })
-
-	vim.keymap.set('n', '<leader>fz', function()
-		require('telescope.builtin').find_files({
-			find_command = { 'rg', '--files', '--type', fn.input({ prompt = 'Type: ' }) }
-		})
-	end, { desc = 'Search Certain Type Files' })
-
-	vim.keymap.set('n', '<leader>f/', function()
-		require('telescope.builtin').grep_string({
-			search = fn.input({ prompt = 'Grep String > ' })
-		})
-	end, { desc = 'Grep Strings' })
-
-	vim.keymap.set('n', '<leader>fn', function()
-		require('telescope.builtin').find_files({
-			cwd = '~/.config/nvim',
-			prompt_title = 'Nvim Configs'
-		})
-	end, { desc = 'Neovim Config Files' })
-end
-
-M.config = function()
+function M.config()
 	local telescope = require('telescope')
 	local actions = require('telescope.actions')
 	local actions_layout = require('telescope.actions.layout')
@@ -160,5 +101,62 @@ M.config = function()
 		telescope.load_extension(extn)
 	end
 end
+
+M.keys = {
+	{ '<leader><leader>', function()
+		require('telescope.builtin').buffers()
+	end, desc = 'Buffers' },
+
+	{ '<leader><space>', function()
+		require('telescope').extensions.file_browser.file_browser()
+	end, desc = 'File Browser' },
+
+	{ '<F12>', function()
+		require('telescope.builtin').commands()
+	end, desc = 'Command Pallete' },
+
+	{ '<leader>fd', function()
+		require('telescope.builtin').find_files()
+	end, desc = 'Find Files' },
+
+	{ '<leader>ff', function()
+		require('telescope.builtin').current_buffer_fuzzy_find()
+	end, desc = 'Current Buffer Fuzzy Find' },
+
+	{ '<leader>fg', function()
+		require('telescope.builtin').live_grep()
+	end, desc = 'Live Grep' },
+
+	{ '<leader>fh', function()
+		require('telescope.builtin').help_tags()
+	end, desc = 'Help Tags' },
+
+	{ '<leader>fm', function()
+		require('telescope.builtin').builtin()
+	end, desc = 'Telescope Meta' },
+
+	{ '<leader>fr', function()
+		require('telescope').extensions.frecency.frecency(require('telescope.themes').get_ivy())
+	end, desc = 'Recent Files' },
+
+	{ '<leader>fz', function()
+		require('telescope.builtin').find_files({
+			find_command = { 'rg', '--files', '--type', vim.fn.input({ prompt = 'Type: ' }) }
+		})
+	end, desc = 'Search Certain Type Files' },
+
+	{ '<leader>f/', function()
+		require('telescope.builtin').grep_string({
+			search = vim.fn.input({ prompt = 'Grep String > ' })
+		})
+	end, desc = 'Grep Strings' },
+
+	{ '<leader>fn', function()
+		require('telescope.builtin').find_files({
+			cwd = '~/.config/nvim',
+			prompt_title = 'Nvim Configs'
+		})
+	end, desc = 'Neovim Config Files' },
+}
 
 return M

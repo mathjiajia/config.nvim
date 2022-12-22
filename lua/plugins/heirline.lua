@@ -1,11 +1,11 @@
 local M = {
 	'rebelot/heirline.nvim',
-	dependencies = { 'nvim-tree/nvim-web-devicons' },
+	dependencies = 'nvim-tree/nvim-web-devicons',
 	event = 'BufReadPre',
 	-- lazy = false,
 }
 
-M.config = function()
+function M.config()
 	local conditions = require('heirline.conditions')
 	local utils = require('heirline.utils')
 	local api, fn = vim.api, vim.fn

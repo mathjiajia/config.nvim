@@ -3,7 +3,7 @@ local M = {
 	event = 'BufReadPre',
 }
 
-M.config = function()
+function M.config()
 	require('indent_blankline').setup({
 		use_treesitter = true,
 		use_treesitter_scope = true,

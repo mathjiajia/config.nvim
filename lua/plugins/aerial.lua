@@ -2,13 +2,7 @@ local M = {
 	'stevearc/aerial.nvim',
 }
 
-M.init = function()
-	vim.keymap.set('n', '<M-o>', function()
-		require('aerial').toggle()
-	end, { desc = 'Toggle Aerial' })
-end
-
-M.config = function()
+function M.config()
 	require('aerial').setup({
 		show_guides = true,
 		layout = {
@@ -17,5 +11,11 @@ M.config = function()
 		},
 	})
 end
+
+M.keys = {
+	{ 'n', '<M-o>', function()
+		require('aerial').toggle()
+	end, desc = 'Toggle Aerial' },
+}
 
 return M

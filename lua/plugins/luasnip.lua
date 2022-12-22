@@ -2,7 +2,7 @@ local M = {
 	'L3MON4D3/LuaSnip',
 }
 
-M.config = function()
+function M.config()
 	local ls = require('luasnip')
 	local types = require('luasnip.util.types')
 

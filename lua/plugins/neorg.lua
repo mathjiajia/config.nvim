@@ -4,13 +4,14 @@ local M = {
 		'nvim-lua/plenary.nvim',
 		-- 'nvim-neorg/neorg-telescope'
 	},
-	-- build = function()
-	-- 	pcall(require('nvim-treesitter.install').commands.TSInstallSync['run!']('norg', 'norg_meta'))
-	-- end,
 	ft = 'norg',
 }
 
-M.config = function()
+-- function M.build()
+-- 	pcall(require('nvim-treesitter.install').commands.TSInstallSync['run!']('norg', 'norg_meta'))
+-- end
+
+function M.config()
 	require('neorg').setup({
 		load = {
 			['core.defaults'] = {},

@@ -7,7 +7,7 @@ local M = {
 	event = 'VeryLazy',
 }
 
-M.config = function()
+function M.config()
 	require('noice').setup({
 		lsp = {
 			override = {

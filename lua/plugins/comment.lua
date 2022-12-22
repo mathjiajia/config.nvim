@@ -3,7 +3,7 @@ local M = {
 	keys = { 'gc', 'gcc', 'gbc' },
 }
 
-M.config = function()
+function M.config()
 	require('Comment').setup()
 end
 
