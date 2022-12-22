@@ -3,14 +3,9 @@ local M = {
 }
 
 M.init = function()
-	vim.keymap.set(
-		'n',
-		'<M-o>',
-		function()
-			require('aerial').toggle()
-		end,
-		{ desc = 'Toggle Aerial' }
-	)
+	vim.keymap.set('n', '<M-o>', function()
+		require('aerial').toggle()
+	end, { desc = 'Toggle Aerial' })
 end
 
 M.config = function()

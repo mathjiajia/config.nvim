@@ -33,77 +33,41 @@ M.config = function()
 
 	require('heirline').load_colors(colors)
 
-	local mode_lable = {
-		n         = 'NORMAL',
-		no        = 'OPPEND',
-		nov       = 'N?',
-		noV       = 'N?',
-		['no\22'] = 'N?',
-		niI       = 'Ni',
-		niR       = 'Nr',
-		niV       = 'Nv',
-		nt        = 'N-TERM',
-		v         = 'VISUAL',
-		vs        = 'Vs',
-		V         = 'V-LINE',
-		Vs        = 'Vs',
-		['\22']   = 'V-BLCK',
-		['\22s']  = '^V',
-		s         = 'SELECT',
-		S         = 'S-LINE',
-		['\19']   = 'S-BLCK',
-		i         = 'INSERT',
-		ic        = 'ICOMPL',
-		ix        = 'Ix',
-		R         = 'RPLACE',
-		Rc        = 'Rc',
-		Rx        = 'Rx',
-		Rv        = 'VRPLCE',
-		Rvc       = 'Rv',
-		Rvx       = 'Rv',
-		c         = 'CMMAND',
-		cv        = 'PROMPT',
-		r         = '...',
-		rm        = 'MORE',
-		['r?']    = 'CNFIRM',
-		['!']     = 'SHELL',
-		t         = 'TERM',
-	}
-
-	local mode_colors_table = {
-		n        = 'fg',
-		no       = 'blue',
-		nov      = 'blue',
-		noV      = 'blue',
-		niI      = 'red',
-		niR      = 'red',
-		niV      = 'red',
-		nt       = 'red',
-		v        = 'cyan',
-		vs       = 'cyan',
-		V        = 'cyan',
-		Vs       = 'cyan',
-		['\22']  = 'cyan',
-		['\22s'] = 'cyan',
-		s        = 'purple',
-		S        = 'purple',
-		['\19']  = 'purple',
-		i        = 'blue',
-		ic       = 'blue',
-		ix       = 'blue',
-		R        = 'orange',
-		Rc       = 'orange',
-		Rx       = 'orange',
-		Rv       = 'orange',
-		Rvc      = 'orange',
-		Rvx      = 'orange',
-		c        = 'green',
-		cv       = 'green',
-		r        = 'green',
-		rm       = 'green',
-		['r?']   = 'green',
-		['!']    = 'red',
-		t        = 'red',
+	local modes_table = {
+		n         = { name = 'NORMAL', bg = 'fg' },
+		no        = { name = 'OPPEND', bg = 'blue' },
+		nov       = { name = 'N?', bg = 'blue' },
+		noV       = { name = 'N?', bg = 'blue' },
+		['no\22'] = { name = 'N?', bg = 'blue' },
+		niI       = { name = 'Ni', bg = 'red' },
+		niR       = { name = 'Nr', bg = 'red' },
+		niV       = { name = 'Nv', bg = 'red' },
+		nt        = { name = 'N-TERM', bg = 'red' },
+		v         = { name = 'VISUAL', bg = 'cyan' },
+		vs        = { name = 'Vs', bg = 'cyan' },
+		V         = { name = 'V-LINE', bg = 'cyan' },
+		Vs        = { name = 'Vs', bg = 'cyan' },
+		['\22']   = { name = 'V-BLCK', bg = 'cyan' },
+		['\22s']  = { name = '^V', bg = 'cyan' },
+		s         = { name = 'SELECT', bg = 'purple' },
+		S         = { name = 'S-LINE', bg = 'purple' },
+		['\19']   = { name = 'S-BLCK', bg = 'purple' },
+		i         = { name = 'INSERT', bg = 'blue' },
+		ic        = { name = 'ICOMPL', bg = 'blue' },
+		ix        = { name = 'Ix', bg = 'blue' },
+		R         = { name = 'RPLACE', bg = 'orange' },
+		Rc        = { name = 'Rc', bg = 'orange' },
+		Rx        = { name = 'Rx', bg = 'orange' },
+		Rv        = { name = 'VRPLCE', bg = 'orange' },
+		Rvc       = { name = 'Rv', bg = 'orange' },
+		Rvx       = { name = 'Rv', bg = 'orange' },
+		c         = { name = 'CMMAND', bg = 'green' },
+		cv        = { name = 'PROMPT', bg = 'green' },
+		r         = { name = '...', bg = 'green' },
+		rm        = { name = 'MORE', bg = 'green' },
+		['r?']    = { name = 'CNFIRM', bg = 'green' },
+		['!']     = { name = 'SHELL', bg = 'red' },
+		t         = { name = 'TERM', bg = 'red' },
 	}
 
 	local mode_colors = setmetatable({
@@ -112,7 +76,7 @@ M.config = function()
 		__index = function(_, mode)
 			return {
 				fg = 'bg',
-				bg = mode_colors_table[mode],
+				bg = modes_table[mode].bg,
 			}
 		end
 	})
@@ -142,7 +106,7 @@ M.config = function()
 			{
 				{
 					provider = function(self)
-						return '● ' .. mode_lable[self.mode]
+						return '● ' .. modes_table[self.mode].name
 					end,
 				},
 				hl = function(self)
@@ -167,9 +131,8 @@ M.config = function()
 			return vim.tbl_contains({ 'i', 's' }, fn.mode())
 		end,
 		provider = function()
-			local ls = require('luasnip')
-			local forward = ls.locally_jumpable(1) and ' ' or ''
-			local backward = ls.locally_jumpable(-1) and ' ' or ''
+			local forward = require('luasnip').locally_jumpable(1) and '' or ''
+			local backward = require('luasnip').locally_jumpable(-1) and ' ' or ''
 			return backward .. forward
 		end,
 		hl = { fg = 'red', bold = true },

@@ -64,35 +64,20 @@ M.config = function()
 		-- end
 
 		if caps.codeActionProvider then
-			vim.keymap.set(
-				{ 'n', 'x' },
-				'<leader>ca',
-				function()
-					require('lspsaga.codeaction'):code_action()
-				end,
-				{ buffer = bufnr, desc = '(Range) Code Actions' }
-			)
+			vim.keymap.set({ 'n', 'x' }, '<leader>ca', function()
+				require('lspsaga.codeaction'):code_action()
+			end, { buffer = bufnr, desc = '(Range) Code Actions' })
 		end
 
 		if caps.documentFormattingProvider then
-			vim.keymap.set(
-				'n',
-				'<leader>lf',
-				function()
-					lsp.buf.format({ bufnr = bufnr, async = true })
-				end,
-				{ buffer = bufnr, desc = 'Formmating' }
-			)
+			vim.keymap.set('n', '<leader>lf', function()
+				lsp.buf.format({ bufnr = bufnr, async = true })
+			end, { buffer = bufnr, desc = 'Formmating' })
 		end
 		if caps.documentRangeFormattingProvider then
-			vim.keymap.set(
-				'x',
-				'<leader>lf',
-				function()
-					lsp.buf.format({ bufnr = bufnr, async = true })
-				end,
-				{ buffer = bufnr, desc = 'Range Formmating' }
-			)
+			vim.keymap.set('x', '<leader>lf', function()
+				lsp.buf.format({ bufnr = bufnr, async = true })
+			end, { buffer = bufnr, desc = 'Range Formmating' })
 		end
 
 		-- if caps.codeLensProvider then

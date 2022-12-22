@@ -7,6 +7,13 @@ M.config = function()
 	require('indent_blankline').setup({
 		use_treesitter = true,
 		use_treesitter_scope = true,
+		buftype_exclude = { 'terminal', 'nofile' },
+		filetype_exclude = {
+			'help',
+			'norg',
+			'neo-tree',
+			'Trouble',
+		},
 		show_trailing_blankline_indent = false,
 		show_current_context = true,
 		show_current_context_start = true,

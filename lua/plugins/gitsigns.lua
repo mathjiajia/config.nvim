@@ -7,27 +7,17 @@ M.config = function()
 	local gitsigns = require('gitsigns')
 
 	local function on_attach(bufnr)
-		vim.keymap.set(
-			'n',
-			']c',
-			function()
-				if vim.wo.diff then return ']c' end
-				vim.schedule(gitsigns.next_hunk)
-				return '<Ignore>'
-			end,
-			{ expr = true, buffer = bufnr }
-		)
+		vim.keymap.set('n', ']c', function()
+			if vim.wo.diff then return ']c' end
+			vim.schedule(gitsigns.next_hunk)
+			return '<Ignore>'
+		end, { expr = true, buffer = bufnr })
 
-		vim.keymap.set(
-			'n',
-			'[c',
-			function()
-				if vim.wo.diff then return '[c' end
-				vim.schedule(gitsigns.prev_hunk)
-				return '<Ignore>'
-			end,
-			{ expr = true, buffer = bufnr }
-		)
+		vim.keymap.set('n', '[c', function()
+			if vim.wo.diff then return '[c' end
+			vim.schedule(gitsigns.prev_hunk)
+			return '<Ignore>'
+		end, { expr = true, buffer = bufnr })
 
 		vim.keymap.set('n', '<leader>hs', gitsigns.stage_hunk, { buffer = bufnr, desc = 'Stage Hunk' })
 		vim.keymap.set('n', '<leader>hr', gitsigns.reset_hunk, { buffer = bufnr, desc = 'Reset Hunk' })

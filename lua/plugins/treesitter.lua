@@ -15,12 +15,13 @@ local M = {
 M.config = function()
 	local langs = {
 		'bash',
-		'comment',
+		-- 'comment',
 		'diff',
 		'fish',
 		'latex',
 		'markdown',
 		'markdown_inline',
+		'norg',
 		'python',
 		'query',
 		'regex',

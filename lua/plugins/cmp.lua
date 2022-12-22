@@ -62,10 +62,10 @@ M.config = function()
 				vim_item.menu = ({
 					buffer   = '[Buf]',
 					cmdline  = '[Cmd]',
-					-- copilot  = '[Cop]',
+					copilot  = '[Cop]',
 					luasnip  = '[Snip]',
 					nvim_lsp = '[LSP]',
-					-- neorg    = '[Norg]',
+					neorg    = '[Norg]',
 					path     = '[Path]',
 					rg       = '[RG]',
 				})[entry.source.name]
@@ -76,11 +76,11 @@ M.config = function()
 		sources = {
 			{ name = 'nvim_lsp', max_item_count = 10 },
 			{ name = 'luasnip', max_item_count = 10, option = { show_autosnippets = true } },
-			{ name = 'path', keyword_length = 4, max_item_count = 10 },
-			-- { name = 'neorg', max_item_count = 10 },
+			{ name = 'path', keyword_length = 4, max_item_count = 5 },
+			{ name = 'neorg', max_item_count = 5 },
 			{ name = 'buffer', keyword_length = 3, max_item_count = 10 },
 			{ name = 'copilot', max_item_count = 3 },
-			{ name = 'rg', keyword_length = 4, max_item_count = 10 }
+			{ name = 'rg', keyword_length = 4, max_item_count = 8 }
 		},
 		window = {
 			completion = {

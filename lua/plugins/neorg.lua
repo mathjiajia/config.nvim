@@ -1,11 +1,12 @@
 local M = {
 	'nvim-neorg/neorg',
-	enabled = false,
 	dependencies = {
 		'nvim-lua/plenary.nvim',
-		'nvim-neorg/neorg-telescope'
+		-- 'nvim-neorg/neorg-telescope'
 	},
-	build = ':Neorg sync-parsers',
+	-- build = function()
+	-- 	pcall(require('nvim-treesitter.install').commands.TSInstallSync['run!']('norg', 'norg_meta'))
+	-- end,
 	ft = 'norg',
 }
 
@@ -27,7 +28,7 @@ M.config = function()
 			['core.gtd.ui'] = {},
 			['core.norg.completion'] = { config = { engine = 'nvim-cmp' } },
 			['core.norg.qol.toc'] = {},
-			['core.integrations.telescope'] = {},
+			-- ['core.integrations.telescope'] = {},
 		},
 	})
 end

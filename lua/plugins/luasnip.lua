@@ -28,36 +28,21 @@ M.config = function()
 		-- },
 	})
 
-	vim.keymap.set(
-		{ 'i', 's' },
-		'<C-j>',
-		function()
-			if ls.expandable() or ls.locally_jumpable(1) then
-				ls.expand_or_jump()
-			end
-		end,
-		{ buffer = true, desc = 'LuaSnip Forward Jump' }
-	)
-	vim.keymap.set(
-		{ 'i', 's' },
-		'<C-k>',
-		function()
-			if ls.locally_jumpable(-1) then
-				ls.jump(-1)
-			end
-		end,
-		{ buffer = true, desc = 'LuaSnip Backward Jump' }
-	)
-	vim.keymap.set(
-		'i',
-		'<C-l>',
-		function()
-			if ls.choice_active() then
-				ls.change_choice(1)
-			end
-		end,
-		{ buffer = true, desc = 'LuaSnip Next Choice' }
-	)
+	vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+		if ls.expandable() or ls.locally_jumpable(1) then
+			ls.expand_or_jump()
+		end
+	end, { buffer = true, desc = 'LuaSnip Forward Jump' })
+	vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+		if ls.locally_jumpable(-1) then
+			ls.jump(-1)
+		end
+	end, { buffer = true, desc = 'LuaSnip Backward Jump' })
+	vim.keymap.set('i', '<C-l>', function()
+		if ls.choice_active() then
+			ls.change_choice(1)
+		end
+	end, { buffer = true, desc = 'LuaSnip Next Choice' })
 
 	require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnips/' })
 end

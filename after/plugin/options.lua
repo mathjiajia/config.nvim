@@ -51,4 +51,4 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = 'yes'
 
 -- Theme
-vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme('vscode')
