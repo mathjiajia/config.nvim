@@ -7,7 +7,7 @@ local cond_obj = require('luasnip.extras.conditions')
 ---Check if cursor is in treesitter capture
 ---@param capture string
 ---@return boolean
-local in_ts_capture = function(capture)
+local function in_ts_capture(capture)
 	local buf = api.nvim_get_current_buf()
 	local row, col = unpack(api.nvim_win_get_cursor(0))
 	row = row - 1

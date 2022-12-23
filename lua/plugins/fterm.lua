@@ -2,20 +2,14 @@ local M = {
 	'numtostr/FTerm.nvim',
 }
 
-function M.config()
-	vim.keymap.set('t', '<C-\\>', function()
-		require('FTerm').toggle()
-	end, { desc = 'Toggle Terminal' })
-
-	vim.keymap.set('t', '<Esc>', function()
-		require('FTerm').exit()
-	end, { desc = 'Exit Terminal' })
-end
-
 M.keys = {
 	{ '<C-\\>', function()
 		require('FTerm').toggle()
-	end, desc = 'Toggle Terminal' },
+	end, mode = { 'n', 't' }, desc = 'Toggle Terminal' },
+
+	{ '<Esc>', function()
+		require('FTerm').exit()
+	end, mode = 't', desc = 'Exit Terminal' },
 
 	{ '<M-g>', function()
 		require('FTerm'):new({
@@ -26,7 +20,7 @@ M.keys = {
 				width = 1
 			}
 		}):open()
-	end, buffer = true, desc = 'LazyGit' },
+	end, desc = 'LazyGit' },
 
 	{ '<leader><Enter>', function()
 		local runners = { lua = 'lua', python = 'python3', swift = 'swift' }
@@ -38,7 +32,7 @@ M.keys = {
 		if exec ~= nil then
 			require('FTerm').scratch({ cmd = { exec, buf } })
 		end
-	end, buffer = true, desc = 'Code Runner' },
+	end, desc = 'Code Runner' },
 }
 
 return M

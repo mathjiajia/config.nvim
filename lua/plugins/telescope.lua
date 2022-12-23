@@ -1,6 +1,5 @@
 local M = {
 	'nvim-telescope/telescope.nvim',
-	-- "~/Desktop/NeovimPlugins/telescope.nvim", requires = "nvim-lua/plenary.nvim",
 	dependencies = {
 		'nvim-lua/plenary.nvim',
 		'nvim-tree/nvim-web-devicons',
