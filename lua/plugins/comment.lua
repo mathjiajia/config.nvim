@@ -1,10 +1,7 @@
 local M = {
 	'numToStr/Comment.nvim',
+	config = true,
 	keys = { 'gbc', 'gc', 'gcc' },
 }
-
-function M.config()
-	require('Comment').setup()
-end
 
 return M

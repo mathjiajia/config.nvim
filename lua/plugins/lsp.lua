@@ -143,19 +143,22 @@ function M.config()
 				'%f',
 			}
 
-			local binary_path = fn.stdpath('data') .. '/site/pack/packer/start/nvim-texlabconfig/nvim-texlabconfig'
+			local binary_path = fn.stdpath('data') .. '/lazy/nvim-texlabconfig/nvim-texlabconfig'
 			local cache_root = fn.stdpath('cache')
 
-			local forward_executable = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+			local forward_executable = 'sioyek'
 			local forward_args = {
-				'--reuse-instance',
 				'--inverse-search',
 				binary_path .. ' -file %1 -line %2 -cache_root ' .. cache_root,
-				'--forward-search-file', '%f',
-				'--forward-search-line', '%l', '%p'
+				'--reuse-window',
+				'--forward-search-file',
+				'%f',
+				'--forward-search-line',
+				'%l',
+				'%p'
 			}
-			-- local executable = '/Applications/Skim.app/Contents/SharedSupport/displayline',
-			-- local args = { '%l', '%p', '%f' },
+			-- local forward_executable = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+			-- local forward_args = { '%l', '%p', '%f' }
 
 			nvim_lsp.texlab.setup({
 				on_attach = on_attach,
@@ -182,8 +185,8 @@ function M.config()
 				},
 			})
 
-			vim.keymap.set('n', '<M-b>', vim.cmd.TexlabBuild, { buffer = true, desc = 'Build LaTeX' })
-			vim.keymap.set('n', '<M-f>', vim.cmd.TexlabForward, { buffer = true, desc = 'Forward Search' })
+			vim.keymap.set('n', '<M-b>', vim.cmd.TexlabBuild, { desc = 'Build LaTeX' })
+			vim.keymap.set('n', '<M-f>', vim.cmd.TexlabForward, { desc = 'Forward Search' })
 		end
 	})
 

@@ -11,6 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
+vim.o.termguicolors = true
+vim.cmd.colorscheme('vscode')
+
 require('lazy').setup('plugins', {
 	defaults = { lazy = true },
 	ui = { border = 'rounded' },

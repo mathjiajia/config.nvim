@@ -13,42 +13,38 @@ function M.init()
 	vim.g.neo_tree_remove_legacy_commands = 1
 end
 
-function M.config()
-	local fn = vim.fn
-
-	require('neo-tree').setup({
-		window = {
-			position = 'float',
-			popup = {
-				position = {
-					row = 0,
-					col = '100%',
-				},
-				size = function(state)
-					local root_name = fn.fnamemodify(state.path, ':~')
-					local root_len = string.len(root_name) + 2
-					return {
-						width = math.max(root_len, 32),
-						height = '50%'
-					}
-				end,
-				border = {
-					style = 'rounded',
-				},
+M.config = {
+	window = {
+		position = 'float',
+		popup = {
+			position = {
+				row = 0,
+				col = '100%',
+			},
+			size = function(state)
+				local root_name = vim.fn.fnamemodify(state.path, ':~')
+				local root_len = string.len(root_name) + 2
+				return {
+					width = math.max(root_len, 32),
+					height = '50%'
+				}
+			end,
+			border = {
+				style = 'rounded',
 			},
 		},
-		filesystem = {
-			follow_current_file = true,
-			hijack_netrw_behavior = 'open_current',
+	},
+	filesystem = {
+		follow_current_file = true,
+		hijack_netrw_behavior = 'open_current',
+	},
+	source_selector = {
+		winbar = true,
+		tab_labels = {
+			buffers = '  Bufs ',
 		},
-		source_selector = {
-			winbar = true,
-			tab_labels = {
-				buffers = '  Bufs ',
-			},
-		}
-	})
-end
+	}
+}
 
 M.keys = {
 	{ '<M-t>', function()

@@ -1,12 +1,11 @@
 local M = {
 	'zbirenbaum/nvim-copilot',
 	enabled = false,
-	dependencies = 'zbirenbaum/copilot_cmp',
+	config = true,
+	dependencies = {
+		'zbirenbaum/copilot_cmp',
+		config = true,
+	},
 }
-
-function M.config()
-	require('copilot').setup()
-	require('copilot_cmp').setup()
-end
 
 return M

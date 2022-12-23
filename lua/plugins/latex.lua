@@ -3,33 +3,31 @@ local M = {
 	ft = 'tex',
 }
 
-function M.config()
-	require('latex').setup({
-		conceals = {
-			enabled = {
-				'greek',
-				'math',
-				'script',
-				'delim',
-				'font'
-			},
-			add = {
-				['colon'] = ':',
-				['coloneqq'] = '≔',
-			}
+M.config = {
+	conceals = {
+		enabled = {
+			'greek',
+			'math',
+			'script',
+			'delim',
+			'font'
 		},
-		imaps = {
-			add = {
-				['\\emptyset'] = '0',
-			},
-			default_leader = ';'
+		add = {
+			['colon'] = ':',
+			['coloneqq'] = '≔',
+		}
+	},
+	imaps = {
+		add = {
+			['\\emptyset'] = '0',
 		},
-		surrounds = {
-			enabled = true,
-			command = 'c',
-			environment = 'e',
-		},
-	})
-end
+		default_leader = ';'
+	},
+	surrounds = {
+		enabled = true,
+		command = 'c',
+		environment = 'e',
+	},
+}
 
 return M

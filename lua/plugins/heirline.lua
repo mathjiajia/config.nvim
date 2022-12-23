@@ -2,7 +2,6 @@ local M = {
 	'rebelot/heirline.nvim',
 	dependencies = 'nvim-tree/nvim-web-devicons',
 	event = 'BufReadPre',
-	-- lazy = false,
 }
 
 function M.config()
@@ -34,40 +33,40 @@ function M.config()
 	require('heirline').load_colors(colors)
 
 	local modes_table = {
-		n         = { name = 'NORMAL', bg = 'fg' },
-		no        = { name = 'OPPEND', bg = 'blue' },
-		nov       = { name = 'N?', bg = 'blue' },
-		noV       = { name = 'N?', bg = 'blue' },
-		['no\22'] = { name = 'N?', bg = 'blue' },
-		niI       = { name = 'Ni', bg = 'red' },
-		niR       = { name = 'Nr', bg = 'red' },
-		niV       = { name = 'Nv', bg = 'red' },
-		nt        = { name = 'N-TERM', bg = 'red' },
-		v         = { name = 'VISUAL', bg = 'cyan' },
-		vs        = { name = 'Vs', bg = 'cyan' },
-		V         = { name = 'V-LINE', bg = 'cyan' },
-		Vs        = { name = 'Vs', bg = 'cyan' },
-		['\22']   = { name = 'V-BLCK', bg = 'cyan' },
-		['\22s']  = { name = '^V', bg = 'cyan' },
-		s         = { name = 'SELECT', bg = 'purple' },
-		S         = { name = 'S-LINE', bg = 'purple' },
-		['\19']   = { name = 'S-BLCK', bg = 'purple' },
-		i         = { name = 'INSERT', bg = 'blue' },
-		ic        = { name = 'ICOMPL', bg = 'blue' },
-		ix        = { name = 'Ix', bg = 'blue' },
-		R         = { name = 'RPLACE', bg = 'orange' },
-		Rc        = { name = 'Rc', bg = 'orange' },
-		Rx        = { name = 'Rx', bg = 'orange' },
-		Rv        = { name = 'VRPLCE', bg = 'orange' },
-		Rvc       = { name = 'Rv', bg = 'orange' },
-		Rvx       = { name = 'Rv', bg = 'orange' },
-		c         = { name = 'CMMAND', bg = 'green' },
-		cv        = { name = 'PROMPT', bg = 'green' },
-		r         = { name = '...', bg = 'green' },
-		rm        = { name = 'MORE', bg = 'green' },
-		['r?']    = { name = 'CNFIRM', bg = 'green' },
-		['!']     = { name = 'SHELL', bg = 'red' },
-		t         = { name = 'TERM', bg = 'red' },
+		n         = { 'NORMAL', 'fg' },
+		no        = { 'OPPEND', 'blue' },
+		nov       = { 'N?', 'blue' },
+		noV       = { 'N?', 'blue' },
+		['no\22'] = { 'N?', 'blue' },
+		niI       = { 'Ni', 'red' },
+		niR       = { 'Nr', 'red' },
+		niV       = { 'Nv', 'red' },
+		nt        = { 'N-TERM', 'red' },
+		v         = { 'VISUAL', 'cyan' },
+		vs        = { 'Vs', 'cyan' },
+		V         = { 'V-LINE', 'cyan' },
+		Vs        = { 'Vs', 'cyan' },
+		['\22']   = { 'V-BLCK', 'cyan' },
+		['\22s']  = { '^V', 'cyan' },
+		s         = { 'SELECT', 'purple' },
+		S         = { 'S-LINE', 'purple' },
+		['\19']   = { 'S-BLCK', 'purple' },
+		i         = { 'INSERT', 'blue' },
+		ic        = { 'ICOMPL', 'blue' },
+		ix        = { 'Ix', 'blue' },
+		R         = { 'RPLACE', 'orange' },
+		Rc        = { 'Rc', 'orange' },
+		Rx        = { 'Rx', 'orange' },
+		Rv        = { 'VRPLCE', 'orange' },
+		Rvc       = { 'Rv', 'orange' },
+		Rvx       = { 'Rv', 'orange' },
+		c         = { 'CMMAND', 'green' },
+		cv        = { 'PROMPT', 'green' },
+		r         = { '...', 'green' },
+		rm        = { 'MORE', 'green' },
+		['r?']    = { 'CNFIRM', 'green' },
+		['!']     = { 'SHELL', 'red' },
+		t         = { 'TERM', 'red' },
 	}
 
 	local mode_colors = setmetatable({
@@ -76,7 +75,7 @@ function M.config()
 		__index = function(_, mode)
 			return {
 				fg = 'bg',
-				bg = modes_table[mode].bg,
+				bg = modes_table[mode][2],
 			}
 		end
 	})
@@ -106,7 +105,7 @@ function M.config()
 			{
 				{
 					provider = function(self)
-						return '● ' .. modes_table[self.mode].name
+						return '● ' .. modes_table[self.mode][1]
 					end,
 				},
 				hl = function(self)
@@ -131,8 +130,9 @@ function M.config()
 			return vim.tbl_contains({ 'i', 's' }, fn.mode())
 		end,
 		provider = function()
-			local forward = require('luasnip').locally_jumpable(1) and '' or ''
-			local backward = require('luasnip').locally_jumpable(-1) and ' ' or ''
+			local ls = require('luasnip')
+			local forward = ls.locally_jumpable(1) and '' or ''
+			local backward = ls.locally_jumpable(-1) and ' ' or ''
 			return backward .. forward
 		end,
 		hl = { fg = 'red', bold = true },

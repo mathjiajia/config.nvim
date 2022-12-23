@@ -1,10 +1,7 @@
 local M = {
 	'kylechui/nvim-surround',
+	config = true,
 	keys = { 'cs', 'ds', 'ys' },
 }
-
-function M.config()
-	require('nvim-surround').setup()
-end
 
 return M

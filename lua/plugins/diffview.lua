@@ -4,10 +4,8 @@ local M = {
 	cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
 }
 
-function M.config()
-	require('diffview').setup({
-		enhanced_diff_hl = true,
-	})
-end
+M.config = {
+	enhanced_diff_hl = true,
+}
 
 return M

@@ -2,15 +2,13 @@ local M = {
 	'stevearc/aerial.nvim',
 }
 
-function M.config()
-	require('aerial').setup({
-		show_guides = true,
-		layout = {
-			-- max_width = { 40, 0.2 },
-			min_width = 30,
-		},
-	})
-end
+M.config = {
+	show_guides = true,
+	layout = {
+		-- max_width = { 40, 0.2 },
+		min_width = 30,
+	},
+}
 
 M.keys = {
 	{ '<M-o>', function()

@@ -3,10 +3,10 @@ local M = {
 	event = 'BufReadPre',
 }
 
-function M.config()
-	local gitsigns = require('gitsigns')
+M.config = {
+	on_attach = function(bufnr)
+		local gitsigns = require('gitsigns')
 
-	local function on_attach(bufnr)
 		vim.keymap.set('n', ']c', function()
 			if vim.wo.diff then return ']c' end
 			vim.schedule(gitsigns.next_hunk)
@@ -26,10 +26,6 @@ function M.config()
 
 		vim.keymap.set('n', '<leader>hd', gitsigns.diffthis, { buffer = bufnr, desc = 'Diff This' })
 	end
-
-	gitsigns.setup({
-		on_attach = on_attach
-	})
-end
+}
 
 return M

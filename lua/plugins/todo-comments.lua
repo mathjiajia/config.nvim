@@ -1,12 +1,9 @@
 local M = {
 	'folke/todo-comments.nvim',
+	config = true,
 	event = 'BufReadPost',
 	cmd = { 'TodoTrouble', 'TodoTelescope' },
 }
-
-function M.config()
-	require('todo-comments').setup()
-end
 
 M.keys = {
 	{ ']t', function()

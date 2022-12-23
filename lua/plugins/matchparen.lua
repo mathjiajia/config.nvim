@@ -1,9 +1,6 @@
 local M = {
 	'monkoose/matchparen.nvim',
+	config = true,
 }
-
-function M.config()
-	require('matchparen').setup({})
-end
 
 return M

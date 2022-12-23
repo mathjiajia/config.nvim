@@ -17,7 +17,7 @@ local openPDF = augroup('openPDF', {})
 autocmd('BufReadPost', {
 	pattern = { '*.pdf' },
 	callback = function()
-		fn.jobstart('/Applications/sioyek.app/Contents/MacOS/sioyek "' .. fn.expand('%') .. '"', {
+		fn.jobstart('sioyek "' .. fn.expand('%') .. '"', {
 			detach = true,
 		})
 		api.nvim_buf_delete(0, {})
