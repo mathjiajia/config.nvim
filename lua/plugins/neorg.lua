@@ -7,15 +7,13 @@ local M = {
 	ft = 'norg',
 }
 
--- function M.build()
--- 	pcall(require('nvim-treesitter.install').commands.TSInstallSync['run!']('norg', 'norg_meta'))
--- end
+function M.build()
+	pcall(require('nvim-treesitter.install').commands.TSInstallSync['run!']('norg', 'norg_meta'))
+end
 
 M.config = {
 	load = {
 		['core.defaults'] = {},
-		['core.keybinds'] = {},
-		['core.norg.concealer'] = {},
 		['core.norg.dirman'] = {
 			config = {
 				workspaces = {
@@ -24,10 +22,12 @@ M.config = {
 				},
 			},
 		},
-		['core.gtd.base'] = { config = { workspace = 'gtd' } },
-		['core.gtd.ui'] = {},
-		['core.norg.completion'] = { config = { engine = 'nvim-cmp' } },
-		['core.norg.qol.toc'] = {},
+		['core.norg.completion'] = {
+			config = { engine = 'nvim-cmp' }
+		},
+		['core.norg.concealer'] = {},
+		-- ['core.export'] = {},
+		-- ['core.presenter'] = {},
 		-- ['core.integrations.telescope'] = {},
 	},
 }

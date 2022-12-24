@@ -13,7 +13,7 @@ M.keys = {
 
 	{ '<M-g>', function()
 		require('FTerm'):new({
-			ft = 'fterm_gitui',
+			ft = 'fterm_lazygit',
 			cmd = 'lazygit',
 			dimensions = {
 				height = 1,
@@ -23,10 +23,13 @@ M.keys = {
 	end, desc = 'LazyGit' },
 
 	{ '<leader><Enter>', function()
-		local runners = { lua = 'lua', python = 'python3', swift = 'swift' }
-		local api = vim.api
+		local runners = {
+			lua = 'lua',
+			python = 'python3',
+			swift = 'swift',
+		}
 
-		local buf = api.nvim_buf_get_name(0)
+		local buf = vim.api.nvim_buf_get_name(0)
 		local ftype = vim.filetype.match({ filename = buf })
 		local exec = runners[ftype]
 		if exec ~= nil then
