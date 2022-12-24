@@ -1,5 +1,6 @@
 local M = {
 	'stevearc/aerial.nvim',
+	enabled = false,
 }
 
 M.config = {

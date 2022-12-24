@@ -17,11 +17,17 @@ function M.config()
 
 	local on_attach = function(client, bufnr)
 		vim.keymap.set('n', 'gD', lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Declaration' })
-		vim.keymap.set('n', 'gd', lsp.buf.definition, { buffer = bufnr, desc = 'Go to Definition' })
-		vim.keymap.set('n', 'K', lsp.buf.hover, { buffer = bufnr, desc = 'Docs Hover' })
+		vim.keymap.set('n', 'gd', function()
+			require('lspsaga.definition'):peek_definition()
+		end, { buffer = bufnr, desc = 'Go to Definition' })
+		vim.keymap.set('n', 'K', function()
+			require('lspsaga.hover'):render_hover_doc()
+		end, { buffer = bufnr, desc = 'Docs Hover' })
 		vim.keymap.set('n', 'gi', lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
 		vim.keymap.set('n', '<C-k>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-		vim.keymap.set('n', '<leader>rn', lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
+		vim.keymap.set('n', '<leader>rn', function()
+			require('lspsaga.rename'):lsp_rename()
+		end, { buffer = bufnr, desc = 'Rename' })
 		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'Telescope References' })
 
 		local caps = client.server_capabilities
@@ -184,9 +190,6 @@ function M.config()
 					},
 				},
 			})
-
-			vim.keymap.set('n', '<M-b>', vim.cmd.TexlabBuild, { desc = 'Build LaTeX' })
-			vim.keymap.set('n', '<M-f>', vim.cmd.TexlabForward, { desc = 'Forward Search' })
 		end
 	})
 
