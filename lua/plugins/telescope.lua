@@ -93,7 +93,7 @@ function M.config()
 		'frecency',
 		'bibtex',
 		'ui-select',
-		'aerial',
+		-- 'aerial',
 		'noice',
 	}
 	for _, extn in ipairs(extns) do
