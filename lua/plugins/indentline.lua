@@ -5,7 +5,7 @@ local M = {
 
 M.config = {
 	use_treesitter = true,
-	use_treesitter_scope = true,
+	-- use_treesitter_scope = true,
 	buftype_exclude = { 'terminal', 'nofile' },
 	filetype_exclude = {
 		'help',

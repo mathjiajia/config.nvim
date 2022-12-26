@@ -161,7 +161,7 @@ function M.config()
 				'%f',
 				'--forward-search-line',
 				'%l',
-				'%p'
+				'%p',
 			}
 			-- local forward_executable = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 			-- local forward_args = { '%l', '%p', '%f' }
@@ -179,14 +179,17 @@ function M.config()
 						},
 						forwardSearch = {
 							executable = forward_executable,
-							args = forward_args
+							args = forward_args,
 						},
+						-- chktex = {
+						-- onOpenAndSave = true,
+						-- },
 						diagnostics = {
 							ignoredPatterns = {
 								'^Overfull',
 								'^Underfull',
-							}
-						}
+							},
+						},
 					},
 				},
 			})
