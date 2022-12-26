@@ -10,6 +10,8 @@ local M = {
 }
 
 function M.config()
+	require('plugins.lsp.diagnostic')
+
 	local api, fn = vim.api, vim.fn
 	local augroup = api.nvim_create_augroup
 	local autocmd = api.nvim_create_autocmd
@@ -30,70 +32,11 @@ function M.config()
 		end, { buffer = bufnr, desc = 'Rename' })
 		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'Telescope References' })
 
-		local caps = client.server_capabilities
 
-		if caps.documentHighlightProvider then
-			augroup('lsp_document_highlight', { clear = false })
-			api.nvim_clear_autocmds({
-				buffer = bufnr,
-				group = 'lsp_document_highlight',
-			})
-			autocmd('CursorHold', {
-				callback = lsp.buf.document_highlight,
-				buffer   = bufnr,
-				group    = 'lsp_document_highlight',
-			})
-			autocmd('CursorMoved', {
-				callback = lsp.buf.clear_references,
-				buffer   = bufnr,
-				group    = 'lsp_document_highlight',
-			})
-		end
-
-		-- if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-		-- 	local augroup = augroup('SemanticTokens', {})
-		-- 	autocmd('TextChanged', {
-		-- 		group = augroup,
-		-- 		buffer = bufnr,
-		-- 		callback = function()
-		-- 			lsp.buf.semantic_tokens_full()
-		-- 		end,
-		-- 	})
-		-- 	-- fire it first time on load as well
-		-- 	lsp.buf.semantic_tokens_full()
-		-- end
-
-		if caps.codeActionProvider then
-			vim.keymap.set({ 'n', 'x' }, '<leader>ca', function()
-				require('lspsaga.codeaction'):code_action()
-			end, { buffer = bufnr, desc = '(Range) Code Actions' })
-		end
-
-		if caps.documentFormattingProvider then
-			vim.keymap.set('n', '<leader>lf', function()
-				lsp.buf.format({ bufnr = bufnr, async = true })
-			end, { buffer = bufnr, desc = 'Formmating' })
-		end
-		if caps.documentRangeFormattingProvider then
-			vim.keymap.set('x', '<leader>lf', function()
-				lsp.buf.format({ bufnr = bufnr, async = true })
-			end, { buffer = bufnr, desc = 'Range Formmating' })
-		end
-
-		-- if caps.codeLensProvider then
-		-- 	augroup('lsp_codelens', { clear = true })
-		-- 	autocmd('BufEnter', {
-		-- 		callback = require('lsp.codelens').refresh,
-		-- 		buffer   = bufnr,
-		-- 		group    = 'lsp_codelens',
-		-- 		once     = true,
-		-- 	})
-		-- 	autocmd({ 'BufWritePost', 'CursorHold' }, {
-		-- 		callback = require('lsp.codelens').refresh,
-		-- 		buffer   = bufnr,
-		-- 		group    = 'lsp_codelens',
-		-- 	})
-		-- end
+		require('plugins.lsp.highlight').setup(client, bufnr)
+		require('plugins.lsp.action').setup(client, bufnr)
+		require('plugins.lsp.formater').setup(client, bufnr)
+		require('plugins.lsp.codelens').setup(client, bufnr)
 	end
 
 	local capabilities = require('cmp_nvim_lsp').default_capabilities()

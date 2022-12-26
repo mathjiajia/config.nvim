@@ -23,18 +23,7 @@ function M.config()
 	null_ls.setup({
 		sources = sources,
 		on_attach = function(client, bufnr)
-			local caps = client.server_capabilities
-
-			if caps.documentFormattingProvider then
-				vim.keymap.set('n', '<leader>lf', function()
-					lsp.buf.format({ bufnr = bufnr, async = true })
-				end, { buffer = bufnr, desc = 'Formmating' })
-			end
-			if caps.documentRangeFormattingProvider then
-				vim.keymap.set('x', '<leader>lf', function()
-					lsp.buf.format({ bufnr = bufnr, async = true })
-				end, { buffer = bufnr, desc = 'Range Formmating' })
-			end
+			require('plugins.lsp.formater').setup(client, bufnr)
 		end,
 	})
 end
