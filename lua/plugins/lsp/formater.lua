@@ -9,6 +9,7 @@ function M.setup(client, bufnr)
 			lsp.buf.format({ bufnr = bufnr, async = true })
 		end, { buffer = bufnr, desc = 'Formmating' })
 	end
+
 	if caps.documentRangeFormattingProvider then
 		vim.keymap.set('x', '<leader>lf', function()
 			lsp.buf.format({ bufnr = bufnr, async = true })

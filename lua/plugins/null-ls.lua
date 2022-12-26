@@ -7,7 +7,6 @@ local M = {
 function M.config()
 	local null_ls = require('null-ls')
 	local b = null_ls.builtins
-	local lsp = vim.lsp
 
 	local sources = {
 		b.formatting.black,

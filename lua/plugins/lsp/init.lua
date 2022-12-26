@@ -12,10 +12,7 @@ local M = {
 function M.config()
 	require('plugins.lsp.diagnostic')
 
-	local api, fn = vim.api, vim.fn
-	local augroup = api.nvim_create_augroup
-	local autocmd = api.nvim_create_autocmd
-	local lsp = vim.lsp
+	local fn, lsp = vim.fn, vim.lsp
 
 	local on_attach = function(client, bufnr)
 		vim.keymap.set('n', 'gD', lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Declaration' })
@@ -32,11 +29,19 @@ function M.config()
 		end, { buffer = bufnr, desc = 'Rename' })
 		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'Telescope References' })
 
+		local caps = client.server_capabilities
 
-		require('plugins.lsp.highlight').setup(client, bufnr)
-		require('plugins.lsp.action').setup(client, bufnr)
 		require('plugins.lsp.formater').setup(client, bufnr)
-		require('plugins.lsp.codelens').setup(client, bufnr)
+
+		if caps.documentHighlightProvider then
+			require('plugins.lsp.highlight').setup(bufnr)
+		end
+		if caps.codeActionProvider then
+			require('plugins.lsp.action').setup(bufnr)
+		end
+		if caps.codeLensProvider then
+			require('plugins.lsp.codelens').setup(bufnr)
+		end
 	end
 
 	local capabilities = require('cmp_nvim_lsp').default_capabilities()

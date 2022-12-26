@@ -11,9 +11,3 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- INSERT
 vim.keymap.set('i', '<C-f>', '<Right>', { desc = 'Move Forward a Char' })
 vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
-
--- DIAGNOSTIC
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Float Diagnostics' })
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous Diagnostics' })
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next Diagnostics' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Loclist Diagnostics' })
