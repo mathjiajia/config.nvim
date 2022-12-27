@@ -1,10 +1,21 @@
 local M = {
 	'neovim/nvim-lspconfig',
 	dependencies = {
-		'williamboman/mason.nvim',
-		'williamboman/mason-lspconfig.nvim',
+		{
+			'williamboman/mason.nvim',
+			config = {
+				ui = { border = 'rounded' },
+			},
+		},
+		{
+			'williamboman/mason-lspconfig.nvim',
+			config = true,
+		},
 		'hrsh7th/cmp-nvim-lsp',
-		'folke/neodev.nvim',
+		{
+			'folke/neodev.nvim',
+			config = true,
+		},
 	},
 	event = 'BufReadPre',
 }
@@ -46,14 +57,6 @@ function M.config()
 
 	local capabilities = require('cmp_nvim_lsp').default_capabilities()
 	local nvim_lsp = require('lspconfig')
-
-	require('neodev').setup()
-
-	require('mason').setup({
-		ui = { border = 'rounded' }
-	})
-
-	require('mason-lspconfig').setup()
 
 	require('mason-lspconfig').setup_handlers({
 		function(server_name)
