@@ -1,21 +1,15 @@
 local M = {
 	'neovim/nvim-lspconfig',
 	dependencies = {
+		'hrsh7th/cmp-nvim-lsp',
 		{
 			'williamboman/mason.nvim',
 			config = {
 				ui = { border = 'rounded' },
 			},
 		},
-		{
-			'williamboman/mason-lspconfig.nvim',
-			config = true,
-		},
-		'hrsh7th/cmp-nvim-lsp',
-		{
-			'folke/neodev.nvim',
-			config = true,
-		},
+		{ 'williamboman/mason-lspconfig.nvim', config = true },
+		{ 'folke/neodev.nvim', config = true },
 	},
 	event = 'BufReadPre',
 }
@@ -33,16 +27,16 @@ function M.config()
 		vim.keymap.set('n', 'K', function()
 			require('lspsaga.hover'):render_hover_doc()
 		end, { buffer = bufnr, desc = 'Docs Hover' })
-		vim.keymap.set('n', 'gi', lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
+		vim.keymap.set('n', 'gi', lsp.buf.implementation, { buffer = bufnr, desc = 'Goto Implementation' })
 		vim.keymap.set('n', '<C-k>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
 		vim.keymap.set('n', '<leader>rn', function()
 			require('lspsaga.rename'):lsp_rename()
-		end, { buffer = bufnr, desc = 'Rename' })
-		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'Telescope References' })
-
-		local caps = client.server_capabilities
+		end, { buffer = bufnr, desc = 'Rename Symbol' })
+		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'References' })
 
 		require('plugins.lsp.formater').setup(client, bufnr)
+
+		local caps = client.server_capabilities
 
 		if caps.documentHighlightProvider then
 			require('plugins.lsp.highlight').setup(bufnr)
@@ -73,9 +67,6 @@ function M.config()
 					Lua = {
 						workspace = {
 							checkThirdParty = false,
-						},
-						telemetry = {
-							enable = false,
 						},
 					},
 				},

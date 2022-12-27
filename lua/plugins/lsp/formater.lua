@@ -7,13 +7,13 @@ function M.setup(client, bufnr)
 	if caps.documentFormattingProvider then
 		vim.keymap.set('n', '<leader>lf', function()
 			lsp.buf.format({ bufnr = bufnr, async = true })
-		end, { buffer = bufnr, desc = 'Formmating' })
+		end, { buffer = bufnr, desc = 'Format Document' })
 	end
 
 	if caps.documentRangeFormattingProvider then
 		vim.keymap.set('x', '<leader>lf', function()
 			lsp.buf.format({ bufnr = bufnr, async = true })
-		end, { buffer = bufnr, desc = 'Range Formmating' })
+		end, { buffer = bufnr, desc = 'Format Range' })
 	end
 end
 
