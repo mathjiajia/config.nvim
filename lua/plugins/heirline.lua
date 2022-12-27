@@ -125,18 +125,18 @@ function M.config()
 		update = { 'ModeChanged' }
 	}
 
-	-- local Snippets = {
-	-- 	condition = function()
-	-- 		return vim.tbl_contains({ 'i', 's' }, fn.mode())
-	-- 	end,
-	-- 	provider = function()
-	-- 		local ls = require('luasnip')
-	-- 		local forward = ls.locally_jumpable(1) and '' or ''
-	-- 		local backward = ls.locally_jumpable(-1) and ' ' or ''
-	-- 		return backward .. forward
-	-- 	end,
-	-- 	hl = { fg = 'red', bold = true },
-	-- }
+	local Snippets = {
+		condition = function()
+			return vim.tbl_contains({ 'i', 's' }, fn.mode())
+		end,
+		provider = function()
+			local ls = require('luasnip')
+			local forward = ls.locally_jumpable(1) and '' or ''
+			local backward = ls.locally_jumpable(-1) and ' ' or ''
+			return backward .. forward
+		end,
+		hl = { fg = 'red', bold = true },
+	}
 
 	local WorkDir = {
 		init = function(self)
@@ -450,8 +450,7 @@ function M.config()
 
 	local DefaultStatusline = {
 		LeftCap, VimMode,
-		-- Snippets,
-		Space,
+		Snippets, Space,
 		WorkDir, Align,
 		Diagnostics, Space,
 		Git,

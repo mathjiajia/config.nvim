@@ -9,7 +9,6 @@ M.config = function()
 	saga.init_lsp_saga({
 		border_style = 'rounded',
 		saga_winblend = 20,
-		diagnostic_header = { ' ', ' ', ' ', '' },
 		custom_kind = {
 			File          = { ' ', '#D4D4D4' },
 			Module        = { ' ', '#D4D4D4' },
@@ -49,14 +48,6 @@ end
 M.keys = {
 	{ 'gh', function()
 		require('lspsaga.finder'):lsp_finder()
-	end, silent = true },
-
-	{ '<leader>cl', function()
-		require('lspsaga.diagnostic').show_line_diagnostics()
-	end, silent = true },
-
-	{ '<leader>cc', function()
-		require('lspsaga.diagnostic').show_cursor_diagnostics()
 	end, silent = true },
 
 	{ ']d', function()
