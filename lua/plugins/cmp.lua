@@ -101,21 +101,9 @@ function M.config()
 		}
 	}
 
-	local border = function(hl)
-		return {
-			{ '╭', hl },
-			{ '─', hl },
-			{ '╮', hl },
-			{ '│', hl },
-			{ '╯', hl },
-			{ '─', hl },
-			{ '╰', hl },
-			{ '│', hl },
-		}
-	end
-
-	local lspkind = require('lspkind')
 	local cmp = require('cmp')
+	local lspkind = require('lspkind')
+	local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 
 	cmp.setup({
 		mapping = cmp.mapping.preset.insert({
@@ -155,13 +143,13 @@ function M.config()
 		},
 		window = {
 			completion = {
-				border = border('Normal'),
+				border = border,
 				max_width = 80,
 				max_height = 20,
 				col_offset = -3,
 			},
 			documentation = {
-				border = border('Pmenu'),
+				border = border,
 			},
 		}
 	})

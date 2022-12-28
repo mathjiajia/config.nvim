@@ -42,7 +42,7 @@ vim.bo.undofile = true
 -- local to window
 vim.wo.breakindent = true
 vim.wo.colorcolumn = '120'
--- vim.wo.cursorline = true
+vim.wo.cursorline = true
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldenable = false

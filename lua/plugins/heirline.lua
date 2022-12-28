@@ -24,9 +24,9 @@ function M.config()
 		diag_error = utils.get_highlight('DiagnosticError').fg,
 		diag_hint  = utils.get_highlight('DiagnosticHint').fg,
 		diag_info  = utils.get_highlight('DiagnosticInfo').fg,
-		git_del    = utils.get_highlight('@error').fg,
-		git_add    = utils.get_highlight('@comment').fg,
-		git_change = utils.get_highlight('@function').fg,
+		git_del    = utils.get_highlight('GitSignsDelete').fg,
+		git_add    = utils.get_highlight('GitSignsAdd').fg,
+		git_change = utils.get_highlight('GitSignsChange').fg,
 		work_dir   = utils.get_highlight('Directory').fg,
 	}
 
