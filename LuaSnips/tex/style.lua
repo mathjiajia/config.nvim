@@ -22,15 +22,30 @@ snips = {
 }
 
 autosnips = {
-	postfix({ trig = 'bar', name = 'post overline', hidden = true },
+	s(
+		{ trig = 'bar', name = 'overline' },
+		{ t '\\overline{', i(1), t '}' },
+		{ condition = tex.in_mathzone }),
+	s(
+		{ trig = 'hat', name = 'widehat' },
+		{ t '\\widehat{', i(1), t '}' },
+		{ condition = tex.in_mathzone }),
+	s(
+		{ trig = 'td', name = 'widetilde' },
+		{ t '\\widetilde{', i(1), t '}' },
+		{ condition = tex.in_mathzone }),
+	postfix(
+		{ trig = 'bar', name = 'post overline', hidden = true },
 		{ l('\\overline{' .. l.POSTFIX_MATCH .. '}') },
 		{ condition = tex.in_mathzone }
 	),
-	postfix({ trig = 'hat', name = 'post widehat', hidden = true },
+	postfix(
+		{ trig = 'hat', name = 'post widehat', hidden = true },
 		{ l('\\widehat{' .. l.POSTFIX_MATCH .. '}') },
 		{ condition = tex.in_mathzone }
 	),
-	postfix({ trig = 'td', name = 'post widetilde', hidden = true },
+	postfix(
+		{ trig = 'td', name = 'post widetilde', hidden = true },
 		{ l('\\widetilde{' .. l.POSTFIX_MATCH .. '}') },
 		{ condition = tex.in_mathzone }
 	),
