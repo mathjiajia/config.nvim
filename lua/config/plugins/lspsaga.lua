@@ -1,21 +1,24 @@
 local M = {
 	'glepnir/lspsaga.nvim',
-	branch = 'main',
+	branch = 'version_2.3',
+	cmd = 'Lspsaga',
 }
 
 M.config = function()
 	local saga = require('lspsaga')
 
 	saga.init_lsp_saga({
-		border_style = 'rounded',
-		saga_winblend = 20,
+		ui = {
+			border = 'rounded',
+			winblend = 20,
+		},
 		custom_kind = {
 			File          = { ' ', '#D4D4D4' },
 			Module        = { ' ', '#D4D4D4' },
 			Namespace     = { ' ', '#4EC9B0' },
 			Package       = { ' ', '#C586C0' },
 			Class         = { ' ', '#f28b25' },
-			Method        = { ' ', '#C586C0' },
+			Method        = { ' ', '#C586C0' },
 			Property      = { ' ', '#9CDCFE' },
 			Field         = { ' ', '#4EC9B0' },
 			Constructor   = { ' ', '#4EC9B0' },
@@ -62,10 +65,6 @@ M.keys = {
 	end, silent = true },
 	{ '[e', function()
 		require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })
-	end, silent = true },
-
-	{ '<M-o>', function()
-		require('lspsaga.outline'):render_outline()
 	end, silent = true },
 }
 

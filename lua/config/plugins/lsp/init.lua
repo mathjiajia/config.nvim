@@ -15,7 +15,7 @@ local M = {
 }
 
 function M.config()
-	require('plugins.lsp.diagnostic')
+	require('config.plugins.lsp.diagnostic')
 
 	local fn, lsp = vim.fn, vim.lsp
 
@@ -29,23 +29,21 @@ function M.config()
 		end, { buffer = bufnr, desc = 'Docs Hover' })
 		vim.keymap.set('n', 'gi', lsp.buf.implementation, { buffer = bufnr, desc = 'Goto Implementation' })
 		vim.keymap.set('n', '<C-k>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature' })
-		vim.keymap.set('n', '<leader>rn', function()
-			require('lspsaga.rename'):lsp_rename()
-		end, { buffer = bufnr, desc = 'Rename Symbol' })
+		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename Symbol' })
 		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'References' })
 
-		require('plugins.lsp.formater').setup(client, bufnr)
+		require('config.plugins.lsp.formater').setup(client, bufnr)
 
 		local caps = client.server_capabilities
 
 		if caps.documentHighlightProvider then
-			require('plugins.lsp.highlight').setup(bufnr)
+			require('config.plugins.lsp.highlight').setup(bufnr)
 		end
 		if caps.codeActionProvider then
-			require('plugins.lsp.action').setup(bufnr)
+			require('config.plugins.lsp.action').setup(bufnr)
 		end
 		if caps.codeLensProvider then
-			require('plugins.lsp.codelens').setup(bufnr)
+			require('config.plugins.lsp.codelens').setup(bufnr)
 		end
 	end
 

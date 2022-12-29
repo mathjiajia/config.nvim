@@ -10,7 +10,7 @@ local M = {
 		},
 		'nvim-telescope/telescope-file-browser.nvim',
 		'nvim-telescope/telescope-bibtex.nvim',
-		'nvim-telescope/telescope-ui-select.nvim',
+		-- 'nvim-telescope/telescope-ui-select.nvim',
 	},
 	cmd = 'Telescope',
 }
@@ -83,7 +83,7 @@ function M.config()
 				theme = 'ivy',
 				hijack_netrw = true,
 			},
-			['ui-select'] = themes.get_dropdown(),
+			-- ['ui-select'] = themes.get_dropdown(),
 		},
 	})
 
@@ -92,8 +92,8 @@ function M.config()
 		'file_browser',
 		'frecency',
 		'bibtex',
-		'ui-select',
-		-- 'aerial',
+		-- 'ui-select',
+		'aerial',
 		'noice',
 	}
 	for _, extn in ipairs(extns) do
