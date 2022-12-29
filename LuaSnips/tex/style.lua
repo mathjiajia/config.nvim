@@ -1,7 +1,7 @@
 local snips, autosnips = {}, {}
 
 local postfix = require('luasnip.extras.postfix').postfix
-local tex = require('util.snips.latex')
+local tex = require('snips.latex')
 
 snips = {
 	s(

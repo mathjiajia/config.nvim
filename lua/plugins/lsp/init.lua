@@ -15,7 +15,7 @@ local M = {
 }
 
 function M.config()
-	require('config.plugins.lsp.diagnostic')
+	require('plugins.lsp.diagnostic')
 
 	local fn, lsp = vim.fn, vim.lsp
 
@@ -32,18 +32,18 @@ function M.config()
 		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename Symbol' })
 		vim.keymap.set('n', 'gr', lsp.buf.references, { buffer = bufnr, desc = 'References' })
 
-		require('config.plugins.lsp.formater').setup(client, bufnr)
+		require('plugins.lsp.formater').setup(client, bufnr)
 
 		local caps = client.server_capabilities
 
 		if caps.documentHighlightProvider then
-			require('config.plugins.lsp.highlight').setup(bufnr)
+			require('plugins.lsp.highlight').setup(bufnr)
 		end
 		if caps.codeActionProvider then
-			require('config.plugins.lsp.action').setup(bufnr)
+			require('plugins.lsp.action').setup(bufnr)
 		end
 		if caps.codeLensProvider then
-			require('config.plugins.lsp.codelens').setup(bufnr)
+			require('plugins.lsp.codelens').setup(bufnr)
 		end
 	end
 

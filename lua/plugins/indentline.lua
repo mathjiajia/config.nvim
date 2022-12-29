@@ -8,6 +8,7 @@ M.config = {
 	-- use_treesitter_scope = true,
 	buftype_exclude = { 'terminal', 'nofile' },
 	filetype_exclude = {
+		'alpha',
 		'help',
 		'norg',
 		'neo-tree',

@@ -22,7 +22,7 @@ function M.config()
 	null_ls.setup({
 		sources = sources,
 		on_attach = function(client, bufnr)
-			require('config.plugins.lsp.formater').setup(client, bufnr)
+			require('plugins.lsp.formater').setup(client, bufnr)
 		end,
 	})
 end

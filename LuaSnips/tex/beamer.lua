@@ -1,8 +1,8 @@
 local snips, autosnips = {}, {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
-local tex = require('util.snips.latex')
-local position = require('util.snips.position')
+local tex = require('snips.latex')
+local position = require('snips.position')
 
 autosnips = {
 	s(
