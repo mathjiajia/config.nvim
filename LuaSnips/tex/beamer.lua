@@ -1,4 +1,4 @@
-local snips, autosnips = {}, {}
+local autosnips = {}
 
 local conds_expand = require('luasnip.extras.conditions.expand')
 local tex = require('snips.latex')
@@ -45,4 +45,4 @@ autosnips = {
 	),
 }
 
-return snips, autosnips
+return nil, autosnips

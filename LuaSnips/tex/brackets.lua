@@ -67,7 +67,8 @@ autosnips = {
 		{ condition = tex.in_mathzone }
 	),
 	s(
-		{ trig = 'cvec', name = 'column vector', hidden = true }, {
+		{ trig = 'cvec', name = 'column vector', hidden = true },
+		{
 			t({ '\\begin{pmatrix}', '\t' }),
 			i(1, 'x'),
 			t('}_'),
@@ -77,7 +78,8 @@ autosnips = {
 			t('_'),
 			i(3, 'n'),
 			t({ '', '\\end{pmatrix}' }),
-		}, { condition = tex.in_mathzone }
+		},
+		{ condition = tex.in_mathzone }
 	),
 	s(
 		{ trig = 'lra', name = 'leftangle rightangle', hidden = true },

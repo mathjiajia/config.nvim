@@ -1,4 +1,4 @@
-local snips, autosnips = {}, {}
+local autosnips = {}
 
 local tex = require('snips.latex')
 
@@ -228,4 +228,4 @@ autosnips = {
 	),
 }
 
-return snips, autosnips
+return nil, autosnips

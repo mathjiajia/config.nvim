@@ -1,4 +1,4 @@
-local snips, autosnips = {}, {}
+local autosnips = {}
 
 local api = vim.api
 
@@ -100,4 +100,4 @@ autosnips = {
 	),
 }
 
-return snips, autosnips
+return nil, autosnips
