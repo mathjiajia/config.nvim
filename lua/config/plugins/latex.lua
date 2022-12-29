@@ -5,13 +5,6 @@ local M = {
 
 M.config = {
 	conceals = {
-		enabled = {
-			'greek',
-			'math',
-			'script',
-			'delim',
-			'font'
-		},
 		add = {
 			['colon'] = ':',
 			['coloneqq'] = '≔',
@@ -25,8 +18,6 @@ M.config = {
 	},
 	surrounds = {
 		enabled = true,
-		command = 'c',
-		environment = 'e',
 	},
 }
 

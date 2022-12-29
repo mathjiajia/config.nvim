@@ -21,6 +21,3 @@ vim.g.loaded_zipPlugin = 1
 
 require('config.options')
 require('config.lazyinit')
-
-require('util.dashboard').setup()
-

@@ -24,15 +24,13 @@ function M.config()
 		diag_error = utils.get_highlight('DiagnosticError').fg,
 		diag_hint  = utils.get_highlight('DiagnosticHint').fg,
 		diag_info  = utils.get_highlight('DiagnosticInfo').fg,
-		git_del    = '#F44747',
-		git_add    = '#6A9955',
-		git_change = '#DCDCAA',
+		git_del    = utils.get_highlight('diffDeleted').fg,
+		git_add    = utils.get_highlight('diffAdded').fg,
+		git_change = utils.get_highlight('diffChanged').fg,
 		work_dir   = utils.get_highlight('Directory').fg,
 	}
 
 	require('heirline').load_colors(colors)
-
-
 
 	local modes_table = {
 		n         = { 'NORMAL', 'fg' },
