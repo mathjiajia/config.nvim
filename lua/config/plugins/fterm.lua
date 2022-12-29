@@ -3,7 +3,7 @@ local M = {
 }
 
 M.keys = {
-	{ '<C-\\>', function()
+	{ '<M-i>', function()
 		require('FTerm').toggle()
 	end, mode = { 'n', 't' }, desc = 'Toggle Terminal' },
 

@@ -51,21 +51,25 @@ end
 M.keys = {
 	{ 'gh', function()
 		require('lspsaga.finder'):lsp_finder()
-	end, silent = true },
+	end, silent = true, desc = 'Lsp Finder' },
 
 	{ ']d', function()
 		require('lspsaga.diagnostic').goto_next()
-	end, silent = true },
+	end, silent = true, desc = 'Next Diagnostics' },
 	{ '[d', function()
 		require('lspsaga.diagnostic').goto_prev()
-	end, silent = true },
+	end, silent = true, desc = 'Previous Diagnostics' },
 
 	{ ']e', function()
 		require('lspsaga.diagnostic').goto_next({ severity = vim.diagnostic.severity.ERROR })
-	end, silent = true },
+	end, silent = true, desc = 'Next Error' },
 	{ '[e', function()
 		require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })
-	end, silent = true },
+	end, silent = true, desc = 'Previous Error' },
+
+	{ '<leader>o', function()
+		require('lspsaga.outline'):render_outline()
+	end, silent = true, 'Lsp Outline' },
 }
 
 return M

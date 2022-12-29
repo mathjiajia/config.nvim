@@ -15,7 +15,7 @@ autocmd('TextYankPost', {
 -- Opens PDF files in sioyek instead of viewing the binary in Neovim
 local openPDF = augroup('openPDF', {})
 autocmd('BufReadPost', {
-	pattern = { '*.pdf' },
+	pattern = '*.pdf',
 	callback = function()
 		fn.jobstart('sioyek "' .. fn.expand('%') .. '"', { detach = true })
 		api.nvim_buf_delete(0, {})

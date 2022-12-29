@@ -42,6 +42,6 @@ local function run()
 end
 
 api.nvim_create_autocmd({ 'BufWinEnter', 'FileType' }, {
-	group    = api.nvim_create_augroup('nvim-lastplace', {}),
+	group = api.nvim_create_augroup('nvim-lastplace', {}),
 	callback = run
 })
