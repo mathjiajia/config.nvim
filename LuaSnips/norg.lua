@@ -77,35 +77,35 @@ snips = {
 
 autosnips = {
 	s(
-		{ trig = ',b', name = 'bold' },
+		{ trig = ';b', name = 'bold' },
 		{ t('*'), i(1), t('*') }
 	),
 	s(
-		{ trig = ',i', name = 'italic' },
+		{ trig = ';i', name = 'italic' },
 		{ t('/'), i(1), t('/') }
 	),
 	s(
-		{ trig = ',u', name = 'underline' },
+		{ trig = ';u', name = 'underline' },
 		{ t('_'), i(1), t('_') }
 	),
 	s(
-		{ trig = ',s', name = 'strikethrough' },
+		{ trig = ';s', name = 'strikethrough' },
 		{ t('-'), i(1), t('-') }
 	),
 	s(
-		{ trig = ',|', name = 'spoiler' },
+		{ trig = ';|', name = 'spoiler' },
 		{ t('|'), i(1), t('|') }
 	),
 	s(
-		{ trig = ',c', name = 'inline code' },
+		{ trig = ';c', name = 'inline code' },
 		{ t('`'), i(1), t('`') }
 	),
 	s(
-		{ trig = ',^', name = 'subscript' },
+		{ trig = ';^', name = 'subscript' },
 		{ t('^'), i(1), t('^') }
 	),
 	s(
-		{ trig = ',_', name = 'subscript' },
+		{ trig = ';_', name = 'subscript' },
 		{ t(','), i(1), t(',') }
 	),
 	s(
@@ -113,11 +113,11 @@ autosnips = {
 		{ t('$'), i(1), t('$') }
 	),
 	s(
-		{ trig = ',v', name = 'variable' },
+		{ trig = ';v', name = 'variable' },
 		{ t('='), i(1), t('=') }
 	),
 	s(
-		{ trig = ',+', name = 'comment' },
+		{ trig = ';+', name = 'comment' },
 		{ t('+'), i(1), t('+') }
 	),
 }
