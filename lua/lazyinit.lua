@@ -4,12 +4,12 @@ if not vim.loop.fs_stat(lazypath) then
 		'git',
 		'clone',
 		'--filter=blob:none',
-		'--single-branch',
+		'--branch=stable', -- remove this if you want to bootstrap to HEAD
 		'https://github.com/folke/lazy.nvim.git',
 		lazypath,
 	})
 end
-vim.opt.runtimepath:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup('plugins', {
 	defaults = { lazy = true },
