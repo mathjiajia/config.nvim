@@ -107,12 +107,10 @@ M.keys = {
 		require('telescope').extensions.file_browser.file_browser()
 	end, desc = 'File Browser' },
 
-	{ '<F12>', function()
-		require('telescope.builtin').commands()
-	end, desc = 'Command Pallete' },
-
 	{ '<leader>fd', function()
-		require('telescope.builtin').find_files()
+		require('telescope.builtin').find_files({
+			cwd = require('utils').get_root()
+		})
 	end, desc = 'Find Files' },
 
 	{ '<leader>ff', function()

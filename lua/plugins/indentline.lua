@@ -17,8 +17,8 @@ M.config = {
 	show_trailing_blankline_indent = false,
 	show_current_context = true,
 	show_current_context_start = true,
-	-- char = '▎',
-	-- context_char = '▍',
+	char = '▏',
+	context_char = '▏',
 	char_highlight_list = {
 		'IndentBlanklineIndent1',
 		'IndentBlanklineIndent2',

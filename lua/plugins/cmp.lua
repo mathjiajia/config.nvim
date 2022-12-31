@@ -42,7 +42,6 @@ function M.config()
 	}
 
 	local cmp = require('cmp')
-	local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 
 	cmp.setup({
 		mapping = cmp.mapping.preset.insert({
