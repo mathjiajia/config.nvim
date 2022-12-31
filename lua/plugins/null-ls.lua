@@ -1,6 +1,5 @@
 local M = {
 	'jose-elias-alvarez/null-ls.nvim',
-	dependencies = 'nvim-lua/plenary.nvim',
 	ft = { 'python', 'fish', 'css', 'javascript', 'yaml', 'markdown' },
 }
 

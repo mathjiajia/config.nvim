@@ -1,9 +1,6 @@
 local M = {
 	'nvim-neorg/neorg',
-	dependencies = {
-		'nvim-lua/plenary.nvim',
-		-- 'nvim-neorg/neorg-telescope'
-	},
+	-- dependencies = 'nvim-neorg/neorg-telescope',
 	ft = 'norg',
 }
 

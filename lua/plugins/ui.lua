@@ -94,6 +94,41 @@ local M = {
 		end
 	},
 
+	-- better quickfix
+	{
+		'kevinhwang91/nvim-bqf',
+		dependencies = {
+			'junegunn/fzf',
+			build = function()
+				vim.fn['fzf#install']()
+			end
+		},
+		config = {
+			preview = {
+				win_height = 5,
+				win_vheight = 5,
+			},
+		},
+		ft = 'qf',
+	},
+
+	-- todo-comments
+	{
+		'folke/todo-comments.nvim',
+		config = true,
+		keys = {
+			{ ']t', function()
+				require('todo-comments').jump_next()
+			end, desc = 'Next todo comment' },
+
+			{ '[t', function()
+				require('todo-comments').jump_prev()
+			end, desc = 'Previous todo comment' },
+		},
+		event = 'BufReadPost',
+		cmd = { 'TodoTrouble', 'TodoTelescope' },
+	},
+
 	-- alternative to matchparen neovim plugin
 	{
 		'monkoose/matchparen.nvim',
