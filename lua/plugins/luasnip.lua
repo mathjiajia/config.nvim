@@ -16,16 +16,6 @@ function M.config()
 				},
 			}
 		},
-		-- snip_env = {
-		-- 	s = function(...)
-		-- 		local snip = ls.s(...)
-		-- 		table.insert(getfenv(2).ls_file_snippets, snip)
-		-- 	end,
-		-- parse = function(...)
-		-- 	local snip = ls.parser.parse(...)
-		-- 	table.insert(getfenv(2).ls_file_snippets, snip)
-		-- end,
-		-- },
 	})
 
 	vim.keymap.set({ 'i', 's' }, '<C-j>', function()

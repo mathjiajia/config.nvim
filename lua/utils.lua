@@ -1,5 +1,7 @@
 local M = {}
 
+local api = vim.api
+
 local runners = {
 	lua = 'lua',
 	python = 'python3',
@@ -7,7 +9,7 @@ local runners = {
 }
 
 function M.code_run()
-	local buf = vim.api.nvim_buf_get_name(0)
+	local buf = api.nvim_buf_get_name(0)
 	local ftype = vim.filetype.match({ filename = buf })
 	local exec = runners[ftype]
 	if exec ~= nil then
@@ -17,7 +19,9 @@ end
 
 ---@return string
 function M.get_root()
-	local path = vim.loop.fs_realpath(vim.api.nvim_buf_get_name(0))
+	local fs, uv = vim.fs, vim.loop
+
+	local path = uv.fs_realpath(api.nvim_buf_get_name(0))
 	---@type string[]
 	local roots = {}
 	if path ~= '' then
@@ -27,7 +31,7 @@ function M.get_root()
 				return vim.uri_to_fname(ws.uri)
 			end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
 			for _, p in ipairs(paths) do
-				local r = vim.loop.fs_realpath(p)
+				local r = uv.fs_realpath(p)
 				if path:find(r, 1, true) then
 					roots[#roots + 1] = r
 				end
@@ -37,10 +41,10 @@ function M.get_root()
 	---@type string?
 	local root = roots[1]
 	if not root then
-		path = path == '' and vim.loop.cwd() or vim.fs.dirname(path)
+		path = path == '' and uv.cwd() or fs.dirname(path)
 		---@type string?
-		root = vim.fs.find({ '.git' }, { path = path, upward = true })[1]
-		root = root and vim.fs.dirname(root) or vim.loop.cwd()
+		root = fs.find({ '.git' }, { path = path, upward = true })[1]
+		root = root and fs.dirname(root) or uv.cwd()
 	end
 	---@cast root string
 	return root

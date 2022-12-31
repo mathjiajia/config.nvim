@@ -53,6 +53,10 @@ M.keys = {
 		require('lspsaga.finder'):lsp_finder()
 	end, silent = true, desc = 'Lsp Finder' },
 
+	{ '<leader>cd', function()
+		require('lspsaga.diagnostic').show_line_diagnostics()
+	end, silent = true, desc = 'Line Diagnostic' },
+
 	{ ']d', function()
 		require('lspsaga.diagnostic').goto_next()
 	end, silent = true, desc = 'Next Diagnostics' },
