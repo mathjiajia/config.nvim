@@ -11,6 +11,7 @@ local M = {
 			'saadparwaiz1/cmp_luasnip',
 		},
 		config = function()
+			local cmp_kinds = require('configs.icons').kinds
 			local cmp = require('cmp')
 
 			cmp.setup({
@@ -28,8 +29,6 @@ local M = {
 				formatting = {
 					fields = { 'kind', 'abbr', 'menu' },
 					format = function(entry, vim_item)
-						local cmp_kinds = require('config.icons').kinds
-
 						vim_item.kind = cmp_kinds[vim_item.kind]
 						vim_item.menu = ({
 							buffer   = '[Buf]',
