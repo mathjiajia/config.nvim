@@ -6,13 +6,17 @@ local M = {
 		keys = { 'gbc', 'gc', 'gcc' },
 	},
 
-	-- screen navigation
+	-- easily jump to any location and enhanced f/t motions for Leap
 	{
 		'ggandor/leap.nvim',
+		event = 'VeryLazy',
+		dependencies = {
+			'ggandor/flit.nvim',
+			config = { labeled_modes = 'nv' },
+		},
 		config = function()
 			require('leap').add_default_mappings()
 		end,
-		event = 'VeryLazy',
 	},
 
 	-- surround
