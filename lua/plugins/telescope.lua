@@ -107,7 +107,7 @@ M.keys = {
 
 	{ '<leader>fd', function()
 		require('telescope.builtin').find_files({
-			cwd = require('utils').get_root()
+			cwd = require('configs.utils').get_root()
 		})
 	end, desc = 'Find Files' },
 

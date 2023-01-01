@@ -1,8 +1,8 @@
 local M = {
 	'nvim-treesitter/nvim-treesitter',
 	dependencies = {
-		'nvim-treesitter/nvim-treesitter-textobjects',
 		'nvim-treesitter/nvim-treesitter-context',
+		'nvim-treesitter/nvim-treesitter-textobjects',
 		'p00f/nvim-ts-rainbow',
 	},
 	event = 'BufReadPost',
@@ -33,21 +33,18 @@ function M.config()
 		highlight = { enable = true },
 		incremental_selection = { enable = true },
 		indent = { enable = true },
-		-- pairs = { enable = true },
 		rainbow = { enable = true },
-		-- playground = { enable = true },
-		-- query_linter = { enable = true },
 		textobjects = {
 			select = {
 				enable = true,
 				lookahead = true,
 				keymaps = {
-					['ab'] = '@block.outer',
-					['ib'] = '@block.inner',
-					['ac'] = '@class.outer',
-					['ic'] = '@class.inner',
 					['af'] = '@function.outer',
 					['if'] = '@function.inner',
+					['ac'] = '@class.outer',
+					['ic'] = '@class.inner',
+					['ab'] = '@block.outer',
+					['ib'] = '@block.inner',
 					['as'] = '@statement.outer',
 				}
 			},
@@ -84,15 +81,15 @@ function M.config()
 					['[}'] = '@block.outer',
 				},
 			},
-			lsp_interop = {
-				enable = true,
-				border = 'none',
-				peek_definition_code = {
-					['<leader>df'] = '@function.outer',
-					['<leader>dc'] = '@class.outer',
-					['<leader>db'] = '@block.outer',
-				}
-			}
+			-- lsp_interop = {
+			-- 	enable = true,
+			-- 	border = 'none',
+			-- 	peek_definition_code = {
+			-- 		['<leader>df'] = '@function.outer',
+			-- 		['<leader>dc'] = '@class.outer',
+			-- 		['<leader>db'] = '@block.outer',
+			-- 	}
+			-- },
 		},
 	})
 end

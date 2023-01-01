@@ -9,18 +9,8 @@ local M = {
 	-- screen navigation
 	{
 		'ggandor/leap.nvim',
-		-- dependencies = {
-		-- 	{ 'ggandor/flit.nvim' },
-		-- 	{ 'ggandor/leap-ast.nvim' },
-		-- },
 		config = function()
 			require('leap').add_default_mappings()
-			-- require('flit').setup({
-			-- 	labeled_modes = 'nv',
-			-- })
-			-- vim.keymap.set({ 'n', 'x', 'o' }, 'M', function()
-			-- 	require('leap-ast').leap()
-			-- end, {})
 		end,
 		event = 'VeryLazy',
 	},
@@ -40,9 +30,8 @@ local M = {
 				require('FTerm').toggle()
 			end, mode = { 'n', 't' }, desc = 'Toggle Terminal' },
 
-
 			{ '<leader><Enter>', function()
-				require('utils').code_run()
+				require('configs.utils').code_run()
 			end, desc = 'Code Runner' },
 		},
 		config = function()

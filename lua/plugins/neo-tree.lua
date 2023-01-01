@@ -45,7 +45,7 @@ M.keys = {
 	{ '<M-t>', function()
 		require('neo-tree.command').execute({
 			toggle = true,
-			dir = require('utils').get_root()
+			dir = require('configs.utils').get_root()
 		})
 	end, desc = 'Toggle NeoTree' },
 }

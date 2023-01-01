@@ -1,10 +1,10 @@
 local fn = vim.fn
 
 -- Diagnostic signs
-fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
-fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
-fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
-fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
+for name, icon in pairs(require('configs.icons').diagnostics) do
+    name = 'DiagnosticSign' .. name
+    fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
+end
 
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Float Diagnostics' })

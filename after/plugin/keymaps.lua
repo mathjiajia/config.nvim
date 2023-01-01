@@ -14,5 +14,5 @@ vim.keymap.set('i', '<C-b>', '<Left>', { desc = 'Move Backward a Char' })
 
 -- lazygit
 vim.keymap.set('n', '<M-g>', function()
-	require('utils').lazygit(require('utils').get_root())
+	require('configs.utils').lazygit(require('configs.utils').get_root())
 end, { desc = 'LazyGit' })
