@@ -75,22 +75,24 @@ local M = {
 	{ 'goolord/alpha-nvim',
 		lazy = false,
 		config = function()
-			local alpha = require('alpha')
 			local startify = require('alpha.themes.startify')
 
 			startify.section.header.val = {
 				[[-- .- - .... . -- .- - .. -.-. ...]],
 			}
 
+			startify.section.top_buttons.val = {
+				startify.button('e', 'New file', '<Cmd>ene <BAR> startinsert<CR>'),
+			}
 			startify.section.bottom_buttons.val = {
 				startify.button('u', 'Update Plugins', '<cmd>Lazy update<CR>'),
-				startify.button('q', 'Quit', '<cmd>exit<CR>'),
+				startify.button('q', 'Quit', '<Cmd>exit<CR>'),
 			}
 
 			startify.config.opts.noautocmd = true
 			startify.nvim_web_devicons.enabled = false
 
-			alpha.setup(startify.config)
+			require('alpha').setup(startify.config)
 		end
 	},
 
