@@ -9,7 +9,7 @@ function M.config()
 	local api, fn = vim.api, vim.fn
 
 	local colors = {
-		bright_bg  = utils.get_highlight('Folded').bg,
+		bright_bg  = utils.get_highlight('Folded').fg,
 		-- bright_fg  = utils.get_highlight('Folded').fg,
 		red        = utils.get_highlight('DiagnosticError').fg,
 		dark_red   = utils.get_highlight('DiffDelete').bg,
@@ -183,7 +183,9 @@ function M.config()
 		init = function(self)
 			local filename = self.filename
 			local extension = fn.fnamemodify(filename, ':e')
-			self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+			self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, {
+				default = true
+			})
 		end,
 		provider = function(self)
 			return self.icon and (self.icon .. ' ')
@@ -534,7 +536,7 @@ function M.config()
 		provider = function(self)
 			return tostring(self.bufnr) .. '. '
 		end,
-		hl = 'Comment',
+		hl = 'String',
 	}
 
 	local TablineFileName = {
@@ -669,16 +671,16 @@ function M.config()
 	local TabLineOffset = {
 		condition = function(self)
 			local win = api.nvim_tabpage_list_wins(0)[1]
-			local bufnr = api.nvim_win_get_buf(win)
+			-- local bufnr = api.nvim_win_get_buf(win)
 			self.winid = win
 
-			if vim.bo[bufnr].filetype == 'neo-tree' then
-				self.title = 'neo-tree'
-				return true
-				-- elseif vim.bo[bufnr].filetype == 'aerial' then
-				-- 	self.title = 'aerial'
-				-- 	return true
-			end
+			-- if vim.bo[bufnr].filetype == 'neo-tree' then
+			-- 	self.title = 'neo-tree'
+			-- 	return true
+			-- elseif vim.bo[bufnr].filetype == 'aerial' then
+			-- 	self.title = 'aerial'
+			-- 	return true
+			-- end
 		end,
 
 		provider = function(self)

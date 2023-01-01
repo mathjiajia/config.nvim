@@ -52,4 +52,4 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = 'yes'
 
 -- Theme
-vim.cmd.colorscheme('vscode')
+vim.cmd.colorscheme('catppuccin')
