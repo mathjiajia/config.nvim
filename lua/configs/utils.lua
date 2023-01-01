@@ -12,6 +12,7 @@ function M.code_run()
 	local buf = api.nvim_buf_get_name(0)
 	local ftype = vim.filetype.match({ filename = buf })
 	local exec = runners[ftype]
+
 	if exec ~= nil then
 		require('FTerm').scratch({ cmd = { exec, buf } })
 	end
@@ -20,10 +21,11 @@ end
 ---@return string
 function M.get_root()
 	local fs, uv = vim.fs, vim.loop
-
 	local path = uv.fs_realpath(api.nvim_buf_get_name(0))
+
 	---@type string[]
 	local roots = {}
+
 	if path ~= '' then
 		for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
 			local workspace = client.config.workspace_folders
@@ -38,6 +40,7 @@ function M.get_root()
 			end
 		end
 	end
+
 	---@type string?
 	local root = roots[1]
 	if not root then
@@ -46,6 +49,7 @@ function M.get_root()
 		root = fs.find({ '.git' }, { path = path, upward = true })[1]
 		root = root and fs.dirname(root) or uv.cwd()
 	end
+
 	---@cast root string
 	return root
 end

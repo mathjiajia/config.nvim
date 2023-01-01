@@ -1,11 +1,8 @@
 local M = {
 	'mfussenegger/nvim-dap',
 	dependencies = {
-		{
-			'rcarriga/nvim-dap-ui',
-			config = true,
-		},
-		'mfussenegger/nvim-dap-python',
+		'rcarriga/nvim-dap-ui',
+		config = true,
 	},
 }
 
@@ -40,18 +37,44 @@ M.keys = {
 }
 
 function M.config()
-	require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+	local fn = vim.fn
+
+	-- Dap signs
+	for name, icon in pairs(require('configs.icons').dap) do
+		name = 'Dap' .. name
+		fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
+	end
 
 	local dap, dapui = require('dap'), require('dapui')
 
+	local python_path = vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/bin/python'
+
+	dap.adapters.python = {
+		type = 'executable';
+		command = python_path;
+		args = { '-m', 'debugpy.adapter' };
+	}
+
+	dap.configurations.python = {
+		{
+			type = 'python';
+			request = 'launch';
+			name = 'Launch file';
+
+			program = '${file}';
+			console = 'integratedTerminal',
+			pythonPath = '/usr/bin/python3'
+		},
+	}
+
 	dap.listeners.after.event_initialized['dapui_config'] = function()
-		dapui.open()
+		dapui.open({})
 	end
 	dap.listeners.before.event_terminated['dapui_config'] = function()
-		dapui.close()
+		dapui.close({})
 	end
 	dap.listeners.before.event_exited['dapui_config'] = function()
-		dapui.close()
+		dapui.close({})
 	end
 end
 

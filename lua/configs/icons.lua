@@ -1,9 +1,16 @@
 return {
+	dap = {
+		Breakpoint          = '● ',
+		BreakpointRejected  = ' ',
+		BreakpointCondition = ' ',
+		BreakpointLog       = '● ',
+		Stopped             = ' ',
+	},
 	diagnostics = {
 		Error = ' ',
-		Warn = ' ',
-		Hint = ' ',
-		Info = ' ',
+		Warn  = ' ',
+		Hint  = ' ',
+		Info  = ' ',
 	},
 	kinds = {
 		Text          = '',
