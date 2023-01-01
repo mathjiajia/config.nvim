@@ -11,11 +11,20 @@ M.keys = {
 		require('dap').toggle_breakpoint()
 	end, desc = 'Toggle Breakpoint' },
 
+	{ '<leader>dB', function()
+		require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+	end, desc = 'Toggle Breakpoint' },
+
 	{ '<leader>dc', function()
 		require('dap').continue()
 	end, desc = 'Continue' },
 
-	{ '<leader>do', function()
+	{ '<leader>dd', function()
+		require('dap').terminate()
+		require('dapui').close()
+	end, desc = 'Continue' },
+
+	{ '<leader>dv', function()
 		require('dap').step_over()
 	end, desc = 'Step Over' },
 
@@ -23,13 +32,17 @@ M.keys = {
 		require('dap').step_into()
 	end, desc = 'Step Into' },
 
-	{ '<leader>dw', function()
-		require('dap.ui.widgets').hover()
-	end, desc = 'Widgets' },
+	{ '<leader>do', function()
+		require('dap').step_out()
+	end, desc = 'Step Out' },
 
 	{ '<leader>dr', function()
 		require('dap').repl.open()
 	end, desc = 'Repl' },
+
+	{ '<leader>dw', function()
+		require('dap.ui.widgets').hover()
+	end, desc = 'Widgets' },
 
 	{ '<leader>du', function()
 		require('dapui').toggle({})
