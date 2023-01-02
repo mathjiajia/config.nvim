@@ -15,26 +15,9 @@ M.keys = {
 		require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
 	end, desc = 'Toggle Breakpoint' },
 
-	{ '<leader>dc', function()
-		require('dap').continue()
-	end, desc = 'Continue' },
-
-	{ '<leader>dd', function()
-		require('dap').terminate()
-		require('dapui').close()
-	end, desc = 'Continue' },
-
-	{ '<leader>dv', function()
-		require('dap').step_over()
-	end, desc = 'Step Over' },
-
-	{ '<leader>di', function()
-		require('dap').step_into()
-	end, desc = 'Step Into' },
-
-	{ '<leader>do', function()
-		require('dap').step_out()
-	end, desc = 'Step Out' },
+	{ '<leader>lp', function()
+		require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+	end, desc = 'Toggle Breakpoint' },
 
 	{ '<leader>dr', function()
 		require('dap').repl.open()
@@ -89,6 +72,31 @@ function M.config()
 	dap.listeners.before.event_exited['dapui_config'] = function()
 		dapui.close({})
 	end
+
+	vim.keymap.set('n', '<F5>', function()
+		require('dap').continue()
+	end, { desc = 'Continue' })
+
+	vim.keymap.set('n', '<F17>', function() -- Shift + F5
+		require('dap').terminate()
+		require('dapui').close()
+	end, { desc = 'Continue' })
+
+	vim.keymap.set('n', '<F10>', function()
+		require('dap').step_over()
+	end, { desc = 'Step Over' })
+
+	vim.keymap.set('n', '<F11>', function()
+		require('dap').step_into()
+	end, { desc = 'Step Into' })
+
+	vim.keymap.set('n', '<F12>', function()
+		require('dap').step_out()
+	end, { desc = 'Step Out' })
+
+	vim.keymap.set('n', '<leader>dl', function()
+		require('dap').run_last()
+	end, { desc = 'Step Out' })
 end
 
 return M
