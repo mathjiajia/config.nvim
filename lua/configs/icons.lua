@@ -1,3 +1,4 @@
+-- a collection of icons
 return {
 	aerial = {
 		Array         = ' ',

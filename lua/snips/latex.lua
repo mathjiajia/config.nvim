@@ -12,21 +12,13 @@ local MATH_NODES = {
 
 local ALIGN_ENVIRONMENTS = {
 	['{multline}']  = true,
-	['{multline*}'] = true,
 	['{eqnarray}']  = true,
-	['{eqnarray*}'] = true,
 	['{align}']     = true,
-	['{align*}']    = true,
 	['{array}']     = true,
-	['{array*}']    = true,
 	['{split}']     = true,
-	['{split*}']    = true,
 	['{alignat}']   = true,
-	['{alignat*}']  = true,
 	['[gather]']    = true,
-	['[gather*]']   = true,
 	['{flalign}']   = true,
-	['{flalign*}']  = true,
 }
 
 local function get_node_at_cursor()
@@ -70,6 +62,7 @@ end
 -- end
 
 ---Check if cursor is in treesitter node of 'text'
+---@return boolean
 local function in_text()
 	local node = get_node_at_cursor()
 	while node do
@@ -84,6 +77,7 @@ local function in_text()
 end
 
 ---Check if cursor is in treesitter node of 'math'
+---@return boolean
 local function in_mathzone()
 	local node = get_node_at_cursor()
 	while node do
@@ -107,7 +101,7 @@ local function in_align()
 			local begin = node:child(0)
 			local names = begin and begin:field('name')
 
-			if names and names[1] and ALIGN_ENVIRONMENTS[ts.query.get_node_text(names[1], buf)] then
+			if names and names[1] and ALIGN_ENVIRONMENTS[ts.query.get_node_text(names[1], buf):gsub('%*', '')] then
 				return true
 			end
 		end

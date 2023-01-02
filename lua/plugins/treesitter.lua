@@ -5,31 +5,25 @@ local M = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		'p00f/nvim-ts-rainbow',
 	},
+	build = ':TSUpdate',
 	event = 'BufReadPost',
 }
 
-function M.build()
-	pcall(require('nvim-treesitter.install').update({ with_sync = true }))
-end
-
 function M.config()
-	local langs = {
-		'bash',
-		'diff',
-		'fish',
-		'latex',
-		'markdown',
-		'markdown_inline',
-		'python',
-		'query',
-		'regex',
-		'swift',
-	}
-
 	require('nvim-treesitter.install').compilers = { '/opt/homebrew/bin/gcc-12' }
-
 	require('nvim-treesitter.configs').setup({
-		ensure_installed = langs,
+		ensure_installed = {
+			'bash',
+			'diff',
+			'fish',
+			'latex',
+			'markdown',
+			'markdown_inline',
+			'python',
+			'query',
+			'regex',
+			'swift',
+		},
 		highlight = { enable = true },
 		incremental_selection = { enable = true },
 		indent = { enable = true },

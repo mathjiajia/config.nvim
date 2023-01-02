@@ -2,13 +2,15 @@ local M = {
 	-- better vim.notify
 	{
 		'rcarriga/nvim-notify',
-		init = function()
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.notify = function(...)
-				vim.notify = require('notify')
-				return vim.notify(...)
-			end
-		end,
+		config = {
+			timeout = 3000,
+			max_height = function()
+				return math.floor(vim.o.lines * 0.75)
+			end,
+			max_width = function()
+				return math.floor(vim.o.columns * 0.75)
+			end,
+		},
 	},
 
 	-- better vim.ui
@@ -65,7 +67,9 @@ local M = {
 			},
 			use_treesitter = true,
 			show_trailing_blankline_indent = false,
-			filetype_exclude = { 'alpha', 'checkhealth', 'help', 'lspinfo', 'norg', 'neo-tree', 'Trouble' },
+			filetype_exclude = {
+				'alpha', 'checkhealth', 'help', 'lazy', 'lspinfo', 'neo-tree', 'norg', 'Trouble'
+			},
 			show_current_context = true,
 			show_current_context_start = true,
 		},
