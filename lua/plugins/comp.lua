@@ -11,8 +11,8 @@ local M = {
 			'saadparwaiz1/cmp_luasnip',
 		},
 		config = function()
-			local cmp_kinds = require('configs.icons').kinds
 			local cmp = require('cmp')
+			local cmp_kinds = require('configs.icons').kinds
 
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({

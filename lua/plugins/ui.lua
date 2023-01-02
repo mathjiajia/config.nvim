@@ -135,6 +135,13 @@ local M = {
 		cmd = { 'TodoTrouble', 'TodoTelescope' },
 	},
 
+	-- trouble
+	{
+		'folke/trouble.nvim',
+		enabled = false,
+		config = true,
+	},
+
 	-- statusline/tabline
 	{
 		'rebelot/heirline.nvim',

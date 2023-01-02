@@ -69,7 +69,7 @@ return {
 		Operator      = '',
 		TypeParameter = ''
 	},
-	saga = {
+	lspsaga = {
 		File          = { ' ', '#D4D4D4' },
 		Module        = { ' ', '#D4D4D4' },
 		Namespace     = { ' ', '#4EC9B0' },

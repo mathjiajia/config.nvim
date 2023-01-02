@@ -11,7 +11,11 @@ local M = {
 	{
 		'numToStr/Comment.nvim',
 		config = true,
-		keys = { 'gbc', 'gc', 'gcc' },
+		keys = {
+			'gcc',
+			{ 'gbc', mode = { 'n', 'x' } },
+			{ 'gc', mode = { 'n', 'x' } },
+		},
 	},
 
 	-- easily jump to any location and enhanced f/t motions for Leap
