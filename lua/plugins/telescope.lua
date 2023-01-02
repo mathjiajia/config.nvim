@@ -12,6 +12,14 @@ local M = {
 	cmd = 'Telescope',
 }
 
+---@param func string
+---@param opts? table
+local function project_files(func, opts)
+	opts = opts or {}
+	opts.cwd = require('configs.utils').get_root()
+	require('telescope.builtin')[func](opts)
+end
+
 function M.config()
 	local telescope = require('telescope')
 	local actions = require('telescope.actions')
@@ -63,7 +71,6 @@ function M.config()
 		},
 		extensions = {
 			frecency = {
-				theme = themes.get_dropdown,
 				show_scores = true,
 				workspaces = {
 					['conf'] = home .. '/.config',
@@ -102,13 +109,13 @@ M.keys = {
 	end, desc = 'Buffers' },
 
 	{ '<leader><space>', function()
-		require('telescope').extensions.file_browser.file_browser()
+		require('telescope').extensions.file_browser.file_browser({
+			path = '%:p:h'
+		})
 	end, desc = 'File Browser' },
 
 	{ '<leader>fd', function()
-		require('telescope.builtin').find_files({
-			cwd = require('configs.utils').get_root()
-		})
+		project_files('find_files')
 	end, desc = 'Find Files' },
 
 	{ '<leader>ff', function()
@@ -116,7 +123,7 @@ M.keys = {
 	end, desc = 'Current Buffer Fuzzy Find' },
 
 	{ '<leader>fg', function()
-		require('telescope.builtin').live_grep()
+		project_files('live_grep')
 	end, desc = 'Live Grep' },
 
 	{ '<leader>fh', function()
@@ -128,18 +135,27 @@ M.keys = {
 	end, desc = 'Telescope Meta' },
 
 	{ '<leader>fr', function()
-		require('telescope').extensions.frecency.frecency(require('telescope.themes').get_ivy())
+		require('telescope').extensions.frecency.frecency()
 	end, desc = 'Recent Files' },
 
 	{ '<leader>fz', function()
-		require('telescope.builtin').find_files({
-			find_command = { 'rg', '--files', '--type', vim.fn.input({ prompt = 'Type: ' }) }
+		project_files('find_files', {
+			find_command = {
+				'rg',
+				'--files',
+				'--type',
+				vim.fn.input({
+					prompt = 'Type: '
+				})
+			},
 		})
 	end, desc = 'Search Certain Type Files' },
 
 	{ '<leader>f/', function()
-		require('telescope.builtin').grep_string({
-			search = vim.fn.input({ prompt = 'Grep String > ' })
+		project_files('grep_string', {
+			search = vim.fn.input({
+				prompt = 'Grep String > '
+			}),
 		})
 	end, desc = 'Grep Strings' },
 
