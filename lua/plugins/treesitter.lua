@@ -28,7 +28,6 @@ return {
 			textobjects = {
 				select = {
 					enable = true,
-					lookahead = true,
 					keymaps = {
 						['af'] = '@function.outer',
 						['if'] = '@function.inner',
@@ -38,15 +37,6 @@ return {
 						['ib'] = '@block.inner',
 						['as'] = '@statement.outer',
 					}
-				},
-				swap = {
-					enable = true,
-					swap_next = {
-						['<leader>a'] = '@parameter.inner',
-					},
-					swap_previous = {
-						['<leader>A'] = '@parameter.inner',
-					},
 				},
 				move = {
 					enable = true,
@@ -72,15 +62,6 @@ return {
 						['[}'] = '@block.outer',
 					},
 				},
-				-- lsp_interop = {
-				-- 	enable = true,
-				-- 	border = 'none',
-				-- 	peek_definition_code = {
-				-- 		['<leader>df'] = '@function.outer',
-				-- 		['<leader>dc'] = '@class.outer',
-				-- 		['<leader>db'] = '@block.outer',
-				-- 	}
-				-- },
 			},
 		})
 	end,
