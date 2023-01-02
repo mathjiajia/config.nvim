@@ -1,5 +1,8 @@
 local o = vim.opt
 
+-- leader key
+vim.g.mapleader = ','
+
 -- global
 vim.o.clipboard = 'unnamedplus'
 vim.o.cmdheight = 0
