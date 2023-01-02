@@ -20,7 +20,7 @@
   "latex.nvim": { "branch": "main", "commit": "f24ea9c855e9a3871c3a674a71781792ad995402" },
   "lazy.nvim": { "branch": "main", "commit": "3974a6cbe38f7958c2e4f41c6f0d9a6c001a723d" },
   "leap.nvim": { "branch": "main", "commit": "e0145906c5f004b23eb6ec876fad55ffd3382ec9" },
-  "lspsaga.nvim": { "branch": "version_2.3", "commit": "e95ec9f112e83a9da105cbb2baf27933af6cfadc" },
+  "lspsaga.nvim": { "branch": "version_2.3", "commit": "dab9a88962613b8c1a3cc2f18941b0ab97993201" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "aa25b4153d2f2636c3b3a8c8360349d2b29e7ae3" },
   "mason.nvim": { "branch": "main", "commit": "ee75fcd37eaecbc5db479eb648c41a7d11144e32" },
   "matchparen.nvim": { "branch": "main", "commit": "dc511ea561bb34c99d0fad9a6fd08bb0e4187a5e" },

@@ -18,8 +18,8 @@ local M = {
 				mapping = cmp.mapping.preset.insert({
 					['<C-d>']     = cmp.mapping.scroll_docs(-4),
 					['<C-f>']     = cmp.mapping.scroll_docs(4),
-					['<C-Space>'] = cmp.mapping.complete({}),
-					['<C-y>']     = cmp.mapping.confirm { select = true }
+					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-y>']     = cmp.mapping.confirm({ select = true })
 				}),
 				snippet = {
 					expand = function(args)
@@ -33,9 +33,9 @@ local M = {
 						vim_item.menu = ({
 							buffer   = '[Buf]',
 							cmdline  = '[Cmd]',
-							luasnip  = '[Snip]',
 							nvim_lsp = '[LSP]',
-							-- neorg    = '[Norg]',
+							luasnip  = '[Snip]',
+							neorg    = '[Norg]',
 							path     = '[Path]',
 							rg       = '[RG]',
 						})[entry.source.name]
@@ -57,9 +57,7 @@ local M = {
 						border = 'rounded',
 						col_offset = -3,
 					},
-					documentation = {
-						border = 'rounded',
-					},
+					documentation = { border = 'rounded' },
 				}
 			})
 

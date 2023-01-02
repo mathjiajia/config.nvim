@@ -21,9 +21,7 @@ snips = {
 				[2] = {
 					[events.enter] = function()
 						require('telescope').extensions.bibtex.bibtex(
-							require('telescope.themes').get_dropdown({
-								previewer = false
-							})
+							require('telescope.themes').get_dropdown({ previewer = false })
 						)
 					end,
 				},
