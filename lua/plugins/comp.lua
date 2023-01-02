@@ -1,4 +1,5 @@
-local M = {
+return {
+
 	-- completion (and sources)
 	{
 		'hrsh7th/nvim-cmp',
@@ -188,5 +189,3 @@ local M = {
 		},
 	},
 }
-
-return M

@@ -6,7 +6,8 @@ local function project_files(func, opts)
 	require('telescope.builtin')[func](opts)
 end
 
-local M = {
+return {
+
 	-- comments
 	{
 		'numToStr/Comment.nvim',
@@ -35,7 +36,7 @@ local M = {
 	{
 		'kylechui/nvim-surround',
 		config = true,
-		keys = { 'cs', 'ds', 'ys' },
+		keys = { 'cs', 'ds', 'ys', 'yS' },
 	},
 
 	-- terminal
@@ -199,16 +200,4 @@ local M = {
 			end, desc = 'Neovim Config Files' },
 		},
 	},
-
-	-- measure startuptime
-	{
-		'dstein64/vim-startuptime',
-		config = function()
-			vim.g.startuptime_tries = 10
-		end,
-		cmd = 'StartupTime',
-	},
-
 }
-
-return M

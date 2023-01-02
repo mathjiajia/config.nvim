@@ -1,4 +1,6 @@
-local M = {
+return {
+
+	-- filesype plugin for `latex`
 	{
 		'ryleelyman/latex.nvim',
 		config = {
@@ -29,5 +31,3 @@ local M = {
 		ft = 'tex',
 	}
 }
-
-return M

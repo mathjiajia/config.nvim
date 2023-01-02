@@ -1,4 +1,5 @@
-local M = {
+return {
+
 	-- symbols outline
 	{
 		'stevearc/aerial.nvim',
@@ -71,5 +72,3 @@ local M = {
 
 	}
 }
-
-return M

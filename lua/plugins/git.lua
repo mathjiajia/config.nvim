@@ -1,4 +1,5 @@
-local M = {
+return {
+
 	-- diffview
 	{
 		'sindrets/diffview.nvim',
@@ -38,5 +39,3 @@ local M = {
 		event = 'BufReadPre',
 	},
 }
-
-return M

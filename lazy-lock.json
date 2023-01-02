@@ -18,7 +18,7 @@
   "heirline.nvim": { "branch": "master", "commit": "556666aabb57c227cbb14a996b30b2934e5ff7b1" },
   "indent-blankline.nvim": { "branch": "master", "commit": "c4c203c3e8a595bc333abaf168fcb10c13ed5fb7" },
   "latex.nvim": { "branch": "main", "commit": "f24ea9c855e9a3871c3a674a71781792ad995402" },
-  "lazy.nvim": { "branch": "main", "commit": "3974a6cbe38f7958c2e4f41c6f0d9a6c001a723d" },
+  "lazy.nvim": { "branch": "main", "commit": "9e90852a471205e92e524e9052cc2df101a24d80" },
   "leap.nvim": { "branch": "main", "commit": "e0145906c5f004b23eb6ec876fad55ffd3382ec9" },
   "lspsaga.nvim": { "branch": "version_2.3", "commit": "917b02872dfc9907aa26be8790a6d6265ae49c42" },
   "mason.nvim": { "branch": "main", "commit": "b8c3fceed16d29a166cf73ce55358f13c9f6cfcc" },
@@ -50,6 +50,5 @@
   "telescope-frecency.nvim": { "branch": "master", "commit": "62cbd4e7f55fb6de2b8081087ce97026022ffcd2" },
   "telescope-zf-native.nvim": { "branch": "master", "commit": "1ec5d8fc2d59a2ee13f59268e35d72e7040f5ed9" },
   "telescope.nvim": { "branch": "master", "commit": "a606bd10c79ec5989c76c49cc6f736e88b63f0da" },
-  "todo-comments.nvim": { "branch": "main", "commit": "c1760010f46992165995aaa52ca967f473a2e8e6" },
-  "vim-startuptime": { "branch": "master", "commit": "cb4c112b9e0f224236ee4eab6bf5153406b3f88b" }
+  "todo-comments.nvim": { "branch": "main", "commit": "c1760010f46992165995aaa52ca967f473a2e8e6" }
 }
