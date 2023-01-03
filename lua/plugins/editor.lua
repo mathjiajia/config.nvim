@@ -1,10 +1,4 @@
----@param func string
----@param opts? table
-local function project_files(func, opts)
-	opts = opts or {}
-	opts.cwd = require('configs.utils').get_root()
-	require('telescope.builtin')[func](opts)
-end
+local utils = require('configs.utils')
 
 return {
 
@@ -30,6 +24,16 @@ return {
 		config = function()
 			require('leap').add_default_mappings()
 		end,
+	},
+
+	-- search/replace in multiple files
+	{
+		'windwp/nvim-spectre',
+		keys = {
+			{ '<leader>sr', function()
+				require('spectre').open()
+			end, desc = 'Replace in files (Spectre)' },
+		},
 	},
 
 	-- surround
@@ -58,6 +62,7 @@ return {
 		end,
 	},
 
+	-- fuzzy finder
 	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = {
@@ -159,7 +164,7 @@ return {
 			end, desc = 'File Browser' },
 
 			{ '<leader>fd', function()
-				project_files('find_files')
+				utils.telescope('find_files')
 			end, desc = 'Find Files' },
 
 			{ '<leader>ff', function()
@@ -167,7 +172,7 @@ return {
 			end, desc = 'Current Buffer Fuzzy Find' },
 
 			{ '<leader>fg', function()
-				project_files('live_grep')
+				utils.telescope('live_grep')
 			end, desc = 'Live Grep' },
 
 			{ '<leader>fh', function()
@@ -183,13 +188,13 @@ return {
 			end, desc = 'Recent Files' },
 
 			{ '<leader>fz', function()
-				project_files('find_files', {
+				utils.telescope('find_files', {
 					find_command = { 'rg', '--files', '--type', vim.fn.input({ prompt = 'Type: ' }) },
 				})
 			end, desc = 'Search Certain Type Files' },
 
 			{ '<leader>f/', function()
-				project_files('grep_string', { search = vim.fn.input({ prompt = 'Grep String > ' }) })
+				utils.telescope('grep_string', { search = vim.fn.input({ prompt = 'Grep String > ' }) })
 			end, desc = 'Grep Strings' },
 
 			{ '<leader>fn', function()

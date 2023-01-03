@@ -1,36 +1,62 @@
-local servers = require('plugins.lsp.servers')
-
-local function on_attach(client, bufnr)
-	require('plugins.lsp.format').on_attach(client, bufnr)
-	require('plugins.lsp.keymaps').on_attach(client, bufnr)
-	require('plugins.lsp.highlight').on_attach(client, bufnr)
-	require('plugins.lsp.codelens').on_attach(client, bufnr)
-end
-
 return {
 	-- lspconfig
 	{
 		'neovim/nvim-lspconfig',
-		event = 'BufReadPre',
 		dependencies = {
-			'hrsh7th/cmp-nvim-lsp',
-			{
-				'williamboman/mason.nvim',
-				config = { ui = { border = 'rounded' } },
-			},
 			{ 'folke/neodev.nvim', config = true },
+			'hrsh7th/cmp-nvim-lsp',
+			'mason.nvim',
 		},
+		servers = nil,
 		config = function()
+			-- setup formatting, keymaps, highlight and codelens
+			require('configs.utils').on_attach(function(client, bufnr)
+				require('plugins.lsp.format').on_attach(client, bufnr)
+				require('plugins.lsp.keymaps').on_attach(client, bufnr)
+				require('plugins.lsp.highlight').on_attach(client, bufnr)
+				require('plugins.lsp.codelens').on_attach(client, bufnr)
+			end)
+
 			require('plugins.lsp.diagnostic')
 
 			-- lspconfig
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+			local servers = require('plugins.lsp.servers')
 			for server, opts in pairs(servers) do
 				opts.capabilities = capabilities
-				opts.on_attach = on_attach
 				require('lspconfig')[server].setup(opts)
+			end
+		end,
+		event = 'BufReadPre',
+	},
+
+	-- cmdline tools and lsp servers
+	{
+
+		'williamboman/mason.nvim',
+		ensure_installed = {
+			'black',
+			'debugpy',
+			'lua-language-server',
+			'markdownlint',
+			'prettierd',
+			'pyright',
+			'tectonic',
+			'texlab',
+		},
+		config = function(plugin)
+			require('mason').setup({
+				ui = { border = 'rounded' }
+			})
+
+			local mr = require('mason-registry')
+			for _, tool in ipairs(plugin.ensure_installed) do
+				local p = mr.get_package(tool)
+				if not p:is_installed() then
+					p:install()
+				end
 			end
 		end,
 	},
@@ -38,6 +64,7 @@ return {
 	-- inject LSP
 	{
 		'jose-elias-alvarez/null-ls.nvim',
+		dependencies = { 'mason.nvim' },
 		event = 'BufReadPre',
 		config = function()
 			local null_ls = require('null-ls')

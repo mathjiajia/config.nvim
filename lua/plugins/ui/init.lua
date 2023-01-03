@@ -12,6 +12,11 @@ return {
 				return math.floor(vim.o.columns * 0.75)
 			end,
 		},
+		keys = {
+			{ '<leader>nc', function()
+				require('notify').dismiss({ silent = true, pending = true })
+			end, desc = 'Clear all Notifications' },
+		},
 	},
 
 	-- better vim.ui
@@ -78,8 +83,8 @@ return {
 
 	-- dashboard
 	{ 'goolord/alpha-nvim',
-		lazy = false,
 		config = function()
+			local alpha = require('alpha')
 			local startify = require('alpha.themes.startify')
 
 			startify.section.header.val = {
@@ -97,8 +102,9 @@ return {
 			startify.config.opts.noautocmd = true
 			startify.nvim_web_devicons.enabled = false
 
-			require('alpha').setup(startify.config)
-		end
+			alpha.setup(startify.config)
+		end,
+		event = 'VimEnter',
 	},
 
 	-- better quickfix
