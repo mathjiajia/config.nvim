@@ -3,7 +3,7 @@ local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
 
 -- Highlight yanked text
-augroup('HighlightYank', { clear = true })
+augroup('HighlightYank', {})
 autocmd('TextYankPost', {
 	callback = function()
 		vim.highlight.on_yank()
@@ -13,12 +13,13 @@ autocmd('TextYankPost', {
 })
 
 -- Opens PDF files in sioyek instead of viewing the binary in Neovim
-local openPDF = augroup('openPDF', {})
+augroup('openPDF', {})
 autocmd('BufReadPost', {
 	pattern = '*.pdf',
 	callback = function()
 		fn.jobstart('sioyek "' .. fn.expand('%') .. '"', { detach = true })
 		api.nvim_buf_delete(0, {})
 	end,
-	group = openPDF,
+	group = 'openPDF',
+	desc = 'Opens PDF file in sioyek',
 })

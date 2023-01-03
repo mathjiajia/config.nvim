@@ -131,7 +131,7 @@ return {
 		config = function()
 			require('plugins.ui.heirline')
 		end,
-		event = 'BufReadPre',
+		event = 'UIEnter',
 	},
 
 	-- todo-comments

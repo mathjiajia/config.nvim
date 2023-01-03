@@ -4,7 +4,7 @@ local M = {}
 ---@param bufnr integer
 function M.on_attach(client, bufnr)
 	if client.server_capabilities.documentHighlightProvider then
-		vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+		vim.api.nvim_create_augroup('lsp_document_highlight', {})
 		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 			callback = vim.lsp.buf.document_highlight,
 			group = 'lsp_document_highlight',
