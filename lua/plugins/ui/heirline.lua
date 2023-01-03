@@ -1,10 +1,12 @@
+local api, fn = vim.api, vim.fn
+
 local conditions = require('heirline.conditions')
 local utils = require('heirline.utils')
-local api, fn = vim.api, vim.fn
+local devicons = require('nvim-web-devicons')
 
 local colors = {
 	bright_bg  = utils.get_highlight('Folded').fg,
-	bright_fg  = utils.get_highlight('Folded').fg,
+	-- bright_fg  = utils.get_highlight('Folded').fg,
 	red        = utils.get_highlight('DiagnosticError').fg,
 	dark_red   = utils.get_highlight('DiffDelete').bg,
 	green      = utils.get_highlight('String').fg,
@@ -25,17 +27,6 @@ local colors = {
 
 require('heirline').load_colors(colors)
 
-local modes_table = require('configs.modes')
-
-local mode_colors = setmetatable({ n = { fg = 'fg' } }, {
-	__index = function(_, mode)
-		return {
-			fg = 'bg',
-			bg = modes_table[mode][2],
-		}
-	end
-})
-
 local LeftCap = {
 	provider = '▌',
 	hl = { fg = 'fg' }
@@ -45,6 +36,7 @@ local VimModeNormal = {
 	condition = function(self)
 		return self.mode == 'n'
 	end,
+
 	provider = ' ●',
 	hl = { fg = 'fg' }
 }
@@ -54,18 +46,35 @@ local VimModeOthers = {
 		return self.mode ~= 'n'
 	end,
 
+	static = {
+		modes = {
+			v       = { 'VISUAL', 'cyan' },
+			V       = { 'V-LINE', 'cyan' },
+			['\22'] = { 'V-BLCK', 'cyan' },
+			s       = { 'SELECT', 'purple' },
+			S       = { 'S-LINE', 'purple' },
+			['\19'] = { 'S-BLCK', 'purple' },
+			i       = { 'INSERT', 'green' },
+			R       = { 'RPLACE', 'orange' },
+			c       = { 'CMMAND', 'orange' },
+			r       = { '...', 'orange' },
+			['!']   = { 'SHELL', 'red' },
+			t       = { 'TERM', 'red' },
+		},
+	},
+
 	utils.surround({ '', '' },
 		function(self)
-			return mode_colors[self.mode].bg
+			return self.modes[self.mode][2]
 		end,
 		{
 			{
 				provider = function(self)
-					return '● ' .. modes_table[self.mode][1]
+					return '● ' .. self.modes[self.mode][1]
 				end,
 			},
 			hl = function(self)
-				return mode_colors[self.mode]
+				return { fg = 'bg', bg = self.modes[self.mode][2] }
 			end
 		}
 	),
@@ -73,7 +82,7 @@ local VimModeOthers = {
 
 local VimMode = {
 	init = function(self)
-		self.mode = fn.mode(1)
+		self.mode = fn.mode()
 	end,
 
 	VimModeNormal, VimModeOthers,
@@ -140,9 +149,7 @@ local FileIcon = {
 	init = function(self)
 		local filename = self.filename
 		local extension = fn.fnamemodify(filename, ':e')
-		self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, {
-			default = true
-		})
+		self.icon, self.icon_color = devicons.get_icon_color(filename, extension, { default = true })
 	end,
 	provider = function(self)
 		return self.icon and (self.icon .. ' ')
@@ -218,12 +225,14 @@ local FileType = {
 local Diagnostics = {
 	condition = conditions.has_diagnostics,
 	update = { 'DiagnosticChanged', 'BufEnter' },
-	-- on_click = {
-	-- 	callback = function()
-	-- 		require('trouble').toggle({ mode = 'document_diagnostics' })
-	-- 	end,
-	-- 	name = 'heirline_diagnostics',
-	-- },
+	on_click = {
+		callback = function()
+			-- require('trouble').toggle({ mode = 'document_diagnostics' })
+			-- or
+			vim.diagnostic.setqflist()
+		end,
+		name = 'heirline_diagnostics',
+	},
 
 	static = {
 		error_icon = ' ',
@@ -407,11 +416,11 @@ local SpecialStatusline = {
 	condition = function()
 		return conditions.buffer_matches({
 			buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-			filetype = { '^git.*' },
+			filetype = { '^git.*', 'fugitive' },
 		})
 	end,
 
-	Space, FileType, Space, HelpFileName, Align
+	FileType, Space, HelpFileName, Align
 }
 
 local TerminalStatusline = {
