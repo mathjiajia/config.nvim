@@ -69,9 +69,21 @@ return {
 			'natecraddock/telescope-zf-native.nvim',
 			{
 				'nvim-telescope/telescope-frecency.nvim',
-				dependencies = { 'kkharji/sqlite.lua' }
+				dependencies = { 'kkharji/sqlite.lua' },
+				keys = {
+					{ '<leader>fr', function()
+						require('telescope').extensions.frecency.frecency()
+					end, desc = 'Recent Files' },
+				},
 			},
-			'nvim-telescope/telescope-file-browser.nvim',
+			{
+				'nvim-telescope/telescope-file-browser.nvim',
+				keys = {
+					{ '<leader><space>', function()
+						require('telescope').extensions.file_browser.file_browser({ path = '%:p:h' })
+					end, desc = 'File Browser' },
+				},
+			},
 			'nvim-telescope/telescope-bibtex.nvim',
 		},
 		config = function()
@@ -159,12 +171,8 @@ return {
 				require('telescope.builtin').buffers()
 			end, desc = 'Buffers' },
 
-			{ '<leader><space>', function()
-				require('telescope').extensions.file_browser.file_browser({ path = '%:p:h' })
-			end, desc = 'File Browser' },
-
 			{ '<leader>fd', function()
-				util.telescope('find_files')
+				require('telescope.builtin').find_files({ cwd = util.get_root() })
 			end, desc = 'Find Files' },
 
 			{ '<leader>ff', function()
@@ -172,7 +180,7 @@ return {
 			end, desc = 'Current Buffer Fuzzy Find' },
 
 			{ '<leader>fg', function()
-				util.telescope('live_grep')
+				require('telescope.builtin').live_grep({ cwd = util.get_root() })
 			end, desc = 'Live Grep' },
 
 			{ '<leader>fh', function()
@@ -183,18 +191,18 @@ return {
 				require('telescope.builtin').builtin()
 			end, desc = 'Telescope Meta' },
 
-			{ '<leader>fr', function()
-				require('telescope').extensions.frecency.frecency()
-			end, desc = 'Recent Files' },
-
 			{ '<leader>fz', function()
-				util.telescope('find_files', {
+				require('telescope.builtin').find_files({
+					cwd = util.get_root(),
 					find_command = { 'rg', '--files', '--type', vim.fn.input({ prompt = 'Type: ' }) },
 				})
 			end, desc = 'Search Certain Type Files' },
 
 			{ '<leader>f/', function()
-				util.telescope('grep_string', { search = vim.fn.input({ prompt = 'Grep String > ' }) })
+				require('telescope.builtin').grep_string({
+					cwd = util.get_root(),
+					search = vim.fn.input({ prompt = 'Grep String > ' })
+				})
 			end, desc = 'Grep Strings' },
 
 			{ '<leader>fn', function()

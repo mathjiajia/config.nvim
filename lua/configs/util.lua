@@ -62,14 +62,9 @@ function M.get_root()
 	return root
 end
 
-function M.telescope(builtin, opts)
-	return function()
-		opts = opts or {}
-		opts.cwd = M.get_root()
-		require('telescope.builtin')[builtin](opts)
-	end
-end
-
+---lazy.nvim api
+---@param cmd string[]
+---@param opts? table
 function M.float_term(cmd, opts)
 	opts = vim.tbl_deep_extend('force', {
 		terminal = true,
