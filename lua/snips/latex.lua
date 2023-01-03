@@ -11,14 +11,14 @@ local MATH_NODES = {
 }
 
 local ALIGN_ENVIRONMENTS = {
-	['{multline}']  = true,
-	['{eqnarray}']  = true,
-	['{align}']     = true,
-	['{array}']     = true,
-	['{split}']     = true,
-	['{alignat}']   = true,
-	['[gather]']    = true,
-	['{flalign}']   = true,
+	['{multline}'] = true,
+	['{eqnarray}'] = true,
+	['{align}']    = true,
+	['{array}']    = true,
+	['{split}']    = true,
+	['{alignat}']  = true,
+	['[gather]']   = true,
+	['{flalign}']  = true,
 }
 
 local function get_node_at_cursor()

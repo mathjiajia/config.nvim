@@ -36,25 +36,25 @@ return {
 
 	-- cmdline tools and lsp servers
 	{
-
 		'williamboman/mason.nvim',
-		ensure_installed = {
-			'black',
-			'debugpy',
-			'lua-language-server',
-			'markdownlint',
-			'prettierd',
-			'pyright',
-			'tectonic',
-			'texlab',
-		},
-		config = function(plugin)
+		config = function()
 			require('mason').setup({
 				ui = { border = 'rounded' }
 			})
 
+			local ensure_installed = {
+				'black',
+				'debugpy',
+				'lua-language-server',
+				'markdownlint',
+				'prettierd',
+				'pyright',
+				'tectonic',
+				'texlab',
+			}
+
 			local mr = require('mason-registry')
-			for _, tool in ipairs(plugin.ensure_installed) do
+			for _, tool in ipairs(ensure_installed) do
 				local p = mr.get_package(tool)
 				if not p:is_installed() then
 					p:install()
@@ -66,7 +66,7 @@ return {
 	-- inject LSP
 	{
 		'jose-elias-alvarez/null-ls.nvim',
-		dependencies = { 'mason.nvim' },
+		dependencies = 'mason.nvim',
 		event = 'BufReadPre',
 		config = function()
 			local null_ls = require('null-ls')
