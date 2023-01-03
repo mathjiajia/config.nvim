@@ -4,6 +4,7 @@ local binary_path = fn.stdpath('data') .. '/lazy/nvim-texlabconfig/nvim-texlabco
 local cache_path = fn.stdpath('cache')
 
 -- Add any servers here together with their settings
+---@type lspconfig.options
 local servers = {
 	pyright = {},
 	sourcekit = {},
@@ -11,6 +12,7 @@ local servers = {
 		settings = {
 			Lua = {
 				workspace = { checkThirdParty = false },
+				completion = { callSnippet = 'Replace' },
 			},
 		},
 	},

@@ -1,7 +1,5 @@
--- setup formatting, keymaps, highlight and codelens
-
-
 return {
+
 	-- lspconfig
 	{
 		'neovim/nvim-lspconfig',
@@ -23,7 +21,7 @@ return {
 				require('plugins.lsp.format').on_attach(client, bufnr)
 				require('plugins.lsp.keymaps').on_attach(client, bufnr)
 				require('plugins.lsp.highlight').on_attach(client, bufnr)
-				require('plugins.lsp.codelens').on_attach(client, bufnr)
+				-- require('plugins.lsp.codelens').on_attach(client, bufnr)
 			end
 
 			local servers = require('plugins.lsp.servers')

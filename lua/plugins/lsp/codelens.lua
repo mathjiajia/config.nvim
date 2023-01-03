@@ -1,24 +1,20 @@
 local M = {}
 
+---@param client table
+---@param bufnr integer
 function M.on_attach(client, bufnr)
-	local caps = client.server_capabilities
-	-- code lens
-	if caps.codeLensProvider then
-		local api, lsp = vim.api, vim.lsp
-		local augroup = api.nvim_create_augroup
-		local autocmd = api.nvim_create_autocmd
-
-		augroup('lsp_codelens', { clear = true })
-		autocmd('BufEnter', {
-			callback = lsp.codelens.refresh,
+	if client.server_capabilities.codeLensProvider then
+		vim.api.nvim_create_augroup('lsp_document_codelens', {})
+		vim.api.nvim_create_autocmd('BufEnter', {
+			callback = vim.lsp.codelens.refresh,
 			buffer = bufnr,
-			group = 'lsp_codelens',
+			group = 'lsp_document_codelens',
 			once = true,
 		})
-		autocmd({ 'BufWritePost', 'CursorHold' }, {
-			callback = lsp.codelens.refresh,
+		vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
+			callback = vim.lsp.codelens.refresh,
 			buffer = bufnr,
-			group = 'lsp_codelens',
+			group = 'lsp_document_codelens',
 		})
 	end
 end

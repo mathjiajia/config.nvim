@@ -1,6 +1,6 @@
 local M = {}
 
-M.autoformat = false
+M.autoformat = true
 
 function M.toggle()
 	M.autoformat = not M.autoformat
@@ -24,16 +24,14 @@ function M.format()
 end
 
 function M.on_attach(client, bufnr)
-	local caps = client.server_capabilities
-	-- document formatting
-	if caps.documentFormattingProvider then
-		vim.keymap.set('n', '<leader>lf', M.format, { buffer = bufnr, desc = 'Format Document' })
-	end
-	if caps.documentRangeFormattingProvider then
-		vim.keymap.set('x', '<leader>lf', M.format, { buffer = bufnr, desc = 'Format Range' })
-	end
+	local self = M.new(client, bufnr)
 
-	if client.supports_method('textDocument/formatting') then
+	-- document formatting
+	self:map('<leader>lf', M.format, { desc = 'Format Document', has = 'documentFormatting' })
+	self:map('<leader>lf', M.format, { mode = 'x', desc = 'Format Range', has = 'documentRangeFormatting' })
+
+	-- if client.supports_method('textDocument/formatting') then
+	if self:has('documentFormatting') then
 		vim.api.nvim_create_autocmd('BufWritePre', {
 			group = vim.api.nvim_create_augroup('LspFormat.' .. bufnr, {}),
 			buffer = bufnr,
@@ -44,6 +42,27 @@ function M.on_attach(client, bufnr)
 			end,
 		})
 	end
+end
+
+function M.new(client, bufnr)
+	return setmetatable({ client = client, buffer = bufnr }, { __index = M })
+end
+
+function M:has(cap)
+	return self.client.server_capabilities[cap .. 'Provider']
+end
+
+function M:map(lhs, rhs, opts)
+	opts = opts or {}
+	if opts.has and not self:has(opts.has) then
+		return
+	end
+	vim.keymap.set(
+		opts.mode or 'n',
+		lhs,
+		rhs,
+		{ silent = true, buffer = self.buffer, desc = opts.desc }
+	)
 end
 
 return M
