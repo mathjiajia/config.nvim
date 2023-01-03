@@ -1,4 +1,4 @@
-local utils = require('configs.utils')
+local util = require('configs.util')
 
 return {
 
@@ -52,7 +52,7 @@ return {
 			end, mode = { 'n', 't' }, desc = 'Toggle Terminal' },
 
 			{ '<leader><Enter>', function()
-				require('configs.utils').code_run()
+				require('configs.util').code_run()
 			end, desc = 'Code Runner' },
 		},
 		config = function()
@@ -164,7 +164,7 @@ return {
 			end, desc = 'File Browser' },
 
 			{ '<leader>fd', function()
-				utils.telescope('find_files')
+				util.telescope('find_files')
 			end, desc = 'Find Files' },
 
 			{ '<leader>ff', function()
@@ -172,7 +172,7 @@ return {
 			end, desc = 'Current Buffer Fuzzy Find' },
 
 			{ '<leader>fg', function()
-				utils.telescope('live_grep')
+				util.telescope('live_grep')
 			end, desc = 'Live Grep' },
 
 			{ '<leader>fh', function()
@@ -188,13 +188,13 @@ return {
 			end, desc = 'Recent Files' },
 
 			{ '<leader>fz', function()
-				utils.telescope('find_files', {
+				util.telescope('find_files', {
 					find_command = { 'rg', '--files', '--type', vim.fn.input({ prompt = 'Type: ' }) },
 				})
 			end, desc = 'Search Certain Type Files' },
 
 			{ '<leader>f/', function()
-				utils.telescope('grep_string', { search = vim.fn.input({ prompt = 'Grep String > ' }) })
+				util.telescope('grep_string', { search = vim.fn.input({ prompt = 'Grep String > ' }) })
 			end, desc = 'Grep Strings' },
 
 			{ '<leader>fn', function()

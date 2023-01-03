@@ -51,7 +51,5 @@
   "telescope-frecency.nvim": { "branch": "master", "commit": "62cbd4e7f55fb6de2b8081087ce97026022ffcd2" },
   "telescope-zf-native.nvim": { "branch": "master", "commit": "1ec5d8fc2d59a2ee13f59268e35d72e7040f5ed9" },
   "telescope.nvim": { "branch": "master", "commit": "a606bd10c79ec5989c76c49cc6f736e88b63f0da" },
-  "todo-comments.nvim": { "branch": "main", "commit": "c1760010f46992165995aaa52ca967f473a2e8e6" },
-  "vim-startuptime": { "branch": "master", "commit": "cb4c112b9e0f224236ee4eab6bf5153406b3f88b" },
-  "which-key.nvim": { "branch": "main", "commit": "8682d3003595017cd8ffb4c860a07576647cc6f8" }
+  "todo-comments.nvim": { "branch": "main", "commit": "c1760010f46992165995aaa52ca967f473a2e8e6" }
 }
