@@ -1,3 +1,6 @@
+-- setup formatting, keymaps, highlight and codelens
+
+
 return {
 	-- lspconfig
 	{
@@ -9,23 +12,24 @@ return {
 		},
 		servers = nil,
 		config = function()
-			-- setup formatting, keymaps, highlight and codelens
-			require('configs.utils').on_attach(function(client, bufnr)
-				require('plugins.lsp.format').on_attach(client, bufnr)
-				require('plugins.lsp.keymaps').on_attach(client, bufnr)
-				require('plugins.lsp.highlight').on_attach(client, bufnr)
-				require('plugins.lsp.codelens').on_attach(client, bufnr)
-			end)
-
+			-- diagnostics
 			require('plugins.lsp.diagnostic')
 
 			-- lspconfig
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+			local function on_attach(client, bufnr)
+				require('plugins.lsp.format').on_attach(client, bufnr)
+				require('plugins.lsp.keymaps').on_attach(client, bufnr)
+				require('plugins.lsp.highlight').on_attach(client, bufnr)
+				require('plugins.lsp.codelens').on_attach(client, bufnr)
+			end
+
 			local servers = require('plugins.lsp.servers')
 			for server, opts in pairs(servers) do
 				opts.capabilities = capabilities
+				opts.on_attach = on_attach
 				require('lspconfig')[server].setup(opts)
 			end
 		end,
@@ -70,10 +74,12 @@ return {
 			local null_ls = require('null-ls')
 			local b = null_ls.builtins
 
+			local function on_attach(client, bufnr)
+				require('plugins.lsp.format').on_attach(client, bufnr)
+			end
+
 			null_ls.setup({
-				on_attach = function(client, bufnr)
-					require('plugins.lsp.format').on_attach(client, bufnr)
-				end,
+				on_attach = on_attach,
 				sources = {
 					b.formatting.black,
 					b.formatting.fish_indent,

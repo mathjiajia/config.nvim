@@ -3,9 +3,7 @@ return {
 	-- diffview
 	{
 		'sindrets/diffview.nvim',
-		config = {
-			enhanced_diff_hl = true,
-		},
+		config = { enhanced_diff_hl = true },
 		cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
 	},
 

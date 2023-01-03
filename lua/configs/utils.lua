@@ -21,17 +21,6 @@ function M.code_run()
 	end
 end
 
----@param on_attach fun(client, bufnr)
-function M.on_attach(on_attach)
-	api.nvim_create_autocmd('LspAttach', {
-		callback = function(args)
-			local bufnr = args.buf
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			on_attach(client, bufnr)
-		end,
-	})
-end
-
 -- returns the root directory based on:
 -- * lsp workspace folders
 -- * lsp root_dir

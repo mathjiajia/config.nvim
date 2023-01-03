@@ -97,6 +97,8 @@ return {
 				},
 			})
 
+			require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnips/' })
+
 			vim.keymap.set({ 'i', 's' }, '<C-j>', function()
 				if ls.expandable() or ls.locally_jumpable(1) then
 					ls.expand_or_jump()
@@ -112,8 +114,6 @@ return {
 					ls.change_choice(1)
 				end
 			end, { desc = 'LuaSnip Next Choice' })
-
-			require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/LuaSnips/' })
 		end,
 	},
 

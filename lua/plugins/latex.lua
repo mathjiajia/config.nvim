@@ -11,14 +11,10 @@ return {
 				}
 			},
 			imaps = {
-				add = {
-					['\\emptyset'] = '0',
-				},
+				add = { ['\\emptyset'] = '0' },
 				default_leader = ';'
 			},
-			surrounds = {
-				enabled = true,
-			},
+			surrounds = { enabled = true },
 		},
 		ft = 'tex',
 	},
