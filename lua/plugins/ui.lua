@@ -156,7 +156,7 @@ return {
   {
     "rebelot/heirline.nvim",
     config = function()
-      require("config.heirline")
+      require("util.heirline")
     end,
     event = "UIEnter",
   },

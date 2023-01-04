@@ -1,3 +1,5 @@
+-- This file is automatically loaded by plugins.config
+
 -- CURSOR MOVEMENTS
 vim.keymap.set("n", "<M-h>", function()
   vim.cmd.wincmd("h")

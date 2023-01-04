@@ -110,13 +110,13 @@ return {
             sort_lastused = true,
             previewer = false,
           },
-          current_buffer_fuzzy_find = {previewer = false},
+          current_buffer_fuzzy_find = { previewer = false },
           find_files = {
             theme = "ivy",
             follow = true,
           },
-          grep_string = {path_display = { "shorten" }},
-          live_grep = {path_display = { "shorten" }},
+          grep_string = { path_display = { "shorten" } },
+          live_grep = { path_display = { "shorten" } },
         },
         extensions = {
           frecency = {
@@ -202,7 +202,7 @@ return {
       config = { labeled_modes = "nv" },
     },
     config = function()
-      require("leap").add_default_mappings()
+      require("leap").add_default_mappings(true)
     end,
   },
 

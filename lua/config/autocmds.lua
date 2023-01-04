@@ -1,3 +1,5 @@
+-- This file is automatically loaded by plugins.config
+
 local api, fn = vim.api, vim.fn
 local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd

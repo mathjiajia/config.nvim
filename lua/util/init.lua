@@ -5,6 +5,7 @@ local fs, uv = vim.fs, vim.loop
 
 M.root_patterns = { ".git", "/lua" }
 
+---@table <string, string>
 M.runners = {
   lua = "lua",
   python = "python3",
@@ -14,6 +15,7 @@ M.runners = {
 function M.code_run()
   local buf = api.nvim_buf_get_name(0)
   local ftype = vim.filetype.match({ filename = buf })
+  ---@type string
   local exec = M.runners[ftype]
 
   if exec ~= nil then
@@ -64,7 +66,7 @@ end
 
 ---wrap of telescope functions
 ---@param builtin string
----@param opts? table
+---@param opts table|nil
 ---@return function
 function M.telescope(builtin, opts)
   return function()
@@ -74,7 +76,7 @@ end
 
 ---wrap of telescope functions
 ---@param builtin string
----@param opts? table
+---@param opts table|nil
 ---@return function
 function M.tele_builtin(builtin, opts)
   return function()
@@ -84,7 +86,7 @@ end
 
 ---wrap of telescope functions
 ---@param extn string
----@param opts? table
+---@param opts table|nil
 ---@return function
 function M.tele_extn(extn, opts)
   return function()
@@ -94,7 +96,7 @@ end
 
 ---lazy.nvim api
 ---@param cmd string[]
----@param opts? table
+---@param opts table|nil
 function M.float_term(cmd, opts)
   opts = vim.tbl_deep_extend("force", {
     terminal = true,

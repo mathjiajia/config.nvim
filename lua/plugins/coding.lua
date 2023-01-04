@@ -55,7 +55,6 @@ return {
       local cmp_kinds = require("config.settings").icons.kinds
 
       cmp.setup({
-        completion = { completeopt = "menu,menuone,noinsert" },
         mapping = cmp.mapping.preset.insert({
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
