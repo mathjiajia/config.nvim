@@ -4,9 +4,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neodev.nvim", config = true },
       "hrsh7th/cmp-nvim-lsp",
       "mason.nvim",
+      { "folke/neodev.nvim", config = true },
     },
     servers = nil,
     config = function()
@@ -38,9 +38,7 @@ return {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("mason").setup({
-        ui = { border = "rounded" },
-      })
+      require("mason").setup({ ui = { border = "rounded" } })
 
       local ensure_installed = {
         "black",
@@ -49,6 +47,7 @@ return {
         "markdownlint",
         "prettierd",
         "pyright",
+        "stylua",
         "tectonic",
         "texlab",
       }

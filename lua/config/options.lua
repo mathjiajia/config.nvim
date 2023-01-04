@@ -28,7 +28,8 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Tabs
-local indent = 4
+local indent = 2
+vim.bo.expandtab = true -- Use spaces instead of tabs
 vim.o.shiftwidth = indent
 vim.o.softtabstop = indent
 vim.o.tabstop = indent
