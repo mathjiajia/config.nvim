@@ -3,8 +3,8 @@ local autosnips = {}
 local api = vim.api
 
 local conds_expand = require('luasnip.extras.conditions.expand')
-local tex = require('snips.latex')
-local position = require('snips.position')
+local tex = require('util.latex')
+local position = require('util.position')
 
 local appended_space_after_insert = function()
 	api.nvim_create_autocmd('InsertCharPre', {

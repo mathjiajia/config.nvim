@@ -1,6 +1,6 @@
 local snips, autosnips = {}, {}
 
-local tex = require('snips.latex')
+local tex = require('util.latex')
 
 -- local texpairs = {
 -- 	{ '(', ')' },
