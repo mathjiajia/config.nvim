@@ -31,6 +31,7 @@ autosnips = {
       return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
     end, {}),
   }, { condition = tex.in_text }),
+
   s({
     trig = "(%s)([0-9]+[a-zA-Z]+)([,;.%)]?)%s+",
     name = "surround word starting with number",
@@ -42,6 +43,7 @@ autosnips = {
       return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
     end, {}),
   }, { condition = tex.in_text }),
+
   s(
     { trig = "(%s)(%w[-_+=><]%w)([,;.%)]?)%s+", name = "surround i+1", wordTrig = false, regTrig = true, hidden = true },
     {
@@ -55,9 +57,7 @@ autosnips = {
   s({ trig = "mk", name = "inline math", dscr = "Insert inline Math Environment." }, { t("\\("), i(1), t("\\)") }, {
     condition = tex.in_text,
     show_condition = tex.in_text,
-    callbacks = {
-      [-1] = { [events.leave] = appended_space_after_insert },
-    },
+    callbacks = { [-1] = { [events.leave] = appended_space_after_insert } },
   }),
 
   s(

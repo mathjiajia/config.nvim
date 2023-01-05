@@ -38,14 +38,13 @@ vim.o.smartcase = true
 vim.o.sessionoptions = "buffers,curdir,tabpages,winsize"
 
 -- local to buffer
-vim.bo.smartindent = true
 vim.bo.spelllang = "en_gb"
 vim.bo.swapfile = false
 vim.bo.undofile = true
 
 -- Tabs
 vim.bo.expandtab = true -- Use spaces instead of tabs
-vim.bo.smartindent = true
+-- vim.bo.smartindent = true
 vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.tabstop = 2
@@ -63,4 +62,4 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = "yes"
 
 -- Theme
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("vscode")

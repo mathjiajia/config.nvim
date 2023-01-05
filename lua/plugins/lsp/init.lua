@@ -6,7 +6,8 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "mason.nvim",
-      { "folke/neodev.nvim", config = true },
+      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
+      { "folke/neodev.nvim", config = true, ft = "lua" },
     },
     servers = nil,
     config = function()

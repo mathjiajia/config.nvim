@@ -119,13 +119,10 @@ local settings = {
   ms_install = {
     "black",
     "debugpy",
-    "lua-language-server",
     "markdownlint",
     "prettierd",
-    "pyright",
     "stylua",
     "tectonic",
-    "texlab",
   },
   ts_install = {
     "bash",

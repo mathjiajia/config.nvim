@@ -79,6 +79,7 @@ autosnips = {
     { t("\\begin{proof}[Proof of \\cref{"), i(1), t({ "}]", "\t" }), i(0), t({ "", "\\end{proof}" }) },
     { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }
   ),
+
   s({ trig = "lthm", name = "labled Theorem Environment", dscr = "Create a labled theorem environment." }, {
     t({ "\\begin{theorem}[" }),
     i(1),
@@ -88,6 +89,7 @@ autosnips = {
     i(0),
     t({ "", "\\end{theorem}" }),
   }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
+
   s({ trig = "llem", name = "labled Lemma Environment", dscr = "Create a labled lemma environment." }, {
     t({ "\\begin{lemma}[" }),
     i(1),
@@ -97,6 +99,7 @@ autosnips = {
     i(0),
     t({ "", "\\end{lemma}" }),
   }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
+
   s({ trig = "ldef", name = "labled Definition Environment", dscr = "Create a labled definition environment." }, {
     t({ "\\begin{definition}[" }),
     i(1),
@@ -106,6 +109,7 @@ autosnips = {
     i(0),
     t({ "", "\\end{definition}" }),
   }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
+
   s({ trig = "lprop", name = "labled Proposition Environment", dscr = "Create a labled proposition environment." }, {
     t({ "\\begin{proposition}[" }),
     i(1),
@@ -115,6 +119,7 @@ autosnips = {
     i(0),
     t({ "", "\\end{proposition}" }),
   }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
+
   s({ trig = "lcor", name = "labled Corollary Environment", dscr = "Create a labled corollary environment." }, {
     t({ "\\begin{corollary}[" }),
     i(1),
@@ -124,6 +129,7 @@ autosnips = {
     i(0),
     t({ "", "\\end{corollary}" }),
   }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
+
   s({ trig = "lrem", name = "labled Remark Environment", dscr = "labled Create a remark environment." }, {
     t({ "\\begin{remark}[" }),
     i(1),
@@ -133,6 +139,7 @@ autosnips = {
     i(0),
     t({ "", "\\end{remark}" }),
   }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
+
   s({ trig = "lconj", name = "labled Conjecture Environment", dscr = "Create a labled conjecture environment." }, {
     t({ "\\begin{conjecture}[" }),
     i(1),
@@ -168,6 +175,7 @@ autosnips = {
     { t({ "\\begin{enumerate}", "\t\\item " }), i(1), d(2, rec_ls, {}), t({ "", "\\end{enumerate}" }) },
     { condition = conds_expand.line_begin * tex.in_text, show_condition = tex.in_text }
   ),
+
   s({ trig = "lben", name = "Enumerate with labels" }, {
     t({ "\\begin{enumerate}[label=(\\" }),
     c(1, {

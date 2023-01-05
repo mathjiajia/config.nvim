@@ -3,9 +3,10 @@ local api, fn = vim.api, vim.fn
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 local devicons = require("nvim-web-devicons")
+local util = require("util")
 
 local colors = {
-  bright_bg = utils.get_highlight("Folded").fg,
+  bright_bg = utils.get_highlight("Folded").bg,
   -- bright_fg  = utils.get_highlight('Folded').fg,
   red = utils.get_highlight("DiagnosticError").fg,
   dark_red = utils.get_highlight("DiffDelete").bg,
@@ -27,10 +28,7 @@ local colors = {
 
 require("heirline").load_colors(colors)
 
-local LeftCap = {
-  provider = "▌",
-  hl = { fg = "fg" },
-}
+local LeftCap = { provider = "▌", hl = { fg = "fg" } }
 
 local VimModeNormal = {
   condition = function(self)
@@ -113,9 +111,7 @@ local WorkDir = {
   hl = { fg = "blue", bold = true },
   on_click = {
     callback = function()
-      require("neo-tree.command").execute({
-        dir = require("util").get_root(),
-      })
+      require("neo-tree.command").execute({ dir = util.get_root() })
     end,
     name = "heirline_workdir",
   },
@@ -134,7 +130,7 @@ local WorkDir = {
       return self.icon .. cwd .. trail .. " "
     end,
   },
-  { provider = "" },
+  -- { provider = "" },
 }
 
 local FileNameBlock = {
@@ -221,19 +217,14 @@ local Diagnostics = {
   update = { "DiagnosticChanged", "BufEnter" },
   on_click = {
     callback = function()
-      -- require('trouble').toggle({ mode = 'document_diagnostics' })
+      -- require("trouble").toggle({ mode = "document_diagnostics" })
       -- or
       vim.diagnostic.setqflist()
     end,
     name = "heirline_diagnostics",
   },
 
-  static = {
-    error_icon = " ",
-    warn_icon = " ",
-    info_icon = " ",
-    hint_icon = " ",
-  },
+  static = require("config.settings").icons.diagnostics,
 
   init = function(self)
     self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -245,25 +236,25 @@ local Diagnostics = {
   { provider = "![" },
   {
     provider = function(self)
-      return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+      return self.errors > 0 and (self.Error .. self.errors .. " ")
     end,
     hl = { fg = "diag_error" },
   },
   {
     provider = function(self)
-      return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+      return self.warnings > 0 and (self.Warn .. self.warnings .. " ")
     end,
     hl = { fg = "diag_warn" },
   },
   {
     provider = function(self)
-      return self.info > 0 and (self.info_icon .. self.info .. " ")
+      return self.info > 0 and (self.Info .. self.info .. " ")
     end,
     hl = { fg = "diag_info" },
   },
   {
     provider = function(self)
-      return self.hints > 0 and (self.hint_icon .. self.hints)
+      return self.hints > 0 and (self.Hint .. self.hints)
     end,
     hl = { fg = "diag_hint" },
   },
@@ -280,7 +271,6 @@ local Git = {
 
   on_click = {
     callback = function()
-      local util = require("util")
       util.float_term({ "lazygit" }, { cwd = util.get_root() })
     end,
     name = "heirline_git",
@@ -406,6 +396,7 @@ local DefaultStatusline = {
 
 local InactiveStatusline = {
   condition = conditions.is_not_active,
+
   Space,
   FileType,
   Space,
@@ -506,8 +497,8 @@ local TablineFileNameBlock = {
   hl = function(self)
     if self.is_active then
       return "TabLineSel"
-      -- elseif not api.nvim_buf_is_loaded(self.bufnr) then
-      -- 	return { fg = 'gray' }
+    -- elseif not api.nvim_buf_is_loaded(self.bufnr) then
+    --   return { fg = "gray" }
     else
       return "TabLine"
     end
@@ -537,7 +528,7 @@ local TablineCloseButton = {
   end,
   { provider = " " },
   { -- ✗    
-    provider = "",
+    provider = "✗",
     hl = { fg = "gray" },
     on_click = {
       callback = function(_, minwid)
@@ -578,10 +569,7 @@ local Tabpage = {
   end,
 }
 
-local TabpageClose = {
-  provider = " %999X %X",
-  hl = "TabLine",
-}
+local TabpageClose = { provider = " %999X %X", hl = "TabLine" }
 
 local TabPages = {
   condition = function()
@@ -598,12 +586,12 @@ local TabLineOffset = {
     -- local bufnr = api.nvim_win_get_buf(win)
     self.winid = win
 
-    -- if vim.bo[bufnr].filetype == 'neo-tree' then
-    -- 	self.title = 'neo-tree'
-    -- 	return true
-    -- elseif vim.bo[bufnr].filetype == 'aerial' then
-    -- 	self.title = 'aerial'
-    -- 	return true
+    -- if vim.bo[bufnr].filetype == "neo-tree" then
+    --   self.title = "neo-tree"
+    --   return true
+    -- elseif vim.bo[bufnr].filetype == "aerial" then
+    --   self.title = "aerial"
+    --   return true
     -- end
   end,
 
@@ -628,7 +616,9 @@ local TabLine = { TabLineOffset, BufferLine, TabPages }
 require("heirline").setup(StatusLines, nil, TabLine)
 
 vim.o.showtabline = 2
+
+api.nvim_create_augroup("Heirline", {})
 api.nvim_create_autocmd({ "FileType" }, {
-  pattern = "*",
-  command = 'if index(["wipe", "delete"], &bufhidden) >= 0 | set nobuflisted | endif',
+  command = "if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif",
+  group = "Heirline",
 })

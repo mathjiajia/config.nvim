@@ -5,7 +5,6 @@ return {
   -- file explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
     end,
@@ -28,7 +27,7 @@ return {
     cmd = "Neotree",
     -- stylua: ignore
     keys = {
-      { "<M-t>", function() require("neo-tree.command").execute({ toggle = true, dir = util.get_root() }) end, desc = "Toggle NeoTree" },
+      { "<leader>ft", function() require("neo-tree.command").execute({ toggle = true, dir = util.get_root() }) end, desc = "Toggle NeoTree" },
     },
   },
 
@@ -152,6 +151,34 @@ return {
       require("leap").add_default_mappings(true)
     end,
   },
+
+  -- which-key
+  -- {
+  --   "folke/which-key.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local wk = require("which-key")
+  --     wk.setup({
+  --       plugins = { spelling = true },
+  --       key_labels = { ["<leader>"] = "SPC" },
+  --     })
+  --     wk.register({
+  --       mode = { "n", "v" },
+  --       ["g"] = { name = "+goto" },
+  --       ["]"] = { name = "+next" },
+  --       ["["] = { name = "+prev" },
+  --       ["<leader>b"] = { name = "+buffer" },
+  --       ["<leader>c"] = { name = "+code" },
+  --       ["<leader>f"] = { name = "+file" },
+  --       ["<leader>g"] = { name = "+git" },
+  --       ["<leader>h"] = { name = "+help" },
+  --       ["<leader>n"] = { name = "+noice" },
+  --       ["<leader>q"] = { name = "+quit/session" },
+  --       ["<leader>s"] = { name = "+search" },
+  --       ["<leader>x"] = { name = "+diagnostics/quickfix" },
+  --     })
+  --   end,
+  -- },
 
   -- git signs
   {
