@@ -10,6 +10,7 @@ snips = {
     end, {}) },
     { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
   ),
+
   s(
     { trig = "f(%a)", name = "mathfrak", wordTrig = false, regTrig = true, hidden = true },
     { f(function(_, snip)
@@ -17,6 +18,7 @@ snips = {
     end, {}) },
     { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
   ),
+
   s(
     { trig = "s(%u)", name = "mathscr", wordTrig = false, regTrig = true, hidden = true },
     { f(function(_, snip)
@@ -116,22 +118,19 @@ autosnips = {
       return string.format("%s_%s", snip.captures[1], snip.captures[2])
     end, {}),
   }, { condition = tex.in_mathzone }),
-  s(
-    {
-      trig = "(%a)_(%d%d)",
-      name = "auto subscript 2",
-      dscr = "Subscript with two numbers.",
-      wordTrig = false,
-      regTrig = true,
-      hidden = true,
-    },
-    {
-      f(function(_, snip)
-        return string.format("%s_{%s}", snip.captures[1], snip.captures[2])
-      end, {}),
-    },
-    { condition = tex.in_mathzone }
-  ),
+
+  s({
+    trig = "(%a)_(%d%d)",
+    name = "auto subscript 2",
+    dscr = "Subscript with two numbers.",
+    wordTrig = false,
+    regTrig = true,
+    hidden = true,
+  }, {
+    f(function(_, snip)
+      return string.format("%s_{%s}", snip.captures[1], snip.captures[2])
+    end, {}),
+  }, { condition = tex.in_mathzone }),
 
   s(
     { trig = "inn", name = "belongs to ∈", wordTrig = false, hidden = true },
@@ -374,6 +373,7 @@ autosnips = {
     end, {}) },
     { condition = tex.in_mathzone }
   ),
+
   s(
     { trig = "([QRZ])N", name = "negative", wordTrig = false, regTrig = true, hidden = true },
     { f(function(_, snip)
@@ -381,6 +381,7 @@ autosnips = {
     end, {}) },
     { condition = tex.in_mathzone }
   ),
+
   s(
     { trig = "([qr])le", name = "linearly equivalent", wordTrig = false, regTrig = true, hidden = true },
     { f(function(_, snip)
@@ -400,24 +401,12 @@ autosnips = {
     { condition = tex.in_xymatrix }
   ),
 
-  s({
-    trig = "(%a)ii",
-    name = "alph i",
-    wordTrig = false,
-    regTrig = true,
-    hidden = true,
-  }, {
+  s({ trig = "(%a)ii", name = "alph i", wordTrig = false, regTrig = true, hidden = true }, {
     f(function(_, snip)
       return snip.captures[1] .. "_{i}"
     end, {}),
   }, { condition = tex.in_mathzone }),
-  s({
-    trig = "(%a)jj",
-    name = "alph j",
-    wordTrig = false,
-    regTrig = true,
-    hidden = true,
-  }, {
+  s({ trig = "(%a)jj", name = "alph j", wordTrig = false, regTrig = true, hidden = true }, {
     f(function(_, snip)
       return snip.captures[1] .. "_{j}"
     end, {}),

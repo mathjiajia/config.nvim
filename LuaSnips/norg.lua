@@ -8,21 +8,25 @@ snips = {
       return string.rep("*", tonumber(snip.captures[1], 10)) .. " "
     end, {}),
   }, { condition = conds_expand.line_begin }),
+
   s({ trig = "q([2-6])", name = "Quote", dscr = "Add Quote", regTrig = true, hidden = true }, {
     f(function(_, snip)
       return string.rep(">", tonumber(snip.captures[1], 10)) .. " "
     end, {}),
   }, { condition = conds_expand.line_begin }),
+
   s({ trig = "-([2-6])", name = "Unordered lists", dscr = "Add Unordered lists", regTrig = true, hidden = true }, {
     f(function(_, snip)
       return string.rep("-", tonumber(snip.captures[1], 10)) .. " "
     end, {}),
   }, { condition = conds_expand.line_begin }),
+
   s({ trig = "~([2-6])", name = "Ordered lists", dscr = "Add Ordered lists", regTrig = true, hidden = true }, {
     f(function(_, snip)
       return string.rep("~", tonumber(snip.captures[1], 10)) .. " "
     end, {}),
   }, { condition = conds_expand.line_begin }),
+
   s(
     { trig = "link", name = "Neorg Links", dscr = "Insert a Link" },
     { t("{"), i(1, "url"), t("}["), i(2, "title"), t("]") }

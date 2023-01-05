@@ -13,7 +13,7 @@ local appended_space_after_insert = function()
         vim.v.char = " " .. vim.v.char
       end
     end,
-    buffer = 0,
+    buffer = true,
     once = true,
     desc = "Auto Add a Space after Inline Math",
   })
@@ -42,17 +42,15 @@ autosnips = {
       return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
     end, {}),
   }, { condition = tex.in_text }),
-  s({
-    trig = "(%s)(%w[-_+=><]%w)([,;.%)]?)%s+",
-    name = "surround i+1",
-    wordTrig = false,
-    regTrig = true,
-    hidden = true,
-  }, {
-    f(function(_, snip)
-      return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
-    end, {}),
-  }, { condition = tex.in_text }),
+  s(
+    { trig = "(%s)(%w[-_+=><]%w)([,;.%)]?)%s+", name = "surround i+1", wordTrig = false, regTrig = true, hidden = true },
+    {
+      f(function(_, snip)
+        return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
+      end, {}),
+    },
+    { condition = tex.in_text }
+  ),
 
   s({ trig = "mk", name = "inline math", dscr = "Insert inline Math Environment." }, { t("\\("), i(1), t("\\)") }, {
     condition = tex.in_text,
@@ -61,13 +59,11 @@ autosnips = {
       [-1] = { [events.leave] = appended_space_after_insert },
     },
   }),
+
   s(
     { trig = "dm", name = "dispaly math", dscr = "Insert display Math Environment." },
     { t({ "\\[", "\t" }), i(1), t({ "", "\\]" }) },
-    {
-      condition = conds_expand.line_begin * tex.in_text,
-      show_condition = position.line_begin * tex.in_text,
-    }
+    { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }
   ),
   s(
     { trig = "pha", name = "sum", dscr = "Insert a sum notation.", hidden = true },
@@ -77,10 +73,7 @@ autosnips = {
   s(
     { trig = "ni", name = "non-indented paragraph", dscr = "Insert non-indented paragraph." },
     { t({ "\\noindent", "" }) },
-    {
-      condition = conds_expand.line_begin * tex.in_text,
-      show_condition = position.line_begin * tex.in_text,
-    }
+    { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }
   ),
 }
 

@@ -40,18 +40,7 @@ return {
     config = function()
       require("mason").setup({ ui = { border = "rounded" } })
 
-      local ensure_installed = {
-        "black",
-        "debugpy",
-        "lua-language-server",
-        "markdownlint",
-        "prettierd",
-        "pyright",
-        "stylua",
-        "tectonic",
-        "texlab",
-      }
-
+      local ensure_installed = require("config.settings").ms_install
       local mr = require("mason-registry")
       for _, tool in ipairs(ensure_installed) do
         local p = mr.get_package(tool)
@@ -101,41 +90,16 @@ return {
       local saga = require("lspsaga")
 
       saga.init_lsp_saga({
-        ui = {
-          border = "rounded",
-          winblend = 20,
-        },
+        ui = { border = "rounded", winblend = 20 },
         custom_kind = require("config.settings").icons.lspsaga,
       })
     end,
     cmd = "Lspsaga",
+    -- stylua: ignore
     keys = {
-      {
-        "gh",
-        function()
-          require("lspsaga.finder"):lsp_finder()
-        end,
-        silent = true,
-        desc = "Lsp Finder",
-      },
-
-      {
-        "<leader>cd",
-        function()
-          require("lspsaga.diagnostic").show_line_diagnostics()
-        end,
-        silent = true,
-        desc = "Line Diagnostic",
-      },
-
-      {
-        "<leader>o",
-        function()
-          require("lspsaga.outline"):render_outline()
-        end,
-        silent = true,
-        "Lsp Outline",
-      },
+      { "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
+      { "<leader>cd", function() require("lspsaga.diagnostic").show_line_diagnostics() end, silent = true, desc = "Line Diagnostic" },
+      { "<leader>o", function() require("lspsaga.outline"):render_outline() end, silent = true, "Lsp Outline" },
     },
   },
 }

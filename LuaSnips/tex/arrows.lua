@@ -12,6 +12,7 @@ autosnips = {
       end
     end),
   }, { condition = tex.in_mathzone }),
+
   s({ trig = "emb", name = "embeddeing map arrow", wordTrig = false, hidden = true }, {
     d(1, function()
       if tex.in_xymatrix() then

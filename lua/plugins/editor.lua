@@ -17,49 +17,27 @@ return {
           size = function(state)
             local root_name = vim.fn.fnamemodify(state.path, ":~")
             local root_len = string.len(root_name) + 2
-            return {
-              width = math.max(root_len, 32),
-              height = "60%",
-            }
+            return { width = math.max(root_len, 32), height = "60%" }
           end,
           border = { style = "rounded" },
         },
       },
-      filesystem = {
-        follow_current_file = true,
-        hijack_netrw_behavior = "open_current",
-      },
-      source_selector = {
-        winbar = true,
-        tab_labels = { buffers = "  Bufs " },
-      },
+      filesystem = { follow_current_file = true, hijack_netrw_behavior = "open_current" },
+      source_selector = { winbar = true, tab_labels = { buffers = "  Bufs " } },
     },
     cmd = "Neotree",
+    -- stylua: ignore
     keys = {
-      {
-        "<M-t>",
-        function()
-          require("neo-tree.command").execute({
-            toggle = true,
-            dir = require("util").get_root(),
-          })
-        end,
-        desc = "Toggle NeoTree",
-      },
+      { "<M-t>", function() require("neo-tree.command").execute({ toggle = true, dir = util.get_root() }) end, desc = "Toggle NeoTree" },
     },
   },
 
   -- search/replace in multiple files
   {
     "windwp/nvim-spectre",
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>sr",
-        function()
-          require("spectre").open()
-        end,
-        desc = "Replace in files (Spectre)",
-      },
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
 
@@ -105,16 +83,9 @@ return {
           file_ignore_patterns = { "%.jpeg$", "%.jpg$", "%.png$", ".DS_Store" },
         },
         pickers = {
-          buffers = {
-            theme = "dropdown",
-            sort_lastused = true,
-            previewer = false,
-          },
+          buffers = { theme = "dropdown", sort_lastused = true, previewer = false },
           current_buffer_fuzzy_find = { previewer = false },
-          find_files = {
-            theme = "ivy",
-            follow = true,
-          },
+          find_files = { theme = "ivy", follow = true },
           grep_string = { path_display = { "shorten" } },
           live_grep = { path_display = { "shorten" } },
         },
@@ -128,14 +99,8 @@ return {
               ["tex"] = home .. "/TeX",
             },
           },
-          bibtex = {
-            format = "plain",
-            wrap = true,
-          },
-          file_browser = {
-            theme = "ivy",
-            hijack_netrw = true,
-          },
+          bibtex = { format = "plain", wrap = true },
+          file_browser = { theme = "ivy", hijack_netrw = true },
         },
       })
 
@@ -152,44 +117,29 @@ return {
       end
     end,
     cmd = "Telescope",
+    -- stylua: ignore
     keys = {
       { "<leader>fb", util.tele_builtin("buffers"), desc = "Buffers" },
       { "<leader>fd", util.telescope("find_files"), desc = "Find Files" },
-      { "<leader>ff", util.tele_builtin("current_buffer_fuzzy_find"), desc = "Current Buffer Fuzzy Find" },
+      { "<leader>ff", util.tele_builtin("current_buffer_fuzzy_find"), desc = "Current_Buf Fuzzy Find" },
       { "<leader>fg", util.telescope("live_grep"), desc = "Live Grep" },
       { "<leader>fh", util.tele_builtin("help_tags"), desc = "Help Tags" },
       { "<leader>fm", util.tele_builtin("builtin"), desc = "Telescope Meta" },
+      { "<leader>fn", util.tele_builtin("find_files", { cwd = "~/.config/nvim" }), desc = "Neovim Config Files" },
 
-      {
-        "<leader>fz",
-        function()
-          require("telescope.builtin").find_files({
-            cwd = util.get_root(),
-            find_command = { "rg", "--files", "--type", vim.fn.input({ prompt = "Type: " }) },
-          })
-        end,
-        desc = "Search Certain Type Files",
-      },
+      { "<leader>fz", function()
+        require("telescope.builtin").find_files({
+          cwd = util.get_root(),
+          find_command = { "rg", "--files", "--type", vim.fn.input({ prompt = "Type: " }) }
+        })
+      end, desc = "Search Certain Type Files" },
 
-      {
-        "<leader>f/",
-        function()
-          require("telescope.builtin").grep_string({
-            cwd = util.get_root(),
-            search = vim.fn.input({ prompt = "Grep String > " }),
-          })
-        end,
-        desc = "Grep Strings",
-      },
-
-      {
-        "<leader>fn",
-        util.tele_builtin("find_files", {
-          cwd = "~/.config/nvim",
-          prompt_title = "Nvim Configs",
-        }),
-        desc = "Neovim Config Files",
-      },
+      { "<leader>f/", function()
+        require("telescope.builtin").grep_string({
+          cwd = util.get_root(),
+          search = vim.fn.input({ prompt = "Grep String > " })
+        })
+      end, desc = "Grep Strings" },
     },
   },
 
@@ -197,10 +147,7 @@ return {
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "ggandor/flit.nvim",
-      config = { labeled_modes = "nv" },
-    },
+    dependencies = { "ggandor/flit.nvim", config = { labeled_modes = "nv" } },
     config = function()
       require("leap").add_default_mappings(true)
     end,
@@ -231,15 +178,22 @@ return {
 
         vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk, { buffer = bufnr, desc = "Stage Hunk" })
         vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, { buffer = bufnr, desc = "Reset Hunk" })
-
-        vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk_inline, { buffer = bufnr, desc = "Preview Hunk" })
-
+        vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Preview Hunk" })
         vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, { buffer = bufnr, desc = "Diff This" })
       end,
     },
     event = "BufReadPre",
   },
 
+  -- buffer remove
+  {
+    "echasnovski/mini.bufremove",
+    -- stylua: ignore
+    keys = {
+      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+    },
+  },
   -- symbols outline
   {
     "stevearc/aerial.nvim",
@@ -250,14 +204,9 @@ return {
       show_guides = true,
       layout = { min_width = 30 },
     },
+    -- stylua: ignore
     keys = {
-      {
-        "<M-o>",
-        function()
-          require("aerial").toggle()
-        end,
-        desc = "Toggle Aerial",
-      },
+      { "<M-o>", function() require("aerial").toggle() end, desc = "Toggle Aerial" },
     },
   },
 
@@ -271,28 +220,15 @@ return {
   -- terminal
   {
     "numtostr/FTerm.nvim",
+    -- stylua: ignore
     keys = {
-      {
-        "<M-i>",
-        function()
-          require("FTerm").toggle()
-        end,
-        mode = { "n", "t" },
-        desc = "Toggle Terminal",
-      },
-
-      {
-        "<leader><Enter>",
-        function()
-          require("util").code_run()
-        end,
-        desc = "Code Runner",
-      },
+      { "<M-i>", function() require("FTerm").toggle() end, mode = { "n", "t" }, desc = "Toggle Terminal" },
+      { "<leader><Enter>", function() util.code_run() end, desc = "Code Runner" },
     },
     config = function()
-      vim.keymap.set("t", "<Esc>", function()
-        require("FTerm").exit()
-      end, { desc = "Exit Terminal" })
+      -- stylua: ignore start
+      vim.keymap.set("t", "<Esc>", function() require("FTerm").exit() end, { desc = "Exit Terminal" })
+      -- stylua: ignore end
     end,
   },
 }

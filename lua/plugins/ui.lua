@@ -12,14 +12,9 @@ return {
         return math.floor(vim.o.columns * 0.75)
       end,
     },
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>nc",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Clear all Notifications",
-      },
+      { "<leader>nd", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Clear all Notifications" },
     },
   },
 
@@ -65,19 +60,9 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
     config = {
-      char = "│",
       use_treesitter = true,
       show_trailing_blankline_indent = false,
-      filetype_exclude = {
-        "alpha",
-        "checkhealth",
-        "help",
-        "lazy",
-        "lspinfo",
-        "neo-tree",
-        "norg",
-        "Trouble",
-      },
+      filetype_exclude = require("config.settings").ft_exclude,
     },
   },
 
@@ -90,22 +75,9 @@ return {
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
-        pattern = {
-          "aerial",
-          "alpha",
-          "checkhealth",
-          "help",
-          "lazy",
-          "lspinfo",
-          "lspsagafinder",
-          "neo-tree",
-          "Trouble",
-        },
+        pattern = require("config.settings").ft_exclude,
       })
-      require("mini.indentscope").setup({
-        -- symbol = "│",
-        options = { try_as_border = true },
-      })
+      require("mini.indentscope").setup({ options = { try_as_border = true } })
     end,
   },
 
@@ -124,7 +96,7 @@ return {
       }
       startify.section.bottom_buttons.val = {
         startify.button("u", "Update Plugins", "<cmd>Lazy update<CR>"),
-        startify.button("q", "Quit", "<Cmd>exit<CR>"),
+        startify.button("q", "Quit", "<Cmd>q<CR>"),
       }
 
       -- vim.b.miniindentscope_disable = true
@@ -143,12 +115,7 @@ return {
         vim.fn["fzf#install"]()
       end,
     },
-    config = {
-      preview = {
-        win_height = 5,
-        win_vheight = 5,
-      },
-    },
+    config = { preview = { win_height = 5, win_vheight = 5 } },
     ft = "qf",
   },
 
@@ -165,22 +132,10 @@ return {
   {
     "folke/todo-comments.nvim",
     config = true,
+    -- stylua: ignore
     keys = {
-      {
-        "]t",
-        function()
-          require("todo-comments").jump_next()
-        end,
-        desc = "Next todo comment",
-      },
-
-      {
-        "[t",
-        function()
-          require("todo-comments").jump_prev()
-        end,
-        desc = "Previous todo comment",
-      },
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
     },
     event = "BufReadPost",
     cmd = { "TodoTrouble", "TodoTelescope" },
@@ -191,6 +146,13 @@ return {
     "folke/trouble.nvim",
     enabled = false,
     config = true,
+  },
+
+  -- Zen mode
+  {
+    "folke/zen-mode.nvim",
+    config = true,
+    cmd = "ZenMode",
   },
 
   -- alternative to matchparen neovim plugin

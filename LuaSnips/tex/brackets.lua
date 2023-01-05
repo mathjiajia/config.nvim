@@ -68,6 +68,12 @@ autosnips = {
     { t({ "\\begin{bmatrix}", "\t" }), i(1), t({ "", "\\end{bmatrix}" }) },
     { condition = tex.in_mathzone }
   ),
+  s(
+    { trig = "lra", name = "leftangle rightangle", hidden = true },
+    { t({ "\\langle " }), i(1), t({ "\\rangle" }) },
+    { condition = tex.in_mathzone }
+  ),
+
   s({ trig = "cvec", name = "column vector", hidden = true }, {
     t({ "\\begin{pmatrix}", "\t" }),
     i(1, "x"),
@@ -79,11 +85,6 @@ autosnips = {
     i(3, "n"),
     t({ "", "\\end{pmatrix}" }),
   }, { condition = tex.in_mathzone }),
-  s(
-    { trig = "lra", name = "leftangle rightangle", hidden = true },
-    { t({ "\\langle " }), i(1), t({ "\\rangle" }) },
-    { condition = tex.in_mathzone }
-  ),
 }
 
 return snips, autosnips

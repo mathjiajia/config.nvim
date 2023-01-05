@@ -11,18 +11,19 @@ autosnips = {
     t(")"),
     i(0),
   }, { condition = tex.in_mathzone }),
+
   s({ trig = "(%a)p(%d)", name = "x[n+1]", regTrig = true, hidden = true }, {
     f(function(_, snip)
       return snip.captures[1] .. "_{n+" .. snip.captures[2] .. "}"
     end, {}),
   }, { condition = tex.in_mathzone }),
 
-  s({ trig = "cod", name = "codimension", hidden = true }, { t("\\codim") }, { condition = tex.in_mathzone }),
   s(
     { trig = "dint", name = "integral", dscr = "Insert integral notation.", hidden = true },
     { t("\\int_{"), i(1, "-\\infty"), t("}^{"), i(2, "\\infty"), t("} ") },
     { condition = tex.in_mathzone }
   ),
+  s({ trig = "cod", name = "codimension", hidden = true }, { t("\\codim") }, { condition = tex.in_mathzone }),
   s({ trig = "coker", name = "cokernel", hidden = true }, { t("\\coker") }, { condition = tex.in_mathzone }),
 
   -- s({ trig = "arcsin", name = "arcsin", hidden = true }, { t("\\arcsin") }, { condition = tex.in_mathzone }),
@@ -60,6 +61,7 @@ autosnips = {
     i(1),
     t("}"),
   }, { condition = tex.in_mathzone }),
+
   s(
     { trig = "//", name = "fraction", hidden = true },
     { t("\\frac{"), i(1), t("}{"), i(2), t("}") },

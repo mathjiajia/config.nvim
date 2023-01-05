@@ -22,6 +22,7 @@ snips = {
       },
     },
   }),
+
   s(
     { trig = "cf", name = "confer/conferatur" },
     { t("cf.~") },
@@ -67,11 +68,13 @@ autosnips = {
       return "\\(\\mathbb{" .. string.upper(snip.captures[1]) .. "}\\)-Cartier"
     end, {}),
   }, { condition = tex.in_text, show_condition = tex.in_text }),
+
   s({ trig = "([qr])d", name = "divisor", regTrig = true }, {
     f(function(_, snip)
       return "\\(\\mathbb{" .. string.upper(snip.captures[1]) .. "}\\)-divisor"
     end, {}),
   }, { condition = tex.in_text, show_condition = tex.in_text }),
+
   s(
     { trig = "cd", name = "Cartier divisor" },
     { t("Cartier divisor") },
@@ -142,18 +145,17 @@ autosnips = {
     { t("the following are equivalent") },
     { condition = tex.in_text, show_condition = tex.in_text }
   ),
-  s({ trig = "Tfae", name = "The following are equivalent" }, { t("The following are equivalent") }, {
-    condition = conds_expand.line_begin * tex.in_text,
-    show_condition = position.line_begin * tex.in_text,
-  }),
+  s(
+    { trig = "Tfae", name = "The following are equivalent" },
+    { t("The following are equivalent") },
+    { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }
+  ),
+
   s({ trig = "([wW])log", name = "without loss of generality", regTrig = true }, {
     f(function(_, snip)
       return snip.captures[1] .. "ithout loss of generality"
     end, {}),
-  }, {
-    condition = conds_expand.line_begin * tex.in_text,
-    show_condition = position.line_begin * tex.in_text,
-  }),
+  }, { condition = conds_expand.line_begin * tex.in_text, show_condition = position.line_begin * tex.in_text }),
 
   s(
     { trig = "cref", name = "\\cref{}" },

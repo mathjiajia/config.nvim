@@ -15,6 +15,7 @@ autosnips = {
     condition = conds_expand.line_begin * position.in_beamer * tex.in_text,
     show_condition = position.line_begin * position.in_beamer * tex.in_text,
   }),
+
   s(
     { trig = "bcor", name = "Beamer Corollary Environment" },
     { t({ "\\begin{block}{Corollary}", "\t" }), i(0), t({ "", "\\end{block}" }) },
