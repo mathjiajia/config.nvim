@@ -1,170 +1,185 @@
 return {
 
-  -- better vim.notify
-  {
-    "rcarriga/nvim-notify",
-    config = {
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-    },
-    -- stylua: ignore
-    keys = {
-      { "<leader>nd", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Clear all Notifications" },
-    },
-  },
+	-- better vim.notify
+	{
+		"rcarriga/nvim-notify",
+		keys = {
+			{
+				"<leader>nd",
+				function()
+					require("notify").dismiss({ silent = true, pending = true })
+				end,
+				desc = "Delete all Notifications",
+			},
+		},
+		opts = {
+			timeout = 3000,
+			max_height = function()
+				return math.floor(vim.o.lines * 0.75)
+			end,
+			max_width = function()
+				return math.floor(vim.o.columns * 0.75)
+			end,
+		},
+	},
 
-  -- better vim.ui
-  {
-    "stevearc/dressing.nvim",
-    init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.select(...)
-      end
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.input(...)
-      end
-    end,
-  },
+	-- better vim.ui
+	{
+		"stevearc/dressing.nvim",
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
+			end
+		end,
+	},
 
-  -- noicer ui
-  {
-    "folke/noice.nvim",
-    config = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        bottom_search = true,
-        command_palette = true,
-        long_message_to_split = true,
-      },
-    },
-    event = "VeryLazy",
-  },
+	-- statusline/tabline
+	{
+		"rebelot/heirline.nvim",
+		config = function()
+			require("util.heirline")
+		end,
+		event = "UIEnter",
+	},
 
-  -- indent guides for Neovim
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    config = {
-      use_treesitter = true,
-      show_trailing_blankline_indent = false,
-      filetype_exclude = require("config.settings").ft_exclude,
-    },
-  },
+	-- indent guides for Neovim
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		opts = {
+			use_treesitter = true,
+			show_trailing_blankline_indent = false,
+			filetype_exclude = require("config.settings").ft_exclude,
+		},
+		event = "BufReadPre",
+	},
 
-  -- active indent guide and indent text objects
-  {
-    "echasnovski/mini.indentscope",
-    event = "BufReadPre",
-    config = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-        pattern = require("config.settings").ft_exclude,
-      })
-      require("mini.indentscope").setup({ options = { try_as_border = true } })
-    end,
-  },
+	-- active indent guide and indent text objects
+	{
+		"echasnovski/mini.indentscope",
+		version = false, -- wait till new 0.7.0 release to put it back on semver
+		config = function(_, opts)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = require("config.settings").ft_exclude,
+				callback = function()
+					vim.b.miniindentscope_disable = true
+				end,
+			})
+			require("mini.indentscope").setup(opts)
+		end,
+		opts = {
+			options = { try_as_border = true },
+		},
+		event = "BufReadPre",
+	},
 
-  -- dashboard
-  {
-    "goolord/alpha-nvim",
-    config = function()
-      local startify = require("alpha.themes.startify")
+	-- noicer ui
+	{
+		"folke/noice.nvim",
+		opts = {
+			lsp = {
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
+				},
+			},
+			presets = {
+				bottom_search = true,
+				command_palette = true,
+				long_message_to_split = true,
+			},
+		},
+		-- stylua: ignore
+		keys = {
+			{ "<c-f>", function()
+				if not require("noice.lsp").scroll(4) then
+					return "<c-f>"
+				end
+			end, silent = true, expr = true, desc = "Scroll forward" },
+			{ "<c-b>", function()
+				if not require("noice.lsp").scroll(-4) then
+					return "<c-b>"
+				end
+			end, silent = true, expr = true, desc = "Scroll backward" },
+		},
+		event = "VeryLazy",
+	},
 
-      startify.section.header.val = {
-        [[-- .- - .... . -- .- - .. -.-. ...]],
-      }
+	-- start screen
+	{
+		"goolord/alpha-nvim",
+		opts = function()
+			local startify = require("alpha.themes.startify")
 
-      startify.section.top_buttons.val = {
-        startify.button("e", "New file", "<Cmd>ene <BAR> startinsert<CR>"),
-      }
-      startify.section.bottom_buttons.val = {
-        startify.button("u", "Update Plugins", "<cmd>Lazy update<CR>"),
-        startify.button("q", "Quit", "<Cmd>q<CR>"),
-      }
+			startify.section.top_buttons.val = {
+				startify.button("e", "New file", "<cmd>ene <BAR> startinsert<CR>"),
+			}
+			startify.section.bottom_buttons.val = {
+				startify.button("u", "Update Plugins", "<cmd>Lazy update<CR>"),
+				startify.button("q", "Quit", "<cmd>q<CR>"),
+			}
 
-      -- vim.b.miniindentscope_disable = true
+			startify.config.layout = {
+				startify.section.top_buttons,
+				startify.section.mru_cwd,
+				startify.section.mru,
+				{ type = "padding", val = 1 },
+				startify.section.bottom_buttons,
+			}
+			return startify.config
+		end,
+		config = function(_, opts)
+			require("alpha").setup(opts)
+		end,
+		event = "VimEnter",
+	},
 
-      require("alpha").setup(startify.config)
-    end,
-    event = "VimEnter",
-  },
+	-- better quickfix
+	{
+		"kevinhwang91/nvim-bqf",
+		dependencies = {
+			"junegunn/fzf",
+			-- stylua: ignore
+			build = function() vim.fn["fzf#install"]() end,
+		},
+		opts = {
+			preview = {
+				win_height = 5,
+				win_vheight = 5,
+			},
+		},
+		ft = "qf",
+	},
 
-  -- better quickfix
-  {
-    "kevinhwang91/nvim-bqf",
-    dependencies = {
-      "junegunn/fzf",
-      build = function()
-        vim.fn["fzf#install"]()
-      end,
-    },
-    config = { preview = { win_height = 5, win_vheight = 5 } },
-    ft = "qf",
-  },
+	-- Zen mode
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			plugins = {
+				gitsigns = true,
+				kitty = { enabled = false, font = "+2" },
+			},
+		},
+		cmd = "ZenMode",
+	},
 
-  -- statusline/tabline
-  {
-    "rebelot/heirline.nvim",
-    config = function()
-      require("util.heirline")
-    end,
-    event = "UIEnter",
-  },
+	-- alternative to matchparen neovim plugin
+	{
+		"monkoose/matchparen.nvim",
+		config = true,
+		event = "BufReadPost",
+	},
 
-  -- todo-comments
-  {
-    "folke/todo-comments.nvim",
-    config = true,
-    -- stylua: ignore
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-    },
-    event = "BufReadPost",
-    cmd = { "TodoTrouble", "TodoTelescope" },
-  },
+	-- icons
+	"nvim-tree/nvim-web-devicons",
 
-  -- trouble
-  {
-    "folke/trouble.nvim",
-    enabled = false,
-    config = true,
-  },
-
-  -- Zen mode
-  {
-    "folke/zen-mode.nvim",
-    config = true,
-    cmd = "ZenMode",
-  },
-
-  -- alternative to matchparen neovim plugin
-  {
-    "monkoose/matchparen.nvim",
-    config = true,
-    event = "BufReadPost",
-  },
-
-  -- icons
-  "nvim-tree/nvim-web-devicons",
-
-  -- ui components
-  "MunifTanjim/nui.nvim",
+	-- ui components
+	"MunifTanjim/nui.nvim",
 }

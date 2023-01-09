@@ -1,28 +1,31 @@
 return {
 
-  -- measure startuptime
-  {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-    config = function()
-      vim.g.startuptime_tries = 10
-    end,
-  },
+	-- measure startuptime
+	{
+		"dstein64/vim-startuptime",
+		config = function()
+			vim.g.startuptime_tries = 10
+		end,
+		cmd = "StartupTime",
+	},
 
-  -- session management
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    config = { options = { "buffers", "curdir", "tabpages", "winsize", "help" } },
-    -- stylua: ignore
-    keys = {
-      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
-      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Delete Current Session" },
-    },
-  },
+	-- session management
+	{
+		"folke/persistence.nvim",
+		enabled = false,
+		opts = {
+			options = { "buffers", "curdir", "tabpages", "winsize", "help" },
+		},
+		event = "BufReadPre",
+		-- stylua: ignore
+		keys = {
+			{ "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+			{ "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+			{ "<leader>qd", function() require("persistence").stop() end, desc = "Delete Current Session" },
+		},
+	},
 
-  -- library used by other plugins
-  "nvim-lua/plenary.nvim",
-  "kkharji/sqlite.lua",
+	-- library used by other plugins
+	"nvim-lua/plenary.nvim",
+	"kkharji/sqlite.lua",
 }
