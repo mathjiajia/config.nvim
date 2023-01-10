@@ -54,7 +54,7 @@ return {
 				request = "launch",
 				MIMode = "lldb",
 				miDebuggerServerAddress = "localhost:1234",
-				miDebuggerPath = "/Users/jia/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/lldb-mi/bin/lldb-mi",
+				miDebuggerPath = "usr/bin/lldb",
 				cwd = "${workspaceFolder}",
 				program = function()
 					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
@@ -100,11 +100,9 @@ return {
 					{
 						localRoot = function()
 							return vim.fn.input("Local code folder > ", vim.fn.getcwd(), "file")
-							--"/home/alpha2phi/workspace/alpha2phi/python-apps/ml-yolo/backend", -- Local folder the code lives
 						end,
 						remoteRoot = function()
 							return vim.fn.input("Container code folder > ", "/", "file")
-							-- "/fastapi", -- Wherever your Python code lives in the container.
 						end,
 					},
 				},

@@ -6,7 +6,7 @@ local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("util.latex")
 local position = require("util.position")
 
-local appended_space_after_insert = function()
+local function appended_space_after_insert ()
 	api.nvim_create_autocmd("InsertCharPre", {
 		callback = function()
 			if string.find(vim.v.char, "%a") then
@@ -59,7 +59,8 @@ autosnips = {
 	s({ trig = "mk", name = "inline math", dscr = "Insert inline Math Environment." }, { t("\\("), i(1), t("\\)") }, {
 		condition = tex.in_text,
 		show_condition = tex.in_text,
-		callbacks = { [-1] = { [events.leave] = appended_space_after_insert } },
+		-- FIXME:
+		-- callbacks = { [-1] = { [events.leave] = appended_space_after_insert } },
 	}),
 
 	s(

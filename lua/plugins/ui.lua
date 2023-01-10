@@ -63,7 +63,6 @@ return {
 	-- active indent guide and indent text objects
 	{
 		"echasnovski/mini.indentscope",
-		version = false, -- wait till new 0.7.0 release to put it back on semver
 		config = function(_, opts)
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = require("config.settings").ft_exclude,

@@ -303,21 +303,21 @@ local Git = {
 	{
 		provider = function(self)
 			local count = self.status_dict.added or 0
-			return count > 0 and (" " .. count)
+			return count > 0 and ("+" .. count)
 		end,
 		hl = { fg = "git_add" },
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.removed or 0
-			return count > 0 and (" " .. count)
+			return count > 0 and ("-" .. count)
 		end,
 		hl = { fg = "git_del" },
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.changed or 0
-			return count > 0 and (" " .. count)
+			return count > 0 and ("~" .. count)
 		end,
 		hl = { fg = "git_change" },
 	},
@@ -346,7 +346,14 @@ local LSPActive = {
 	},
 }
 
-local Ruler = { provider = " %3p%% %2l(%02c)/%-3L" }
+local Ruler = {
+	-- %l = current line number
+    -- %L = number of lines in the buffer
+    -- %c = column number
+    -- %P = percentage through file of displayed window
+	provider = " %3p%% (%02v)/%-3L",
+	-- provider = " %3p%% %2l(%02c)/%-3L"
+}
 
 local ScrollBar = {
 	static = { sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" } },
@@ -389,6 +396,7 @@ local Space = { provider = " " }
 local DefaultStatusline = {
 	LeftCap,
 	VimMode,
+	Space,
 	Snippets,
 	Space,
 	WorkDir,

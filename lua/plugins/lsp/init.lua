@@ -63,10 +63,10 @@ return {
 					null_ls.builtins.formatting.black,
 					null_ls.builtins.formatting.fish_indent,
 					null_ls.builtins.formatting.latexindent,
-					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.prettierd.with({
 						filetypes = { "css", "javascript", "yaml", "markdown" },
 					}),
+					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.diagnostics.fish,
 					null_ls.builtins.diagnostics.markdownlint.with({
 						args = { "--config", "~/.config/markdownlint/markdownlint.yaml", "--stdin" },
@@ -110,17 +110,17 @@ return {
 		branch = "version_2.3",
 		config = function()
 			local saga = require("lspsaga")
-
 			saga.init_lsp_saga({
-				ui = { border = "rounded", winblend = 30 },
-				custom_kind = require("config.settings").icons.lspsaga,
+				ui = {
+					border = "rounded",
+					winblend = 30,
+				},
 			})
 		end,
 		cmd = "Lspsaga",
 		-- stylua: ignore
 		keys = {
 			{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
-			-- { "<leader>cd", function() require("lspsaga.diagnostic").show_line_diagnostics() end, silent = true, desc = "Line Diagnostic" },
 			{ "<M-o>", function() require("lspsaga.outline"):render_outline() end, silent = true, desc = "Lsp Outline" },
 		},
 	},

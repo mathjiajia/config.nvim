@@ -67,7 +67,14 @@ return {
 			local telescope = require("telescope")
 			telescope.setup(opts)
 
-			local extns = { "zf-native", "file_browser", "frecency", "bibtex", "aerial", "noice" }
+			local extns = {
+				"zf-native",
+				"file_browser",
+				"frecency",
+				"bibtex",
+				"aerial",
+				"noice",
+			}
 			for _, extn in ipairs(extns) do
 				telescope.load_extension(extn)
 			end
