@@ -62,6 +62,7 @@ return {
 			"nvim-telescope/telescope-bibtex.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
+			"prochri/telescope-all-recent.nvim",
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
@@ -78,6 +79,8 @@ return {
 			for _, extn in ipairs(extns) do
 				telescope.load_extension(extn)
 			end
+
+			require("telescope-all-recent").setup({})
 		end,
 		opts = function()
 			local actions = require("telescope.actions")

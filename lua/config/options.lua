@@ -9,7 +9,7 @@ vim.opt.confirm = true
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Diff
-vim.opt.diffopt:append("linematch:60")
+-- vim.opt.diffopt:append("linematch:60")
 
 -- Folding
 vim.wo.foldmethod = "expr"
@@ -26,7 +26,7 @@ vim.o.spelllang = "en_gb"
 -- Split
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.splitkeep = "screen"
+-- vim.opt.splitkeep = "screen"
 
 -- State
 vim.opt.swapfile = false
@@ -55,6 +55,7 @@ vim.opt.colorcolumn = "120"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
+-- vim.opt.statuscolumn = "%=%l%s%C"
 
 -- Wrap
 vim.opt.breakindent = true
