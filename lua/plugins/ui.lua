@@ -3,15 +3,13 @@ return {
 	-- better vim.notify
 	{
 		"rcarriga/nvim-notify",
-		keys = {
-			{
-				"<leader>nd",
-				function()
-					require("notify").dismiss({ silent = true, pending = true })
-				end,
-				desc = "Delete all Notifications",
-			},
-		},
+		init = function()
+			-- lazy-load notify here. Will be overriden by Noice when it loads
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.notify = function(...)
+				return require("notify").notify(...)
+			end
+		end,
 		opts = {
 			timeout = 3000,
 			max_height = function()
@@ -20,6 +18,15 @@ return {
 			max_width = function()
 				return math.floor(vim.o.columns * 0.75)
 			end,
+		},
+		keys = {
+			{
+				"<leader>nd",
+				function()
+					require("notify").dismiss({ silent = true, pending = true })
+				end,
+				desc = "Delete all Notifications",
+			},
 		},
 	},
 
@@ -39,6 +46,20 @@ return {
 			end
 		end,
 	},
+
+	-- floating winbar
+	-- {
+	-- 	"b0o/incline.nvim",
+	-- 	opts = {
+	-- 		window = { margin = { vertical = 0, horizontal = 1 } },
+	-- 		render = function(props)
+	-- 			local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+	-- 			local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+	-- 			return { { icon, guifg = color }, { " " }, { filename } }
+	-- 		end,
+	-- 	},
+	-- 	event = "BufReadPre",
+	-- },
 
 	-- statusline/tabline
 	{
@@ -93,6 +114,8 @@ return {
 				bottom_search = true,
 				command_palette = true,
 				long_message_to_split = true,
+				-- cmdline_output_to_split = true,
+				lsp_doc_border = true,
 			},
 		},
 		-- stylua: ignore

@@ -48,9 +48,9 @@ vim.opt.laststatus = 3
 vim.opt.pumheight = 10
 vim.opt.scrolloff = 6
 vim.opt.shortmess:append("c")
-vim.opt.winblend = 10
+-- vim.opt.winblend = 10
 
--- vim.opt.cursorline = true
+vim.opt.cursorline = true
 vim.opt.colorcolumn = "120"
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -65,4 +65,10 @@ vim.opt.whichwrap:append("[,]")
 
 -- Theme
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("vscode")
+vim.cmd.colorscheme("tokyonight")
+
+if vim.fn.has("nvim-0.9.0") == 1 then
+	vim.opt.splitkeep = "screen"
+	vim.opt.diffopt:append("linematch:60")
+	vim.o.shortmess = "filnxtToOFWIcC"
+end

@@ -49,6 +49,11 @@ local settings = {
 			Hint = " ",
 			Info = " ",
 		},
+		git = {
+			added = " ",
+			changed = " ",
+			removed = " ",
+		},
 		kinds = {
 			Text = "",
 			Method = "",
@@ -81,6 +86,7 @@ local settings = {
 		"aerial",
 		"alpha",
 		"checkhealth",
+		"conf",
 		"dap-repl",
 		"help",
 		"lazy",
@@ -104,15 +110,22 @@ local settings = {
 	ts_install = {
 		"bash",
 		"bibtex",
+		"c",
 		"diff",
 		"fish",
+		"git_rebase",
+		"gitcommit",
+		"gitignore",
+		"help",
 		"latex",
+		"lua",
 		"markdown",
 		"markdown_inline",
 		"python",
 		"query",
 		"regex",
 		"swift",
+		"vim",
 	},
 }
 

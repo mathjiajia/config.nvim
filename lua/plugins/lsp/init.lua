@@ -108,20 +108,17 @@ return {
 	{
 		"glepnir/lspsaga.nvim",
 		branch = "version_2.3",
-		config = function()
-			local saga = require("lspsaga")
-			saga.init_lsp_saga({
-				ui = {
-					border = "rounded",
-					winblend = 30,
-				},
-			})
+		opts = {
+			ui = { border = "rounded" },
+		},
+		config = function(_, opts)
+			require("lspsaga").init_lsp_saga(opts)
 		end,
 		cmd = "Lspsaga",
 		-- stylua: ignore
 		keys = {
 			{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
-			{ "<M-o>", function() require("lspsaga.outline"):render_outline() end, silent = true, desc = "Lsp Outline" },
+			{ "<M-o>", function() require("lspsaga.outline"):outline() end, silent = true, desc = "Lsp Outline" },
 		},
 	},
 }

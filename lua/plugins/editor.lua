@@ -7,6 +7,12 @@ return {
 		"nvim-neo-tree/neo-tree.nvim",
 		init = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
+			if vim.fn.argc() == 1 then
+				local stat = vim.loop.fs_stat(vim.fn.argv(0))
+				if stat and stat.type == "directory" then
+					require("neo-tree")
+				end
+			end
 		end,
 		opts = {
 			window = {
@@ -24,10 +30,7 @@ return {
 					border = { style = "rounded" },
 				},
 			},
-			filesystem = {
-				follow_current_file = true,
-				hijack_netrw_behavior = "open_current",
-			},
+			filesystem = { follow_current_file = true },
 			source_selector = {
 				winbar = true,
 				tab_labels = { buffers = "  Bufs " },
@@ -172,6 +175,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
+			preview_config = { border = "rounded" },
 			on_attach = function(bufnr)
 				local gs = require("gitsigns")
 
