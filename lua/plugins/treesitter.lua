@@ -9,7 +9,7 @@ return {
 		require("nvim-treesitter.configs").setup(opts)
 	end,
 	opts = {
-		ensure_installed = require("config.settings").ts_install,
+		ensure_installed = require("config").ts_install,
 		sync_install = false,
 		highlight = { enable = true },
 		incremental_selection = { enable = true },

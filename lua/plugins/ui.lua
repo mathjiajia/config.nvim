@@ -61,6 +61,12 @@ return {
 	-- 	event = "BufReadPre",
 	-- },
 
+	{
+		"luukvbaal/statuscol.nvim",
+		opts = { setopt = true },
+		event = "UIEnter",
+	},
+
 	-- statusline/tabline
 	{
 		"rebelot/heirline.nvim",
@@ -76,7 +82,7 @@ return {
 		opts = {
 			use_treesitter = true,
 			show_trailing_blankline_indent = false,
-			filetype_exclude = require("config.settings").ft_exclude,
+			filetype_exclude = require("config").ft_exclude,
 		},
 		event = "BufReadPre",
 	},
@@ -86,16 +92,14 @@ return {
 		"echasnovski/mini.indentscope",
 		config = function(_, opts)
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = require("config.settings").ft_exclude,
+				pattern = require("config").ft_exclude,
 				callback = function()
 					vim.b.miniindentscope_disable = true
 				end,
 			})
 			require("mini.indentscope").setup(opts)
 		end,
-		opts = {
-			options = { try_as_border = true },
-		},
+		opts = { options = { try_as_border = true } },
 		event = "BufReadPre",
 	},
 
@@ -171,12 +175,7 @@ return {
 			-- stylua: ignore
 			build = function() vim.fn["fzf#install"]() end,
 		},
-		opts = {
-			preview = {
-				win_height = 5,
-				win_vheight = 5,
-			},
-		},
+		opts = { preview = { win_height = 5, win_vheight = 5 } },
 		ft = "qf",
 	},
 

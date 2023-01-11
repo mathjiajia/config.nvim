@@ -34,12 +34,8 @@ return {
 			load = {
 				["core.defaults"] = {},
 				["core.norg.concealer"] = {},
-				["core.norg.completion"] = {
-					config = { engine = "nvim-cmp" },
-				},
-				["core.presenter"] = {
-					config = { zen_mode = "zen-mode" },
-				},
+				["core.norg.completion"] = { config = { engine = "nvim-cmp" } },
+				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 			},
 		},
 		build = ":Neorg sync-parsers",

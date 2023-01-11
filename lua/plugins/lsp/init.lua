@@ -7,25 +7,38 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			{ "folke/neodev.nvim", config = true },
+			{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
 		},
-		servers = nil,
 		config = function()
-			-- diagnostics
-			require("plugins.lsp.diagnostic")
-
-			-- lspconfig
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-			local function on_attach(client, bufnr)
-				require("plugins.lsp.format").on_attach(client, bufnr)
-				require("plugins.lsp.keymaps").on_attach(client, bufnr)
-				require("plugins.lsp.highlight").on_attach(client, bufnr)
-				-- require('plugins.lsp.codelens').on_attach(client, bufnr)
+			-- diagnostics signs
+			local icons = require("config").icons.diagnostics
+			for name, icon in pairs(icons) do
+				name = "DiagnosticSign" .. name
+				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 			end
 
-			local servers = require("plugins.lsp.servers")
+			-- diagnostic keymaps
+			vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
+			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostics" })
+			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostics" })
+			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Loclist Diagnostics" })
+
+			-- diagnostics config
+			vim.diagnostic.config({
+				virtual_text = { spacing = 4, prefix = "●" },
+				severity_sort = true,
+			})
+
+			-- lspconfig
+			local capabilities =
+				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+			local function on_attach(client, bufnr)
+				require("plugins.lsp.misc").on_attach(client, bufnr)
+				require("plugins.lsp.format").on_attach(client, bufnr)
+			end
+
+			local servers = require("config").servers
 			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
 			require("mason-lspconfig").setup_handlers({
 				function(server)
@@ -49,16 +62,12 @@ return {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		dependencies = "mason.nvim",
-		event = "BufReadPre",
-		config = function()
+		opts = function()
 			local null_ls = require("null-ls")
-
-			local function on_attach(client, bufnr)
-				require("plugins.lsp.format").on_attach(client, bufnr)
-			end
-
-			null_ls.setup({
-				on_attach = on_attach,
+			return {
+				on_attach = function(client, bufnr)
+					require("plugins.lsp.format").on_attach(client, bufnr)
+				end,
 				sources = {
 					null_ls.builtins.formatting.black,
 					null_ls.builtins.formatting.fish_indent,
@@ -72,30 +81,21 @@ return {
 						args = { "--config", "~/.config/markdownlint/markdownlint.yaml", "--stdin" },
 					}),
 				},
-			})
+			}
 		end,
+		event = "BufReadPre",
 	},
 
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
-		opts = {
-			ui = { border = "rounded" },
-			ensure_installed = {
-				"black",
-				"cpptools",
-				"debugpy",
-				"markdownlint",
-				"prettierd",
-				"stylua",
-				"tectonic",
-			},
-		},
+		opts = { ui = { border = "rounded" } },
 		config = function(_, opts)
 			require("mason").setup(opts)
 
 			local mr = require("mason-registry")
-			for _, tool in ipairs(opts.ensure_installed) do
+			local tools = require("config").ms_install
+			for _, tool in ipairs(tools) do
 				local p = mr.get_package(tool)
 				if not p:is_installed() then
 					p:install()
@@ -108,9 +108,7 @@ return {
 	{
 		"glepnir/lspsaga.nvim",
 		branch = "version_2.3",
-		opts = {
-			ui = { border = "rounded" },
-		},
+		opts = { ui = { border = "rounded" } },
 		config = function(_, opts)
 			require("lspsaga").init_lsp_saga(opts)
 		end,

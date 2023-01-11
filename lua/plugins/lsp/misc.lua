@@ -1,6 +1,8 @@
 local M = {}
 
-local lsp = vim.lsp
+local api, lsp = vim.api, vim.lsp
+local augroup = api.nvim_create_augroup
+local autocmd = api.nvim_create_autocmd
 
 function M.on_attach(client, bufnr)
 	local self = M.new(client, bufnr)
@@ -17,13 +19,42 @@ function M.on_attach(client, bufnr)
 	self:map("<leader>ca", function()
 		require("lspsaga.codeaction"):code_action()
 	end, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
+
+	if self:has("documentHighlight") then
+		augroup("lsp_document_highlight", {})
+		autocmd({ "CursorHold", "CursorHoldI" }, {
+			callback = lsp.buf.document_highlight,
+			group = "lsp_document_highlight",
+			buffer = bufnr,
+		})
+		autocmd({ "CursorMoved", "CursorMovedI" }, {
+			callback = lsp.buf.clear_references,
+			group = "lsp_document_highlight",
+			buffer = bufnr,
+		})
+	end
+
+	-- if self:has('codeLens') then
+	-- 	augroup("lsp_document_codelens", {})
+	-- 	autocmd("BufEnter", {
+	-- 		callback = lsp.codelens.refresh,
+	-- 		buffer = bufnr,
+	-- 		group = "lsp_document_codelens",
+	-- 		once = true,
+	-- 	})
+	-- 	autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
+	-- 		callback = lsp.codelens.refresh,
+	-- 		buffer = bufnr,
+	-- 		group = "lsp_document_codelens",
+	-- 	})
+	-- end
 end
 
 ---@param client string
 ---@param bufnr number
 ---@return table
 function M.new(client, bufnr)
-	return setmetatable({ client = client, buffer = bufnr }, { __index = M })
+	return setmetatable({ client = client, bufnr = bufnr }, { __index = M })
 end
 
 ---@param cap string
@@ -40,7 +71,7 @@ function M:map(lhs, rhs, opts)
 	if opts.has and not self:has(opts.has) then
 		return
 	end
-	vim.keymap.set(opts.mode or "n", lhs, rhs, { silent = true, buffer = self.buffer, desc = opts.desc })
+	vim.keymap.set(opts.mode or "n", lhs, rhs, { silent = true, buffer = self.bufnr, desc = opts.desc })
 end
 
 return M

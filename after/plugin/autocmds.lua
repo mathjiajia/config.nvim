@@ -5,7 +5,7 @@ local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
 
 -- Check if we need to reload the file when it changed
--- autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
 -- Highlight yanked text
 augroup("HighlightYank", {})

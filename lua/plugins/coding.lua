@@ -9,34 +9,26 @@ return {
 
 			require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/LuaSnips/" })
 
+			-- stylua: ignore start
 			vim.keymap.set({ "i", "s" }, "<C-j>", function()
-				if ls.expandable() or ls.locally_jumpable(1) then
-					ls.expand_or_jump()
-				end
+				if ls.expandable() or ls.locally_jumpable(1) then ls.expand_or_jump() end
 			end, { desc = "LuaSnip Forward Jump" })
+
 			vim.keymap.set({ "i", "s" }, "<C-k>", function()
-				if ls.locally_jumpable(-1) then
-					ls.jump(-1)
-				end
+				if ls.locally_jumpable(-1) then ls.jump(-1) end
 			end, { desc = "LuaSnip Backward Jump" })
+
 			vim.keymap.set("i", "<C-l>", function()
-				if ls.choice_active() then
-					ls.change_choice(1)
-				end
+				if ls.choice_active() then ls.change_choice(1) end
 			end, { desc = "LuaSnip Next Choice" })
+			-- stylua: ignore end
 		end,
 		opts = function()
 			local types = require("luasnip.util.types")
 			return {
 				update_events = "TextChanged,TextChangedI",
 				enable_autosnippets = true,
-				ext_opts = {
-					[types.choiceNode] = {
-						active = {
-							virt_text = { { "« ", "NonText" } },
-						},
-					},
-				},
+				ext_opts = { [types.choiceNode] = { active = { virt_text = { { "« ", "NonText" } } } } },
 			}
 		end,
 	},
@@ -71,7 +63,7 @@ return {
 		end,
 		opts = function()
 			local cmp = require("cmp")
-			local cmp_kinds = require("config.settings").icons.kinds
+			local cmp_kinds = require("config").icons.cmp_kinds
 
 			return {
 				mapping = cmp.mapping.preset.insert({
@@ -104,11 +96,7 @@ return {
 				matching = { disallow_prefix_unmatching = true },
 				sources = {
 					{ name = "nvim_lsp", max_item_count = 10 },
-					{
-						name = "luasnip",
-						max_item_count = 10,
-						option = { show_autosnippets = true },
-					},
+					{ name = "luasnip", max_item_count = 10, option = { show_autosnippets = true } },
 					{ name = "neorg", max_item_count = 5 },
 					{ name = "buffer", keyword_length = 3, max_item_count = 10 },
 					-- { name = "copilot", max_item_count = 3 },
@@ -116,10 +104,7 @@ return {
 					{ name = "rg", keyword_length = 4, max_item_count = 8 },
 				},
 				window = {
-					completion = {
-						border = "rounded",
-						col_offset = -3,
-					},
+					completion = { border = "rounded", col_offset = -3 },
 					documentation = { border = "rounded" },
 				},
 			}
@@ -131,10 +116,7 @@ return {
 	{
 		"zbirenbaum/nvim-copilot",
 		enabled = false,
-		dependencies = {
-			"zbirenbaum/copilot_cmp",
-			config = true,
-		},
+		dependencies = { "zbirenbaum/copilot_cmp", config = true },
 		opts = {
 			panel = {
 				enabled = true,

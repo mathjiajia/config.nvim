@@ -1,3 +1,4 @@
+local fn = vim.fn
 local util = require("util")
 
 return {
@@ -7,8 +8,8 @@ return {
 		"nvim-neo-tree/neo-tree.nvim",
 		init = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
-			if vim.fn.argc() == 1 then
-				local stat = vim.loop.fs_stat(vim.fn.argv(0))
+			if fn.argc() == 1 then
+				local stat = vim.loop.fs_stat(fn.argv(0))
 				if stat and stat.type == "directory" then
 					require("neo-tree")
 				end
@@ -20,12 +21,9 @@ return {
 				popup = {
 					position = { row = 0, col = "100%" },
 					size = function(state)
-						local root_name = vim.fn.fnamemodify(state.path, ":~")
+						local root_name = fn.fnamemodify(state.path, ":~")
 						local root_len = string.len(root_name) + 2
-						return {
-							width = math.max(root_len, 32),
-							height = "60%",
-						}
+						return { width = math.max(root_len, 32), height = "60%" }
 					end,
 					border = { style = "rounded" },
 				},
@@ -52,9 +50,7 @@ return {
 	{
 		"windwp/nvim-spectre",
 		-- stylua: ignore
-		keys = {
-			{ "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
-		},
+		keys = { { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" } },
 	},
 
 	-- fuzzy finder
@@ -89,7 +85,7 @@ return {
 			local actions = require("telescope.actions")
 			local actions_layout = require("telescope.actions.layout")
 
-			local home = vim.fn.expand("~")
+			local home = fn.expand("~")
 			return {
 				defaults = {
 					sorting_strategy = "ascending",
@@ -118,12 +114,8 @@ return {
 					current_buffer_fuzzy_find = { previewer = false },
 					find_files = { theme = "ivy", follow = true },
 					git_files = { theme = "ivy" },
-					grep_string = {
-						path_display = { "shorten" },
-					},
-					live_grep = {
-						path_display = { "shorten" },
-					},
+					grep_string = { path_display = { "shorten" } },
+					live_grep = { path_display = { "shorten" } },
 				},
 				extensions = {
 					frecency = {
@@ -161,10 +153,7 @@ return {
 	-- easily jump to any location and enhanced f/t motions for Leap
 	{
 		"ggandor/leap.nvim",
-		dependencies = {
-			"ggandor/flit.nvim",
-			opts = { labeled_modes = "nv" },
-		},
+		dependencies = { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } },
 		config = function()
 			require("leap").add_default_mappings(true)
 		end,
@@ -180,21 +169,19 @@ return {
 				local gs = require("gitsigns")
 
 				-- Navigation
+				-- stylua: ignore start
 				vim.keymap.set("n", "]c", function()
-					if vim.wo.diff then
-						return "]c"
-					end
+					if vim.wo.diff then return "]c" end
 					vim.schedule(gs.next_hunk)
 					return "<Ignore>"
 				end, { expr = true, buffer = bufnr })
 
 				vim.keymap.set("n", "[c", function()
-					if vim.wo.diff then
-						return "[c"
-					end
+					if vim.wo.diff then return "[c" end
 					vim.schedule(gs.prev_hunk)
 					return "<Ignore>"
 				end, { expr = true, buffer = bufnr })
+				-- stylua: ignore end
 
 				-- Actions
 				vim.keymap.set({ "n", "v" }, "<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Stage Hunk" })
@@ -257,14 +244,12 @@ return {
 		opts = {
 			backends = { "lsp", "treesitter", "markdown", "man" },
 			filter_kind = false,
-			icons = require("config.settings").icons.aerial,
+			icons = require("config").icons.aerial,
 			show_guides = true,
 			layout = { min_width = 30 },
 		},
 		-- stylua: ignore
-		keys = {
-			{ "<leader>oa", function() require("aerial").toggle() end, desc = "Aerial" },
-		},
+		keys = { { "<leader>oa", function() require("aerial").toggle() end, desc = "Aerial" } },
 	},
 
 	-- diffview
@@ -273,8 +258,6 @@ return {
 		opts = { enhanced_diff_hl = true },
 		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
 		-- stylua: ignore
-		keys = {
-			{ "<leader>gd", function() require("diffview").open() end, desc = "Diff View" },
-		},
+		keys = { { "<leader>gd", function() require("diffview").open() end, desc = "Diff View" } },
 	},
 }

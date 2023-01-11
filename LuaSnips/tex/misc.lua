@@ -6,7 +6,7 @@ local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("util.latex")
 local position = require("util.position")
 
-local function appended_space_after_insert ()
+local function appended_space_after_insert()
 	api.nvim_create_autocmd("InsertCharPre", {
 		callback = function()
 			if string.find(vim.v.char, "%a") then

@@ -1,9 +1,9 @@
+local Util = require("lazy.core.util")
+
 local M = {}
 
 M.root_patterns = { ".git", "/lua" }
-
 M.runners = {
-	c = "clang",
 	lua = "lua",
 	python = "python3",
 	swift = "swift",
@@ -24,12 +24,9 @@ function M.get_root()
 	if path then
 		for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
 			local workspace = client.config.workspace_folders
-			local paths = workspace
-					and vim.tbl_map(function(ws)
-						return vim.uri_to_fname(ws.uri)
-					end, workspace)
-				or client.config.root_dir and { client.config.root_dir }
-				or {}
+			local paths = workspace and vim.tbl_map(function(ws)
+				return vim.uri_to_fname(ws.uri)
+			end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
 			for _, p in ipairs(paths) do
 				local r = vim.loop.fs_realpath(p)
 				if path:find(r, 1, true) then
@@ -113,19 +110,15 @@ function M.toggle(option, silent, values)
 		else
 			vim.opt_local[option] = values[1]
 		end
-		return vim.notify(
-			"Set " .. option .. " to " .. vim.opt_local[option]:get(),
-			vim.log.levels.INFO,
-			{ title = "Option" }
-		)
+		return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
 	end
 	vim.opt_local[option] = not vim.opt_local[option]:get()
 	if not silent then
-		vim.notify(
-			(vim.opt_local[option]:get() and "Enabled" or "Disabled") .. " " .. option,
-			vim.log.levels.INFO,
-			{ title = "Option" }
-		)
+		if vim.opt_local[option]:get() then
+			Util.info("Enabled " .. option, { title = "Option" })
+		else
+			Util.warn("Disabled " .. option, { title = "Option" })
+		end
 	end
 end
 
@@ -134,13 +127,14 @@ function M.toggle_diagnostics()
 	enabled = not enabled
 	if enabled then
 		vim.diagnostic.enable()
-		vim.notify("Enabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
+		Util.info("Enabled diagnostics", { title = "Diagnostics" })
 	else
 		vim.diagnostic.disable()
-		vim.notify("Disabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
+		Util.warn("Disabled diagnostics", { title = "Diagnostics" })
 	end
 end
 
+-- code runner
 function M.code_run()
 	---@type string?
 	local buf = vim.api.nvim_buf_get_name(0)
