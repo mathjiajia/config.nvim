@@ -7,7 +7,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+			{ "folke/neodev.nvim", config = true },
 		},
 		config = function()
 			-- diagnostics signs
@@ -64,11 +64,13 @@ return {
 		dependencies = "mason.nvim",
 		opts = function()
 			local null_ls = require("null-ls")
+
 			return {
 				on_attach = function(client, bufnr)
 					require("plugins.lsp.format").on_attach(client, bufnr)
 				end,
 				sources = {
+					require("plugins.lsp.swift"),
 					null_ls.builtins.formatting.black,
 					null_ls.builtins.formatting.fish_indent,
 					null_ls.builtins.formatting.latexindent,
@@ -107,11 +109,12 @@ return {
 	-- lsp enhancement
 	{
 		"glepnir/lspsaga.nvim",
-		branch = "version_2.3",
-		opts = { ui = { border = "rounded" } },
-		config = function(_, opts)
-			require("lspsaga").init_lsp_saga(opts)
-		end,
+		opts = {
+			ui = {
+				border = "rounded",
+				colors = require("config").colors,
+			},
+		},
 		cmd = "Lspsaga",
 		-- stylua: ignore
 		keys = {
