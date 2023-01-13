@@ -1,7 +1,6 @@
 local M = {}
 
 local api = vim.api
-
 local cond_obj = require("luasnip.extras.conditions")
 
 ---Check if cursor is in the beginning of a line

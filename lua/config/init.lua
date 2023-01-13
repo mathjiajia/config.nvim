@@ -22,11 +22,11 @@ if viewer == "sioyek" then
 	forwardSearch = {
 		executable = "sioyek",
 		args = {
+			-- "--execute-command",
+			-- "turn_on_synctex",
 			"--inverse-search",
 			binary_path .. " -file %1 -line %2 -cache_root " .. cache_path,
 			"--reuse-window",
-			-- "--execute-command",
-			-- "turn_on_synctex",
 			"--forward-search-file",
 			"%f",
 			"--forward-search-line",
@@ -93,6 +93,22 @@ local options = {
 		},
 		diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " " },
 		git = { added = " ", changed = " ", removed = " " },
+	},
+	colors = {
+		--float window normal bakcground color
+		normal_bg = "#1e2030",
+		--title background color
+		title_bg = "#c3e88d",
+		red = "#ff757f",
+		magenta = "#c099ff",
+		orange = "#ff966c",
+		yellow = "#ffc777",
+		green = "#c3e88d",
+		cyan = "#86e1fc",
+		blue = "#82aaff",
+		purple = "#fca7ea",
+		white = "#d1d4cf",
+		black = "#1e2030",
 	},
 	-- indent lines
 	ft_exclude = {

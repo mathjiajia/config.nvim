@@ -70,7 +70,6 @@ return {
 					require("plugins.lsp.format").on_attach(client, bufnr)
 				end,
 				sources = {
-					require("plugins.lsp.swift"),
 					null_ls.builtins.formatting.black,
 					null_ls.builtins.formatting.fish_indent,
 					null_ls.builtins.formatting.latexindent,
@@ -78,6 +77,7 @@ return {
 						filetypes = { "css", "javascript", "yaml", "markdown" },
 					}),
 					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.formatting.swiftformat,
 					null_ls.builtins.diagnostics.fish,
 					null_ls.builtins.diagnostics.markdownlint.with({
 						args = { "--config", "~/.config/markdownlint/markdownlint.yaml", "--stdin" },

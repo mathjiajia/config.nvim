@@ -5,7 +5,7 @@ local api, fn = vim.api, vim.fn
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 local devicons = require("nvim-web-devicons")
-local util = require("util")
+local Util = require("util")
 
 local colors = {
 	bright_bg = utils.get_highlight("Folded").bg,
@@ -30,10 +30,7 @@ local colors = {
 
 require("heirline").load_colors(colors)
 
-local LeftCap = {
-	provider = "▌",
-	hl = { fg = "fg" },
-}
+local LeftCap = { provider = "▌", hl = { fg = "fg" } }
 
 local VimModeNormal = {
 	condition = function(self)
@@ -116,7 +113,7 @@ local WorkDir = {
 	hl = { fg = "blue", bold = true },
 	on_click = {
 		callback = function()
-			require("neo-tree.command").execute({ dir = util.get_root() })
+			require("neo-tree.command").execute({ dir = Util.get_root() })
 		end,
 		name = "heirline_workdir",
 	},
@@ -282,7 +279,7 @@ local Git = {
 
 	on_click = {
 		callback = function()
-			util.float_term({ "lazygit" }, { cwd = util.get_root() })
+			Util.float_term({ "lazygit" }, { cwd = Util.get_root() })
 		end,
 		name = "heirline_git",
 		update = false,

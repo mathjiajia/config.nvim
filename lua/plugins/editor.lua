@@ -1,5 +1,5 @@
 local fn = vim.fn
-local util = require("util")
+local Util = require("util")
 
 return {
 
@@ -29,18 +29,16 @@ return {
 				},
 			},
 			filesystem = { follow_current_file = true },
-			source_selector = {
-				winbar = true,
-				tab_labels = { buffers = "  Bufs " },
-			},
+			source_selector = { winbar = true, tab_labels = { buffers = "  Bufs " } },
 		},
+		branch = "main",
 		cmd = "Neotree",
 		-- stylua: ignore
 		keys = {
-			{ "<leader>ft", function()
-				require("neo-tree.command").execute({ toggle = true, dir = util.get_root() })
+			{ "<leader>fe", function()
+				require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() })
 			end, desc = "NeoTree (root dir)" },
-			{ "<leader>fT", function()
+			{ "<leader>fE", function()
 				require("neo-tree.command").execute({ toggle = true })
 			end, desc = "Toggle NeoTree (cwd)" },
 		},
@@ -134,19 +132,19 @@ return {
 		end,
 		cmd = "Telescope",
 		keys = {
-			{ "<leader><space>", util.telescope("files"), desc = "Find Files (root dir)" },
-			{ "<leader>fb", util.tele_builtin("buffers"), desc = "Buffers" },
-			{ "<leader>fd", util.tele_extn("file_browser", { path = "%:p:h" }), desc = "File Browser" },
-			{ "<leader>fD", util.tele_extn("file_browser"), desc = "File Browser" },
-			{ "<leader>ff", util.telescope("files"), desc = "Find Files (root dir)" },
-			{ "<leader>fF", util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
-			{ "<leader>fm", util.tele_builtin("builtin"), desc = "Telescope Meta" },
-			{ "<leader>fn", util.tele_builtin("find_files", { cwd = "~/.config/nvim" }), desc = "Neovim Configs" },
-			{ "<leader>fr", util.tele_extn("frecency"), desc = "Recent Files" },
-			{ "<leader>sb", util.tele_builtin("current_buffer_fuzzy_find"), desc = "Current_Buf Fuzzy Find" },
-			{ "<leader>sg", util.telescope("live_grep"), desc = "Live Grep (root dir)" },
-			{ "<leader>sG", util.telescope("live_grep", { cwd = false }), desc = "Live Grep (cwd)" },
-			{ "<leader>sh", util.tele_builtin("help_tags"), desc = "Help Tags" },
+			{ "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader>fb", Util.tele_builtin("buffers"), desc = "Buffers" },
+			{ "<leader>fd", Util.tele_extn("file_browser", { path = "%:p:h" }), desc = "File Browser" },
+			{ "<leader>fD", Util.tele_extn("file_browser"), desc = "File Browser" },
+			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+			{ "<leader>fm", Util.tele_builtin("builtin"), desc = "Telescope Meta" },
+			{ "<leader>fn", Util.tele_builtin("find_files", { cwd = "~/.config/nvim" }), desc = "Neovim Configs" },
+			{ "<leader>fr", Util.tele_extn("frecency"), desc = "Recent Files" },
+			{ "<leader>sb", Util.tele_builtin("current_buffer_fuzzy_find"), desc = "Current_Buf Fuzzy Find" },
+			{ "<leader>sg", Util.telescope("live_grep"), desc = "Live Grep (root dir)" },
+			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (cwd)" },
+			{ "<leader>sh", Util.tele_builtin("help_tags"), desc = "Help Tags" },
 		},
 	},
 

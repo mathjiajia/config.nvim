@@ -21,7 +21,7 @@ return {
 		},
 		keys = {
 			{
-				"<leader>nd",
+				"<leader>un",
 				function()
 					require("notify").dismiss({ silent = true, pending = true })
 				end,
@@ -125,14 +125,10 @@ return {
 		-- stylua: ignore
 		keys = {
 			{ "<c-f>", function()
-				if not require("noice.lsp").scroll(4) then
-					return "<c-f>"
-				end
+				if not require("noice.lsp").scroll(4) then return "<c-f>" end
 			end, silent = true, expr = true, desc = "Scroll forward" },
 			{ "<c-b>", function()
-				if not require("noice.lsp").scroll(-4) then
-					return "<c-b>"
-				end
+				if not require("noice.lsp").scroll(-4) then return "<c-b>" end
 			end, silent = true, expr = true, desc = "Scroll backward" },
 		},
 		event = "VeryLazy",
