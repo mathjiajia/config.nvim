@@ -1,46 +1,5 @@
 local M = {}
 
-local fn = vim.fn
-
-local builder = "latexmk"
-local viewer = "sioyek"
-
-local build, forwardSearch
-if builder == "tectonic" then
-	build = {
-		executable = "executable",
-		args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-	}
-else
-	build = { args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" } }
-end
-
-local binary_path = fn.stdpath("data") .. "/lazy/nvim-texlabconfig/nvim-texlabconfig"
-local cache_path = fn.stdpath("cache")
-
-if viewer == "sioyek" then
-	forwardSearch = {
-		executable = "sioyek",
-		args = {
-			-- "--execute-command",
-			-- "turn_on_synctex",
-			"--inverse-search",
-			binary_path .. " -file %1 -line %2 -cache_root " .. cache_path,
-			"--reuse-window",
-			"--forward-search-file",
-			"%f",
-			"--forward-search-line",
-			"%l",
-			"%p",
-		},
-	}
-else
-	forwardSearch = {
-		executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
-		args = { "%l", "%p", "%f" },
-	}
-end
-
 local kinds = {
 	Class = "",
 	Color = "",
@@ -94,10 +53,9 @@ local options = {
 		diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " " },
 		git = { added = " ", changed = " ", removed = " " },
 	},
+	-- colors for Lspsaga
 	colors = {
-		--float window normal bakcground color
 		normal_bg = "#1e2030",
-		--title background color
 		title_bg = "#c3e88d",
 		red = "#ff757f",
 		magenta = "#c099ff",
@@ -110,7 +68,7 @@ local options = {
 		white = "#d1d4cf",
 		black = "#1e2030",
 	},
-	-- indent lines
+	-- exclude from indent lines
 	ft_exclude = {
 		"aerial",
 		"alpha",
@@ -129,14 +87,7 @@ local options = {
 		"Trouble",
 	},
 	-- cli tools
-	ms_install = {
-		"black",
-		"debugpy",
-		"markdownlint",
-		"prettierd",
-		"stylua",
-		"tectonic",
-	},
+	ms_install = { "black", "debugpy", "markdownlint", "prettierd", "stylua", "tectonic" },
 	-- treesitter parsers
 	ts_install = {
 		"bash",
@@ -157,24 +108,6 @@ local options = {
 		"regex",
 		"swift",
 		"vim",
-	},
-	servers = {
-		clangd = {},
-		pyright = {},
-		sumneko_lua = { settings = { Lua = { workspace = { checkThirdParty = false } } } },
-		texlab = {
-			settings = {
-				texlab = {
-					build = vim.tbl_extend("force", {
-						-- forwardSearchAfter = true,
-						onSave = true,
-					}, build),
-					forwardSearch = forwardSearch,
-					chktex = { onOpenAndSave = false },
-					diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
-				},
-			},
-		},
 	},
 }
 

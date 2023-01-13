@@ -38,7 +38,37 @@ return {
 				require("plugins.lsp.format").on_attach(client, bufnr)
 			end
 
-			local servers = require("config").servers
+			local servers = {
+				clangd = {},
+				pyright = {},
+				sumneko_lua = { settings = { Lua = { workspace = { checkThirdParty = false } } } },
+				texlab = {
+					settings = {
+						texlab = {
+							build = {
+								executable = "tectonic",
+								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
+								-- args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+							},
+							forwardSearch = {
+								executable = "sioyek",
+								args = {
+									-- "--execute-command",
+									-- "turn_on_synctex",
+									"--reuse-window",
+									"--forward-search-file",
+									"%f",
+									"--forward-search-line",
+									"%l",
+									"%p",
+								},
+							},
+							chktex = { onOpenAndSave = false },
+							diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
+						},
+					},
+				},
+			}
 			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
 			require("mason-lspconfig").setup_handlers({
 				function(server)
