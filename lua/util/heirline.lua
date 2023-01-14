@@ -8,7 +8,7 @@ local devicons = require("nvim-web-devicons")
 local Util = require("util")
 
 local colors = {
-	bright_bg = utils.get_highlight("Folded").bg,
+	bright_bg = utils.get_highlight("Folded").fg,
 	-- bright_fg  = utils.get_highlight('Folded').fg,
 	red = utils.get_highlight("DiagnosticError").fg,
 	dark_red = utils.get_highlight("DiffDelete").bg,

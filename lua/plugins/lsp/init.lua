@@ -49,6 +49,7 @@ return {
 								executable = "tectonic",
 								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
 								-- args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+								onSave = true,
 							},
 							forwardSearch = {
 								executable = "sioyek",

@@ -1,19 +1,17 @@
 local autosnips = {}
 
-local api = vim.api
-
 local conds_expand = require("luasnip.extras.conditions.expand")
 local tex = require("util.latex")
 local position = require("util.position")
 
 local function appended_space_after_insert()
-	api.nvim_create_autocmd("InsertCharPre", {
+	vim.api.nvim_create_autocmd("InsertCharPre", {
 		callback = function()
 			if string.find(vim.v.char, "%a") then
 				vim.v.char = " " .. vim.v.char
 			end
 		end,
-		buffer = true,
+		buffer = 0,
 		once = true,
 		desc = "Auto Add a Space after Inline Math",
 	})
@@ -56,13 +54,17 @@ autosnips = {
 		end, {}),
 	}, { condition = tex.in_text }),
 
-	s({ trig = "mk", name = "inline math", dscr = "Insert inline Math Environment." }, { t("\\("), i(1), t("\\)") }, {
-		condition = tex.in_text,
-		show_condition = tex.in_text,
-		-- FIXME:
-		-- callbacks = { [-1] = { [events.leave] = appended_space_after_insert } },
-	}),
-
+	s(
+		{ trig = "mk", name = "inline math", dscr = "Insert inline Math Environment.", hidden = true },
+		{ t("\\("), i(1), t("\\)") },
+		{
+			condition = tex.in_text,
+			callbacks = {
+				-- index `-1` means the callback is on the snippet as a whole
+				[-1] = { [events.leave] = appended_space_after_insert },
+			},
+		}
+	),
 	s(
 		{ trig = "dm", name = "dispaly math", dscr = "Insert display Math Environment." },
 		{ t({ "\\[", "\t" }), i(1), t({ "", "\\]" }) },

@@ -34,7 +34,6 @@ vim.keymap.set("n", "<leader>uc", function() Util.toggle("conceallevel", false, 
 vim.keymap.set("n", "<M-r>", function() Util.code_run() end, { desc = "Code Runner" })
 vim.keymap.set("n", "<M-i>", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
 vim.keymap.set("n", "<M-S-i>", function() Util.float_term() end, { desc = "Terminal (cwd)" })
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 -- lazygit
 vim.keymap.set("n", "<M-g>", function() Util.float_term("lazygit", { cwd = Util.get_root() }) end, { desc = "LazyGit (root dir)" })
