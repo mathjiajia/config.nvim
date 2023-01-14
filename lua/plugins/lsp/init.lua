@@ -18,7 +18,7 @@ return {
 			end
 
 			-- diagnostic keymaps
-			vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
+			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostics" })
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostics" })
 			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Loclist Diagnostics" })
@@ -66,6 +66,7 @@ return {
 							},
 							chktex = { onOpenAndSave = false },
 							diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
+							bibtexFormatter = "latexindent",
 						},
 					},
 				},
@@ -95,7 +96,6 @@ return {
 		dependencies = "mason.nvim",
 		opts = function()
 			local null_ls = require("null-ls")
-
 			return {
 				on_attach = function(client, bufnr)
 					require("plugins.lsp.format").on_attach(client, bufnr)
@@ -104,9 +104,7 @@ return {
 					null_ls.builtins.formatting.black,
 					null_ls.builtins.formatting.fish_indent,
 					null_ls.builtins.formatting.latexindent,
-					null_ls.builtins.formatting.prettierd.with({
-						filetypes = { "css", "javascript", "yaml", "markdown" },
-					}),
+					null_ls.builtins.formatting.prettierd,
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.swiftformat,
 					null_ls.builtins.diagnostics.fish,

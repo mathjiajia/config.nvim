@@ -31,7 +31,6 @@ return {
 			filesystem = { follow_current_file = true },
 			source_selector = { winbar = true, tab_labels = { buffers = "  Bufs " } },
 		},
-		branch = "main",
 		cmd = "Neotree",
 		-- stylua: ignore
 		keys = {
@@ -256,6 +255,6 @@ return {
 		opts = { enhanced_diff_hl = true },
 		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
 		-- stylua: ignore
-		keys = { { "<leader>gd", function() require("diffview").open() end, desc = "Diff View" } },
+		keys = { { "<leader>gd", function() require("diffview").open({}) end, desc = "Diff View" } },
 	},
 }

@@ -7,3 +7,6 @@
 "(" @opening
 ")" @closing
 
+"\\(" @opening
+")" @closing
+

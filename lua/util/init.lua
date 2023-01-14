@@ -3,7 +3,7 @@ local Util = require("lazy.core.util")
 local M = {}
 
 M.root_patterns = { ".git", "lua" }
-M.runners = { lua = "lua", python = "python3", swift = "swift" }
+M.runners = { lua = "lua", markdown = "glow", python = "python3", swift = "swift" }
 
 -- returns the root directory based on:
 -- * lsp workspace folders
