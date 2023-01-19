@@ -64,6 +64,7 @@ Dolbeault
 dualizing
 equidimensional
 equivariant
+\'etale
 Fano
 Fano's
 fibration
@@ -101,6 +102,7 @@ Inoue
 int
 isogenous
 isogeny
+isotrivial
 Javanpeykar
 jia
 Jia
@@ -113,6 +115,7 @@ Kleiman
 Kleiman's
 klt
 Kodaira
+Kodaira's
 Kolchin
 Koll\'ar
 Koszul
@@ -156,6 +159,7 @@ preimage
 preimages
 preperiodic
 projectivity
+projectivization
 pseudo
 pseudo-effective
 pullback
@@ -180,6 +184,7 @@ Siu
 Siu's
 slc
 subalgebra
+subbundle
 subcone
 submanifold
 submanifolds
@@ -206,11 +211,9 @@ unirational
 Unirational
 uniruled
 unramified
+Vietoris
 vir
 Weierstrass
 Weil
 Zariski
 Zhang
-isotrivial
-Kodaira's
-subbundle

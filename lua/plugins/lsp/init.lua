@@ -41,7 +41,7 @@ return {
 			local servers = {
 				clangd = {},
 				pyright = {},
-				sumneko_lua = { settings = { Lua = { workspace = { checkThirdParty = false } } } },
+				sumneko_lua = {},
 				texlab = {
 					settings = {
 						texlab = {

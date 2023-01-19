@@ -3,11 +3,14 @@ return {
 	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
+		dependencies = { "mathjiajia/mysnippets" },
 		config = function(_, opts)
 			local ls = require("luasnip")
 			ls.setup(opts)
 
-			require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/LuaSnips/" })
+			require("luasnip.loaders.from_lua").lazy_load({
+				paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets",
+			})
 
 			-- stylua: ignore start
 			vim.keymap.set({ "i", "s" }, "<C-j>", function()

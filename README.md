@@ -9,66 +9,73 @@ This setup is mainly used for taking notes and writing documents in LaTeX.
 ```txt
 ├── LICENSE
 ├── LuaSnips
-│   ├── all.lua
-│   ├── gitcommit.lua
-│   ├── lua.lua
-│   ├── markdown.lua
-│   ├── norg.lua
-│   ├── python.lua
-│   └── tex
-│       ├── arrows.lua
-│       ├── beamer.lua
-│       ├── brackets.lua
-│       ├── environments.lua
-│       ├── misc.lua
-│       ├── operators.lua
-│       ├── phrases.lua
-│       ├── sectioning.lua
-│       ├── style.lua
-│       └── symbols.lua
+│   ├── all.lua
+│   ├── gitcommit.lua
+│   ├── lua.lua
+│   ├── markdown.lua
+│   ├── norg.lua
+│   ├── python.lua
+│   └── tex
+│       ├── arrows.lua
+│       ├── beamer.lua
+│       ├── brackets.lua
+│       ├── environments.lua
+│       ├── misc.lua
+│       ├── operators.lua
+│       ├── phrases.lua
+│       ├── sectioning.lua
+│       ├── style.lua
+│       └── symbols.lua
 ├── README.md
 ├── after
-│   ├── ftplugin
-│   │   ├── dap-repl.lua
-│   │   ├── help.lua
-│   │   ├── man.lua
-│   │   ├── markdown.lua
-│   │   ├── norg.lua
-│   │   ├── qf.lua
-│   │   └── tex.lua
-│   └── plugin
-│       ├── autocmds.lua
-│       ├── keymaps.lua
-│       └── lastplace.lua
+│   ├── ftplugin
+│   │   ├── c.lua
+│   │   ├── dap-repl.lua
+│   │   ├── help.lua
+│   │   ├── man.lua
+│   │   ├── markdown.lua
+│   │   ├── norg.lua
+│   │   ├── qf.lua
+│   │   └── tex.lua
+│   ├── plugin
+│   │   ├── autocmds.lua
+│   │   ├── keymaps.lua
+│   │   └── lastplace.lua
+│   └── queries
+│       ├── latex
+│       │   └── highlights.scm
+│       └── swift
+│           └── rainbow-parens.scm
 ├── colors
 ├── ginit.vim
 ├── init.lua
 ├── lazy-lock.json
 ├── lua
-│   ├── config
-│   │   ├── heirline.lua
-│   │   ├── lazyinit.lua
-│   │   ├── options.lua
-│   │   ├── settings.lua
-│   │   └── util.lua
-│   ├── plugins
-│   │   ├── coding.lua
-│   │   ├── dap.lua
-│   │   ├── editor.lua
-│   │   ├── lang.lua
-│   │   ├── lsp
-│   │   │   ├── codelens.lua
-│   │   │   ├── diagnostic.lua
-│   │   │   ├── format.lua
-│   │   │   ├── highlight.lua
-│   │   │   ├── init.lua
-│   │   │   ├── keymaps.lua
-│   │   │   └── servers.lua
-│   │   ├── treesitter.lua
-│   │   ├── ui.lua
-│   │   └── util.lua
-│   └── snips
+│   ├── config
+│   │   ├── init.lua
+│   │   ├── lazyinit.lua
+│   │   └── options.lua
+│   ├── plugins
+│   │   ├── coding.lua
+│   │   ├── dap.lua
+│   │   ├── editor.lua
+│   │   ├── lang.lua
+│   │   ├── lsp
+│   │   │   ├── format.lua
+│   │   │   ├── init.lua
+│   │   │   └── misc.lua
+│   │   ├── treesitter.lua
+│   │   ├── ui.lua
+│   │   └── util.lua
+│   └── util
+│       ├── context.lua
+│       ├── heirline.lua
+│       ├── init.lua
+│       ├── latex.lua
+│       └── position.lua
 ├── spell
+│   ├── en.utf-8.add
+│   └── en.utf-8.add.spl
 └── stylua.toml
 ```
 

@@ -1,17 +1,6 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua.diagnostics.globals": [
-        "c",
-        "d",
-        "dl",
-        "f",
-        "i",
-        "l",
-        "p",
-        "rep",
-        "s",
-        "sn",
-        "t",
-        "events"
-    ]
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "runtime.version": "LuaJIT",
+  "workspace.checkThirdParty": false,
+  "telemetry.enable": false
 }
