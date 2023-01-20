@@ -34,10 +34,10 @@ return {
 		cmd = "Neotree",
 		-- stylua: ignore
 		keys = {
-			{ "<leader>fe", function()
+			{ "<leader>ft", function()
 				require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() })
 			end, desc = "NeoTree (root dir)" },
-			{ "<leader>fE", function()
+			{ "<leader>fT", function()
 				require("neo-tree.command").execute({ toggle = true })
 			end, desc = "Toggle NeoTree (cwd)" },
 		},
@@ -131,7 +131,7 @@ return {
 		end,
 		cmd = "Telescope",
 		keys = {
-			{ "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader><space>", Util.telescope("files", { cwd = "%:p:h" }), desc = "Find Files (current)" },
 			{ "<leader>fb", Util.tele_builtin("buffers"), desc = "Buffers" },
 			{ "<leader>fd", Util.tele_extn("file_browser", { path = "%:p:h" }), desc = "File Browser" },
 			{ "<leader>fD", Util.tele_extn("file_browser"), desc = "File Browser" },
