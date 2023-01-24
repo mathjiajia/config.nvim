@@ -135,31 +135,21 @@ return {
 
 	-- start screen
 	{
-		"goolord/alpha-nvim",
-		opts = function()
-			local startify = require("alpha.themes.startify")
-
-			startify.section.top_buttons.val = {
-				startify.button("e", "New file", "<cmd>ene <BAR> startinsert<CR>"),
-			}
-			startify.section.bottom_buttons.val = {
-				startify.button("u", "Update Plugins", "<cmd>Lazy update<CR>"),
-				startify.button("q", "Quit", "<cmd>q<CR>"),
-			}
-
-			startify.config.layout = {
-				startify.section.top_buttons,
-				startify.section.mru_cwd,
-				startify.section.mru,
-				{ type = "padding", val = 1 },
-				startify.section.bottom_buttons,
-			}
-			return startify.config
-		end,
-		config = function(_, opts)
-			require("alpha").setup(opts)
-		end,
-		event = "VimEnter",
+		"glepnir/dashboard-nvim",
+		event = 'VimEnter',
+		opts = {
+			theme = "hyper",
+			config = {
+				-- stylua: ignore
+				shortcut = {
+					{ desc = " Update", key = "u", action = "Lazy update", group = "Character" },
+					{ desc = " Files", key = "f", action = "Telescope find_files", group = "Statement" },
+					{ desc = " Dots", key = "d", action = "Telescope find_files cwd=~/.config/nvim", group = "Type" },
+					{ desc = " Quit", key = "q", action = "quitall", group = "Float" },
+				},
+				footer = { '', '', os.date() },
+			},
+		},
 	},
 
 	-- better quickfix
@@ -177,12 +167,7 @@ return {
 	-- Zen mode
 	{
 		"folke/zen-mode.nvim",
-		opts = {
-			plugins = {
-				gitsigns = true,
-				kitty = { enabled = false, font = "+2" },
-			},
-		},
+		opts = { plugins = { gitsigns = true } },
 		cmd = "ZenMode",
 	},
 

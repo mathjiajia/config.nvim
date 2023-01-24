@@ -58,7 +58,7 @@ return {
 			"nvim-telescope/telescope-bibtex.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
-			"prochri/telescope-all-recent.nvim",
+			-- "prochri/telescope-all-recent.nvim",
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
@@ -76,7 +76,7 @@ return {
 				telescope.load_extension(extn)
 			end
 
-			require("telescope-all-recent").setup({})
+			-- require("telescope-all-recent").setup({})
 		end,
 		opts = function()
 			local actions = require("telescope.actions")
@@ -86,7 +86,6 @@ return {
 			return {
 				defaults = {
 					sorting_strategy = "ascending",
-					layout_strategy = "horizontal",
 					layout_config = { prompt_position = "top" },
 					prompt_prefix = "   ",
 					selection_caret = " ",
@@ -115,6 +114,8 @@ return {
 					live_grep = { path_display = { "shorten" } },
 				},
 				extensions = {
+					bibtex = { format = "plain" },
+					file_browser = { theme = "ivy" },
 					frecency = {
 						show_scores = true,
 						workspaces = {
@@ -124,8 +125,6 @@ return {
 							["tex"] = home .. "/TeX",
 						},
 					},
-					bibtex = { format = "plain" },
-					file_browser = { theme = "ivy" },
 				},
 			}
 		end,

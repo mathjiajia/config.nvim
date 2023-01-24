@@ -71,9 +71,9 @@ local options = {
 	-- exclude from indent lines
 	ft_exclude = {
 		"aerial",
-		"alpha",
 		"checkhealth",
 		"conf",
+		"dashboard",
 		"dap-repl",
 		"help",
 		"lazy",

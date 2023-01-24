@@ -5,6 +5,11 @@ return {
 		-- "nvim-treesitter/nvim-treesitter-context",
 	},
 	config = function(_, opts)
+		-- Folding
+		vim.opt.foldmethod = "expr"
+		vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		vim.opt.foldenable = false
+
 		require("nvim-treesitter.install").compilers = { "/opt/homebrew/bin/gcc-12" }
 		require("nvim-treesitter.configs").setup(opts)
 	end,

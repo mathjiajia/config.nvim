@@ -8,12 +8,10 @@ opt.confirm = true
 opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Diff
-opt.diffopt:append("linematch:60")
+opt.diffopt:append({ linematch = 60 })
 
--- Folding
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldenable = false
+-- Format
+opt.formatoptions = "tcroqnlj"
 
 -- Search
 opt.ignorecase = true
@@ -47,7 +45,7 @@ opt.fillchars = { eob = " ", diff = " " }
 opt.laststatus = 3
 opt.pumheight = 10
 opt.scrolloff = 6
-opt.shortmess:append("IcC")
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
 
 -- opt.cursorline = true
 opt.colorcolumn = "120"
