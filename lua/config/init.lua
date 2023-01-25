@@ -53,21 +53,6 @@ local options = {
 		diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " " },
 		git = { added = " ", changed = " ", removed = " " },
 	},
-	-- colors for Lspsaga
-	colors = {
-		normal_bg = "#1e1e1e",
-		title_bg = "#4EC9B0",
-		red = "#F44747",
-		magenta = "#D16969",
-		orange = "#CE9178",
-		yellow = "#DCDCAA",
-		green = "#6A9955",
-		cyan = "#9CDCFE",
-		blue = "#569CD6",
-		purple = "#C586C0",
-		white = "#D4D4D4",
-		black = "#1E2030",
-	},
 	-- exclude from indent lines
 	ft_exclude = {
 		"aerial",
@@ -78,8 +63,6 @@ local options = {
 		"help",
 		"lazy",
 		"lspinfo",
-		"lspsagafinder",
-		"lspsagaoutline",
 		"markdown",
 		"mason",
 		"neo-tree",

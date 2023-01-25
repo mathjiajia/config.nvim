@@ -30,8 +30,7 @@ return {
 			})
 
 			-- lspconfig
-			local capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+			local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			local function on_attach(client, bufnr)
 				require("plugins.lsp.misc").on_attach(client, bufnr)
@@ -66,6 +65,7 @@ return {
 							},
 							chktex = { onOpenAndSave = false },
 							diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
+							latexFormatter = "none",
 							bibtexFormatter = "latexindent",
 						},
 					},
@@ -136,19 +136,43 @@ return {
 	},
 
 	-- lsp enhancement
+	-- {
+	-- 	"glepnir/lspsaga.nvim",
+	-- 	opts = { ui = { border = "rounded" } },
+	-- 	cmd = "Lspsaga",
+	-- 	-- stylua: ignore
+	-- 	keys = {
+	-- 		{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
+	-- 		{ "<M-o>", function() require("lspsaga.outline"):outline() end, silent = true, desc = "Lsp Outline" },
+	-- 	},
+	-- },
+
 	{
-		"glepnir/lspsaga.nvim",
+		"dnlhc/glance.nvim",
 		opts = {
-			ui = {
-				border = "rounded",
-				colors = require("config").colors,
+			border = {
+				enable = true,
 			},
-		},
-		cmd = "Lspsaga",
-		-- stylua: ignore
-		keys = {
-			{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
-			{ "<M-o>", function() require("lspsaga.outline"):outline() end, silent = true, desc = "Lsp Outline" },
+			hooks = {
+				---Don't open glance when there is only one result and it is located in the current buffer, open otherwise
+				---@param results table
+				---@param open function(table)
+				---@param jump function(string)
+				before_open = function(results, open, jump)
+					local uri = vim.uri_from_bufnr(0)
+					if #results == 1 then
+						local target_uri = results[1].uri or results[1].targetUri
+
+						if target_uri == uri then
+							jump(results[1])
+						else
+							open(results)
+						end
+					else
+						open(results)
+					end
+				end,
+			},
 		},
 	},
 }

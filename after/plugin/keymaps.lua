@@ -13,8 +13,8 @@ vim.keymap.set("n", "<M-l>", function() vim.cmd.wincmd("l") end, { desc = "Move 
 -- stylua: ignore end
 
 -- INSERT
-vim.keymap.set("i", "<C-f>", "<Right>", { desc = "Move Forward a Char" })
-vim.keymap.set("i", "<C-b>", "<Left>", { desc = "Move Backward a Char" })
+-- vim.keymap.set("i", "<C-f>", "<Right>", { desc = "Move Forward a Char" })
+-- vim.keymap.set("i", "<C-b>", "<Left>", { desc = "Move Backward a Char" })
 
 -- list
 vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })

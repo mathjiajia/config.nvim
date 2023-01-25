@@ -16,6 +16,10 @@ return {
 			end
 		end,
 		opts = {
+			source_selector = {
+				winbar = true,
+				tab_labels = { buffers = "  Bufs " },
+			},
 			window = {
 				position = "float",
 				popup = {
@@ -28,17 +32,19 @@ return {
 					border = { style = "rounded" },
 				},
 			},
-			filesystem = { follow_current_file = true },
-			source_selector = { winbar = true, tab_labels = { buffers = "  Bufs " } },
+			filesystem = {
+				bind_to_cwd = false,
+				follow_current_file = true,
+			},
 		},
 		cmd = "Neotree",
 		-- stylua: ignore
 		keys = {
-			{ "<leader>ft", function()
+			{ "<M-t>", function()
 				require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() })
 			end, desc = "NeoTree (root dir)" },
-			{ "<leader>fT", function()
-				require("neo-tree.command").execute({ toggle = true })
+			{ "<M-S-t>", function()
+				require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
 			end, desc = "Toggle NeoTree (cwd)" },
 		},
 	},
@@ -58,25 +64,15 @@ return {
 			"nvim-telescope/telescope-bibtex.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
-			-- "prochri/telescope-all-recent.nvim",
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
 			telescope.setup(opts)
 
-			local extns = {
-				"zf-native",
-				"file_browser",
-				"frecency",
-				"bibtex",
-				"aerial",
-				"noice",
-			}
+			local extns = { "zf-native", "file_browser", "frecency", "bibtex", "aerial", "noice" }
 			for _, extn in ipairs(extns) do
 				telescope.load_extension(extn)
 			end
-
-			-- require("telescope-all-recent").setup({})
 		end,
 		opts = function()
 			local actions = require("telescope.actions")
@@ -245,7 +241,7 @@ return {
 			layout = { min_width = 30 },
 		},
 		-- stylua: ignore
-		keys = { { "<leader>oa", function() require("aerial").toggle() end, desc = "Aerial" } },
+		keys = { { "<M-o>", function() require("aerial").toggle() end, desc = "Aerial" } },
 	},
 
 	-- diffview

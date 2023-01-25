@@ -104,7 +104,7 @@ return {
 					{ name = "neorg" },
 					{ name = "buffer", keyword_length = 3 },
 					-- { name = "copilot", max_item_count = 3 },
-					{ name = "path", keyword_length = 4 },
+					{ name = "path", keyword_length = 3 },
 					{ name = "rg", keyword_length = 4 },
 				},
 				window = {

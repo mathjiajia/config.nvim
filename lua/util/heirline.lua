@@ -102,37 +102,24 @@ local Snippets = {
 }
 
 local WorkDir = {
-	init = function(self)
-		self.icon = (fn.haslocaldir(0) == 1 and "l" or "g") .. " " .. " "
+	provider = function()
+		local icon = (fn.haslocaldir(0) == 1 and "l" or "g") .. " " .. " "
 		local cwd = fn.getcwd(0)
-		self.cwd = fn.fnamemodify(cwd, ":~")
-		if not conditions.width_percent_below(#self.cwd, 0.27) then
-			self.cwd = fn.pathshorten(self.cwd)
+		cwd = fn.fnamemodify(cwd, ":~")
+		if not conditions.width_percent_below(#cwd, 0.25) then
+			cwd = fn.pathshorten(cwd)
 		end
+		local trail = cwd:sub(-1) == "/" and "" or "/"
+		return icon .. cwd .. trail
 	end,
 	hl = { fg = "blue", bold = true },
+
 	on_click = {
 		callback = function()
 			require("neo-tree.command").execute({ dir = Util.get_root() })
 		end,
 		name = "heirline_workdir",
 	},
-
-	flexible = 1,
-	{
-		provider = function(self)
-			local trail = self.cwd:sub(-1) == "/" and "" or "/"
-			return self.icon .. self.cwd .. trail .. " "
-		end,
-	},
-	{
-		provider = function(self)
-			local cwd = fn.pathshorten(self.cwd)
-			local trail = self.cwd:sub(-1) == "/" and "" or "/"
-			return self.icon .. cwd .. trail .. " "
-		end,
-	},
-	-- { provider = "" },
 }
 
 local FileNameBlock = {
@@ -156,27 +143,17 @@ local FileIcon = {
 }
 
 local FileName = {
-	init = function(self)
-		self.lfilename = fn.fnamemodify(self.filename, ":.")
-		if self.lfilename == "" then
-			self.lfilename = "[No Name]"
+	provider = function(self)
+		local filename = fn.fnamemodify(self.filename, ":.")
+		if filename == "" then
+			return "[No Name]"
 		end
-		if not conditions.width_percent_below(#self.lfilename, 0.27) then
-			self.lfilename = fn.pathshorten(self.lfilename)
+		if not conditions.width_percent_below(#filename, 0.25) then
+			filename = fn.pathshorten(filename)
 		end
+		return filename
 	end,
-	hl = "Directory",
-	flexible = 2,
-	{
-		provider = function(self)
-			return self.lfilename
-		end,
-	},
-	{
-		provider = function(self)
-			return fn.pathshorten(self.lfilename)
-		end,
-	},
+	hl = { fg = utils.get_highlight("Directory").fg },
 }
 
 local FileFlags = {
@@ -204,13 +181,8 @@ local FileNameModifer = {
 	end,
 }
 
-FileNameBlock = utils.insert(
-	FileNameBlock,
-	FileIcon,
-	utils.insert(FileNameModifer, FileName),
-	unpack(FileFlags),
-	{ provider = "%<" }
-)
+FileNameBlock =
+	utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" })
 
 local FileType = {
 	provider = function()
@@ -221,15 +193,6 @@ local FileType = {
 
 local Diagnostics = {
 	condition = conditions.has_diagnostics,
-	update = { "DiagnosticChanged", "BufEnter" },
-	on_click = {
-		callback = function()
-			-- require("trouble").toggle({ mode = "document_diagnostics" })
-			-- or
-			vim.diagnostic.setqflist()
-		end,
-		name = "heirline_diagnostics",
-	},
 
 	static = require("config").icons.diagnostics,
 
@@ -239,6 +202,8 @@ local Diagnostics = {
 		self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
 		self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 	end,
+
+	update = { "DiagnosticChanged", "BufEnter" },
 
 	{ provider = "![" },
 	{
@@ -266,6 +231,15 @@ local Diagnostics = {
 		hl = { fg = "diag_hint" },
 	},
 	{ provider = "]" },
+
+	on_click = {
+		callback = function()
+			-- require("trouble").toggle({ mode = "document_diagnostics" })
+			-- or
+			vim.diagnostic.setqflist()
+		end,
+		name = "heirline_diagnostics",
+	},
 }
 
 local Git = {
@@ -276,14 +250,6 @@ local Git = {
 		self.status_dict = vim.b.gitsigns_status_dict
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
-
-	on_click = {
-		callback = function()
-			Util.float_term({ "lazygit" }, { cwd = Util.get_root() })
-		end,
-		name = "heirline_git",
-		update = false,
-	},
 
 	hl = { fg = "orange" },
 
@@ -327,6 +293,14 @@ local Git = {
 		end,
 		provider = ")",
 	},
+
+	on_click = {
+		callback = function()
+			Util.float_term({ "lazygit" }, { cwd = Util.get_root() })
+		end,
+		name = "heirline_git",
+		update = false,
+	},
 }
 
 local LSPActive = {
@@ -353,25 +327,14 @@ local LSPActive = {
 	},
 }
 
-local Ruler = {
-	-- %l = current line number
-	-- %L = number of lines in the buffer
-	-- %v = virtual column number (screen column)
-	-- %P = percentage through file of displayed window
-	provider = " %3p%% %2l(%02v)/%-3L",
-}
+local Ruler = { provider = " %3p%% %2l(%02v)/%-3L" }
 
 local ScrollBar = {
 	static = { sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" } },
 	provider = function(self)
-		local curr_line = api.nvim_win_get_cursor(0)[1]
-		local lines = api.nvim_buf_line_count(0)
-		local i
-		if lines > 0 then
-			i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-		else
-			i = #self.sbar
-		end
+		local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+		local lines = vim.api.nvim_buf_line_count(0)
+		local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
 		return string.rep(self.sbar[i], 2)
 	end,
 	hl = { fg = "blue", bg = "bright_bg" },
@@ -499,8 +462,7 @@ local TablineFileFlags = {
 	},
 	{
 		condition = function(self)
-			return not api.nvim_buf_get_option(self.bufnr, "modifiable")
-				or api.nvim_buf_get_option(self.bufnr, "readonly")
+			return not api.nvim_buf_get_option(self.bufnr, "modifiable") or api.nvim_buf_get_option(self.bufnr, "readonly")
 		end,
 		provider = function(self)
 			if api.nvim_buf_get_option(self.bufnr, "buftype") == "terminal" then
@@ -526,6 +488,11 @@ local TablineFileNameBlock = {
 			return "TabLine"
 		end
 	end,
+	TablineBufnr,
+	FileIcon,
+	TablineFileName,
+	TablineFileFlags,
+
 	on_click = {
 		callback = function(_, minwid, _, button)
 			if button == "m" then
@@ -539,10 +506,6 @@ local TablineFileNameBlock = {
 		end,
 		name = "heirline_tabline_buffer_callback",
 	},
-	TablineBufnr,
-	FileIcon,
-	TablineFileName,
-	TablineFileFlags,
 }
 
 local TablineCloseButton = {
@@ -581,7 +544,7 @@ local BufferLine = utils.make_buflist(
 
 local Tabpage = {
 	provider = function(self)
-		return "%" .. self.tabnr .. "T " .. self.tabnr .. " %T"
+		return "%" .. self.tabnr .. "T " .. self.tabpage .. " %T"
 	end,
 	hl = function(self)
 		if not self.is_active then
@@ -636,7 +599,102 @@ local TabLineOffset = {
 
 local TabLine = { TabLineOffset, BufferLine, TabPages }
 
--- local StatusColumn = {}
+-- local StatusColumn = {
+-- 	static = {
+-- 		---@return {name:string, text:string, texthl:string}[]
+-- 		get_signs = function()
+-- 			-- local buf = vim.api.nvim_get_current_buf()
+-- 			local buf = vim.fn.expand("%")
+-- 			return vim.tbl_map(function(sign)
+-- 				return vim.fn.sign_getdefined(sign.name)[1]
+-- 			end, vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs)
+-- 		end,
+--
+-- 		resolve = function(self, name)
+-- 			for pat, cb in pairs(self.handlers) do
+-- 				if name:match(pat) then
+-- 					return cb
+-- 				end
+-- 			end
+-- 		end,
+--
+-- 		handlers = {
+-- 			["GitSigns.*"] = function(args)
+-- 				require("gitsigns").preview_hunk()
+-- 			end,
+-- 			["Dap.*"] = function(args)
+-- 				require("dap").toggle_breakpoint()
+-- 			end,
+-- 			["Diagnostic.*"] = function(args)
+-- 				vim.diagnostic.open_float() -- { pos = args.mousepos.line - 1, relative = "mouse" })
+-- 			end,
+-- 		},
+-- 	},
+-- 	-- init = function(self)
+-- 	--     local signs = {}
+-- 	--     for _, s in ipairs(self.get_signs()) do
+-- 	--         if s.name:find("GitSign") then
+-- 	--             self.git_sign = s
+-- 	--         else
+-- 	--             table.insert(signs, s)
+-- 	--         end
+-- 	--     end
+-- 	--     self.signs = signs
+-- 	-- end,
+-- 	{
+-- 		provider = "%s",
+-- 		-- provider = function(self)
+-- 		--     -- return vim.inspect({ self.signs, self.git_sign })
+-- 		--     local children = {}
+-- 		--     for _, sign in ipairs(self.signs) do
+-- 		--         table.insert(children, {
+-- 		--             provider = sign.text,
+-- 		--             hl = sign.texthl,
+-- 		--         })
+-- 		--     end
+-- 		--     self[1] = self:new(children, 1)
+-- 		-- end,
+--
+-- 		on_click = {
+-- 			callback = function(self, ...)
+-- 				local mousepos = vim.fn.getmousepos()
+-- 				vim.api.nvim_win_set_cursor(0, { mousepos.line, mousepos.column })
+-- 				local sign_at_cursor = vim.fn.screenstring(mousepos.screenrow, mousepos.screencol)
+-- 				if sign_at_cursor ~= "" then
+-- 					local args = {
+-- 						mousepos = mousepos,
+-- 					}
+-- 					local signs = vim.fn.sign_getdefined()
+-- 					for _, sign in ipairs(signs) do
+-- 						local glyph = sign.text:gsub(" ", "")
+-- 						if sign_at_cursor == glyph then
+-- 							vim.defer_fn(function()
+-- 								self:resolve(sign.name)(args)
+-- 							end, 10)
+-- 							return
+-- 						end
+-- 					end
+-- 				end
+-- 			end,
+-- 			name = "heirline_signcol_callback",
+-- 			update = true,
+-- 		},
+-- 	},
+-- 	{
+-- 		provider = "%=%4{v:virtnum ? '' : &nu ? (&rnu && v:relnum ? v:relnum : v:lnum) . ' ' : ''}",
+-- 	},
+-- 	{
+-- 		provider = "%{% &fdc ? '%C ' : '' %}",
+-- 	},
+-- 	-- {
+-- 	--     provider = function(self)
+-- 	--         return self.git_sign and self.git_sign.text
+-- 	--     end,
+-- 	--     hl = function(self)
+-- 	--         return self.git_sign and self.git_sign.texthl
+-- 	--     end,
+-- 	-- },
+-- }
 
 require("heirline").setup({
 	statusline = StatusLine,
@@ -644,10 +702,6 @@ require("heirline").setup({
 	tabline = TabLine,
 	-- statuscolumn = StatusColumn,
 })
-
--- vim.wo.winbar = require("lspsaga.symbolwinbar"):get_winbar()
-
-vim.o.showtabline = 2
 
 api.nvim_create_augroup("Heirline", {})
 api.nvim_create_autocmd({ "FileType" }, {

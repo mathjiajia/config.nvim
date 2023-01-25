@@ -47,20 +47,15 @@ return {
 		end,
 	},
 
-	-- floating winbar
-	-- {
-	-- 	"b0o/incline.nvim",
-	-- 	opts = {
-	-- 		window = { margin = { vertical = 0, horizontal = 1 } },
-	-- 		render = function(props)
-	-- 			local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-	-- 			local icon, color = require("nvim-web-devicons").get_icon_color(filename)
-	-- 			return { { icon, guifg = color }, { " " }, { filename } }
-	-- 		end,
-	-- 	},
-	-- 	event = "BufReadPre",
-	-- },
+	-- winbar
+	{
+		"utilyre/barbecue.nvim",
+		opts = { show_dirname = false },
+		dependencies = { "SmiteshP/nvim-navic" },
+		event = "UIEnter",
+	},
 
+	-- statuscolumn
 	{
 		"luukvbaal/statuscol.nvim",
 		opts = { setopt = true },
@@ -125,10 +120,10 @@ return {
 		keys = {
 			{ "<c-f>", function()
 				if not require("noice.lsp").scroll(4) then return "<c-f>" end
-			end, silent = true, expr = true, desc = "Scroll forward" },
+			end, silent = true, expr = true, desc = "Scroll forward", mode = { "i", "n", "s" } },
 			{ "<c-b>", function()
 				if not require("noice.lsp").scroll(-4) then return "<c-b>" end
-			end, silent = true, expr = true, desc = "Scroll backward" },
+			end, silent = true, expr = true, desc = "Scroll backward", mode = { "i", "n", "s" } },
 		},
 		event = "VeryLazy",
 	},
@@ -136,18 +131,17 @@ return {
 	-- start screen
 	{
 		"glepnir/dashboard-nvim",
-		event = 'VimEnter',
+		event = "VimEnter",
 		opts = {
 			theme = "hyper",
 			config = {
-				-- stylua: ignore
+				week_header = { enable = true },
 				shortcut = {
-					{ desc = " Update", key = "u", action = "Lazy update", group = "Character" },
-					{ desc = " Files", key = "f", action = "Telescope find_files", group = "Statement" },
-					{ desc = " Dots", key = "d", action = "Telescope find_files cwd=~/.config/nvim", group = "Type" },
-					{ desc = " Quit", key = "q", action = "quitall", group = "Float" },
+					{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
+					{ desc = " Files", group = "Label", action = "Telescope find_files", key = "f" },
+					{ desc = " NeoVim", group = "", action = "Telescope find_files cwd=~/.config/nvim", key = "n" },
+					{ desc = " Quit", group = "Number", key = "q", action = "quitall" },
 				},
-				footer = { '', '', os.date() },
 			},
 		},
 	},

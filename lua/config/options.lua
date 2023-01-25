@@ -31,9 +31,9 @@ opt.undofile = true
 
 -- Indent
 -- opt.expandtab = false
-opt.shiftwidth = 4
-opt.softtabstop = 4
-opt.tabstop = 4
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.tabstop = 2
 
 -- Time
 opt.timeoutlen = 500
@@ -46,6 +46,7 @@ opt.laststatus = 3
 opt.pumheight = 10
 opt.scrolloff = 6
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.showtabline = 2
 
 -- opt.cursorline = true
 opt.colorcolumn = "120"
