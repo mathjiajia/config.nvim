@@ -51,7 +51,7 @@ local options = {
 			Stopped = " ",
 		},
 		diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " " },
-		git = { added = " ", changed = " ", removed = " " },
+		git = { branch = "  ", added = "  ", changed = "  ", removed = "  " },
 	},
 	-- exclude from indent lines
 	ft_exclude = {

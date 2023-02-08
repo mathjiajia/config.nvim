@@ -1,5 +1,3 @@
--- local opts = {}
-
 local api, fn = vim.api, vim.fn
 
 local conditions = require("heirline.conditions")
@@ -8,84 +6,44 @@ local devicons = require("nvim-web-devicons")
 local Util = require("util")
 
 local colors = {
-	bright_bg = utils.get_highlight("Folded").bg,
-	-- bright_fg  = utils.get_highlight('Folded').fg,
-	red = utils.get_highlight("DiagnosticError").fg,
-	dark_red = utils.get_highlight("DiffDelete").bg,
 	green = utils.get_highlight("String").fg,
 	blue = utils.get_highlight("Function").fg,
 	gray = utils.get_highlight("NonText").fg,
 	orange = utils.get_highlight("Constant").fg,
 	purple = utils.get_highlight("Statement").fg,
 	cyan = utils.get_highlight("Special").fg,
-	diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-	diag_error = utils.get_highlight("DiagnosticError").fg,
-	diag_hint = utils.get_highlight("DiagnosticHint").fg,
-	diag_info = utils.get_highlight("DiagnosticInfo").fg,
-	git_del = utils.get_highlight("Error").fg,
-	git_add = utils.get_highlight("Comment").fg,
-	git_change = utils.get_highlight("Function").fg,
-	work_dir = utils.get_highlight("Directory").fg,
 }
 
 require("heirline").load_colors(colors)
 
-local LeftCap = { provider = "▌", hl = { fg = "fg" } }
-
-local VimModeNormal = {
-	condition = function(self)
-		return self.mode == "n"
+local VimMode = {
+	init = function(self)
+		self.mode = vim.fn.mode()
 	end,
-
-	provider = " ●",
-	hl = { fg = "fg" },
-}
-
-local VimModeOthers = {
-	condition = function(self)
-		return self.mode ~= "n"
-	end,
-
 	static = {
 		modes = {
-			v = { "VISUAL", "cyan" },
-			V = { "V-LINE", "cyan" },
-			["\22"] = { "V-BLCK", "cyan" },
-			s = { "SELECT", "purple" },
-			S = { "S-LINE", "purple" },
-			["\19"] = { "S-BLCK", "purple" },
-			i = { "INSERT", "blue" },
-			R = { "RPLACE", "green" },
-			c = { "CMMAND", "green" },
-			r = { "...", "orange" },
-			["!"] = { "SHELL", "red" },
-			t = { "TERM", "red" },
+			n = "NORMAL",
+			v = "VISUAL",
+			V = "V-LINE",
+			["\22"] = "V-BLCK",
+			s = "SELECT",
+			S = "S-LINE",
+			["\19"] = "S-BLCK",
+			i = "INSERT",
+			R = "RPLACE",
+			c = "CMMAND",
+			r = " ...  ",
+			["!"] = "SHELL ",
+			t = " TERM ",
 		},
 	},
 
-	utils.surround({ "", "" }, function(self)
-		return self.modes[self.mode][2]
-	end, {
-		{
-			provider = function(self)
-				return "● " .. self.modes[self.mode][1]
-			end,
-		},
-		hl = function(self)
-			return { fg = "bg", bg = self.modes[self.mode][2] }
-		end,
-	}),
-}
-
-local VimMode = {
-	init = function(self)
-		self.mode = fn.mode()
+	provider = function(self)
+		return "  %2(" .. self.modes[self.mode] .. "%)"
 	end,
+	hl = { fg = "fg" },
 
-	VimModeNormal,
-	VimModeOthers,
-
-	update = { "ModeChanged" },
+	-- update = { "ModeChanged" },
 }
 
 local Snippets = {
@@ -98,7 +56,7 @@ local Snippets = {
 		local backward = ls.locally_jumpable(-1) and " " or ""
 		return backward .. forward
 	end,
-	hl = { fg = "red", bold = true },
+	hl = { fg = "purple" },
 }
 
 local WorkDir = {
@@ -112,7 +70,6 @@ local WorkDir = {
 		local trail = cwd:sub(-1) == "/" and "" or "/"
 		return icon .. cwd .. trail
 	end,
-	hl = { fg = "blue", bold = true },
 
 	on_click = {
 		callback = function()
@@ -120,6 +77,132 @@ local WorkDir = {
 		end,
 		name = "heirline_workdir",
 	},
+}
+
+local Git = {
+	condition = conditions.is_git_repo,
+
+	static = require("config").icons.git,
+
+	init = function(self)
+		---@diagnostic disable-next-line: undefined-field
+		self.status_dict = vim.b.gitsigns_status_dict
+		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+	end,
+
+	{
+		provider = function(self)
+			return self.branch .. self.status_dict.head
+		end,
+	},
+
+	{
+		provider = function(self)
+			local count = self.status_dict.added or 0
+			return count > 0 and (self.added .. count)
+		end,
+		hl = "GitSignsAdd",
+	},
+	{
+		provider = function(self)
+			local count = self.status_dict.removed or 0
+			return count > 0 and (self.removed .. count)
+		end,
+		hl = "GitSignsDelete",
+	},
+	{
+		provider = function(self)
+			local count = self.status_dict.changed or 0
+			return count > 0 and (self.changed .. count)
+		end,
+		hl = "GitSignsChange",
+	},
+
+	on_click = {
+		callback = function()
+			Util.float_term({ "lazygit" }, { cwd = Util.get_root() })
+		end,
+		name = "heirline_git",
+		update = false,
+	},
+}
+
+local Diagnostics = {
+	condition = conditions.has_diagnostics,
+
+	static = require("config").icons.diagnostics,
+
+	init = function(self)
+		self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+		self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+		self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+		self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+	end,
+
+	update = { "DiagnosticChanged", "BufEnter" },
+
+	{
+		provider = function(self)
+			return self.errors > 0 and (self.Error .. self.errors .. " ")
+		end,
+		hl = "DiagnosticError",
+	},
+	{
+		provider = function(self)
+			return self.warnings > 0 and (self.Warn .. self.warnings .. " ")
+		end,
+		hl = "DiagnosticWarn",
+	},
+	{
+		provider = function(self)
+			return self.info > 0 and (self.Info .. self.info .. " ")
+		end,
+		hl = "DiagnosticInfo",
+	},
+	{
+		provider = function(self)
+			return self.hints > 0 and (self.Hint .. self.hints)
+		end,
+		hl = "DiagnosticHint",
+	},
+
+	on_click = {
+		callback = function()
+			vim.diagnostic.setqflist()
+		end,
+		name = "heirline_diagnostics",
+	},
+}
+
+local LSPActive = {
+	condition = conditions.lsp_attached,
+	update = { "LspAttach", "LspDetach" },
+
+	provider = function()
+		local names = {}
+		for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+			table.insert(names, server.name)
+		end
+		return " ◍ [" .. table.concat(names, ",") .. "]"
+	end,
+
+	on_click = {
+		callback = function()
+			vim.defer_fn(function()
+				require("lspconfig.ui.lspinfo")()
+			end, 100)
+		end,
+		name = "heirline_LSP",
+	},
+}
+
+local Ruler = { provider = "%3l:%-3v 󰀹 %3p%%" }
+
+local Spell = {
+	condition = function()
+		return vim.wo.spell
+	end,
+	provider = "󰓆 Spell",
 }
 
 local FileNameBlock = {
@@ -188,156 +271,6 @@ local FileType = {
 	provider = function()
 		return string.upper(vim.bo.filetype)
 	end,
-	hl = { fg = utils.get_highlight("Type").fg, bold = true },
-}
-
-local Diagnostics = {
-	condition = conditions.has_diagnostics,
-
-	static = require("config").icons.diagnostics,
-
-	init = function(self)
-		self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-		self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-		self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-		self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-	end,
-
-	update = { "DiagnosticChanged", "BufEnter" },
-
-	{ provider = "![" },
-	{
-		provider = function(self)
-			return self.errors > 0 and (self.Error .. self.errors .. " ")
-		end,
-		hl = { fg = "diag_error" },
-	},
-	{
-		provider = function(self)
-			return self.warnings > 0 and (self.Warn .. self.warnings .. " ")
-		end,
-		hl = { fg = "diag_warn" },
-	},
-	{
-		provider = function(self)
-			return self.info > 0 and (self.Info .. self.info .. " ")
-		end,
-		hl = { fg = "diag_info" },
-	},
-	{
-		provider = function(self)
-			return self.hints > 0 and (self.Hint .. self.hints)
-		end,
-		hl = { fg = "diag_hint" },
-	},
-	{ provider = "]" },
-
-	on_click = {
-		callback = function()
-			-- require("trouble").toggle({ mode = "document_diagnostics" })
-			-- or
-			vim.diagnostic.setqflist()
-		end,
-		name = "heirline_diagnostics",
-	},
-}
-
-local Git = {
-	condition = conditions.is_git_repo,
-
-	init = function(self)
-		---@diagnostic disable-next-line: undefined-field
-		self.status_dict = vim.b.gitsigns_status_dict
-		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
-	end,
-
-	hl = { fg = "orange" },
-
-	{
-		provider = function(self)
-			return " " .. self.status_dict.head
-		end,
-		hl = { bold = true },
-	},
-
-	{
-		condition = function(self)
-			return self.has_changes
-		end,
-		provider = "(",
-	},
-	{
-		provider = function(self)
-			local count = self.status_dict.added or 0
-			return count > 0 and ("+" .. count)
-		end,
-		hl = { fg = "git_add" },
-	},
-	{
-		provider = function(self)
-			local count = self.status_dict.removed or 0
-			return count > 0 and ("-" .. count)
-		end,
-		hl = { fg = "git_del" },
-	},
-	{
-		provider = function(self)
-			local count = self.status_dict.changed or 0
-			return count > 0 and ("~" .. count)
-		end,
-		hl = { fg = "git_change" },
-	},
-	{
-		condition = function(self)
-			return self.has_changes
-		end,
-		provider = ")",
-	},
-
-	on_click = {
-		callback = function()
-			Util.float_term({ "lazygit" }, { cwd = Util.get_root() })
-		end,
-		name = "heirline_git",
-		update = false,
-	},
-}
-
-local LSPActive = {
-	condition = conditions.lsp_attached,
-	update = { "LspAttach", "LspDetach" },
-
-	-- provider = " ◍ LSP ",
-	provider = function()
-		local names = {}
-		for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-			table.insert(names, server.name)
-		end
-		return " ◍ [" .. table.concat(names, ",") .. "]"
-	end,
-	hl = { fg = "green" },
-
-	on_click = {
-		callback = function()
-			vim.defer_fn(function()
-				require("lspconfig.ui.lspinfo")()
-			end, 100)
-		end,
-		name = "heirline_LSP",
-	},
-}
-
-local Ruler = { provider = " %3p%% %2l(%02v)/%-3L" }
-
-local ScrollBar = {
-	static = { sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" } },
-	provider = function(self)
-		local curr_line = vim.api.nvim_win_get_cursor(0)[1]
-		local lines = vim.api.nvim_buf_line_count(0)
-		local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-		return string.rep(self.sbar[i], 2)
-	end,
-	hl = { fg = "blue", bg = "bright_bg" },
 }
 
 local TerminalName = {
@@ -345,7 +278,7 @@ local TerminalName = {
 		local tname, _ = api.nvim_buf_get_name(0):gsub(".*:", "")
 		return " " .. tname
 	end,
-	hl = { fg = "blue", bold = true },
+	hl = { fg = "blue" },
 }
 
 local HelpFileName = {
@@ -363,20 +296,20 @@ local Align = { provider = "%=" }
 local Space = { provider = " " }
 
 local DefaultStatusline = {
-	LeftCap,
 	VimMode,
-	Space,
 	Snippets,
 	Space,
 	WorkDir,
+	Git,
 	Align,
 	Diagnostics,
-	Space,
-	Git,
 	LSPActive,
+	Space,
 	Ruler,
 	Space,
-	ScrollBar,
+	FileType,
+	Space,
+	Spell,
 }
 
 local InactiveStatusline = {
@@ -407,9 +340,8 @@ local TerminalStatusline = {
 	condition = function()
 		return conditions.buffer_matches({ buftype = { "terminal" } })
 	end,
-	hl = { bg = "dark_red" },
 
-	{ condition = conditions.is_active, LeftCap, VimMode, Space },
+	{ condition = conditions.is_active, VimMode, Space },
 	FileType,
 	Space,
 	TerminalName,
@@ -448,7 +380,7 @@ local TablineFileName = {
 		return filename
 	end,
 	hl = function(self)
-		return { bold = self.is_active or self.is_visible, italic = true }
+		return { bold = self.is_active or self.is_visible }
 	end,
 }
 
@@ -482,8 +414,6 @@ local TablineFileNameBlock = {
 	hl = function(self)
 		if self.is_active then
 			return "TabLineSel"
-		-- elseif not api.nvim_buf_is_loaded(self.bufnr) then
-		--   return { fg = "gray" }
 		else
 			return "TabLine"
 		end
@@ -513,7 +443,7 @@ local TablineCloseButton = {
 		return not api.nvim_buf_get_option(self.bufnr, "modified")
 	end,
 	{ provider = " " },
-	{ -- ✗    
+	{
 		provider = "✗",
 		hl = { fg = "gray" },
 		on_click = {
@@ -599,102 +529,7 @@ local TabLineOffset = {
 
 local TabLine = { TabLineOffset, BufferLine, TabPages }
 
--- local StatusColumn = {
--- 	static = {
--- 		---@return {name:string, text:string, texthl:string}[]
--- 		get_signs = function()
--- 			-- local buf = vim.api.nvim_get_current_buf()
--- 			local buf = vim.fn.expand("%")
--- 			return vim.tbl_map(function(sign)
--- 				return vim.fn.sign_getdefined(sign.name)[1]
--- 			end, vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs)
--- 		end,
---
--- 		resolve = function(self, name)
--- 			for pat, cb in pairs(self.handlers) do
--- 				if name:match(pat) then
--- 					return cb
--- 				end
--- 			end
--- 		end,
---
--- 		handlers = {
--- 			["GitSigns.*"] = function(args)
--- 				require("gitsigns").preview_hunk()
--- 			end,
--- 			["Dap.*"] = function(args)
--- 				require("dap").toggle_breakpoint()
--- 			end,
--- 			["Diagnostic.*"] = function(args)
--- 				vim.diagnostic.open_float() -- { pos = args.mousepos.line - 1, relative = "mouse" })
--- 			end,
--- 		},
--- 	},
--- 	-- init = function(self)
--- 	--     local signs = {}
--- 	--     for _, s in ipairs(self.get_signs()) do
--- 	--         if s.name:find("GitSign") then
--- 	--             self.git_sign = s
--- 	--         else
--- 	--             table.insert(signs, s)
--- 	--         end
--- 	--     end
--- 	--     self.signs = signs
--- 	-- end,
--- 	{
--- 		provider = "%s",
--- 		-- provider = function(self)
--- 		--     -- return vim.inspect({ self.signs, self.git_sign })
--- 		--     local children = {}
--- 		--     for _, sign in ipairs(self.signs) do
--- 		--         table.insert(children, {
--- 		--             provider = sign.text,
--- 		--             hl = sign.texthl,
--- 		--         })
--- 		--     end
--- 		--     self[1] = self:new(children, 1)
--- 		-- end,
---
--- 		on_click = {
--- 			callback = function(self, ...)
--- 				local mousepos = vim.fn.getmousepos()
--- 				vim.api.nvim_win_set_cursor(0, { mousepos.line, mousepos.column })
--- 				local sign_at_cursor = vim.fn.screenstring(mousepos.screenrow, mousepos.screencol)
--- 				if sign_at_cursor ~= "" then
--- 					local args = {
--- 						mousepos = mousepos,
--- 					}
--- 					local signs = vim.fn.sign_getdefined()
--- 					for _, sign in ipairs(signs) do
--- 						local glyph = sign.text:gsub(" ", "")
--- 						if sign_at_cursor == glyph then
--- 							vim.defer_fn(function()
--- 								self:resolve(sign.name)(args)
--- 							end, 10)
--- 							return
--- 						end
--- 					end
--- 				end
--- 			end,
--- 			name = "heirline_signcol_callback",
--- 			update = true,
--- 		},
--- 	},
--- 	{
--- 		provider = "%=%4{v:virtnum ? '' : &nu ? (&rnu && v:relnum ? v:relnum : v:lnum) . ' ' : ''}",
--- 	},
--- 	{
--- 		provider = "%{% &fdc ? '%C ' : '' %}",
--- 	},
--- 	-- {
--- 	--     provider = function(self)
--- 	--         return self.git_sign and self.git_sign.text
--- 	--     end,
--- 	--     hl = function(self)
--- 	--         return self.git_sign and self.git_sign.texthl
--- 	--     end,
--- 	-- },
--- }
+vim.opt.showtabline = 2
 
 require("heirline").setup({
 	statusline = StatusLine,

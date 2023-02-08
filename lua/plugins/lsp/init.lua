@@ -40,14 +40,21 @@ return {
 			local servers = {
 				clangd = {},
 				pyright = {},
-				sumneko_lua = {},
+				sumneko_lua = {
+					settings = {
+						Lua = {
+							workspace = { checkThirdParty = false },
+							telemetry = { enable = false },
+						},
+					},
+				},
 				texlab = {
 					settings = {
 						texlab = {
 							build = {
 								executable = "tectonic",
 								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-								-- args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+								-- args = { "-pdflatex=lualatex", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
 								onSave = true,
 							},
 							forwardSearch = {
@@ -87,7 +94,7 @@ return {
 				on_attach = on_attach,
 			})
 		end,
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- inject LSP
@@ -114,7 +121,7 @@ return {
 				},
 			}
 		end,
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- cmdline tools and lsp servers

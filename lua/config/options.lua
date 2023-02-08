@@ -46,7 +46,6 @@ opt.laststatus = 3
 opt.pumheight = 10
 opt.scrolloff = 6
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
-opt.showtabline = 2
 
 -- opt.cursorline = true
 opt.colorcolumn = "120"

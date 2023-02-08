@@ -50,7 +50,7 @@ return {
 	-- winbar
 	{
 		"utilyre/barbecue.nvim",
-		opts = { show_dirname = false },
+		config = true,
 		dependencies = { "SmiteshP/nvim-navic" },
 		event = "UIEnter",
 	},
@@ -79,7 +79,7 @@ return {
 			show_trailing_blankline_indent = false,
 			filetype_exclude = require("config").ft_exclude,
 		},
-		event = "BufReadPre",
+		event = { "BufReadPost", "BufNewFile" },
 	},
 
 	-- active indent guide and indent text objects
@@ -95,7 +95,7 @@ return {
 			require("mini.indentscope").setup(opts)
 		end,
 		opts = { options = { try_as_border = true } },
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- noicer ui

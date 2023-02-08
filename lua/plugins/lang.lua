@@ -34,6 +34,7 @@ return {
 			load = {
 				["core.defaults"] = {},
 				["core.norg.concealer"] = {},
+				["core.norg.dirman"] = { config = { workspaces = { work = "~/Documents/neorg/work" } } },
 				["core.norg.completion"] = { config = { engine = "nvim-cmp" } },
 				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 			},

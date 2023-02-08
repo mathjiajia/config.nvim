@@ -6,19 +6,19 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- stylua: ignore start
 -- Move to window using the <meta> movement keys
-vim.keymap.set("n", "<M-h>", function() vim.cmd.wincmd("h") end, { desc = "Move to Left Window" })
-vim.keymap.set("n", "<M-j>", function() vim.cmd.wincmd("j") end, { desc = "Move to Bottom Window" })
-vim.keymap.set("n", "<M-k>", function() vim.cmd.wincmd("k") end, { desc = "Move to Upper Window" })
-vim.keymap.set("n", "<M-l>", function() vim.cmd.wincmd("l") end, { desc = "Move to Right Window" })
+vim.keymap.set("n", "<M-h>", function() vim.cmd.wincmd("h") end, { desc = "Left Window" })
+vim.keymap.set("n", "<M-j>", function() vim.cmd.wincmd("j") end, { desc = "Bottom Window" })
+vim.keymap.set("n", "<M-k>", function() vim.cmd.wincmd("k") end, { desc = "Upper Window" })
+vim.keymap.set("n", "<M-l>", function() vim.cmd.wincmd("l") end, { desc = "Right Window" })
+
+-- buffer
+vim.keymap.set("n", "<leader>bd", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Delete Buffer" })
+vim.keymap.set("n", "<leader>bD", function() vim.api.nvim_buf_delete(0, { force = true }) end, { desc = "Delete Buffer (force)" })
 -- stylua: ignore end
 
--- INSERT
--- vim.keymap.set("i", "<C-f>", "<Right>", { desc = "Move Forward a Char" })
--- vim.keymap.set("i", "<C-b>", "<Left>", { desc = "Move Backward a Char" })
-
 -- list
-vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
-vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
+vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 -- stylua: ignore start
 -- toggle options

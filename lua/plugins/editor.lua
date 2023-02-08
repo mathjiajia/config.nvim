@@ -186,17 +186,7 @@ return {
 				vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Hunk Object" })
 			end,
 		},
-		event = "BufReadPre",
-	},
-
-	-- buffer remove
-	{
-		"echasnovski/mini.bufremove",
-		-- stylua: ignore
-		keys = {
-			{ "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-			{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-		},
+		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- better diagnostics list and others
@@ -220,7 +210,7 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		config = true,
-		event = "BufReadPost",
+		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "TodoTrouble", "TodoTelescope" },
 		-- stylua: ignore
 		keys = {

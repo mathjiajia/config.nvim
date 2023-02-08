@@ -2,6 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
 		"HiPhish/nvim-ts-rainbow2",
+		commit = "7d33fb4402676723b0d7ca4d95717f5e020cd123",
 		-- "nvim-treesitter/nvim-treesitter-context",
 	},
 	config = function(_, opts)
@@ -25,5 +26,5 @@ return {
 		},
 	},
 	build = ":TSUpdate",
-	event = "BufReadPost",
+	event = { "BufReadPost", "BufNewFile" },
 }
