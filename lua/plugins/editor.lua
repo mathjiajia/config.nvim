@@ -139,6 +139,8 @@ return {
 			{ "<leader>sg", Util.telescope("live_grep"), desc = "Live Grep (root dir)" },
 			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (cwd)" },
 			{ "<leader>sh", Util.tele_builtin("help_tags"), desc = "Help Tags" },
+			{ "<leader>ss", Util.telescope("grep_string"), desc = "Grep String (root dir)" },
+			{ "<leader>sS", Util.telescope("grep_string", { cwd = false }), desc = "Grep String" },
 		},
 	},
 

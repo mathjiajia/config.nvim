@@ -128,22 +128,26 @@ return {
 	-- auto pairs
 	{
 		"windwp/nvim-autopairs",
-		config = function()
+		config = function(_, opts)
 			local npairs = require("nvim-autopairs")
 			local Rule = require("nvim-autopairs.rule")
+			-- local cond = require("nvim-autopairs.conds")
 
-			npairs.setup()
+			npairs.setup(opts)
 
 			-- turn off the quotes rule for LaTeX
 			npairs.get_rule("'")[1].not_filetypes = { "tex", "latex" }
 			npairs.get_rule('"')[1].not_filetypes = { "tex", "latex" }
 
 			-- add new rules for LaTeX
-			npairs.add_rules({ Rule("`", "'", { "tex", "latex" }) })
-			npairs.add_rules({ Rule("``", "'", { "tex", "latex" }) }) -- tricky
-			npairs.add_rules({ Rule("\\(", "\\)", { "tex", "latex" }) })
-			npairs.add_rules({ Rule("\\[", "\\]", { "tex", "latex" }) })
+			npairs.add_rules({
+				Rule("`", "'", { "tex", "latex" }),
+				Rule("``", "'", { "tex", "latex" }), -- tricky
+				Rule("\\(", "\\)", { "tex", "latex" }),
+				Rule("\\[", "\\]", { "tex", "latex" }),
+			})
 		end,
+		opts = { check_ts = true },
 		event = "InsertEnter",
 	},
 
