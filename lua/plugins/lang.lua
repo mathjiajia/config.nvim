@@ -42,4 +42,13 @@ return {
 		build = ":Neorg sync-parsers",
 		ft = "norg",
 	},
+
+	-- swift
+	{
+		"dimaportenko/telescope-simulators.nvim",
+		config = function()
+			require("simulators").setup()
+		end,
+		ft = "swift",
+	},
 }

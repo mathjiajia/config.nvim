@@ -54,9 +54,10 @@ opt.relativenumber = true
 opt.signcolumn = "yes"
 
 -- Wrap
-opt.breakindent = true
-opt.linebreak = true
-opt.showbreak = "> "
+opt.wrap = false
+-- opt.breakindent = true
+-- opt.linebreak = true
+-- opt.showbreak = "> "
 opt.whichwrap:append("[,]")
 
 -- Theme

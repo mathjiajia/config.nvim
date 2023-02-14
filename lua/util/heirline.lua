@@ -43,7 +43,7 @@ local VimMode = {
 	end,
 	hl = { fg = "fg" },
 
-	-- update = { "ModeChanged" },
+	update = { "ModeChanged", "CmdlineLeave" },
 }
 
 local Snippets = {

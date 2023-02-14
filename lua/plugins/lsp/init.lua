@@ -40,7 +40,7 @@ return {
 			local servers = {
 				clangd = {},
 				pyright = {},
-				sumneko_lua = {
+				lua_ls = {
 					settings = {
 						Lua = {
 							workspace = { checkThirdParty = false },
@@ -145,26 +145,23 @@ return {
 	-- lsp enhancement
 	-- {
 	-- 	"glepnir/lspsaga.nvim",
-	-- 	opts = { ui = { border = "rounded" } },
+	-- 	opts = {
+	-- 		ui = { border = "rounded" },
+	-- 		symbol_in_winbar = { enable = false },
+	-- 	},
 	-- 	cmd = "Lspsaga",
 	-- 	-- stylua: ignore
 	-- 	keys = {
 	-- 		{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
-	-- 		{ "<M-o>", function() require("lspsaga.outline"):outline() end, silent = true, desc = "Lsp Outline" },
 	-- 	},
 	-- },
 
 	{
 		"dnlhc/glance.nvim",
 		opts = {
-			border = {
-				enable = true,
-			},
+			border = { enable = true },
 			hooks = {
 				---Don't open glance when there is only one result and it is located in the current buffer, open otherwise
-				---@param results table
-				---@param open function(table)
-				---@param jump function(string)
 				before_open = function(results, open, jump)
 					local uri = vim.uri_from_bufnr(0)
 					if #results == 1 then
