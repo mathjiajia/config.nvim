@@ -39,13 +39,13 @@ function M.on_attach(client, bufnr)
 
 	if self:has("documentFormatting") then
 		api.nvim_create_autocmd("BufWritePre", {
-			group = api.nvim_create_augroup("LspFormat." .. bufnr, {}),
-			buffer = bufnr,
 			callback = function()
 				if M.autoformat then
 					M.format()
 				end
 			end,
+			group = api.nvim_create_augroup("LspFormat." .. bufnr, {}),
+			buffer = bufnr,
 		})
 	end
 end

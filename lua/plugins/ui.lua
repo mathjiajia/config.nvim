@@ -75,7 +75,7 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		opts = {
-			-- use_treesitter = true,
+			use_treesitter = true,
 			show_trailing_blankline_indent = false,
 			filetype_exclude = require("config").ft_exclude,
 		},
@@ -140,7 +140,7 @@ return {
 					{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
 					{ desc = " Files", group = "Label", action = "Telescope find_files", key = "f" },
 					{ desc = " NeoVim", group = "", action = "Telescope find_files cwd=~/.config/nvim", key = "n" },
-					{ desc = " Quit", group = "Number", key = "q", action = "quitall" },
+					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
 				},
 			},
 		},

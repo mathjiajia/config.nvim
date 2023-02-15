@@ -4,9 +4,6 @@ local opt = vim.opt
 opt.clipboard = "unnamedplus"
 opt.confirm = true
 
--- Completion
-opt.completeopt = { "menu", "menuone", "noselect" }
-
 -- Diff
 opt.diffopt:append({ linematch = 60 })
 
@@ -54,10 +51,10 @@ opt.relativenumber = true
 opt.signcolumn = "yes"
 
 -- Wrap
-opt.wrap = false
--- opt.breakindent = true
--- opt.linebreak = true
--- opt.showbreak = "> "
+-- opt.wrap = false
+opt.breakindent = true
+opt.linebreak = true
+opt.showbreak = "> "
 opt.whichwrap:append("[,]")
 
 -- Theme

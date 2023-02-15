@@ -34,21 +34,31 @@ return {
 			load = {
 				["core.defaults"] = {},
 				["core.norg.concealer"] = {},
-				["core.norg.dirman"] = { config = { workspaces = { work = "~/Documents/neorg/work" } } },
+				["core.norg.dirman"] = {
+					config = {
+						workspaces = {
+							log = "~/Documents/neorg/log",
+							projects = "~/Documents/neorg/projects",
+							wiki = "~/Documents/neorg/wiki",
+						},
+						default_workspace = "wiki",
+					},
+				},
 				["core.norg.completion"] = { config = { engine = "nvim-cmp" } },
 				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 			},
 		},
 		build = ":Neorg sync-parsers",
+		cmd = "Neorg",
 		ft = "norg",
 	},
 
 	-- swift
-	{
-		"dimaportenko/telescope-simulators.nvim",
-		config = function()
-			require("simulators").setup()
-		end,
-		ft = "swift",
-	},
+	-- {
+	-- 	"dimaportenko/telescope-simulators.nvim",
+	-- 	config = function()
+	-- 		require("simulators").setup()
+	-- 	end,
+	-- 	ft = "swift",
+	-- },
 }

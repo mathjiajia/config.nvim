@@ -27,31 +27,31 @@ function M.on_attach(client, bufnr)
 	self:map("<leader>ca", lsp.buf.code_action, { desc = "Code Action", has = "codeAction" })
 
 	if self:has("documentHighlight") then
-		augroup("lsp_document_highlight", {})
+		local group = augroup("lsp_document_highlight", {})
 		autocmd({ "CursorHold", "CursorHoldI" }, {
 			callback = lsp.buf.document_highlight,
-			group = "lsp_document_highlight",
+			group = group,
 			buffer = bufnr,
 		})
 		autocmd({ "CursorMoved", "CursorMovedI" }, {
 			callback = lsp.buf.clear_references,
-			group = "lsp_document_highlight",
+			group = group,
 			buffer = bufnr,
 		})
 	end
 
-	-- if self:has('codeLens') then
-	-- 	augroup("lsp_document_codelens", {})
+	-- if self:has("codeLens") then
+	-- 	local group = augroup("lsp_document_codelens", {})
 	-- 	autocmd("BufEnter", {
 	-- 		callback = lsp.codelens.refresh,
 	-- 		buffer = bufnr,
-	-- 		group = "lsp_document_codelens",
+	-- 		group = group,
 	-- 		once = true,
 	-- 	})
 	-- 	autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
 	-- 		callback = lsp.codelens.refresh,
 	-- 		buffer = bufnr,
-	-- 		group = "lsp_document_codelens",
+	-- 		group = group,
 	-- 	})
 	-- end
 end

@@ -9,6 +9,7 @@ return {
 		init = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
 			if fn.argc() == 1 then
+				---@diagnostic disable-next-line: param-type-mismatch
 				local stat = vim.loop.fs_stat(fn.argv(0))
 				if stat and stat.type == "directory" then
 					require("neo-tree")
@@ -139,8 +140,8 @@ return {
 			{ "<leader>sg", Util.telescope("live_grep"), desc = "Live Grep (root dir)" },
 			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (cwd)" },
 			{ "<leader>sh", Util.tele_builtin("help_tags"), desc = "Help Tags" },
-			{ "<leader>ss", Util.telescope("grep_string"), desc = "Grep String (root dir)" },
-			{ "<leader>sS", Util.telescope("grep_string", { cwd = false }), desc = "Grep String" },
+			{ "<leader>ss", Util.telescope("grep_string"), desc = "Grep String (root dir)", mode = { "n", "x" } },
+			{ "<leader>sS", Util.telescope("grep_string", { cwd = false }), desc = "Grep String", mode = { "n", "x" } },
 		},
 	},
 
@@ -213,12 +214,12 @@ return {
 		"folke/todo-comments.nvim",
 		config = true,
 		event = { "BufReadPost", "BufNewFile" },
-		cmd = { "TodoTrouble", "TodoTelescope" },
+		cmd = "TodoTelescope", -- "TodoTrouble"
 		-- stylua: ignore
 		keys = {
 			{ "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
 			{ "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-			{ "<leader>xt", function() require("trouble").open("todo") end, desc = "Todo Trouble" },
+			-- { "<leader>xt", function() require("trouble").open("todo") end, desc = "Todo Trouble" },
 		},
 	},
 
@@ -240,7 +241,7 @@ return {
 	{
 		"sindrets/diffview.nvim",
 		opts = { enhanced_diff_hl = true },
-		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
 		-- stylua: ignore
 		keys = { { "<leader>gd", function() require("diffview").open({}) end, desc = "Diff View" } },
 	},

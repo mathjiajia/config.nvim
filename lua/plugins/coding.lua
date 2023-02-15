@@ -90,7 +90,7 @@ return {
 							nvim_lsp = "[LSP]",
 							luasnip = "[Snip]",
 							neorg = "[Norg]",
-							-- copilot = "[GHC]",
+							copilot = "[GHC]",
 							path = "[Path]",
 							rg = "[RG]",
 						})[entry.source.name]
@@ -103,7 +103,7 @@ return {
 					{ name = "luasnip", option = { show_autosnippets = true } },
 					{ name = "neorg" },
 					{ name = "buffer", keyword_length = 3 },
-					-- { name = "copilot", max_item_count = 3 },
+					{ name = "copilot", max_item_count = 3 },
 					{ name = "path", keyword_length = 3 },
 					{ name = "rg", keyword_length = 4 },
 				},
@@ -117,38 +117,19 @@ return {
 	},
 
 	-- github copilot
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	config = true,
-	-- 	dependencies = { "zbirenbaum/copilot-cmp", config = true },
-	-- 	event = "InsertEnter",
-	-- 	cmd = "Copilot",
-	-- },
+	{
+		"zbirenbaum/copilot.lua",
+		config = true,
+		dependencies = { "zbirenbaum/copilot-cmp", config = true },
+		-- event = "InsertEnter",
+		cmd = "Copilot",
+	},
 
 	-- auto pairs
 	{
-		"windwp/nvim-autopairs",
-		config = function(_, opts)
-			local npairs = require("nvim-autopairs")
-			local Rule = require("nvim-autopairs.rule")
-			-- local cond = require("nvim-autopairs.conds")
-
-			npairs.setup(opts)
-
-			-- turn off the quotes rule for LaTeX
-			npairs.get_rule("'")[1].not_filetypes = { "tex", "latex" }
-			npairs.get_rule('"')[1].not_filetypes = { "tex", "latex" }
-
-			-- add new rules for LaTeX
-			npairs.add_rules({
-				Rule("`", "'", { "tex", "latex" }),
-				Rule("``", "'", { "tex", "latex" }), -- tricky
-				Rule("\\(", "\\)", { "tex", "latex" }),
-				Rule("\\[", "\\]", { "tex", "latex" }),
-			})
-		end,
-		opts = { check_ts = true },
-		event = "InsertEnter",
+		"altermo/ultimate-autopair.nvim",
+		config = true,
+		event = { "InsertEnter", "CmdlineEnter" },
 	},
 
 	-- surround

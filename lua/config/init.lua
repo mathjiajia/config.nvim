@@ -69,30 +69,6 @@ local options = {
 		"norg",
 		"Trouble",
 	},
-	-- cli tools
-	ms_install = { "black", "debugpy", "markdownlint", "prettierd", "stylua", "tectonic" },
-	-- treesitter parsers
-	ts_install = {
-		"bash",
-		"bibtex",
-		"c",
-		"diff",
-		"fish",
-		"git_rebase",
-		"gitcommit",
-		"gitignore",
-		"help",
-		"latex",
-		"lua",
-		"markdown",
-		"markdown_inline",
-		-- "norg",
-		"python",
-		"query",
-		"regex",
-		"swift",
-		"vim",
-	},
 }
 
 setmetatable(M, {

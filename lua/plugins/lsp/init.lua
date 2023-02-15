@@ -132,7 +132,7 @@ return {
 			require("mason").setup(opts)
 
 			local mr = require("mason-registry")
-			local tools = require("config").ms_install
+			local tools = { "black", "debugpy", "markdownlint", "prettierd", "stylua", "tectonic" }
 			for _, tool in ipairs(tools) do
 				local p = mr.get_package(tool)
 				if not p:is_installed() then
@@ -143,18 +143,18 @@ return {
 	},
 
 	-- lsp enhancement
-	-- {
-	-- 	"glepnir/lspsaga.nvim",
-	-- 	opts = {
-	-- 		ui = { border = "rounded" },
-	-- 		symbol_in_winbar = { enable = false },
-	-- 	},
-	-- 	cmd = "Lspsaga",
-	-- 	-- stylua: ignore
-	-- 	keys = {
-	-- 		{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
-	-- 	},
-	-- },
+	{
+		"glepnir/lspsaga.nvim",
+		opts = {
+			ui = { border = "rounded" },
+			symbol_in_winbar = { enable = false },
+		},
+		cmd = "Lspsaga",
+		-- stylua: ignore
+		keys = {
+			{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
+		},
+	},
 
 	{
 		"dnlhc/glance.nvim",

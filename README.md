@@ -3,29 +3,13 @@
 My personal NeoVim configuration files on &#63743; macOS (apple silicon).
 
 This setup is mainly used for taking notes and writing documents in LaTeX.
+For the useful snippets (for mathematics, especially algebraic geometry)
+see [mySnippets][mysnippets]
 
 ## Structure
 
 ```txt
 ├── LICENSE
-├── LuaSnips
-│   ├── all.lua
-│   ├── gitcommit.lua
-│   ├── lua.lua
-│   ├── markdown.lua
-│   ├── norg.lua
-│   ├── python.lua
-│   └── tex
-│       ├── arrows.lua
-│       ├── beamer.lua
-│       ├── brackets.lua
-│       ├── environments.lua
-│       ├── misc.lua
-│       ├── operators.lua
-│       ├── phrases.lua
-│       ├── sectioning.lua
-│       ├── style.lua
-│       └── symbols.lua
 ├── README.md
 ├── after
 │   ├── ftplugin
@@ -68,11 +52,8 @@ This setup is mainly used for taking notes and writing documents in LaTeX.
 │   │   ├── ui.lua
 │   │   └── util.lua
 │   └── util
-│       ├── context.lua
 │       ├── heirline.lua
-│       ├── init.lua
-│       ├── latex.lua
-│       └── position.lua
+│       └── init.lua
 ├── spell
 │   ├── en.utf-8.add
 │   └── en.utf-8.add.spl
@@ -85,4 +66,5 @@ This setup is mainly used for taking notes and writing documents in LaTeX.
 - `lua/snips` -- a folder of utility functions for snippets
 - `after/ftplugin` -- individual file type settings
 - `after/plugin` -- some plugins no need to load early
-- `LuaSnips` -- useful snippets for different languages
+
+[mysnippets]: https://github.com/mathjiajia/mySnippets
