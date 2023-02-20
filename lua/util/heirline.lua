@@ -52,8 +52,9 @@ local Snippets = {
 	provider = function()
 		local ls = require("luasnip")
 		local forward = ls.locally_jumpable(1) and "" or ""
-		local backward = ls.locally_jumpable(-1) and " " or ""
-		return backward .. forward
+		local backward = ls.locally_jumpable(-1) and "" or ""
+		local choice = ls.choice_active() and " 󰇘 " or " "
+		return backward .. choice .. forward
 	end,
 	hl = { fg = "purple" },
 }
@@ -244,10 +245,11 @@ local Space = { provider = " " }
 
 local DefaultStatusline = {
 	VimMode,
-	Snippets,
 	Space,
 	WorkDir,
 	Git,
+	Align,
+	Snippets,
 	Align,
 	Diagnostics,
 	LSPActive,
