@@ -30,6 +30,7 @@ return {
 	-- neorg
 	{
 		"nvim-neorg/neorg",
+		dependencies = "nvim-neorg/neorg-telescope",
 		opts = {
 			load = {
 				["core.defaults"] = {},
@@ -46,6 +47,7 @@ return {
 				},
 				["core.norg.completion"] = { config = { engine = "nvim-cmp" } },
 				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
+				["core.integrations.telescope"] = {},
 			},
 		},
 		build = ":Neorg sync-parsers",

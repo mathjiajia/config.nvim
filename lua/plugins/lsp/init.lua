@@ -132,7 +132,7 @@ return {
 			require("mason").setup(opts)
 
 			local mr = require("mason-registry")
-			local tools = { "black", "debugpy", "markdownlint", "prettierd", "stylua", "tectonic" }
+			local tools = { "black", "debugpy", "glow", "markdownlint", "prettierd", "stylua", "tectonic" }
 			for _, tool in ipairs(tools) do
 				local p = mr.get_package(tool)
 				if not p:is_installed() then
