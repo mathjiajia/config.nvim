@@ -128,12 +128,11 @@ return {
 	-- auto pairs
 	{
 		"altermo/ultimate-autopair.nvim",
-		opts = {
-			default_pairs = {
-				{ '"', '"', rules = { { "not", { "filetype", "tex" } } } },
-				ft = { tex = { { "\\(", "\\)" } } },
+		opts = { internal_pairs = {
+			ft = {
+				tex = { { "\\(", "\\)" }, { "``", "''" } },
 			},
-		},
+		} },
 		event = { "InsertEnter", "CmdlineEnter" },
 	},
 

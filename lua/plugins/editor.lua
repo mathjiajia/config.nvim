@@ -111,7 +111,10 @@ return {
 					live_grep = { path_display = { "shorten" } },
 				},
 				extensions = {
-					bibtex = { format = "plain" },
+					bibtex = {
+						format = "plain",
+						global_files = { "~/TeX/Jiabibtex.bib" },
+					},
 					file_browser = { theme = "ivy" },
 					frecency = {
 						show_scores = true,
@@ -212,6 +215,7 @@ return {
 	-- todo-comments
 	{
 		"folke/todo-comments.nvim",
+		enabled = false,
 		config = true,
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = "TodoTelescope", -- "TodoTrouble"

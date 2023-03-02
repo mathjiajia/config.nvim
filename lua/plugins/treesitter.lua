@@ -4,7 +4,7 @@ return {
 	config = function(_, opts)
 		-- Folding
 		vim.opt.foldmethod = "expr"
-		vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		vim.opt.foldenable = false
 
 		require("nvim-treesitter.configs").setup(opts)
@@ -14,6 +14,7 @@ return {
 			"bash",
 			"bibtex",
 			"c",
+			"comment",
 			"diff",
 			"fish",
 			"git_rebase",
@@ -24,6 +25,7 @@ return {
 			"lua",
 			"markdown",
 			"markdown_inline",
+			"matlab",
 			"norg",
 			"python",
 			"query",

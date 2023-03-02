@@ -85,13 +85,15 @@ return {
 	-- active indent guide and indent text objects
 	{
 		"echasnovski/mini.indentscope",
-		config = function(_, opts)
+		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = require("config").ft_exclude,
 				callback = function()
 					vim.b.miniindentscope_disable = true
 				end,
 			})
+		end,
+		config = function(_, opts)
 			require("mini.indentscope").setup(opts)
 		end,
 		opts = { options = { try_as_border = true } },
@@ -164,6 +166,14 @@ return {
 		opts = { plugins = { gitsigns = true } },
 		cmd = "ZenMode",
 	},
+
+	-- {
+	-- 	"nullchilly/fastcolor.nvim",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("fastcolor").load("vscode")
+	-- 	end,
+	-- },
 
 	-- alternative to matchparen neovim plugin
 	{
