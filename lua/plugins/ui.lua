@@ -93,10 +93,9 @@ return {
 				end,
 			})
 		end,
-		config = function(_, opts)
-			require("mini.indentscope").setup(opts)
+		config = function()
+			require("mini.indentscope").setup({ options = { try_as_border = true } })
 		end,
-		opts = { options = { try_as_border = true } },
 		event = { "BufReadPre", "BufNewFile" },
 	},
 

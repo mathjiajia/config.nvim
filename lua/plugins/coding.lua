@@ -4,9 +4,17 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = { "mathjiajia/mysnippets" },
-		config = function(_, opts)
+		config = function()
+			local types = require("luasnip.util.types")
+
 			local ls = require("luasnip")
-			ls.setup(opts)
+			ls.setup({
+				update_events = "TextChanged,TextChangedI",
+				enable_autosnippets = true,
+				ext_opts = {
+					[types.choiceNode] = { active = { virt_text = { { "« ", "NonText" } } } },
+				},
+			})
 
 			require("luasnip.loaders.from_lua").lazy_load({
 				paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets",
@@ -26,14 +34,6 @@ return {
 			end, { desc = "LuaSnip Next Choice" })
 			-- stylua: ignore end
 		end,
-		opts = function()
-			local types = require("luasnip.util.types")
-			return {
-				update_events = "TextChanged,TextChangedI",
-				enable_autosnippets = true,
-				ext_opts = { [types.choiceNode] = { active = { virt_text = { { "« ", "NonText" } } } } },
-			}
-		end,
 	},
 
 	-- auto completion
@@ -47,28 +47,11 @@ return {
 			"lukas-reineke/cmp-rg",
 			"saadparwaiz1/cmp_luasnip",
 		},
-		config = function(_, opts)
-			local cmp = require("cmp")
-			cmp.setup(opts)
-
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = { { name = "buffer" } },
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "path" },
-					{ name = "cmdline" },
-				},
-			})
-		end,
-		opts = function()
+		config = function()
 			local cmp = require("cmp")
 			local cmp_kinds = require("config").icons.cmp_kinds
 
-			return {
+			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -111,7 +94,20 @@ return {
 					completion = { border = "rounded", col_offset = -3 },
 					documentation = { border = "rounded" },
 				},
-			}
+			})
+
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = { { name = "buffer" } },
+			})
+
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "path" },
+					{ name = "cmdline" },
+				},
+			})
 		end,
 		event = { "CmdlineEnter", "InsertEnter" },
 	},
@@ -121,6 +117,10 @@ return {
 		"zbirenbaum/copilot.lua",
 		config = true,
 		dependencies = { "zbirenbaum/copilot-cmp", config = true },
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+		},
 		-- event = "InsertEnter",
 		cmd = "Copilot",
 	},
@@ -128,11 +128,7 @@ return {
 	-- auto pairs
 	{
 		"altermo/ultimate-autopair.nvim",
-		opts = { internal_pairs = {
-			ft = {
-				tex = { { "\\(", "\\)" }, { "``", "''" } },
-			},
-		} },
+		opts = { internal_pairs = { ft = { tex = { { "\\(", "\\)" }, { "``", "''" } } } } },
 		event = { "InsertEnter", "CmdlineEnter" },
 	},
 
@@ -166,13 +162,10 @@ return {
 				end,
 			},
 		},
-		config = function(_, opts)
+		config = function()
 			local ai = require("mini.ai")
-			ai.setup(opts)
-		end,
-		opts = function()
-			local ai = require("mini.ai")
-			return {
+
+			ai.setup({
 				n_lines = 500,
 				custom_textobjects = {
 					o = ai.gen_spec.treesitter({
@@ -182,7 +175,7 @@ return {
 					f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
 					c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
 				},
-			}
+			})
 		end,
 		keys = {
 			{ "a", mode = { "x", "o" } },

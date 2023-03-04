@@ -66,21 +66,14 @@ return {
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
 		},
-		config = function(_, opts)
+		config = function()
 			local telescope = require("telescope")
-			telescope.setup(opts)
-
-			local extns = { "zf-native", "file_browser", "frecency", "bibtex", "aerial", "noice" }
-			for _, extn in ipairs(extns) do
-				telescope.load_extension(extn)
-			end
-		end,
-		opts = function()
 			local actions = require("telescope.actions")
 			local actions_layout = require("telescope.actions.layout")
 
 			local home = fn.expand("~")
-			return {
+
+			telescope.setup({
 				defaults = {
 					sorting_strategy = "ascending",
 					layout_config = { prompt_position = "top" },
@@ -126,7 +119,12 @@ return {
 						},
 					},
 				},
-			}
+			})
+
+			local extns = { "zf-native", "file_browser", "frecency", "bibtex", "aerial", "noice" }
+			for _, extn in ipairs(extns) do
+				telescope.load_extension(extn)
+			end
 		end,
 		cmd = "Telescope",
 		keys = {
@@ -209,21 +207,6 @@ return {
 			{ "<leader>xX", function()
 				require("trouble").toggle("workspace_diagnostics")
 			end, desc = "Workspace Diagnostics (Trouble)" },
-		},
-	},
-
-	-- todo-comments
-	{
-		"folke/todo-comments.nvim",
-		enabled = false,
-		config = true,
-		event = { "BufReadPost", "BufNewFile" },
-		cmd = "TodoTelescope", -- "TodoTrouble"
-		-- stylua: ignore
-		keys = {
-			{ "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-			{ "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-			-- { "<leader>xt", function() require("trouble").open("todo") end, desc = "Todo Trouble" },
 		},
 	},
 

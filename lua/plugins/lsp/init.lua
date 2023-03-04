@@ -127,9 +127,8 @@ return {
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
-		opts = { ui = { border = "rounded" } },
-		config = function(_, opts)
-			require("mason").setup(opts)
+		config = function()
+			require("mason").setup({ ui = { border = "rounded" } })
 
 			local mr = require("mason-registry")
 			local tools = { "black", "debugpy", "glow", "markdownlint", "prettierd", "stylua", "tectonic" }
