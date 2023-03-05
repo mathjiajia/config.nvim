@@ -21,6 +21,7 @@ return {
 				"help",
 				"latex",
 				"lua",
+				"luap",
 				"markdown",
 				"markdown_inline",
 				"matlab",

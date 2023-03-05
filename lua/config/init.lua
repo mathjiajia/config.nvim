@@ -66,6 +66,8 @@ local options = {
 		"markdown",
 		"mason",
 		"neo-tree",
+		"qf",
+		"query",
 		"norg",
 		"Trouble",
 	},
