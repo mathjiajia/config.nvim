@@ -56,6 +56,7 @@ local options = {
 	-- exclude from indent lines
 	ft_exclude = {
 		"aerial",
+		"chatgpt",
 		"checkhealth",
 		"conf",
 		"dashboard",

@@ -228,7 +228,7 @@ return {
 	{
 		"sindrets/diffview.nvim",
 		opts = { enhanced_diff_hl = true },
-		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		-- stylua: ignore
 		keys = { { "<leader>gd", function() require("diffview").open({}) end, desc = "Diff View" } },
 	},

@@ -15,12 +15,12 @@ function M.toggle()
 end
 
 function M.format()
-	local buf = api.nvim_get_current_buf()
-	local ft = vim.bo[buf].filetype
+	local bufnr = api.nvim_get_current_buf()
+	local ft = vim.bo[bufnr].filetype
 	local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
 	vim.lsp.buf.format({
-		bufnr = buf,
+		bufnr = bufnr,
 		filter = function(client)
 			if have_nls then
 				return client.name == "null-ls"
@@ -30,6 +30,8 @@ function M.format()
 	})
 end
 
+---@param client string
+---@param bufnr integer
 function M.on_attach(client, bufnr)
 	local self = M.new(client, bufnr)
 
@@ -50,14 +52,22 @@ function M.on_attach(client, bufnr)
 	end
 end
 
+---@param client string
+---@param bufnr integer
+---@return table
 function M.new(client, bufnr)
 	return setmetatable({ client = client, buffer = bufnr }, { __index = M })
 end
 
+---@param cap string
+---@return boolean
 function M:has(cap)
 	return self.client.server_capabilities[cap .. "Provider"]
 end
 
+---@param lhs string
+---@param rhs string|function
+---@param opts table<string, any>
 function M:map(lhs, rhs, opts)
 	opts = opts or {}
 	if opts.has and not self:has(opts.has) then

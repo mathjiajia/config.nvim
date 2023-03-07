@@ -54,7 +54,7 @@ return {
 							build = {
 								executable = "tectonic",
 								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-								-- args = { "-pdflatex=lualatex", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+								-- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
 								onSave = true,
 							},
 							forwardSearch = {
@@ -150,9 +150,7 @@ return {
 		},
 		cmd = "Lspsaga",
 		-- stylua: ignore
-		keys = {
-			{ "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" },
-		},
+		keys = { { "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" } },
 	},
 
 	{

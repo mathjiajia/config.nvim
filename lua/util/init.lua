@@ -12,7 +12,7 @@ M.runners = { lua = "lua", markdown = "glow", python = "python3", swift = "swift
 -- * root pattern of cwd
 ---@return string
 function M.get_root()
-	---@type string?
+	---@type string|nil
 	local path = vim.api.nvim_buf_get_name(0)
 	path = path ~= "" and vim.loop.fs_realpath(path) or nil
 	---@type string[]
@@ -25,7 +25,7 @@ function M.get_root()
 			end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
 			for _, p in ipairs(paths) do
 				local r = vim.loop.fs_realpath(p)
-				if path:find(r, 1, true) then
+				if r and path:find(r, 1, true) then
 					roots[#roots + 1] = r
 				end
 			end
@@ -34,11 +34,11 @@ function M.get_root()
 	table.sort(roots, function(a, b)
 		return #a > #b
 	end)
-	---@type string?
+	---@type string|nil
 	local root = roots[1]
 	if not root then
 		path = path and vim.fs.dirname(path) or vim.loop.cwd()
-		---@type string?
+		---@type string|nil
 		root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
 		root = root and vim.fs.dirname(root) or vim.loop.cwd()
 	end
@@ -48,7 +48,7 @@ end
 
 ---wrap of telescope builtin functions
 ---@param builtin string
----@param opts table?
+---@param opts table|nil
 ---@return function
 function M.tele_builtin(builtin, opts)
 	return function()
@@ -58,7 +58,7 @@ end
 
 ---wrap of telescope extension functions
 ---@param extn string
----@param opts table?
+---@param opts table|nil
 ---@return function
 function M.tele_extn(extn, opts)
 	return function()
@@ -67,8 +67,8 @@ function M.tele_extn(extn, opts)
 end
 
 -- this will return a function that calls telescope.
--- cwd will defautlt to util.get_root
--- for `files`, git_files or find_files will be chosen depending on .git
+-- cwd will defautlt to util.get_root for `files`,
+-- git_files or find_files will be chosen depending on .git
 function M.telescope(builtin, opts)
 	local params = { builtin = builtin, opts = opts }
 	return function()
@@ -88,8 +88,8 @@ function M.telescope(builtin, opts)
 end
 
 -- Opens a floating terminal (interactive by default)
----@param cmd? string[]|string
----@param opts? {interactive?:boolean}
+---@param cmd string[]|string
+---@param opts {interactive?:boolean}
 function M.float_term(cmd, opts)
 	opts = vim.tbl_deep_extend("force", {
 		size = { width = 0.9, height = 0.9 },
@@ -98,8 +98,8 @@ function M.float_term(cmd, opts)
 	vim.keymap.set("t", "<esc><esc>", "<cmd>q<cr>", { desc = "Quit Terminal" })
 end
 
----@param silent boolean?
----@param values? {[1]:any, [2]:any}
+---@param silent boolean|nil
+---@param values {[1]:any, [2]:any}
 function M.toggle(option, silent, values)
 	if values then
 		if vim.opt_local[option]:get() == values[1] then
@@ -133,11 +133,9 @@ end
 
 -- code runner
 function M.code_run()
-	---@type string?
 	local buf = vim.api.nvim_buf_get_name(0)
-	---@type string?
 	local ftype = vim.filetype.match({ filename = buf })
-	---@type string?
+	---@type string|nil
 	local exec = M.runners[ftype]
 
 	if exec ~= nil then

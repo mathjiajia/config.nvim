@@ -27,7 +27,6 @@ opt.swapfile = false
 opt.undofile = true
 
 -- Indent
--- opt.expandtab = false
 opt.shiftwidth = 2
 opt.softtabstop = 2
 opt.tabstop = 2
@@ -38,13 +37,13 @@ opt.updatetime = 200
 
 -- UI
 opt.cmdheight = 0
-opt.fillchars = { eob = " ", diff = " " }
+opt.fillchars:append({ eob = " ", diff = "╱" })
 opt.laststatus = 3
 opt.pumheight = 10
-opt.scrolloff = 6
+opt.scrolloff = 5
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 
--- opt.cursorline = true
+opt.cursorline = true
 opt.colorcolumn = "120"
 opt.number = true
 opt.relativenumber = true
@@ -59,4 +58,4 @@ opt.whichwrap:append("[,]")
 
 -- Theme
 opt.termguicolors = true
-vim.cmd.colorscheme("vscode")
+vim.cmd.colorscheme("tokyonight")

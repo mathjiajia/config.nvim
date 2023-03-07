@@ -166,14 +166,6 @@ return {
 		cmd = "ZenMode",
 	},
 
-	-- {
-	-- 	"nullchilly/fastcolor.nvim",
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		require("fastcolor").load("vscode")
-	-- 	end,
-	-- },
-
 	-- alternative to matchparen neovim plugin
 	{
 		"monkoose/matchparen.nvim",

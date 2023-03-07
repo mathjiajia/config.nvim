@@ -24,6 +24,13 @@ return {
 		},
 	},
 
+	-- chatGPT
+	{
+		"jackMort/ChatGPT.nvim",
+		config = true,
+		cmd = { "ChatGPT" },
+	},
+
 	-- library used by other plugins
 	"nvim-lua/plenary.nvim",
 	"kkharji/sqlite.lua",

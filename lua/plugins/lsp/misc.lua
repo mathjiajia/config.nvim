@@ -4,6 +4,8 @@ local api, lsp = vim.api, vim.lsp
 local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
 
+---@param client string
+---@param bufnr integer
 function M.on_attach(client, bufnr)
 	local self = M.new(client, bufnr)
 
@@ -57,7 +59,7 @@ function M.on_attach(client, bufnr)
 end
 
 ---@param client string
----@param bufnr number
+---@param bufnr integer
 ---@return table
 function M.new(client, bufnr)
 	return setmetatable({ client = client, bufnr = bufnr }, { __index = M })

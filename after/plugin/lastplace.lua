@@ -15,8 +15,8 @@ local function run()
 		return
 	end
 
-	-- If a line has already been specified on the command line, we are done
-	--   nvim file +num
+	-- If a line has already been specified on the command line,
+	-- we are done nvim file +num
 	if fn.line(".") > 1 then
 		return
 	end
