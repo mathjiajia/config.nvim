@@ -50,7 +50,7 @@ return {
 	-- winbar
 	{
 		"utilyre/barbecue.nvim",
-		config = true,
+		opts = { show_modified = true },
 		dependencies = { "SmiteshP/nvim-navic" },
 		event = "UIEnter",
 	},
@@ -166,9 +166,9 @@ return {
 		cmd = "ZenMode",
 	},
 
-	-- alternative to matchparen neovim plugin
+	-- Enhanced matchparen
 	{
-		"monkoose/matchparen.nvim",
+		"utilyre/sentiment.nvim",
 		config = true,
 		event = "BufReadPost",
 	},

@@ -88,8 +88,8 @@ function M.telescope(builtin, opts)
 end
 
 -- Opens a floating terminal (interactive by default)
----@param cmd string[]|string
----@param opts {interactive?:boolean}
+---@param cmd string[]|string|nil
+---@param opts {interactive:boolean}|nil
 function M.float_term(cmd, opts)
 	opts = vim.tbl_deep_extend("force", {
 		size = { width = 0.9, height = 0.9 },
@@ -99,7 +99,7 @@ function M.float_term(cmd, opts)
 end
 
 ---@param silent boolean|nil
----@param values {[1]:any, [2]:any}
+---@param values {[1]:any, [2]:any}|nil
 function M.toggle(option, silent, values)
 	if values then
 		if vim.opt_local[option]:get() == values[1] then

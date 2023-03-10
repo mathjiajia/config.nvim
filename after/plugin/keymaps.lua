@@ -14,13 +14,11 @@ vim.keymap.set("n", "<M-l>", function() vim.cmd.wincmd("l") end, { desc = "Right
 -- buffer
 vim.keymap.set("n", "<leader>bd", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Delete Buffer" })
 vim.keymap.set("n", "<leader>bD", function() vim.api.nvim_buf_delete(0, { force = true }) end, { desc = "Delete Buffer (force)" })
--- stylua: ignore end
 
 -- list
-vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+vim.keymap.set("n", "<leader>xl", function() vim.cmd.lopen() end, { desc = "Location List" })
+vim.keymap.set("n", "<leader>xq", function() vim.cmd.copen() end, { desc = "Quickfix List" })
 
--- stylua: ignore start
 -- toggle options
 vim.keymap.set("n", "<leader>uf", function() require("plugins.lsp.format").toggle() end, { desc = "Format on Save" })
 vim.keymap.set("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Spelling" })

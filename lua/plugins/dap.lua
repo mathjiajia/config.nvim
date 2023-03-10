@@ -137,21 +137,15 @@ return {
 
 		vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run Last" })
 		vim.keymap.set("n", "<leader>de", dapui.eval, { desc = "Eval" })
-		vim.keymap.set("n", "<leader>dE", function()
-			dapui.eval(fn.input({ prompt = "[DAP] Expression > "}), {})
-		end, { desc = "Eval Expression" })
+		vim.keymap.set("n", "<leader>dE", function() dapui.eval(fn.input({ prompt = "[DAP] Expression > "}), {}) end, { desc = "Eval Expression" })
 		-- stylua: ignore end
 	end,
 		-- stylua: ignore
 		keys = {
 			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Breakpoint" },
 			{ "<leader>dB", function() require("dapui").toggle({}) end, desc = "Dap UI" },
-			{ "<leader>dc", function()
-				require("dap").set_breakpoint(fn.input({ prompt = "Breakpoint condition: "}))
-			end, desc = "Conditional Breakpoint" },
-			{ "<leader>lp", function()
-				require'dap'.set_breakpoint(nil, nil, fn.input({prompt = 'Log point message: '}))
-			end, desc = "Log point message" },
+			{ "<leader>dc", function() require("dap").set_breakpoint(fn.input({ prompt = "Breakpoint condition: "})) end, desc = "Conditional Breakpoint" },
+			{ "<leader>lp", function() require('dap').set_breakpoint(nil, nil, fn.input({prompt = 'Log point message: '})) end, desc = "Log point message" },
 			{ "<leader>dr", function() require("dap").repl.open() end, desc = "Repl" },
 			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
 	},

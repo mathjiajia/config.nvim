@@ -1,6 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = { "HiPhish/nvim-ts-rainbow2" },
+	dependencies = {
+		-- "HiPhish/nvim-ts-rainbow2",
+		"Gordin/nvim-ts-rainbow2",
+	},
 	config = function()
 		-- Folding
 		vim.opt.foldmethod = "expr"

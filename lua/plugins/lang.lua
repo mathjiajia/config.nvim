@@ -50,7 +50,7 @@ return {
 				["core.integrations.telescope"] = {},
 			},
 		},
-		build = ":Neorg sync-parsers",
+		-- build = ":Neorg sync-parsers",
 		cmd = "Neorg",
 		ft = "norg",
 	},

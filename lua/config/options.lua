@@ -58,4 +58,4 @@ opt.whichwrap:append("[,]")
 
 -- Theme
 opt.termguicolors = true
-vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("vscode")

@@ -356,7 +356,7 @@ local TablineFileFlags = {
 			return api.nvim_buf_get_option(self.bufnr, "modified")
 		end,
 
-		provider = "[+]",
+		provider = " ● ", --[+]",
 		hl = { fg = "green" },
 	},
 	{
@@ -438,10 +438,42 @@ local TablineBufferBlock = utils.surround({ "", "" }, function(self)
 	end
 end, { TablineFileNameBlock, TablineCloseButton })
 
+local get_bufs = function()
+	return vim.tbl_filter(function(bufnr)
+		return vim.api.nvim_buf_get_option(bufnr, "buflisted")
+	end, vim.api.nvim_list_bufs())
+end
+
+local buflist_cache = {}
+
+vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+	callback = function()
+		vim.schedule(function()
+			local buffers = get_bufs()
+			for i, v in ipairs(buffers) do
+				buflist_cache[i] = v
+			end
+			for i = #buffers + 1, #buflist_cache do
+				buflist_cache[i] = nil
+			end
+
+			if #buflist_cache > 1 then
+				vim.o.showtabline = 2
+			else
+				vim.o.showtabline = 1
+			end
+		end)
+	end,
+})
+
 local BufferLine = utils.make_buflist(
 	TablineBufferBlock,
 	{ provider = " ", hl = { fg = "gray" } },
-	{ provider = " ", hl = { fg = "gray" } }
+	{ provider = " ", hl = { fg = "gray" } },
+	function()
+		return buflist_cache
+	end,
+	false
 )
 
 local Tabpage = {
@@ -488,7 +520,7 @@ local TabLineOffset = {
 	provider = function(self)
 		local title = self.title
 		local width = api.nvim_win_get_width(self.winid)
-		local pad = math.ceil((width - #title) / 2)
+		local pad = math.ceil((width - #title) * 0.5)
 		return string.rep(" ", pad) .. title .. string.rep(" ", pad)
 	end,
 
@@ -502,8 +534,6 @@ local TabLineOffset = {
 }
 
 local TabLine = { TabLineOffset, BufferLine, TabPages }
-
-vim.opt.showtabline = 2
 
 require("heirline").setup({
 	statusline = StatusLine,
