@@ -1,9 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = {
-		-- "HiPhish/nvim-ts-rainbow2",
-		"Gordin/nvim-ts-rainbow2",
-	},
+	dependencies = "HiPhish/nvim-ts-rainbow2",
 	config = function()
 		-- Folding
 		vim.opt.foldmethod = "expr"
@@ -21,9 +18,9 @@ return {
 				"git_rebase",
 				"gitcommit",
 				"gitignore",
-				"help",
 				"latex",
 				"lua",
+				"luadoc",
 				"luap",
 				"markdown",
 				"markdown_inline",
@@ -34,6 +31,7 @@ return {
 				"regex",
 				"swift",
 				"vim",
+				"vimdoc",
 			},
 			highlight = { enable = true },
 			incremental_selection = { enable = true },

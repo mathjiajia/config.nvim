@@ -37,7 +37,13 @@ local VimMode = {
 			t = " TERM ",
 		},
 	},
-	update = { "ModeChanged", "CmdlineLeave" },
+	update = {
+		"ModeChanged",
+		pattern = "*:*",
+		callback = vim.schedule_wrap(function()
+			vim.cmd("redrawstatus")
+		end),
+	},
 
 	provider = function(self)
 		return "  %2(" .. self.modes[self.mode] .. "%)"
@@ -396,7 +402,9 @@ local TablineFileNameBlock = {
 	on_click = {
 		callback = function(_, minwid, _, button)
 			if button == "m" then
-				api.nvim_buf_delete(minwid, { force = false })
+				vim.schedule(function()
+					api.nvim_buf_delete(minwid, { force = false })
+				end)
 			else
 				api.nvim_win_set_buf(0, minwid)
 			end
@@ -420,7 +428,10 @@ local TablineCloseButton = {
 
 		on_click = {
 			callback = function(_, minwid)
-				api.nvim_buf_delete(minwid, { force = false })
+				vim.schedule(function()
+					api.nvim_buf_delete(minwid, { force = false })
+				end)
+				vim.cmd.redrawtabline()
 			end,
 			minwid = function(self)
 				return self.bufnr

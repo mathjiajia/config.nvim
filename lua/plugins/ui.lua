@@ -4,21 +4,15 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		init = function()
-			-- lazy-load notify here. Will be overriden by Noice when it loads
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.notify = function(...)
-				return require("notify").notify(...)
+			-- when noice is not enabled, install notify on VeryLazy
+			local Util = require("util")
+			if not Util.has("noice.nvim") then
+				Util.on_very_lazy(function()
+					vim.notify = require("notify")
+				end)
 			end
 		end,
-		opts = {
-			timeout = 3000,
-			max_height = function()
-				return math.floor(vim.o.lines * 0.75)
-			end,
-			max_width = function()
-				return math.floor(vim.o.columns * 0.75)
-			end,
-		},
+		config = true,
 		keys = {
 			{
 				"<leader>un",

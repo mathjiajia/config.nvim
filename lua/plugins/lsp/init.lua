@@ -4,10 +4,10 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			{ "folke/neodev.nvim", config = true },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			{ "folke/neodev.nvim", config = true },
+			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			-- diagnostics signs
@@ -54,7 +54,6 @@ return {
 							build = {
 								executable = "tectonic",
 								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-								-- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
 								onSave = true,
 							},
 							forwardSearch = {
@@ -78,6 +77,7 @@ return {
 					},
 				},
 			}
+
 			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
 			require("mason-lspconfig").setup_handlers({
 				function(server)
@@ -101,9 +101,9 @@ return {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		dependencies = "mason.nvim",
-		opts = function()
+		config = function()
 			local null_ls = require("null-ls")
-			return {
+			null_ls.setup({
 				on_attach = function(client, bufnr)
 					require("plugins.lsp.format").on_attach(client, bufnr)
 				end,
@@ -119,7 +119,7 @@ return {
 						args = { "--config", "~/.config/markdownlint/markdownlint.yaml", "--stdin" },
 					}),
 				},
-			}
+			})
 		end,
 		event = { "BufReadPre", "BufNewFile" },
 	},
@@ -127,16 +127,26 @@ return {
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
 		config = function()
 			require("mason").setup({ ui = { border = "rounded" } })
 
 			local mr = require("mason-registry")
 			local tools = { "black", "debugpy", "glow", "markdownlint", "prettierd", "stylua", "tectonic" }
-			for _, tool in ipairs(tools) do
-				local p = mr.get_package(tool)
-				if not p:is_installed() then
-					p:install()
+
+			local function ensure_installed()
+				for _, tool in ipairs(tools) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() then
+						p:install()
+					end
 				end
+			end
+
+			if mr.refresh then
+				mr.refresh(ensure_installed)
+			else
+				ensure_installed()
 			end
 		end,
 	},

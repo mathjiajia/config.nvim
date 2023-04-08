@@ -5,9 +5,9 @@ return {
 		"L3MON4D3/LuaSnip",
 		dependencies = { "mathjiajia/mysnippets" },
 		config = function()
+			local ls = require("luasnip")
 			local types = require("luasnip.util.types")
 
-			local ls = require("luasnip")
 			ls.setup({
 				update_events = "TextChanged,TextChangedI",
 				enable_autosnippets = true,
@@ -16,9 +16,7 @@ return {
 				},
 			})
 
-			require("luasnip.loaders.from_lua").lazy_load({
-				paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets",
-			})
+			require("luasnip.loaders.from_lua").lazy_load({ paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets" })
 
 			-- stylua: ignore start
 			vim.keymap.set({ "i", "s" }, "<C-j>", function()
