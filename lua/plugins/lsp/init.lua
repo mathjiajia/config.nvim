@@ -153,7 +153,7 @@ return {
 
 	-- lsp enhancement
 	{
-		"glepnir/lspsaga.nvim",
+		"nvimdev/lspsaga.nvim",
 		opts = {
 			ui = { border = "rounded" },
 			symbol_in_winbar = { enable = false },

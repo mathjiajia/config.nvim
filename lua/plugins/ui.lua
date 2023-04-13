@@ -125,7 +125,7 @@ return {
 
 	-- start screen
 	{
-		"glepnir/dashboard-nvim",
+		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
 		opts = {
 			theme = "hyper",
