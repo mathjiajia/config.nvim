@@ -17,10 +17,7 @@ return {
 			end
 		end,
 		opts = {
-			source_selector = {
-				winbar = true,
-				tab_labels = { buffers = "  Bufs " },
-			},
+			source_selector = { winbar = true },
 			window = {
 				position = "float",
 				popup = {
@@ -28,7 +25,7 @@ return {
 					size = function(state)
 						local root_name = fn.fnamemodify(state.path, ":~")
 						local root_len = string.len(root_name) + 2
-						return { width = math.max(root_len, 32), height = "60%" }
+						return { width = math.max(root_len, 37), height = "60%" }
 					end,
 					border = { style = "rounded" },
 				},

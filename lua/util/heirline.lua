@@ -555,7 +555,7 @@ require("heirline").setup({
 
 api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
-		if vim.tbl_contains({ "wipe", "delete" }, vim.opt_local.bufhidden:get()) then
+		if vim.list_contains({ "wipe", "delete" }, vim.opt_local.bufhidden:get()) then
 			vim.opt_local.buflisted = false
 		end
 	end,
