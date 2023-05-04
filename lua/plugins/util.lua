@@ -1,27 +1,10 @@
 return {
 
-	-- measure startuptime
-	{
-		"dstein64/vim-startuptime",
-		enabled = false,
-		config = function()
-			vim.g.startuptime_tries = 10
-		end,
-		cmd = "StartupTime",
-	},
-
 	-- session management
 	{
-		"folke/persistence.nvim",
-		enabled = false,
-		opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help" } },
-		event = "BufReadPre",
-		-- stylua: ignore
-		keys = {
-			{ "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
-			{ "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-			{ "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
-		},
+		"glepnir/dbsession.nvim",
+		config = true,
+		cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
 	},
 
 	-- chatGPT
@@ -29,15 +12,6 @@ return {
 		"jackMort/ChatGPT.nvim",
 		config = true,
 		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions", "ChatGPTRun" },
-	},
-
-	{
-		"echasnovski/mini.colors",
-		enabled = false,
-		lazy = false,
-		config = function()
-			require("mini.colors").setup()
-		end,
 	},
 
 	-- library used by other plugins

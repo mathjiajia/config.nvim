@@ -204,23 +204,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 	},
 
-	-- better diagnostics list and others
-	{
-		"folke/trouble.nvim",
-		enabled = false,
-		opts = { use_diagnostic_signs = true },
-		cmd = { "TroubleToggle", "Trouble" },
-		-- stylua: ignore
-		keys = {
-			{ "<leader>xx", function()
-				require("trouble").toggle("document_diagnostics")
-			end, desc = "Document Diagnostics (Trouble)" },
-			{ "<leader>xX", function()
-				require("trouble").toggle("workspace_diagnostics")
-			end, desc = "Workspace Diagnostics (Trouble)" },
-		},
-	},
-
 	-- symbols outline
 	{
 		"stevearc/aerial.nvim",
