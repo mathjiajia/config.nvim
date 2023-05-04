@@ -34,8 +34,8 @@ return {
 		opts = {
 			load = {
 				["core.defaults"] = {},
-				["core.norg.concealer"] = {},
-				["core.norg.dirman"] = {
+				["core.concealer"] = {},
+				["core.dirman"] = {
 					config = {
 						workspaces = {
 							log = "~/Documents/neorg/log",
@@ -45,7 +45,7 @@ return {
 						default_workspace = "wiki",
 					},
 				},
-				["core.norg.completion"] = { config = { engine = "nvim-cmp" } },
+				["core.completion"] = { config = { engine = "nvim-cmp" } },
 				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 				["core.integrations.telescope"] = {},
 			},

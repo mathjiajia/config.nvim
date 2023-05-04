@@ -42,6 +42,7 @@ opt.laststatus = 3
 opt.pumheight = 10
 opt.scrolloff = 5
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.smoothscroll = true
 
 opt.cursorline = true
 opt.colorcolumn = "120"
@@ -57,5 +58,4 @@ opt.showbreak = "> "
 opt.whichwrap:append("[,]")
 
 -- Theme
-opt.termguicolors = true
 vim.cmd.colorscheme("vscode")

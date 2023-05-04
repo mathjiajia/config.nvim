@@ -17,7 +17,21 @@ return {
 			end
 		end,
 		opts = {
-			source_selector = { winbar = true },
+			sources = {
+				"filesystem",
+				"buffers",
+				"git_status",
+				"document_symbols",
+			},
+			source_selector = {
+				winbar = true,
+				sources = {
+					{ source = "filesystem", display_name = " Files" },
+					{ source = "buffers", display_name = " Bufs" },
+					{ source = "git_status", display_name = " Git" },
+					{ source = "document_symbols", display_name = " LSP" },
+				},
+			},
 			window = {
 				position = "float",
 				popup = {
@@ -25,7 +39,7 @@ return {
 					size = function(state)
 						local root_name = fn.fnamemodify(state.path, ":~")
 						local root_len = string.len(root_name) + 2
-						return { width = math.max(root_len, 37), height = "60%" }
+						return { width = math.max(root_len, 36), height = "60%" }
 					end,
 					border = { style = "rounded" },
 				},

@@ -78,14 +78,16 @@ return {
 				},
 			}
 
-			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
-			require("mason-lspconfig").setup_handlers({
-				function(server)
-					local opts = servers[server] or {}
-					opts.capabilities = capabilities
-					opts.on_attach = on_attach
-					require("lspconfig")[server].setup(opts)
-				end,
+			require("mason-lspconfig").setup({
+				ensure_installed = vim.tbl_keys(servers),
+				handlers = {
+					function(server)
+						local opts = servers[server]
+						opts.capabilities = capabilities
+						opts.on_attach = on_attach
+						require("lspconfig")[server].setup(opts)
+					end,
+				},
 			})
 
 			require("lspconfig").sourcekit.setup({

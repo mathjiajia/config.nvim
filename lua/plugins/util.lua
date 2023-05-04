@@ -28,7 +28,16 @@ return {
 	{
 		"jackMort/ChatGPT.nvim",
 		config = true,
-		cmd = { "ChatGPT" },
+		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions", "ChatGPTRun" },
+	},
+
+	{
+		"echasnovski/mini.colors",
+		enabled = false,
+		lazy = false,
+		config = function()
+			require("mini.colors").setup()
+		end,
 	},
 
 	-- library used by other plugins
