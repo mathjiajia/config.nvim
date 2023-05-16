@@ -29,7 +29,6 @@ local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 2
 vim.keymap.set("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end, { desc = "Conceal" })
 
 -- floating terminal
-vim.keymap.set("n", "<M-r>", function() Util.code_run() end, { desc = "Code Runner" })
 vim.keymap.set("n", "<M-i>", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
 vim.keymap.set("n", "<M-S-i>", function() Util.float_term() end, { desc = "Terminal (cwd)" })
 

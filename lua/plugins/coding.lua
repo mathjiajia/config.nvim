@@ -126,7 +126,7 @@ return {
 	-- auto pairs
 	{
 		"altermo/ultimate-autopair.nvim",
-		opts = { internal_pairs = { ft = { tex = { { "\\(", "\\)" }, { "``", "''" } } } } },
+		config = true,
 		event = { "InsertEnter", "CmdlineEnter" },
 	},
 

@@ -5,11 +5,11 @@ local ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" }
 local api, fn = vim.api, vim.fn
 
 local function run()
-	if vim.tbl_contains(ignore_buftype, vim.bo.buftype) then
+	if vim.list_contains(ignore_buftype, vim.bo.buftype) then
 		return
 	end
 
-	if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
+	if vim.list_contains(ignore_filetype, vim.bo.filetype) then
 		-- reset cursor to first line
 		vim.cmd.normal({ "gg", bang = true })
 		return

@@ -64,8 +64,12 @@ return {
 	-- search/replace in multiple files
 	{
 		"windwp/nvim-spectre",
-		-- stylua: ignore
-		keys = { { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" } },
+		cmd = { "Spectre" },
+	},
+	{
+		"AckslD/muren.nvim",
+		config = true,
+		cmd = { "MurenToggle", "MurenFresh", "MurenUnique" },
 	},
 
 	-- fuzzy finder
@@ -138,20 +142,21 @@ return {
 			end
 		end,
 		cmd = "Telescope",
+		-- stylua: ignore
 		keys = {
 			{ "<leader><space>", Util.telescope("files", { cwd = "%:p:h" }), desc = "Find Files (current)" },
-			{ "<leader>fb", Util.tele_builtin("buffers"), desc = "Buffers" },
-			{ "<leader>fd", Util.tele_extn("file_browser", { path = "%:p:h" }), desc = "File Browser" },
-			{ "<leader>fD", Util.tele_extn("file_browser"), desc = "File Browser" },
+			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+			{ "<leader>fd", function() require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" }) end, desc = "Neovim Configs" },
+			{ "<leader>fD", function() require("telescope").extensions.file_browser.file_browser() end, desc = "Neovim Configs" },
 			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
 			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
-			{ "<leader>fm", Util.tele_builtin("builtin"), desc = "Telescope Meta" },
-			{ "<leader>fn", Util.tele_builtin("find_files", { cwd = "~/.config/nvim" }), desc = "Neovim Configs" },
-			{ "<leader>fr", Util.tele_extn("frecency"), desc = "Recent Files" },
-			{ "<leader>sb", Util.tele_builtin("current_buffer_fuzzy_find"), desc = "Current_Buf Fuzzy Find" },
+			{ "<leader>fm", function() require("telescope.builtin").builtin() end, desc = "Telescope Meta" },
+			{ "<leader>fn", function() require("telescope.builtin").find_files({ cwd = "~/.config/nvim" }) end, desc = "Neovim Configs" },
+			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Neovim Configs" },
+			{ "<leader>sb", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy Find" },
 			{ "<leader>sg", Util.telescope("live_grep"), desc = "Live Grep (root dir)" },
 			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (cwd)" },
-			{ "<leader>sh", Util.tele_builtin("help_tags"), desc = "Help Tags" },
+			{ "<leader>sh", function() require("telescope.builtin").help_tags() end, desc = "Help Tags" },
 			{ "<leader>ss", Util.telescope("grep_string"), desc = "Grep String (root dir)", mode = { "n", "x" } },
 			{ "<leader>sS", Util.telescope("grep_string", { cwd = false }), desc = "Grep String", mode = { "n", "x" } },
 		},
@@ -210,7 +215,7 @@ return {
 		opts = {
 			backends = { "lsp", "treesitter", "markdown", "man" },
 			filter_kind = false,
-			icons = require("config").icons.aerial,
+			-- icons = require("config").icons.aerial,
 			show_guides = true,
 			layout = { min_width = 30 },
 		},

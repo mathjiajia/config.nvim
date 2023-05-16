@@ -87,9 +87,7 @@ return {
 				end,
 			})
 		end,
-		config = function()
-			require("mini.indentscope").setup({ options = { try_as_border = true } })
-		end,
+		opts = { options = { try_as_border = true } },
 		event = { "BufReadPre", "BufNewFile" },
 	},
 
@@ -132,10 +130,10 @@ return {
 			config = {
 				week_header = { enable = true },
 				shortcut = {
-					{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
+					{ desc = "󰚰 Update", group = "@property", action = "Lazy update", key = "u" },
 					{ desc = " Files", group = "Label", action = "Telescope find_files", key = "f" },
 					{ desc = " NeoVim", group = "", action = "Telescope find_files cwd=~/.config/nvim", key = "n" },
-					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
+					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
 				},
 			},
 		},

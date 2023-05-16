@@ -7,6 +7,20 @@ return {
 		cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
 	},
 
+	-- ccode runner
+	{
+		"CRAG666/code_runner.nvim",
+		opts = {
+			filetype = {
+				lua = "lua",
+				markdown = "glow",
+				python = "python3 -u",
+				swift = "swift",
+			},
+		},
+		cmd = { "RunCode", "RunFile", "RunProject" },
+	},
+
 	-- chatGPT
 	{
 		"jackMort/ChatGPT.nvim",
