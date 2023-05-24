@@ -1,3 +1,5 @@
+local fn = vim.fn
+
 return {
 
 	-- lspconfig
@@ -14,7 +16,7 @@ return {
 			local icons = require("config").icons.diagnostics
 			for name, icon in pairs(icons) do
 				name = "DiagnosticSign" .. name
-				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+				fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 			end
 
 			-- diagnostic keymaps
@@ -54,19 +56,21 @@ return {
 							build = {
 								executable = "tectonic",
 								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
+								-- forwardSearchAfter = true,
 								onSave = true,
 							},
 							forwardSearch = {
+								-- executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+								-- args = { "%l", "%p", "%f" },
 								executable = "sioyek",
+								-- stylua: ignore
 								args = {
-									-- "--execute-command",
-									-- "turn_on_synctex",
 									"--reuse-window",
-									"--forward-search-file",
-									"%f",
-									"--forward-search-line",
-									"%l",
-									"%p",
+									"--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
+									"--inverse-search",
+									fn.stdpath("data") .. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %1 -line %2 -cache_root " .. fn.stdpath("cache") .. " -server " .. vim.v.servername,
+									"--forward-search-file", "%f",
+									"--forward-search-line", "%l", "%p"
 								},
 							},
 							chktex = { onOpenAndSave = false },

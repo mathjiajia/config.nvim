@@ -1,3 +1,4 @@
+local api = vim.api
 local Util = require("lazy.core.util")
 
 local M = {}
@@ -27,7 +28,7 @@ end
 ---@return string
 function M.get_root()
 	---@type string?
-	local path = vim.api.nvim_buf_get_name(0)
+	local path = api.nvim_buf_get_name(0)
 	path = path ~= "" and vim.loop.fs_realpath(path) or nil
 	---@type string[]
 	local roots = {}
@@ -96,16 +97,16 @@ end
 ---@param values? {[1]:any, [2]:any}
 function M.toggle(option, silent, values)
 	if values then
-		if vim.opt_local[option]:get() == values[1] then
+		if api.nvim_get_option_value(option, {}) == values[1] then
 			vim.opt_local[option] = values[2]
 		else
 			vim.opt_local[option] = values[1]
 		end
-		return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
+		return Util.info("Set " .. option .. " to " .. api.nvim_get_option_value(option, {}), { title = "Option" })
 	end
-	vim.opt_local[option] = not vim.opt_local[option]:get()
+	vim.opt_local[option] = not api.nvim_get_option_value(option, {})
 	if not silent then
-		if vim.opt_local[option]:get() then
+		if api.nvim_get_option_value(option, {}) then
 			Util.info("Enabled " .. option, { title = "Option" })
 		else
 			Util.warn("Disabled " .. option, { title = "Option" })

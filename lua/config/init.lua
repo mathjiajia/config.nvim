@@ -65,14 +65,14 @@ local options = {
 		"help",
 		"lazy",
 		"lspinfo",
+		"man",
 		"markdown",
 		"mason",
 		"neo-tree",
+		"norg",
 		"notify",
 		"qf",
 		"query",
-		"norg",
-		"Trouble",
 	},
 }
 

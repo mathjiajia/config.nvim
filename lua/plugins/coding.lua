@@ -20,7 +20,7 @@ return {
 
 			-- stylua: ignore start
 			vim.keymap.set({ "i", "s" }, "<C-j>", function()
-				if ls.expandable() or ls.locally_jumpable(1) then ls.expand_or_jump() end
+				if ls.expand_or_locally_jumpable() then ls.expand_or_jump() end
 			end, { desc = "LuaSnip Forward Jump" })
 
 			vim.keymap.set({ "i", "s" }, "<C-k>", function()

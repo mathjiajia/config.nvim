@@ -102,6 +102,15 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						find = "%d+L, %d+B",
+					},
+					view = "mini",
+				},
+			},
 			presets = {
 				bottom_search = true,
 				command_palette = true,

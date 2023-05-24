@@ -18,7 +18,7 @@ require("heirline").load_colors(colors)
 
 local VimMode = {
 	init = function(self)
-		self.mode = vim.fn.mode()
+		self.mode = fn.mode()
 	end,
 	static = {
 		modes = {
@@ -451,13 +451,13 @@ end, { TablineFileNameBlock, TablineCloseButton })
 
 local get_bufs = function()
 	return vim.tbl_filter(function(bufnr)
-		return vim.api.nvim_buf_get_option(bufnr, "buflisted")
-	end, vim.api.nvim_list_bufs())
+		return api.nvim_buf_get_option(bufnr, "buflisted")
+	end, api.nvim_list_bufs())
 end
 
 local buflist_cache = {}
 
-vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
 	callback = function()
 		vim.schedule(function()
 			local buffers = get_bufs()
@@ -555,7 +555,7 @@ require("heirline").setup({
 
 api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
-		if vim.list_contains({ "wipe", "delete" }, vim.opt_local.bufhidden:get()) then
+		if vim.list_contains({ "wipe", "delete" }, api.nvim_get_option_value("bufhidden", {})) then
 			vim.opt_local.buflisted = false
 		end
 	end,
