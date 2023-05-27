@@ -18,9 +18,15 @@ return {
 
 			require("luasnip.loaders.from_lua").lazy_load({ paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets" })
 
-			vim.keymap.set({ "i", "s" }, "<C-j>", function()
+			vim.keymap.set("i", "<C-j>", function()
 				if ls.expand_or_locally_jumpable() then
 					ls.expand_or_jump()
+				end
+			end, { desc = "LuaSnip Forward Jump" })
+
+			vim.keymap.set("s", "<C-j>", function()
+				if ls.locally_jumpable(1) then
+					ls.jump(1)
 				end
 			end, { desc = "LuaSnip Forward Jump" })
 
@@ -92,6 +98,7 @@ return {
 					{ name = "path", keyword_length = 3 },
 					{ name = "rg", keyword_length = 4 },
 				},
+				experimental = { ghost_text = { hl_group = "LspCodeLens" } },
 				window = {
 					completion = { border = "rounded", col_offset = -3 },
 					documentation = { border = "rounded" },
