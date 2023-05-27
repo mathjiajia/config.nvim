@@ -2,7 +2,29 @@ local fn = vim.fn
 
 return {
 	"mfussenegger/nvim-dap",
-	dependencies = { "rcarriga/nvim-dap-ui", config = true },
+	dependencies = {
+		"rcarriga/nvim-dap-ui",
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+			dapui.setup()
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open({})
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close({})
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close({})
+			end
+		end,
+			-- stylua: ignore
+      keys = {
+        { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
+        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+        { "<leader>dE", function() require("dapui").eval(fn.input("[DAP] Expression > ")) end, desc = "Eval Expression" },
+      },
+	},
 	config = function()
 		-- dap signs
 		local icons = require("config").icons.dap
@@ -11,20 +33,7 @@ return {
 			fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 		end
 
-		local dap, dapui = require("dap"), require("dapui")
-
-		-- dapui
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open({})
-		end
-		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close({})
-			dap.repl.close()
-		end
-		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close({})
-			dap.repl.close()
-		end
+		local dap = require("dap")
 
 		-- c, c++, rust: cpptools
 		dap.adapters.cppdbg = {
@@ -127,26 +136,24 @@ return {
 				},
 			},
 		}
-
-		-- stylua: ignore start
-		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Continue" })
-		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Step Over" })
-		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Step Into" })
-		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Step Out" })
-		vim.keymap.set("n", "<F17>", function() dap.terminate() dapui.close({}) end, { desc = "Terminate" })
-
-		vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run Last" })
-		vim.keymap.set("n", "<leader>de", dapui.eval, { desc = "Eval" })
-		vim.keymap.set("n", "<leader>dE", function() dapui.eval(fn.input({ prompt = "[DAP] Expression > "}), {}) end, { desc = "Eval Expression" })
-		-- stylua: ignore end
 	end,
 		-- stylua: ignore
-		keys = {
-			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Breakpoint" },
-			{ "<leader>dB", function() require("dapui").toggle({}) end, desc = "Dap UI" },
-			{ "<leader>dc", function() require("dap").set_breakpoint(fn.input({ prompt = "Breakpoint condition: "})) end, desc = "Conditional Breakpoint" },
-			{ "<leader>lp", function() require('dap').set_breakpoint(nil, nil, fn.input({prompt = 'Log point message: '})) end, desc = "Log point message" },
-			{ "<leader>dr", function() require("dap").repl.open() end, desc = "Repl" },
-			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
-	},
+  keys = {
+    { "<leader>dB", function() require("dap").set_breakpoint(fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
+    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+    { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+  },
 }

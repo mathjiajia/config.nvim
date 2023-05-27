@@ -18,19 +18,23 @@ return {
 
 			require("luasnip.loaders.from_lua").lazy_load({ paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets" })
 
-			-- stylua: ignore start
 			vim.keymap.set({ "i", "s" }, "<C-j>", function()
-				if ls.expand_or_locally_jumpable() then ls.expand_or_jump() end
+				if ls.expand_or_locally_jumpable() then
+					ls.expand_or_jump()
+				end
 			end, { desc = "LuaSnip Forward Jump" })
 
 			vim.keymap.set({ "i", "s" }, "<C-k>", function()
-				if ls.locally_jumpable(-1) then ls.jump(-1) end
+				if ls.locally_jumpable(-1) then
+					ls.jump(-1)
+				end
 			end, { desc = "LuaSnip Backward Jump" })
 
 			vim.keymap.set("i", "<C-l>", function()
-				if ls.choice_active() then ls.change_choice(1) end
+				if ls.choice_active() then
+					ls.change_choice(1)
+				end
 			end, { desc = "LuaSnip Next Choice" })
-			-- stylua: ignore end
 		end,
 	},
 
@@ -53,7 +57,7 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete({}),
+					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				snippet = {
@@ -152,13 +156,11 @@ return {
 	{
 		"echasnovski/mini.ai",
 		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter-textobjects",
-				init = function()
-					-- no need to load the plugin, since we only need its queries
-					require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-				end,
-			},
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			init = function()
+				-- no need to load the plugin, since we only need its queries
+				require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+			end,
 		},
 		config = function()
 			local ai = require("mini.ai")

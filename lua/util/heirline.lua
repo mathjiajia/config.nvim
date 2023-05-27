@@ -359,7 +359,7 @@ local TablineFileName = {
 local TablineFileFlags = {
 	{
 		condition = function(self)
-			return api.nvim_buf_get_option(self.bufnr, "modified")
+			return api.nvim_get_option_value("modified", { buf = self.bufnr })
 		end,
 
 		provider = " ● ", --[+]",
@@ -367,11 +367,12 @@ local TablineFileFlags = {
 	},
 	{
 		condition = function(self)
-			return not api.nvim_buf_get_option(self.bufnr, "modifiable") or api.nvim_buf_get_option(self.bufnr, "readonly")
+			return not api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+				or api.nvim_get_option_value("readonly", { buf = self.bufnr })
 		end,
 
 		provider = function(self)
-			if api.nvim_buf_get_option(self.bufnr, "buftype") == "terminal" then
+			if api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal" then
 				return "  "
 			else
 				return ""
@@ -418,7 +419,7 @@ local TablineFileNameBlock = {
 
 local TablineCloseButton = {
 	condition = function(self)
-		return not api.nvim_buf_get_option(self.bufnr, "modified")
+		return not api.nvim_get_option_value("modified", { buf = self.bufnr })
 	end,
 
 	{ provider = " " },
@@ -451,7 +452,7 @@ end, { TablineFileNameBlock, TablineCloseButton })
 
 local get_bufs = function()
 	return vim.tbl_filter(function(bufnr)
-		return api.nvim_buf_get_option(bufnr, "buflisted")
+		return api.nvim_get_option_value("buflisted", { buf = bufnr })
 	end, api.nvim_list_bufs())
 end
 
@@ -501,7 +502,7 @@ local Tabpage = {
 	end,
 }
 
-local TabpageClose = { provider = " %999X %X", hl = "TabLine" }
+local TabpageClose = { provider = " %999X %X", hl = "TabLine" }
 
 local TabPages = {
 	condition = function()
