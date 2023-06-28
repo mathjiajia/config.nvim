@@ -16,6 +16,9 @@ return {
 				end
 			end
 		end,
+		deactivate = function()
+			require("neo-tree.command").execute({ action = "close" })
+		end,
 		opts = {
 			sources = {
 				"filesystem",
@@ -23,30 +26,22 @@ return {
 				"git_status",
 				"document_symbols",
 			},
-			source_selector = {
-				winbar = true,
-				sources = {
-					{ source = "filesystem", display_name = " Files" },
-					{ source = "buffers", display_name = " Bufs" },
-					{ source = "git_status", display_name = " Git" },
-					{ source = "document_symbols", display_name = " LSP" },
-				},
-			},
-			window = {
-				position = "float",
-				popup = {
-					position = { row = 0, col = "100%" },
-					size = function(state)
-						local root_name = fn.fnamemodify(state.path, ":~")
-						local root_len = string.len(root_name) + 2
-						return { width = math.max(root_len, 36), height = "60%" }
-					end,
-					border = { style = "rounded" },
-				},
-			},
 			filesystem = {
 				bind_to_cwd = false,
 				follow_current_file = true,
+				use_libuv_file_watcher = true,
+			},
+			default_component_configs = {
+				icon = {
+					folder_empty = "󰜌",
+					folder_empty_open = "󰜌",
+				},
+				git_status = {
+					symbols = {
+						renamed = "󰁕",
+						unstaged = "󰄱",
+					},
+				},
 			},
 		},
 		cmd = "Neotree",
@@ -65,6 +60,7 @@ return {
 	{
 		"windwp/nvim-spectre",
 		cmd = { "Spectre" },
+		opts = { open_cmd = "noswapfile vnew" },
 	},
 	{
 		"AckslD/muren.nvim",
@@ -164,21 +160,51 @@ return {
 
 	-- easily jump to any location and enhanced f/t motions for Leap
 	{
-		"ggandor/leap.nvim",
-		dependencies = { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } },
-		config = function()
-			require("leap").add_default_mappings(true)
-		end,
-		event = "VeryLazy",
+		"folke/flash.nvim",
+		config = true,
+		-- stylua: ignore
+		keys = {
+			"f", "F", "t", "T",
+			{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+		},
 	},
+
+	-- {
+	-- 	"gbprod/yanky.nvim",
+	-- 	config = true,
+	-- 	keys = {
+	-- 		{ "p", mode = { "n", "x" }, "<Plug>(YankyPutAfter)" },
+	-- 		{ "P", mode = { "n", "x" }, "<Plug>(YankyPutBefore)" },
+	-- 		{ "gp", mode = { "n", "x" }, "<Plug>(YankyGPutAfter)" },
+	-- 		{ "gP", mode = { "n", "x" }, "<Plug>(YankyGPutBefore)" },
+	-- 	},
+	-- },
+
+	-- {
+	-- 	"ggandor/leap.nvim",
+	-- 	dependencies = { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } },
+	-- 	config = function()
+	-- 		require("leap").add_default_mappings(true)
+	-- 	end,
+	-- 	event = "VeryLazy",
+	-- },
 
 	-- git signs
 	{
 		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			preview_config = { border = "rounded" },
+			-- stylua: ignore
 			on_attach = function(bufnr)
 				local gs = require("gitsigns")
+
+				local function map(mode, lhs, rhs, desc)
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+				end
 
 				-- Navigation
 				-- stylua: ignore start
@@ -186,27 +212,33 @@ return {
 					if vim.wo.diff then return "]c" end
 					vim.schedule(gs.next_hunk)
 					return "<Ignore>"
-				end, { expr = true, buffer = bufnr })
+				end, { expr = true, buffer = bufnr, desc = "Next Hunk" })
 
 				vim.keymap.set("n", "[c", function()
 					if vim.wo.diff then return "[c" end
 					vim.schedule(gs.prev_hunk)
 					return "<Ignore>"
-				end, { expr = true, buffer = bufnr })
-				-- stylua: ignore end
+				end, { expr = true, buffer = bufnr, desc = "Prev Hunk" })
 
 				-- Actions
-				vim.keymap.set({ "n", "v" }, "<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Stage Hunk" })
-				vim.keymap.set({ "n", "v" }, "<leader>hr", gs.reset_hunk, { buffer = bufnr, desc = "Reset Hunk" })
-				vim.keymap.set("n", "<leader>hS", gs.stage_buffer, { buffer = bufnr, desc = "Stage Buffer" })
-				vim.keymap.set("n", "<leader>hR", gs.reset_buffer, { buffer = bufnr, desc = "Reset Buffer" })
-				vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { buffer = bufnr, desc = "Preview Hunk" })
+				map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
+				map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
+				map("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Stage Hunk")
+				map("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Reset Hunk")
+				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
+				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
+				map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
+				map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
+				map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
+				map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle Blame")
+				map("n", "<leader>hd", gs.diffthis, "Diff This")
+				map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff This (working copy)")
+				-- map('n', '<leader>td', gs.toggle_deleted, 'Toggle Deleted')
 
 				-- Text object
-				vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Hunk Object" })
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Hunk Object")
 			end,
 		},
-		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- symbols outline
@@ -217,10 +249,14 @@ return {
 			filter_kind = false,
 			-- icons = require("config").icons.aerial,
 			show_guides = true,
-			layout = { min_width = 30 },
+			layout = {
+				-- min_width = 30,
+				default_direction = "left",
+			},
 		},
 		-- stylua: ignore
 		keys = { { "<M-o>", function() require("aerial").toggle() end, desc = "Aerial" } },
+		cmd = "AerialToggle",
 	},
 
 	-- diffview

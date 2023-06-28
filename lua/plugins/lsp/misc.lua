@@ -14,7 +14,7 @@ function M.on_attach(client, bufnr)
 	self:map("gd", function() require("glance").open("definitions") end, { desc = "Goto Definition" })
 	self:map("gi", function() require("glance").open("implementations") end, { desc = "Goto Implementation" })
 	self:map("gr", function() require("glance").open("references") end, { desc = "References" })
-	self:map("gt", function() require("glance").open("type_references") end, { desc = "Goto Type Definition" })
+	self:map("gt", function() require("glance").open("type_definitions") end, { desc = "Goto Type Definition" })
 	self:map("K", lsp.buf.hover, { desc = "Docs Hover" })
 	self:map("<C-k>", lsp.buf.signature_help, { desc = "Signature" })
 	-- stylua: ignore end
@@ -35,6 +35,10 @@ function M.on_attach(client, bufnr)
 			buffer = bufnr,
 		})
 	end
+
+	-- if self:has("inlayHint") then
+	-- 	vim.lsp.buf.inlay_hint(bufnr, true)
+	-- end
 
 	-- if self:has("codeLens") then
 	-- 	local group = augroup("lsp_document_codelens", {})

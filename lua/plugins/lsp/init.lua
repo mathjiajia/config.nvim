@@ -46,6 +46,7 @@ return {
 					settings = {
 						Lua = {
 							workspace = { checkThirdParty = false },
+							hint = { enable = true },
 							telemetry = { enable = false },
 						},
 					},
@@ -66,9 +67,9 @@ return {
 								-- stylua: ignore
 								args = {
 									"--reuse-window",
-									"--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
+									-- "--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
 									"--inverse-search",
-									fn.stdpath("data") .. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %1 -line %2 -cache_root " .. fn.stdpath("cache") .. " -server " .. vim.v.servername,
+									fn.stdpath("data") .. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root " .. fn.stdpath("cache") .. " -server " .. vim.v.servername,
 									"--forward-search-file", "%f",
 									"--forward-search-line", "%l", "%p"
 								},
@@ -136,10 +137,8 @@ return {
 		build = ":MasonUpdate",
 		config = function()
 			require("mason").setup({ ui = { border = "rounded" } })
-
 			local mr = require("mason-registry")
 			local tools = { "black", "debugpy", "glow", "markdownlint", "prettierd", "stylua", "tectonic" }
-
 			local function ensure_installed()
 				for _, tool in ipairs(tools) do
 					local p = mr.get_package(tool)
@@ -148,7 +147,6 @@ return {
 					end
 				end
 			end
-
 			if mr.refresh then
 				mr.refresh(ensure_installed)
 			else

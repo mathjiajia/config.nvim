@@ -124,6 +124,7 @@ return {
 	-- github copilot
 	{
 		"zbirenbaum/copilot.lua",
+		build = ":Copilot auth",
 		config = true,
 		dependencies = { "zbirenbaum/copilot-cmp", config = true },
 		opts = {

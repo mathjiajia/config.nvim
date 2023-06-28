@@ -9,4 +9,3 @@
 
 "\\(" @opening
 ")" @closing
-

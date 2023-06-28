@@ -19,13 +19,18 @@ autocmd("TextYankPost", {
 	desc = "Highlight the yanked text",
 })
 
--- Opens PDF files in sioyek instead of viewing the binary in Neovim
+-- Opens non-text files in the default program instead of in Neovim
 autocmd("BufReadPost", {
-	pattern = "*.pdf",
+	pattern = {
+		"*.jpeg",
+		"*.jpg",
+		"*.pdf",
+		"*.png",
+	},
 	callback = function()
-		fn.jobstart("sioyek '" .. fn.expand("%") .. "'", { detach = true })
+		fn.jobstart("open '" .. fn.expand("%") .. "'", { detach = true })
 		api.nvim_buf_delete(0, {})
 	end,
-	group = augroup("OpenPDF", {}),
-	desc = "Opens PDF file in sioyek",
+	group = augroup("openFile", {}),
+	desc = "openFile",
 })

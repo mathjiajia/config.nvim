@@ -41,6 +41,26 @@ return {
 		end,
 	},
 
+	{
+		"echasnovski/mini.hipatterns",
+		event = "BufReadPre",
+		config = function()
+			local hipatterns = require("mini.hipatterns")
+			hipatterns.setup({
+				highlighters = {
+					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+					-- Highlight hex color strings (`#rrggbb`) using that color
+					hex_color = hipatterns.gen_highlighter.hex_color(),
+				},
+			})
+		end,
+	},
+
 	-- winbar
 	{
 		"utilyre/barbecue.nvim",
@@ -106,7 +126,11 @@ return {
 				{
 					filter = {
 						event = "msg_show",
-						find = "%d+L, %d+B",
+						any = {
+							{ find = "%d+L, %d+B" },
+							{ find = "; after #%d+" },
+							{ find = "; before #%d+" },
+						},
 					},
 					view = "mini",
 				},
@@ -148,6 +172,57 @@ return {
 		},
 	},
 
+	{
+		"folke/edgy.nvim",
+		event = "VeryLazy",
+    -- stylua: ignore
+		keys = {
+			{ "<leader>ue", function() require("edgy").toggle() end, desc = "Edgy Toggle" },
+      { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+		},
+		opts = {
+			left = {
+				-- Neo-tree filesystem always takes half the screen height
+				{
+					title = "Neo-Tree",
+					ft = "neo-tree",
+					filter = function(buf)
+						return vim.b[buf].neo_tree_source == "filesystem"
+					end,
+					pinned = true,
+					open = "Neotree",
+					size = { height = 0.5 },
+				},
+				{
+					title = "Neo-Tree Git",
+					ft = "neo-tree",
+					filter = function(buf)
+						return vim.b[buf].neo_tree_source == "git_status"
+					end,
+					pinned = true,
+					open = "Neotree position=right git_status",
+				},
+				{
+					title = "Neo-Tree Buffers",
+					ft = "neo-tree",
+					filter = function(buf)
+						return vim.b[buf].neo_tree_source == "buffers"
+					end,
+					pinned = true,
+					open = "Neotree position=top buffers",
+				},
+				{
+					title = "Aerial",
+					ft = "aerial",
+					pinned = true,
+					open = "AerialToggle",
+				},
+				-- any other neo-tree windows
+				"neo-tree",
+			},
+		},
+	},
+
 	-- better quickfix
 	{
 		"kevinhwang91/nvim-bqf",
@@ -163,6 +238,10 @@ return {
 	-- Zen mode
 	{
 		"folke/zen-mode.nvim",
+		dependencies = {
+			"folke/twilight.nvim",
+			config = true,
+		},
 		opts = { plugins = { gitsigns = true } },
 		cmd = "ZenMode",
 	},

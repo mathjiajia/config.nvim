@@ -12,7 +12,6 @@ return {
 				"bash",
 				"bibtex",
 				"c",
-				"comment",
 				"diff",
 				"fish",
 				"git_rebase",
