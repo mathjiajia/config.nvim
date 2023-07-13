@@ -57,5 +57,10 @@ opt.linebreak = true
 opt.showbreak = "> "
 opt.whichwrap:append("[,]")
 
+-- Folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldenable = false
+
 -- Theme
 vim.cmd.colorscheme("vscode")

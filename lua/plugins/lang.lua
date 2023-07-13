@@ -2,20 +2,8 @@ return {
 
 	-- filesype plugin for `LaTeX`
 	{
-		"ryleelyman/latex.nvim",
-		opts = {
-			conceals = {
-				add = {
-					["colon"] = ":",
-					["coloneqq"] = "≔",
-				},
-			},
-			imaps = {
-				add = { ["\\emptyset"] = "0" },
-				default_leader = ";",
-			},
-			surrounds = { enabled = true },
-		},
+		"mathjiajia/latex.nvim",
+		config = true,
 		ft = "tex",
 	},
 

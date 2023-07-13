@@ -1,3 +1,5 @@
+local api = vim.api
+
 return {
 
 	-- better vim.notify
@@ -13,15 +15,8 @@ return {
 			end
 		end,
 		config = true,
-		keys = {
-			{
-				"<leader>un",
-				function()
-					require("notify").dismiss({ silent = true, pending = true })
-				end,
-				desc = "Delete all Notifications",
-			},
-		},
+		-- stylua: ignore
+		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete all Notifications" } },
 	},
 
 	-- better vim.ui
@@ -63,44 +58,50 @@ return {
 
 	-- winbar
 	{
-		"utilyre/barbecue.nvim",
-		opts = { show_modified = true },
-		dependencies = { "SmiteshP/nvim-navic" },
-		event = "UIEnter",
+		"Bekaboo/dropbar.nvim",
+		event = "VeryLazy",
+		config = true,
 	},
 
 	-- statuscolumn
 	{
 		"luukvbaal/statuscol.nvim",
+		event = "VeryLazy",
 		opts = { setopt = true },
-		event = "UIEnter",
 	},
 
 	-- statusline/tabline
 	{
 		"rebelot/heirline.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("util.heirline")
 		end,
-		event = "UIEnter",
 	},
+
+	-- {
+	-- 	"nvimdev/whiskyline.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = true,
+	-- },
 
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			use_treesitter = true,
 			show_trailing_blankline_indent = false,
 			filetype_exclude = require("config").ft_exclude,
 		},
-		event = { "BufReadPost", "BufNewFile" },
 	},
 
 	-- active indent guide and indent text objects
 	{
 		"echasnovski/mini.indentscope",
+		event = { "BufReadPre", "BufNewFile" },
 		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
+			api.nvim_create_autocmd("FileType", {
 				pattern = require("config").ft_exclude,
 				callback = function()
 					vim.b.miniindentscope_disable = true
@@ -108,12 +109,12 @@ return {
 			})
 		end,
 		opts = { options = { try_as_border = true } },
-		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- noicer ui
 	{
 		"folke/noice.nvim",
+		event = "VeryLazy",
 		opts = {
 			lsp = {
 				override = {
@@ -144,14 +145,9 @@ return {
 		},
 		-- stylua: ignore
 		keys = {
-			{ "<c-f>", function()
-				if not require("noice.lsp").scroll(4) then return "<c-f>" end
-			end, silent = true, expr = true, desc = "Scroll forward", mode = { "i", "n", "s" } },
-			{ "<c-b>", function()
-				if not require("noice.lsp").scroll(-4) then return "<c-b>" end
-			end, silent = true, expr = true, desc = "Scroll backward", mode = { "i", "n", "s" } },
+			{ "<C-f>", function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
+			{ "<C-b>", function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"} },
 		},
-		event = "VeryLazy",
 	},
 
 	-- start screen
@@ -172,6 +168,7 @@ return {
 		},
 	},
 
+	-- edgy
 	{
 		"folke/edgy.nvim",
 		event = "VeryLazy",
@@ -181,6 +178,33 @@ return {
       { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
 		},
 		opts = {
+			bottom = {
+				{
+					ft = "noice",
+					size = { height = 0.4 },
+					filter = function(_, win)
+						return api.nvim_win_get_config(win).relative == ""
+					end,
+				},
+				{
+					ft = "lazyterm",
+					title = "LazyTerm",
+					size = { height = 0.4 },
+					filter = function(buf)
+						return not vim.b[buf].lazyterm_cmd
+					end,
+				},
+				{ ft = "qf", title = "QuickFix" },
+				{
+					ft = "help",
+					size = { height = 20 },
+					-- don't open help files in edgy that we're editing
+					filter = function(buf)
+						return vim.bo[buf].buftype == "help"
+					end,
+				},
+				{ ft = "spectre_panel", size = { height = 0.4 } },
+			},
 			left = {
 				-- Neo-tree filesystem always takes half the screen height
 				{
@@ -220,42 +244,106 @@ return {
 				-- any other neo-tree windows
 				"neo-tree",
 			},
+			keys = {
+				-- increase width
+				["<M-Right>"] = function(win)
+					win:resize("width", 2)
+				end,
+				-- decrease width
+				["<M-Left>"] = function(win)
+					win:resize("width", -2)
+				end,
+				-- increase height
+				["<M-Up>"] = function(win)
+					win:resize("height", 2)
+				end,
+				-- decrease height
+				["<M-Down>"] = function(win)
+					win:resize("height", -2)
+				end,
+			},
 		},
 	},
+
+	-- animations
+	{
+		"echasnovski/mini.animate",
+		event = "VeryLazy",
+		opts = function()
+			-- don't use animate when scrolling with the mouse
+			local mouse_scrolled = false
+			for _, scroll in ipairs({ "Up", "Down" }) do
+				local key = "<ScrollWheel" .. scroll .. ">"
+				vim.keymap.set({ "", "i" }, key, function()
+					mouse_scrolled = true
+					return key
+				end, { expr = true })
+			end
+
+			local animate = require("mini.animate")
+			return {
+				resize = {
+					timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
+				},
+				scroll = {
+					timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
+					subscroll = animate.gen_subscroll.equal({
+						predicate = function(total_scroll)
+							if mouse_scrolled then
+								mouse_scrolled = false
+								return false
+							end
+							return total_scroll > 1
+						end,
+					}),
+				},
+			}
+		end,
+	},
+
+	-- {
+	-- 	"lewis6991/satellite.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = true,
+	-- },
 
 	-- better quickfix
 	{
 		"kevinhwang91/nvim-bqf",
+		opts = { preview = { win_height = 5, win_vheight = 5 } },
+		ft = "qf",
 		dependencies = {
 			"junegunn/fzf",
 			-- stylua: ignore
 			build = function() vim.fn["fzf#install"]() end,
 		},
-		opts = { preview = { win_height = 5, win_vheight = 5 } },
-		ft = "qf",
 	},
 
 	-- Zen mode
 	{
 		"folke/zen-mode.nvim",
-		dependencies = {
-			"folke/twilight.nvim",
-			config = true,
-		},
-		opts = { plugins = { gitsigns = true } },
 		cmd = "ZenMode",
+		dependencies = { "folke/twilight.nvim", config = true },
+		opts = { plugins = { gitsigns = true } },
+	},
+
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		event = { "BufReadPost", "BufNewFile" },
+		init = function()
+			vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } }
+		end,
 	},
 
 	-- Enhanced matchparen
 	{
 		"utilyre/sentiment.nvim",
-		config = true,
 		event = "BufReadPost",
+		config = true,
 	},
 
 	-- icons
 	"nvim-tree/nvim-web-devicons",
-
 	-- ui components
 	"MunifTanjim/nui.nvim",
 }

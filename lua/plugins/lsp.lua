@@ -1,4 +1,4 @@
-local fn = vim.fn
+local fn, lsp = vim.fn, vim.lsp
 
 return {
 
@@ -32,12 +32,7 @@ return {
 			})
 
 			-- lspconfig
-			local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-			local function on_attach(client, bufnr)
-				require("plugins.lsp.misc").on_attach(client, bufnr)
-				require("plugins.lsp.format").on_attach(client, bufnr)
-			end
+			local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp.protocol.make_client_capabilities())
 
 			local servers = {
 				clangd = {},
@@ -51,6 +46,7 @@ return {
 						},
 					},
 				},
+				matlab_ls = {},
 				texlab = {
 					settings = {
 						texlab = {
@@ -61,8 +57,6 @@ return {
 								onSave = true,
 							},
 							forwardSearch = {
-								-- executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
-								-- args = { "%l", "%p", "%f" },
 								executable = "sioyek",
 								-- stylua: ignore
 								args = {
@@ -89,7 +83,6 @@ return {
 					function(server)
 						local opts = servers[server]
 						opts.capabilities = capabilities
-						opts.on_attach = on_attach
 						require("lspconfig")[server].setup(opts)
 					end,
 				},
@@ -98,7 +91,6 @@ return {
 			require("lspconfig").sourcekit.setup({
 				filetypes = { "swift", "objective-c", "objective-cpp" },
 				capabilities = capabilities,
-				on_attach = on_attach,
 			})
 		end,
 		event = { "BufReadPre", "BufNewFile" },
@@ -111,16 +103,7 @@ return {
 		config = function()
 			local null_ls = require("null-ls")
 			null_ls.setup({
-				on_attach = function(client, bufnr)
-					require("plugins.lsp.format").on_attach(client, bufnr)
-				end,
 				sources = {
-					null_ls.builtins.formatting.black,
-					null_ls.builtins.formatting.fish_indent,
-					null_ls.builtins.formatting.latexindent,
-					null_ls.builtins.formatting.prettierd,
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.swiftformat,
 					null_ls.builtins.diagnostics.fish,
 					null_ls.builtins.diagnostics.markdownlint.with({
 						args = { "--config", "~/.config/markdownlint/markdownlint.yaml", "--stdin" },
@@ -155,6 +138,27 @@ return {
 		end,
 	},
 
+	{
+		"nvimdev/guard.nvim",
+		lazy = false,
+		config = function()
+			require("guard").setup({
+				fmt_on_save = true,
+				ft = {
+					fish = { fmt = { cmd = "fish_indent", stdin = true } },
+					markdown = { fmt = { cmd = "prettierd", args = { "--stdin-filepath" }, fname = true, stdin = true } },
+					swift = { fmt = { cmd = "swiftformat", args = { "--stdinpath" }, fname = true, stdin = true } },
+					tex = { fmt = { cmd = "latexindent", args = { "-g", "/dev/null" }, stdin = true } },
+				},
+			})
+
+			local ft = require("guard.filetype")
+			ft("c"):fmt("lsp")
+			ft("lua"):fmt("stylua")
+			ft("python"):fmt("black")
+		end,
+	},
+
 	-- lsp enhancement
 	{
 		"nvimdev/lspsaga.nvim",
@@ -164,7 +168,7 @@ return {
 		},
 		cmd = "Lspsaga",
 		-- stylua: ignore
-		keys = { { "gh", function() require("lspsaga.finder"):lsp_finder() end, silent = true, desc = "Lsp Finder" } },
+		keys = { { "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" } },
 	},
 
 	{

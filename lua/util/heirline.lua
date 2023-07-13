@@ -41,7 +41,7 @@ local VimMode = {
 		"ModeChanged",
 		pattern = "*:*",
 		callback = vim.schedule_wrap(function()
-			vim.cmd("redrawstatus")
+			vim.cmd.redrawstatus()
 		end),
 	},
 
@@ -52,13 +52,13 @@ local VimMode = {
 
 local Snippets = {
 	condition = function()
-		return vim.tbl_contains({ "i", "s" }, fn.mode())
+		return vim.list_contains({ "i", "s" }, fn.mode())
 	end,
 
 	provider = function()
 		local ls = require("luasnip")
-		local forward = ls.locally_jumpable(1) and "" or ""
-		local backward = ls.locally_jumpable(-1) and "" or ""
+		local forward = ls.locally_jumpable(1) and " " or ""
+		local backward = ls.locally_jumpable(-1) and " " or ""
 		local choice = ls.choice_active() and " 󰇘 " or " "
 		return backward .. choice .. forward
 	end,
@@ -181,7 +181,7 @@ local LSPActive = {
 
 	provider = function()
 		local names = {}
-		for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+		for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 			table.insert(names, server.name)
 		end
 		return " ◍ [" .. table.concat(names, ",") .. "]"

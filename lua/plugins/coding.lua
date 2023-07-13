@@ -18,25 +18,25 @@ return {
 
 			require("luasnip.loaders.from_lua").lazy_load({ paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets" })
 
-			vim.keymap.set("i", "<C-j>", function()
-				if ls.expand_or_locally_jumpable() then
-					ls.expand_or_jump()
+			vim.keymap.set("i", "<C-k>", function()
+				if ls.expandable() then
+					ls.expand()
 				end
-			end, { desc = "LuaSnip Forward Jump" })
+			end, { desc = "LuaSnip Expand" })
 
-			vim.keymap.set("s", "<C-j>", function()
+			vim.keymap.set({ "i", "s" }, "<C-l>", function()
 				if ls.locally_jumpable(1) then
 					ls.jump(1)
 				end
 			end, { desc = "LuaSnip Forward Jump" })
 
-			vim.keymap.set({ "i", "s" }, "<C-k>", function()
+			vim.keymap.set({ "i", "s" }, "<C-j>", function()
 				if ls.locally_jumpable(-1) then
 					ls.jump(-1)
 				end
 			end, { desc = "LuaSnip Backward Jump" })
 
-			vim.keymap.set("i", "<C-l>", function()
+			vim.keymap.set("i", "<C-e>", function()
 				if ls.choice_active() then
 					ls.change_choice(1)
 				end
@@ -98,7 +98,7 @@ return {
 					{ name = "path", keyword_length = 3 },
 					{ name = "rg", keyword_length = 4 },
 				},
-				experimental = { ghost_text = { hl_group = "LspCodeLens" } },
+				-- experimental = { ghost_text = { hl_group = "LspCodeLens" } },
 				window = {
 					completion = { border = "rounded", col_offset = -3 },
 					documentation = { border = "rounded" },
@@ -125,14 +125,16 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		build = ":Copilot auth",
-		config = true,
+		cmd = "Copilot",
 		dependencies = { "zbirenbaum/copilot-cmp", config = true },
 		opts = {
 			suggestion = { enabled = false },
 			panel = { enabled = false },
+			filetypes = {
+				markdown = true,
+				help = true,
+			},
 		},
-		-- event = "InsertEnter",
-		cmd = "Copilot",
 	},
 
 	-- auto pairs
@@ -152,27 +154,30 @@ return {
 	-- comments
 	{
 		"numToStr/Comment.nvim",
-		config = true,
 		keys = {
-			{ "gcc", mode = "n" },
+			"gcc",
 			{ "gbc", mode = { "n", "x" } },
 			{ "gc", mode = { "n", "x" } },
 		},
+		config = true,
 	},
 
 	-- better text-objects
 	{
 		"echasnovski/mini.ai",
+		keys = {
+			{ "a", mode = { "o", "x" } },
+			{ "i", mode = { "o", "x" } },
+		},
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			init = function()
-				-- no need to load the plugin, since we only need its queries
+				-- disable rtp plugin, as we only need its queries for mini.ai
 				require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
 			end,
 		},
 		config = function()
 			local ai = require("mini.ai")
-
 			ai.setup({
 				n_lines = 500,
 				custom_textobjects = {
@@ -185,9 +190,5 @@ return {
 				},
 			})
 		end,
-		keys = {
-			{ "a", mode = { "x", "o" } },
-			{ "i", mode = { "x", "o" } },
-		},
 	},
 }

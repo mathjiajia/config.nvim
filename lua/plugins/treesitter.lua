@@ -1,12 +1,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = "HiPhish/nvim-ts-rainbow2",
+	build = ":TSUpdate",
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
-		-- Folding
-		vim.opt.foldmethod = "expr"
-		vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-		vim.opt.foldenable = false
-
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"bash",
@@ -35,12 +31,6 @@ return {
 			highlight = { enable = true },
 			incremental_selection = { enable = true },
 			indent = { enable = true },
-			rainbow = {
-				enable = true,
-				query = { latex = "rainbow-parens" },
-			},
 		})
 	end,
-	build = ":TSUpdate",
-	event = { "BufReadPost", "BufNewFile" },
 }
