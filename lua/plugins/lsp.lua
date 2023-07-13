@@ -140,23 +140,44 @@ return {
 
 	{
 		"nvimdev/guard.nvim",
-		lazy = false,
-		config = function()
-			require("guard").setup({
-				fmt_on_save = true,
-				ft = {
-					fish = { fmt = { cmd = "fish_indent", stdin = true } },
-					markdown = { fmt = { cmd = "prettierd", args = { "--stdin-filepath" }, fname = true, stdin = true } },
-					swift = { fmt = { cmd = "swiftformat", args = { "--stdinpath" }, fname = true, stdin = true } },
-					tex = { fmt = { cmd = "latexindent", args = { "-g", "/dev/null" }, stdin = true } },
-				},
-			})
+		init = function()
+			local formatter = require("guard.tools.formatter")
+
+			formatter.fish_indent = {
+				cmd = "fish_indent",
+				stdin = true,
+			}
+
+			formatter.latexindent = {
+				cmd = "latexindent",
+				args = { "-g", "/dev/null" },
+				stdin = true,
+			}
+
+			formatter.prettierd = {
+				cmd = "prettierd",
+				args = { "--stdin-filepath" },
+				fname = true,
+				stdin = true,
+			}
+
+			formatter.swiftformat = {
+				cmd = "swiftformat",
+				args = { "--stdinpath" },
+				fname = true,
+				stdin = true,
+			}
 
 			local ft = require("guard.filetype")
 			ft("c"):fmt("lsp")
+			ft("fish"):fmt("fish_indent") --:lint("fish")
 			ft("lua"):fmt("stylua")
+			ft("markdown"):fmt("prettierd") --:lint("markdownlint")
 			ft("python"):fmt("black")
+			ft("swift"):fmt("swiftformat")
+			ft("tex"):fmt("latexindent")
 		end,
+		opts = { fmt_on_save = true },
 	},
 
 	-- lsp enhancement
