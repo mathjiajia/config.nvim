@@ -39,19 +39,19 @@ return {
 
 				-- stylua: ignore
 				local keymaps = {
-					{ "gd", function() require("glance").open("definitions") end, desc = "Definition", method = "definition" },
-					{ "gi", function() require("glance").open("implementations") end,  desc = "Implementation", method = "implementation" },
-					{ "gr", function() require("glance").open("references") end,  desc = "References", method = "references" },
-					{ "gt", function() require("glance").open("type_definitions") end, desc = "Type Definition", method = "typeDefinition" },
-					{ "gD", lsp.buf.declaration, desc = "Declaration", method = "declaration" },
-					{ "<C-k>", lsp.buf.signature_help, desc = "Signature", method = "signatureHelp" },
-					{ "<leader>rn", lsp.buf.rename, desc = "Rename Symbol", method = "rename" },
-					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", method = "codeAction" },
+					{ "gd", function() require("glance").open("definitions") end, method = "definition" },
+					{ "gi", function() require("glance").open("implementations") end, method = "implementation" },
+					{ "gr", function() require("glance").open("references") end, method = "references" },
+					{ "gt", function() require("glance").open("type_definitions") end, method = "typeDefinition" },
+					{ "gD", lsp.buf.declaration, method = "declaration" },
+					{ "<C-k>", lsp.buf.signature_help, method = "signatureHelp" },
+					{ "<leader>rn", lsp.buf.rename, method = "rename" },
+					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, method = "codeAction" },
 				}
 
 				for _, keys in ipairs(keymaps) do
 					if client.supports_method("textDocument/" .. keys.method) then
-						vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.desc })
+						vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.method })
 					end
 				end
 
