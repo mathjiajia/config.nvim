@@ -1,4 +1,6 @@
-local fn, lsp = vim.fn, vim.lsp
+local api, fn, lsp = vim.api, vim.fn, vim.lsp
+local augroup = api.nvim_create_augroup
+local autocmd = api.nvim_create_autocmd
 
 return {
 
@@ -32,6 +34,61 @@ return {
 			})
 
 			-- lspconfig
+			local on_attach = function(client, bufnr)
+				vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+				-- stylua: ignore
+				local keymaps = {
+					{ "gd", function() require("glance").open("definitions") end, desc = "Definition", method = "definition" },
+					{ "gi", function() require("glance").open("implementations") end,  desc = "Implementation", method = "implementation" },
+					{ "gr", function() require("glance").open("references") end,  desc = "References", method = "references" },
+					{ "gt", function() require("glance").open("type_definitions") end, desc = "Type Definition", method = "typeDefinition" },
+					{ "gD", lsp.buf.declaration, desc = "Declaration", method = "declaration" },
+					{ "<C-k>", lsp.buf.signature_help, desc = "Signature", method = "signatureHelp" },
+					{ "<leader>rn", lsp.buf.rename, desc = "Rename Symbol", method = "rename" },
+					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", method = "codeAction" },
+				}
+
+				for _, keys in ipairs(keymaps) do
+					if client.supports_method("textDocument/" .. keys.method) then
+						vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.desc })
+					end
+				end
+
+				if client.supports_method("textDocument/documentHighlight") then
+					local group = augroup("lsp_document_highlight", {})
+					autocmd({ "CursorHold", "CursorHoldI" }, {
+						group = group,
+						buffer = bufnr,
+						callback = lsp.buf.document_highlight,
+					})
+					autocmd({ "CursorMoved", "CursorMovedI" }, {
+						group = group,
+						buffer = bufnr,
+						callback = lsp.buf.clear_references,
+					})
+				end
+
+				-- if client.supports_method("textDocument/inlayHint") then
+				-- 	lsp.inlay_hint(bufnr, true)
+				-- end
+
+				-- if client.supports_method("textDocument/codeLens") then
+				-- 	local group = augroup("lsp_document_codelens", {})
+				-- 	autocmd("BufEnter", {
+				-- 		group = group,
+				-- 		buffer = bufnr,
+				-- 		callback = lsp.codelens.refresh,
+				-- 		once = true,
+				-- 	})
+				-- 	autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
+				-- 		group = group,
+				-- 		buffer = bufnr,
+				-- 		callback = lsp.codelens.refresh,
+				-- 	})
+				-- end
+			end
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp.protocol.make_client_capabilities())
 
 			local servers = {
@@ -63,7 +120,9 @@ return {
 									"--reuse-window",
 									-- "--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
 									"--inverse-search",
-									fn.stdpath("data") .. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root " .. fn.stdpath("cache") .. " -server " .. vim.v.servername,
+									fn.stdpath("data") ..
+									"/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root " ..
+									fn.stdpath("cache") .. " -server " .. vim.v.servername,
 									"--forward-search-file", "%f",
 									"--forward-search-line", "%l", "%p"
 								},
@@ -82,6 +141,7 @@ return {
 				handlers = {
 					function(server)
 						local opts = servers[server]
+						opts.on_attach = on_attach
 						opts.capabilities = capabilities
 						require("lspconfig")[server].setup(opts)
 					end,
@@ -90,6 +150,7 @@ return {
 
 			require("lspconfig").sourcekit.setup({
 				filetypes = { "swift", "objective-c", "objective-cpp" },
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 		end,
@@ -100,6 +161,7 @@ return {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		dependencies = "mason.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local null_ls = require("null-ls")
 			null_ls.setup({
@@ -111,13 +173,11 @@ return {
 				},
 			})
 		end,
-		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
-		build = ":MasonUpdate",
 		config = function()
 			require("mason").setup({ ui = { border = "rounded" } })
 			local mr = require("mason-registry")
@@ -140,44 +200,21 @@ return {
 
 	{
 		"nvimdev/guard.nvim",
-		init = function()
-			local formatter = require("guard.tools.formatter")
-
-			formatter.fish_indent = {
-				cmd = "fish_indent",
-				stdin = true,
-			}
-
-			formatter.latexindent = {
-				cmd = "latexindent",
-				args = { "-g", "/dev/null" },
-				stdin = true,
-			}
-
-			formatter.prettierd = {
-				cmd = "prettierd",
-				args = { "--stdin-filepath" },
-				fname = true,
-				stdin = true,
-			}
-
-			formatter.swiftformat = {
-				cmd = "swiftformat",
-				args = { "--stdinpath" },
-				fname = true,
-				stdin = true,
-			}
-
-			local ft = require("guard.filetype")
-			ft("c"):fmt("lsp")
-			ft("fish"):fmt("fish_indent") --:lint("fish")
-			ft("lua"):fmt("stylua")
-			ft("markdown"):fmt("prettierd") --:lint("markdownlint")
-			ft("python"):fmt("black")
-			ft("swift"):fmt("swiftformat")
-			ft("tex"):fmt("latexindent")
-		end,
-		opts = { fmt_on_save = true },
+		-- ft = { "c", "fish", "lua", "markdown", "python", "swift", "tex" },
+		lazy = false,
+		opts = {
+			fmt_on_save = true,
+			-- lsp_as_default_formatter = true,
+			ft = {
+				c = { fmt = { "lsp" } },
+				fish = { fmt = { { cmd = "fish_indent", stdin = true } } },
+				lua = { fmt = { "stylua" } },
+				markdown = { fmt = { { cmd = "prettierd", args = { "--stdin-filepath" }, fname = true, stdin = true } } },
+				python = { fmt = { "black" } },
+				swift = { fmt = { cmd = "swiftformat", args = { "--stdinpath" }, fname = true, stdin = true } },
+				tex = { fmt = { cmd = "latexindent", args = { "-g", "/dev/null" }, stdin = true } },
+			},
+		},
 	},
 
 	-- lsp enhancement

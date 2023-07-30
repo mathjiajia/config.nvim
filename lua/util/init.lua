@@ -5,6 +5,18 @@ local M = {}
 
 M.root_patterns = { ".git", "lua" }
 
+function M.support(method)
+	method = method:find("/") and method or "textDocument/" .. method
+	local bufnr = api.nvim_get_current_buf()
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
+	for _, client in ipairs(clients) do
+		if client.supports_method(method) then
+			return true
+		end
+	end
+	return false
+end
+
 ---@param plugin string
 function M.has(plugin)
 	return require("lazy.core.config").plugins[plugin] ~= nil
@@ -87,8 +99,9 @@ end
 ---@param opts? LazyCmdOptions|{interactive?:boolean, esc_esc?:false}
 function M.float_term(cmd, opts)
 	opts = vim.tbl_deep_extend("force", {
+		ft = "lazyterm",
 		size = { width = 0.9, height = 0.9 },
-	}, opts or {})
+	}, opts or {}, { persistent = true })
 	require("lazy.util").float_term(cmd, opts)
 end
 
@@ -110,6 +123,20 @@ function M.toggle(option, silent, values)
 		else
 			Util.warn("Disabled " .. option, { title = "Option" })
 		end
+	end
+end
+
+local nu = { number = true, relativenumber = true }
+function M.toggle_number()
+	if vim.opt_local.number:get() or vim.opt_local.relativenumber:get() then
+		nu = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		Util.warn("Disabled line numbers", { title = "Option" })
+	else
+		vim.opt_local.number = nu.number
+		vim.opt_local.relativenumber = nu.relativenumber
+		Util.info("Enabled line numbers", { title = "Option" })
 	end
 end
 

@@ -1,4 +1,4 @@
-local api, fn = vim.api, vim.fn
+local api, fn, uv = vim.api, vim.fn, vim.uv
 local Util = require("util")
 
 return {
@@ -15,7 +15,7 @@ return {
 		init = function()
 			if fn.argc() == 1 then
 				---@diagnostic disable-next-line: param-type-mismatch
-				local stat = vim.uv.fs_stat(fn.argv(0))
+				local stat = uv.fs_stat(fn.argv(0))
 				if stat and stat.type == "directory" then
 					require("neo-tree")
 				end
@@ -77,7 +77,7 @@ return {
 			local actions = require("telescope.actions")
 			local actions_layout = require("telescope.actions.layout")
 
-			local home = vim.uv.os_homedir()
+			local home = uv.os_homedir()
 
 			local function flash(prompt_bufnr)
 				require("flash").jump({

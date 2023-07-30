@@ -265,58 +265,23 @@ return {
 		},
 	},
 
-	-- animations
-	{
-		"echasnovski/mini.animate",
-		event = "VeryLazy",
-		opts = function()
-			-- don't use animate when scrolling with the mouse
-			local mouse_scrolled = false
-			for _, scroll in ipairs({ "Up", "Down" }) do
-				local key = "<ScrollWheel" .. scroll .. ">"
-				vim.keymap.set({ "", "i" }, key, function()
-					mouse_scrolled = true
-					return key
-				end, { expr = true })
-			end
-
-			local animate = require("mini.animate")
-			return {
-				resize = {
-					timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
-				},
-				scroll = {
-					timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
-					subscroll = animate.gen_subscroll.equal({
-						predicate = function(total_scroll)
-							if mouse_scrolled then
-								mouse_scrolled = false
-								return false
-							end
-							return total_scroll > 1
-						end,
-					}),
-				},
-			}
-		end,
-	},
-
+	-- better quickfix
 	-- {
-	-- 	"lewis6991/satellite.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = true,
+	-- 	"kevinhwang91/nvim-bf",
+	-- 	opts = { preview = { win_height = 5, win_vheight = 5 } },
+	-- 	ft = "qf",
+	-- 	dependencies = {
+	-- 		"junegunn/fzf",
+	-- 		-- stylua: ignore
+	-- 		build = function() vim.fn["fzf#install"]() end,
+	-- 	},
 	-- },
 
-	-- better quickfix
 	{
-		"kevinhwang91/nvim-bqf",
-		opts = { preview = { win_height = 5, win_vheight = 5 } },
+		"ashfinal/qfview.nvim",
+		config = true,
 		ft = "qf",
-		dependencies = {
-			"junegunn/fzf",
-			-- stylua: ignore
-			build = function() vim.fn["fzf#install"]() end,
-		},
+		keys = { "<leader>q" },
 	},
 
 	-- Zen mode

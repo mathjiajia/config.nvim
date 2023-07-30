@@ -1,6 +1,4 @@
--- This file is automatically loaded by plugins.config
-
-local api, fn, lsp = vim.api, vim.fn, vim.lsp
+local api, fn = vim.api, vim.fn
 local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
 
@@ -17,78 +15,6 @@ autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 	desc = "Highlight the yanked text",
-})
-
-autocmd("LspAttach", {
-	group = augroup("UserLspConfig", {}),
-	callback = function(ev)
-		local bufnr = ev.buf
-
-		vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-		local function has(method)
-			method = method:find("/") and method or "textDocument/" .. method
-			local clients = lsp.get_clients({ bufnr = bufnr })
-			for _, client in ipairs(clients) do
-				if client.supports_method(method) then
-					return true
-				end
-			end
-			return false
-		end
-
-		if has("documentHighlight") then
-			local group = augroup("lsp_document_highlight", {})
-			autocmd({ "CursorHold", "CursorHoldI" }, {
-				group = group,
-				buffer = bufnr,
-				callback = lsp.buf.document_highlight,
-			})
-			autocmd({ "CursorMoved", "CursorMovedI" }, {
-				group = group,
-				buffer = bufnr,
-				callback = lsp.buf.clear_references,
-			})
-		end
-
-		-- if has("inlayHint") then
-		-- 	lsp.inlay_hint(bufnr, true)
-		-- end
-
-		-- if has("codeLens") then
-		-- 	local group = augroup("lsp_document_codelens", {})
-		-- 	autocmd("BufEnter", {
-		-- 		group = group,
-		-- 		buffer = bufnr,
-		-- 		callback = lsp.codelens.refresh,
-		-- 		once = true,
-		-- 	})
-		-- 	autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
-		-- 		group = group,
-		-- 		buffer = bufnr,
-		-- 		callback = lsp.codelens.refresh,
-		-- 	})
-		-- end
-
-		local keymaps = {
-			-- stylua: ignore start
-			{ "gd", function() require("glance").open("definitions") end, desc = "Goto Definition", method = "definition" },
-			{ "gi", function() require("glance").open("implementations") end,  desc = "Goto Implementation", method = "implementation" },
-			{ "gr", function() require("glance").open("references") end,  desc = "References", method = "references" },
-			{ "gt", function() require("glance").open("type_definitions") end, desc = "Goto Type Definition", method = "typeDefinition" },
-			-- stylua: ignore end
-			{ "gD", lsp.buf.declaration, desc = "Goto Declaration", method = "declaration" },
-			{ "<C-k>", lsp.buf.signature_help, desc = "Signature", method = "signatureHelp" },
-			{ "<leader>rn", lsp.buf.rename, desc = "Rename Symbol", method = "rename" },
-			{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", method = "codeAction" },
-		}
-
-		for _, keys in ipairs(keymaps) do
-			if has(keys.method) then
-				vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.desc })
-			end
-		end
-	end,
 })
 
 -- put the cursor at the last edited position
