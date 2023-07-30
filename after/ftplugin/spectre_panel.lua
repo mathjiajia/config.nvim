@@ -1,1 +1,1 @@
-vim.bo.buflisted = false
+vim.opt_local.buflisted = false

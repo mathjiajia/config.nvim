@@ -10,7 +10,7 @@ return {
 		-- stylua: ignore
 		keys = {
 			{ "<M-t>", function() require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() }) end, desc = "NeoTree (root dir)" },
-			{ "<M-S-t>", function() require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() }) end, desc = "NeoTree (cwd)" },
+			{ "<M-S-t>", function() require("neo-tree.command").execute({ toggle = true, dir = uv.cwd() }) end, desc = "NeoTree (cwd)" },
 		},
 		init = function()
 			if fn.argc() == 1 then
@@ -52,19 +52,19 @@ return {
 		keys = {
 			{ "<leader><space>", Util.telescope("files", { cwd = "%:p:h" }), desc = "Find Files (current)" },
 			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
-			{ "<leader>fd", function() require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" }) end, desc = "Neovim Configs" },
-			{ "<leader>fD", function() require("telescope").extensions.file_browser.file_browser() end, desc = "Neovim Configs" },
-			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
-			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+			{ "<leader>fd", function() require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" }) end, desc = "File Browser (current)" },
+			{ "<leader>fD", function() require("telescope").extensions.file_browser.file_browser() end, desc = "File Browser (cwd)" },
+			{ "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (root dir)" },
+			{ "<leader>fF", Util.telescope("files"), desc = "Find Files (cwd)" },
 			{ "<leader>fm", function() require("telescope.builtin").builtin() end, desc = "Telescope Meta" },
 			{ "<leader>fn", function() require("telescope.builtin").find_files({ cwd = "~/.config/nvim" }) end, desc = "Neovim Configs" },
-			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Neovim Configs" },
+			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Frecency" },
 			{ "<leader>sb", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy Find" },
-			{ "<leader>sg", Util.telescope("live_grep"), desc = "Live Grep (root dir)" },
-			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (cwd)" },
+			{ "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (root dir)" },
+			{ "<leader>sG", Util.telescope("live_grep"), desc = "Live Grep (cwd)" },
 			{ "<leader>sh", function() require("telescope.builtin").help_tags() end, desc = "Help Tags" },
-			{ "<leader>ss", Util.telescope("grep_string"), desc = "Grep String (root dir)", mode = { "n", "x" } },
-			{ "<leader>sS", Util.telescope("grep_string", { cwd = false }), desc = "Grep String", mode = { "n", "x" } },
+			{ "<leader>ss", Util.telescope("grep_string", { cwd = false }), desc = "Grep String (root dir)", mode = { "n", "x" } },
+			{ "<leader>sS", Util.telescope("grep_string"), desc = "Grep String", mode = { "n", "x" } },
 		},
 		dependencies = {
 			"natecraddock/telescope-zf-native.nvim",
@@ -76,8 +76,7 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local actions_layout = require("telescope.actions.layout")
-
-			local home = uv.os_homedir()
+			local home = vim.env.HOME
 
 			local function flash(prompt_bufnr)
 				require("flash").jump({
@@ -133,6 +132,7 @@ return {
 					file_browser = { theme = "ivy" },
 					frecency = {
 						show_scores = true,
+						use_sqlite = false,
 						workspaces = {
 							["conf"] = home .. "/.config",
 							["dev"] = home .. "/Developer",
@@ -234,5 +234,62 @@ return {
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		-- stylua: ignore
 		keys = { { "<leader>gd", function() require("diffview").open({}) end, desc = "Diff View" } },
+	},
+
+	{
+		"jaytyrrell13/static.nvim",
+		config = true,
+		cmd = { "Static" },
+	},
+
+	{
+		"echasnovski/mini.clue",
+		lazy = false,
+		config = function()
+			local miniclue = require("mini.clue")
+			miniclue.setup({
+				triggers = {
+					-- Leader triggers
+					{ mode = "n", keys = "<Leader>" },
+					{ mode = "x", keys = "<Leader>" },
+
+					-- Built-in completion
+					{ mode = "i", keys = "<C-x>" },
+
+					-- `g` key
+					{ mode = "n", keys = "g" },
+					{ mode = "x", keys = "g" },
+
+					-- Marks
+					{ mode = "n", keys = "'" },
+					{ mode = "n", keys = "`" },
+					{ mode = "x", keys = "'" },
+					{ mode = "x", keys = "`" },
+
+					-- Registers
+					{ mode = "n", keys = '"' },
+					{ mode = "x", keys = '"' },
+					{ mode = "i", keys = "<C-r>" },
+					{ mode = "c", keys = "<C-r>" },
+
+					-- Window commands
+					{ mode = "n", keys = "<C-w>" },
+
+					-- `z` key
+					{ mode = "n", keys = "z" },
+					{ mode = "x", keys = "z" },
+				},
+
+				clues = {
+					-- Enhance this by adding descriptions for <Leader> mapping groups
+					miniclue.gen_clues.builtin_completion(),
+					miniclue.gen_clues.g(),
+					miniclue.gen_clues.marks(),
+					miniclue.gen_clues.registers(),
+					miniclue.gen_clues.windows(),
+					miniclue.gen_clues.z(),
+				},
+			})
+		end,
 	},
 }

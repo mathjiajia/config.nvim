@@ -5,15 +5,6 @@ return {
 	-- better vim.notify
 	{
 		"rcarriga/nvim-notify",
-		init = function()
-			-- when noice is not enabled, install notify on VeryLazy
-			local Util = require("util")
-			if not Util.has("noice.nvim") then
-				Util.on_very_lazy(function()
-					vim.notify = require("notify")
-				end)
-			end
-		end,
 		config = true,
 		-- stylua: ignore
 		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete all Notifications" } },
@@ -36,12 +27,13 @@ return {
 		end,
 	},
 
+	-- highlight patterns in text
 	{
 		"echasnovski/mini.hipatterns",
 		event = "BufReadPre",
 		config = function()
-			local hipatterns = require("mini.hipatterns")
-			hipatterns.setup({
+			local hi = require("mini.hipatterns")
+			hi.setup({
 				highlighters = {
 					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
 					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
@@ -50,7 +42,7 @@ return {
 					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
 
 					-- Highlight hex color strings (`#rrggbb`) using that color
-					hex_color = hipatterns.gen_highlighter.hex_color(),
+					hex_color = hi.gen_highlighter.hex_color(),
 				},
 			})
 		end,
@@ -79,18 +71,12 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"nvimdev/whiskyline.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = true,
-	-- },
-
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
-			use_treesitter = true,
+			-- use_treesitter = true,
 			show_trailing_blankline_indent = false,
 			filetype_exclude = require("config").ft_exclude,
 		},
@@ -267,7 +253,7 @@ return {
 
 	-- better quickfix
 	-- {
-	-- 	"kevinhwang91/nvim-bf",
+	-- 	"kevinhwang91/nvim-bqf",
 	-- 	opts = { preview = { win_height = 5, win_vheight = 5 } },
 	-- 	ft = "qf",
 	-- 	dependencies = {
@@ -276,12 +262,10 @@ return {
 	-- 		build = function() vim.fn["fzf#install"]() end,
 	-- 	},
 	-- },
-
 	{
 		"ashfinal/qfview.nvim",
 		config = true,
 		ft = "qf",
-		keys = { "<leader>q" },
 	},
 
 	-- Zen mode

@@ -17,6 +17,25 @@ autocmd("TextYankPost", {
 	desc = "Highlight the yanked text",
 })
 
+autocmd("FileType", {
+	-- schedule_wrap is used to stop dlopen from crashing on MacOS
+	callback = vim.schedule_wrap(function()
+		if not pcall(vim.treesitter.start) then
+			return
+		end
+
+		-- folds
+		vim.opt_local.foldmethod = "expr"
+		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.opt.foldenable = false
+		-- vim.cmd.normal("zx")
+
+		-- indentation
+		-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end),
+	desc = "treesitter",
+})
+
 -- put the cursor at the last edited position
 autocmd({ "BufWinEnter", "FileType" }, {
 	group = augroup("LastPlace", {}),

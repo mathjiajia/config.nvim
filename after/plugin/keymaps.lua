@@ -1,3 +1,4 @@
+local api = vim.api
 local Util = require("util")
 
 -- better up/down
@@ -12,8 +13,8 @@ vim.keymap.set({ "n", "t" }, "<M-k>", function() vim.cmd.wincmd("k") end, { desc
 vim.keymap.set({ "n", "t" }, "<M-l>", function() vim.cmd.wincmd("l") end, { desc = "Right Window" })
 
 -- buffer
-vim.keymap.set("n", "<leader>bd", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Delete Buffer" })
-vim.keymap.set("n", "<leader>bD", function() vim.api.nvim_buf_delete(0, { force = true }) end, { desc = "Delete Buffer (force)" })
+vim.keymap.set("n", "<leader>bd", function() api.nvim_buf_delete(0, {}) end, { desc = "Delete Buffer" })
+vim.keymap.set("n", "<leader>bD", function() api.nvim_buf_delete(0, { force = true }) end, { desc = "Delete Buffer (force)" })
 
 -- toggle options
 vim.keymap.set("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Spelling" })

@@ -46,8 +46,9 @@ local VimMode = {
 	},
 
 	provider = function(self)
-		return "  %2(" .. self.modes[self.mode] .. "%)"
+		return " %2(" .. self.modes[self.mode] .. "%)"
 	end,
+	hl = { fg = "green", bold = true },
 }
 
 local Snippets = {
@@ -89,7 +90,6 @@ local Git = {
 	condition = conditions.is_git_repo,
 	static = require("config").icons.git,
 	init = function(self)
-		---@diagnostic disable-next-line: undefined-field
 		self.status_dict = vim.b.gitsigns_status_dict
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
@@ -98,6 +98,7 @@ local Git = {
 		provider = function(self)
 			return self.branch .. self.status_dict.head
 		end,
+		hl = { fg = "purple" },
 	},
 
 	{
@@ -186,6 +187,7 @@ local LSPActive = {
 		end
 		return " ◍ [" .. table.concat(names, ",") .. "]"
 	end,
+	hl = { fg = "blue" },
 
 	on_click = {
 		callback = function()
@@ -203,6 +205,7 @@ local FileType = {
 	provider = function()
 		return string.upper(vim.bo.filetype)
 	end,
+	hl = { fg = utils.get_highlight("Type").fg, bold = true },
 }
 
 local Spell = {
@@ -210,6 +213,7 @@ local Spell = {
 		return vim.wo.spell
 	end,
 	provider = "󰓆 Spell",
+	hl = { bold = true, fg = "cyan" },
 }
 
 local FileName = {
@@ -471,7 +475,7 @@ api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
 
 			if #buflist_cache > 1 then
 				vim.o.showtabline = 2
-			else
+			elseif vim.o.showtabline ~= 1 then
 				vim.o.showtabline = 1
 			end
 		end)
@@ -523,9 +527,9 @@ local TabLineOffset = {
 		if vim.bo[bufnr].filetype == "neo-tree" then
 			self.title = "neo-tree"
 			return true
-		elseif vim.bo[bufnr].filetype == "aerial" then
-			self.title = "aerial"
-			return true
+			-- elseif vim.bo[bufnr].filetype == "aerial" then
+			-- 	self.title = "aerial"
+			-- 	return true
 		end
 	end,
 
@@ -549,9 +553,7 @@ local TabLine = { TabLineOffset, BufferLine, TabPages }
 
 require("heirline").setup({
 	statusline = StatusLine,
-	-- winbar = WinBar,
 	tabline = TabLine,
-	-- statuscolumn = StatusColumn,
 })
 
 api.nvim_create_autocmd({ "FileType" }, {

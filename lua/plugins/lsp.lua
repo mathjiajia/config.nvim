@@ -13,6 +13,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			-- diagnostics signs
 			local icons = require("config").icons.diagnostics
@@ -37,25 +38,27 @@ return {
 			local on_attach = function(client, bufnr)
 				vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
+				local methods = vim.lsp.protocol.Methods
+
 				-- stylua: ignore
 				local keymaps = {
-					{ "gd", function() require("glance").open("definitions") end, method = "definition" },
-					{ "gi", function() require("glance").open("implementations") end, method = "implementation" },
-					{ "gr", function() require("glance").open("references") end, method = "references" },
-					{ "gt", function() require("glance").open("type_definitions") end, method = "typeDefinition" },
-					{ "gD", lsp.buf.declaration, method = "declaration" },
-					{ "<C-k>", lsp.buf.signature_help, method = "signatureHelp" },
-					{ "<leader>rn", lsp.buf.rename, method = "rename" },
-					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, method = "codeAction" },
+					{ "gd", function() require("glance").open("definitions") end, method = methods.textDocument_definition },
+					{ "gi", function() require("glance").open("implementations") end, method = methods.textDocument_implementation },
+					{ "gr", function() require("glance").open("references") end, method = methods.textDocument_references },
+					{ "gt", function() require("glance").open("type_definitions") end, method = methods.textDocument_typeDefinition },
+					{ "gD", lsp.buf.declaration, method = methods.textDocument_declaration },
+					{ "<C-k>", lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
+					{ "<leader>rn", lsp.buf.rename, method = methods.textDocument_rename },
+					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
 				}
 
 				for _, keys in ipairs(keymaps) do
-					if client.supports_method("textDocument/" .. keys.method) then
+					if client.supports_method(keys.method) then
 						vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.method })
 					end
 				end
 
-				if client.supports_method("textDocument/documentHighlight") then
+				if client.supports_method(methods.textDocument_documentHighlight) then
 					local group = augroup("lsp_document_highlight", {})
 					autocmd({ "CursorHold", "CursorHoldI" }, {
 						group = group,
@@ -69,11 +72,11 @@ return {
 					})
 				end
 
-				-- if client.supports_method("textDocument/inlayHint") then
+				-- if client.supports_method(methods.textDocument_inlayHint) then
 				-- 	lsp.inlay_hint(bufnr, true)
 				-- end
 
-				-- if client.supports_method("textDocument/codeLens") then
+				-- if client.supports_method(methods.textDocument_codeLens) then
 				-- 	local group = augroup("lsp_document_codelens", {})
 				-- 	autocmd("BufEnter", {
 				-- 		group = group,
@@ -154,7 +157,6 @@ return {
 				capabilities = capabilities,
 			})
 		end,
-		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- inject LSP
@@ -201,18 +203,17 @@ return {
 	{
 		"nvimdev/guard.nvim",
 		-- ft = { "c", "fish", "lua", "markdown", "python", "swift", "tex" },
-		lazy = false,
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			fmt_on_save = true,
-			-- lsp_as_default_formatter = true,
+			lsp_as_default_formatter = true,
 			ft = {
-				c = { fmt = { "lsp" } },
-				fish = { fmt = { { cmd = "fish_indent", stdin = true } } },
+				fish = { fmt = { "fish_indent" } },
 				lua = { fmt = { "stylua" } },
-				markdown = { fmt = { { cmd = "prettierd", args = { "--stdin-filepath" }, fname = true, stdin = true } } },
+				markdown = { fmt = { "prettierd" } },
 				python = { fmt = { "black" } },
-				swift = { fmt = { cmd = "swiftformat", args = { "--stdinpath" }, fname = true, stdin = true } },
-				tex = { fmt = { cmd = "latexindent", args = { "-g", "/dev/null" }, stdin = true } },
+				swift = { fmt = { "swiftformat" } },
+				tex = { fmt = { "latexindent" } },
 			},
 		},
 	},
