@@ -29,7 +29,7 @@ see [mySnippets][mysnippets]
 │       ├── latex
 │       │   └── highlights.scm
 │       └── swift
-│           └── rainbow-parens.scm
+│           └── rainbow-delimiters.scm
 ├── colors
 ├── ginit.vim
 ├── init.lua
@@ -44,10 +44,7 @@ see [mySnippets][mysnippets]
 │   │   ├── dap.lua
 │   │   ├── editor.lua
 │   │   ├── lang.lua
-│   │   ├── lsp
-│   │   │   ├── format.lua
-│   │   │   ├── init.lua
-│   │   │   └── misc.lua
+│   │   ├── lsp.lua
 │   │   ├── treesitter.lua
 │   │   ├── ui.lua
 │   │   └── util.lua
