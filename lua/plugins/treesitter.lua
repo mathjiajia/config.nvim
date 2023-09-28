@@ -1,10 +1,12 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = "main",
-	build = ":TSUpdate",
+	-- branch = "main",
+	-- lazy = false,
+	main = "nvim-treesitter.configs",
 	event = { "BufReadPost", "BufNewFile" },
+	build = ":TSUpdate",
 	opts = {
-		ensure_install = {
+		ensure_installed = {
 			"bash",
 			"bibtex",
 			"c",
@@ -20,7 +22,7 @@ return {
 			"markdown",
 			"markdown_inline",
 			"matlab",
-			-- "norg",
+			"norg",
 			"python",
 			"query",
 			"regex",
@@ -28,5 +30,8 @@ return {
 			"vim",
 			"vimdoc",
 		},
+		highlight = { enable = true },
+		incremental_selection = { enable = true },
+		indent = { enable = true },
 	},
 }

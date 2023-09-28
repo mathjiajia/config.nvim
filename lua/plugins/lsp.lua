@@ -40,12 +40,35 @@ return {
 
 				local methods = vim.lsp.protocol.Methods
 
-				-- stylua: ignore
 				local keymaps = {
-					{ "gd", function() require("glance").open("definitions") end, method = methods.textDocument_definition },
-					{ "gi", function() require("glance").open("implementations") end, method = methods.textDocument_implementation },
-					{ "gr", function() require("glance").open("references") end, method = methods.textDocument_references },
-					{ "gt", function() require("glance").open("type_definitions") end, method = methods.textDocument_typeDefinition },
+					{
+						"gd",
+						function()
+							require("glance").open("definitions")
+						end,
+						method = methods.textDocument_definition,
+					},
+					{
+						"gi",
+						function()
+							require("glance").open("implementations")
+						end,
+						method = methods.textDocument_implementation,
+					},
+					{
+						"gr",
+						function()
+							require("glance").open("references")
+						end,
+						method = methods.textDocument_references,
+					},
+					{
+						"gt",
+						function()
+							require("glance").open("type_definitions")
+						end,
+						method = methods.textDocument_typeDefinition,
+					},
 					{ "gD", lsp.buf.declaration, method = methods.textDocument_declaration },
 					{ "<C-k>", lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
 					{ "<leader>rn", lsp.buf.rename, method = methods.textDocument_rename },
@@ -118,16 +141,20 @@ return {
 							},
 							forwardSearch = {
 								executable = "sioyek",
-								-- stylua: ignore
 								args = {
 									"--reuse-window",
 									-- "--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
 									"--inverse-search",
-									fn.stdpath("data") ..
-									"/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root " ..
-									fn.stdpath("cache") .. " -server " .. vim.v.servername,
-									"--forward-search-file", "%f",
-									"--forward-search-line", "%l", "%p"
+									fn.stdpath("data")
+										.. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root "
+										.. fn.stdpath("cache")
+										.. " -server "
+										.. vim.v.servername,
+									"--forward-search-file",
+									"%f",
+									"--forward-search-line",
+									"%l",
+									"%p",
 								},
 							},
 							chktex = { onOpenAndSave = false },
@@ -159,31 +186,15 @@ return {
 		end,
 	},
 
-	-- inject LSP
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		dependencies = "mason.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local null_ls = require("null-ls")
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.diagnostics.fish,
-					null_ls.builtins.diagnostics.markdownlint.with({
-						args = { "--config", "~/.config/markdownlint/markdownlint.yaml", "--stdin" },
-					}),
-				},
-			})
-		end,
-	},
-
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
+		cmd = "Mason",
 		config = function()
 			require("mason").setup({ ui = { border = "rounded" } })
 			local mr = require("mason-registry")
-			local tools = { "black", "debugpy", "glow", "markdownlint", "prettierd", "stylua", "tectonic" }
+			local tools =
+				{ "black", "debugpy", "glow", "markdownlint", "mdformat", "prettierd", "shellcheck", "stylua", "tectonic" }
 			local function ensure_installed()
 				for _, tool in ipairs(tools) do
 					local p = mr.get_package(tool)
@@ -200,22 +211,53 @@ return {
 		end,
 	},
 
+	-- formatters
 	{
-		"nvimdev/guard.nvim",
-		-- ft = { "c", "fish", "lua", "markdown", "python", "swift", "tex" },
-		event = { "BufReadPre", "BufNewFile" },
+		"stevearc/conform.nvim",
+		ft = { "c", "fish", "json", "lua", "markdown", "python", "swift", "tex" },
 		opts = {
-			fmt_on_save = true,
-			lsp_as_default_formatter = true,
-			ft = {
-				fish = { fmt = { "fish_indent" } },
-				lua = { fmt = { "stylua" } },
-				markdown = { fmt = { "prettierd" } },
-				python = { fmt = { "black" } },
-				swift = { fmt = { "swiftformat" } },
-				tex = { fmt = { "latexindent" } },
+			formatters_by_ft = {
+				fish = { "fish_indent" },
+				json = { "prettierd" },
+				lua = { "stylua" },
+				markdown = { "prettierd" },
+				python = { "black" },
+				swift = { "swiftformat" },
+				tex = { "latexindent" },
+			},
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_fallback = true,
 			},
 		},
+	},
+
+	-- linters
+	{
+		"mfussenegger/nvim-lint",
+		ft = { "bash", "fish", "markdown", "zsh" },
+		config = function()
+			local lint = require("lint")
+			local markdownlint = lint.linters.markdownlint
+			markdownlint.args = {
+				"--config",
+				"~/.config/markdownlint/markdownlint.yaml",
+				"--stdin",
+			}
+
+			lint.linters_by_ft = {
+				bash = { "shellcheck" },
+				fish = { "fish" },
+				markdown = { "markdownlint" },
+				zsh = { "shellcheck" },
+			}
+
+			autocmd({ "BufWritePost" }, {
+				callback = function()
+					lint.try_lint()
+				end,
+			})
+		end,
 	},
 
 	-- lsp enhancement
@@ -224,14 +266,33 @@ return {
 		opts = {
 			ui = { border = "rounded" },
 			symbol_in_winbar = { enable = false },
+			lightbulb = { enable = false },
 		},
 		cmd = "Lspsaga",
-		-- stylua: ignore
-		keys = { { "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" } },
+		event = "BufEnter",
+		keys = {
+			{
+				"gh",
+				function()
+					require("lspsaga.finder"):new({})
+				end,
+				silent = true,
+				desc = "Lsp Finder",
+			},
+			{
+				"<M-p>",
+				function()
+					require("lspsaga.symbol"):outline()
+				end,
+				silent = true,
+				desc = "Lspsaga Outline",
+			},
+		},
 	},
 
 	{
 		"dnlhc/glance.nvim",
+		cmd = "Glance",
 		opts = {
 			border = { enable = true },
 			hooks = {

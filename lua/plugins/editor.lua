@@ -7,10 +7,21 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
-		-- stylua: ignore
 		keys = {
-			{ "<M-t>", function() require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() }) end, desc = "NeoTree (root dir)" },
-			{ "<M-S-t>", function() require("neo-tree.command").execute({ toggle = true, dir = uv.cwd() }) end, desc = "NeoTree (cwd)" },
+			{
+				"<M-t>",
+				function()
+					require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() })
+				end,
+				desc = "NeoTree (root dir)",
+			},
+			{
+				"<M-S-t>",
+				function()
+					require("neo-tree.command").execute({ toggle = true, dir = uv.cwd() })
+				end,
+				desc = "NeoTree (cwd)",
+			},
 		},
 		init = function()
 			if fn.argc() == 1 then
@@ -48,22 +59,74 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		-- stylua: ignore
 		keys = {
 			{ "<leader><space>", Util.telescope("files", { cwd = "%:p:h" }), desc = "Find Files (current)" },
-			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
-			{ "<leader>fd", function() require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" }) end, desc = "File Browser (current)" },
-			{ "<leader>fD", function() require("telescope").extensions.file_browser.file_browser() end, desc = "File Browser (cwd)" },
+			{
+				"<leader>fb",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Buffers",
+			},
+			{
+				"<leader>fd",
+				function()
+					require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" })
+				end,
+				desc = "File Browser (current)",
+			},
+			{
+				"<leader>fD",
+				function()
+					require("telescope").extensions.file_browser.file_browser()
+				end,
+				desc = "File Browser (cwd)",
+			},
 			{ "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (root dir)" },
 			{ "<leader>fF", Util.telescope("files"), desc = "Find Files (cwd)" },
-			{ "<leader>fm", function() require("telescope.builtin").builtin() end, desc = "Telescope Meta" },
-			{ "<leader>fn", function() require("telescope.builtin").find_files({ cwd = "~/.config/nvim" }) end, desc = "Neovim Configs" },
-			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Frecency" },
-			{ "<leader>sb", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy Find" },
+			{
+				"<leader>fm",
+				function()
+					require("telescope.builtin").builtin()
+				end,
+				desc = "Telescope Meta",
+			},
+			{
+				"<leader>fn",
+				function()
+					require("telescope.builtin").find_files({ cwd = "~/.config/nvim" })
+				end,
+				desc = "Neovim Configs",
+			},
+			{
+				"<leader>fr",
+				function()
+					require("telescope").extensions.frecency.frecency()
+				end,
+				desc = "Frecency",
+			},
+			{
+				"<leader>sb",
+				function()
+					require("telescope.builtin").current_buffer_fuzzy_find()
+				end,
+				desc = "Current Buf Fuzzy Find",
+			},
 			{ "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (root dir)" },
 			{ "<leader>sG", Util.telescope("live_grep"), desc = "Live Grep (cwd)" },
-			{ "<leader>sh", function() require("telescope.builtin").help_tags() end, desc = "Help Tags" },
-			{ "<leader>ss", Util.telescope("grep_string", { cwd = false }), desc = "Grep String (root dir)", mode = { "n", "x" } },
+			{
+				"<leader>sh",
+				function()
+					require("telescope.builtin").help_tags()
+				end,
+				desc = "Help Tags",
+			},
+			{
+				"<leader>ss",
+				Util.telescope("grep_string", { cwd = false }),
+				desc = "Grep String (root dir)",
+				mode = { "n", "x" },
+			},
 			{ "<leader>sS", Util.telescope("grep_string"), desc = "Grep String", mode = { "n", "x" } },
 		},
 		dependencies = {
@@ -120,7 +183,11 @@ return {
 					file_ignore_patterns = { "%.jpeg$", "%.jpg$", "%.png$", ".DS_Store" },
 				},
 				pickers = {
-					buffers = { theme = "dropdown", sort_lastused = true, previewer = false },
+					buffers = {
+						theme = "dropdown",
+						sort_lastused = true,
+						previewer = false,
+					},
 					current_buffer_fuzzy_find = { previewer = false },
 					find_files = { theme = "ivy", follow = true },
 					git_files = { theme = "ivy" },
@@ -128,7 +195,10 @@ return {
 					live_grep = { path_display = { "shorten" } },
 				},
 				extensions = {
-					bibtex = { format = "plain", global_files = { "~/TeX/Jiabibtex.bib" } },
+					bibtex = {
+						format = "plain",
+						global_files = { "~/TeX/Jiabibtex.bib" },
+					},
 					file_browser = { theme = "ivy" },
 					frecency = {
 						show_scores = true,
@@ -143,7 +213,14 @@ return {
 				},
 			})
 
-			local extns = { "zf-native", "file_browser", "frecency", "bibtex", "aerial", "noice" }
+			local extns = {
+				"zf-native",
+				"file_browser",
+				"frecency",
+				"bibtex",
+				"aerial",
+				"noice",
+			}
 			for _, extn in ipairs(extns) do
 				telescope.load_extension(extn)
 			end
@@ -154,14 +231,53 @@ return {
 	{
 		"folke/flash.nvim",
 		opts = { modes = { char = { jump_labels = true } } },
-		-- stylua: ignore
 		keys = {
-			"f", "F", "t", "T", ";", ",",
-			{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-			{ "<C-s>", mode = "c", function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+			"f",
+			"F",
+			"t",
+			"T",
+			";",
+			",",
+			{
+				"s",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<C-s>",
+				mode = "c",
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
 		},
 	},
 
@@ -175,15 +291,18 @@ return {
 				local gs = require("gitsigns")
 
 				-- Navigation
-				-- stylua: ignore start
 				vim.keymap.set("n", "]c", function()
-					if vim.wo.diff then return "]c" end
+					if vim.wo.diff then
+						return "]c"
+					end
 					vim.schedule(gs.next_hunk)
 					return "<Ignore>"
 				end, { expr = true, buffer = bufnr, desc = "Next Hunk" })
 
 				vim.keymap.set("n", "[c", function()
-					if vim.wo.diff then return "[c" end
+					if vim.wo.diff then
+						return "[c"
+					end
 					vim.schedule(gs.prev_hunk)
 					return "<Ignore>"
 				end, { expr = true, buffer = bufnr, desc = "Prev Hunk" })
@@ -195,17 +314,25 @@ return {
 				-- Actions
 				map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
 				map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
-				map("v", "<leader>hs", function() gs.stage_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") }) end, "Stage Hunk")
-				map("v", "<leader>hr", function() gs.reset_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") }) end, "Reset Hunk")
+				map("v", "<leader>hs", function()
+					gs.stage_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") })
+				end, "Stage Hunk")
+				map("v", "<leader>hr", function()
+					gs.reset_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") })
+				end, "Reset Hunk")
 				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
 				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
 				map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
 				map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
-				map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
+				map("n", "<leader>hb", function()
+					gs.blame_line({ full = true })
+				end, "Blame Line")
 				map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle Blame")
 				map("n", "<leader>hd", gs.diffthis, "Diff This")
-				map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff This (working copy)")
-				map('n', "<leader>td", gs.toggle_deleted, "Toggle Deleted")
+				map("n", "<leader>hD", function()
+					gs.diffthis("~")
+				end, "Diff This (working copy)")
+				map("n", "<leader>td", gs.toggle_deleted, "Toggle Deleted")
 
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Hunk Object")
@@ -221,10 +348,16 @@ return {
 			filter_kind = false,
 			show_guides = true,
 			layout = { default_direction = "left" },
+			icons = require("config").icons.aerial,
 		},
 		cmd = "AerialToggle",
-		-- stylua: ignore
-		keys = { { "<M-o>", function() require("aerial").toggle() end, desc = "Aerial" } },
+		keys = { {
+			"<M-o>",
+			function()
+				require("aerial").toggle()
+			end,
+			desc = "Aerial",
+		} },
 	},
 
 	-- diffview
@@ -232,64 +365,12 @@ return {
 		"sindrets/diffview.nvim",
 		opts = { enhanced_diff_hl = true },
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-		-- stylua: ignore
-		keys = { { "<leader>gd", function() require("diffview").open({}) end, desc = "Diff View" } },
-	},
-
-	{
-		"jaytyrrell13/static.nvim",
-		config = true,
-		cmd = { "Static" },
-	},
-
-	{
-		"echasnovski/mini.clue",
-		lazy = false,
-		config = function()
-			local miniclue = require("mini.clue")
-			miniclue.setup({
-				triggers = {
-					-- Leader triggers
-					{ mode = "n", keys = "<Leader>" },
-					{ mode = "x", keys = "<Leader>" },
-
-					-- Built-in completion
-					{ mode = "i", keys = "<C-x>" },
-
-					-- `g` key
-					{ mode = "n", keys = "g" },
-					{ mode = "x", keys = "g" },
-
-					-- Marks
-					{ mode = "n", keys = "'" },
-					{ mode = "n", keys = "`" },
-					{ mode = "x", keys = "'" },
-					{ mode = "x", keys = "`" },
-
-					-- Registers
-					{ mode = "n", keys = '"' },
-					{ mode = "x", keys = '"' },
-					{ mode = "i", keys = "<C-r>" },
-					{ mode = "c", keys = "<C-r>" },
-
-					-- Window commands
-					{ mode = "n", keys = "<C-w>" },
-
-					-- `z` key
-					{ mode = "n", keys = "z" },
-					{ mode = "x", keys = "z" },
-				},
-
-				clues = {
-					-- Enhance this by adding descriptions for <Leader> mapping groups
-					miniclue.gen_clues.builtin_completion(),
-					miniclue.gen_clues.g(),
-					miniclue.gen_clues.marks(),
-					miniclue.gen_clues.registers(),
-					miniclue.gen_clues.windows(),
-					miniclue.gen_clues.z(),
-				},
-			})
-		end,
+		keys = { {
+			"<leader>gd",
+			function()
+				require("diffview").open({})
+			end,
+			desc = "Diff View",
+		} },
 	},
 }

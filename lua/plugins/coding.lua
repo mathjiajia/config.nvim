@@ -3,6 +3,7 @@ return {
 	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
+		lazy = true,
 		dependencies = { "mathjiajia/mysnippets" },
 		config = function()
 			local ls = require("luasnip")
@@ -12,11 +13,20 @@ return {
 				update_events = "TextChanged,TextChangedI",
 				enable_autosnippets = true,
 				ext_opts = {
-					[types.choiceNode] = { active = { virt_text = { { "« ", "NonText" } } } },
+					[types.choiceNode] = {
+						active = {
+							virt_text = { { "", "Special" } },
+						},
+					},
+					[types.insertNode] = {
+						active = {
+							virt_text = { { "", "Boolean" } },
+						},
+					},
 				},
 			})
 
-			require("luasnip.loaders.from_lua").lazy_load({ paths = vim.fn.stdpath("data") .. "/lazy/mySnippets/snippets" })
+			require("luasnip.loaders.from_lua").lazy_load({ paths = "~/Coding/mySnippets/snippets" })
 
 			vim.keymap.set("i", "<C-k>", function()
 				if ls.expandable() then
@@ -36,7 +46,7 @@ return {
 				end
 			end, { desc = "LuaSnip Backward Jump" })
 
-			vim.keymap.set("i", "<C-e>", function()
+			vim.keymap.set({ "i", "s" }, "<C-e>", function()
 				if ls.choice_active() then
 					ls.change_choice(1)
 				end
@@ -55,6 +65,7 @@ return {
 			"lukas-reineke/cmp-rg",
 			"saadparwaiz1/cmp_luasnip",
 		},
+		event = { "CmdlineEnter", "InsertEnter" },
 		config = function()
 			local cmp = require("cmp")
 			local cmp_kinds = require("config").icons.cmp_kinds
@@ -98,9 +109,11 @@ return {
 					{ name = "path", keyword_length = 3 },
 					{ name = "rg", keyword_length = 4 },
 				},
-				-- experimental = { ghost_text = { hl_group = "LspCodeLens" } },
 				window = {
-					completion = { border = "rounded", col_offset = -3 },
+					completion = {
+						border = "rounded",
+						col_offset = -3,
+					},
 					documentation = { border = "rounded" },
 				},
 			})
@@ -118,7 +131,6 @@ return {
 				},
 			})
 		end,
-		event = { "CmdlineEnter", "InsertEnter" },
 	},
 
 	-- github copilot
@@ -126,7 +138,10 @@ return {
 		"zbirenbaum/copilot.lua",
 		build = ":Copilot auth",
 		cmd = "Copilot",
-		dependencies = { "zbirenbaum/copilot-cmp", config = true },
+		dependencies = {
+			"zbirenbaum/copilot-cmp",
+			config = true,
+		},
 		opts = {
 			suggestion = { enabled = false },
 			panel = { enabled = false },
@@ -140,8 +155,8 @@ return {
 	-- auto pairs
 	{
 		"altermo/ultimate-autopair.nvim",
-		config = true,
 		event = { "InsertEnter", "CmdlineEnter" },
+		config = true,
 	},
 
 	-- surround
@@ -154,12 +169,12 @@ return {
 	-- comments
 	{
 		"numToStr/Comment.nvim",
+		config = true,
 		keys = {
-			"gcc",
+			{ "gcc" },
 			{ "gbc", mode = { "n", "x" } },
 			{ "gc", mode = { "n", "x" } },
 		},
-		config = true,
 	},
 
 	-- better text-objects
@@ -172,7 +187,6 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			init = function()
-				-- disable rtp plugin, as we only need its queries for mini.ai
 				require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
 			end,
 		},

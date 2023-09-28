@@ -3,22 +3,25 @@ return {
 	-- filesype plugin for `LaTeX`
 	{
 		"mathjiajia/latex.nvim",
-		config = true,
 		ft = "tex",
+		config = true,
 	},
 
 	-- inverse serach for LaTeX
 	{
 		"f3fora/nvim-texlabconfig",
-		config = true,
-		build = "go build",
 		ft = "tex",
+		build = "go build",
+		config = true,
 	},
 
 	-- neorg
 	{
 		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		ft = "norg",
 		dependencies = "nvim-neorg/neorg-telescope",
+		cmd = "Neorg",
 		opts = {
 			load = {
 				["core.defaults"] = {},
@@ -33,22 +36,27 @@ return {
 						default_workspace = "wiki",
 					},
 				},
-				["core.completion"] = { config = { engine = "nvim-cmp" } },
-				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
+				["core.completion"] = {
+					config = {
+						engine = "nvim-cmp",
+					},
+				},
+				["core.presenter"] = {
+					config = {
+						zen_mode = "zen-mode",
+					},
+				},
 				["core.integrations.telescope"] = {},
 			},
 		},
-		build = ":Neorg sync-parsers",
-		cmd = "Neorg",
-		ft = "norg",
 	},
 
 	-- swift
 	-- {
 	-- 	"dimaportenko/telescope-simulators.nvim",
+	-- 	ft = "swift",
 	-- 	config = function()
 	-- 		require("simulators").setup()
 	-- 	end,
-	-- 	ft = "swift",
 	-- },
 }

@@ -6,13 +6,21 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		config = true,
-		-- stylua: ignore
-		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete all Notifications" } },
+		keys = {
+			{
+				"<leader>un",
+				function()
+					require("notify").dismiss({ silent = true, pending = true })
+				end,
+				desc = "Delete all Notifications",
+			},
+		},
 	},
 
 	-- better vim.ui
 	{
 		"stevearc/dressing.nvim",
+		lazy = true,
 		init = function()
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
@@ -27,6 +35,13 @@ return {
 		end,
 	},
 
+	-- todo
+	{
+		"folke/todo-comments.nvim",
+		event = "BufReadPre",
+		config = true,
+	},
+
 	-- highlight patterns in text
 	{
 		"echasnovski/mini.hipatterns",
@@ -35,13 +50,6 @@ return {
 			local hi = require("mini.hipatterns")
 			hi.setup({
 				highlighters = {
-					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-
-					-- Highlight hex color strings (`#rrggbb`) using that color
 					hex_color = hi.gen_highlighter.hex_color(),
 				},
 			})
@@ -75,10 +83,12 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
+		main = "ibl",
 		opts = {
-			-- use_treesitter = true,
-			show_trailing_blankline_indent = false,
-			filetype_exclude = require("config").ft_exclude,
+			scope = { enabled = false },
+			exclude = {
+				filetype = require("config").ft_exclude,
+			},
 		},
 	},
 
@@ -94,7 +104,11 @@ return {
 				end,
 			})
 		end,
-		opts = { options = { try_as_border = true } },
+		opts = {
+			options = {
+				try_as_border = true,
+			},
+		},
 	},
 
 	-- noicer ui
@@ -121,6 +135,14 @@ return {
 					},
 					view = "mini",
 				},
+				{
+					filter = {
+						event = "notify",
+						kind = "warn",
+						find = "for_each_child",
+					},
+					opts = { skip = true },
+				},
 			},
 			presets = {
 				bottom_search = true,
@@ -129,10 +151,31 @@ return {
 				lsp_doc_border = true,
 			},
 		},
-		-- stylua: ignore
 		keys = {
-			{ "<C-f>", function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-			{ "<C-b>", function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"} },
+			{
+				"<C-f>",
+				function()
+					if not require("noice.lsp").scroll(4) then
+						return "<C-f>"
+					end
+				end,
+				silent = true,
+				expr = true,
+				desc = "Scroll forward",
+				mode = { "i", "n", "s" },
+			},
+			{
+				"<C-b>",
+				function()
+					if not require("noice.lsp").scroll(-4) then
+						return "<C-b>"
+					end
+				end,
+				silent = true,
+				expr = true,
+				desc = "Scroll backward",
+				mode = { "i", "n", "s" },
+			},
 		},
 	},
 
@@ -147,7 +190,7 @@ return {
 				shortcut = {
 					{ desc = "󰚰 Update", group = "@property", action = "Lazy update", key = "u" },
 					{ desc = " Files", group = "Label", action = "Telescope find_files", key = "f" },
-					{ desc = " NeoVim", group = "", action = "Telescope find_files cwd=~/.config/nvim", key = "n" },
+					{ desc = " NeoVim", action = "Telescope find_files cwd=~/.config/nvim", key = "n" },
 					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
 				},
 			},
@@ -158,10 +201,21 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = "VeryLazy",
-    -- stylua: ignore
 		keys = {
-			{ "<leader>ue", function() require("edgy").toggle() end, desc = "Edgy Toggle" },
-      { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+			{
+				"<leader>ue",
+				function()
+					require("edgy").toggle()
+				end,
+				desc = "Edgy Toggle",
+			},
+			{
+				"<leader>uE",
+				function()
+					require("edgy").select()
+				end,
+				desc = "Edgy Select Window",
+			},
 		},
 		opts = {
 			bottom = {
@@ -192,7 +246,6 @@ return {
 				{ ft = "spectre_panel", size = { height = 0.4 } },
 			},
 			left = {
-				-- Neo-tree filesystem always takes half the screen height
 				{
 					title = "Neo-Tree",
 					ft = "neo-tree",
@@ -200,7 +253,9 @@ return {
 						return vim.b[buf].neo_tree_source == "filesystem"
 					end,
 					pinned = true,
-					open = "Neotree",
+					open = function()
+						require("neo-tree.command").execute({ dir = require("util").get_root() })
+					end,
 					size = { height = 0.5 },
 				},
 				{
@@ -225,48 +280,51 @@ return {
 					title = "Aerial",
 					ft = "aerial",
 					pinned = true,
-					open = "AerialToggle",
+					open = function()
+						require("aerial").open()
+					end,
 				},
-				-- any other neo-tree windows
 				"neo-tree",
 			},
-			keys = {
-				-- increase width
-				["<M-Right>"] = function(win)
-					win:resize("width", 2)
-				end,
-				-- decrease width
-				["<M-Left>"] = function(win)
-					win:resize("width", -2)
-				end,
-				-- increase height
-				["<M-Up>"] = function(win)
-					win:resize("height", 2)
-				end,
-				-- decrease height
-				["<M-Down>"] = function(win)
-					win:resize("height", -2)
-				end,
-			},
+			-- keys = {
+			-- 	["<M-Right>"] = function(win)
+			-- 		win:resize("width", 2)
+			-- 	end,
+			-- 	["<M-Left>"] = function(win)
+			-- 		win:resize("width", -2)
+			-- 	end,
+			-- 	["<M-Up>"] = function(win)
+			-- 		win:resize("height", 2)
+			-- 	end,
+			-- 	["<M-Down>"] = function(win)
+			-- 		win:resize("height", -2)
+			-- 	end,
+			-- },
 		},
 	},
 
 	-- better quickfix
-	-- {
-	-- 	"kevinhwang91/nvim-bqf",
-	-- 	opts = { preview = { win_height = 5, win_vheight = 5 } },
-	-- 	ft = "qf",
-	-- 	dependencies = {
-	-- 		"junegunn/fzf",
-	-- 		-- stylua: ignore
-	-- 		build = function() vim.fn["fzf#install"]() end,
-	-- 	},
-	-- },
 	{
-		"ashfinal/qfview.nvim",
-		config = true,
+		"kevinhwang91/nvim-bqf",
 		ft = "qf",
+		dependencies = {
+			"junegunn/fzf",
+			build = function()
+				vim.fn["fzf#install"]()
+			end,
+		},
+		opts = {
+			preview = {
+				win_height = 5,
+				win_vheight = 5,
+			},
+		},
 	},
+	-- {
+	-- 	"ashfinal/qfview.nvim",
+	-- 	config = true,
+	-- 	ft = "qf",
+	-- },
 
 	-- Zen mode
 	{
@@ -292,7 +350,8 @@ return {
 	},
 
 	-- icons
-	"nvim-tree/nvim-web-devicons",
+	{ "nvim-tree/nvim-web-devicons", lazy = true },
+
 	-- ui components
-	"MunifTanjim/nui.nvim",
+	{ "MunifTanjim/nui.nvim", lazy = true },
 }

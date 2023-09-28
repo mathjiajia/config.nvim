@@ -12,8 +12,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
-	defaults = { lazy = true },
 	ui = { border = "rounded" },
+	change_detection = { enabled = false },
+	dev = {
+		path = "~/Coding",
+		patterns = { "mathjiajia" },
+	},
 	performance = {
 		rtp = {
 			disabled_plugins = {

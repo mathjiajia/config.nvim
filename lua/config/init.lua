@@ -3,6 +3,36 @@ local M = {}
 local options = {
 	-- icons used by other plugins
 	icons = {
+		aerial = {
+			Array = "󰅨 ",
+			Boolean = " ",
+			Class = " ",
+			Constant = " ",
+			Constructor = " ",
+			Enum = " ",
+			EnumMember = " ",
+			Event = " ",
+			Field = " ",
+			File = " ",
+			Folder = " ",
+			Function = "󰡱 ",
+			Interface = " ",
+			Key = " ",
+			Method = " ",
+			Module = " ",
+			Number = "󰎠 ",
+			Null = "󰟢 ",
+			Object = " ",
+			Operator = " ",
+			Property = " ",
+			Reference = " ",
+			Struct = " ",
+			String = "󰅳 ",
+			TypeParameter = " ",
+			Unit = " ",
+			Value = " ",
+			Variable = " ",
+		},
 		cmp_kinds = {
 			Class = "",
 			Color = "",
@@ -38,8 +68,18 @@ local options = {
 			BreakpointRejected = " ",
 			LogPoint = ".>",
 		},
-		diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " " },
-		git = { branch = "  ", added = "  ", changed = "  ", removed = "  " },
+		diagnostics = {
+			Error = " ",
+			Warn = " ",
+			Hint = " ",
+			Info = " ",
+		},
+		git = {
+			branch = "  ",
+			added = "  ",
+			changed = "  ",
+			removed = "  ",
+		},
 	},
 	-- exclude from indent lines
 	ft_exclude = {
