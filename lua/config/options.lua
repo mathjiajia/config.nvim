@@ -37,29 +37,37 @@ opt.updatetime = 200
 
 -- UI
 opt.cmdheight = 0
-opt.fillchars:append({ eob = " ", diff = "╱" })
+opt.fillchars = {
+	diff = "╱",
+	eob = " ",
+	fold = " ",
+	foldclose = "",
+	foldopen = "",
+	foldsep = " ",
+}
 opt.laststatus = 3
 opt.pumheight = 10
 opt.scrolloff = 5
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.shortmess:append({ W = true, I = true, c = true })
 opt.smoothscroll = true
 
 opt.cursorline = true
-opt.colorcolumn = "120"
+opt.colorcolumn = { 120 }
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
 
 -- folds
-vim.opt_local.foldmethod = "expr"
-vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldenable = false
+opt.foldlevel = 99
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 -- Wrap
--- opt.wrap = false
 opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = "> "
+opt.virtualedit = "block"
 opt.whichwrap:append("[,]")
 
 -- Theme

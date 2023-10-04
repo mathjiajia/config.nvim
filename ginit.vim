@@ -1,4 +1,4 @@
-set guifont=JetBrainsMono\ Nerd\ Font:h20
+set guifont=Fira\ Code,Symbols\ Nerd\ Font:h20
 
 " let g:neovide_transparency = 0.0
 " let g:transparency = 0.8

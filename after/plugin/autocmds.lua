@@ -1,6 +1,7 @@
 local api, fn = vim.api, vim.fn
 local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
+local Util = require("util")
 
 -- Check if we need to reload the file when it changed
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -17,6 +18,7 @@ autocmd("TextYankPost", {
 	desc = "Highlight the yanked text",
 })
 
+-- Treesitter
 -- autocmd("FileType", {
 -- 	-- schedule_wrap is used to stop dlopen from crashing on MacOS
 -- 	callback = vim.schedule_wrap(function()
@@ -33,43 +35,40 @@ autocmd("TextYankPost", {
 -- 		-- indentation
 -- 		-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- 	end),
--- 	desc = "treesitter",
+-- 	desc = "Treesitter",
 -- })
 
 -- put the cursor at the last edited position
-autocmd({ "BufWinEnter", "FileType" }, {
+autocmd("BufReadPost", {
 	group = augroup("LastPlace", {}),
-	callback = function(ev)
-		local buf = ev.buf
-
-		local ignore_buftype = { "quickfix", "nofile", "help" }
-		local ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" }
-
+	callback = function(event)
+		local exclude_bt = { "help", "nofile", "quickfix" }
+		local exclude_ft = { "gitcommit" }
+		local buf = event.buf
 		if
-			vim.list_contains(ignore_buftype, vim.bo[buf].buftype)
-			or vim.list_contains(ignore_filetype, vim.bo[buf].filetype)
+			vim.list_contains(exclude_bt, vim.bo[buf].buftype)
+			or vim.list_contains(exclude_ft, vim.bo[buf].filetype)
 			or api.nvim_win_get_cursor(0)[1] > 1
+			or vim.b[buf].last_pos
 		then
 			return
 		end
-
-		local mark = api.nvim_buf_get_mark(buf, '"')
-		local last_line = mark[1]
-		local lcount = api.nvim_buf_line_count(buf)
-
-		if last_line > 0 and last_line <= lcount then
-			local win_last_line = fn.line("w$")
-			local win_height = api.nvim_win_get_height(0)
-			if win_last_line == lcount then
-				pcall(api.nvim_win_set_cursor, 0, mark)
-			elseif win_height < (lcount - last_line + 1) * 2 then
-				vim.cmd.normal({ [[g`"zz]], bang = true })
-			else
-				vim.cmd.normal({ [[G'"<C-e>]], bang = true })
-			end
+		vim.b[buf].last_pos = true
+		local mark = vim.api.nvim_buf_get_mark(buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(api.nvim_win_set_cursor, 0, mark)
 		end
 	end,
 	desc = "Last Position",
+})
+
+-- Autoformat autocmd
+autocmd("BufWritePre", {
+	group = augroup("LazyFormat", {}),
+	callback = function(event)
+		Util.format.format({ buf = event.buf })
+	end,
 })
 
 -- Opens non-text files in the default program instead of in Neovim

@@ -38,41 +38,18 @@ return {
 			local on_attach = function(client, bufnr)
 				vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-				local methods = vim.lsp.protocol.Methods
+				local methods = lsp.protocol.Methods
 
 				local keymaps = {
-					{
-						"gd",
-						function()
-							require("glance").open("definitions")
-						end,
-						method = methods.textDocument_definition,
-					},
-					{
-						"gi",
-						function()
-							require("glance").open("implementations")
-						end,
-						method = methods.textDocument_implementation,
-					},
-					{
-						"gr",
-						function()
-							require("glance").open("references")
-						end,
-						method = methods.textDocument_references,
-					},
-					{
-						"gt",
-						function()
-							require("glance").open("type_definitions")
-						end,
-						method = methods.textDocument_typeDefinition,
-					},
 					{ "gD", lsp.buf.declaration, method = methods.textDocument_declaration },
 					{ "<C-k>", lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
 					{ "<leader>rn", lsp.buf.rename, method = methods.textDocument_rename },
 					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
+					-- stylua: ignore start
+					{ "gd", function() require("glance").open("definitions") end, method = methods.textDocument_definition },
+					{ "gi", function() require("glance").open("implementations") end, method = methods.textDocument_implementation },
+					{ "gr", function() require("glance").open("references") end, method = methods.textDocument_references },
+					{ "gt", function() require("glance").open("type_definitions") end, method = methods.textDocument_typeDefinition },
 				}
 
 				for _, keys in ipairs(keymaps) do
@@ -134,8 +111,8 @@ return {
 					settings = {
 						texlab = {
 							build = {
-								executable = "tectonic",
-								args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
+								-- executable = "tectonic",
+								-- args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
 								-- forwardSearchAfter = true,
 								onSave = true,
 							},
@@ -193,8 +170,26 @@ return {
 		config = function()
 			require("mason").setup({ ui = { border = "rounded" } })
 			local mr = require("mason-registry")
-			local tools =
-				{ "black", "debugpy", "glow", "markdownlint", "mdformat", "prettierd", "shellcheck", "stylua", "tectonic" }
+			mr:on("package:install:success", function()
+				vim.defer_fn(function()
+					-- trigger FileType event to possibly load this newly installed LSP server
+					require("lazy.core.handler.event").trigger({
+						event = "FileType",
+						buf = vim.api.nvim_get_current_buf(),
+					})
+				end, 100)
+			end)
+			local tools = {
+				"black",
+				"debugpy",
+				"glow",
+				"markdownlint",
+				"prettierd",
+				"shellcheck",
+				"shfmt",
+				"stylua",
+				"tectonic",
+			}
 			local function ensure_installed()
 				for _, tool in ipairs(tools) do
 					local p = mr.get_package(tool)
@@ -211,82 +206,20 @@ return {
 		end,
 	},
 
-	-- formatters
-	{
-		"stevearc/conform.nvim",
-		ft = { "c", "fish", "json", "lua", "markdown", "python", "swift", "tex" },
-		opts = {
-			formatters_by_ft = {
-				fish = { "fish_indent" },
-				json = { "prettierd" },
-				lua = { "stylua" },
-				markdown = { "prettierd" },
-				python = { "black" },
-				swift = { "swiftformat" },
-				tex = { "latexindent" },
-			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-		},
-	},
-
-	-- linters
-	{
-		"mfussenegger/nvim-lint",
-		ft = { "bash", "fish", "markdown", "zsh" },
-		config = function()
-			local lint = require("lint")
-			local markdownlint = lint.linters.markdownlint
-			markdownlint.args = {
-				"--config",
-				"~/.config/markdownlint/markdownlint.yaml",
-				"--stdin",
-			}
-
-			lint.linters_by_ft = {
-				bash = { "shellcheck" },
-				fish = { "fish" },
-				markdown = { "markdownlint" },
-				zsh = { "shellcheck" },
-			}
-
-			autocmd({ "BufWritePost" }, {
-				callback = function()
-					lint.try_lint()
-				end,
-			})
-		end,
-	},
-
 	-- lsp enhancement
 	{
 		"nvimdev/lspsaga.nvim",
+		cmd = { "Lspsaga" },
+		event = { "BufEnter" },
 		opts = {
 			ui = { border = "rounded" },
 			symbol_in_winbar = { enable = false },
 			lightbulb = { enable = false },
 		},
-		cmd = "Lspsaga",
-		event = "BufEnter",
+		-- stylua: ignore
 		keys = {
-			{
-				"gh",
-				function()
-					require("lspsaga.finder"):new({})
-				end,
-				silent = true,
-				desc = "Lsp Finder",
-			},
-			{
-				"<M-p>",
-				function()
-					require("lspsaga.symbol"):outline()
-				end,
-				silent = true,
-				desc = "Lspsaga Outline",
-			},
+			{ "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" },
+			{ "<M-o>", function() require("lspsaga.symbol"):outline() end, silent = true, desc = "Lspsaga Outline" },
 		},
 	},
 
@@ -296,7 +229,8 @@ return {
 		opts = {
 			border = { enable = true },
 			hooks = {
-				---Don't open glance when there is only one result and it is located in the current buffer, open otherwise
+				-- Don't open glance when there is only one result
+				-- and it is located in the current buffer, open otherwise
 				before_open = function(results, open, jump)
 					local uri = vim.uri_from_bufnr(0)
 					if #results == 1 then

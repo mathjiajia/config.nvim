@@ -80,7 +80,7 @@ local WorkDir = {
 
 	on_click = {
 		callback = function()
-			require("neo-tree.command").execute({ dir = Util.get_root() })
+			require("neo-tree.command").execute({ dir = Util.root() })
 		end,
 		name = "heirline_workdir",
 	},
@@ -125,7 +125,7 @@ local Git = {
 
 	on_click = {
 		callback = function()
-			Util.float_term({ "lazygit" }, { cwd = Util.get_root() })
+			Util.terminal({ "lazygit" }, { cwd = Util.root() })
 		end,
 		name = "heirline_git",
 		update = false,

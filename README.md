@@ -65,3 +65,9 @@ see [mysnippets]
 - `after/plugin` -- some plugins no need to load early
 
 [mysnippets]: https://github.com/mathjiajia/mySnippets
+
+## Acknowledgements
+
+Thanks to
+`[folke](https://github.com/folke)` and his `[LazyVim](https://github.com/LazyVim)` project
+where I copied a lot of code.

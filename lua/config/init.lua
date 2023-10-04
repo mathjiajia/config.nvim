@@ -89,7 +89,6 @@ local options = {
 		"crunner",
 		"dashboard",
 		"lazy",
-		"lspinfo",
 		"markdown",
 		"mason",
 		"neo-tree",

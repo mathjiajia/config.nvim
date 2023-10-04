@@ -4,29 +4,35 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		lazy = true,
-		dependencies = { "mathjiajia/mysnippets" },
+		dependencies = {
+			"mathjiajia/mysnippets",
+			opts = { path = "~/Coding/mySnippets/snippets" },
+		},
 		config = function()
 			local ls = require("luasnip")
 			local types = require("luasnip.util.types")
 
 			ls.setup({
+				-- keep_roots = true,
+				-- link_roots = true,
+				-- link_children = true,
 				update_events = "TextChanged,TextChangedI",
-				enable_autosnippets = true,
+				delete_check_events = "TextChanged",
 				ext_opts = {
-					[types.choiceNode] = {
-						active = {
-							virt_text = { { "", "Special" } },
-						},
-					},
 					[types.insertNode] = {
 						active = {
 							virt_text = { { "", "Boolean" } },
 						},
 					},
+					[types.choiceNode] = {
+						active = {
+							virt_text = { { "", "Special" } },
+						},
+					},
 				},
+				enable_autosnippets = true,
+				store_selection_keys = "<Tab>",
 			})
-
-			require("luasnip.loaders.from_lua").lazy_load({ paths = "~/Coding/mySnippets/snippets" })
 
 			vim.keymap.set("i", "<C-k>", function()
 				if ls.expandable() then
@@ -57,6 +63,7 @@ return {
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
+		event = { "CmdlineEnter", "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
@@ -65,7 +72,6 @@ return {
 			"lukas-reineke/cmp-rg",
 			"saadparwaiz1/cmp_luasnip",
 		},
-		event = { "CmdlineEnter", "InsertEnter" },
 		config = function()
 			local cmp = require("cmp")
 			local cmp_kinds = require("config").icons.cmp_kinds
@@ -183,12 +189,6 @@ return {
 		keys = {
 			{ "a", mode = { "o", "x" } },
 			{ "i", mode = { "o", "x" } },
-		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			init = function()
-				require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-			end,
 		},
 		config = function()
 			local ai = require("mini.ai")

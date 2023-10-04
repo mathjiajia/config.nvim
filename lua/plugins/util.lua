@@ -7,7 +7,7 @@ return {
 		cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
 	},
 
-	-- ccode runner
+	-- code runner
 	{
 		"CRAG666/code_runner.nvim",
 		opts = {

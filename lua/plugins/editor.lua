@@ -9,18 +9,32 @@ return {
 		cmd = "Neotree",
 		keys = {
 			{
-				"<M-t>",
+				"<leader>fe",
 				function()
-					require("neo-tree.command").execute({ toggle = true, dir = Util.get_root() })
+					require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
 				end,
-				desc = "NeoTree (root dir)",
+				desc = "Explorer NeoTree (root dir)",
 			},
 			{
-				"<M-S-t>",
+				"<leader>fE",
 				function()
-					require("neo-tree.command").execute({ toggle = true, dir = uv.cwd() })
+					require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
 				end,
-				desc = "NeoTree (cwd)",
+				desc = "Explorer NeoTree (cwd)",
+			},
+			{
+				"<leader>ge",
+				function()
+					require("neo-tree.command").execute({ source = "git_status", toggle = true })
+				end,
+				desc = "Git explorer",
+			},
+			{
+				"<leader>be",
+				function()
+					require("neo-tree.command").execute({ source = "buffers", toggle = true })
+				end,
+				desc = "Buffer explorer",
 			},
 		},
 		init = function()
@@ -39,6 +53,14 @@ return {
 				bind_to_cwd = false,
 				follow_current_file = { enabled = true },
 				use_libuv_file_watcher = true,
+			},
+			default_component_configs = {
+				indent = {
+					with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+					expander_collapsed = "",
+					expander_expanded = "",
+					expander_highlight = "NeoTreeExpander",
+				},
 			},
 		},
 	},
@@ -130,7 +152,7 @@ return {
 			{ "<leader>sS", Util.telescope("grep_string"), desc = "Grep String", mode = { "n", "x" } },
 		},
 		dependencies = {
-			"natecraddock/telescope-zf-native.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-bibtex.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
@@ -166,6 +188,10 @@ return {
 					layout_config = { prompt_position = "top" },
 					prompt_prefix = "   ",
 					selection_caret = " ",
+					get_selecition_window = function()
+						require("edgy").goto_main()
+						return 0
+					end,
 					mappings = {
 						i = {
 							["<C-s>"] = flash,
@@ -202,7 +228,6 @@ return {
 					file_browser = { theme = "ivy" },
 					frecency = {
 						show_scores = true,
-						use_sqlite = false,
 						workspaces = {
 							["conf"] = home .. "/.config",
 							["dev"] = home .. "/Developer",
@@ -214,7 +239,7 @@ return {
 			})
 
 			local extns = {
-				"zf-native",
+				"fzf",
 				"file_browser",
 				"frecency",
 				"bibtex",
@@ -227,58 +252,21 @@ return {
 		end,
 	},
 
-	-- Navigate with search labels
+	-- Flash enhances the built-in search functionality by showing labels
+	-- at the end of each match, letting you quickly jump to a specific
+	-- location.
 	{
 		"folke/flash.nvim",
-		opts = { modes = { char = { jump_labels = true } } },
-		keys = {
-			"f",
-			"F",
-			"t",
-			"T",
-			";",
-			",",
-			{
-				"s",
-				mode = { "n", "o", "x" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-			{
-				"S",
-				mode = { "n", "o", "x" },
-				function()
-					require("flash").treesitter()
-				end,
-				desc = "Flash Treesitter",
-			},
-			{
-				"r",
-				mode = "o",
-				function()
-					require("flash").remote()
-				end,
-				desc = "Remote Flash",
-			},
-			{
-				"R",
-				mode = { "o", "x" },
-				function()
-					require("flash").treesitter_search()
-				end,
-				desc = "Treesitter Search",
-			},
-			{
-				"<C-s>",
-				mode = "c",
-				function()
-					require("flash").toggle()
-				end,
-				desc = "Toggle Flash Search",
-			},
-		},
+		event = "VeryLazy",
+		config = true,
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
 	},
 
 	-- git signs
@@ -290,48 +278,28 @@ return {
 			on_attach = function(bufnr)
 				local gs = require("gitsigns")
 
-				-- Navigation
-				vim.keymap.set("n", "]c", function()
-					if vim.wo.diff then
-						return "]c"
-					end
-					vim.schedule(gs.next_hunk)
-					return "<Ignore>"
-				end, { expr = true, buffer = bufnr, desc = "Next Hunk" })
-
-				vim.keymap.set("n", "[c", function()
-					if vim.wo.diff then
-						return "[c"
-					end
-					vim.schedule(gs.prev_hunk)
-					return "<Ignore>"
-				end, { expr = true, buffer = bufnr, desc = "Prev Hunk" })
-
 				local function map(mode, lhs, rhs, desc)
 					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
 				end
 
+				-- Navigation
+				map("n", "]h", gs.next_hunk, "Next Hunk")
+				map("n", "[h", gs.prev_hunk, "Prev Hunk")
+
 				-- Actions
+        -- stylua: ignore start
 				map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
-				map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
-				map("v", "<leader>hs", function()
-					gs.stage_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") })
-				end, "Stage Hunk")
-				map("v", "<leader>hr", function()
-					gs.reset_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") })
-				end, "Reset Hunk")
+				map("v", "<leader>hs", function() gs.stage_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") }) end, "Stage Hunk")
 				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
-				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
+				map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
+				map("v", "<leader>hr", function() gs.reset_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") }) end, "Reset Hunk")
 				map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
+				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
 				map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
-				map("n", "<leader>hb", function()
-					gs.blame_line({ full = true })
-				end, "Blame Line")
-				map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle Blame")
+				map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
 				map("n", "<leader>hd", gs.diffthis, "Diff This")
-				map("n", "<leader>hD", function()
-					gs.diffthis("~")
-				end, "Diff This (working copy)")
+				map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff This (working copy)")
+				map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle Blame")
 				map("n", "<leader>td", gs.toggle_deleted, "Toggle Deleted")
 
 				-- Text object
@@ -340,37 +308,71 @@ return {
 		},
 	},
 
+	-- Finds and lists all of the TODO, HACK, BUG, etc comment
+	-- in your project and loads them into a browsable list.
+	{
+		"folke/todo-comments.nvim",
+		event = { "BufReadPost", "BufNewFile" },
+		config = true,
+		-- stylua: ignore
+		keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+    },
+	},
+
 	-- symbols outline
 	{
 		"stevearc/aerial.nvim",
+		cmd = "AerialToggle",
 		opts = {
 			backends = { "lsp", "treesitter", "markdown", "man" },
+			layout = { resize_to_content = false },
+			attach_mode = "global",
+			icons = require("config").icons.aerial,
 			filter_kind = false,
 			show_guides = true,
-			layout = { default_direction = "left" },
-			icons = require("config").icons.aerial,
 		},
-		cmd = "AerialToggle",
-		keys = { {
-			"<M-o>",
-			function()
-				require("aerial").toggle()
-			end,
-			desc = "Aerial",
-		} },
+		-- stylua: ignore
+		keys = {
+			{ "<leader>cs", function() require("aerial").toggle() end, desc = "Aerial (Symbols)" }
+		},
 	},
 
 	-- diffview
 	{
 		"sindrets/diffview.nvim",
-		opts = { enhanced_diff_hl = true },
+		opts = {
+			enhanced_diff_hl = true,
+			hooks = {
+				diff_buf_read = function()
+					vim.opt_local.wrap = false
+					vim.opt_local.list = false
+					vim.opt_local.colorcolumn = { 80 }
+					vim.opt_local.winbar = ""
+				end,
+				-- view_enter = function()
+				-- 	Util.kitty("12")
+				-- 	vim.schedule(function()
+				-- 		vim.cmd.wincmd("=")
+				-- 	end)
+				-- end,
+				-- view_leave = function()
+				-- 	Util.kitty("0")
+				-- end,
+			},
+		},
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-		keys = { {
-			"<leader>gd",
-			function()
-				require("diffview").open({})
-			end,
-			desc = "Diff View",
-		} },
+		keys = {
+			{
+				"<leader>gd",
+				function()
+					require("diffview").open({})
+				end,
+				desc = "Open Diffview",
+			},
+			{ "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
+			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", desc = "Close Diffview" },
+		},
 	},
 }

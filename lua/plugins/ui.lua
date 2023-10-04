@@ -5,7 +5,6 @@ return {
 	-- better vim.notify
 	{
 		"rcarriga/nvim-notify",
-		config = true,
 		keys = {
 			{
 				"<leader>un",
@@ -14,6 +13,18 @@ return {
 				end,
 				desc = "Delete all Notifications",
 			},
+		},
+		opts = {
+			timeout = 3000,
+			max_height = function()
+				return math.floor(vim.o.lines * 0.75)
+			end,
+			max_width = function()
+				return math.floor(vim.o.columns * 0.75)
+			end,
+			on_open = function(win)
+				vim.api.nvim_win_set_config(win, { zindex = 100 })
+			end,
 		},
 	},
 
@@ -33,13 +44,6 @@ return {
 				return vim.ui.input(...)
 			end
 		end,
-	},
-
-	-- todo
-	{
-		"folke/todo-comments.nvim",
-		event = "BufReadPre",
-		config = true,
 	},
 
 	-- highlight patterns in text
@@ -83,32 +87,70 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		main = "ibl",
-		opts = {
-			scope = { enabled = false },
-			exclude = {
-				filetype = require("config").ft_exclude,
-			},
-		},
+		config = function()
+			local highlight = {
+				"RainbowRed",
+				"RainbowYellow",
+				"RainbowBlue",
+				"RainbowOrange",
+				"RainbowGreen",
+				"RainbowViolet",
+				"RainbowCyan",
+			}
+			local hooks = require("ibl.hooks")
+			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+				api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+				api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+				api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+				api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+				api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+				api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+				api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+			end)
+
+			require("ibl").setup({
+				scope = { highlight = highlight },
+				exclude = {
+					filetypes = require("config").ft_exclude,
+				},
+			})
+
+			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+		end,
 	},
 
-	-- active indent guide and indent text objects
+	-- scrollbars
+	-- {
+	-- 	"lewis6991/satellite.nvim",
+	-- 	config = true,
+	-- },
+
+	-- minimap
 	{
-		"echasnovski/mini.indentscope",
-		event = { "BufReadPre", "BufNewFile" },
-		init = function()
-			api.nvim_create_autocmd("FileType", {
-				pattern = require("config").ft_exclude,
-				callback = function()
-					vim.b.miniindentscope_disable = true
-				end,
-			})
-		end,
-		opts = {
-			options = {
-				try_as_border = true,
+		"gorbit99/codewindow.nvim",
+		keys = {
+			{
+				"<leader>mm",
+				"codewindow.toggle_minimap()",
+				mode = "n",
+				desc = "Toggle Minimap",
+			},
+			{
+				"<leader>mf",
+				"codewindow.toggle_focus()",
+				mode = "n",
+				desc = "Focus Minimap",
 			},
 		},
+		config = function()
+			local codewindow = require("codewindow")
+			codewindow.setup({
+				show_cursor = false,
+				screen_bounds = "background",
+				window_border = "rounded",
+			})
+			codewindow.apply_default_keybinds()
+		end,
 	},
 
 	-- noicer ui
@@ -122,6 +164,7 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
+				hover = { enabled = false },
 			},
 			routes = {
 				{
@@ -184,15 +227,20 @@ return {
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
 		opts = {
-			theme = "hyper",
 			config = {
-				week_header = { enable = true },
+				disable_move = true,
 				shortcut = {
 					{ desc = "󰚰 Update", group = "@property", action = "Lazy update", key = "u" },
-					{ desc = " Files", group = "Label", action = "Telescope find_files", key = "f" },
-					{ desc = " NeoVim", action = "Telescope find_files cwd=~/.config/nvim", key = "n" },
+					{ desc = "󰀶 Files", group = "Label", action = "Telescope find_files", key = "f" },
 					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
 				},
+				project = { limit = 4 },
+			},
+			preview = {
+				command = "cat",
+				file_path = (vim.fn.stdpath("config") .. "/neovim.cat"),
+				file_height = 10,
+				file_width = 70,
 			},
 		},
 	},
@@ -243,7 +291,7 @@ return {
 						return vim.bo[buf].buftype == "help"
 					end,
 				},
-				{ ft = "spectre_panel", size = { height = 0.4 } },
+				{ title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
 			},
 			left = {
 				{
@@ -254,7 +302,7 @@ return {
 					end,
 					pinned = true,
 					open = function()
-						require("neo-tree.command").execute({ dir = require("util").get_root() })
+						require("neo-tree.command").execute({ dir = require("util").root() })
 					end,
 					size = { height = 0.5 },
 				},
@@ -276,6 +324,9 @@ return {
 					pinned = true,
 					open = "Neotree position=top buffers",
 				},
+				"neo-tree",
+			},
+			right = {
 				{
 					title = "Aerial",
 					ft = "aerial",
@@ -284,7 +335,6 @@ return {
 						require("aerial").open()
 					end,
 				},
-				"neo-tree",
 			},
 			-- keys = {
 			-- 	["<M-Right>"] = function(win)
@@ -320,11 +370,6 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"ashfinal/qfview.nvim",
-	-- 	config = true,
-	-- 	ft = "qf",
-	-- },
 
 	-- Zen mode
 	{
