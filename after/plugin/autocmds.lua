@@ -1,6 +1,5 @@
-local api, fn = vim.api, vim.fn
-local augroup = api.nvim_create_augroup
-local autocmd = api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 local Util = require("util")
 
 -- Check if we need to reload the file when it changed
@@ -48,7 +47,7 @@ autocmd("BufReadPost", {
 		if
 			vim.list_contains(exclude_bt, vim.bo[buf].buftype)
 			or vim.list_contains(exclude_ft, vim.bo[buf].filetype)
-			or api.nvim_win_get_cursor(0)[1] > 1
+			or vim.api.nvim_win_get_cursor(0)[1] > 1
 			or vim.b[buf].last_pos
 		then
 			return
@@ -57,7 +56,7 @@ autocmd("BufReadPost", {
 		local mark = vim.api.nvim_buf_get_mark(buf, '"')
 		local lcount = vim.api.nvim_buf_line_count(buf)
 		if mark[1] > 0 and mark[1] <= lcount then
-			pcall(api.nvim_win_set_cursor, 0, mark)
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
 		end
 	end,
 	desc = "Last Position",
@@ -76,8 +75,8 @@ autocmd("BufReadPost", {
 	group = augroup("openFile", {}),
 	pattern = { "*.jpeg", "*.jpg", "*.pdf", "*.png" },
 	callback = function()
-		fn.jobstart("open '" .. fn.expand("%") .. "'", { detach = true })
-		api.nvim_buf_delete(0, {})
+		vim.fn.jobstart("open '" .. vim.fn.expand("%") .. "'", { detach = true })
+		vim.api.nvim_buf_delete(0, {})
 	end,
 	desc = "openFile",
 })

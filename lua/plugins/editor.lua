@@ -1,4 +1,3 @@
-local api, fn, uv = vim.api, vim.fn, vim.uv
 local Util = require("util")
 
 return {
@@ -18,7 +17,7 @@ return {
 			{
 				"<leader>fE",
 				function()
-					require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+					require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
 				end,
 				desc = "Explorer NeoTree (cwd)",
 			},
@@ -38,9 +37,9 @@ return {
 			},
 		},
 		init = function()
-			if fn.argc() == 1 then
+			if vim.fn.argc() == 1 then
 				---@diagnostic disable-next-line: param-type-mismatch
-				local stat = uv.fs_stat(fn.argv(0))
+				local stat = vim.uv.fs_stat(vim.fn.argv(0))
 				if stat and stat.type == "directory" then
 					require("neo-tree")
 				end
@@ -83,13 +82,22 @@ return {
 		cmd = "Telescope",
 		keys = {
 			{ "<leader><space>", Util.telescope("files", { cwd = "%:p:h" }), desc = "Find Files (current)" },
-			{
-				"<leader>fb",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-				desc = "Buffers",
-			},
+			-- find
+			{ "<leader>fb", Util.telescope("buffers"), desc = "Buffers" },
+			{ "<leader>fc", Util.telescope.config_files(), desc = "Find Config File" },
+			{ "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (root dir)" },
+			{ "<leader>fF", Util.telescope("files"), desc = "Find Files (cwd)" },
+			{ "<leader>fm", Util.telescope("builtin"), desc = "Telescope Meta" },
+			-- search
+			{ "<leader>sb", Util.telescope("current_buffer_fuzzy_find"), desc = "Current Buf Fuzzy Find" },
+			{ "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (root dir)" },
+			{ "<leader>sG", Util.telescope("live_grep"), desc = "Live Grep (cwd)" },
+			{ "<leader>sh", Util.telescope("help_tags"), desc = "Help Tags" },
+			{ "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
+			{ "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
+			{ "<leader>sw", Util.telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
+			{ "<leader>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
+			-- extensions
 			{
 				"<leader>fd",
 				function()
@@ -104,22 +112,6 @@ return {
 				end,
 				desc = "File Browser (cwd)",
 			},
-			{ "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (root dir)" },
-			{ "<leader>fF", Util.telescope("files"), desc = "Find Files (cwd)" },
-			{
-				"<leader>fm",
-				function()
-					require("telescope.builtin").builtin()
-				end,
-				desc = "Telescope Meta",
-			},
-			{
-				"<leader>fn",
-				function()
-					require("telescope.builtin").find_files({ cwd = "~/.config/nvim" })
-				end,
-				desc = "Neovim Configs",
-			},
 			{
 				"<leader>fr",
 				function()
@@ -127,29 +119,6 @@ return {
 				end,
 				desc = "Frecency",
 			},
-			{
-				"<leader>sb",
-				function()
-					require("telescope.builtin").current_buffer_fuzzy_find()
-				end,
-				desc = "Current Buf Fuzzy Find",
-			},
-			{ "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (root dir)" },
-			{ "<leader>sG", Util.telescope("live_grep"), desc = "Live Grep (cwd)" },
-			{
-				"<leader>sh",
-				function()
-					require("telescope.builtin").help_tags()
-				end,
-				desc = "Help Tags",
-			},
-			{
-				"<leader>ss",
-				Util.telescope("grep_string", { cwd = false }),
-				desc = "Grep String (root dir)",
-				mode = { "n", "x" },
-			},
-			{ "<leader>sS", Util.telescope("grep_string"), desc = "Grep String", mode = { "n", "x" } },
 		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -166,12 +135,12 @@ return {
 			local function flash(prompt_bufnr)
 				require("flash").jump({
 					pattern = "^",
-					highlight = { label = { after = { 0, 0 } } },
+					label = { after = { 0, 0 } },
 					search = {
 						mode = "search",
 						exclude = {
 							function(win)
-								return vim.bo[api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+								return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
 							end,
 						},
 					},
@@ -289,10 +258,10 @@ return {
 				-- Actions
         -- stylua: ignore start
 				map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
-				map("v", "<leader>hs", function() gs.stage_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") }) end, "Stage Hunk")
+				map("v", "<leader>hs", function() gs.stage_hunk({ vim.api.nvim_win_get_cursor(0)[1], vim.fn.line("v") }) end, "Stage Hunk")
 				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
 				map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
-				map("v", "<leader>hr", function() gs.reset_hunk({ api.nvim_win_get_cursor(0)[1], fn.line("v") }) end, "Reset Hunk")
+				map("v", "<leader>hr", function() gs.reset_hunk({ vim.api.nvim_win_get_cursor(0)[1], vim.fn.line("v") }) end, "Reset Hunk")
 				map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
 				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
 				map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")

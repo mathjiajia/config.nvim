@@ -1,8 +1,6 @@
 local Util = require("util")
 
-vim.api.nvim_create_user_command("LazyRoot", function()
-	Util.root.info()
-end, { desc = "LazyRoots for the current buffer" })
+Util.root.setup()
 
 -- Manual format
 vim.api.nvim_create_user_command("LazyFormat", function()

@@ -1,5 +1,3 @@
-local api, fn = vim.api, vim.fn
-
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 local devicons = require("nvim-web-devicons")
@@ -18,7 +16,7 @@ require("heirline").load_colors(colors)
 
 local VimMode = {
 	init = function(self)
-		self.mode = fn.mode()
+		self.mode = vim.fn.mode()
 	end,
 	static = {
 		modes = {
@@ -53,7 +51,7 @@ local VimMode = {
 
 local Snippets = {
 	condition = function()
-		return vim.list_contains({ "i", "s" }, fn.mode())
+		return vim.list_contains({ "i", "s" }, vim.fn.mode())
 	end,
 
 	provider = function()
@@ -68,11 +66,11 @@ local Snippets = {
 
 local WorkDir = {
 	provider = function()
-		local icon = (fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
-		local cwd = fn.getcwd(0)
-		cwd = fn.fnamemodify(cwd, ":~")
+		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
+		local cwd = vim.fn.getcwd(0)
+		cwd = vim.fn.fnamemodify(cwd, ":~")
 		if not conditions.width_percent_below(#cwd, 0.25) then
-			cwd = fn.pathshorten(cwd)
+			cwd = vim.fn.pathshorten(cwd)
 		end
 		local trail = cwd:sub(-1) == "/" and "" or "/"
 		return icon .. cwd .. trail
@@ -80,7 +78,7 @@ local WorkDir = {
 
 	on_click = {
 		callback = function()
-			require("neo-tree.command").execute({ dir = Util.root() })
+			require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
 		end,
 		name = "heirline_workdir",
 	},
@@ -125,7 +123,7 @@ local Git = {
 
 	on_click = {
 		callback = function()
-			Util.terminal({ "lazygit" }, { cwd = Util.root() })
+			require("neo-tree.command").execute({ source = "git_status", toggle = true })
 		end,
 		name = "heirline_git",
 		update = false,
@@ -218,12 +216,12 @@ local Spell = {
 
 local FileName = {
 	provider = function(self)
-		local filename = fn.fnamemodify(self.filename, ":.")
+		local filename = vim.fn.fnamemodify(self.filename, ":.")
 		if filename == "" then
 			return "[No Name]"
 		end
 		if not conditions.width_percent_below(#filename, 0.25) then
-			filename = fn.pathshorten(filename)
+			filename = vim.fn.pathshorten(filename)
 		end
 		return filename
 	end,
@@ -232,7 +230,7 @@ local FileName = {
 
 local TerminalName = {
 	provider = function()
-		local tname, _ = api.nvim_buf_get_name(0):gsub(".*:", "")
+		local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
 		return " " .. tname
 	end,
 	hl = { fg = "blue" },
@@ -244,8 +242,8 @@ local HelpFileName = {
 	end,
 
 	provider = function()
-		local filename = api.nvim_buf_get_name(0)
-		return fn.fnamemodify(filename, ":t")
+		local filename = vim.api.nvim_buf_get_name(0)
+		return vim.fn.fnamemodify(filename, ":t")
 	end,
 	hl = { fg = "blue" },
 }
@@ -335,7 +333,7 @@ local TablineBufnr = {
 local FileIcon = {
 	init = function(self)
 		local filename = self.filename
-		local extension = fn.fnamemodify(filename, ":e")
+		local extension = vim.fn.fnamemodify(filename, ":e")
 		self.icon, self.icon_color = devicons.get_icon_color(filename, extension, { default = true })
 	end,
 
@@ -351,7 +349,7 @@ local FileIcon = {
 local TablineFileName = {
 	provider = function(self)
 		local filename = self.filename
-		filename = filename == "" and "[No Name]" or fn.fnamemodify(filename, ":t")
+		filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
 		return filename
 	end,
 
@@ -363,7 +361,7 @@ local TablineFileName = {
 local TablineFileFlags = {
 	{
 		condition = function(self)
-			return api.nvim_get_option_value("modified", { buf = self.bufnr })
+			return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
 		end,
 
 		provider = " ● ", --[+]",
@@ -371,12 +369,12 @@ local TablineFileFlags = {
 	},
 	{
 		condition = function(self)
-			return not api.nvim_get_option_value("modifiable", { buf = self.bufnr })
-				or api.nvim_get_option_value("readonly", { buf = self.bufnr })
+			return not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+				or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
 		end,
 
 		provider = function(self)
-			if api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal" then
+			if vim.api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal" then
 				return "  "
 			else
 				return ""
@@ -388,7 +386,7 @@ local TablineFileFlags = {
 
 local TablineFileNameBlock = {
 	init = function(self)
-		self.filename = api.nvim_buf_get_name(self.bufnr)
+		self.filename = vim.api.nvim_buf_get_name(self.bufnr)
 	end,
 
 	TablineBufnr,
@@ -408,10 +406,10 @@ local TablineFileNameBlock = {
 		callback = function(_, minwid, _, button)
 			if button == "m" then
 				vim.schedule(function()
-					api.nvim_buf_delete(minwid, { force = false })
+					vim.api.nvim_buf_delete(minwid, { force = false })
 				end)
 			else
-				api.nvim_win_set_buf(0, minwid)
+				vim.api.nvim_win_set_buf(0, minwid)
 			end
 		end,
 		minwid = function(self)
@@ -423,7 +421,7 @@ local TablineFileNameBlock = {
 
 local TablineCloseButton = {
 	condition = function(self)
-		return not api.nvim_get_option_value("modified", { buf = self.bufnr })
+		return not vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
 	end,
 
 	{ provider = " " },
@@ -434,7 +432,7 @@ local TablineCloseButton = {
 		on_click = {
 			callback = function(_, minwid)
 				vim.schedule(function()
-					api.nvim_buf_delete(minwid, { force = false })
+					vim.api.nvim_buf_delete(minwid, { force = false })
 				end)
 				vim.cmd.redrawtabline()
 			end,
@@ -456,13 +454,13 @@ end, { TablineFileNameBlock, TablineCloseButton })
 
 local get_bufs = function()
 	return vim.tbl_filter(function(bufnr)
-		return api.nvim_get_option_value("buflisted", { buf = bufnr })
-	end, api.nvim_list_bufs())
+		return vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
+	end, vim.api.nvim_list_bufs())
 end
 
 local buflist_cache = {}
 
-api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
 	callback = function()
 		vim.schedule(function()
 			local buffers = get_bufs()
@@ -510,7 +508,7 @@ local TabpageClose = { provider = " %999X %X", hl = "TabLine" }
 
 local TabPages = {
 	condition = function()
-		return #api.nvim_list_tabpages() >= 2
+		return #vim.api.nvim_list_tabpages() >= 2
 	end,
 
 	{ provider = "%=" },
@@ -520,8 +518,8 @@ local TabPages = {
 
 local TabLineOffset = {
 	condition = function(self)
-		local win = api.nvim_tabpage_list_wins(0)[1]
-		local bufnr = api.nvim_win_get_buf(win)
+		local win = vim.api.nvim_tabpage_list_wins(0)[1]
+		local bufnr = vim.api.nvim_win_get_buf(win)
 		self.winid = win
 
 		if vim.bo[bufnr].filetype == "neo-tree" then
@@ -535,13 +533,13 @@ local TabLineOffset = {
 
 	provider = function(self)
 		local title = self.title
-		local width = api.nvim_win_get_width(self.winid)
+		local width = vim.api.nvim_win_get_width(self.winid)
 		local pad = math.ceil((width - #title) * 0.5)
 		return string.rep(" ", pad) .. title .. string.rep(" ", pad)
 	end,
 
 	hl = function(self)
-		if api.nvim_get_current_win() == self.winid then
+		if vim.api.nvim_get_current_win() == self.winid then
 			return "TablineSel"
 		else
 			return "Tabline"
@@ -556,11 +554,11 @@ require("heirline").setup({
 	tabline = TabLine,
 })
 
-api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
-		if vim.list_contains({ "wipe", "delete" }, api.nvim_get_option_value("bufhidden", {})) then
+		if vim.list_contains({ "wipe", "delete" }, vim.api.nvim_get_option_value("bufhidden", {})) then
 			vim.opt_local.buflisted = false
 		end
 	end,
-	group = api.nvim_create_augroup("Heirline", {}),
+	group = vim.api.nvim_create_augroup("Heirline", {}),
 })

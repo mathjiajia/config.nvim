@@ -1,7 +1,3 @@
-local api, fn, lsp = vim.api, vim.fn, vim.lsp
-local augroup = api.nvim_create_augroup
-local autocmd = api.nvim_create_autocmd
-
 return {
 
 	-- lspconfig
@@ -19,7 +15,7 @@ return {
 			local icons = require("config").icons.diagnostics
 			for name, icon in pairs(icons) do
 				name = "DiagnosticSign" .. name
-				fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 			end
 
 			-- diagnostic keymaps
@@ -38,13 +34,13 @@ return {
 			local on_attach = function(client, bufnr)
 				vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-				local methods = lsp.protocol.Methods
+				local methods = vim.lsp.protocol.Methods
 
 				local keymaps = {
-					{ "gD", lsp.buf.declaration, method = methods.textDocument_declaration },
-					{ "<C-k>", lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
-					{ "<leader>rn", lsp.buf.rename, method = methods.textDocument_rename },
-					{ "<leader>ca", lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
+					{ "gD", vim.lsp.buf.declaration, method = methods.textDocument_declaration },
+					{ "<C-k>", vim.lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
+					{ "<leader>rn", vim.lsp.buf.rename, method = methods.textDocument_rename },
+					{ "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
 					-- stylua: ignore start
 					{ "gd", function() require("glance").open("definitions") end, method = methods.textDocument_definition },
 					{ "gi", function() require("glance").open("implementations") end, method = methods.textDocument_implementation },
@@ -59,40 +55,40 @@ return {
 				end
 
 				if client.supports_method(methods.textDocument_documentHighlight) then
-					local group = augroup("lsp_document_highlight", {})
-					autocmd({ "CursorHold", "CursorHoldI" }, {
+					local group = vim.api.nvim_create_augroup("lsp_document_highlight", {})
+					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						group = group,
 						buffer = bufnr,
-						callback = lsp.buf.document_highlight,
+						callback = vim.lsp.buf.document_highlight,
 					})
-					autocmd({ "CursorMoved", "CursorMovedI" }, {
+					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 						group = group,
 						buffer = bufnr,
-						callback = lsp.buf.clear_references,
+						callback = vim.lsp.buf.clear_references,
 					})
 				end
 
-				-- if client.supports_method(methods.textDocument_inlayHint) then
-				-- 	lsp.inlay_hint(bufnr, true)
-				-- end
+				if client.supports_method(methods.textDocument_inlayHint) then
+					vim.lsp.inlay_hint(bufnr, true)
+				end
 
-				-- if client.supports_method(methods.textDocument_codeLens) then
-				-- 	local group = augroup("lsp_document_codelens", {})
-				-- 	autocmd("BufEnter", {
-				-- 		group = group,
-				-- 		buffer = bufnr,
-				-- 		callback = lsp.codelens.refresh,
-				-- 		once = true,
-				-- 	})
-				-- 	autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
-				-- 		group = group,
-				-- 		buffer = bufnr,
-				-- 		callback = lsp.codelens.refresh,
-				-- 	})
-				-- end
+				if client.supports_method(methods.textDocument_codeLens) then
+					local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
+					vim.api.nvim_create_autocmd("BufEnter", {
+						group = group,
+						buffer = bufnr,
+						callback = vim.lsp.codelens.refresh,
+						once = true,
+					})
+					vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
+						group = group,
+						buffer = bufnr,
+						callback = vim.lsp.codelens.refresh,
+					})
+				end
 			end
 
-			local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp.protocol.make_client_capabilities())
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local servers = {
 				clangd = {},
@@ -122,9 +118,9 @@ return {
 									"--reuse-window",
 									-- "--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
 									"--inverse-search",
-									fn.stdpath("data")
+									vim.fn.stdpath("data")
 										.. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root "
-										.. fn.stdpath("cache")
+										.. vim.fn.stdpath("cache")
 										.. " -server "
 										.. vim.v.servername,
 									"--forward-search-file",
@@ -209,8 +205,7 @@ return {
 	-- lsp enhancement
 	{
 		"nvimdev/lspsaga.nvim",
-		cmd = { "Lspsaga" },
-		event = { "BufEnter" },
+		event = { "LspAttach" },
 		opts = {
 			ui = { border = "rounded" },
 			symbol_in_winbar = { enable = false },

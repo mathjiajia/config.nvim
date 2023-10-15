@@ -19,13 +19,8 @@ return {
 			},
 		},
 		keys = {
-			{
-				"<M-r>",
-				function()
-					require("code_runner.commands").run_filetype()
-				end,
-				desc = "Run file",
-			},
+			-- stylua: ignore
+			{ "<M-r>", function() require("code_runner.commands").run_filetype() end, desc = "Run file" },
 		},
 		cmd = { "RunCode", "RunFile", "RunProject" },
 	},

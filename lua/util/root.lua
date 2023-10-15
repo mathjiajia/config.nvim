@@ -32,12 +32,11 @@ function M.detectors.lsp(buf)
 	end
 	local roots = {} ---@type string[]
 	for _, client in pairs(vim.lsp.get_clients({ bufnr = buf })) do
+		-- only check workspace folders, since we're not interested in clients
+		-- running in single file mode
 		local workspace = client.config.workspace_folders
 		for _, ws in pairs(workspace or {}) do
 			roots[#roots + 1] = vim.uri_to_fname(ws.uri)
-		end
-		if client.config.root_dir then
-			roots[#roots + 1] = client.config.root_dir
 		end
 	end
 	return vim.tbl_filter(function(path)
@@ -131,7 +130,23 @@ function M.info()
 	lines[#lines + 1] = "vim.g.root_spec = " .. vim.inspect(spec)
 	lines[#lines + 1] = "```"
 	require("util").info(lines, { title = "Lazy Roots" })
-	return roots[1] and roots[1].paths[1] or vim.loop.cwd()
+	return roots[1] and roots[1].paths[1] or vim.uv.cwd()
+end
+
+---@type table<number, string>
+M.cache = {}
+
+function M.setup()
+	vim.api.nvim_create_user_command("LazyRoot", function()
+		Util.root.info()
+	end, { desc = "LazyRoots for the current buffer" })
+
+	vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost" }, {
+		group = vim.api.nvim_create_augroup("lazy_root_cache", { clear = true }),
+		callback = function(event)
+			M.cache[event.buf] = nil
+		end,
+	})
 end
 
 -- returns the root directory based on:
@@ -141,8 +156,14 @@ end
 -- * root pattern of cwd
 ---@return string
 function M.get()
-	local roots = M.detect({ all = false })
-	return roots[1] and roots[1].paths[1] or vim.uv.cwd()
+	local buf = vim.api.nvim_get_current_buf()
+	local ret = M.cache[buf]
+	if not ret then
+		local roots = M.detect({ all = false })
+		ret = roots[1] and roots[1].paths[1] or vim.loop.cwd()
+		M.cache[buf] = ret
+	end
+	return ret
 end
 
 return M
