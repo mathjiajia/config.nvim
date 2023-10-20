@@ -69,5 +69,5 @@ see [mysnippets]
 ## Acknowledgements
 
 Thanks to
-`[folke](https://github.com/folke)` and his `[LazyVim](https://github.com/LazyVim)` project
+[folke](https://github.com/folke) and his [LazyVim](https://github.com/LazyVim) project
 where I copied a lot of code.
