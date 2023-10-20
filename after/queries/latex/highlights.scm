@@ -1,4 +1,5 @@
 ;; extends
+
 (math_environment
   (begin
    command: _ @text.environment
@@ -11,3 +12,5 @@
   (end
    command: _ @text.environment
    name: (curly_group_text (text) @text.environment.name)))
+
+(text_mode content: (curly_group (_) @text))

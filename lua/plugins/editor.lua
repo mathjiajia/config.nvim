@@ -243,7 +243,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-			preview_config = { border = "rounded" },
+			preview_config = { border = "none" },
 			on_attach = function(bufnr)
 				local gs = require("gitsigns")
 
@@ -298,7 +298,36 @@ return {
 			backends = { "lsp", "treesitter", "markdown", "man" },
 			layout = { resize_to_content = false },
 			attach_mode = "global",
-			icons = require("config").icons.aerial,
+			icons = {
+				Array = "󰅨 ",
+				Boolean = " ",
+				Class = " ",
+				Constant = " ",
+				Constructor = " ",
+				Enum = " ",
+				EnumMember = " ",
+				Event = " ",
+				Field = " ",
+				File = " ",
+				Folder = " ",
+				Function = "󰡱 ",
+				Interface = " ",
+				Key = " ",
+				Method = " ",
+				Module = " ",
+				Number = "󰎠 ",
+				Null = "󰟢 ",
+				Object = " ",
+				Operator = " ",
+				Property = " ",
+				Reference = " ",
+				Struct = " ",
+				String = "󰅳 ",
+				TypeParameter = " ",
+				Unit = " ",
+				Value = " ",
+				Variable = " ",
+			},
 			filter_kind = false,
 			show_guides = true,
 		},
@@ -320,28 +349,14 @@ return {
 					vim.opt_local.colorcolumn = { 80 }
 					vim.opt_local.winbar = ""
 				end,
-				-- view_enter = function()
-				-- 	Util.kitty("12")
-				-- 	vim.schedule(function()
-				-- 		vim.cmd.wincmd("=")
-				-- 	end)
-				-- end,
-				-- view_leave = function()
-				-- 	Util.kitty("0")
-				-- end,
 			},
 		},
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+		-- stylua: ignore
 		keys = {
-			{
-				"<leader>gd",
-				function()
-					require("diffview").open({})
-				end,
-				desc = "Open Diffview",
-			},
+			{ "<leader>gd", function() require("diffview").open({}) end, desc = "Open Diffview" },
 			{ "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
-			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", desc = "Close Diffview" },
+			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Close Diffview" },
 		},
 	},
 }

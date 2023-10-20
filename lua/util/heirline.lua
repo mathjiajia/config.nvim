@@ -1,6 +1,5 @@
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
-local devicons = require("nvim-web-devicons")
 local Util = require("util")
 
 local colors = {
@@ -49,21 +48,6 @@ local VimMode = {
 	hl = { fg = "green", bold = true },
 }
 
-local Snippets = {
-	condition = function()
-		return vim.list_contains({ "i", "s" }, vim.fn.mode())
-	end,
-
-	provider = function()
-		local ls = require("luasnip")
-		local forward = ls.locally_jumpable(1) and " " or ""
-		local backward = ls.locally_jumpable(-1) and " " or ""
-		local choice = ls.choice_active() and " 󰇘 " or " "
-		return backward .. choice .. forward
-	end,
-	hl = { fg = "purple" },
-}
-
 local WorkDir = {
 	provider = function()
 		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
@@ -84,9 +68,76 @@ local WorkDir = {
 	},
 }
 
+local FileNameBlock = {
+	init = function(self)
+		self.filename = vim.api.nvim_buf_get_name(0)
+	end,
+}
+
+local FileIcon = {
+	init = function(self)
+		local filename = self.filename
+		local extension = vim.fn.fnamemodify(filename, ":e")
+		self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+	end,
+	provider = function(self)
+		return self.icon and (self.icon .. " ")
+	end,
+	hl = function(self)
+		return { fg = self.icon_color }
+	end,
+}
+
+local FileName = {
+	provider = function(self)
+		local filename = vim.fn.fnamemodify(self.filename, ":.")
+		if filename == "" then
+			return "[No Name]"
+		end
+		if not conditions.width_percent_below(#filename, 0.25) then
+			filename = vim.fn.pathshorten(filename)
+		end
+		return filename
+	end,
+	hl = { fg = utils.get_highlight("Directory").fg },
+}
+
+local FileFlags = {
+	{
+		condition = function()
+			return vim.bo.modified
+		end,
+		provider = "[+]",
+		hl = { fg = "green" },
+	},
+	{
+		condition = function()
+			return not vim.bo.modifiable or vim.bo.readonly
+		end,
+		provider = "",
+		hl = { fg = "orange" },
+	},
+}
+
+local FileNameModifer = {
+	hl = function()
+		if vim.bo.modified then
+			return { fg = "cyan", bold = true, force = true }
+		end
+	end,
+}
+
+FileNameBlock =
+	utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" })
+
 local Git = {
 	condition = conditions.is_git_repo,
-	static = require("config").icons.git,
+	static = {
+		branch = "  ",
+		added = "  ",
+		changed = "  ",
+		removed = "  ",
+	},
 	init = function(self)
 		self.status_dict = vim.b.gitsigns_status_dict
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
@@ -132,7 +183,7 @@ local Git = {
 
 local Diagnostics = {
 	condition = conditions.has_diagnostics,
-	static = require("config").icons.diagnostics,
+	static = { Error = " ", Warn = " ", Hint = " ", Info = " " },
 	init = function(self)
 		self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
 		self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -214,20 +265,6 @@ local Spell = {
 	hl = { bold = true, fg = "cyan" },
 }
 
-local FileName = {
-	provider = function(self)
-		local filename = vim.fn.fnamemodify(self.filename, ":.")
-		if filename == "" then
-			return "[No Name]"
-		end
-		if not conditions.width_percent_below(#filename, 0.25) then
-			filename = vim.fn.pathshorten(filename)
-		end
-		return filename
-	end,
-	hl = { fg = utils.get_highlight("Directory").fg },
-}
-
 local TerminalName = {
 	provider = function()
 		local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
@@ -254,10 +291,10 @@ local Space = { provider = " " }
 local DefaultStatusline = {
 	VimMode,
 	Space,
+	FileNameBlock,
+	Space,
 	WorkDir,
 	Git,
-	Align,
-	Snippets,
 	Align,
 	Diagnostics,
 	LSPActive,
@@ -313,13 +350,7 @@ local StatusLine = {
 	InactiveStatusline,
 	DefaultStatusline,
 
-	hl = function()
-		if conditions.is_active() then
-			return "StatusLine"
-		else
-			return "StatusLineNC"
-		end
-	end,
+	hl = "StatusLine",
 }
 
 -- Tabline
@@ -328,22 +359,6 @@ local TablineBufnr = {
 		return tostring(self.bufnr) .. ". "
 	end,
 	hl = "Comment",
-}
-
-local FileIcon = {
-	init = function(self)
-		local filename = self.filename
-		local extension = vim.fn.fnamemodify(filename, ":e")
-		self.icon, self.icon_color = devicons.get_icon_color(filename, extension, { default = true })
-	end,
-
-	provider = function(self)
-		return self.icon and (self.icon .. " ")
-	end,
-
-	hl = function(self)
-		return { fg = self.icon_color }
-	end,
 }
 
 local TablineFileName = {
@@ -525,9 +540,9 @@ local TabLineOffset = {
 		if vim.bo[bufnr].filetype == "neo-tree" then
 			self.title = "neo-tree"
 			return true
-			-- elseif vim.bo[bufnr].filetype == "aerial" then
-			-- 	self.title = "aerial"
-			-- 	return true
+		elseif vim.bo[bufnr].filetype == "aerial" then
+			self.title = "aerial"
+			return true
 		end
 	end,
 

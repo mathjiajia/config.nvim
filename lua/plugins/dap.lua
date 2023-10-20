@@ -58,7 +58,13 @@ return {
   },
 	config = function()
 		-- dap signs
-		local icons = require("config").icons.dap
+		local icons = {
+			Stopped = "󰁕 ",
+			Breakpoint = " ",
+			BreakpointCondition = " ",
+			BreakpointRejected = " ",
+			LogPoint = ".>",
+		}
 		for name, sign in pairs(icons) do
 			name = "Dap" .. name
 			vim.fn.sign_define(name, { text = sign, texthl = name, numhl = "" })

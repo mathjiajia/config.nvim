@@ -1,7 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-lint",
-		ft = { "bash", "fish", "markdown", "zsh" },
+		ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
 		config = function()
 			local lint = require("lint")
 			local markdownlint = lint.linters.markdownlint
@@ -14,6 +14,7 @@ return {
 			lint.linters_by_ft = {
 				bash = { "shellcheck" },
 				fish = { "fish" },
+				gitcommit = { "commitlint" },
 				markdown = { "markdownlint" },
 				zsh = { "shellcheck" },
 			}

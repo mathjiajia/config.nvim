@@ -13,9 +13,6 @@ return {
 			local types = require("luasnip.util.types")
 
 			ls.setup({
-				-- keep_roots = true,
-				-- link_roots = true,
-				-- link_children = true,
 				update_events = "TextChanged,TextChangedI",
 				delete_check_events = "TextChanged",
 				ext_opts = {
@@ -71,11 +68,13 @@ return {
 			"hrsh7th/cmp-path",
 			"lukas-reineke/cmp-rg",
 			"saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
-			local cmp_kinds = require("config").icons.cmp_kinds
+			local lspkind = require("lspkind")
 
+			---@diagnostic disable-next-line: missing-fields
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -88,47 +87,48 @@ return {
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
+				---@diagnostic disable-next-line: missing-fields
 				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					format = function(entry, vim_item)
-						vim_item.kind = cmp_kinds[vim_item.kind]
-						vim_item.menu = ({
-							buffer = "[Buf]",
-							cmdline = "[Cmd]",
-							nvim_lsp = "[LSP]",
-							luasnip = "[Snip]",
-							neorg = "[Norg]",
-							copilot = "[GHC]",
-							path = "[Path]",
-							rg = "[RG]",
-						})[entry.source.name]
-						return vim_item
-					end,
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+						preset = "codicons",
+						maxwidth = 50,
+						ellipsis_char = "…",
+						before = function(entry, vim_item)
+							vim_item.menu = ({
+								buffer = "[Buf]",
+								cmdline = "[Cmd]",
+								nvim_lsp = "[LSP]",
+								luasnip = "[Snip]",
+								neorg = "[Norg]",
+								copilot = "[GHC]",
+								path = "[Path]",
+								rg = "[RG]",
+							})[entry.source.name]
+							return vim_item
+						end,
+					}),
 				},
+				---@diagnostic disable-next-line: missing-fields
 				matching = { disallow_prefix_unmatching = true },
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip", option = { show_autosnippets = true } },
-					{ name = "neorg" },
-					{ name = "buffer", keyword_length = 3 },
-					{ name = "copilot", max_item_count = 3 },
-					{ name = "path", keyword_length = 3 },
-					{ name = "rg", keyword_length = 4 },
-				},
-				window = {
-					completion = {
-						border = "rounded",
-						col_offset = -3,
-					},
-					documentation = { border = "rounded" },
+					{ name = "neorg", ft = "norg" },
+					{ name = "buffer", keyword_length = 2 },
+					{ name = "copilot", max_item_count = 2 },
+					{ name = "path", keyword_length = 2 },
+					{ name = "rg", keyword_length = 3 },
 				},
 			})
 
+			---@diagnostic disable-next-line: missing-fields
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = { { name = "buffer" } },
 			})
 
+			---@diagnostic disable-next-line: missing-fields
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
@@ -169,7 +169,11 @@ return {
 	{
 		"kylechui/nvim-surround",
 		config = true,
-		keys = { "cs", "ds", "ys", "yS" },
+		keys = {
+			{ "cs", desc = "Change Surrounding" },
+			{ "ds", desc = "Delete Surrounding" },
+			{ "ys", desc = "Add Surrounding" },
+		},
 	},
 
 	-- comments
@@ -177,9 +181,12 @@ return {
 		"numToStr/Comment.nvim",
 		config = true,
 		keys = {
-			{ "gcc" },
-			{ "gbc", mode = { "n", "x" } },
-			{ "gc", mode = { "n", "x" } },
+			{ "gcc", mode = "n", desc = "Comment toggle current line" },
+			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
+			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
+			{ "gbc", mode = "n", desc = "Comment toggle current block" },
+			{ "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
 		},
 	},
 

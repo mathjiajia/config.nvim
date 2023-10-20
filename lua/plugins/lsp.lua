@@ -12,7 +12,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			-- diagnostics signs
-			local icons = require("config").icons.diagnostics
+			local icons = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 			for name, icon in pairs(icons) do
 				name = "DiagnosticSign" .. name
 				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
@@ -68,9 +68,9 @@ return {
 					})
 				end
 
-				if client.supports_method(methods.textDocument_inlayHint) then
-					vim.lsp.inlay_hint(bufnr, true)
-				end
+				-- if client.supports_method(methods.textDocument_inlayHint) then
+				-- 	vim.lsp.inlay_hint(bufnr, true)
+				-- end
 
 				if client.supports_method(methods.textDocument_codeLens) then
 					local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
@@ -164,7 +164,7 @@ return {
 		"williamboman/mason.nvim",
 		cmd = "Mason",
 		config = function()
-			require("mason").setup({ ui = { border = "rounded" } })
+			require("mason").setup({})
 			local mr = require("mason-registry")
 			mr:on("package:install:success", function()
 				vim.defer_fn(function()
@@ -207,7 +207,6 @@ return {
 		"nvimdev/lspsaga.nvim",
 		event = { "LspAttach" },
 		opts = {
-			ui = { border = "rounded" },
 			symbol_in_winbar = { enable = false },
 			lightbulb = { enable = false },
 		},
@@ -222,7 +221,6 @@ return {
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
 		opts = {
-			border = { enable = true },
 			hooks = {
 				-- Don't open glance when there is only one result
 				-- and it is located in the current buffer, open otherwise

@@ -12,7 +12,7 @@ return {
 		"CRAG666/code_runner.nvim",
 		opts = {
 			filetype = {
-				lua = "lua",
+				lua = "nvim -l",
 				markdown = "glow",
 				python = "python3 -u",
 				swift = "swift",

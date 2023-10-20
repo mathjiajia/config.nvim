@@ -85,43 +85,29 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			local highlight = {
-				"RainbowRed",
-				"RainbowYellow",
-				"RainbowBlue",
-				"RainbowOrange",
-				"RainbowGreen",
-				"RainbowViolet",
-				"RainbowCyan",
-			}
-			local hooks = require("ibl.hooks")
-			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-			end)
-
-			require("ibl").setup({
-				scope = { highlight = highlight },
-				exclude = {
-					filetypes = require("config").ft_exclude,
+		opts = {
+			scope = {
+				highlight = {
+					"RainbowRed",
+					"RainbowYellow",
+					"RainbowBlue",
+					"RainbowOrange",
+					"RainbowGreen",
+					"RainbowViolet",
+					"RainbowCyan",
 				},
-			})
+			},
+			exclude = {
+				filetypes = { "conf", "markdown" },
+			},
+		},
+		config = function(_, opts)
+			require("ibl").setup(opts)
 
+			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
 	},
-
-	-- scrollbars
-	-- {
-	-- 	"lewis6991/satellite.nvim",
-	-- 	config = true,
-	-- },
 
 	-- minimap
 	{
@@ -129,26 +115,24 @@ return {
 		keys = {
 			{
 				"<leader>mm",
-				"codewindow.toggle_minimap()",
-				mode = "n",
+				function()
+					require("codewindow").toggle_minimap()
+				end,
 				desc = "Toggle Minimap",
 			},
 			{
 				"<leader>mf",
-				"codewindow.toggle_focus()",
-				mode = "n",
+				function()
+					require("codewindow").toggle_focus()
+				end,
 				desc = "Focus Minimap",
 			},
 		},
-		config = function()
-			local codewindow = require("codewindow")
-			codewindow.setup({
-				show_cursor = false,
-				screen_bounds = "background",
-				window_border = "rounded",
-			})
-			codewindow.apply_default_keybinds()
-		end,
+		opts = {
+			show_cursor = false,
+			screen_bounds = "background",
+			window_border = "none",
+		},
 	},
 
 	-- noicer ui
@@ -176,20 +160,11 @@ return {
 					},
 					view = "mini",
 				},
-				{
-					filter = {
-						event = "notify",
-						kind = "warn",
-						find = "for_each_child",
-					},
-					opts = { skip = true },
-				},
 			},
 			presets = {
 				bottom_search = true,
 				command_palette = true,
 				long_message_to_split = true,
-				lsp_doc_border = true,
 			},
 		},
 		keys = {
