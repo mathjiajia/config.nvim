@@ -89,27 +89,12 @@ return {
 				},
 				---@diagnostic disable-next-line: missing-fields
 				formatting = {
-<<<<<<< HEAD
-					fields = { "kind", "abbr", "menu" },
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
 						preset = "codicons",
 						maxwidth = 50,
 						ellipsis_char = "…",
 						menu = {
-||||||| parent of bf50206 (chore: update)
-					fields = { "kind", "abbr", "menu" },
-					format = function(entry, vim_item)
-						vim_item.kind = cmp_kinds[vim_item.kind]
-						vim_item.menu = ({
-=======
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						preset = "codicons",
-						maxwidth = 50,
-						ellipsis_char = "…",
-						menu = {
->>>>>>> bf50206 (chore: update)
 							buffer = "[Buf]",
 							cmdline = "[Cmd]",
 							nvim_lsp = "[LSP]",
