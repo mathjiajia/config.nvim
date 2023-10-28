@@ -89,24 +89,22 @@ return {
 				},
 				---@diagnostic disable-next-line: missing-fields
 				formatting = {
+					fields = { "kind", "abbr", "menu" },
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
 						preset = "codicons",
 						maxwidth = 50,
 						ellipsis_char = "…",
-						before = function(entry, vim_item)
-							vim_item.menu = ({
-								buffer = "[Buf]",
-								cmdline = "[Cmd]",
-								nvim_lsp = "[LSP]",
-								luasnip = "[Snip]",
-								neorg = "[Norg]",
-								copilot = "[GHC]",
-								path = "[Path]",
-								rg = "[RG]",
-							})[entry.source.name]
-							return vim_item
-						end,
+						menu = {
+							buffer = "[Buf]",
+							cmdline = "[Cmd]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[Snip]",
+							neorg = "[Norg]",
+							copilot = "[GHC]",
+							path = "[Path]",
+							rg = "[RG]",
+						},
 					}),
 				},
 				---@diagnostic disable-next-line: missing-fields
