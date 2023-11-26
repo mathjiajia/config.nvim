@@ -68,9 +68,9 @@ return {
 					})
 				end
 
-				-- if client.supports_method(methods.textDocument_inlayHint) then
-				-- 	vim.lsp.inlay_hint(bufnr, true)
-				-- end
+				if client.supports_method(methods.textDocument_inlayHint) then
+					vim.lsp.inlay_hint.enable(bufnr, true)
+				end
 
 				if client.supports_method(methods.textDocument_codeLens) then
 					local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
@@ -113,22 +113,24 @@ return {
 								onSave = true,
 							},
 							forwardSearch = {
-								executable = "sioyek",
-								args = {
-									"--reuse-window",
-									-- "--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
-									"--inverse-search",
-									vim.fn.stdpath("data")
-										.. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root "
-										.. vim.fn.stdpath("cache")
-										.. " -server "
-										.. vim.v.servername,
-									"--forward-search-file",
-									"%f",
-									"--forward-search-line",
-									"%l",
-									"%p",
-								},
+								-- executable = "sioyek",
+								-- args = {
+								-- 	"--reuse-window",
+								-- 	-- "--execute-command", "turn_on_synctex", -- Open Sioyek in synctex mode.
+								-- 	"--inverse-search",
+								-- 	vim.fn.stdpath("data")
+								-- 		.. "/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root "
+								-- 		.. vim.fn.stdpath("cache")
+								-- 		.. " -server "
+								-- 		.. vim.v.servername,
+								-- 	"--forward-search-file",
+								-- 	"%f",
+								-- 	"--forward-search-line",
+								-- 	"%l",
+								-- 	"%p",
+								-- },
+								executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+								args = { "%l", "%p", "%f" },
 							},
 							chktex = { onOpenAndSave = false },
 							diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
@@ -177,14 +179,16 @@ return {
 			end)
 			local tools = {
 				"black",
+				"clang-format",
 				"debugpy",
 				"glow",
+				"latexindent",
 				"markdownlint",
 				"prettierd",
 				"shellcheck",
 				"shfmt",
 				"stylua",
-				"tectonic",
+				-- "tectonic",
 			}
 			local function ensure_installed()
 				for _, tool in ipairs(tools) do

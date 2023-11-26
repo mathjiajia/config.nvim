@@ -1,6 +1,6 @@
 # config.nvim
 
-My personal NeoVim configuration files on macOS (apple silicon).
+My personal Neovim configuration files on macOS (apple silicon).
 
 This setup is mainly used for taking notes and writing documents in LaTeX.
 For the useful snippets (for mathematics, especially algebraic geometry)

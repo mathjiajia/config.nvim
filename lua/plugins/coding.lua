@@ -6,7 +6,7 @@ return {
 		lazy = true,
 		dependencies = {
 			"mathjiajia/mysnippets",
-			opts = { path = "~/Coding/mySnippets/snippets" },
+			config = true,
 		},
 		config = function()
 			local ls = require("luasnip")

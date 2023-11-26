@@ -69,40 +69,47 @@ return {
 	{
 		"luukvbaal/statuscol.nvim",
 		event = "VeryLazy",
-		opts = { setopt = true },
+		config = true,
 	},
 
 	-- statusline/tabline
+	-- {
+	-- 	"rebelot/heirline.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("util.heirline")
+	-- 	end,
+	-- },
+
+	-- lazy
 	{
-		"rebelot/heirline.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("util.heirline")
-		end,
+		"sontungexpt/sttusline",
+		branch = "table_version",
+		event = "BufEnter",
+		config = true,
 	},
 
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		opts = {
-			scope = {
-				highlight = {
-					"RainbowRed",
-					"RainbowYellow",
-					"RainbowBlue",
-					"RainbowOrange",
-					"RainbowGreen",
-					"RainbowViolet",
-					"RainbowCyan",
+		config = function()
+			require("ibl").setup({
+				scope = {
+					highlight = {
+						"RainbowRed",
+						"RainbowYellow",
+						"RainbowBlue",
+						"RainbowOrange",
+						"RainbowGreen",
+						"RainbowViolet",
+						"RainbowCyan",
+					},
 				},
-			},
-			exclude = {
-				filetypes = { "conf", "markdown" },
-			},
-		},
-		config = function(_, opts)
-			require("ibl").setup(opts)
+				exclude = {
+					filetypes = { "conf", "markdown" },
+				},
+			})
 
 			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
@@ -208,6 +215,7 @@ return {
 					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
 				},
 				project = { limit = 4 },
+				mru = { cwd_only = true },
 			},
 			preview = {
 				command = "cat",

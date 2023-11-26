@@ -1,10 +1,9 @@
----@param config {args?:string[]|fun():string[]?}
 local function get_args(config)
 	local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
 	config = vim.deepcopy(config)
 	---@cast args string[]
 	config.args = function()
-		local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
+		local new_args = vim.fn.input("Run with args: ", table.concat(args, " "))
 		return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
 	end
 	return config
@@ -14,27 +13,29 @@ return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		-- fancy UI for the debugger
-		"rcarriga/nvim-dap-ui",
+		{
+			"rcarriga/nvim-dap-ui",
 		-- stylua: ignore
 		keys = {
 			{ "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
       { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
 			{ "<leader>dE", function() require("dapui").eval(vim.fn.input("[DAP] Expression > ")) end, desc = "Eval Expression" },
 		},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			dapui.setup()
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open({})
-			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close({})
-			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close({})
-			end
-		end,
+			config = function()
+				local dap = require("dap")
+				local dapui = require("dapui")
+				dapui.setup()
+				dap.listeners.after.event_initialized["dapui_config"] = function()
+					dapui.open({})
+				end
+				dap.listeners.before.event_terminated["dapui_config"] = function()
+					dapui.close({})
+				end
+				dap.listeners.before.event_exited["dapui_config"] = function()
+					dapui.close({})
+				end
+			end,
+		},
 	},
 	-- stylua: ignore
   keys = {
@@ -71,37 +72,6 @@ return {
 		end
 
 		local dap = require("dap")
-
-		-- c, c++: codelldb
-		dap.adapters.codelldb = {
-			host = "localhost",
-			type = "server",
-			port = "${port}",
-			executable = {
-				command = "codelldb",
-				args = { "--port", "${port}" },
-			},
-		}
-		dap.configurations.cpp = {
-			{
-				name = "Launch file",
-				type = "codelldb",
-				request = "launch",
-				program = function()
-					return vim.fn.input({ prompt = "Path to executable: ", default = vim.fn.getcwd(), completion = "file" })
-				end,
-				cwd = "${workspaceFolder}",
-				stopOnEntry = false,
-			},
-			{
-				name = "Attach to process",
-				type = "codelldb",
-				request = "attach",
-				processId = require("dap.utils").pick_process,
-				cwd = "${workspaceFolder}",
-			},
-		}
-		dap.configurations.c = dap.configurations.cpp
 
 		-- python: debugpy
 		dap.adapters.python = {

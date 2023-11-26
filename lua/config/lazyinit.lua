@@ -1,6 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
-	vim.fn.system({
+	vim.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
@@ -13,10 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
 	change_detection = { notify = false },
-	dev = {
-		path = "~/Coding",
-		patterns = { "mathjiajia" },
-	},
 	performance = {
 		rtp = {
 			disabled_plugins = {
