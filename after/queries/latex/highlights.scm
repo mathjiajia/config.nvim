@@ -1,5 +1,4 @@
 ;; extends
-
 (math_environment
   (begin
    command: _ @text.environment
