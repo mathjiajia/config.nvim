@@ -28,7 +28,7 @@ opt.number = true
 opt.relativenumber = true
 
 -- 5 syntax, highlighting and spelling
-opt.colorcolumn = { 120 }
+opt.colorcolumn = "120"
 opt.cursorline = true
 opt.spelllang = "en_gb"
 

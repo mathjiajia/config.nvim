@@ -59,6 +59,7 @@ local WorkDir = {
 		local trail = cwd:sub(-1) == "/" and "" or "/"
 		return icon .. cwd .. trail
 	end,
+	hl = { fg = "blue" },
 
 	on_click = {
 		callback = function()
@@ -248,7 +249,10 @@ local LSPActive = {
 	},
 }
 
-local Ruler = { provider = "%3l:%-3v 󰀹 %3p%%" }
+local Ruler = {
+	provider = "%3l:%-3v󰀹 %P",
+	hl = { fg = "purple" },
+}
 
 local FileType = {
 	provider = function()

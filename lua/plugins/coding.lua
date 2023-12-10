@@ -6,7 +6,7 @@ return {
 		lazy = true,
 		dependencies = {
 			"mathjiajia/mysnippets",
-			config = true,
+			opts = { path = "~/Projects/mySnippets/snippets" },
 		},
 		config = function()
 			local ls = require("luasnip")
@@ -74,7 +74,6 @@ return {
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 
-			---@diagnostic disable-next-line: missing-fields
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -87,8 +86,9 @@ return {
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-				---@diagnostic disable-next-line: missing-fields
 				formatting = {
+					expandable_indicator = true,
+					fields = { "abbr", "kind", "menu" },
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
 						preset = "codicons",
@@ -106,7 +106,6 @@ return {
 						},
 					}),
 				},
-				---@diagnostic disable-next-line: missing-fields
 				matching = { disallow_prefix_unmatching = true },
 				sources = {
 					{ name = "nvim_lsp" },
@@ -119,13 +118,11 @@ return {
 				},
 			})
 
-			---@diagnostic disable-next-line: missing-fields
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = { { name = "buffer" } },
 			})
 
-			---@diagnostic disable-next-line: missing-fields
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {

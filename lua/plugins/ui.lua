@@ -73,45 +73,55 @@ return {
 	},
 
 	-- statusline/tabline
-	-- {
-	-- 	"rebelot/heirline.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("util.heirline")
-	-- 	end,
-	-- },
+	{
+		"rebelot/heirline.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("util.heirline")
+		end,
+	},
 
 	-- lazy
-	{
-		"sontungexpt/sttusline",
-		branch = "table_version",
-		event = "BufEnter",
-		config = true,
-	},
+	-- {
+	-- 	"sontungexpt/sttusline",
+	-- 	branch = "table_version",
+	-- 	event = "BufEnter",
+	-- 	config = true,
+	-- },
 
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
+			local highlight = {
+				"RainbowRed",
+				"RainbowYellow",
+				"RainbowBlue",
+				"RainbowOrange",
+				"RainbowGreen",
+				"RainbowViolet",
+				"RainbowCyan",
+			}
+			local hooks = require("ibl.hooks")
+			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+			end)
+
+			vim.g.rainbow_delimiters = { highlight = highlight }
 			require("ibl").setup({
-				scope = {
-					highlight = {
-						"RainbowRed",
-						"RainbowYellow",
-						"RainbowBlue",
-						"RainbowOrange",
-						"RainbowGreen",
-						"RainbowViolet",
-						"RainbowCyan",
-					},
-				},
+				scope = { highlight = highlight },
 				exclude = {
 					filetypes = { "conf", "markdown" },
 				},
 			})
 
-			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
 	},
@@ -210,9 +220,9 @@ return {
 			config = {
 				disable_move = true,
 				shortcut = {
-					{ desc = "󰚰 Update", group = "@property", action = "Lazy update", key = "u" },
-					{ desc = "󰀶 Files", group = "Label", action = "Telescope find_files", key = "f" },
-					{ desc = " Quit", group = "Number", action = "quitall", key = "q" },
+					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
+					{ desc = "󰀶 Files", group = "Directory", action = "Telescope find_files", key = "f" },
+					{ desc = " Quit", group = "String", action = "quitall", key = "q" },
 				},
 				project = { limit = 4 },
 				mru = { cwd_only = true },
@@ -306,20 +316,20 @@ return {
 					end,
 				},
 			},
-			-- keys = {
-			-- 	["<M-Right>"] = function(win)
-			-- 		win:resize("width", 2)
-			-- 	end,
-			-- 	["<M-Left>"] = function(win)
-			-- 		win:resize("width", -2)
-			-- 	end,
-			-- 	["<M-Up>"] = function(win)
-			-- 		win:resize("height", 2)
-			-- 	end,
-			-- 	["<M-Down>"] = function(win)
-			-- 		win:resize("height", -2)
-			-- 	end,
-			-- },
+			keys = {
+				["<M-Right>"] = function(win)
+					win:resize("width", 2)
+				end,
+				["<M-Left>"] = function(win)
+					win:resize("width", -2)
+				end,
+				["<M-Up>"] = function(win)
+					win:resize("height", 2)
+				end,
+				["<M-Down>"] = function(win)
+					win:resize("height", -2)
+				end,
+			},
 		},
 	},
 
