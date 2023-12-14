@@ -50,6 +50,13 @@ function M.diagnostics()
 	end
 end
 
+function M.inlay_hints(buf, value)
+	if value == nil then
+		value = not vim.lsp.inlay_hint.is_enabled(buf)
+	end
+	vim.lsp.inlay_hint.enable(buf, value)
+end
+
 setmetatable(M, {
 	__call = function(m, ...)
 		return m.option(...)

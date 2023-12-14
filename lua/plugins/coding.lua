@@ -18,12 +18,12 @@ return {
 				ext_opts = {
 					[types.insertNode] = {
 						active = {
-							virt_text = { { "", "Boolean" } },
+							virt_text = { { "●", "Boolean" } },
 						},
 					},
 					[types.choiceNode] = {
 						active = {
-							virt_text = { { "", "Special" } },
+							virt_text = { { "○", "Special" } },
 						},
 					},
 				},

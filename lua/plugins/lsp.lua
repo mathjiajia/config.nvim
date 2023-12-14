@@ -4,20 +4,13 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "folke/neodev.nvim", config = true },
+			{ "folke/neodev.nvim", config = true, ft = { "lua", "vim" } },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			-- diagnostics signs
-			local icons = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-			for name, icon in pairs(icons) do
-				name = "DiagnosticSign" .. name
-				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-			end
-
 			-- diagnostic keymaps
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostics" })
@@ -28,6 +21,14 @@ return {
 			vim.diagnostic.config({
 				virtual_text = { spacing = 4, prefix = "●" },
 				severity_sort = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.INFO] = " ",
+						[vim.diagnostic.severity.HINT] = " ",
+					},
+				},
 			})
 
 			-- lspconfig
@@ -138,6 +139,11 @@ return {
 							latexFormatter = "none",
 							bibtexFormatter = "latexindent",
 						},
+					},
+				},
+				typst_lsp = {
+					settings = {
+						exportPdf = "onSave",
 					},
 				},
 			}

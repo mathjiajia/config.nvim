@@ -51,6 +51,12 @@ return {
 		},
 	},
 
+	-- Typst
+	{
+		"kaarmu/typst.vim",
+		ft = "typst",
+	},
+
 	-- swift
 	-- {
 	-- 	"dimaportenko/telescope-simulators.nvim",

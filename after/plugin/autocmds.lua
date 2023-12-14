@@ -18,24 +18,24 @@ autocmd("TextYankPost", {
 })
 
 -- Treesitter
--- autocmd("FileType", {
--- 	-- schedule_wrap is used to stop dlopen from crashing on MacOS
--- 	callback = vim.schedule_wrap(function()
--- 		if not pcall(vim.treesitter.start) then
--- 			return
--- 		end
---
--- 		-- folds
--- 		vim.opt_local.foldmethod = "expr"
--- 		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- 		vim.opt.foldenable = false
--- 		-- vim.cmd.normal("zx")
---
--- 		-- indentation
--- 		-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
--- 	end),
--- 	desc = "Treesitter",
--- })
+autocmd("FileType", {
+	-- schedule_wrap is used to stop dlopen from crashing on MacOS
+	callback = vim.schedule_wrap(function()
+		if not pcall(vim.treesitter.start) then
+			return
+		end
+
+		-- folds
+		vim.wo.foldmethod = "expr"
+		vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
+		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.wo.foldlevel = 99
+
+		-- indentation
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end),
+	desc = "Treesitter",
+})
 
 -- put the cursor at the last edited position
 autocmd("BufReadPost", {

@@ -59,17 +59,11 @@ return {
   },
 	config = function()
 		-- dap signs
-		local icons = {
-			Stopped = "󰁕 ",
-			Breakpoint = " ",
-			BreakpointCondition = " ",
-			BreakpointRejected = " ",
-			LogPoint = ".>",
-		}
-		for name, sign in pairs(icons) do
-			name = "Dap" .. name
-			vim.fn.sign_define(name, { text = sign, texthl = name, numhl = "" })
-		end
+		vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", numhl = "" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "DapBreakpoint", numhl = "" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DapBreakpoint", numhl = "" })
+		vim.fn.sign_define("DapLogPoint", { text = ".>", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = "󰁕 ", texthl = "DapStopped", linehl = "DapStopped", numhl = "" })
 
 		local dap = require("dap")
 
