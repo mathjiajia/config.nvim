@@ -2,6 +2,14 @@ local Util = require("util")
 
 return {
 
+	-- treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+		opts = { auto_install = true },
+	},
+
 	-- file explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim",

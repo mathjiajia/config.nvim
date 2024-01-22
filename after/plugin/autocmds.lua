@@ -32,7 +32,7 @@ autocmd("FileType", {
 		vim.wo.foldlevel = 99
 
 		-- indentation
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end),
 	desc = "Treesitter",
 })
@@ -79,4 +79,12 @@ autocmd("BufReadPost", {
 		vim.api.nvim_buf_delete(0, {})
 	end,
 	desc = "openFile",
+})
+
+-- automatically regenerate spell file after editing dictionary
+autocmd("BufWritePost", {
+	pattern = "*/spell/*.add",
+	callback = function()
+		vim.cmd.mkspell({ "%", bang = true, mods = { silent = true } })
+	end,
 })

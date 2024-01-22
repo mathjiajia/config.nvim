@@ -18,6 +18,7 @@ return {
 	-- neorg
 	{
 		"nvim-neorg/neorg",
+		enabled = false,
 		build = ":Neorg sync-parsers",
 		ft = "norg",
 		dependencies = "nvim-neorg/neorg-telescope",
@@ -65,4 +66,15 @@ return {
 	-- 		require("simulators").setup()
 	-- 	end,
 	-- },
+
+	{
+		"HakonHarnes/img-clip.nvim",
+		-- event = "BufEnter",
+		ft = { "markdown", "tex", "typst" },
+		config = true,
+		-- stylua: ignore
+		keys = {
+			{ "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" },
+		},
+	},
 }

@@ -334,22 +334,22 @@ return {
 	},
 
 	-- better quickfix
-	{
-		"kevinhwang91/nvim-bqf",
-		ft = "qf",
-		dependencies = {
-			"junegunn/fzf",
-			build = function()
-				vim.fn["fzf#install"]()
-			end,
-		},
-		opts = {
-			preview = {
-				win_height = 5,
-				win_vheight = 5,
-			},
-		},
-	},
+	-- {
+	-- 	"kevinhwang91/nvim-bqf",
+	-- 	ft = "qf",
+	-- 	dependencies = {
+	-- 		"junegunn/fzf",
+	-- 		build = function()
+	-- 			vim.fn["fzf#install"]()
+	-- 		end,
+	-- 	},
+	-- 	opts = {
+	-- 		preview = {
+	-- 			win_height = 5,
+	-- 			win_vheight = 5,
+	-- 		},
+	-- 	},
+	-- },
 
 	-- Zen mode
 	{

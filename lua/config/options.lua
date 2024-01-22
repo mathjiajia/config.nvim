@@ -90,4 +90,5 @@ opt.virtualedit = "block"
 opt.signcolumn = "yes"
 
 -- Theme
+-- vim.cmd.colorscheme("bamboo")
 vim.cmd.colorscheme("vscode")
