@@ -7,7 +7,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
-		opts = { auto_install = true },
+		config = true,
 	},
 
 	-- file explorer
@@ -63,7 +63,7 @@ return {
 			},
 			default_component_configs = {
 				indent = {
-					with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+					with_expanders = true,
 					expander_collapsed = "",
 					expander_expanded = "",
 					expander_highlight = "NeoTreeExpander",
@@ -236,14 +236,14 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		config = true,
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
+		-- stylua: ignore
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+		},
 	},
 
 	-- git signs
@@ -264,7 +264,7 @@ return {
 				map("n", "[h", gs.prev_hunk, "Prev Hunk")
 
 				-- Actions
-        -- stylua: ignore start
+				-- stylua: ignore start
 				map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
 				map("v", "<leader>hs", function() gs.stage_hunk({ vim.api.nvim_win_get_cursor(0)[1], vim.fn.line("v") }) end, "Stage Hunk")
 				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
@@ -293,9 +293,9 @@ return {
 		config = true,
 		-- stylua: ignore
 		keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-    },
+			{ "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+			{ "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+		},
 	},
 
 	-- symbols outline
@@ -339,10 +339,8 @@ return {
 			filter_kind = false,
 			show_guides = true,
 		},
-		-- stylua: ignore
-		keys = {
-			{ "<leader>cs", function() require("aerial").toggle() end, desc = "Aerial (Symbols)" }
-		},
+	    -- stylua: ignore
+	    keys = { { "<leader>cs", function() require("aerial").toggle() end, desc = "Aerial (Symbols)" } },
 	},
 
 	-- diffview

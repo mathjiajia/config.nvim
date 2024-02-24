@@ -48,27 +48,6 @@ local VimMode = {
 	hl = { fg = "green", bold = true },
 }
 
-local WorkDir = {
-	provider = function()
-		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
-		local cwd = vim.fn.getcwd(0)
-		cwd = vim.fn.fnamemodify(cwd, ":~")
-		if not conditions.width_percent_below(#cwd, 0.25) then
-			cwd = vim.fn.pathshorten(cwd)
-		end
-		local trail = cwd:sub(-1) == "/" and "" or "/"
-		return icon .. cwd .. trail
-	end,
-	hl = { fg = "blue" },
-
-	on_click = {
-		callback = function()
-			require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
-		end,
-		name = "heirline_workdir",
-	},
-}
-
 local FileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
@@ -130,6 +109,27 @@ local FileNameModifer = {
 
 FileNameBlock =
 	utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" })
+
+local WorkDir = {
+	provider = function()
+		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
+		local cwd = vim.fn.getcwd(0)
+		cwd = vim.fn.fnamemodify(cwd, ":~")
+		if not conditions.width_percent_below(#cwd, 0.25) then
+			cwd = vim.fn.pathshorten(cwd)
+		end
+		local trail = cwd:sub(-1) == "/" and "" or "/"
+		return icon .. cwd .. trail
+	end,
+	hl = { fg = "purple" },
+
+	on_click = {
+		callback = function()
+			require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
+		end,
+		name = "heirline_workdir",
+	},
+}
 
 local Git = {
 	condition = conditions.is_git_repo,

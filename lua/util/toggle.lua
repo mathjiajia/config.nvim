@@ -57,6 +57,16 @@ function M.inlay_hints(buf, value)
 	vim.lsp.inlay_hint.enable(buf, value)
 end
 
+function M.ts_highlight()
+	if vim.b.ts_highlight then
+		vim.treesitter.stop()
+		Util.info("Disabled treesitter highlight", { title = "Treesitter" })
+	else
+		vim.treesitter.start()
+		Util.info("Enabled treesitter highlight", { title = "Treesitter" })
+	end
+end
+
 setmetatable(M, {
 	__call = function(m, ...)
 		return m.option(...)

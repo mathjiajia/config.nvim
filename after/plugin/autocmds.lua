@@ -5,7 +5,11 @@ local Util = require("util")
 -- Check if we need to reload the file when it changed
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("CheckTime", {}),
-	command = "checktime",
+	callback = function()
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
+	end,
 })
 
 -- Highlight yanked text
@@ -19,20 +23,19 @@ autocmd("TextYankPost", {
 
 -- Treesitter
 autocmd("FileType", {
-	-- schedule_wrap is used to stop dlopen from crashing on MacOS
 	callback = vim.schedule_wrap(function()
 		if not pcall(vim.treesitter.start) then
 			return
 		end
 
 		-- folds
-		vim.wo.foldmethod = "expr"
-		vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
-		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		vim.wo.foldlevel = 99
+		vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
+		vim.wo.foldmethod = "expr"
+		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
-		-- indentation
-		-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		-- indenting
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end),
 	desc = "Treesitter",
 })

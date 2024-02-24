@@ -18,10 +18,8 @@ return {
 				swift = "swift",
 			},
 		},
-		keys = {
-			-- stylua: ignore
-			{ "<M-r>", function() require("code_runner.commands").run_filetype() end, desc = "Run file" },
-		},
+		-- stylua: ignore
+		keys = { { "<M-r>", function() require("code_runner.commands").run_filetype() end, desc = "Run file" } },
 		cmd = { "RunCode", "RunFile", "RunProject" },
 	},
 

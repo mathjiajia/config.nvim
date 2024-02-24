@@ -13,44 +13,44 @@ see [mysnippets]
 ├── README.md
 ├── after
 │   ├── ftplugin
-│   │   ├── c.lua
+│   │   ├── checkhealth.lua
 │   │   ├── dap-repl.lua
+│   │   ├── gitcommit.lua
 │   │   ├── help.lua
 │   │   ├── man.lua
 │   │   ├── markdown.lua
 │   │   ├── norg.lua
 │   │   ├── qf.lua
+│   │   ├── spectre_panel.lua
 │   │   └── tex.lua
 │   ├── plugin
 │   │   ├── autocmds.lua
-│   │   ├── keymaps.lua
-│   │   └── lastplace.lua
+│   │   ├── commands.lua
+│   │   └── keymaps.lua
 │   └── queries
-│       ├── latex
-│       │   └── highlights.scm
-│       └── swift
-│           └── rainbow-delimiters.scm
+│       └── latex
+│           └── textobjects.scm
 ├── colors
+├── filetype.lua
 ├── ginit.vim
 ├── init.lua
 ├── lazy-lock.json
 ├── lua
 │   ├── config
-│   │   ├── init.lua
 │   │   ├── lazyinit.lua
 │   │   └── options.lua
 │   ├── plugins
 │   │   ├── coding.lua
 │   │   ├── dap.lua
 │   │   ├── editor.lua
+│   │   ├── formatting.lua
 │   │   ├── lang.lua
+│   │   ├── linting.lua
 │   │   ├── lsp.lua
-│   │   ├── treesitter.lua
 │   │   ├── ui.lua
 │   │   └── util.lua
 │   └── util
-│       ├── heirline.lua
-│       └── init.lua
+├── neovim.cat
 ├── spell
 │   ├── en.utf-8.add
 │   └── en.utf-8.add.spl
@@ -60,7 +60,6 @@ see [mysnippets]
 - `init.lua` -- entrance of the configuration
 - `lua/config` -- configuration files
 - `lua/plugins` -- submodules for different plugins
-- `lua/snips` -- a folder of utility functions for snippets
 - `after/ftplugin` -- individual file type settings
 - `after/plugin` -- some plugins no need to load early
 

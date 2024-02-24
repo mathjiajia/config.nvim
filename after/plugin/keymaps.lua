@@ -27,7 +27,7 @@ vim.keymap.set("n", "<leader>uF", function() Util.format.toggle(true) end, { des
 vim.keymap.set("n", "<leader>ul", function() Util.toggle.number() end, { desc = "Toggle Line Numbers" })
 vim.keymap.set("n", "<leader>ud", function() Util.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
 vim.keymap.set("n", "<leader>uh", function() Util.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
-vim.keymap.set("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
+vim.keymap.set("n", "<leader>uT", function() Util.toggle.ts_highlight() end, { desc = "Toggle Treesitter Highlight" })
 
 -- lazygit
 vim.keymap.set("n", "<M-g>", function() Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false }) end, { desc = "LazyGit (root dir)" })

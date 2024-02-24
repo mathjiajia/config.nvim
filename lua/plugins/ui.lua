@@ -61,38 +61,33 @@ return {
 	-- winbar
 	{
 		"Bekaboo/dropbar.nvim",
-		event = "VeryLazy",
 		config = true,
 	},
 
 	-- statuscolumn
 	{
 		"luukvbaal/statuscol.nvim",
-		event = "VeryLazy",
 		config = true,
 	},
 
 	-- statusline/tabline
 	{
 		"rebelot/heirline.nvim",
-		event = "VeryLazy",
 		config = function()
 			require("util.heirline")
 		end,
 	},
 
-	-- lazy
+	-- statusline
 	-- {
-	-- 	"sontungexpt/sttusline",
-	-- 	branch = "table_version",
-	-- 	event = "BufEnter",
+	-- 	"brianaung/yasl.nvim",
 	-- 	config = true,
 	-- },
 
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPost", "BufNewFile" },
+		-- event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			local highlight = {
 				"RainbowRed",
@@ -118,7 +113,7 @@ return {
 			require("ibl").setup({
 				scope = { highlight = highlight },
 				exclude = {
-					filetypes = { "conf", "markdown" },
+					filetypes = { "conf", "dashboard", "markdown" },
 				},
 			})
 
@@ -129,6 +124,7 @@ return {
 	-- minimap
 	{
 		"gorbit99/codewindow.nvim",
+		enabled = false,
 		keys = {
 			{
 				"<leader>mm",
@@ -225,7 +221,7 @@ return {
 					{ desc = " Quit", group = "String", action = "quitall", key = "q" },
 				},
 				project = { limit = 4 },
-				mru = { cwd_only = true },
+				mru = { limit = 6, cwd_only = true },
 			},
 			preview = {
 				command = "cat",
@@ -266,7 +262,6 @@ return {
 				{
 					ft = "help",
 					size = { height = 20 },
-					-- don't open help files in edgy that we're editing
 					filter = function(buf)
 						return vim.bo[buf].buftype == "help"
 					end,
@@ -359,6 +354,7 @@ return {
 		opts = { plugins = { gitsigns = true } },
 	},
 
+	-- rainbow delimiters
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		event = { "BufReadPost", "BufNewFile" },
@@ -367,11 +363,12 @@ return {
 		end,
 	},
 
-	-- Enhanced matchparen
+	-- enhanced matchparen
 	{
-		"utilyre/sentiment.nvim",
-		event = "BufReadPost",
-		config = true,
+		"lewis6991/nvim-treesitter-pairs",
+		-- "utilyre/sentiment.nvim",
+		-- event = "BufReadPost",
+		-- config = true,
 	},
 
 	-- icons

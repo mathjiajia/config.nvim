@@ -69,12 +69,11 @@ return {
 
 	{
 		"HakonHarnes/img-clip.nvim",
-		-- event = "BufEnter",
 		ft = { "markdown", "tex", "typst" },
 		config = true,
-		-- stylua: ignore
-		keys = {
-			{ "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" },
-		},
+        -- stylua: ignore
+        keys = {
+            { "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" },
+        },
 	},
 }

@@ -15,14 +15,7 @@ opt.scrolloff = 5
 opt.linebreak = true
 opt.breakindent = true
 opt.showbreak = "> "
-opt.fillchars = {
-	diff = "╱",
-	eob = " ",
-	fold = " ",
-	foldclose = "",
-	foldopen = "",
-	foldsep = " ",
-}
+opt.fillchars = { diff = "╱", eob = " ", fold = " " }
 opt.cmdheight = 0
 opt.number = true
 opt.relativenumber = true
@@ -57,9 +50,9 @@ opt.formatoptions = "tcroqnlj"
 opt.pumheight = 10
 
 -- 13 tabs and indenting
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = 4
 
 -- 14 folding
 
@@ -90,5 +83,4 @@ opt.virtualedit = "block"
 opt.signcolumn = "yes"
 
 -- Theme
--- vim.cmd.colorscheme("bamboo")
-vim.cmd.colorscheme("vscode")
+vim.cmd.colorscheme("bamboo")
