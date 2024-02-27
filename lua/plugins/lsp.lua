@@ -111,6 +111,7 @@ return {
 								-- executable = "tectonic",
 								-- args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
 								-- forwardSearchAfter = true,
+								args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
 								onSave = true,
 							},
 							forwardSearch = {
@@ -119,7 +120,7 @@ return {
 									"--reuse-window",
 									"--execute-command",
 									"turn_on_synctex",
-									-- "--inverse-search",
+									"--inverse-search",
 									vim.fn.stdpath("data")
 										.. "/lazy/nvim-texlabconfig/nvim-texlabconfig"
 										.. "-file %1 -line %2 -server "

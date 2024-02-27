@@ -21,25 +21,6 @@ autocmd("TextYankPost", {
 	desc = "Highlight the yanked text",
 })
 
--- Treesitter
-autocmd("FileType", {
-	callback = vim.schedule_wrap(function()
-		if not pcall(vim.treesitter.start) then
-			return
-		end
-
-		-- folds
-		vim.wo.foldlevel = 99
-		vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
-		vim.wo.foldmethod = "expr"
-		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-		-- indenting
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end),
-	desc = "Treesitter",
-})
-
 -- put the cursor at the last edited position
 autocmd("BufReadPost", {
 	group = augroup("LastPlace", {}),
