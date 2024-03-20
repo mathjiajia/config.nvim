@@ -11,7 +11,7 @@ opt.smartcase = true
 
 -- 4 displaying text
 opt.smoothscroll = true
-opt.scrolloff = 5
+opt.scrolloff = 12
 opt.linebreak = true
 opt.breakindent = true
 opt.showbreak = "> "
@@ -21,7 +21,7 @@ opt.number = true
 opt.relativenumber = true
 
 -- 5 syntax, highlighting and spelling
-opt.colorcolumn = "120"
+opt.colorcolumn = "100"
 opt.cursorline = true
 opt.spelllang = "en_gb"
 
@@ -32,6 +32,7 @@ opt.splitkeep = "screen"
 opt.splitright = true
 
 -- 7 multiple tab pages
+opt.showtabline = 2
 
 -- 8 terminal
 
@@ -53,7 +54,6 @@ opt.pumheight = 10
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.softtabstop = 4
-opt.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 -- 14 folding
 opt.foldlevel = 99
@@ -83,6 +83,3 @@ opt.updatetime = 200
 -- 24 various
 opt.virtualedit = "block"
 opt.signcolumn = "yes"
-
--- Theme
-vim.cmd.colorscheme("bamboo")

@@ -28,7 +28,6 @@ require("lazy").setup("plugins", {
 				"shada",
 				"spellfile",
 				"tarPlugin",
-				"tohtml",
 				"tutor",
 				"zipPlugin",
 			},

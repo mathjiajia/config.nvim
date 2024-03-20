@@ -1,4 +1,16 @@
 return {
+	-- colorscheme
+	{
+		"ribru17/bamboo.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("bamboo").setup({
+				transparent = true,
+			})
+			require("bamboo").load()
+		end,
+	},
 
 	-- better vim.notify
 	{
@@ -73,21 +85,53 @@ return {
 	-- statusline/tabline
 	{
 		"rebelot/heirline.nvim",
+		dependencies = {
+			"Zeioth/heirline-components.nvim",
+			opts = {
+				icons = {
+					ActiveLSP = "◍",
+				},
+			},
+		},
 		config = function()
-			require("util.heirline")
+			local heirline = require("heirline")
+			local lib = require("heirline-components.all")
+
+			local opts = {
+				tabline = { -- UI upper bar
+					lib.component.tabline_conditional_padding(),
+					lib.component.tabline_buffers(),
+					lib.component.fill({ hl = { bg = "tabline_bg" } }),
+					lib.component.tabline_tabpages(),
+				},
+				statusline = { -- UI statusbar
+					hl = { fg = "fg", bg = "bg" },
+					lib.component.mode(),
+					lib.component.git_branch(),
+					lib.component.file_info(),
+					lib.component.git_diff(),
+					lib.component.diagnostics(),
+					lib.component.fill(),
+					lib.component.cmd_info(),
+					lib.component.fill(),
+					lib.component.lsp(),
+					lib.component.compiler_state(),
+					lib.component.virtual_env(),
+					lib.component.nav(),
+					lib.component.mode({ surround = { separator = "right" } }),
+				},
+			}
+
+			-- Setup
+			lib.init.subscribe_to_events()
+			heirline.load_colors(lib.hl.get_colors())
+			heirline.setup(opts)
 		end,
 	},
-
-	-- statusline
-	-- {
-	-- 	"brianaung/yasl.nvim",
-	-- 	config = true,
-	-- },
 
 	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		-- event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			local highlight = {
 				"RainbowRed",
@@ -121,39 +165,13 @@ return {
 		end,
 	},
 
-	-- minimap
-	{
-		"gorbit99/codewindow.nvim",
-		enabled = false,
-		keys = {
-			{
-				"<leader>mm",
-				function()
-					require("codewindow").toggle_minimap()
-				end,
-				desc = "Toggle Minimap",
-			},
-			{
-				"<leader>mf",
-				function()
-					require("codewindow").toggle_focus()
-				end,
-				desc = "Focus Minimap",
-			},
-		},
-		opts = {
-			show_cursor = false,
-			screen_bounds = "background",
-			window_border = "none",
-		},
-	},
-
 	-- noicer ui
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = {
 			lsp = {
+				progress = { enabled = false },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
@@ -232,120 +250,6 @@ return {
 		},
 	},
 
-	-- edgy
-	{
-		"folke/edgy.nvim",
-		event = "VeryLazy",
-		-- stylua: ignore
-		keys = {
-			{ "<leader>ue", function() require("edgy").toggle() end, desc = "Edgy Toggle" },
-			{ "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
-		},
-		opts = {
-			bottom = {
-				{
-					ft = "noice",
-					size = { height = 0.4 },
-					filter = function(_, win)
-						return vim.api.nvim_win_get_config(win).relative == ""
-					end,
-				},
-				{
-					ft = "lazyterm",
-					title = "LazyTerm",
-					size = { height = 0.4 },
-					filter = function(buf)
-						return not vim.b[buf].lazyterm_cmd
-					end,
-				},
-				{ ft = "qf", title = "QuickFix" },
-				{
-					ft = "help",
-					size = { height = 20 },
-					filter = function(buf)
-						return vim.bo[buf].buftype == "help"
-					end,
-				},
-				{ title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
-			},
-			left = {
-				{
-					title = "Neo-Tree",
-					ft = "neo-tree",
-					filter = function(buf)
-						return vim.b[buf].neo_tree_source == "filesystem"
-					end,
-					pinned = true,
-					open = function()
-						require("neo-tree.command").execute({ dir = require("util").root() })
-					end,
-					size = { height = 0.5 },
-				},
-				{
-					title = "Neo-Tree Git",
-					ft = "neo-tree",
-					filter = function(buf)
-						return vim.b[buf].neo_tree_source == "git_status"
-					end,
-					pinned = true,
-					open = "Neotree position=right git_status",
-				},
-				{
-					title = "Neo-Tree Buffers",
-					ft = "neo-tree",
-					filter = function(buf)
-						return vim.b[buf].neo_tree_source == "buffers"
-					end,
-					pinned = true,
-					open = "Neotree position=top buffers",
-				},
-				"neo-tree",
-			},
-			right = {
-				{
-					title = "Aerial",
-					ft = "aerial",
-					pinned = true,
-					open = function()
-						require("aerial").open()
-					end,
-				},
-			},
-			keys = {
-				["<M-Right>"] = function(win)
-					win:resize("width", 2)
-				end,
-				["<M-Left>"] = function(win)
-					win:resize("width", -2)
-				end,
-				["<M-Up>"] = function(win)
-					win:resize("height", 2)
-				end,
-				["<M-Down>"] = function(win)
-					win:resize("height", -2)
-				end,
-			},
-		},
-	},
-
-	-- better quickfix
-	-- {
-	-- 	"kevinhwang91/nvim-bqf",
-	-- 	ft = "qf",
-	-- 	dependencies = {
-	-- 		"junegunn/fzf",
-	-- 		build = function()
-	-- 			vim.fn["fzf#install"]()
-	-- 		end,
-	-- 	},
-	-- 	opts = {
-	-- 		preview = {
-	-- 			win_height = 5,
-	-- 			win_vheight = 5,
-	-- 		},
-	-- 	},
-	-- },
-
 	-- Zen mode
 	{
 		"folke/zen-mode.nvim",
@@ -357,19 +261,14 @@ return {
 	-- rainbow delimiters
 	{
 		"HiPhish/rainbow-delimiters.nvim",
-		event = { "BufReadPost", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		init = function()
 			vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } }
 		end,
 	},
 
 	-- enhanced matchparen
-	{
-		"lewis6991/nvim-treesitter-pairs",
-		-- "utilyre/sentiment.nvim",
-		-- event = "BufReadPost",
-		-- config = true,
-	},
+	{ "lewis6991/nvim-treesitter-pairs" },
 
 	-- icons
 	{ "nvim-tree/nvim-web-devicons", lazy = true },

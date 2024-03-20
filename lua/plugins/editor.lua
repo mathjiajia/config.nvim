@@ -46,7 +46,6 @@ return {
 		},
 		init = function()
 			if vim.fn.argc() == 1 then
-				---@diagnostic disable-next-line: param-type-mismatch
 				local stat = vim.uv.fs_stat(vim.fn.argv(0))
 				if stat and stat.type == "directory" then
 					require("neo-tree")
@@ -55,7 +54,7 @@ return {
 		end,
 		opts = {
 			sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-			open_files_do_not_replace_types = { "aerial", "edgy", "qf", "terminal" },
+			open_files_do_not_replace_types = { "aerial", "qf", "terminal" },
 			filesystem = {
 				bind_to_cwd = false,
 				follow_current_file = { enabled = true },
@@ -165,10 +164,6 @@ return {
 					layout_config = { prompt_position = "top" },
 					prompt_prefix = "   ",
 					selection_caret = " ",
-					get_selecition_window = function()
-						require("edgy").goto_main()
-						return 0
-					end,
 					mappings = {
 						i = {
 							["<C-s>"] = flash,
@@ -200,7 +195,7 @@ return {
 				extensions = {
 					bibtex = {
 						format = "plain",
-						global_files = { "~/TeX/Jiabibtex.bib" },
+						-- global_files = { "~/TeX/Jiabibtex.bib" },
 					},
 					file_browser = { theme = "ivy" },
 					frecency = {
@@ -249,9 +244,8 @@ return {
 	-- git signs
 	{
 		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		opts = {
-			preview_config = { border = "none" },
 			on_attach = function(bufnr)
 				local gs = require("gitsigns")
 
@@ -282,19 +276,6 @@ return {
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Hunk Object")
 			end,
-		},
-	},
-
-	-- Finds and lists all of the TODO, HACK, BUG, etc comment
-	-- in your project and loads them into a browsable list.
-	{
-		"folke/todo-comments.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		config = true,
-		-- stylua: ignore
-		keys = {
-			{ "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-			{ "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
 		},
 	},
 
@@ -350,10 +331,10 @@ return {
 			enhanced_diff_hl = true,
 			hooks = {
 				diff_buf_read = function()
-					vim.opt_local.wrap = false
-					vim.opt_local.list = false
-					vim.opt_local.colorcolumn = "80"
-					vim.opt_local.winbar = ""
+					vim.wo.wrap = false
+					vim.wo.list = false
+					vim.wo.colorcolumn = "80"
+					vim.wo.winbar = ""
 				end,
 			},
 		},

@@ -9,7 +9,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		config = function()
 			-- diagnostic keymaps
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
@@ -74,18 +74,13 @@ return {
 				-- end
 
 				if client.supports_method(methods.textDocument_codeLens) then
-					local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
-					vim.api.nvim_create_autocmd("BufEnter", {
-						group = group,
+					vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+						group = vim.api.nvim_create_augroup("lsp_document_codelens", {}),
 						buffer = bufnr,
 						callback = vim.lsp.codelens.refresh,
 						once = true,
 					})
-					vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost", "CursorHold" }, {
-						group = group,
-						buffer = bufnr,
-						callback = vim.lsp.codelens.refresh,
-					})
+					vim.lsp.codelens.refresh()
 				end
 			end
 
@@ -99,6 +94,7 @@ return {
 						Lua = {
 							workspace = { checkThirdParty = false },
 							hint = { enable = true },
+							completion = { callSnippet = "Replace" },
 							telemetry = { enable = false },
 						},
 					},
@@ -111,7 +107,7 @@ return {
 								-- executable = "tectonic",
 								-- args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
 								-- forwardSearchAfter = true,
-								args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+								args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
 								onSave = true,
 							},
 							forwardSearch = {
@@ -119,11 +115,10 @@ return {
 								args = {
 									"--reuse-window",
 									"--execute-command",
-									"turn_on_synctex",
+									"turn_on_synctex", -- Open Sioyek in synctex mode.
 									"--inverse-search",
 									vim.fn.stdpath("data")
-										.. "/lazy/nvim-texlabconfig/nvim-texlabconfig"
-										.. "-file %1 -line %2 -server "
+										.. [[/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -server ]]
 										.. vim.v.servername,
 									"--forward-search-file",
 									"%f",
@@ -141,11 +136,11 @@ return {
 						},
 					},
 				},
-				typst_lsp = {
-					settings = {
-						exportPdf = "onSave",
-					},
-				},
+				-- typst_lsp = {
+				-- 	settings = {
+				-- 		exportPdf = "onSave",
+				-- 	},
+				-- },
 			}
 
 			require("mason-lspconfig").setup({

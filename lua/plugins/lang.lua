@@ -16,47 +16,46 @@ return {
 	},
 
 	-- neorg
-	{
-		"nvim-neorg/neorg",
-		enabled = false,
-		build = ":Neorg sync-parsers",
-		ft = "norg",
-		dependencies = "nvim-neorg/neorg-telescope",
-		cmd = "Neorg",
-		opts = {
-			load = {
-				["core.defaults"] = {},
-				["core.concealer"] = {},
-				["core.dirman"] = {
-					config = {
-						workspaces = {
-							log = "~/Documents/neorg/log",
-							projects = "~/Documents/neorg/projects",
-							wiki = "~/Documents/neorg/wiki",
-						},
-						default_workspace = "wiki",
-					},
-				},
-				["core.completion"] = {
-					config = {
-						engine = "nvim-cmp",
-					},
-				},
-				["core.presenter"] = {
-					config = {
-						zen_mode = "zen-mode",
-					},
-				},
-				["core.integrations.telescope"] = {},
-			},
-		},
-	},
+	-- {
+	-- 	"nvim-neorg/neorg",
+	-- 	build = ":Neorg sync-parsers",
+	-- 	ft = "norg",
+	-- 	dependencies = "nvim-neorg/neorg-telescope",
+	-- 	cmd = "Neorg",
+	-- 	opts = {
+	-- 		load = {
+	-- 			["core.defaults"] = {},
+	-- 			["core.concealer"] = {},
+	-- 			["core.dirman"] = {
+	-- 				config = {
+	-- 					workspaces = {
+	-- 						log = "~/Documents/neorg/log",
+	-- 						projects = "~/Documents/neorg/projects",
+	-- 						wiki = "~/Documents/neorg/wiki",
+	-- 					},
+	-- 					default_workspace = "wiki",
+	-- 				},
+	-- 			},
+	-- 			["core.completion"] = {
+	-- 				config = {
+	-- 					engine = "nvim-cmp",
+	-- 				},
+	-- 			},
+	-- 			["core.presenter"] = {
+	-- 				config = {
+	-- 					zen_mode = "zen-mode",
+	-- 				},
+	-- 			},
+	-- 			["core.integrations.telescope"] = {},
+	-- 		},
+	-- 	},
+	-- },
 
 	-- Typst
-	{
-		"kaarmu/typst.vim",
-		ft = "typst",
-	},
+	-- {
+	-- 	"kaarmu/typst.vim",
+	-- 	ft = "typst",
+	-- },
 
 	-- swift
 	-- {
@@ -67,13 +66,13 @@ return {
 	-- 	end,
 	-- },
 
-	{
-		"HakonHarnes/img-clip.nvim",
-		ft = { "markdown", "tex", "typst" },
-		config = true,
-        -- stylua: ignore
-        keys = {
-            { "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" },
-        },
-	},
+	-- {
+	-- 	"HakonHarnes/img-clip.nvim",
+	-- 	ft = { "markdown", "tex", "typst" },
+	-- 	config = true,
+	--        -- stylua: ignore
+	--        keys = {
+	--            { "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" },
+	--        },
+	-- },
 }
