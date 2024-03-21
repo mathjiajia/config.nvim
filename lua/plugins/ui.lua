@@ -261,6 +261,7 @@ return {
 	-- rainbow delimiters
 	{
 		"HiPhish/rainbow-delimiters.nvim",
+		submodules = false,
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		init = function()
 			vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } }

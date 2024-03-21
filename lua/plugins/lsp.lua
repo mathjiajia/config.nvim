@@ -179,6 +179,7 @@ return {
 				end, 100)
 			end)
 			local tools = {
+				"bibtex-tidy",
 				"black",
 				"clang-format",
 				"commitlint",

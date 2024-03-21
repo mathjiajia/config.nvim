@@ -21,29 +21,22 @@ autocmd("TextYankPost", {
 	desc = "Highlight the yanked text",
 })
 
--- put the cursor at the last edited position
-autocmd("BufReadPost", {
-	group = augroup("LastPlace", {}),
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = augroup("last_loc", {}),
 	callback = function(event)
-		local exclude_bt = { "help", "nofile", "quickfix" }
-		local exclude_ft = { "gitcommit" }
+		local exclude = { "gitcommit" }
 		local buf = event.buf
-		if
-			vim.list_contains(exclude_bt, vim.bo[buf].buftype)
-			or vim.list_contains(exclude_ft, vim.bo[buf].filetype)
-			or vim.api.nvim_win_get_cursor(0)[1] > 1
-			or vim.b[buf].last_pos
-		then
+		if vim.list_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].last_loc then
 			return
 		end
-		vim.b[buf].last_pos = true
+		vim.b[buf].last_loc = true
 		local mark = vim.api.nvim_buf_get_mark(buf, '"')
 		local lcount = vim.api.nvim_buf_line_count(buf)
 		if mark[1] > 0 and mark[1] <= lcount then
 			pcall(vim.api.nvim_win_set_cursor, 0, mark)
 		end
 	end,
-	desc = "Last Position",
 })
 
 -- Autoformat autocmd

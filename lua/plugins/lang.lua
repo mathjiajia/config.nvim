@@ -37,14 +37,10 @@ return {
 	-- 				},
 	-- 			},
 	-- 			["core.completion"] = {
-	-- 				config = {
-	-- 					engine = "nvim-cmp",
-	-- 				},
+	-- 				config = { engine = "nvim-cmp" },
 	-- 			},
 	-- 			["core.presenter"] = {
-	-- 				config = {
-	-- 					zen_mode = "zen-mode",
-	-- 				},
+	-- 				config = { zen_mode = "zen-mode" },
 	-- 			},
 	-- 			["core.integrations.telescope"] = {},
 	-- 		},
@@ -70,9 +66,7 @@ return {
 	-- 	"HakonHarnes/img-clip.nvim",
 	-- 	ft = { "markdown", "tex", "typst" },
 	-- 	config = true,
-	--        -- stylua: ignore
-	--        keys = {
-	--            { "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" },
-	--        },
+	--     -- stylua: ignore
+	--     keys = { { "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" } },
 	-- },
 }
