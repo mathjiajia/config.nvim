@@ -1,5 +1,5 @@
 set termguicolors
-set guifont=JetBrainsMono\ Nerd\ Font:h30
+set guifont=JetBrainsMono\ Nerd\ Font:h24
 
 if exists("g:neovide")
 	" colorscheme bamboo_nt
@@ -8,7 +8,7 @@ if exists("g:neovide")
 
 	" g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 	" let g:neovide_transparency = 0.2
-	let g:transparency = 0.8
+	" let g:transparency = 0.8
 	let g:neovide_background_color = '#252326'
 
 	" let g:neovide_window_blurred = v:true

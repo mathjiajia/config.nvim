@@ -3,7 +3,6 @@ local LazyUtil = require("lazy.core.util")
 ---@class util: LazyUtilCore
 ---@field root util.root
 ---@field telescope util.telescope
----@field terminal util.terminal
 ---@field toggle util.toggle
 ---@field format util.format
 local M = {}

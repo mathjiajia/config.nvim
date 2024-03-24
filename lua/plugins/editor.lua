@@ -73,9 +73,14 @@ return {
 
 	-- search/replace in multiple files
 	{
-		"windwp/nvim-spectre",
+		"nvim-pack/nvim-spectre",
 		cmd = { "Spectre" },
-		opts = { open_cmd = "noswapfile vnew" },
+		opts = {
+			open_cmd = "noswapfile vnew",
+			default = {
+				replace = { cmd = "sd" },
+			},
+		},
 	},
 	{
 		"AckslD/muren.nvim",
@@ -137,7 +142,7 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local actions_layout = require("telescope.actions.layout")
-			local home = vim.env.HOME
+			local home = vim.uv.os_homedir() or "~"
 
 			local function flash(prompt_bufnr)
 				require("flash").jump({

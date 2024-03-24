@@ -32,6 +32,7 @@ return {
 		end,
 		opts = {
 			formatters_by_ft = {
+				bib = { "bibtex-tidy" },
 				c = { "clang_format" },
 				css = { "prettierd" },
 				html = { "prettierd" },

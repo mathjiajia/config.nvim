@@ -11,6 +11,8 @@ return {
 		},
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		config = function()
+			require("lspconfig.ui.windows").default_options.border = "rounded"
+
 			-- diagnostic keymaps
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostics" })
@@ -40,13 +42,13 @@ return {
                 -- stylua: ignore
 				local keymaps = {
 					{ "gD", vim.lsp.buf.declaration, method = methods.textDocument_declaration },
+                    { "gd", vim.lsp.buf.definition, method = methods.textDocument_definition },
+                    { "gi", vim.lsp.buf.implementation, method = methods.textDocument_implementation },
 					{ "<C-k>", vim.lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
+                    { "gt", vim.lsp.buf.type_definition, method = methods.textDocument_typeDefinition },
 					{ "<leader>rn", vim.lsp.buf.rename, method = methods.textDocument_rename },
 					{ "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
-                    { "gd", function() require("glance").open("definitions") end,      method = methods.textDocument_definition },
-                    { "gi", function() require("glance").open("implementations") end,  method = methods.textDocument_implementation },
-                    { "gr", function() require("glance").open("references") end,       method = methods.textDocument_references },
-                    { "gt", function() require("glance").open("type_definitions") end, method = methods.textDocument_typeDefinition },
+                    { "gr", vim.lsp.buf.references, method = methods.textDocument_references },
 				}
 
 				for _, keys in ipairs(keymaps) do
@@ -168,7 +170,12 @@ return {
 		"williamboman/mason.nvim",
 		cmd = "Mason",
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				ui = {
+					border = "rounded",
+					height = 0.8,
+				},
+			})
 			local mr = require("mason-registry")
 			mr:on("package:install:success", function()
 				vim.defer_fn(function()
@@ -228,6 +235,7 @@ return {
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
 		opts = {
+			border = { enable = true },
 			hooks = {
 				before_open = function(results, open, jump)
 					local uri = vim.uri_from_bufnr(0)

@@ -6,7 +6,7 @@ return {
 		priority = 1000,
 		config = function()
 			require("bamboo").setup({
-				transparent = true,
+				-- transparent = true,
 			})
 			require("bamboo").load()
 		end,
@@ -230,6 +230,7 @@ return {
 	{
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
+		cond = not vim.g.neovide,
 		opts = {
 			config = {
 				disable_move = true,

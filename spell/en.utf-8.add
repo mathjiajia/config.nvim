@@ -1,3 +1,4 @@
+\'etale
 abelian
 adelic
 adic
@@ -15,12 +16,14 @@ BibLaTeX
 Bierstone
 biholomorphic
 biholomorphically
+biholomorphism
 bimeromorphic
 birational
 birationality
 birationally
 biregularly
 Birkar
+blowdown
 blowup
 blowups
 Bogomolov
@@ -62,10 +65,10 @@ Dinh
 divisorial
 dlt
 Dolbeault
+dualising
 dualizing
 equidimensional
 equivariant
-\'etale
 Fano
 Fano's
 fibration
@@ -83,12 +86,14 @@ Hartshorne
 Hartshorne's
 Hausdorff
 Hermite
+Hilbert's
 Hironaka
 Hironaka's
 Hirzebruch
 holomorphic
 holomorphically
 homeomorphic
+homeomorphism
 homeomorphisms
 homotopic
 homotopies
@@ -107,10 +112,12 @@ int
 isogenous
 isogeny
 isotrivial
+Jacobians
 Javanpeykar
 jia
 Jia
 jia\_jia@u.nus.edu
+Jingzhai, Tsinghua University, Haidian District
 K\"ahler
 K\"ahlerian
 Kawaguchi
@@ -129,6 +136,7 @@ Lefschetz
 Lelong
 letterpaper
 LMMP
+Macaulay
 mathjiajia
 Meng
 meromorphically
@@ -136,6 +144,7 @@ metabelian
 Minkowski
 Minkowski's
 MMP
+MMPs
 Moishezon
 monodromy
 Mori
@@ -148,8 +157,10 @@ nonempty
 nontrivial
 nonvanishing
 nonzero
+Nullstellensatz
 NUS
 pagestyle
+parametre
 Paun
 Perroni
 Peternell
@@ -171,8 +182,10 @@ projectivization
 pseudo
 pseudo-effective
 pullback
+pullbacks
 pushdown
 Pushdown
+pushdowns
 QCohstack
 Quotfunctor
 Remmert's
@@ -188,6 +201,7 @@ sextic
 Sheng
 Shokurov
 Shokurov's
+Shuimu Tsinghua Scholar Program
 simplicial
 Siu
 Siu's
@@ -197,6 +211,7 @@ subbundle
 subcone
 submanifold
 submanifolds
+submodule
 subquotient
 subring
 subscheme
@@ -216,7 +231,11 @@ tensoring
 threefolds
 tori
 toric
+Tsinghua University
+tsinghua.edu.cn
+uniformization
 unimodular
+unipotency
 unirational
 Unirational
 uniruled
@@ -225,26 +244,9 @@ Vietoris
 vir
 Weierstrass
 Weil
-Zariski
-Zhang
-tsinghua.edu.cn
 Yau Mathematical Sciences Center
-Jingzhai, Tsinghua University, Haidian District
-Shuimu Tsinghua Scholar Program
-unipotency
-Tsinghua University
-homeomorphism
-Jacobians
-biholomorphism
-uniformization
-Nullstellensatz
-Hilbert's
-dualising
-Macaulay
-parametre
-pushdowns
-submodule
+Zariski
 Zariski's Main Theorem
-pullbacks
-blowdown
-MMPs
+Zhang
+Artinian
+Cramer's
