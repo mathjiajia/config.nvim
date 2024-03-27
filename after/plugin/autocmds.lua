@@ -1,6 +1,5 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local Util = require("util")
 
 -- Check if we need to reload the file when it changed
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -99,21 +98,13 @@ autocmd("BufReadPost", {
 	desc = "Last Position",
 })
 
--- Autoformat autocmd
-autocmd("BufWritePre", {
-	group = augroup("LazyFormat", {}),
-	callback = function(event)
-		Util.format.format({ buf = event.buf })
-	end,
-})
-
 -- Opens non-text files in the default program instead of in Neovim
 autocmd("BufReadPost", {
 	group = augroup("openFile", {}),
 	pattern = { "*.jpeg", "*.jpg", "*.pdf", "*.png" },
-	callback = function()
+	callback = function(ev)
 		vim.fn.jobstart("open '" .. vim.fn.expand("%") .. "'", { detach = true })
-		vim.api.nvim_buf_delete(0, {})
+		vim.api.nvim_buf_delete(ev.buf, {})
 	end,
 	desc = "openFile",
 })

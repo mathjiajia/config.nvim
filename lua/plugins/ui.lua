@@ -1,4 +1,5 @@
 return {
+
 	-- colorscheme
 	{
 		"ribru17/bamboo.nvim",
@@ -126,6 +127,17 @@ return {
 			lib.init.subscribe_to_events()
 			heirline.load_colors(lib.hl.get_colors())
 			heirline.setup(opts)
+
+			vim.api.nvim_create_autocmd({ "User" }, {
+				pattern = "HeirlineComponentsTablineBuffersUpdated",
+				callback = function()
+					if #vim.t.bufs > 1 then
+						vim.opt.showtabline = 2
+					else
+						vim.opt.showtabline = 1
+					end
+				end,
+			})
 		end,
 	},
 
@@ -171,13 +183,11 @@ return {
 		event = "VeryLazy",
 		opts = {
 			lsp = {
-				-- progress = { enabled = false },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
-				hover = { enabled = false },
 			},
 			routes = {
 				{
@@ -196,33 +206,13 @@ return {
 				bottom_search = true,
 				command_palette = true,
 				long_message_to_split = true,
+				lsp_doc_border = true,
 			},
 		},
+		-- stylua: ignore
 		keys = {
-			{
-				"<C-f>",
-				function()
-					if not require("noice.lsp").scroll(4) then
-						return "<C-f>"
-					end
-				end,
-				silent = true,
-				expr = true,
-				desc = "Scroll forward",
-				mode = { "i", "n", "s" },
-			},
-			{
-				"<C-b>",
-				function()
-					if not require("noice.lsp").scroll(-4) then
-						return "<C-b>"
-					end
-				end,
-				silent = true,
-				expr = true,
-				desc = "Scroll backward",
-				mode = { "i", "n", "s" },
-			},
+			{ "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
+			{ "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
 		},
 	},
 

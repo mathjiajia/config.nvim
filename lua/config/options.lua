@@ -32,7 +32,6 @@ opt.splitkeep = "screen"
 opt.splitright = true
 
 -- 7 multiple tab pages
-opt.showtabline = 2
 
 -- 8 terminal
 

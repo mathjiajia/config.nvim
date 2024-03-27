@@ -1,5 +1,3 @@
-local Util = require("util")
-
 return {
 
 	-- treesitter
@@ -14,35 +12,11 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
+		-- stylua: ignore
 		keys = {
-			{
-				"<leader>fe",
-				function()
-					require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
-				end,
-				desc = "Explorer NeoTree (root dir)",
-			},
-			{
-				"<leader>fE",
-				function()
-					require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-				end,
-				desc = "Explorer NeoTree (cwd)",
-			},
-			{
-				"<leader>ge",
-				function()
-					require("neo-tree.command").execute({ source = "git_status", toggle = true })
-				end,
-				desc = "Git explorer",
-			},
-			{
-				"<leader>be",
-				function()
-					require("neo-tree.command").execute({ source = "buffers", toggle = true })
-				end,
-				desc = "Buffer explorer",
-			},
+			{ "<leader>fe", function() require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() }) end, desc = "Explorer NeoTree (cwd)" },
+			{ "<leader>ge", function() require("neo-tree.command").execute({ source = "git_status", toggle = true }) end, desc = "Git explorer" },
+			{ "<leader>be", function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end, desc = "Buffer explorer" },
 		},
 		init = function()
 			if vim.fn.argc() == 1 then
@@ -52,8 +26,10 @@ return {
 				end
 			end
 		end,
+		deactivate = function()
+			require("neo-tree.command").execute({ action = "close" })
+		end,
 		opts = {
-			sources = { "filesystem", "buffers", "git_status", "document_symbols" },
 			open_files_do_not_replace_types = { "aerial", "qf", "terminal" },
 			filesystem = {
 				bind_to_cwd = false,
@@ -92,45 +68,25 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		-- stylua: ignore
 		keys = {
-			{ "<leader><space>", Util.telescope("files", { cwd = "%:p:h" }), desc = "Find Files (current)" },
+			{ "<leader><space>", function () require('telescope.builtin').find_files({ cwd = "%:p:h" }) end, desc = "Find Files (current)" },
 			-- find
-			{ "<leader>fb", Util.telescope("buffers"), desc = "Buffers" },
-			{ "<leader>fc", Util.telescope.config_files(), desc = "Find Config File" },
-			{ "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (root dir)" },
-			{ "<leader>fF", Util.telescope("files"), desc = "Find Files (cwd)" },
-			{ "<leader>fm", Util.telescope("builtin"), desc = "Telescope Meta" },
+			{ "<leader>fb", function () require('telescope.builtin').buffers() end, desc = "Buffers" },
+			{ "<leader>fc", function () require('telescope.builtin').find_files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+			{ "<leader>ff", function () require('telescope.builtin').find_files() end, desc = "Find Files" },
+			{ "<leader>fg", function () require('telescope.builtin').git_files() end, desc = "Find Git Files" },
+			{ "<leader>fm", function () require('telescope.builtin').builtin() end, desc = "Telescope Meta" },
 			-- search
-			{ "<leader>sb", Util.telescope("current_buffer_fuzzy_find"), desc = "Current Buf Fuzzy Find" },
-			{ "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "Live Grep (root dir)" },
-			{ "<leader>sG", Util.telescope("live_grep"), desc = "Live Grep (cwd)" },
-			{ "<leader>sh", Util.telescope("help_tags"), desc = "Help Tags" },
-			{ "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
-			{ "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
-			{ "<leader>sw", Util.telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
-			{ "<leader>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
+			{ "<leader>sb", function () require('telescope.builtin').current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy Find" },
+			{ "<leader>sg", function () require('telescope.builtin').live_grep() end, desc = "Live Grep" },
+			{ "<leader>sh", function () require('telescope.builtin').help_tags() end, desc = "Help Tags" },
+			{ "<leader>sw", function () require('telescope.builtin').grep_string({ word_match = "-w" }) end, desc = "Search Word" },
+			{ "<leader>sw", function () require('telescope.builtin').grep_string() end, mode = "v", desc = "Search Selection" },
 			-- extensions
-			{
-				"<leader>fd",
-				function()
-					require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" })
-				end,
-				desc = "File Browser (current)",
-			},
-			{
-				"<leader>fD",
-				function()
-					require("telescope").extensions.file_browser.file_browser()
-				end,
-				desc = "File Browser (cwd)",
-			},
-			{
-				"<leader>fr",
-				function()
-					require("telescope").extensions.frecency.frecency()
-				end,
-				desc = "Frecency",
-			},
+			{ "<leader>fd", function() require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" }) end, desc = "File Browser (current)" },
+			{ "<leader>fD", function() require("telescope").extensions.file_browser.file_browser() end, desc = "File Browser (cwd)" },
+			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Frecency" },
 		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
