@@ -57,6 +57,8 @@ opt.softtabstop = 4
 
 -- 14 folding
 opt.foldlevel = 99
+opt.foldtext = " "
+-- opt.foldcolumn = "auto"
 
 -- 15 diff mode
 opt.diffopt:append({ linematch = 60 })

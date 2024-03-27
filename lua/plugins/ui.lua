@@ -76,21 +76,13 @@ return {
 		config = true,
 	},
 
-	-- statuscolumn
-	{
-		"luukvbaal/statuscol.nvim",
-		config = true,
-	},
-
-	-- statusline/tabline
+	-- statuscolumn/statusline/tabline
 	{
 		"rebelot/heirline.nvim",
 		dependencies = {
 			"Zeioth/heirline-components.nvim",
 			opts = {
-				icons = {
-					ActiveLSP = "◍",
-				},
+				icons = { ActiveLSP = "◍" },
 			},
 		},
 		config = function()
@@ -104,6 +96,15 @@ return {
 					lib.component.fill({ hl = { bg = "tabline_bg" } }),
 					lib.component.tabline_tabpages(),
 				},
+				statuscolumn = { -- UI left column
+					init = function(self)
+						self.bufnr = vim.api.nvim_get_current_buf()
+					end,
+					lib.component.foldcolumn(),
+					lib.component.fill(),
+					lib.component.numbercolumn(),
+					lib.component.signcolumn(),
+				},
 				statusline = { -- UI statusbar
 					hl = { fg = "fg", bg = "bg" },
 					lib.component.mode(),
@@ -114,8 +115,7 @@ return {
 					lib.component.fill(),
 					lib.component.cmd_info(),
 					lib.component.fill(),
-					lib.component.lsp(),
-					lib.component.compiler_state(),
+					lib.component.lsp({ lsp_progress = false }),
 					lib.component.virtual_env(),
 					lib.component.nav(),
 					lib.component.mode({ surround = { separator = "right" } }),
@@ -171,7 +171,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			lsp = {
-				progress = { enabled = false },
+				-- progress = { enabled = false },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,

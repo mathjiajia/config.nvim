@@ -7,7 +7,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
-		config = true,
+		opts = { auto_install = true },
 	},
 
 	-- file explorer
@@ -251,6 +251,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		opts = {
+			preview_config = { border = "rounded" },
 			on_attach = function(bufnr)
 				local gs = require("gitsigns")
 

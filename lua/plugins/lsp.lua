@@ -33,64 +33,11 @@ return {
 				},
 			})
 
-			-- lspconfig
-			local on_attach = function(client, bufnr)
-				vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-				local methods = vim.lsp.protocol.Methods
-
-                -- stylua: ignore
-				local keymaps = {
-					{ "gD", vim.lsp.buf.declaration, method = methods.textDocument_declaration },
-                    { "gd", vim.lsp.buf.definition, method = methods.textDocument_definition },
-                    { "gi", vim.lsp.buf.implementation, method = methods.textDocument_implementation },
-					{ "<C-k>", vim.lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
-                    { "gt", vim.lsp.buf.type_definition, method = methods.textDocument_typeDefinition },
-					{ "<leader>rn", vim.lsp.buf.rename, method = methods.textDocument_rename },
-					{ "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
-                    { "gr", vim.lsp.buf.references, method = methods.textDocument_references },
-				}
-
-				for _, keys in ipairs(keymaps) do
-					if client.supports_method(keys.method) then
-						vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.method })
-					end
-				end
-
-				if client.supports_method(methods.textDocument_documentHighlight) then
-					local group = vim.api.nvim_create_augroup("lsp_document_highlight", {})
-					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-						group = group,
-						buffer = bufnr,
-						callback = vim.lsp.buf.document_highlight,
-					})
-					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-						group = group,
-						buffer = bufnr,
-						callback = vim.lsp.buf.clear_references,
-					})
-				end
-
-				-- if client.supports_method(methods.textDocument_inlayHint) then
-				-- 	vim.lsp.inlay_hint.enable(bufnr, true)
-				-- end
-
-				if client.supports_method(methods.textDocument_codeLens) then
-					vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-						group = vim.api.nvim_create_augroup("lsp_document_codelens", {}),
-						buffer = bufnr,
-						callback = vim.lsp.codelens.refresh,
-						once = true,
-					})
-					vim.lsp.codelens.refresh()
-				end
-			end
-
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local servers = {
+				basedpyright = {},
 				clangd = {},
-				pyright = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -101,7 +48,6 @@ return {
 						},
 					},
 				},
-				matlab_ls = {},
 				texlab = {
 					settings = {
 						texlab = {
@@ -120,7 +66,9 @@ return {
 									"turn_on_synctex", -- Open Sioyek in synctex mode.
 									"--inverse-search",
 									vim.fn.stdpath("data")
-										.. [[/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -server ]]
+										.. [[/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root ]]
+										.. vim.fn.stdpath("cache")
+										.. " -server "
 										.. vim.v.servername,
 									"--forward-search-file",
 									"%f",
@@ -150,7 +98,6 @@ return {
 				handlers = {
 					function(server)
 						local opts = servers[server]
-						opts.on_attach = on_attach
 						opts.capabilities = capabilities
 						require("lspconfig")[server].setup(opts)
 					end,
@@ -159,7 +106,6 @@ return {
 
 			require("lspconfig").sourcekit.setup({
 				filetypes = { "swift", "objective-c", "objective-cpp" },
-				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 		end,
