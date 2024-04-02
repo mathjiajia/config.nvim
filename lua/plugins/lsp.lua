@@ -136,7 +136,6 @@ return {
 				"black",
 				"clang-format",
 				"commitlint",
-				"debugpy",
 				"glow",
 				-- "latexindent",
 				"markdownlint-cli2",
@@ -169,31 +168,45 @@ return {
 		opts = {
 			symbol_in_winbar = { enable = false },
 			lightbulb = { enable = false },
+			outline = { auto_preview = false },
 		},
         -- stylua: ignore
         keys = {
-            { "gh",    function() require("lspsaga.finder"):new({}) end,   silent = true, desc = "Lsp Finder" },
+            { "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" },
             { "<M-o>", function() require("lspsaga.symbol"):outline() end, silent = true, desc = "Lspsaga Outline" },
         },
 	},
 
 	{
-		"dnlhc/glance.nvim",
-		cmd = "Glance",
-		opts = {
-			border = { enable = true },
-			hooks = {
-				before_open = function(results, open, jump)
-					local uri = vim.uri_from_bufnr(0)
-					if #results == 1 then
-						local target_uri = results[1].uri or results[1].targetUri
-						if target_uri == uri then
-							jump(results[1])
-						end
-					else
-						open(results)
-					end
-				end,
+		"folke/trouble.nvim",
+		branch = "dev",
+		cmd = { "TroubleToggle", "Trouble" },
+		config = true,
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
 			},
 		},
 	},

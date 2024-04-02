@@ -10,7 +10,7 @@ return {
 		opts = {
 			formatters_by_ft = {
 				bib = { "bibtex-tidy" },
-				c = { "clang_format" },
+				c = { "clang-format" },
 				css = { "prettierd" },
 				html = { "prettierd" },
 				javascript = { "prettierd" },

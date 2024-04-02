@@ -5,7 +5,14 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
-		opts = { auto_install = true },
+		opts = {
+			ensure_install = {
+				"comment",
+				"diff",
+				"latex",
+			},
+			auto_install = true,
+		},
 	},
 
 	-- file explorer
@@ -20,6 +27,7 @@ return {
 		},
 		init = function()
 			if vim.fn.argc() == 1 then
+				---@diagnostic disable-next-line: param-type-mismatch
 				local stat = vim.uv.fs_stat(vim.fn.argv(0))
 				if stat and stat.type == "directory" then
 					require("neo-tree")
@@ -74,11 +82,11 @@ return {
 			-- find
 			{ "<leader>fb", function () require('telescope.builtin').buffers() end, desc = "Buffers" },
 			{ "<leader>fc", function () require('telescope.builtin').find_files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-			{ "<leader>ff", function () require('telescope.builtin').find_files() end, desc = "Find Files" },
+			{ "<leader>ff", function () require('telescope.builtin').find_files() end, desc = "Find Files (cwd)" },
 			{ "<leader>fg", function () require('telescope.builtin').git_files() end, desc = "Find Git Files" },
 			{ "<leader>fm", function () require('telescope.builtin').builtin() end, desc = "Telescope Meta" },
 			-- search
-			{ "<leader>sb", function () require('telescope.builtin').current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy Find" },
+			{ "<leader>sb", function () require('telescope.builtin').current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy" },
 			{ "<leader>sg", function () require('telescope.builtin').live_grep() end, desc = "Live Grep" },
 			{ "<leader>sh", function () require('telescope.builtin').help_tags() end, desc = "Help Tags" },
 			{ "<leader>sw", function () require('telescope.builtin').grep_string({ word_match = "-w" }) end, desc = "Search Word" },
@@ -156,6 +164,7 @@ return {
 				extensions = {
 					bibtex = {
 						format = "plain",
+						context = true,
 						-- global_files = { "~/TeX/Jiabibtex.bib" },
 					},
 					file_browser = { theme = "ivy" },
