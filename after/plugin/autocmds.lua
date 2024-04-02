@@ -17,7 +17,7 @@ autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
-	desc = "Highlight the yanked text",
+	desc = "Highlight the Yanked Text",
 })
 
 autocmd("LspAttach", {
@@ -98,6 +98,55 @@ autocmd("BufReadPost", {
 	desc = "Last Position",
 })
 
+-- treesitter
+autocmd("FileType", {
+	group = augroup("TreesitterHighlight", {}),
+	pattern = {
+		"bash",
+		"c",
+		"cpp",
+		"css",
+		"diff",
+		"fish",
+		"gitconfig",
+		"gitcommit",
+		"gitignore",
+		"html",
+		"json",
+		"json5",
+		"jsonc",
+		"markdown",
+		"norg",
+		"py",
+		"ruby",
+		"swift",
+		"tex",
+		"toml",
+		"yaml",
+	},
+	callback = function(ev)
+		vim.treesitter.start()
+
+		vim.wo.foldmethod = "expr"
+		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.b[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
+	desc = "Enable Treesitter",
+})
+
+-- No buflist for special files
+autocmd("FileType", {
+	group = augroup("NoBufList", {}),
+	pattern = { "checkhealth", "help", "man", "qf", "spectre_panel" },
+	callback = function(ev)
+		vim.b[ev.buf].buflisted = false
+		vim.keymap.set("n", "q", function()
+			vim.api.nvim_win_close(ev.buf, false)
+		end, { buffer = ev.buf, silent = true })
+	end,
+	desc = "Special Files",
+})
+
 -- Opens non-text files in the default program instead of in Neovim
 autocmd("BufReadPost", {
 	group = augroup("openFile", {}),
@@ -106,7 +155,7 @@ autocmd("BufReadPost", {
 		vim.fn.jobstart("open '" .. vim.fn.expand("%") .. "'", { detach = true })
 		vim.api.nvim_buf_delete(ev.buf, {})
 	end,
-	desc = "openFile",
+	desc = "Open File",
 })
 
 -- automatically regenerate spell file after editing dictionary

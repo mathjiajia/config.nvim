@@ -16,15 +16,8 @@ return {
 	-- better vim.notify
 	{
 		"rcarriga/nvim-notify",
-		keys = {
-			{
-				"<leader>un",
-				function()
-					require("notify").dismiss({ silent = true, pending = true })
-				end,
-				desc = "Delete all Notifications",
-			},
-		},
+		-- stylua: ignore
+		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete All Notifications" } },
 		opts = {
 			timeout = 3000,
 			max_height = function()
@@ -60,31 +53,22 @@ return {
 	-- highlight patterns in text
 	{
 		"echasnovski/mini.hipatterns",
-		event = "BufReadPre",
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			local hi = require("mini.hipatterns")
-			hi.setup({
-				highlighters = {
-					hex_color = hi.gen_highlighter.hex_color(),
-				},
-			})
+			hi.setup({ highlighters = { hex_color = hi.gen_highlighter.hex_color() } })
 		end,
 	},
 
 	-- winbar
-	{
-		"Bekaboo/dropbar.nvim",
-		config = true,
-	},
+	{ "Bekaboo/dropbar.nvim", config = true },
 
 	-- statuscolumn/statusline/tabline
 	{
 		"rebelot/heirline.nvim",
 		dependencies = {
 			"Zeioth/heirline-components.nvim",
-			opts = {
-				icons = { ActiveLSP = "◍" },
-			},
+			opts = { icons = { ActiveLSP = "◍" } },
 		},
 		config = function()
 			local heirline = require("heirline")
@@ -168,9 +152,7 @@ return {
 			vim.g.rainbow_delimiters = { highlight = highlight }
 			require("ibl").setup({
 				scope = { highlight = highlight },
-				exclude = {
-					filetypes = { "conf", "dashboard", "markdown" },
-				},
+				exclude = { filetypes = { "conf", "dashboard", "markdown" } },
 			})
 
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
@@ -220,9 +202,9 @@ return {
 	{
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
-		cond = not vim.g.neovide,
 		opts = {
 			config = {
+				week_header = { enable = true },
 				disable_move = true,
 				shortcut = {
 					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
@@ -232,12 +214,12 @@ return {
 				project = { limit = 4 },
 				mru = { limit = 6, cwd_only = true },
 			},
-			preview = {
-				command = "cat",
-				file_path = (vim.fn.stdpath("config") .. "/neovim.cat"),
-				file_height = 10,
-				file_width = 70,
-			},
+			-- preview = {
+			-- 	command = "cat",
+			-- 	file_path = (vim.fn.stdpath("config") .. "/neovim.cat"),
+			-- 	file_height = 10,
+			-- 	file_width = 70,
+			-- },
 		},
 	},
 

@@ -17,16 +17,8 @@ return {
 				update_events = "TextChanged,TextChangedI",
 				delete_check_events = "TextChanged",
 				ext_opts = {
-					[types.insertNode] = {
-						active = {
-							virt_text = { { "●", "Boolean" } },
-						},
-					},
-					[types.choiceNode] = {
-						active = {
-							virt_text = { { "○", "Special" } },
-						},
-					},
+					[types.insertNode] = { active = { virt_text = { { "●", "Boolean" } } } },
+					[types.choiceNode] = { active = { virt_text = { { "○", "Special" } } } },
 				},
 				enable_autosnippets = true,
 				store_selection_keys = "<Tab>",
@@ -176,12 +168,12 @@ return {
 		"numToStr/Comment.nvim",
 		config = true,
 		keys = {
-			{ "gcc", mode = "n", desc = "Comment toggle current line" },
-			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-			{ "gbc", mode = "n", desc = "Comment toggle current block" },
-			{ "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+			{ "gcc", mode = "n", desc = "Comment Toggle Current Line" },
+			{ "gc", mode = { "n", "o" }, desc = "Comment Toggle Linewise" },
+			{ "gc", mode = "x", desc = "Comment Toggle Linewise (Visual)" },
+			{ "gbc", mode = "n", desc = "Comment Toggle Current Block" },
+			{ "gb", mode = { "n", "o" }, desc = "Comment Toggle Blockwise" },
+			{ "gb", mode = "x", desc = "Comment Toggle Blockwise (Visual)" },
 		},
 	},
 
