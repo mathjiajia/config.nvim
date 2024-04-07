@@ -103,7 +103,7 @@ return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip", option = { show_autosnippets = true } },
-					{ name = "neorg", ft = "norg" },
+					-- { name = "neorg", ft = "norg" },
 					{ name = "buffer", keyword_length = 2 },
 					{ name = "copilot", max_item_count = 2 },
 					{ name = "path", keyword_length = 2 },
