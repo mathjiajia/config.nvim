@@ -52,12 +52,9 @@ return {
 
 	-- highlight patterns in text
 	{
-		"echasnovski/mini.hipatterns",
+		"brenoprata10/nvim-highlight-colors",
 		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			local hi = require("mini.hipatterns")
-			hi.setup({ highlighters = { hex_color = hi.gen_highlighter.hex_color() } })
-		end,
+		config = true,
 	},
 
 	-- winbar

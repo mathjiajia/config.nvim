@@ -15,13 +15,16 @@ return {
 		config = true,
 	},
 
-	-- neorg
+	-- {
+	-- 	"vhyrro/luarocks.nvim",
+	-- 	priority = 1000,
+	-- 	config = true,
+	-- },
 	-- {
 	-- 	"nvim-neorg/neorg",
-	-- 	build = ":Neorg sync-parsers",
 	-- 	ft = "norg",
-	-- 	dependencies = "nvim-neorg/neorg-telescope",
 	-- 	cmd = "Neorg",
+	-- 	dependencies = { "luarocks.nvim" },
 	-- 	opts = {
 	-- 		load = {
 	-- 			["core.defaults"] = {},
