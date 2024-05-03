@@ -32,9 +32,6 @@ autocmd("LspAttach", {
 			{ "gi", vim.lsp.buf.implementation, method = methods.textDocument_implementation },
 			{ "<C-k>", vim.lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
 			{ "gt", vim.lsp.buf.type_definition, method = methods.textDocument_typeDefinition },
-			{ "<leader>rn", vim.lsp.buf.rename, method = methods.textDocument_rename },
-			{ "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
-			{ "gr", vim.lsp.buf.references, method = methods.textDocument_references },
 		}
 
 		for _, keys in ipairs(keymaps) do
@@ -61,15 +58,15 @@ autocmd("LspAttach", {
 		-- 	vim.lsp.inlay_hint.enable(ev.buf, true)
 		-- end
 
-		if client and client.supports_method(methods.textDocument_codeLens) then
-			vim.lsp.codelens.refresh({ bufnr = ev.buf })
-			autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-				group = augroup("lsp_document_codelens", {}),
-				buffer = ev.buf,
-				callback = vim.lsp.codelens.refresh,
-				once = true,
-			})
-		end
+		-- if client and client.supports_method(methods.textDocument_codeLens) then
+		-- 	vim.lsp.codelens.refresh({ bufnr = ev.buf })
+		-- 	autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+		-- 		group = augroup("lsp_document_codelens", {}),
+		-- 		buffer = ev.buf,
+		-- 		callback = vim.lsp.codelens.refresh,
+		-- 		once = true,
+		-- 	})
+		-- end
 	end,
 })
 
@@ -137,7 +134,7 @@ autocmd("FileType", {
 -- No buflist for special files
 autocmd("FileType", {
 	group = augroup("NoBufList", {}),
-	pattern = { "checkhealth", "help", "man", "qf", "spectre_panel" },
+	pattern = { "checkhealth", "help", "qf", "spectre_panel" },
 	callback = function(ev)
 		vim.b[ev.buf].buflisted = false
 		vim.keymap.set("n", "q", function()

@@ -14,9 +14,6 @@ return {
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
 			-- diagnostic keymaps
-			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostics" })
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostics" })
 			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Loclist Diagnostics" })
 
 			-- diagnostics config
@@ -33,74 +30,73 @@ return {
 				},
 			})
 
+			-- lspconfig
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			local servers = {
-				basedpyright = {},
-				clangd = {},
-				lua_ls = {
-					settings = {
-						Lua = {
-							workspace = { checkThirdParty = false },
-							hint = { enable = true },
-							completion = { callSnippet = "Replace" },
-							telemetry = { enable = false },
-						},
-					},
-				},
-				texlab = {
-					settings = {
-						texlab = {
-							build = {
-								-- executable = "tectonic",
-								-- args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
-								-- forwardSearchAfter = true,
-								args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
-								onSave = true,
-							},
-							forwardSearch = {
-								executable = "sioyek",
-								args = {
-									"--reuse-window",
-									"--execute-command",
-									"turn_on_synctex", -- Open Sioyek in synctex mode.
-									"--inverse-search",
-									vim.fn.stdpath("data")
-										.. [[/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -cache_root ]]
-										.. vim.fn.stdpath("cache")
-										.. " -server "
-										.. vim.v.servername,
-									"--forward-search-file",
-									"%f",
-									"--forward-search-line",
-									"%l",
-									"%p",
-								},
-								-- executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
-								-- args = { "%l", "%p", "%f" },
-							},
-							chktex = { onOpenAndSave = false },
-							diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
-							latexFormatter = "none",
-							bibtexFormatter = "latexindent",
-						},
-					},
-				},
-				-- typst_lsp = {
-				-- 	settings = {
-				-- 		exportPdf = "onSave",
-				-- 	},
-				-- },
-			}
-
 			require("mason-lspconfig").setup({
-				ensure_installed = vim.tbl_keys(servers),
+				ensure_installed = {
+					"basedpyright",
+					"clangd",
+					"lua_ls",
+				},
 				handlers = {
-					function(server)
-						local opts = servers[server]
-						opts.capabilities = capabilities
-						require("lspconfig")[server].setup(opts)
+					function(server_name) -- default handler (optional)
+						require("lspconfig")[server_name].setup({
+							capabilities = capabilities,
+						})
 					end,
+
+					["lua_ls"] = function()
+						require("lspconfig").lua_ls.setup({
+							capabilities = capabilities,
+							settings = {
+								Lua = {
+									workspace = { checkThirdParty = false },
+									hint = { enable = true },
+									completion = { callSnippet = "Replace" },
+									telemetry = { enable = false },
+								},
+							},
+						})
+					end,
+				},
+			})
+
+			-- local pdf_executable = "/Applications/Skim.app/Contents/SharedSupport/displayline"
+			-- local forward_search_args = { "%l", "%p", "%f" }
+
+			require("lspconfig").texlab.setup({
+				capabilities = capabilities,
+				filetypes = { "tex", "bib" },
+				settings = {
+					texlab = {
+						build = {
+							forwardSearchAfter = false,
+							executable = "latexmk",
+							args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
+							onSave = true,
+						},
+						forwardSearch = {
+							executable = "sioyek",
+							args = {
+								"--reuse-window",
+								"--execute-command",
+								"turn_on_synctex",
+								"--inverse-search",
+								"texlab inverse-search --input %%1 --line %%2",
+								"--forward-search-file",
+								"%f",
+								"--forward-search-line",
+								"%l",
+								"%p",
+							},
+						},
+						chktex = { onOpenAndSave = false },
+						diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
+						latexFormatter = "none",
+						bibtexFormatter = "latexindent",
+					},
 				},
 			})
 
@@ -115,50 +111,33 @@ return {
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
-		config = function()
-			require("mason").setup({
-				ui = {
-					border = "rounded",
-					height = 0.8,
-				},
-			})
-			local mr = require("mason-registry")
-			mr:on("package:install:success", function()
-				vim.defer_fn(function()
-					require("lazy.core.handler.event").trigger({
-						event = "FileType",
-						buf = vim.api.nvim_get_current_buf(),
-					})
-				end, 100)
-			end)
-			local tools = {
-				"bibtex-tidy",
-				"black",
-				"clang-format",
-				"commitlint",
-				"glow",
-				-- "latexindent",
-				"markdownlint-cli2",
-				"prettierd",
-				"shellcheck",
-				"shfmt",
-				"stylua",
-				-- "tectonic",
-			}
-			local function ensure_installed()
-				for _, tool in ipairs(tools) do
-					local p = mr.get_package(tool)
-					if not p:is_installed() then
-						p:install()
-					end
-				end
-			end
-			if mr.refresh then
-				mr.refresh(ensure_installed)
-			else
-				ensure_installed()
-			end
-		end,
+		-- dependencies = {
+		-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
+		-- 	opts = {
+		-- 		ensure_installed = {
+		-- 			-- linter
+		-- 			"commitlint",
+		-- 			"markdownlint-cli2",
+		-- 			"shellcheck",
+		-- 			-- formatter
+		-- 			"bibtex-tidy",
+		-- 			"black",
+		-- 			"clang-format",
+		-- 			"prettierd",
+		-- 			"shfmt",
+		-- 			"stylua",
+		-- 			-- others
+		-- 			"glow",
+		-- 			-- "tectonic",
+		-- 		},
+		-- 	},
+		-- },
+		opts = {
+			ui = {
+				border = "rounded",
+				height = 0.8,
+			},
+		},
 	},
 
 	-- lsp enhancement
@@ -193,11 +172,11 @@ return {
 				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 				desc = "Buffer Diagnostics (Trouble)",
 			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
+			-- {
+			-- 	"<leader>cs",
+			-- 	"<cmd>Trouble symbols toggle focus=false<cr>",
+			-- 	desc = "Symbols (Trouble)",
+			-- },
 			{
 				"<leader>xL",
 				"<cmd>Trouble loclist toggle<cr>",

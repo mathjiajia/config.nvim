@@ -7,24 +7,10 @@ return {
 		config = true,
 	},
 
-	-- inverse serach for LaTeX
-	{
-		"f3fora/nvim-texlabconfig",
-		ft = "tex",
-		build = "go build",
-		config = true,
-	},
-
-	-- {
-	-- 	"vhyrro/luarocks.nvim",
-	-- 	priority = 1000,
-	-- 	config = true,
-	-- },
 	-- {
 	-- 	"nvim-neorg/neorg",
 	-- 	ft = "norg",
 	-- 	cmd = "Neorg",
-	-- 	dependencies = { "luarocks.nvim" },
 	-- 	opts = {
 	-- 		load = {
 	-- 			["core.defaults"] = {},
@@ -48,12 +34,6 @@ return {
 	-- 			["core.integrations.telescope"] = {},
 	-- 		},
 	-- 	},
-	-- },
-
-	-- Typst
-	-- {
-	-- 	"kaarmu/typst.vim",
-	-- 	ft = "typst",
 	-- },
 
 	-- swift

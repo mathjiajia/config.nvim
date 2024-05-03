@@ -1,8 +1,8 @@
 return {
 	{
 		"stevearc/conform.nvim",
+		lazy = false,
 		dependencies = { "mason.nvim" },
-		cmd = "ConformInfo",
 		-- stylua: ignore
 		keys = {
 			{ "<leader>cF", function() require("conform").format({ formatters = { "injected" }, timeout_ms = 2000 }) end, mode = { "n", "v" }, desc = "Format Injected Langs" },
