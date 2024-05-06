@@ -7,11 +7,17 @@ return {
 		build = ":TSUpdate",
 		opts = {
 			ensure_install = {
+				"bash",
+				"bibtex",
 				"comment",
 				"diff",
 				"latex",
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"regex",
+				"vim",
 			},
-			auto_install = true,
 		},
 	},
 

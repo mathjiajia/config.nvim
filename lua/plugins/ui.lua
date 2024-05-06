@@ -5,12 +5,23 @@ return {
 		"ribru17/bamboo.nvim",
 		priority = 1000,
 		config = function()
-			require("bamboo").setup({
-				-- transparent = true,
-			})
+			require("bamboo").setup({ transparent = false })
 			require("bamboo").load()
 		end,
 	},
+
+	-- {
+	-- 	"Mofiqul/vscode.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("vscode").setup({
+	-- 			-- transparent = true,
+	-- 			italic_comments = true,
+	-- 			underline_links = true,
+	-- 		})
+	-- 		require("vscode").load()
+	-- 	end,
+	-- },
 
 	-- better vim.notify
 	{
@@ -197,7 +208,7 @@ return {
 	-- start screen
 	{
 		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
+		-- event = "VimEnter",
 		opts = {
 			config = {
 				week_header = { enable = true },

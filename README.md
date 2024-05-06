@@ -13,25 +13,11 @@ see [mysnippets]
 ├── README.md
 ├── after
 │   ├── ftplugin
-│   │   ├── checkhealth.lua
-│   │   ├── dap-repl.lua
-│   │   ├── gitcommit.lua
-│   │   ├── help.lua
-│   │   ├── man.lua
-│   │   ├── markdown.lua
-│   │   ├── norg.lua
-│   │   ├── qf.lua
-│   │   ├── spectre_panel.lua
+│   │   ├── lua.lua
 │   │   └── tex.lua
-│   ├── plugin
-│   │   ├── autocmds.lua
-│   │   ├── commands.lua
-│   │   └── keymaps.lua
-│   └── queries
-│       └── latex
-│           └── textobjects.scm
-├── colors
-├── filetype.lua
+│   └── plugin
+│       ├── autocmds.lua
+│       └── keymaps.lua
 ├── ginit.vim
 ├── init.lua
 ├── lazy-lock.json
@@ -39,17 +25,15 @@ see [mysnippets]
 │   ├── config
 │   │   ├── lazyinit.lua
 │   │   └── options.lua
-│   ├── plugins
-│   │   ├── coding.lua
-│   │   ├── dap.lua
-│   │   ├── editor.lua
-│   │   ├── formatting.lua
-│   │   ├── lang.lua
-│   │   ├── linting.lua
-│   │   ├── lsp.lua
-│   │   ├── ui.lua
-│   │   └── util.lua
-│   └── util
+│   └── plugins
+│       ├── coding.lua
+│       ├── editor.lua
+│       ├── formatting.lua
+│       ├── lang.lua
+│       ├── linting.lua
+│       ├── lsp.lua
+│       ├── ui.lua
+│       └── util.lua
 ├── neovim.cat
 ├── spell
 │   ├── en.utf-8.add

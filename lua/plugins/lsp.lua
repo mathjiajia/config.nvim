@@ -63,9 +63,6 @@ return {
 				},
 			})
 
-			-- local pdf_executable = "/Applications/Skim.app/Contents/SharedSupport/displayline"
-			-- local forward_search_args = { "%l", "%p", "%f" }
-
 			require("lspconfig").texlab.setup({
 				capabilities = capabilities,
 				filetypes = { "tex", "bib" },
@@ -127,7 +124,6 @@ return {
 		-- 			"shfmt",
 		-- 			"stylua",
 		-- 			-- others
-		-- 			"glow",
 		-- 			-- "tectonic",
 		-- 		},
 		-- 	},

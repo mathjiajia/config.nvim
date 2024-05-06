@@ -32,6 +32,10 @@ autocmd("LspAttach", {
 			{ "gi", vim.lsp.buf.implementation, method = methods.textDocument_implementation },
 			{ "<C-k>", vim.lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
 			{ "gt", vim.lsp.buf.type_definition, method = methods.textDocument_typeDefinition },
+			-- to be removed in 0.11
+			{ "<leader>rn", vim.lsp.buf.rename, method = methods.textDocument_rename },
+			{ "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
+			{ "gr", vim.lsp.buf.references, method = methods.textDocument_references },
 		}
 
 		for _, keys in ipairs(keymaps) do
@@ -152,7 +156,7 @@ autocmd("FileType", {
 		vim.opt_local.conceallevel = 2
 		vim.opt_local.spell = true
 
-		vim.keymap.set("i", "<C-s>", "<C-g>u<Esc>[s1z=`]a<C-g>u", { buffer = ev.buf, desc = "Crect Last Spelling" })
+		vim.keymap.set("i", "<C-h>", "<C-g>u<Esc>[s1z=`]a<C-g>u", { buffer = ev.buf, desc = "Crect Last Spelling" })
 	end,
 	desc = "Special Files",
 })

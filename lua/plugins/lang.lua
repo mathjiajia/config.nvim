@@ -7,34 +7,13 @@ return {
 		config = true,
 	},
 
-	-- {
-	-- 	"nvim-neorg/neorg",
-	-- 	ft = "norg",
-	-- 	cmd = "Neorg",
-	-- 	opts = {
-	-- 		load = {
-	-- 			["core.defaults"] = {},
-	-- 			["core.concealer"] = {},
-	-- 			["core.dirman"] = {
-	-- 				config = {
-	-- 					workspaces = {
-	-- 						log = "~/Documents/neorg/log",
-	-- 						projects = "~/Documents/neorg/projects",
-	-- 						wiki = "~/Documents/neorg/wiki",
-	-- 					},
-	-- 					default_workspace = "wiki",
-	-- 				},
-	-- 			},
-	-- 			["core.completion"] = {
-	-- 				config = { engine = "nvim-cmp" },
-	-- 			},
-	-- 			["core.presenter"] = {
-	-- 				config = { zen_mode = "zen-mode" },
-	-- 			},
-	-- 			["core.integrations.telescope"] = {},
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"MeanderingProgrammer/markdown.nvim",
+		ft = "markdown",
+		config = function()
+			require("render-markdown").setup({})
+		end,
+	},
 
 	-- swift
 	-- {
