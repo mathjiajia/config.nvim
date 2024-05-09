@@ -10,19 +10,6 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"Mofiqul/vscode.nvim",
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("vscode").setup({
-	-- 			-- transparent = true,
-	-- 			italic_comments = true,
-	-- 			underline_links = true,
-	-- 		})
-	-- 		require("vscode").load()
-	-- 	end,
-	-- },
-
 	-- better vim.notify
 	{
 		"rcarriga/nvim-notify",
@@ -208,7 +195,6 @@ return {
 	-- start screen
 	{
 		"nvimdev/dashboard-nvim",
-		-- event = "VimEnter",
 		opts = {
 			config = {
 				week_header = { enable = true },
@@ -221,12 +207,6 @@ return {
 				project = { limit = 4 },
 				mru = { limit = 6, cwd_only = true },
 			},
-			-- preview = {
-			-- 	command = "cat",
-			-- 	file_path = (vim.fn.stdpath("config") .. "/neovim.cat"),
-			-- 	file_height = 10,
-			-- 	file_width = 70,
-			-- },
 		},
 	},
 

@@ -101,15 +101,16 @@ return {
 				},
 				---@diagnostic disable-next-line: missing-fields
 				matching = { disallow_prefix_unmatching = true },
-				sources = {
+				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip", option = { show_autosnippets = true } },
 					-- { name = "neorg", ft = "norg" },
-					{ name = "buffer", keyword_length = 2 },
+					{ name = "path" },
+				}, {
 					{ name = "copilot", max_item_count = 2 },
-					{ name = "path", keyword_length = 2 },
+					{ name = "buffer" },
 					{ name = "rg", keyword_length = 3 },
-				},
+				}),
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
