@@ -1,12 +1,77 @@
 return {
 
 	-- colorscheme
+	-- {
+	-- 	"ribru17/bamboo.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("bamboo").setup({ transparent = false })
+	-- 		require("bamboo").load()
+	-- 	end,
+	-- },
+
 	{
-		"ribru17/bamboo.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("bamboo").setup({ transparent = false })
-			require("bamboo").load()
+			require("catppuccin").setup({
+				-- flavour = "latte", -- latte, frappe, macchiato, mocha
+				-- transparent_background = true, -- disables setting the background color.
+				term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+				dim_inactive = {
+					enabled = true, -- dims the background color of inactive window
+					shade = "dark",
+					percentage = 0.15, -- percentage of the shade to apply to the inactive window
+				},
+				styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+					comments = { "italic" }, -- Change the style of comments
+					conditionals = { "italic" },
+					loops = {},
+					functions = {},
+					keywords = {},
+					strings = {},
+					variables = {},
+					numbers = {},
+					booleans = {},
+					properties = {},
+					types = {},
+					operators = {},
+					-- miscs = {}, -- Uncomment to turn off hard-coded styles
+				},
+				integrations = {
+					alpha = false,
+					dap = false,
+					dap_ui = false,
+					diffview = true,
+					neogit = false,
+					nvimtree = false,
+					ufo = false,
+					rainbow_delimiters = true,
+					treesitter_context = false,
+					barbecue = {
+						dim_dirname = false,
+						bold_basename = false,
+						dim_context = false,
+						alt_background = false,
+					},
+					illuminate = {
+						enabled = false,
+						lsp = false,
+					},
+					dropbar = {
+						enabled = true,
+						color_mode = false,
+					},
+					colorful_winsep = {
+						enabled = false,
+						color = "red",
+					},
+				},
+			})
+
+			-- setup must be called before loading
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 
@@ -16,6 +81,7 @@ return {
 		-- stylua: ignore
 		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete All Notifications" } },
 		opts = {
+			-- background_colour = "#000000",
 			timeout = 3000,
 			max_height = function()
 				return math.floor(vim.o.lines * 0.75)
@@ -222,7 +288,6 @@ return {
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		submodules = false,
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		init = function()
 			vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } }
 		end,

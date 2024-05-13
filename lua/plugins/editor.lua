@@ -221,7 +221,6 @@ return {
 	-- git signs
 	{
 		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		opts = {
 			preview_config = { border = "rounded" },
 			on_attach = function(bufnr)
@@ -318,6 +317,21 @@ return {
 			{ "<leader>gd", function() require("diffview").open({}) end, desc = "Open Diffview" },
 			{ "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
 			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Close Diffview" },
+		},
+	},
+
+	-- speed up choosing ours/theres when resolving diffs
+	{
+		"akinsho/git-conflict.nvim",
+		opts = { default_mappings = false },
+		cmd = {
+			"GitConflictChooseOurs",
+			"GitConflictChooseTheirs",
+			"GitConflictChooseBoth",
+			"GitConflictChooseNone",
+			"GitConflictNextConflict",
+			"GitConflictPrevConflict",
+			"GitConflictListQf",
 		},
 	},
 }

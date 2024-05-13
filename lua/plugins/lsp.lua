@@ -9,7 +9,6 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -39,6 +38,7 @@ return {
 					"basedpyright",
 					"clangd",
 					"lua_ls",
+					"texlab",
 				},
 				handlers = {
 					function(server_name) -- default handler (optional)
@@ -60,40 +60,43 @@ return {
 							},
 						})
 					end,
-				},
-			})
 
-			require("lspconfig").texlab.setup({
-				capabilities = capabilities,
-				filetypes = { "tex", "bib" },
-				settings = {
-					texlab = {
-						build = {
-							forwardSearchAfter = false,
-							executable = "latexmk",
-							args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
-							onSave = true,
-						},
-						forwardSearch = {
-							executable = "sioyek",
-							args = {
-								"--reuse-window",
-								"--execute-command",
-								"turn_on_synctex",
-								"--inverse-search",
-								"texlab inverse-search --input %%1 --line %%2",
-								"--forward-search-file",
-								"%f",
-								"--forward-search-line",
-								"%l",
-								"%p",
+					["texlab"] = function()
+						require("lspconfig").texlab.setup({
+							filetypes = { "tex", "bib" },
+							capabilities = capabilities,
+							settings = {
+								texlab = {
+									build = {
+										forwardSearchAfter = false,
+										executable = "latexmk",
+										args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
+										onSave = true,
+									},
+									forwardSearch = {
+										executable = "sioyek",
+										args = {
+											"--reuse-window",
+											"--execute-command",
+											"turn_on_synctex",
+											"--inverse-search",
+											vim.fn.stdpath("data")
+												.. "/mason/packages/texlab/texlab inverse-search --input %%1 --line %%2",
+											"--forward-search-file",
+											"%f",
+											"--forward-search-line",
+											"%l",
+											"%p",
+										},
+									},
+									chktex = { onOpenAndSave = false },
+									diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
+									latexFormatter = "none",
+									bibtexFormatter = "latexindent",
+								},
 							},
-						},
-						chktex = { onOpenAndSave = false },
-						diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
-						latexFormatter = "none",
-						bibtexFormatter = "latexindent",
-					},
+						})
+					end,
 				},
 			})
 
