@@ -17,6 +17,7 @@ return {
 				"markdown_inline",
 				"regex",
 				"vim",
+				"vimdoc",
 			},
 		},
 	},
@@ -206,7 +207,7 @@ return {
 	-- location.
 	{
 		"folke/flash.nvim",
-		event = "VeryLazy",
+		event = { "VeryLazy" },
 		config = true,
 		-- stylua: ignore
 		keys = {

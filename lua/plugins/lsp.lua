@@ -80,14 +80,15 @@ return {
 											"--execute-command",
 											"turn_on_synctex",
 											"--inverse-search",
-											vim.fn.stdpath("data")
-												.. "/mason/packages/texlab/texlab inverse-search --input %%1 --line %%2",
+											vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
 											"--forward-search-file",
 											"%f",
 											"--forward-search-line",
 											"%l",
 											"%p",
 										},
+										-- executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+										-- args = { "-r", "%l", "%p", "%f" },
 									},
 									chktex = { onOpenAndSave = false },
 									diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
@@ -131,28 +132,41 @@ return {
 		-- 		},
 		-- 	},
 		-- },
-		opts = {
-			ui = {
-				border = "rounded",
-				height = 0.8,
-			},
-		},
+		opts = { ui = { border = "rounded", height = 0.8 } },
 	},
 
 	-- lsp enhancement
 	{
 		"nvimdev/lspsaga.nvim",
 		event = { "LspAttach" },
-		opts = {
-			symbol_in_winbar = { enable = false },
-			lightbulb = { enable = false },
-			outline = { auto_preview = false },
-		},
-        -- stylua: ignore
-        keys = {
-            { "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" },
-            { "<M-o>", function() require("lspsaga.symbol"):outline() end, silent = true, desc = "Lspsaga Outline" },
-        },
+		config = function()
+			require("lspsaga").setup({
+				symbol_in_winbar = { enable = false },
+				lightbulb = { enable = false },
+				outline = { auto_preview = false },
+				floaterm = { height = 1, width = 1 },
+			})
+
+			vim.keymap.set("n", "gh", function()
+				require("lspsaga.finder"):new({})
+			end, { desc = "Lsp Finder" })
+
+			vim.keymap.set({ "n", "t" }, "<M-g>", function()
+				require("lspsaga.floaterm"):open_float_terminal({ "lazygit" })
+			end, { desc = "LazyGit" })
+
+			vim.keymap.set({ "n", "t" }, "<M-i>", function()
+				require("lspsaga.floaterm"):open_float_terminal({ "btop" })
+			end, { desc = "Toggle btop" })
+
+			vim.keymap.set("n", "<M-o>", function()
+				require("lspsaga.symbol"):outline()
+			end, { desc = "Lspsaga Outline" })
+
+			-- vim.keymap.set("n", "<M-r>", function()
+			-- 	require("lspsaga.floaterm"):open_float_terminal({ cmd })
+			-- end, { desc = "Code Runner" })
+		end,
 	},
 
 	{
