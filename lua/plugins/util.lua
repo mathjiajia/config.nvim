@@ -11,15 +11,11 @@ return {
 				float_opts = { border = "rounded" },
 			})
 
+			local Terminal = require("toggleterm.terminal").Terminal
+			local cmd = require("code_runner.commands").get_filetype_command()
+
 			vim.keymap.set("n", "<M-r>", function()
-				require("toggleterm.terminal").Terminal
-					:new({
-						cmd = require("code_runner.commands").get_filetype_command(),
-						hidden = true,
-						direction = "float",
-						close_on_exit = false,
-					})
-					:open()
+				Terminal:new({ cmd = cmd, hidden = true, close_on_exit = false }):open()
 			end, { desc = "Code Runner" })
 		end,
 	},

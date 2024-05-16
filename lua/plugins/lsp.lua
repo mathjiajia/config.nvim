@@ -139,6 +139,11 @@ return {
 	{
 		"nvimdev/lspsaga.nvim",
 		event = { "LspAttach" },
+		-- stylua: ignore
+		keys = {
+			{ "<M-g>", function() require("lspsaga.floaterm"):open_float_terminal({ "lazygit" }) end, mode = { "n", "t" }, desc = "LazyGit" },
+			{ "<M-i>", function() require("lspsaga.floaterm"):open_float_terminal({ "btop" }) end, mode = { "n", "t" }, desc = "btop" }
+		},
 		config = function()
 			require("lspsaga").setup({
 				symbol_in_winbar = { enable = false },
@@ -151,21 +156,9 @@ return {
 				require("lspsaga.finder"):new({})
 			end, { desc = "Lsp Finder" })
 
-			vim.keymap.set({ "n", "t" }, "<M-g>", function()
-				require("lspsaga.floaterm"):open_float_terminal({ "lazygit" })
-			end, { desc = "LazyGit" })
-
-			vim.keymap.set({ "n", "t" }, "<M-i>", function()
-				require("lspsaga.floaterm"):open_float_terminal({ "btop" })
-			end, { desc = "Toggle btop" })
-
 			vim.keymap.set("n", "<M-o>", function()
 				require("lspsaga.symbol"):outline()
 			end, { desc = "Lspsaga Outline" })
-
-			-- vim.keymap.set("n", "<M-r>", function()
-			-- 	require("lspsaga.floaterm"):open_float_terminal({ cmd })
-			-- end, { desc = "Code Runner" })
 		end,
 	},
 
