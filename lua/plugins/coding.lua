@@ -115,15 +115,18 @@ return {
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = { { name = "buffer" } },
+				sources = {
+					{ name = "buffer" },
+				},
 			})
 
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
+				sources = cmp.config.sources({
 					{ name = "path" },
+				}, {
 					{ name = "cmdline" },
-				},
+				}),
 			})
 		end,
 	},

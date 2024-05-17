@@ -1,62 +1,62 @@
 return {
 
 	-- colorschemes
-	-- {
-	-- 	"ribru17/bamboo.nvim",
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("bamboo").setup({ transparent = false })
-	-- 		require("bamboo").load()
-	-- 	end,
-	-- },
-
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"ribru17/bamboo.nvim",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				-- flavour = "latte", -- latte, frappe, macchiato, mocha
-				-- transparent_background = true,
-				term_colors = true,
-				dim_inactive = {
-					enabled = true,
-					shade = "dark",
-					percentage = 0.15,
-				},
-				styles = {
-					comments = { "italic" },
-					conditionals = { "italic" },
-					loops = {},
-					functions = {},
-					keywords = {},
-					strings = {},
-					variables = {},
-					numbers = {},
-					booleans = {},
-					properties = {},
-					types = {},
-					operators = {},
-				},
-				integrations = {
-					alpha = false,
-					dap = false,
-					dap_ui = false,
-					diffview = true,
-					lsp_saga = true,
-					markdown = false,
-					neogit = false,
-					nvimtree = false,
-					ufo = false,
-					treesitter_context = false,
-					illuminate = { enabled = false },
-				},
-			})
-
-			-- setup must be called before loading
-			vim.cmd.colorscheme("catppuccin")
+			require("bamboo").setup({ transparent = false })
+			require("bamboo").load()
 		end,
 	},
+
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("catppuccin").setup({
+	-- 			-- flavour = "latte", -- latte, frappe, macchiato, mocha
+	-- 			-- transparent_background = true,
+	-- 			term_colors = true,
+	-- 			dim_inactive = {
+	-- 				enabled = true,
+	-- 				shade = "dark",
+	-- 				percentage = 0.15,
+	-- 			},
+	-- 			styles = {
+	-- 				comments = { "italic" },
+	-- 				conditionals = { "italic" },
+	-- 				loops = {},
+	-- 				functions = {},
+	-- 				keywords = {},
+	-- 				strings = {},
+	-- 				variables = {},
+	-- 				numbers = {},
+	-- 				booleans = {},
+	-- 				properties = {},
+	-- 				types = {},
+	-- 				operators = {},
+	-- 			},
+	-- 			integrations = {
+	-- 				alpha = false,
+	-- 				dap = false,
+	-- 				dap_ui = false,
+	-- 				diffview = true,
+	-- 				lsp_saga = true,
+	-- 				markdown = false,
+	-- 				neogit = false,
+	-- 				nvimtree = false,
+	-- 				ufo = false,
+	-- 				treesitter_context = false,
+	-- 				illuminate = { enabled = false },
+	-- 			},
+	-- 		})
+	--
+	-- 		-- setup must be called before loading
+	-- 		vim.cmd.colorscheme("catppuccin")
+	-- 	end,
+	-- },
 
 	-- better vim.notify
 	{
@@ -246,8 +246,6 @@ return {
 		"nvimdev/dashboard-nvim",
 		opts = {
 			config = {
-				week_header = { enable = true },
-				disable_move = true,
 				shortcut = {
 					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
 					{ desc = "󰀶 Files", group = "Directory", action = "Telescope find_files", key = "f" },
@@ -255,6 +253,12 @@ return {
 				},
 				project = { limit = 4 },
 				mru = { limit = 6, cwd_only = true },
+			},
+			preview = {
+				command = "cat",
+				file_path = vim.fn.stdpath("config") .. "/neovim.cat",
+				file_height = 10,
+				file_width = 70,
 			},
 		},
 	},
