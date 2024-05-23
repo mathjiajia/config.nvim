@@ -4,10 +4,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "folke/neodev.nvim", config = true, ft = { "lua", "vim" } },
 			"mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
+			{ "folke/neodev.nvim", config = true },
 		},
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -33,73 +32,63 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"basedpyright",
-					"clangd",
-					"lua_ls",
-					"texlab",
+			local settings = {
+				basedpyright = {},
+				clangd = {},
+				lua_ls = {
+					Lua = {
+						workspace = { checkThirdParty = false },
+						hint = { enable = true },
+						completion = { callSnippet = "Replace" },
+						telemetry = { enable = false },
+					},
 				},
-				handlers = {
-					function(server_name) -- default handler (optional)
-						require("lspconfig")[server_name].setup({
-							capabilities = capabilities,
-						})
-					end,
-
-					["lua_ls"] = function()
-						require("lspconfig").lua_ls.setup({
-							capabilities = capabilities,
-							settings = {
-								Lua = {
-									workspace = { checkThirdParty = false },
-									hint = { enable = true },
-									completion = { callSnippet = "Replace" },
-									telemetry = { enable = false },
-								},
-							},
-						})
-					end,
-
-					["texlab"] = function()
-						require("lspconfig").texlab.setup({
-							filetypes = { "tex", "bib" },
-							capabilities = capabilities,
-							settings = {
-								texlab = {
-									build = {
-										forwardSearchAfter = false,
-										executable = "latexmk",
-										args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
-										onSave = true,
-									},
-									forwardSearch = {
-										executable = "sioyek",
-										args = {
-											"--reuse-window",
-											"--execute-command",
-											"turn_on_synctex",
-											"--inverse-search",
-											vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
-											"--forward-search-file",
-											"%f",
-											"--forward-search-line",
-											"%l",
-											"%p",
-										},
-										-- executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
-										-- args = { "-r", "%l", "%p", "%f" },
-									},
-									chktex = { onOpenAndSave = false },
-									diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
-									latexFormatter = "none",
-									bibtexFormatter = "latexindent",
-								},
-							},
-						})
-					end,
+				matlab_ls = {
+					MATLAB = {
+						indexWorkspace = true,
+						installPath = "/Applications/MATLAB_R2024a.app",
+						telemetry = false,
+					},
 				},
-			})
+				texlab = {
+					texlab = {
+						build = {
+							forwardSearchAfter = false,
+							executable = "latexmk",
+							args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
+							onSave = true,
+						},
+						forwardSearch = {
+							executable = "sioyek",
+							args = {
+								"--reuse-window",
+								"--execute-command",
+								"turn_on_synctex",
+								"--inverse-search",
+								vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
+								"--forward-search-file",
+								"%f",
+								"--forward-search-line",
+								"%l",
+								"%p",
+							},
+							-- executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+							-- args = { "-r", "%l", "%p", "%f" },
+						},
+						chktex = { onOpenAndSave = false },
+						diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
+						latexFormatter = "none",
+						bibtexFormatter = "latexindent",
+					},
+				},
+			}
+
+			for _, server in pairs(vim.tbl_keys(settings)) do
+				require("lspconfig")[server].setup({
+					capabilities = capabilities,
+					settings = settings[server],
+				})
+			end
 
 			require("lspconfig").sourcekit.setup({
 				filetypes = { "swift", "objective-c", "objective-cpp" },
@@ -111,11 +100,19 @@ return {
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
-		cmd = "Mason",
 		-- dependencies = {
 		-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 		-- 	opts = {
 		-- 		ensure_installed = {
+		-- 			-- lsp
+		-- 			"basedpyright",
+		-- 			"clangd",
+		-- 			"lua-language-server",
+		-- 			"matlab-language-server",
+		-- 			"texlab",
+		-- 			-- dap
+		-- 			"codelldb",
+		-- 			"debugpy",
 		-- 			-- linter
 		-- 			"commitlint",
 		-- 			"markdownlint-cli2",
@@ -162,37 +159,62 @@ return {
 		end,
 	},
 
+	-- formatting
 	{
-		"folke/trouble.nvim",
-		branch = "dev",
-		cmd = { "TroubleToggle", "Trouble" },
-		config = true,
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			-- {
-			-- 	"<leader>cs",
-			-- 	"<cmd>Trouble symbols toggle focus=false<cr>",
-			-- 	desc = "Symbols (Trouble)",
-			-- },
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-		},
+		"stevearc/conform.nvim",
+		dependencies = { "mason.nvim" },
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					bib = { "bibtex-tidy" },
+					c = { "clang-format" },
+					css = { "prettierd" },
+					html = { "prettierd" },
+					javascript = { "prettierd" },
+					json = { "prettierd" },
+					jsonc = { "prettierd" },
+					markdown = { "prettierd" },
+					["markdown.mdx"] = { "prettierd" },
+					yaml = { "prettierd" },
+					fish = { "fish_indent" },
+					lua = { "stylua" },
+					python = { "black" },
+					sh = { "shfmt" },
+					swift = { "swift_format" },
+					tex = { "latexindent" },
+				},
+				format_on_save = {
+					timeout_ms = 3000,
+					lsp_fallback = true,
+				},
+			})
+
+			vim.keymap.set({ "n", "v" }, "<leader>cF", function()
+				require("conform").format({ formatters = { "injected" }, timeout_ms = 2000 })
+			end, { desc = "Format Injected Langs" })
+		end,
+	},
+
+	-- linting
+	{
+		"mfussenegger/nvim-lint",
+		-- ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
+		config = function()
+			local lint = require("lint")
+
+			lint.linters_by_ft = {
+				bash = { "shellcheck" },
+				fish = { "fish" },
+				gitcommit = { "commitlint" },
+				markdown = { "markdownlint-cli2" },
+				zsh = { "shellcheck" },
+			}
+
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					lint.try_lint()
+				end,
+			})
+		end,
 	},
 }

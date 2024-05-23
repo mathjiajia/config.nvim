@@ -101,36 +101,15 @@ autocmd("BufReadPost", {
 
 -- treesitter
 autocmd("FileType", {
-	group = augroup("TreesitterHighlight", {}),
-	pattern = {
-		"bash",
-		"c",
-		"cpp",
-		"css",
-		"diff",
-		"fish",
-		"gitconfig",
-		"gitcommit",
-		"gitignore",
-		"html",
-		"json",
-		"json5",
-		"jsonc",
-		"markdown",
-		"norg",
-		"py",
-		"ruby",
-		"swift",
-		"tex",
-		"toml",
-		"yaml",
-	},
 	callback = function(ev)
-		vim.treesitter.start()
+		if not pcall(vim.treesitter.start, ev.buf) then
+			return
+		end
 
 		vim.opt_local.foldmethod = "expr"
 		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-		vim.b[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+		vim.api.nvim_exec_autocmds("User", { pattern = "ts_attach" })
 	end,
 	desc = "Enable Treesitter",
 })

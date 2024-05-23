@@ -9,7 +9,13 @@ return {
 			require("bamboo").load()
 		end,
 	},
-
+	-- {
+	-- 	"olimorris/onedarkpro.nvim",
+	-- 	priority = 1000, -- Ensure it loads first
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("onedark")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"catppuccin/nvim",
 	-- 	name = "catppuccin",
@@ -79,29 +85,10 @@ return {
 	},
 
 	-- better vim.ui
-	{
-		"stevearc/dressing.nvim",
-		lazy = true,
-		init = function()
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.ui.select = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.select(...)
-			end
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.ui.input = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.input(...)
-			end
-		end,
-	},
+	{ "stevearc/dressing.nvim", config = true },
 
 	-- highlight patterns in text
-	{
-		"brenoprata10/nvim-highlight-colors",
-		event = { "BufReadPost", "BufNewFile" },
-		config = true,
-	},
+	{ "brenoprata10/nvim-highlight-colors", config = true },
 
 	-- winbar
 	{ "Bekaboo/dropbar.nvim", config = true },
@@ -110,7 +97,8 @@ return {
 	{
 		"rebelot/heirline.nvim",
 		dependencies = {
-			"Zeioth/heirline-components.nvim",
+			"brunnseb/heirline-components.nvim",
+			branch = "neovim-11",
 			opts = { icons = { ActiveLSP = "◍" } },
 		},
 		config = function()
@@ -251,8 +239,7 @@ return {
 					{ desc = "󰀶 Files", group = "Directory", action = "Telescope find_files", key = "f" },
 					{ desc = " Quit", group = "String", action = "quitall", key = "q" },
 				},
-				project = { limit = 4 },
-				mru = { limit = 6, cwd_only = true },
+				mru = { cwd_only = true },
 			},
 			preview = {
 				command = "cat",
@@ -279,9 +266,6 @@ return {
 			vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } }
 		end,
 	},
-
-	-- enhanced matchparen
-	{ "lewis6991/nvim-treesitter-pairs" },
 
 	-- icons
 	{ "nvim-tree/nvim-web-devicons", lazy = true },

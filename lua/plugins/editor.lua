@@ -1,27 +1,5 @@
 return {
 
-	-- treesitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		build = ":TSUpdate",
-		opts = {
-			ensure_install = {
-				"bash",
-				"bibtex",
-				"comment",
-				"diff",
-				"latex",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"regex",
-				"vim",
-				"vimdoc",
-			},
-		},
-	},
-
 	-- file explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -33,13 +11,21 @@ return {
 			{ "<leader>be", function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end, desc = "Buffer explorer" },
 		},
 		init = function()
-			if vim.fn.argc() == 1 then
-				---@diagnostic disable-next-line: param-type-mismatch
-				local stat = vim.uv.fs_stat(vim.fn.argv(0))
-				if stat and stat.type == "directory" then
-					require("neo-tree")
-				end
-			end
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
+				desc = "Start Neo-tree with directory",
+				once = true,
+				callback = function()
+					if package.loaded["neo-tree"] then
+						return
+					else
+						local stats = vim.uv.fs_stat(vim.fn.argv(0))
+						if stats and stats.type == "directory" then
+							require("neo-tree")
+						end
+					end
+				end,
+			})
 		end,
 		deactivate = function()
 			require("neo-tree.command").execute({ action = "close" })
@@ -58,6 +44,12 @@ return {
 					expander_expanded = "",
 					expander_highlight = "NeoTreeExpander",
 				},
+				git_status = {
+					symbols = {
+						unstaged = "󰄱",
+						staged = "󰱒",
+					},
+				},
 			},
 		},
 	},
@@ -68,15 +60,13 @@ return {
 		cmd = { "Spectre" },
 		opts = {
 			open_cmd = "noswapfile vnew",
-			default = {
-				replace = { cmd = "sd" },
-			},
+			default = { replace = { cmd = "sd" } },
 		},
 	},
 	{
 		"AckslD/muren.nvim",
 		config = true,
-		cmd = { "MurenToggle", "MurenFresh", "MurenUnique" },
+		-- cmd = { "MurenToggle", "MurenFresh", "MurenUnique" },
 	},
 
 	-- fuzzy finder
@@ -269,6 +259,29 @@ return {
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 			end,
+		},
+	},
+
+	-- better diagnostics list and others
+	{
+		"folke/trouble.nvim",
+		branch = "dev",
+		cmd = { "TroubleToggle", "Trouble" },
+		config = true,
+		keys = {
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			-- {
+			-- 	"<leader>cs",
+			-- 	"<cmd>Trouble symbols toggle focus=false<cr>",
+			-- 	desc = "Symbols (Trouble)",
+			-- },
+			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 		},
 	},
 

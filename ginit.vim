@@ -58,7 +58,7 @@ let g:neovide_confirm_quit = v:true
 
 " Input Settings
 " macOS Alt is Meta
-let g:neovide_input_macos_alt_is_meta = v:true
+let g:neovide_input_macos_option_key_is_meta = 'only_left'
 " IME
 " let g:neovide_input_ime = v:true
 " Touch Deadzone
