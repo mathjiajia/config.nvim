@@ -32,10 +32,6 @@ autocmd("LspAttach", {
 			{ "gi", vim.lsp.buf.implementation, method = methods.textDocument_implementation },
 			{ "<C-k>", vim.lsp.buf.signature_help, method = methods.textDocument_signatureHelp },
 			{ "gt", vim.lsp.buf.type_definition, method = methods.textDocument_typeDefinition },
-			-- to be removed in 0.11
-			{ "<leader>rn", vim.lsp.buf.rename, method = methods.textDocument_rename },
-			{ "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = methods.textDocument_codeAction },
-			{ "gr", vim.lsp.buf.references, method = methods.textDocument_references },
 		}
 
 		for _, keys in ipairs(keymaps) do
@@ -58,19 +54,19 @@ autocmd("LspAttach", {
 			})
 		end
 
-		-- if client and client.supports_method(methods.textDocument_inlayHint) then
-		-- 	vim.lsp.inlay_hint.enable(ev.buf, true)
-		-- end
+		if client and client.supports_method(methods.textDocument_inlayHint) then
+			vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+		end
 
-		-- if client and client.supports_method(methods.textDocument_codeLens) then
-		-- 	vim.lsp.codelens.refresh({ bufnr = ev.buf })
-		-- 	autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-		-- 		group = augroup("lsp_document_codelens", {}),
-		-- 		buffer = ev.buf,
-		-- 		callback = vim.lsp.codelens.refresh,
-		-- 		once = true,
-		-- 	})
-		-- end
+		if client and client.supports_method(methods.textDocument_codeLens) then
+			autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+				group = augroup("lsp_document_codelens", {}),
+				buffer = ev.buf,
+				callback = function()
+					vim.lsp.codelens.refresh({ bufnr = ev.buf })
+				end,
+			})
+		end
 	end,
 })
 

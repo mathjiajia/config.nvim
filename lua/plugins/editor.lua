@@ -1,5 +1,10 @@
 return {
 
+	-- {
+	-- 	"stevearc/oil.nvim",
+	-- 	config = true,
+	-- 	cmd = { "Oil" },
+	-- },
 	-- file explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim",

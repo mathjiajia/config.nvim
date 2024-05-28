@@ -14,3 +14,7 @@ vim.keymap.set({ "n", "t" }, "<M-l>", function() vim.cmd.wincmd("l") end, { desc
 -- buffer
 vim.keymap.set("n", "<leader>bd", function() api.nvim_buf_delete(0, {}) end, { desc = "Delete Buffer" })
 vim.keymap.set("n", "<leader>bD", function() api.nvim_buf_delete(0, { force = true }) end, { desc = "Delete Buffer (force)" })
+
+-- commenting
+vim.keymap.set("n", "gcO", "O<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>", { desc = "Add Comment Above" })
+vim.keymap.set("n", "gco", "o<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>", { desc = "Add Comment Below" })

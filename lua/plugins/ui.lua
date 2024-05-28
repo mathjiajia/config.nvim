@@ -97,8 +97,7 @@ return {
 	{
 		"rebelot/heirline.nvim",
 		dependencies = {
-			"brunnseb/heirline-components.nvim",
-			branch = "neovim-11",
+			"Zeioth/heirline-components.nvim",
 			opts = { icons = { ActiveLSP = "◍" } },
 		},
 		config = function()
