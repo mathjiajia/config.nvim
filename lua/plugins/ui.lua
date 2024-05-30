@@ -88,7 +88,10 @@ return {
 	{ "stevearc/dressing.nvim", config = true },
 
 	-- highlight patterns in text
-	{ "brenoprata10/nvim-highlight-colors", config = true },
+	{
+		"brenoprata10/nvim-highlight-colors",
+		opts = { exclude = { "lazy" } },
+	},
 
 	-- winbar
 	{ "Bekaboo/dropbar.nvim", config = true },

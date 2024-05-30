@@ -24,6 +24,7 @@ return {
 					if package.loaded["neo-tree"] then
 						return
 					else
+						---@diagnostic disable-next-line: param-type-mismatch
 						local stats = vim.uv.fs_stat(vim.fn.argv(0))
 						if stats and stats.type == "directory" then
 							require("neo-tree")
@@ -270,23 +271,15 @@ return {
 	-- better diagnostics list and others
 	{
 		"folke/trouble.nvim",
-		branch = "dev",
 		cmd = { "TroubleToggle", "Trouble" },
 		config = true,
+		-- stylua: ignore
 		keys = {
-			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			-- {
-			-- 	"<leader>cs",
-			-- 	"<cmd>Trouble symbols toggle focus=false<cr>",
-			-- 	desc = "Symbols (Trouble)",
-			-- },
-			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+			{ "<leader>xx", function() require("trouble").toggle("diagnostics") end, desc = "Diagnostics (Trouble)" },
+			{ "<leader>xX", function() require("trouble").toggle({ mode = "diagnostics", filter = { buf = 0 } }) end, desc = "Buffer Diagnostics (Trouble)" },
+			{ "<leader>cl", function() require("trouble").toggle({ mode = "lsp", focus = false }) end, desc = "LSP Definitions / references / ... (Trouble)" },
+			{ "<leader>xl", function() require("trouble").toggle("loclist") end, desc = "Location List (Trouble)" },
+			{ "<leader>xq", function() require("trouble").toggle("qflist") end, desc = "Quickfix List (Trouble)" },
 		},
 	},
 
@@ -334,8 +327,8 @@ return {
 		-- stylua: ignore
 		keys = {
 			{ "<leader>gd", function() require("diffview").open({}) end, desc = "Open Diffview" },
-			{ "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
-			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Close Diffview" },
+			{ "<leader>gc", function() require("diffview").close() end, desc = "Close Diffview" },
+			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Diffview File History" },
 		},
 	},
 

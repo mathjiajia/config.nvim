@@ -11,9 +11,6 @@ return {
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
-			-- diagnostic keymaps
-			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Loclist Diagnostics" })
-
 			-- diagnostics config
 			vim.diagnostic.config({
 				virtual_text = { spacing = 4, prefix = "●" },

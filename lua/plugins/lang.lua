@@ -10,9 +10,8 @@ return {
 	{
 		"MeanderingProgrammer/markdown.nvim",
 		ft = "markdown",
-		config = function()
-			require("render-markdown").setup({})
-		end,
+		main = "render-markdown",
+		config = true,
 	},
 
 	-- swift
