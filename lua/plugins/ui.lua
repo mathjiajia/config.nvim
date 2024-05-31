@@ -90,7 +90,7 @@ return {
 	-- highlight patterns in text
 	{
 		"brenoprata10/nvim-highlight-colors",
-		opts = { exclude = { "lazy" } },
+		opts = { exclude_buftypes = { "nofile" } },
 	},
 
 	-- winbar

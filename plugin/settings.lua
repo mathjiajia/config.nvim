@@ -57,7 +57,6 @@ opt.softtabstop = 4
 -- 14 folding
 opt.foldlevel = 99
 opt.foldtext = " "
--- opt.foldcolumn = "auto"
 
 -- 15 diff mode
 opt.diffopt:append({ linematch = 60 })
@@ -84,3 +83,7 @@ opt.updatetime = 200
 -- 24 various
 opt.virtualedit = "block"
 opt.signcolumn = "yes"
+
+-- Remove "How-to disable mouse" from right-click menu
+pcall(vim.cmd.aunmenu, [[PopUp.How-to\ disable\ mouse]])
+pcall(vim.cmd.aunmenu, [[PopUp.-1-]])

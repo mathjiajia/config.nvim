@@ -47,6 +47,7 @@ return {
 						telemetry = false,
 					},
 				},
+				taplo = {},
 				texlab = {
 					texlab = {
 						build = {
@@ -106,6 +107,7 @@ return {
 		-- 			"clangd",
 		-- 			"lua-language-server",
 		-- 			"matlab-language-server",
+		-- 			"taplo",
 		-- 			"texlab",
 		-- 			-- dap
 		-- 			"codelldb",
@@ -174,6 +176,7 @@ return {
 					sh = { "shfmt" },
 					swift = { "swift_format" },
 					tex = { "latexindent" },
+					toml = { "taplo" },
 				},
 				format_on_save = {
 					timeout_ms = 3000,
