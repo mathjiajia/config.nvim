@@ -36,6 +36,7 @@ return {
 					Lua = {
 						workspace = { checkThirdParty = false },
 						hint = { enable = true },
+						codeLens = { enable = true },
 						completion = { callSnippet = "Replace" },
 						telemetry = { enable = false },
 					},

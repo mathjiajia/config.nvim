@@ -41,14 +41,11 @@ autocmd("LspAttach", {
 		end
 
 		if client and client.supports_method(methods.textDocument_documentHighlight) then
-			local group = augroup("lsp_document_highlight", {})
 			autocmd({ "CursorHold", "CursorHoldI" }, {
-				group = group,
 				buffer = ev.buf,
 				callback = vim.lsp.buf.document_highlight,
 			})
 			autocmd("CursorMoved", {
-				group = group,
 				buffer = ev.buf,
 				callback = vim.lsp.buf.clear_references,
 			})
@@ -59,8 +56,8 @@ autocmd("LspAttach", {
 		end
 
 		if client and client.supports_method(methods.textDocument_codeLens) then
+			vim.lsp.codelens.refresh({ bufnr = ev.buf })
 			autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-				group = augroup("lsp_document_codelens", {}),
 				buffer = ev.buf,
 				callback = function()
 					vim.lsp.codelens.refresh({ bufnr = ev.buf })
