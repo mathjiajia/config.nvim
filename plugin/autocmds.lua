@@ -23,7 +23,7 @@ autocmd("TextYankPost", {
 autocmd("LspAttach", {
 	group = augroup("UserLspConfig", {}),
 	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 		local methods = vim.lsp.protocol.Methods
 
 		local keymaps = {
@@ -35,12 +35,12 @@ autocmd("LspAttach", {
 		}
 
 		for _, keys in ipairs(keymaps) do
-			if client and client.supports_method(keys.method) then
+			if client.supports_method(keys.method) then
 				vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = ev.buf, desc = keys.method })
 			end
 		end
 
-		if client and client.supports_method(methods.textDocument_documentHighlight) then
+		if client.supports_method(methods.textDocument_documentHighlight) then
 			autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = ev.buf,
 				callback = vim.lsp.buf.document_highlight,
@@ -51,18 +51,8 @@ autocmd("LspAttach", {
 			})
 		end
 
-		if client and client.supports_method(methods.textDocument_inlayHint) then
+		if client.supports_method(methods.textDocument_inlayHint) then
 			vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
-		end
-
-		if client and client.supports_method(methods.textDocument_codeLens) then
-			vim.lsp.codelens.refresh({ bufnr = ev.buf })
-			autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-				buffer = ev.buf,
-				callback = function()
-					vim.lsp.codelens.refresh({ bufnr = ev.buf })
-				end,
-			})
 		end
 	end,
 })

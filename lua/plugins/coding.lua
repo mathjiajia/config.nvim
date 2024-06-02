@@ -105,20 +105,18 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip", option = { show_autosnippets = true } },
-					-- { name = "neorg", ft = "norg" },
 					{ name = "path" },
 				}, {
 					{ name = "copilot", max_item_count = 2 },
 					{ name = "buffer" },
-					{ name = "rg", keyword_length = 3 },
+				}, {
+					{ name = "rg", keyword_length = 2 },
 				}),
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
+				sources = { { name = "buffer" } },
 			})
 
 			cmp.setup.cmdline(":", {
@@ -137,26 +135,15 @@ return {
 		"zbirenbaum/copilot.lua",
 		build = ":Copilot auth",
 		cmd = "Copilot",
-		dependencies = {
-			"zbirenbaum/copilot-cmp",
-			config = true,
-		},
+		dependencies = { "zbirenbaum/copilot-cmp", config = true },
 		opts = {
 			suggestion = { enabled = false },
 			panel = { enabled = false },
-			filetypes = {
-				markdown = true,
-				help = true,
-			},
 		},
 	},
 
 	-- auto pairs
-	{
-		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		config = true,
-	},
+	{ "altermo/ultimate-autopair.nvim", event = { "InsertEnter", "CmdlineEnter" }, config = true },
 
 	-- surround
 	{

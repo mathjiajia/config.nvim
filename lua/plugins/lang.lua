@@ -1,18 +1,18 @@
 return {
 
 	-- filesype plugin for `LaTeX`
-	{
-		"mathjiajia/latex.nvim",
-		ft = "tex",
-		config = true,
-	},
+	{ "mathjiajia/latex.nvim", ft = "tex", config = true },
 
+	-- viewing Markdown files in Neovim
+	{ "MeanderingProgrammer/markdown.nvim", ft = "markdown", main = "render-markdown", config = true },
+
+	-- Faster LuaLS setup for Neovim
 	{
-		"MeanderingProgrammer/markdown.nvim",
-		ft = "markdown",
-		main = "render-markdown",
-		config = true,
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = { library = { "/luvit-meta/library" } },
 	},
+	{ "Bilal2453/luvit-meta", lazy = true },
 
 	-- swift
 	-- {

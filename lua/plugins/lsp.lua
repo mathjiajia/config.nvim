@@ -3,11 +3,7 @@ return {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			"mason.nvim",
-			"hrsh7th/cmp-nvim-lsp",
-			{ "folke/neodev.nvim", config = true },
-		},
+		dependencies = { "mason.nvim" },
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -36,7 +32,6 @@ return {
 					Lua = {
 						workspace = { checkThirdParty = false },
 						hint = { enable = true },
-						codeLens = { enable = true },
 						completion = { callSnippet = "Replace" },
 						telemetry = { enable = false },
 					},

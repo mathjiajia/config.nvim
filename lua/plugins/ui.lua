@@ -5,10 +5,17 @@ return {
 		"ribru17/bamboo.nvim",
 		priority = 1000,
 		config = function()
-			require("bamboo").setup({ transparent = false })
+			require("bamboo").setup({ transparent = true })
 			require("bamboo").load()
 		end,
 	},
+	-- {
+	-- 	"Mofiqul/vscode.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("vscode")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"olimorris/onedarkpro.nvim",
 	-- 	priority = 1000, -- Ensure it loads first
