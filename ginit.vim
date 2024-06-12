@@ -24,7 +24,9 @@ let g:neovide_window_blurred = v:true
 " let g:neovide_light_angle_degrees = 45
 " let g:neovide_light_radius = 5
 " Transparency
-" let g:neovide_transparency = 0.8
+let g:neovide_transparency = 0
+let g:transparency = 0.2
+let g:neovide_background_color = '#252623'.printf('%x', float2nr(255 * g:transparency))
 " Show Border (Currently macOS only)
 let g:neovide_show_border = v:false
 " Scroll Animation Length

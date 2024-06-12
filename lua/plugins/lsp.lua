@@ -71,8 +71,6 @@ return {
 						},
 						chktex = { onOpenAndSave = false },
 						diagnostics = { ignoredPatterns = { "^Overfull", "^Underfull" } },
-						latexFormatter = "none",
-						bibtexFormatter = "latexindent",
 					},
 				},
 			}
@@ -116,6 +114,7 @@ return {
 		-- 			"bibtex-tidy",
 		-- 			"black",
 		-- 			"clang-format",
+		-- 			"latexindent",
 		-- 			"prettierd",
 		-- 			"shfmt",
 		-- 			"stylua",

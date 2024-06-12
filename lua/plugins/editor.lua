@@ -24,7 +24,7 @@ return {
 					if package.loaded["neo-tree"] then
 						return
 					else
-						local stats = vim.uv.fs_stat(vim.fn.argv(0))
+						local stats = vim.uv.fs_stat(vim.fn.argv(0) --[[@as string]])
 						if stats and stats.type == "directory" then
 							require("neo-tree")
 						end
@@ -61,19 +61,20 @@ return {
 
 	-- search/replace in multiple files
 	{
-		"nvim-pack/nvim-spectre",
-		cmd = { "Spectre" },
-		opts = {
-			open_cmd = "noswapfile vnew",
-			default = { replace = { cmd = "sd" } },
-		},
-	},
-	{
-		"AckslD/muren.nvim",
+		"MagicDuck/grug-far.nvim",
+		cmd = { "GrugFar" },
 		config = true,
-		-- cmd = { "MurenToggle", "MurenFresh", "MurenUnique" },
 	},
 
+	-- {
+	-- 	"ibhagwan/fzf-lua",
+	-- 	-- optional for icon support
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	config = function()
+	-- 		-- calling `setup` is optional for customization
+	-- 		require("fzf-lua").setup({})
+	-- 	end,
+	-- },
 	-- fuzzy finder
 	{
 		"nvim-telescope/telescope.nvim",

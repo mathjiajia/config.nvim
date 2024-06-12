@@ -54,6 +54,8 @@ autocmd("LspAttach", {
 		if client.supports_method(methods.textDocument_inlayHint) then
 			vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 		end
+
+		-- vim.lsp.completion.enable(true, ev.data.client_id, 0, { autotrigger = true })
 	end,
 })
 
@@ -100,7 +102,7 @@ autocmd("FileType", {
 -- No buflist for special files
 autocmd("FileType", {
 	group = augroup("NoBufList", {}),
-	pattern = { "checkhealth", "help", "qf", "spectre_panel" },
+	pattern = { "checkhealth", "help", "qf", "grug-far" },
 	callback = function(ev)
 		vim.b[ev.buf].buflisted = false
 		vim.keymap.set("n", "q", function()
