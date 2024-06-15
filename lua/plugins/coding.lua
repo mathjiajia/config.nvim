@@ -5,7 +5,6 @@ return {
 		"L3MON4D3/LuaSnip",
 		lazy = true,
 		build = "make install_jsregexp",
-		-- commit = "8f3d3465ba5c7ade0a8adb41eca5736f291a3fa8",
 		dependencies = {
 			"mathjiajia/mySnippets",
 			opts = { path = "~/Projects/mySnippets/snippets" },
