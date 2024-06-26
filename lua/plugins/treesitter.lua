@@ -2,11 +2,11 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
+		-- branch = "main",
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter").setup({
-				ensure_install = {
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
 					"bash",
 					"bibtex",
 					"comment",
@@ -18,20 +18,22 @@ return {
 					"markdown",
 					"markdown_inline",
 					"matlab",
+					"norg",
 					"python",
 					"query",
 					"regex",
 					"vim",
 					"vimdoc",
 				},
+				highlight = { enable = true },
 			})
 
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "ts_attach",
-				callback = function()
-					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("User", {
+			-- 	pattern = "ts_attach",
+			-- 	callback = function()
+			-- 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			-- 	end,
+			-- })
 		end,
 	},
 

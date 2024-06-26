@@ -199,7 +199,6 @@ return {
 	-- noicer ui
 	{
 		"folke/noice.nvim",
-		event = { "VeryLazy" },
 		opts = {
 			lsp = {
 				override = {
@@ -276,7 +275,4 @@ return {
 
 	-- icons
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
-
-	-- ui components
-	{ "MunifTanjim/nui.nvim", lazy = true },
 }

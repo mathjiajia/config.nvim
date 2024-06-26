@@ -20,6 +20,25 @@ return {
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{ "justinsgithub/wezterm-types", lazy = true },
 
+	-- neorg
+	{
+		"nvim-neorg/neorg",
+		ft = "norg",
+		opts = {
+			load = {
+				["core.defaults"] = {},
+				["core.concealer"] = {},
+				["core.completion"] = { config = { engine = "nvim-cmp" } },
+				["core.dirman"] = {
+					config = {
+						workspaces = { notes = "~/Documents/neorg/notes" },
+						default_workspace = "notes",
+					},
+				},
+			},
+		},
+	},
+
 	-- swift
 	-- {
 	-- 	"dimaportenko/telescope-simulators.nvim",

@@ -108,6 +108,7 @@ return {
 				}, {
 					{ name = "copilot", max_item_count = 2 },
 					{ name = "buffer" },
+					{ name = "neorg" },
 				}, {
 					{ name = "rg", keyword_length = 2 },
 				}),

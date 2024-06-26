@@ -43,7 +43,6 @@ return {
 						telemetry = false,
 					},
 				},
-				taplo = {},
 				texlab = {
 					texlab = {
 						build = {
@@ -101,7 +100,6 @@ return {
 		-- 			"clangd",
 		-- 			"lua-language-server",
 		-- 			"matlab-language-server",
-		-- 			"taplo",
 		-- 			"texlab",
 		-- 			-- dap
 		-- 			"codelldb",
@@ -165,13 +163,11 @@ return {
 					markdown = { "prettierd" },
 					["markdown.mdx"] = { "prettierd" },
 					yaml = { "prettierd" },
-					fish = { "fish_indent" },
 					lua = { "stylua" },
 					python = { "black" },
 					sh = { "shfmt" },
 					swift = { "swift_format" },
 					tex = { "latexindent" },
-					toml = { "taplo" },
 				},
 				format_on_save = {
 					timeout_ms = 3000,
@@ -188,13 +184,12 @@ return {
 	-- linting
 	{
 		"mfussenegger/nvim-lint",
-		-- ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
+		ft = { "bash", "gitcommit", "markdown", "zsh" },
 		config = function()
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
 				bash = { "shellcheck" },
-				fish = { "fish" },
 				gitcommit = { "commitlint" },
 				markdown = { "markdownlint-cli2" },
 				zsh = { "shellcheck" },
