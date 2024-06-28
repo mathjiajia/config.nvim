@@ -199,6 +199,7 @@ return {
 	-- noicer ui
 	{
 		"folke/noice.nvim",
+		event = { "VeryLazy" },
 		opts = {
 			lsp = {
 				override = {
@@ -239,6 +240,8 @@ return {
 		"nvimdev/dashboard-nvim",
 		opts = {
 			config = {
+				week_header = { enable = true },
+				disable_move = true,
 				-- stylua: ignore
 				shortcut = {
 					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
@@ -247,12 +250,12 @@ return {
 				},
 				mru = { cwd_only = true },
 			},
-			preview = {
-				command = "cat",
-				file_path = vim.fn.stdpath("config") .. "/neovim.cat",
-				file_height = 10,
-				file_width = 70,
-			},
+			-- preview = {
+			-- 	command = "cat",
+			-- 	file_path = vim.fn.stdpath("config") .. "/neovim.cat",
+			-- 	file_height = 10,
+			-- 	file_width = 70,
+			-- },
 		},
 	},
 
