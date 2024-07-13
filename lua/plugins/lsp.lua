@@ -47,9 +47,11 @@ return {
 					texlab = {
 						build = {
 							forwardSearchAfter = false,
-							executable = "latexmk",
 							args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
 							onSave = true,
+							auxDirectory = "./build",
+							logDirectory = "./build",
+							pdfDirectory = "./build",
 						},
 						forwardSearch = {
 							executable = "sioyek",

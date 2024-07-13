@@ -1,11 +1,12 @@
 set termguicolors
+set autochdir
 
 nmap <D-s> :w<cr>
 imap <D-s> <Esc>:w<cr>	
 
 " Display
 " Line spacing
-" set linespace=0
+set linespace=10
 " Scale
 " let g:neovide_scale_factor = 1.0
 " Padding

@@ -28,6 +28,9 @@ return {
 			load = {
 				["core.defaults"] = {},
 				["core.concealer"] = {},
+				["core.highlights"] = {},
+				["core.mode"] = {},
+				["core.integrations.treesitter"] = {},
 				["core.completion"] = { config = { engine = "nvim-cmp" } },
 				["core.dirman"] = {
 					config = {
