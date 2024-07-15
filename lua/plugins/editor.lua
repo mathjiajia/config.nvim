@@ -71,15 +71,6 @@ return {
 		config = true,
 	},
 
-	-- {
-	-- 	"ibhagwan/fzf-lua",
-	-- 	-- optional for icon support
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	config = function()
-	-- 		-- calling `setup` is optional for customization
-	-- 		require("fzf-lua").setup({})
-	-- 	end,
-	-- },
 	-- fuzzy finder
 	{
 		"nvim-telescope/telescope.nvim",
@@ -92,7 +83,6 @@ return {
 			{ "<leader>fc", function () require('telescope.builtin').find_files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 			{ "<leader>ff", function () require('telescope.builtin').find_files() end, desc = "Find Files (cwd)" },
 			{ "<leader>fg", function () require('telescope.builtin').git_files() end, desc = "Find Git Files" },
-			{ "<leader>fm", function () require('telescope.builtin').builtin() end, desc = "Telescope Meta" },
 			-- search
 			{ "<leader>sb", function () require('telescope.builtin').current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy" },
 			{ "<leader>sg", function () require('telescope.builtin').live_grep() end, desc = "Live Grep" },
@@ -307,43 +297,5 @@ return {
 		},
 	    -- stylua: ignore
 	    keys = { { "<leader>cs", function() require("aerial").toggle() end, desc = "Aerial (Symbols)" } },
-	},
-
-	-- diffview
-	{
-		"sindrets/diffview.nvim",
-		opts = {
-			enhanced_diff_hl = true,
-			hooks = {
-				diff_buf_read = function()
-					vim.wo.wrap = false
-					vim.wo.list = false
-					vim.wo.colorcolumn = "80"
-					vim.wo.winbar = ""
-				end,
-			},
-		},
-		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-		-- stylua: ignore
-		keys = {
-			{ "<leader>gd", function() require("diffview").open({}) end, desc = "Open Diffview" },
-			{ "<leader>gc", function() require("diffview").close() end, desc = "Close Diffview" },
-			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Diffview File History" },
-		},
-	},
-
-	-- speed up choosing ours/theres when resolving diffs
-	{
-		"akinsho/git-conflict.nvim",
-		opts = { default_mappings = false },
-		cmd = {
-			"GitConflictChooseOurs",
-			"GitConflictChooseTheirs",
-			"GitConflictChooseBoth",
-			"GitConflictChooseNone",
-			"GitConflictNextConflict",
-			"GitConflictPrevConflict",
-			"GitConflictListQf",
-		},
 	},
 }
