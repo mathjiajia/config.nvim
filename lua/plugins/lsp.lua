@@ -153,6 +153,7 @@ return {
 		"stevearc/conform.nvim",
 		dependencies = { "mason.nvim" },
 		config = function()
+			require("conform").formatters.latexindent = { args = { "-g", "/dev/null" } }
 			require("conform").setup({
 				formatters_by_ft = {
 					bib = { "bibtex-tidy" },

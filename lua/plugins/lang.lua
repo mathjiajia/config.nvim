@@ -4,7 +4,11 @@ return {
 	{ "mathjiajia/latex.nvim", ft = "tex", config = true },
 
 	-- viewing Markdown files in Neovim
-	{ "MeanderingProgrammer/markdown.nvim", ft = "markdown", main = "render-markdown", config = true },
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = "markdown",
+		opts = { latex = { enabled = false } },
+	},
 
 	-- Faster LuaLS setup for Neovim
 	{

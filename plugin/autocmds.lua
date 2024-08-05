@@ -100,8 +100,9 @@ autocmd("BufReadPost", {
 -- })
 
 -- No buflist for special files
+-- close some filetypes with <q>
 autocmd("FileType", {
-	group = augroup("NoBufList", {}),
+	group = augroup("SpecialFiles", {}),
 	pattern = { "checkhealth", "help", "qf", "grug-far" },
 	callback = function(ev)
 		vim.b[ev.buf].buflisted = false
