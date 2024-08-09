@@ -136,9 +136,11 @@ return {
 		build = ":Copilot auth",
 		cmd = "Copilot",
 		dependencies = { "zbirenbaum/copilot-cmp", config = true },
+		---@module "copilot"
+		---@class copilot_config
 		opts = {
-			suggestion = { enabled = false },
 			panel = { enabled = false },
+			suggestion = { enabled = false },
 		},
 	},
 
