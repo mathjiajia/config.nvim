@@ -81,23 +81,27 @@ return {
 				},
 				formatting = {
 					expandable_indicator = true,
-					fields = { "abbr", "kind", "menu" },
+					fields = { "abbr", "menu", "kind" },
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
 						preset = "codicons",
-						maxwidth = 50,
+						maxwidth = 30,
 						ellipsis_char = "…",
 						menu = {
-							buffer = "Buffer",
-							cmdline = "Cmd",
-							nvim_lsp = "Lsp",
-							luasnip = "Snippet",
-							neorg = "Norg",
-							copilot = "Copilot",
-							path = "Path",
-							rg = "RG",
+							buffer = "[Buffer]",
+							cmdline = "[Cmd]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[Snip]",
+							neorg = "[Norg]",
+							copilot = "[Copilot]",
+							path = "[Path]",
+							rg = "[RG]",
 						},
 					}),
+				},
+				window = {
+					completion = { border = "rounded", col_offset = -1 },
+					documentation = { border = "rounded" },
 				},
 				---@diagnostic disable-next-line: missing-fields
 				matching = { disallow_prefix_unmatching = true },
@@ -136,9 +140,11 @@ return {
 		build = ":Copilot auth",
 		cmd = "Copilot",
 		dependencies = { "zbirenbaum/copilot-cmp", config = true },
+		---@module "copilot"
+		---@class copilot_config
 		opts = {
-			suggestion = { enabled = false },
 			panel = { enabled = false },
+			suggestion = { enabled = false },
 		},
 	},
 

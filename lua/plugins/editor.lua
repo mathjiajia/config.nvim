@@ -67,6 +67,9 @@ return {
 	-- search/replace in multiple files
 	{
 		"MagicDuck/grug-far.nvim",
+		---@module "grug-far"
+		---@type GrugFarOptions
+		---@diagnostic disable-next-line: missing-fields
 		opts = { headerMaxWidth = 80 },
 		cmd = "GrugFar",
 		keys = {
@@ -220,6 +223,9 @@ return {
 	-- git signs
 	{
 		"lewis6991/gitsigns.nvim",
+		---@module "gitsigns"
+		---@type Gitsigns.Config
+		---@diagnostic disable-next-line: missing-fields
 		opts = {
 			preview_config = { border = "rounded" },
 			on_attach = function(bufnr)
@@ -270,18 +276,21 @@ return {
 		},
 	},
 
-	-- better diagnostics list and others
 	{
-		"folke/trouble.nvim",
-		cmd = { "TroubleToggle", "Trouble" },
-		config = true,
+		"stevearc/quicker.nvim",
+		---@module "quicker"
+		---@type quicker.SetupOptions
+		opts = {
+			-- stylua: ignore
+			keys = {
+				{ ">", function() require("quicker").expand({ before = 2, after = 2, add_to_existing = true }) end, desc = "Expand quickfix context" },
+				{ "<", function() require("quicker").collapse() end, desc = "Collapse quickfix context" },
+			},
+		},
 		-- stylua: ignore
 		keys = {
-			{ "<leader>xx", function() require("trouble").toggle("diagnostics") end, desc = "Diagnostics (Trouble)" },
-			{ "<leader>xX", function() require("trouble").toggle({ mode = "diagnostics", filter = { buf = 0 } }) end, desc = "Buffer Diagnostics (Trouble)" },
-			{ "<leader>cl", function() require("trouble").toggle({ mode = "lsp", focus = false }) end, desc = "LSP Definitions / references / ... (Trouble)" },
-			{ "<leader>xl", function() require("trouble").toggle("loclist") end, desc = "Location List (Trouble)" },
-			{ "<leader>xq", function() require("trouble").toggle("qflist") end, desc = "Quickfix List (Trouble)" },
+			{ "<leader>q", function() require("quicker").toggle() end, desc = "Toggle quickfix" },
+			{ "<leader>l", function() require("quicker").toggle({ loclist = true }) end, desc = "Toggle loclist" },
 		},
 	},
 

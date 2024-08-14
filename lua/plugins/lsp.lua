@@ -163,6 +163,7 @@ return {
 					javascript = { "prettierd" },
 					json = { "prettierd" },
 					jsonc = { "prettierd" },
+					fish = { "fish_indent" },
 					markdown = { "prettierd" },
 					["markdown.mdx"] = { "prettierd" },
 					yaml = { "prettierd" },
@@ -187,12 +188,13 @@ return {
 	-- linting
 	{
 		"mfussenegger/nvim-lint",
-		ft = { "bash", "gitcommit", "markdown", "zsh" },
+		ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
 		config = function()
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
 				bash = { "shellcheck" },
+				fish = { "fish" },
 				gitcommit = { "commitlint" },
 				markdown = { "markdownlint-cli2" },
 				zsh = { "shellcheck" },
