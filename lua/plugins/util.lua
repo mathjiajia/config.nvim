@@ -44,9 +44,14 @@ return {
 
 	-- session management
 	{
-		"glepnir/dbsession.nvim",
-		cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
-		config = true,
+		"stevearc/resession.nvim",
+		opts = {},
+		-- stylua: ignore
+		keys = {
+			{ "<leader>ss", function() require("resession").save() end, desc = "Save Session" },
+			{ "<leader>sl", function() require("resession").load() end, desc = "Load Session" },
+			{ "<leader>sd", function() require("resession").delete() end, desc = "Delete Session" },
+		},
 	},
 
 	-- code runner

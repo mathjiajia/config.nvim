@@ -47,15 +47,6 @@ return {
 		},
 	},
 
-	-- swift
-	-- {
-	-- 	"dimaportenko/telescope-simulators.nvim",
-	-- 	ft = "swift",
-	-- 	config = function()
-	-- 		require("simulators").setup()
-	-- 	end,
-	-- },
-
 	-- {
 	-- 	"HakonHarnes/img-clip.nvim",
 	-- 	ft = { "markdown", "tex", "typst" },

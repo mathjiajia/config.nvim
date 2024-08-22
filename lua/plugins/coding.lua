@@ -61,11 +61,9 @@ return {
 			"hrsh7th/cmp-path",
 			"lukas-reineke/cmp-rg",
 			"saadparwaiz1/cmp_luasnip",
-			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
-			local lspkind = require("lspkind")
 
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
@@ -82,22 +80,25 @@ return {
 				formatting = {
 					expandable_indicator = true,
 					fields = { "abbr", "menu", "kind" },
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						preset = "codicons",
-						maxwidth = 30,
-						ellipsis_char = "…",
-						menu = {
+					format = function(entry, item)
+						local maxwidth = 30
+						local icon = require("mini.icons").get("lsp", item.kind)
+
+						if vim.fn.strchars(item.abbr) > maxwidth then
+							item.abbr = vim.fn.strcharpart(item.abbr, 0, maxwidth) .. "…"
+						end
+						item.menu = ({
 							buffer = "[Buffer]",
 							cmdline = "[Cmd]",
 							nvim_lsp = "[LSP]",
 							luasnip = "[Snip]",
 							neorg = "[Norg]",
-							copilot = "[Copilot]",
 							path = "[Path]",
 							rg = "[RG]",
-						},
-					}),
+						})[entry.source.name]
+						item.kind = icon .. " " .. item.kind
+						return item
+					end,
 				},
 				window = {
 					completion = { border = "rounded", col_offset = -1 },
