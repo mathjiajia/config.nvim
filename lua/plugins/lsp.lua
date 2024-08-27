@@ -43,6 +43,7 @@ return {
 						telemetry = false,
 					},
 				},
+				taplo = {},
 				texlab = {
 					texlab = {
 						build = {
@@ -127,26 +128,26 @@ return {
 	},
 
 	-- lsp enhancement
-	{
-		"nvimdev/lspsaga.nvim",
-		event = { "LspAttach" },
-		config = function()
-			require("lspsaga").setup({
-				symbol_in_winbar = { enable = false },
-				lightbulb = { enable = false },
-				outline = { auto_preview = false },
-				floaterm = { height = 1, width = 1 },
-			})
-
-			vim.keymap.set("n", "gh", function()
-				require("lspsaga.finder"):new({})
-			end, { desc = "Lsp Finder" })
-
-			vim.keymap.set("n", "<M-o>", function()
-				require("lspsaga.symbol"):outline()
-			end, { desc = "Lspsaga Outline" })
-		end,
-	},
+	-- {
+	-- 	"nvimdev/lspsaga.nvim",
+	-- 	event = { "LspAttach" },
+	-- 	config = function()
+	-- 		require("lspsaga").setup({
+	-- 			symbol_in_winbar = { enable = false },
+	-- 			lightbulb = { enable = false },
+	-- 			outline = { auto_preview = false },
+	-- 			floaterm = { height = 1, width = 1 },
+	-- 		})
+	--
+	-- 		vim.keymap.set("n", "gh", function()
+	-- 			require("lspsaga.finder"):new({})
+	-- 		end, { desc = "Lsp Finder" })
+	--
+	-- 		vim.keymap.set("n", "<M-o>", function()
+	-- 			require("lspsaga.symbol"):outline()
+	-- 		end, { desc = "Lspsaga Outline" })
+	-- 	end,
+	-- },
 
 	-- formatting
 	{
@@ -172,6 +173,7 @@ return {
 					sh = { "shfmt" },
 					swift = { "swift_format" },
 					tex = { "latexindent" },
+					toml = { "taplo" },
 				},
 				format_on_save = {
 					timeout_ms = 3000,
