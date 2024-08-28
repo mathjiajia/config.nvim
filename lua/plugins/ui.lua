@@ -1,25 +1,26 @@
 return {
 
 	-- colorschemes
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("tokyonight").setup({
-	-- 			style = "storm",
-	-- 			transparent = true,
-	-- 		})
-	-- 		vim.cmd.colorscheme("tokyonight")
-	-- 	end,
-	-- },
 	{
-		"ribru17/bamboo.nvim",
+		"folke/tokyonight.nvim",
 		priority = 1000,
 		config = function()
-			require("bamboo").setup({ transparent = true })
-			require("bamboo").load()
+			require("tokyonight").setup({
+				style = "night",
+				transparent = true,
+				terminal_colors = false,
+			})
+			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
+	-- {
+	-- 	"ribru17/bamboo.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("bamboo").setup({ transparent = true })
+	-- 		require("bamboo").load()
+	-- 	end,
+	-- },
 
 	-- better vim.notify
 	{

@@ -11,41 +11,32 @@ see [mysnippets]
 ```txt
 ├── LICENSE
 ├── README.md
-├── after
-│   ├── ftplugin
-│   │   ├── lua.lua
-│   │   └── tex.lua
-│   └── plugin
-│       ├── autocmds.lua
-│       └── keymaps.lua
 ├── ginit.vim
 ├── init.lua
 ├── lazy-lock.json
 ├── lua
-│   ├── config
-│   │   ├── lazyinit.lua
-│   │   └── options.lua
 │   └── plugins
 │       ├── coding.lua
+│       ├── dap.lua
 │       ├── editor.lua
-│       ├── formatting.lua
 │       ├── lang.lua
-│       ├── linting.lua
 │       ├── lsp.lua
+│       ├── treesitter.lua
 │       ├── ui.lua
 │       └── util.lua
 ├── neovim.cat
-├── spell
-│   ├── en.utf-8.add
-│   └── en.utf-8.add.spl
-└── stylua.toml
+├── plugin
+│   ├── autocmds.lua
+│   ├── keymaps.lua
+│   └── options.lua
+└── spell
+    ├── en.utf-8.add
+    └── en.utf-8.add.spl
 ```
 
 - `init.lua` -- entrance of the configuration
-- `lua/config` -- configuration files
 - `lua/plugins` -- submodules for different plugins
-- `after/ftplugin` -- individual file type settings
-- `after/plugin` -- some plugins no need to load early
+- `plugin` -- autocmds, keymaps, options
 
 [mysnippets]: https://github.com/mathjiajia/mySnippets
 
