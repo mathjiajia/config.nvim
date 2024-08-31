@@ -30,7 +30,6 @@ return {
 		---@module "notify"
 		---@class notify.Config
 		opts = {
-			-- background_colour = "#000000",
 			max_height = function()
 				return math.floor(vim.o.lines * 0.75)
 			end,
@@ -62,15 +61,7 @@ return {
 	-- statusline
 	{
 		"sschleemilch/slimline.nvim",
-		opts = {
-			verbose_mode = true,
-			style = "fg",
-			hl = {
-				base = "StatusLine",
-				primary = "StatusLine",
-				secondary = "StatusLine",
-			},
-		},
+		opts = { verbose_mode = true },
 	},
 
 	-- indent guides for Neovim
@@ -157,7 +148,6 @@ return {
 		opts = {
 			config = {
 				week_header = { enable = true },
-				disable_move = true,
 				-- stylua: ignore
 				shortcut = {
 					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
@@ -167,12 +157,6 @@ return {
 				project = { action = "FzfLua files cwd=" },
 				mru = { cwd_only = true },
 			},
-			-- preview = {
-			-- 	command = "cat",
-			-- 	file_path = vim.fn.stdpath("config") .. "/neovim.cat",
-			-- 	file_height = 10,
-			-- 	file_width = 70,
-			-- },
 		},
 	},
 
