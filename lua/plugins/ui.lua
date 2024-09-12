@@ -64,7 +64,10 @@ return {
 	-- statusline
 	{
 		"sschleemilch/slimline.nvim",
-		opts = { verbose_mode = true },
+		opts = {
+			verbose_mode = true,
+			style = "fg",
+		},
 	},
 
 	-- indent guides for Neovim
@@ -186,16 +189,12 @@ return {
 	{
 		"echasnovski/mini.icons",
 		lazy = true,
-		config = function()
-			local mini_icons = require("mini.icons")
-			mini_icons.mock_nvim_web_devicons()
-			mini_icons.setup({
-				lsp = {
-					["function"] = { glyph = "" },
-					object = { glyph = "" },
-					value = { glyph = "" },
-				},
-			})
-		end,
+		opts = {
+			lsp = {
+				["function"] = { glyph = "" },
+				object = { glyph = "" },
+				value = { glyph = "" },
+			},
+		},
 	},
 }
