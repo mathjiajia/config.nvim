@@ -94,6 +94,7 @@ return {
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
+		opts = { ui = { border = "rounded", height = 0.8 } },
 		-- dependencies = {
 		-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 		-- 	opts = {
@@ -120,11 +121,10 @@ return {
 		-- 			"shfmt",
 		-- 			"stylua",
 		-- 			-- others
-		-- 			-- "tectonic",
+		-- 			"tectonic",
 		-- 		},
 		-- 	},
 		-- },
-		opts = { ui = { border = "rounded", height = 0.8 } },
 	},
 
 	-- lsp enhancement
