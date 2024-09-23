@@ -1,32 +1,34 @@
 return {
-
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
+		-- branch = "main",
 		build = ":TSUpdate",
-		opts = {
-			ensure_install = {
-				"bash",
-				"bibtex",
-				"c",
-				"comment",
-				"diff",
-				"fish",
-				"latex",
-				"lua",
-				"luadoc",
-				"luap",
-				"markdown",
-				"markdown_inline",
-				"matlab",
-				"python",
-				"query",
-				"regex",
-				"toml",
-				"vim",
-				"vimdoc",
-			},
-		},
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"bash",
+					"bibtex",
+					"c",
+					"comment",
+					"diff",
+					"fish",
+					"latex",
+					"lua",
+					"luadoc",
+					"luap",
+					"markdown",
+					"markdown_inline",
+					"matlab",
+					"python",
+					"query",
+					"regex",
+					"toml",
+					"vim",
+					"vimdoc",
+				},
+				highlight = { enable = true },
+			})
+		end,
 	},
 
 	-- enhanced matchparen

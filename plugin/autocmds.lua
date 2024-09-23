@@ -85,19 +85,19 @@ autocmd("BufReadPost", {
 })
 
 -- treesitter
-autocmd("FileType", {
-	callback = function(ev)
-		if not pcall(vim.treesitter.start, ev.buf) then
-			return
-		end
-
-		vim.opt_local.foldmethod = "expr"
-		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end,
-	desc = "Enable Treesitter",
-})
+-- autocmd("FileType", {
+-- 	callback = function(ev)
+-- 		if not pcall(vim.treesitter.start, ev.buf) then
+-- 			return
+-- 		end
+--
+-- 		vim.opt_local.foldmethod = "expr"
+-- 		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--
+-- 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- 	end,
+-- 	desc = "Enable Treesitter",
+-- })
 
 -- No buflist for special files
 -- close some filetypes with <q>

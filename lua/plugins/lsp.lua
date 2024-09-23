@@ -43,6 +43,7 @@ return {
 						telemetry = false,
 					},
 				},
+				sourcekit = {},
 				taplo = {},
 				texlab = {
 					texlab = {
@@ -83,11 +84,6 @@ return {
 					settings = settings[server],
 				})
 			end
-
-			require("lspconfig").sourcekit.setup({
-				filetypes = { "swift", "objective-c", "objective-cpp" },
-				capabilities = capabilities,
-			})
 		end,
 	},
 
@@ -173,7 +169,6 @@ return {
 					sh = { "shfmt" },
 					swift = { "swift_format" },
 					tex = { "latexindent" },
-					toml = { "taplo" },
 				},
 				format_on_save = {
 					timeout_ms = 3000,
