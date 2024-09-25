@@ -1,29 +1,29 @@
 return {
 
 	-- colorschemes
-	{
-		"folke/tokyonight.nvim",
-		priority = 1000,
-		config = function()
-			require("tokyonight").setup({
-				transparent = true,
-				terminal_colors = false,
-				styles = {
-					sidebars = "transparent",
-					floats = "transparent",
-				},
-			})
-			vim.cmd.colorscheme("tokyonight")
-		end,
-	},
 	-- {
-	-- 	"ribru17/bamboo.nvim",
+	-- 	"folke/tokyonight.nvim",
 	-- 	priority = 1000,
 	-- 	config = function()
-	-- 		require("bamboo").setup({ transparent = true })
-	-- 		require("bamboo").load()
+	-- 		require("tokyonight").setup({
+	-- 			transparent = true,
+	-- 			terminal_colors = false,
+	-- 			styles = {
+	-- 				sidebars = "transparent",
+	-- 				floats = "transparent",
+	-- 			},
+	-- 		})
+	-- 		vim.cmd.colorscheme("tokyonight")
 	-- 	end,
 	-- },
+	{
+		"ribru17/bamboo.nvim",
+		priority = 1000,
+		config = function()
+			require("bamboo").setup({ transparent = true })
+			require("bamboo").load()
+		end,
+	},
 
 	-- better vim.notify
 	{
@@ -56,19 +56,35 @@ return {
 	},
 
 	-- winbar
-	{ "Bekaboo/dropbar.nvim", config = true },
+	{
+		"mathjiajia/dropbar.nvim",
+		opts = {
+			icons = {
+				kinds = {
+					use_mini_icons = true,
+					use_devicons = false,
+				},
+			},
+		},
+	},
 
 	-- statuscolumn
 	{ "luukvbaal/statuscol.nvim", config = true },
 
-	-- statusline
+	-- statusline/tabline
 	{
-		"sschleemilch/slimline.nvim",
-		opts = {
-			verbose_mode = true,
-			style = "fg",
-		},
+		"rebelot/heirline.nvim",
+		config = function()
+			require("configs.heirline")
+		end,
 	},
+	-- {
+	-- 	"sschleemilch/slimline.nvim",
+	-- 	opts = {
+	-- 		verbose_mode = true,
+	-- 		style = "fg",
+	-- 	},
+	-- },
 
 	-- indent guides for Neovim
 	{
