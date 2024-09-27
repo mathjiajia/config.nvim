@@ -290,7 +290,6 @@ local DefaultStatusline = {
 	VimMode,
 	Space,
 	WorkDir,
-	Space,
 	FileNameBlock,
 	Git,
 	Align,
