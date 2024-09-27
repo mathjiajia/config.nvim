@@ -9,6 +9,7 @@ local colors = {
 	cyan = utils.get_highlight("Special").fg,
 }
 require("heirline").load_colors(colors)
+
 local VimMode = {
 	init = function(self)
 		self.mode = vim.fn.mode()
@@ -40,13 +41,15 @@ local VimMode = {
 	provider = function(self)
 		return " %2(" .. self.modes[self.mode] .. "%)"
 	end,
-	hl = { fg = "green", bold = true },
+	hl = { fg = "orange", bold = true },
 }
+
 local FileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
 }
+
 local FileIcon = {
 	init = function(self)
 		local filename = self.filename
@@ -59,6 +62,7 @@ local FileIcon = {
 		return self.icon_color
 	end,
 }
+
 local FileName = {
 	provider = function(self)
 		local filename = vim.fn.fnamemodify(self.filename, ":.")
@@ -72,6 +76,7 @@ local FileName = {
 	end,
 	hl = { fg = utils.get_highlight("Directory").fg },
 }
+
 local FileFlags = {
 	{
 		condition = function()
@@ -88,6 +93,7 @@ local FileFlags = {
 		hl = { fg = "orange" },
 	},
 }
+
 local FileNameModifer = {
 	hl = function()
 		if vim.bo.modified then
@@ -95,8 +101,10 @@ local FileNameModifer = {
 		end
 	end,
 }
+
 FileNameBlock =
 	utils.insert(FileNameBlock, FileIcon, utils.insert(FileNameModifer, FileName), FileFlags, { provider = "%<" })
+
 local WorkDir = {
 	provider = function()
 		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
@@ -116,6 +124,7 @@ local WorkDir = {
 		name = "heirline_workdir",
 	},
 }
+
 local Git = {
 	condition = conditions.is_git_repo,
 	static = {
@@ -171,6 +180,7 @@ local Git = {
 		update = false,
 	},
 }
+
 local Diagnostics = {
 	condition = conditions.has_diagnostics,
 	static = { Error = " ", Warn = " ", Hint = " ", Info = " " },
@@ -207,11 +217,12 @@ local Diagnostics = {
 	},
 	on_click = {
 		callback = function()
-			vim.diagnostic.setqflist()
+			vim.diagnostic.setloclist()
 		end,
 		name = "heirline_diagnostics",
 	},
 }
+
 local LSPActive = {
 	condition = conditions.lsp_attached,
 	update = { "LspAttach", "LspDetach" },
@@ -232,16 +243,19 @@ local LSPActive = {
 		name = "heirline_LSP",
 	},
 }
+
 local Ruler = {
 	provider = "%3l:%-3v󰀹 %P",
 	hl = { fg = "purple" },
 }
+
 local FileType = {
 	provider = function()
 		return string.upper(vim.bo.filetype)
 	end,
 	hl = { fg = utils.get_highlight("Type").fg, bold = true },
 }
+
 local Spell = {
 	condition = function()
 		return vim.wo.spell
@@ -249,6 +263,7 @@ local Spell = {
 	provider = "󰓆 Spell",
 	hl = { bold = true, fg = "cyan" },
 }
+
 local TerminalName = {
 	provider = function()
 		local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
@@ -256,6 +271,7 @@ local TerminalName = {
 	end,
 	hl = { fg = "blue" },
 }
+
 local HelpFileName = {
 	condition = function()
 		return vim.bo.filetype == "help"
@@ -266,14 +282,16 @@ local HelpFileName = {
 	end,
 	hl = { fg = "blue" },
 }
+
 local Align = { provider = "%=" }
 local Space = { provider = " " }
+
 local DefaultStatusline = {
 	VimMode,
 	Space,
-	FileNameBlock,
-	Space,
 	WorkDir,
+	Space,
+	FileNameBlock,
 	Git,
 	Align,
 	Diagnostics,
@@ -285,6 +303,7 @@ local DefaultStatusline = {
 	Space,
 	Spell,
 }
+
 local InactiveStatusline = {
 	condition = conditions.is_not_active,
 	Space,
@@ -293,6 +312,7 @@ local InactiveStatusline = {
 	FileName,
 	Align,
 }
+
 local SpecialStatusline = {
 	condition = function()
 		return conditions.buffer_matches({
@@ -305,6 +325,7 @@ local SpecialStatusline = {
 	HelpFileName,
 	Align,
 }
+
 local TerminalStatusline = {
 	condition = function()
 		return conditions.buffer_matches({ buftype = { "terminal" } })
@@ -315,6 +336,7 @@ local TerminalStatusline = {
 	TerminalName,
 	Align,
 }
+
 local StatusLine = {
 	fallthrough = false,
 	SpecialStatusline,
@@ -323,6 +345,7 @@ local StatusLine = {
 	DefaultStatusline,
 	hl = "StatusLine",
 }
+
 -- Tabline
 local TablineBufnr = {
 	provider = function(self)
@@ -330,6 +353,7 @@ local TablineBufnr = {
 	end,
 	hl = "Comment",
 }
+
 local TablineFileName = {
 	provider = function(self)
 		local filename = self.filename
@@ -340,6 +364,7 @@ local TablineFileName = {
 		return { bold = self.is_active or self.is_visible }
 	end,
 }
+
 local TablineFileFlags = {
 	{
 		condition = function(self)
@@ -363,6 +388,7 @@ local TablineFileFlags = {
 		hl = { fg = "orange" },
 	},
 }
+
 local TablineFileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(self.bufnr)
@@ -394,6 +420,7 @@ local TablineFileNameBlock = {
 		name = "heirline_tabline_buffer_callback",
 	},
 }
+
 local TablineCloseButton = {
 	condition = function(self)
 		return not vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
@@ -416,6 +443,7 @@ local TablineCloseButton = {
 		},
 	},
 }
+
 local TablineBufferBlock = utils.surround({ "", "" }, function(self)
 	if self.is_active then
 		return utils.get_highlight("TabLineSel").bg
@@ -423,12 +451,14 @@ local TablineBufferBlock = utils.surround({ "", "" }, function(self)
 		return utils.get_highlight("TabLine").bg
 	end
 end, { TablineFileNameBlock, TablineCloseButton })
+
 local get_bufs = function()
 	return vim.tbl_filter(function(bufnr)
 		return vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
 	end, vim.api.nvim_list_bufs())
 end
 local buflist_cache = {}
+
 vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
 	callback = function()
 		vim.schedule(function()
@@ -447,6 +477,7 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
 		end)
 	end,
 })
+
 local BufferLine = utils.make_buflist(
 	TablineBufferBlock,
 	{ provider = " ", hl = { fg = "gray" } },
@@ -456,6 +487,7 @@ local BufferLine = utils.make_buflist(
 	end,
 	false
 )
+
 local Tabpage = {
 	provider = function(self)
 		return "%" .. self.tabnr .. "T " .. self.tabpage .. " %T"
@@ -468,7 +500,9 @@ local Tabpage = {
 		end
 	end,
 }
+
 local TabpageClose = { provider = " %999X %X", hl = "TabLine" }
+
 local TabPages = {
 	condition = function()
 		return #vim.api.nvim_list_tabpages() >= 2
@@ -477,6 +511,7 @@ local TabPages = {
 	utils.make_tablist(Tabpage),
 	TabpageClose,
 }
+
 local TabLineOffset = {
 	condition = function(self)
 		local win = vim.api.nvim_tabpage_list_wins(0)[1]
@@ -504,11 +539,14 @@ local TabLineOffset = {
 		end
 	end,
 }
+
 local TabLine = { TabLineOffset, BufferLine, TabPages }
+
 require("heirline").setup({
 	statusline = StatusLine,
 	tabline = TabLine,
 })
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
 		if vim.list_contains({ "wipe", "delete" }, vim.api.nvim_get_option_value("bufhidden", {})) then

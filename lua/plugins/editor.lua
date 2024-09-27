@@ -149,10 +149,11 @@ return {
 				{ "<", function() require("quicker").collapse() end, desc = "Collapse quickfix context" },
 			},
 		},
+		ft = { "qf" },
 		-- stylua: ignore
 		keys = {
-			{ "<leader>q", function() vim.diagnostic.setqflist() end, desc = "Toggle quickfix" },
-			{ "<leader>l", function() vim.diagnostic.setloclist() end, desc = "Toggle quickfix" },
+			{ "<leader>q", function() vim.diagnostic.setqflist() end, desc = "Toggle Quickfix" },
+			{ "<leader>l", function() vim.diagnostic.setloclist() end, desc = "Toggle Loclist" },
 		},
 	},
 

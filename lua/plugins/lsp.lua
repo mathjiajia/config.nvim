@@ -3,7 +3,6 @@ return {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "mason.nvim" },
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -148,7 +147,6 @@ return {
 	-- formatting
 	{
 		"stevearc/conform.nvim",
-		dependencies = { "mason.nvim" },
 		config = function()
 			require("conform").formatters.latexindent = { args = { "-g", "/dev/null" } }
 			require("conform").setup({
