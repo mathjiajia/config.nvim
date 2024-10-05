@@ -237,7 +237,7 @@ local LSPActive = {
 	on_click = {
 		callback = function()
 			vim.defer_fn(function()
-				require("lspconfig.ui.lspinfo")()
+				vim.cmd.checkhealth("lspconfig")
 			end, 100)
 		end,
 		name = "heirline_LSP",

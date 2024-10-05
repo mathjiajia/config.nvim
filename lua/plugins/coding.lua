@@ -158,6 +158,11 @@ return {
 			{ "cs", desc = "Change Surrounding" },
 			{ "ds", desc = "Delete Surrounding" },
 			{ "ys", desc = "Add Surrounding" },
+			{ "yS", desc = "Add Surrounding to Current Line" },
+			{ "S", mode = { "x" }, desc = "Add Surrounding" },
+			{ "gS", mode = { "x" }, desc = "Add Surrounding to Current Line" },
+			{ "<C-g>s", mode = { "i" }, desc = "Add Surrounding" },
+			{ "<C-g>S", mode = { "i" }, desc = "Add Surrounding to Current Line" },
 		},
 	},
 }

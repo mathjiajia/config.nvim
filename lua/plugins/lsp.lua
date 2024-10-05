@@ -167,6 +167,7 @@ return {
 					sh = { "shfmt" },
 					swift = { "swift_format" },
 					tex = { "latexindent" },
+					toml = { "taplo" },
 				},
 				format_on_save = {
 					timeout_ms = 3000,
