@@ -168,6 +168,8 @@ return {
 		"mathjiajia/dashboard-nvim",
 		branch = "mini-icons",
 		opts = {
+			disable_move = true,
+			shuffle_letter = true,
 			config = {
 				week_header = { enable = true },
 				-- stylua: ignore
