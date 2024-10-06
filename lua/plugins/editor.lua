@@ -61,9 +61,6 @@ return {
 				file_icons = "mini",
 				formatter = "path.dirname_first",
 			},
-			-- lsp = {
-			-- symbols = { symbol_icons = "" },
-			-- },
 		},
 	},
 
