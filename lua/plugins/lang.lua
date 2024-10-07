@@ -1,20 +1,26 @@
 return {
 
 	-- filesype plugin for `LaTeX`
-	{ "mathjiajia/latex.nvim", config = true },
+	{ "mathjiajia/latex.nvim", ft = "tex", config = true },
 
 	-- viewing Markdown files in Neovim
-	{ "OXY2DEV/markview.nvim", config = true },
+	{ "OXY2DEV/markview.nvim", ft = "markdown", config = true },
 
-	-- Faster LuaLS setup for Neovim
 	{
+		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+		-- used for completion, annotations and signatures of Neovim apis
 		"folke/lazydev.nvim",
 		ft = "lua",
-		dependencies = { "Bilal2453/luvit-meta", lazy = true },
 		---@module "lazydev"
 		---@class lazydev.Config
-		opts = { library = { { path = "luvit-meta/library", words = { "vim%.uv" } } } },
+		opts = {
+			library = {
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
 	},
+	{ "Bilal2453/luvit-meta", lazy = true },
 
 	-- neorg
 	-- {

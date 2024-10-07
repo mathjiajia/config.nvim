@@ -22,6 +22,7 @@ return {
 					"python",
 					"query",
 					"regex",
+					"swift",
 					"toml",
 					"vim",
 					"vimdoc",

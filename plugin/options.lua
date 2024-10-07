@@ -86,6 +86,8 @@ opt.updatetime = 200
 opt.virtualedit = "block"
 opt.signcolumn = "yes"
 
+vim.cmd.colorscheme("bamboo_vulgaris")
+
 -- Remove "How-to disable mouse" from right-click menu
 pcall(vim.cmd.aunmenu, [[PopUp.How-to\ disable\ mouse]])
 pcall(vim.cmd.aunmenu, [[PopUp.-1-]])

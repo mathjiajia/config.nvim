@@ -1,30 +1,5 @@
 return {
 
-	-- colorschemes
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("tokyonight").setup({
-	-- 			transparent = true,
-	-- 			terminal_colors = false,
-	-- 			styles = {
-	-- 				sidebars = "transparent",
-	-- 				floats = "transparent",
-	-- 			},
-	-- 		})
-	-- 		vim.cmd.colorscheme("tokyonight")
-	-- 	end,
-	-- },
-	{
-		"ribru17/bamboo.nvim",
-		priority = 1000,
-		config = function()
-			require("bamboo").setup({ transparent = not vim.g.neovide })
-			require("bamboo").load()
-		end,
-	},
-
 	-- better vim.notify
 	{
 		"rcarriga/nvim-notify",

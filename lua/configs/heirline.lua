@@ -1,14 +1,17 @@
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 local colors = {
-	green = utils.get_highlight("String").fg,
-	blue = utils.get_highlight("Function").fg,
-	gray = utils.get_highlight("NonText").fg,
-	orange = utils.get_highlight("Constant").fg,
-	purple = utils.get_highlight("Statement").fg,
-	cyan = utils.get_highlight("Special").fg,
+	bright_bg = "#2f312c",
+	bright_fg = "#f1e9d2",
+	red = "#dc4f62",
+	dark_red = "#893f45",
+	green = "#8fb573",
+	blue = "#57a5e5",
+	gray = "#5b5e5a",
+	orange = "#ff9966",
+	purple = "#aaaaff",
+	cyan = "#70c2be",
 }
-require("heirline").load_colors(colors)
 
 local VimMode = {
 	init = function(self)
@@ -30,6 +33,21 @@ local VimMode = {
 			["!"] = "SHELL ",
 			t = " TERM ",
 		},
+		mode_colors = {
+			n = "red",
+			i = "green",
+			v = "cyan",
+			V = "cyan",
+			["\22"] = "cyan",
+			c = "orange",
+			s = "purple",
+			S = "purple",
+			["\19"] = "purple",
+			R = "orange",
+			r = "orange",
+			["!"] = "red",
+			t = "red",
+		},
 	},
 	update = {
 		"ModeChanged",
@@ -41,7 +59,10 @@ local VimMode = {
 	provider = function(self)
 		return " %2(" .. self.modes[self.mode] .. "%)"
 	end,
-	hl = { fg = "orange", bold = true },
+	hl = function(self)
+		local mode = self.mode
+		return { fg = self.mode_colors[mode], bold = true }
+	end,
 }
 
 local FileNameBlock = {
@@ -107,7 +128,7 @@ FileNameBlock =
 
 local WorkDir = {
 	provider = function()
-		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
+		local icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. "  "
 		local cwd = vim.fn.getcwd(0)
 		cwd = vim.fn.fnamemodify(cwd, ":~")
 		if not conditions.width_percent_below(#cwd, 0.25) then
@@ -116,7 +137,7 @@ local WorkDir = {
 		local trail = cwd:sub(-1) == "/" and "" or "/"
 		return icon .. cwd .. trail
 	end,
-	hl = { fg = "purple" },
+	hl = { fg = "blue", bold = true },
 	on_click = {
 		callback = function()
 			require("oil").toggle_float()
@@ -127,42 +148,50 @@ local WorkDir = {
 
 local Git = {
 	condition = conditions.is_git_repo,
-	static = {
-		branch = "  ",
-		added = "  ",
-		changed = "  ",
-		removed = "  ",
-	},
 	init = function(self)
 		self.status_dict = vim.b.gitsigns_status_dict
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
+	hl = { fg = "orange" },
+
 	{
 		provider = function(self)
-			return self.branch .. self.status_dict.head
+			return "  " .. self.status_dict.head
 		end,
-		hl = { fg = "green" },
+		hl = { bold = true },
+	},
+	{
+		condition = function(self)
+			return self.has_changes
+		end,
+		provider = "(",
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.added or 0
-			return count > 0 and (self.added .. count)
+			return count > 0 and (" " .. count .. " ")
 		end,
 		hl = "GitSignsAdd",
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.removed or 0
-			return count > 0 and (self.removed .. count)
+			return count > 0 and (" " .. count .. " ")
 		end,
 		hl = "GitSignsDelete",
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.changed or 0
-			return count > 0 and (self.changed .. count)
+			return count > 0 and (" " .. count)
 		end,
 		hl = "GitSignsChange",
+	},
+	{
+		condition = function(self)
+			return self.has_changes
+		end,
+		provider = ")",
 	},
 	on_click = {
 		callback = function()
@@ -192,6 +221,9 @@ local Diagnostics = {
 	end,
 	update = { "DiagnosticChanged", "BufEnter" },
 	{
+		provider = "![",
+	},
+	{
 		provider = function(self)
 			return self.errors > 0 and (self.Error .. self.errors .. " ")
 		end,
@@ -215,6 +247,9 @@ local Diagnostics = {
 		end,
 		hl = "DiagnosticHint",
 	},
+	{
+		provider = "]",
+	},
 	on_click = {
 		callback = function()
 			vim.diagnostic.setloclist()
@@ -233,7 +268,7 @@ local LSPActive = {
 		end
 		return " ◍ [" .. table.concat(names, ",") .. "]"
 	end,
-	hl = { fg = "blue" },
+	hl = { fg = "green", bold = true },
 	on_click = {
 		callback = function()
 			vim.defer_fn(function()
@@ -246,14 +281,13 @@ local LSPActive = {
 
 local Ruler = {
 	provider = "%3l:%-3v󰀹 %P",
-	hl = { fg = "purple" },
 }
 
 local FileType = {
 	provider = function()
 		return string.upper(vim.bo.filetype)
 	end,
-	hl = { fg = utils.get_highlight("Type").fg, bold = true },
+	hl = { fg = "yellow", bold = true },
 }
 
 local Spell = {
@@ -261,7 +295,7 @@ local Spell = {
 		return vim.wo.spell
 	end,
 	provider = "󰓆 Spell",
-	hl = { bold = true, fg = "cyan" },
+	hl = { bold = true, fg = "orange" },
 }
 
 local TerminalName = {
@@ -269,7 +303,7 @@ local TerminalName = {
 		local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
 		return " " .. tname
 	end,
-	hl = { fg = "blue" },
+	hl = { fg = "blue", bold = true },
 }
 
 local HelpFileName = {
@@ -280,7 +314,7 @@ local HelpFileName = {
 		local filename = vim.api.nvim_buf_get_name(0)
 		return vim.fn.fnamemodify(filename, ":t")
 	end,
-	hl = { fg = "blue" },
+	hl = { fg = colors.blue },
 }
 
 local Align = { provider = "%=" }
@@ -319,6 +353,7 @@ local SpecialStatusline = {
 			filetype = { "^git.*", "fugitive" },
 		})
 	end,
+
 	FileType,
 	Space,
 	HelpFileName,
@@ -329,6 +364,10 @@ local TerminalStatusline = {
 	condition = function()
 		return conditions.buffer_matches({ buftype = { "terminal" } })
 	end,
+
+	hl = { bg = "dark_red" },
+
+	-- Quickly add a condition to the ViMode to only show it when buffer is active!
 	{ condition = conditions.is_active, VimMode, Space },
 	FileType,
 	Space,
@@ -360,7 +399,7 @@ local TablineFileName = {
 		return filename
 	end,
 	hl = function(self)
-		return { bold = self.is_active or self.is_visible }
+		return { bold = self.is_active or self.is_visible, italic = true }
 	end,
 }
 
@@ -392,20 +431,19 @@ local TablineFileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(self.bufnr)
 	end,
-	TablineBufnr,
-	FileIcon,
-	TablineFileName,
-	TablineFileFlags,
+
 	hl = function(self)
 		if self.is_active then
 			return "TabLineSel"
+		-- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
+		--     return { fg = "gray" }
 		else
 			return "TabLine"
 		end
 	end,
 	on_click = {
 		callback = function(_, minwid, _, button)
-			if button == "m" then
+			if button == "m" then -- close on mouse middle click
 				vim.schedule(function()
 					vim.api.nvim_buf_delete(minwid, { force = false })
 				end)
@@ -418,6 +456,10 @@ local TablineFileNameBlock = {
 		end,
 		name = "heirline_tabline_buffer_callback",
 	},
+	TablineBufnr,
+	FileIcon,
+	TablineFileName,
+	TablineFileFlags,
 }
 
 local TablineCloseButton = {
@@ -432,8 +474,8 @@ local TablineCloseButton = {
 			callback = function(_, minwid)
 				vim.schedule(function()
 					vim.api.nvim_buf_delete(minwid, { force = false })
+					vim.cmd.redrawtabline()
 				end)
-				vim.cmd.redrawtabline()
 			end,
 			minwid = function(self)
 				return self.bufnr
@@ -456,9 +498,10 @@ local get_bufs = function()
 		return vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
 	end, vim.api.nvim_list_bufs())
 end
+
 local buflist_cache = {}
 
-vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
 	callback = function()
 		vim.schedule(function()
 			local buffers = get_bufs()
@@ -468,6 +511,7 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
 			for i = #buffers + 1, #buflist_cache do
 				buflist_cache[i] = nil
 			end
+
 			if #buflist_cache > 1 then
 				vim.o.showtabline = 2
 			elseif vim.o.showtabline ~= 1 then
@@ -516,20 +560,22 @@ local TabLineOffset = {
 		local win = vim.api.nvim_tabpage_list_wins(0)[1]
 		local bufnr = vim.api.nvim_win_get_buf(win)
 		self.winid = win
-		if vim.bo[bufnr].filetype == "neo-tree" then
-			self.title = "neo-tree"
-			return true
-		elseif vim.bo[bufnr].filetype == "aerial" then
+		-- if vim.bo[bufnr].filetype == "neo-tree" then
+		-- 	self.title = "neo-tree"
+		-- 	return true
+		if vim.bo[bufnr].filetype == "aerial" then
 			self.title = "aerial"
 			return true
 		end
 	end,
+
 	provider = function(self)
 		local title = self.title
 		local width = vim.api.nvim_win_get_width(self.winid)
-		local pad = math.ceil((width - #title) * 0.5)
+		local pad = math.ceil((width - #title) / 2)
 		return string.rep(" ", pad) .. title .. string.rep(" ", pad)
 	end,
+
 	hl = function(self)
 		if vim.api.nvim_get_current_win() == self.winid then
 			return "TablineSel"
@@ -544,6 +590,7 @@ local TabLine = { TabLineOffset, BufferLine, TabPages }
 require("heirline").setup({
 	statusline = StatusLine,
 	tabline = TabLine,
+	opts = { colors = colors },
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
