@@ -57,7 +57,7 @@ local VimMode = {
 		end),
 	},
 	provider = function(self)
-		return " %2(" .. self.modes[self.mode] .. "%)"
+		return "  %2(" .. self.modes[self.mode] .. "%)"
 	end,
 	hl = function(self)
 		local mode = self.mode
@@ -164,7 +164,7 @@ local Git = {
 		condition = function(self)
 			return self.has_changes
 		end,
-		provider = "(",
+		provider = " (",
 	},
 	{
 		provider = function(self)

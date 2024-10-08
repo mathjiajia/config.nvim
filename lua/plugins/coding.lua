@@ -49,8 +49,8 @@ return {
 
 	-- auto completion
 	{
-		"yioneko/nvim-cmp",
-		branch = "perf",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp",
 		event = { "CmdlineEnter", "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-buffer",
