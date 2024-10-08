@@ -367,7 +367,6 @@ local TerminalStatusline = {
 
 	hl = { bg = "dark_red" },
 
-	-- Quickly add a condition to the ViMode to only show it when buffer is active!
 	{ condition = conditions.is_active, VimMode, Space },
 	FileType,
 	Space,
@@ -436,14 +435,14 @@ local TablineFileNameBlock = {
 		if self.is_active then
 			return "TabLineSel"
 		-- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
-		--     return { fg = "gray" }
+		-- 	return { fg = "gray" }
 		else
 			return "TabLine"
 		end
 	end,
 	on_click = {
 		callback = function(_, minwid, _, button)
-			if button == "m" then -- close on mouse middle click
+			if button == "m" then
 				vim.schedule(function()
 					vim.api.nvim_buf_delete(minwid, { force = false })
 				end)
@@ -485,7 +484,7 @@ local TablineCloseButton = {
 	},
 }
 
-local TablineBufferBlock = utils.surround({ "", "" }, function(self)
+local TablineBufferBlock = utils.surround({ "█", "█" }, function(self)
 	if self.is_active then
 		return utils.get_highlight("TabLineSel").bg
 	else
