@@ -40,6 +40,22 @@ autocmd("LspAttach", {
 			end
 		end
 
+		vim.keymap.set("n", "grn", function()
+			vim.lsp.buf.rename()
+		end, { desc = "vim.lsp.buf.rename()" })
+
+		vim.keymap.set({ "n", "x" }, "gra", function()
+			vim.lsp.buf.code_action()
+		end, { desc = "vim.lsp.buf.code_action()" })
+
+		vim.keymap.set("n", "grr", function()
+			vim.lsp.buf.references()
+		end, { desc = "vim.lsp.buf.references()" })
+
+		vim.keymap.set("i", "<C-S>", function()
+			vim.lsp.buf.signature_help()
+		end, { desc = "vim.lsp.buf.signature_help()" })
+
 		if client.supports_method(methods.textDocument_documentHighlight) then
 			autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = ev.buf,

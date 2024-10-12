@@ -73,8 +73,10 @@ local FileNameBlock = {
 
 local FileIcon = {
 	init = function(self)
-		local filename = self.filename
-		self.icon, self.icon_color = require("mini.icons").get("file", filename)
+		local ft = vim.filetype.match({ buf = 0 })
+		local category = ft and "filetype" or "file"
+		local name = ft or self.filename
+		self.icon, self.icon_color = require("mini.icons").get(category, name)
 	end,
 	provider = function(self)
 		return self.icon and (self.icon .. " ")
@@ -160,39 +162,39 @@ local Git = {
 		end,
 		hl = { bold = true },
 	},
-	{
-		condition = function(self)
-			return self.has_changes
-		end,
-		provider = " (",
-	},
+	-- {
+	-- 	condition = function(self)
+	-- 		return self.has_changes
+	-- 	end,
+	-- 	provider = " (",
+	-- },
 	{
 		provider = function(self)
 			local count = self.status_dict.added or 0
-			return count > 0 and (" " .. count .. " ")
+			return count > 0 and ("  " .. count)
 		end,
 		hl = "GitSignsAdd",
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.removed or 0
-			return count > 0 and (" " .. count .. " ")
+			return count > 0 and ("  " .. count)
 		end,
 		hl = "GitSignsDelete",
 	},
 	{
 		provider = function(self)
 			local count = self.status_dict.changed or 0
-			return count > 0 and (" " .. count)
+			return count > 0 and ("  " .. count)
 		end,
 		hl = "GitSignsChange",
 	},
-	{
-		condition = function(self)
-			return self.has_changes
-		end,
-		provider = ")",
-	},
+	-- {
+	-- 	condition = function(self)
+	-- 		return self.has_changes
+	-- 	end,
+	-- 	provider = ")",
+	-- },
 	on_click = {
 		callback = function()
 			require("toggleterm.terminal").Terminal
@@ -571,7 +573,7 @@ local TabLineOffset = {
 	provider = function(self)
 		local title = self.title
 		local width = vim.api.nvim_win_get_width(self.winid)
-		local pad = math.ceil((width - #title) / 2)
+		local pad = math.ceil((width - #title) * 0.5)
 		return string.rep(" ", pad) .. title .. string.rep(" ", pad)
 	end,
 

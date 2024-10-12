@@ -6,6 +6,7 @@ return {
 		cmd = "Oil",
 		-- stylua: ignore
 		keys = { { "<leader>o", function() require("oil").toggle_float() end, desc = "Toggle Oil" } },
+		---@type oil.SetupOpts
 		opts = {
 			float = {
 				max_width = vim.fn.round(vim.o.columns * 0.5),
@@ -17,8 +18,8 @@ return {
 	-- search/replace in multiple files
 	{
 		"MagicDuck/grug-far.nvim",
-		---@type GrugFarOptions
-		---@diagnostic disable-next-line: missing-fields
+		---@module "grug-far"
+		---@type GrugFarOptionsOverride
 		opts = { headerMaxWidth = 80 },
 		cmd = "GrugFar",
 		keys = {
@@ -138,6 +139,7 @@ return {
 
 	{
 		"stevearc/quicker.nvim",
+		ft = { "qf" },
 		---@type quicker.SetupOptions
 		opts = {
 			-- stylua: ignore
@@ -146,7 +148,6 @@ return {
 				{ "<", function() require("quicker").collapse() end, desc = "Collapse quickfix context" },
 			},
 		},
-		ft = { "qf" },
 		-- stylua: ignore
 		keys = {
 			{ "<leader>q", function() vim.diagnostic.setqflist() end, desc = "Toggle Quickfix" },

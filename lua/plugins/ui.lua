@@ -6,7 +6,8 @@ return {
 		-- stylua: ignore
 		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete All Notifications" } },
 		---@module "notify"
-		---@class notify.Config
+		---@type notify.Config
+		---@diagnostic disable-next-line: missing-fields
 		opts = {
 			max_height = function()
 				return math.floor(vim.o.lines * 0.75)
@@ -32,15 +33,8 @@ return {
 
 	-- winbar
 	{
-		"mathjiajia/dropbar.nvim",
-		opts = {
-			icons = {
-				kinds = {
-					use_mini_icons = true,
-					use_devicons = false,
-				},
-			},
-		},
+		"Bekaboo/dropbar.nvim",
+		config = true,
 	},
 
 	-- statuscolumn
@@ -140,8 +134,7 @@ return {
 
 	-- start screen
 	{
-		"mathjiajia/dashboard-nvim",
-		branch = "mini-icons",
+		"nvimdev/dashboard-nvim",
 		opts = {
 			disable_move = true,
 			shuffle_letter = true,
@@ -166,8 +159,8 @@ return {
 		cmd = "ZenMode",
 		dependencies = { "folke/twilight.nvim", config = true },
 		---@module "zen-mode"
-		---@class ZenOptions
-		opts = { plugins = { gitsigns = true } },
+		---@type ZenOptions
+		opts = { plugins = { gitsigns = { enabled = false } } },
 	},
 
 	-- rainbow delimiters
@@ -182,13 +175,16 @@ return {
 	-- icons
 	{
 		"echasnovski/mini.icons",
-		lazy = true,
-		opts = {
-			lsp = {
-				["function"] = { glyph = "" },
-				object = { glyph = "" },
-				value = { glyph = "" },
-			},
-		},
+		-- lazy = true,
+		config = function()
+			require("mini.icons").setup({
+				lsp = {
+					["function"] = { glyph = "" },
+					object = { glyph = "" },
+					value = { glyph = "" },
+				},
+			})
+			MiniIcons.mock_nvim_web_devicons()
+		end,
 	},
 }

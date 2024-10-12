@@ -140,7 +140,7 @@ return {
 		cmd = "Copilot",
 		dependencies = { "zbirenbaum/copilot-cmp", config = true },
 		---@module "copilot"
-		---@class copilot_config
+		---@type copilot_config
 		opts = {
 			panel = { enabled = false },
 			suggestion = { enabled = false },

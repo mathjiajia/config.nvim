@@ -42,6 +42,13 @@ return {
 						telemetry = false,
 					},
 				},
+				nil_ls = {
+					["nil"] = {
+						formatting = {
+							command = { "nixfmt" },
+						},
+					},
+				},
 				sourcekit = {},
 				taplo = {},
 				texlab = {
@@ -50,10 +57,9 @@ return {
 							args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
 							forwardSearchAfter = false,
 							onSave = true,
-							pdfDirectory = "./build",
 						},
 						forwardSearch = {
-							executable = "sioyek",
+							executable = "/Applications/sioyek.app/Contents/MacOS/sioyek",
 							args = {
 								"--reuse-window",
 								"--execute-command",
@@ -86,6 +92,8 @@ return {
 	-- cmdline tools and lsp servers
 	{
 		"williamboman/mason.nvim",
+		---@module "mason"
+		---@type MasonSettings
 		opts = { ui = { border = "rounded", height = 0.8 } },
 		-- dependencies = {
 		-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -159,6 +167,7 @@ return {
 					["markdown.mdx"] = { "prettierd" },
 					yaml = { "prettierd" },
 					lua = { "stylua" },
+					nix = { "nixfmt" },
 					python = { "black" },
 					sh = { "shfmt" },
 					swift = { "swift_format" },
