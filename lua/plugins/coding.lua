@@ -1,12 +1,9 @@
 return {
 
-	-- snippets
 	{
-		"L3MON4D3/LuaSnip",
-		lazy = true,
-		build = "make install_jsregexp",
-		dependencies = { "mathjiajia/mySnippets", config = true },
-		config = function()
+		"luasnip",
+		event = { "InsertEnter" },
+		after = function()
 			local ls = require("luasnip")
 			local types = require("luasnip.util.types")
 
@@ -20,6 +17,9 @@ return {
 				enable_autosnippets = true,
 				store_selection_keys = "<Tab>",
 			})
+
+			local path = "/nix/store/6pcw2vnnja9pb6xi3xbd8kw1rg2hm4qg-vimplugin-mySnippets/snippets"
+			require("luasnip.loaders.from_lua").lazy_load({ paths = path })
 
 			vim.keymap.set("i", "<C-k>", function()
 				if ls.expandable() then
@@ -47,20 +47,10 @@ return {
 		end,
 	},
 
-	-- auto completion
 	{
-		"iguanacucumber/magazine.nvim",
-		name = "nvim-cmp",
+		"cmp.nvim",
 		event = { "CmdlineEnter", "InsertEnter" },
-		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"lukas-reineke/cmp-rg",
-			"saadparwaiz1/cmp_luasnip",
-		},
-		config = function()
+		after = function()
 			local cmp = require("cmp")
 
 			cmp.setup({
@@ -133,27 +123,31 @@ return {
 		end,
 	},
 
-	-- github copilot
 	{
-		"zbirenbaum/copilot.lua",
-		build = ":Copilot auth",
+		"copilot.lua",
 		cmd = "Copilot",
-		dependencies = { "zbirenbaum/copilot-cmp", config = true },
-		---@module "copilot"
-		---@type copilot_config
-		opts = {
-			panel = { enabled = false },
-			suggestion = { enabled = false },
-		},
+		after = function()
+			require("copilot").setup({
+				panel = { enabled = false },
+				suggestion = { enabled = false },
+			})
+		end,
 	},
 
-	-- auto pairs
-	{ "altermo/ultimate-autopair.nvim", event = { "InsertEnter", "CmdlineEnter" }, config = true },
-
-	-- surround
 	{
-		"kylechui/nvim-surround",
-		config = true,
+		"ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		after = function()
+			require("ultimate-autopair").setup()
+		end,
+	},
+
+	{
+		"nvim-surround",
+		after = function()
+			require("nvim-surround").setup({})
+		end,
+		ft = { "tex" },
 		keys = {
 			{ "cs", desc = "Change Surrounding" },
 			{ "ds", desc = "Delete Surrounding" },

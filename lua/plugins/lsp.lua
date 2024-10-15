@@ -1,9 +1,8 @@
 return {
 
-	-- lspconfig
 	{
-		"neovim/nvim-lspconfig",
-		config = function()
+		"nvim-lspconfig",
+		after = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
 			-- diagnostics config
@@ -89,70 +88,50 @@ return {
 		end,
 	},
 
-	-- cmdline tools and lsp servers
 	{
-		"williamboman/mason.nvim",
-		---@module "mason"
-		---@type MasonSettings
-		opts = { ui = { border = "rounded", height = 0.8 } },
-		-- dependencies = {
-		-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
-		-- 	opts = {
-		-- 		ensure_installed = {
-		-- 			-- lsp
-		-- 			"basedpyright",
-		-- 			"clangd",
-		-- 			"lua-language-server",
-		-- 			"matlab-language-server",
-		-- 			"texlab",
-		-- 			-- dap
-		-- 			"codelldb",
-		-- 			"debugpy",
-		-- 			-- linter
-		-- 			"commitlint",
-		-- 			"markdownlint-cli2",
-		-- 			"shellcheck",
-		-- 			-- formatter
-		-- 			"bibtex-tidy",
-		-- 			"black",
-		-- 			"clang-format",
-		-- 			"latexindent",
-		-- 			"prettierd",
-		-- 			"shfmt",
-		-- 			"stylua",
-		-- 			-- others
-		-- 			"tectonic",
-		-- 		},
-		-- 	},
-		-- },
+		"mason.nvim",
+		after = function()
+			require("mason").setup({ ui = { border = "rounded", height = 0.8 } })
+		end,
 	},
 
-	-- lsp enhancement
 	-- {
-	-- 	"nvimdev/lspsaga.nvim",
-	-- 	event = { "LspAttach" },
-	-- 	config = function()
-	-- 		require("lspsaga").setup({
-	-- 			symbol_in_winbar = { enable = false },
-	-- 			lightbulb = { enable = false },
-	-- 			outline = { auto_preview = false },
-	-- 			floaterm = { height = 1, width = 1 },
+	-- 	"mason-tool-installer.nvim",
+	-- 	after = function()
+	-- 		require("mason-tool-installer").setup({
+	-- 			ensure_installed = {
+	-- 				-- lsp
+	-- 				"basedpyright",
+	-- 				"clangd",
+	-- 				"lua-language-server",
+	-- 				"matlab-language-server",
+	-- 				"nil",
+	-- 				"texlab",
+	-- 				-- dap
+	-- 				"codelldb",
+	-- 				"debugpy",
+	-- 				-- linter
+	-- 				"commitlint",
+	-- 				"markdownlint-cli2",
+	-- 				"shellcheck",
+	-- 				-- formatter
+	-- 				"bibtex-tidy",
+	-- 				"black",
+	-- 				"clang-format",
+	-- 				"latexindent",
+	-- 				"prettierd",
+	-- 				"shfmt",
+	-- 				"stylua",
+	-- 				-- others
+	-- 				"tectonic",
+	-- 			},
 	-- 		})
-	--
-	-- 		vim.keymap.set("n", "gh", function()
-	-- 			require("lspsaga.finder"):new({})
-	-- 		end, { desc = "Lsp Finder" })
-	--
-	-- 		vim.keymap.set("n", "<M-o>", function()
-	-- 			require("lspsaga.symbol"):outline()
-	-- 		end, { desc = "Lspsaga Outline" })
 	-- 	end,
 	-- },
 
-	-- formatting
 	{
-		"stevearc/conform.nvim",
-		config = function()
+		"conform.nvim",
+		after = function()
 			require("conform").setup({
 				formatters_by_ft = {
 					bib = { "bibtex-tidy" },
@@ -200,11 +179,10 @@ return {
 		end,
 	},
 
-	-- linting
 	{
-		"mfussenegger/nvim-lint",
+		"nvim-lint",
 		ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
-		config = function()
+		after = function()
 			local lint = require("lint")
 
 			lint.linters_by_ft = {

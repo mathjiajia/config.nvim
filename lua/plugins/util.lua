@@ -1,8 +1,7 @@
 return {
 
-	-- terminal
 	{
-		"akinsho/toggleterm.nvim",
+		"toggleterm-nvim",
 		cmd = { "ToggleTerm" },
 		keys = {
 			{ "<C-Bslash>", desc = "Toggle Term" },
@@ -10,7 +9,7 @@ return {
 			{ "<M-i>", desc = "Toggle btop" },
 			{ "<M-r>", desc = "Code Runner" },
 		},
-		config = function()
+		after = function()
 			require("toggleterm").setup({
 				open_mapping = "<C-Bslash>",
 				float_opts = { border = "rounded" },
@@ -43,10 +42,11 @@ return {
 		end,
 	},
 
-	-- session management
 	{
-		"stevearc/resession.nvim",
-		opts = {},
+		"resession-nvim",
+		after = function()
+			require("resession").setup({})
+		end,
 		-- stylua: ignore
 		keys = {
 			{ "<leader>ss", function() require("resession").save() end, desc = "Save Session" },
@@ -55,16 +55,17 @@ return {
 		},
 	},
 
-	-- code runner
 	{
-		"CRAG666/code_runner.nvim",
+		"code_runner-nvim",
 		cmd = { "RunCode", "RunFile", "RunProject" },
-		opts = {
-			filetype = {
-				lua = "nvim -l",
-				python = "python3 -u",
-				swift = "swift",
-			},
-		},
+		after = function()
+			require("code_runner").setup({
+				filetype = {
+					lua = "nvim -l",
+					python = "python3 -u",
+					swift = "swift",
+				},
+			})
+		end,
 	},
 }
