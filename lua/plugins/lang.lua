@@ -20,11 +20,7 @@ return {
 		"lazydev.nvim",
 		ft = "lua",
 		after = function()
-			require("lazydev").setup({
-				library = {
-					{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				},
-			})
+			require("lazydev").setup()
 		end,
 	},
 }

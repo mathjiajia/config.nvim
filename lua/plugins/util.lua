@@ -1,7 +1,7 @@
 return {
 
 	{
-		"toggleterm-nvim",
+		"toggleterm.nvim",
 		cmd = { "ToggleTerm" },
 		keys = {
 			{ "<C-Bslash>", desc = "Toggle Term" },
@@ -43,7 +43,7 @@ return {
 	},
 
 	{
-		"resession-nvim",
+		"resession.nvim",
 		after = function()
 			require("resession").setup({})
 		end,
@@ -56,7 +56,7 @@ return {
 	},
 
 	{
-		"code_runner-nvim",
+		"code_runner.nvim",
 		cmd = { "RunCode", "RunFile", "RunProject" },
 		after = function()
 			require("code_runner").setup({

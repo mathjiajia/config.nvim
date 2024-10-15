@@ -20,7 +20,6 @@ return {
 			})
 
 			-- lspconfig
-
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local settings = {
@@ -37,17 +36,11 @@ return {
 				matlab_ls = {
 					MATLAB = {
 						indexWorkspace = true,
-						installPath = "/Applications/MATLAB_R2024a.app",
+						installPath = "/Applications/MATLAB_R2024b.app",
 						telemetry = false,
 					},
 				},
-				nil_ls = {
-					["nil"] = {
-						formatting = {
-							command = { "nixfmt" },
-						},
-					},
-				},
+				nil_ls = {},
 				sourcekit = {},
 				taplo = {},
 				texlab = {

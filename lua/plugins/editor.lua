@@ -35,7 +35,7 @@ return {
 	},
 
 	{
-		"ibhagwan/fzf-lua",
+		"fzf-lua",
 		cmd = "FzfLua",
 		after = function()
 			require("fzf-lua").setup({
@@ -134,7 +134,7 @@ return {
 	},
 
 	{
-		"stevearc/quicker.nvim",
+		"quicker.nvim",
 		ft = { "qf" },
 		after = function()
 			require("quicker").setup({
@@ -153,14 +153,17 @@ return {
 	},
 
 	{
-		"stevearc/aerial.nvim",
+		"aerial.nvim",
 		cmd = { "AerialToggle" },
+		after = function()
+			require("aerial").setup({
+				backends = { "lsp", "treesitter", "markdown", "man" },
+				layout = { resize_to_content = false },
+				filter_kind = false,
+				show_guides = true,
+			})
+		end,
 		-- stylua: ignore
 		keys = { { "<leader>cs", function() require("aerial").toggle() end, desc = "Aerial (Symbols)" } },
-	},
-
-	{
-		"mfussenegger/nvim-lint",
-		ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
 	},
 }

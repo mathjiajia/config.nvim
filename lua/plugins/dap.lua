@@ -65,7 +65,7 @@ return {
 						elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
 							return cwd .. "/.venv/bin/python"
 						else
-							return "/opt/homebrew/bin/python3"
+							return "python"
 						end
 					end,
 				},
@@ -113,6 +113,8 @@ return {
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				dapui.close()
 			end
+
+			require("dap-virtual-text").setup()
 		end,
 		-- stylua: ignore
 		keys = {

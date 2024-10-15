@@ -24,9 +24,10 @@ return {
 				end,
 				timeout = 3000,
 			})
+
+			-- stylua: ignore
+			vim.keymap.set("n", "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, { desc = "Delete All Notifications" } )
 		end,
-		-- stylua: ignore
-		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete All Notifications" } },
 	},
 
 	{
