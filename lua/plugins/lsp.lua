@@ -130,7 +130,7 @@ return {
 					nix = { "nixfmt" },
 					python = { "black" },
 					sh = { "shfmt" },
-					swift = { "swift_format" },
+					-- swift = { "swift_format" },
 					tex = { "latexindent" },
 					toml = { "taplo" },
 				},
