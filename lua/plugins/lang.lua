@@ -1,14 +1,6 @@
 return {
 
 	{
-		"latex.nvim",
-		ft = "tex",
-		after = function()
-			require("latex").setup()
-		end,
-	},
-
-	{
 		"markview.nvim",
 		ft = "markdown",
 		after = function()

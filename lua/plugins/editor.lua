@@ -2,8 +2,7 @@ return {
 	{
 		"oil.nvim",
 		cmd = { "Oil" },
-		-- stylua: ignore
-		keys = { { "<leader>o", function() require("oil").toggle_float() end, desc = "Toggle Oil" } },
+		keys = { { "-", "<Cmd>Oil --float<CR>", desc = "Open parent directory" } },
 		after = function()
 			require("oil").setup({
 				float = {
@@ -163,7 +162,6 @@ return {
 				show_guides = true,
 			})
 		end,
-		-- stylua: ignore
-		keys = { { "<leader>cs", function() require("aerial").toggle() end, desc = "Aerial (Symbols)" } },
+		keys = { { "<leader>cs", "<Cmd>AerialToggle<CR>", desc = "Aerial (Symbols)" } },
 	},
 }

@@ -41,7 +41,6 @@ return {
 					},
 				},
 				nil_ls = {},
-				sourcekit = {},
 				taplo = {},
 				texlab = {
 					texlab = {
@@ -78,6 +77,11 @@ return {
 					settings = settings[server],
 				})
 			end
+
+			require("lspconfig").sourcekit.setup({
+				capabilities = capabilities,
+				filetypes = { "swift", "objc", "objcpp" },
+			})
 		end,
 	},
 

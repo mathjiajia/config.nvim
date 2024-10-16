@@ -40,12 +40,60 @@ return {
 
 	{
 		"overseer.nvim",
-		ft = { "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
+		ft = { "bash", "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
 		after = function()
 			require("overseer").setup({
-				templates = { "builtin", "user.runner" },
+				templates = { "builtin", "user.builder", "user.runner" },
 				strategy = "toggleterm",
 			})
+
+			vim.keymap.set("n", "<leader>rf", "<Cmd>OverseerRun RunFile<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>rr", "<Cmd>OverseerRun OpenREPL<CR>", { silent = true })
+		end,
+	},
+
+	{
+		"sniprun",
+		ft = { "bash", "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
+		after = function()
+			require("sniprun").setup({
+				selected_interpreters = { "Generic", "Lua_nvim", "Python3_fifo" },
+				repl_enable = {
+					"Bash_original",
+					"Lua_nvim",
+					"Mathematica_original",
+					"Python3_fifo",
+					"R_original",
+					"Swift_original",
+				},
+
+				interpreter_options = {
+					Generic = {
+						Swift_original = {
+							supported_filetypes = { "swift" },
+							extension = ".swift",
+							interpreter = "swift",
+							boilerplate_pre = "import Foundation",
+						},
+					},
+					-- Python3_fifo = {
+					-- 	interpreter = "python",
+					-- 	venv = { "venv_project1", "venv_project2", "../venv_project2" },
+					-- },
+					Mathematica_original = { interpreter = "wolframscript" },
+				},
+
+				display = {
+					-- "Classic",
+					"VirtualTextOk",
+					"VirtualTextErr",
+					"Terminal",
+				},
+			})
+
+			vim.keymap.set("v", "<M-r>", "<Plug>SnipRun", { silent = true })
+			vim.keymap.set("n", "<M-r>", "<Plug>SnipRun", { silent = true })
+			-- vim.api.nvim_set_keymap("n", "<leader>f", "<Plug>SnipRunOperator", { silent = true })
 		end,
 	},
 
@@ -60,19 +108,5 @@ return {
 			{ "<leader>sl", function() require("resession").load() end, desc = "Load Session" },
 			{ "<leader>sd", function() require("resession").delete() end, desc = "Delete Session" },
 		},
-	},
-
-	{
-		"code_runner.nvim",
-		cmd = { "RunCode", "RunFile", "RunProject" },
-		after = function()
-			require("code_runner").setup({
-				filetype = {
-					lua = "nvim -l",
-					python = "python3 -u",
-					swift = "swift",
-				},
-			})
-		end,
 	},
 }

@@ -147,7 +147,7 @@ return {
 		after = function()
 			require("nvim-surround").setup({})
 		end,
-		ft = { "tex" },
+		ft = { "markdown", "tex" },
 		keys = {
 			{ "cs", desc = "Change Surrounding" },
 			{ "ds", desc = "Delete Surrounding" },

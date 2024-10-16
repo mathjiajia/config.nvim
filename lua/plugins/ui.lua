@@ -2,9 +2,9 @@ return {
 
 	{
 		"bamboo.nvim",
-		colorscheme = "bamboo",
 		after = function()
 			require("bamboo").setup({ transparent = true })
+			require("bamboo").load()
 		end,
 	},
 
@@ -25,8 +25,9 @@ return {
 				timeout = 3000,
 			})
 
-			-- stylua: ignore
-			vim.keymap.set("n", "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, { desc = "Delete All Notifications" } )
+			vim.keymap.set("n", "<leader>un", function()
+				require("notify").dismiss({ silent = true, pending = true })
+			end, { desc = "Delete All Notifications" })
 		end,
 	},
 
@@ -131,8 +132,12 @@ return {
 			})
 
 			-- stylua: ignore start
-			vim.keymap.set({ "i", "n", "s" }, "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, { silent = true, expr = true, desc = "Scroll Forward" })
-			vim.keymap.set({ "i", "n", "s" }, "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, { silent = true, expr = true, desc = "Scroll Backward" })
+			vim.keymap.set({ "i", "n", "s" }, "<c-f>",
+				function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,
+				{ silent = true, expr = true, desc = "Scroll Forward" })
+			vim.keymap.set({ "i", "n", "s" }, "<c-b>",
+				function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end,
+				{ silent = true, expr = true, desc = "Scroll Backward" })
 		end,
 	},
 
@@ -147,9 +152,9 @@ return {
 					packages = { enable = false },
 					-- stylua: ignore
 					shortcut = {
-						{ desc = " Files", group = "Directory", action = "FzfLua files", key = "f" },
-						{ desc = "󰤖 Directory", group = "Float", action = "Oil --float", key = "d" },
-						{ desc = " Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
+						{ desc = "  Files", group = "Directory", action = "FzfLua files", key = "f" },
+						{ desc = "  Directory", group = "Float", action = "Oil --float", key = "d" },
+						{ desc = "  Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
 					},
 					project = { action = "FzfLua files cwd=" },
 					mru = { cwd_only = true },
