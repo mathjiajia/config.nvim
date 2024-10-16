@@ -2,13 +2,13 @@ return {
 
 	{
 		"toggleterm.nvim",
-		cmd = { "ToggleTerm" },
-		keys = {
-			{ "<C-Bslash>", desc = "Toggle Term" },
-			{ "<M-g>", desc = "Toggle Lazygit" },
-			{ "<M-i>", desc = "Toggle btop" },
-			{ "<M-r>", desc = "Code Runner" },
-		},
+		-- cmd = { "ToggleTerm" },
+		-- keys = {
+		-- 	{ "<C-Bslash>", desc = "Toggle Term" },
+		-- 	{ "<M-g>", desc = "Toggle Lazygit" },
+		-- 	{ "<M-i>", desc = "Toggle btop" },
+		-- 	{ "<M-r>", desc = "Code Runner" },
+		-- },
 		after = function()
 			require("toggleterm").setup({
 				open_mapping = "<C-Bslash>",
@@ -32,13 +32,20 @@ return {
 				float_opts = float_opts,
 			})
 
-			local cmd = require("code_runner.commands").get_filetype_command()
-			local code_runner = Terminal:new({ cmd = cmd, hidden = true, direction = "float", close_on_exit = false })
-
 			-- stylua: ignore start
 			vim.keymap.set({ "n", "t" }, "<M-g>", function() lazygit:toggle() end )
 			vim.keymap.set({ "n", "t" }, "<M-i>", function() btop:toggle() end )
-			vim.keymap.set("n", "<M-r>", function() code_runner:open() end )
+		end,
+	},
+
+	{
+		"overseer.nvim",
+		ft = { "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
+		after = function()
+			require("overseer").setup({
+				templates = { "builtin", "user.runner" },
+				strategy = "toggleterm",
+			})
 		end,
 	},
 

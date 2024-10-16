@@ -57,7 +57,7 @@ return {
 								"--execute-command",
 								"turn_on_synctex",
 								"--inverse-search",
-								vim.fn.stdpath("data") .. "/mason/bin/texlab inverse-search -i %%1 -l %%2",
+								"texlab inverse-search -i %%1 -l %%2",
 								"--forward-search-file",
 								"%f",
 								"--forward-search-line",
@@ -82,47 +82,6 @@ return {
 	},
 
 	{
-		"mason.nvim",
-		after = function()
-			require("mason").setup({ ui = { border = "rounded", height = 0.8 } })
-		end,
-	},
-
-	-- {
-	-- 	"mason-tool-installer.nvim",
-	-- 	after = function()
-	-- 		require("mason-tool-installer").setup({
-	-- 			ensure_installed = {
-	-- 				-- lsp
-	-- 				"basedpyright",
-	-- 				"clangd",
-	-- 				"lua-language-server",
-	-- 				"matlab-language-server",
-	-- 				"nil",
-	-- 				"texlab",
-	-- 				-- dap
-	-- 				"codelldb",
-	-- 				"debugpy",
-	-- 				-- linter
-	-- 				"commitlint",
-	-- 				"markdownlint-cli2",
-	-- 				"shellcheck",
-	-- 				-- formatter
-	-- 				"bibtex-tidy",
-	-- 				"black",
-	-- 				"clang-format",
-	-- 				"latexindent",
-	-- 				"prettierd",
-	-- 				"shfmt",
-	-- 				"stylua",
-	-- 				-- others
-	-- 				"tectonic",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
-
-	{
 		"conform.nvim",
 		after = function()
 			require("conform").setup({
@@ -142,7 +101,7 @@ return {
 					nix = { "nixfmt" },
 					python = { "black" },
 					sh = { "shfmt" },
-					swift = { "swift_format" },
+					-- swift = { "swift_format" },
 					tex = { "latexindent" },
 					toml = { "taplo" },
 				},

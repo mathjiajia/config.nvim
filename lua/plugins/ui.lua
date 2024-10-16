@@ -148,7 +148,7 @@ return {
 					-- stylua: ignore
 					shortcut = {
 						{ desc = " Files", group = "Directory", action = "FzfLua files", key = "f" },
-						{ desc = "󰤖 Servers", group = "Float", action = "Mason", key = "s" },
+						{ desc = "󰤖 Directory", group = "Float", action = "Oil --float", key = "d" },
 						{ desc = " Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
 					},
 					project = { action = "FzfLua files cwd=" },

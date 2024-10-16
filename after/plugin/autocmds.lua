@@ -6,7 +6,7 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("CheckTime", {}),
 	callback = function()
 		if vim.o.buftype ~= "nofile" then
-			vim.cmd("checktime")
+			vim.cmd.checktime()
 		end
 	end,
 })
@@ -98,33 +98,6 @@ autocmd("BufReadPost", {
 -- 	end,
 -- 	desc = "Enable Treesitter",
 -- })
-
--- No buflist for special files
--- close some filetypes with <q>
-autocmd("FileType", {
-	group = augroup("SpecialFiles", {}),
-	pattern = { "checkhealth", "help", "qf", "grug-far" },
-	callback = function(ev)
-		vim.b[ev.buf].buflisted = false
-		vim.keymap.set("n", "q", function()
-			vim.api.nvim_win_close(0, false)
-		end, { buffer = ev.buf, silent = true })
-	end,
-	desc = "Special Files",
-})
-
--- Enable conceal and spell for markup langs
-autocmd("FileType", {
-	group = augroup("ConcealSpell", {}),
-	pattern = { "markdown", "norg", "tex" },
-	callback = function(ev)
-		vim.opt_local.conceallevel = 2
-		vim.opt_local.spell = true
-
-		vim.keymap.set("i", "<C-h>", "<C-g>u<Esc>[s1z=`]a<C-g>u", { buffer = ev.buf, desc = "Crect Last Spelling" })
-	end,
-	desc = "Conceal and Spell",
-})
 
 -- Opens non-text files in the default program instead of in Neovim
 autocmd("BufReadPost", {
