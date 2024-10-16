@@ -1,14 +1,10 @@
 return {
 	{
-		"nvim-treesitter",
-		after = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {},
-				highlight = { enable = true },
-			})
-		end,
+		"nvim-treesitter/nvim-treesitter",
+		main = "nvim-treesitter.configs",
+		opts = { highlight = { enable = true } },
 	},
 
 	-- enhanced matchparen
-	-- { "nvim-treesitter-pairs" },
+	{ "lewis6991/nvim-treesitter-pairs" },
 }

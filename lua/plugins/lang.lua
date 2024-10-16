@@ -1,18 +1,41 @@
 return {
 
-	{
-		"markview.nvim",
-		ft = "markdown",
-		after = function()
-			require("markview").setup()
-		end,
-	},
+	-- filesype plugin for `LaTeX`
+	"mathjiajia/latex.nvim",
 
-	{
-		"lazydev.nvim",
-		ft = "lua",
-		after = function()
-			require("lazydev").setup()
-		end,
-	},
+	-- viewing Markdown files in Neovim
+	{ "OXY2DEV/markview.nvim", ft = "markdown", config = true },
+
+	-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+	-- used for completion, annotations and signatures of Neovim apis
+	{ "folke/lazydev.nvim", ft = "lua", config = true },
+
+	-- neorg
+	-- {
+	-- 	"nvim-neorg/neorg",
+	-- 	ft = "norg",
+	-- 	opts = {
+	-- 		load = {
+	-- 			["core.defaults"] = {},
+	-- 			["core.concealer"] = {},
+	-- 			["core.highlights"] = {},
+	-- 			["core.integrations.treesitter"] = {},
+	-- 			["core.completion"] = { config = { engine = "nvim-cmp" } },
+	-- 			["core.dirman"] = {
+	-- 				config = {
+	-- 					workspaces = { notes = "~/Documents/neorg/notes" },
+	-- 					default_workspace = "notes",
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
+
+	-- {
+	-- 	"HakonHarnes/img-clip.nvim",
+	-- 	ft = { "markdown", "tex", "typst" },
+	-- 	config = true,
+	--     -- stylua: ignore
+	--     keys = { { "<leader>p", function() require("img-clip").pasteImage() end, desc = "Paste clipboard image" } },
+	-- },
 }

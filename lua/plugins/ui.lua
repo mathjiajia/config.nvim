@@ -1,83 +1,89 @@
 return {
 
+	-- colorscheme
 	{
-		"bamboo.nvim",
-		after = function()
+		"ribru17/bamboo.nvim",
+		priority = 1000,
+		config = function()
 			require("bamboo").setup({ transparent = true })
 			require("bamboo").load()
 		end,
 	},
-
+	-- better vim.notify
 	{
-		"nvim-notify",
-		after = function()
-			---@diagnostic disable-next-line: missing-fields
-			require("notify").setup({
-				max_height = function()
-					return math.floor(vim.o.lines * 0.75)
-				end,
-				max_width = function()
-					return math.floor(vim.o.columns * 0.75)
-				end,
-				on_open = function(win)
-					vim.api.nvim_win_set_config(win, { zindex = 100 })
-				end,
-				timeout = 3000,
-			})
-
-			vim.keymap.set("n", "<leader>un", function()
-				require("notify").dismiss({ silent = true, pending = true })
-			end, { desc = "Delete All Notifications" })
-		end,
+		"rcarriga/nvim-notify",
+		-- stylua: ignore
+		keys = { { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Delete All Notifications" } },
+		---@module "notify"
+		---@type notify.Config
+		---@diagnostic disable-next-line: missing-fields
+		opts = {
+			max_height = function()
+				return math.floor(vim.o.lines * 0.75)
+			end,
+			max_width = function()
+				return math.floor(vim.o.columns * 0.75)
+			end,
+			on_open = function(win)
+				vim.api.nvim_win_set_config(win, { zindex = 100 })
+			end,
+			timeout = 3000,
+		},
 	},
 
+	-- better vim.ui
+	{ "stevearc/dressing.nvim", config = true },
+
+	-- highlight patterns in text
 	{
-		"dressing.nvim",
-		after = function()
-			require("dressing").setup()
-		end,
+		"brenoprata10/nvim-highlight-colors",
+		opts = { exclude_buftypes = { "nofile" } },
 	},
 
+	-- winbar
 	{
-		"nvim-highlight-colors",
-		after = function()
-			require("nvim-highlight-colors").setup({ exclude_buftypes = { "nofile" } })
-		end,
+		"Bekaboo/dropbar.nvim",
+		config = true,
 	},
 
-	{
-		"dropbar.nvim",
-		after = function()
-			require("dropbar").setup()
-		end,
-	},
+	-- statuscolumn
+	{ "luukvbaal/statuscol.nvim", config = true },
 
+	-- statusline/tabline
 	{
-		"statuscol.nvim",
-		after = function()
-			require("statuscol").setup()
-		end,
-	},
-
-	{
-		"heirline.nvim",
-		after = function()
+		"rebelot/heirline.nvim",
+		config = function()
 			require("configs.heirline")
 		end,
 	},
+	-- {
+	-- 	"sschleemilch/slimline.nvim",
+	-- 	opts = {
+	-- 		verbose_mode = true,
+	-- 		style = "fg",
+	-- 	},
+	-- },
 
+	-- indent guides for Neovim
 	{
-		"indent-blankline.nvim",
-		after = function()
-			local highlight = {
-				"RainbowRed",
-				"RainbowYellow",
-				"RainbowBlue",
-				"RainbowOrange",
-				"RainbowGreen",
-				"RainbowViolet",
-				"RainbowCyan",
-			}
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@type ibl.config
+		opts = {
+			exclude = { filetypes = { "conf", "dashboard", "markdown" } },
+			scope = {
+				highlight = {
+					"RainbowRed",
+					"RainbowYellow",
+					"RainbowBlue",
+					"RainbowOrange",
+					"RainbowGreen",
+					"RainbowViolet",
+					"RainbowCyan",
+				},
+			},
+		},
+		config = function(_, opts)
 			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
@@ -89,19 +95,17 @@ return {
 				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 			end)
 
-			vim.g.rainbow_delimiters = { highlight = highlight }
-			require("ibl").setup({
-				exclude = { filetypes = { "conf", "dashboard", "markdown" } },
-				scope = { highlight = highlight },
-			})
+			vim.g.rainbow_delimiters = { highlight = opts.scope.highlight }
+			require("ibl").setup(opts)
 
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
 	},
 
+	-- noicer ui
 	{
-		"noice.nvim",
-		after = function()
+		"folke/noice.nvim",
+		config = function()
 			require("noice").setup({
 				lsp = {
 					override = {
@@ -132,58 +136,56 @@ return {
 			})
 
 			-- stylua: ignore start
-			vim.keymap.set({ "i", "n", "s" }, "<c-f>",
-				function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,
-				{ silent = true, expr = true, desc = "Scroll Forward" })
-			vim.keymap.set({ "i", "n", "s" }, "<c-b>",
-				function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end,
-				{ silent = true, expr = true, desc = "Scroll Backward" })
+			vim.keymap.set({ "i", "n", "s" }, "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, { silent = true, expr = true, desc = "Scroll Forward" })
+			vim.keymap.set({ "i", "n", "s" }, "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, { silent = true, expr = true, desc = "Scroll Backward" })
 		end,
 	},
 
+	-- start screen
 	{
-		"dashboard-nvim",
-		after = function()
-			require("dashboard").setup({
-				disable_move = true,
-				shuffle_letter = true,
-				config = {
-					week_header = { enable = true },
-					packages = { enable = false },
-					-- stylua: ignore
-					shortcut = {
-						{ desc = "  Files", group = "Directory", action = "FzfLua files", key = "f" },
-						{ desc = "  Directory", group = "Float", action = "Oil --float", key = "d" },
-						{ desc = "  Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
-					},
-					project = { action = "FzfLua files cwd=" },
-					mru = { cwd_only = true },
+		"nvimdev/dashboard-nvim",
+		opts = {
+			disable_move = true,
+			shuffle_letter = true,
+			config = {
+				week_header = { enable = true },
+				-- stylua: ignore
+				shortcut = {
+					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
+					{ desc = "  Files", group = "Directory", action = "FzfLua files", key = "f" },
+					{ desc = "  Directory", group = "Float", action = "Oil --float", key = "d" },
+					{ desc = "  Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
 				},
-			})
-		end,
+				project = { action = "FzfLua files cwd=" },
+				mru = { cwd_only = true },
+			},
+		},
 	},
 
+	-- Zen mode
 	{
-		"zen-mode.nvim",
+		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
-		before = function()
-			require("twilight").setup()
-		end,
-		after = function()
-			require("zen-mode").setup({ plugins = { gitsigns = { enabled = false } } })
-		end,
+		dependencies = { "folke/twilight.nvim", config = true },
+		---@module "zen-mode"
+		---@type ZenOptions
+		opts = { plugins = { gitsigns = { enabled = false } } },
 	},
 
+	-- rainbow delimiters
 	{
-		"rainbow-delimiters.nvim",
-		before = function()
+		"HiPhish/rainbow-delimiters.nvim",
+		submodules = false,
+		init = function()
 			vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } }
 		end,
 	},
 
+	-- icons
 	{
-		"mini.icons",
-		after = function()
+		"echasnovski/mini.icons",
+		-- lazy = true,
+		config = function()
 			require("mini.icons").setup({
 				lsp = {
 					["function"] = { glyph = "" },

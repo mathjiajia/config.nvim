@@ -1,15 +1,16 @@
 return {
 
+	-- terminal
 	{
-		"toggleterm.nvim",
-		-- cmd = { "ToggleTerm" },
-		-- keys = {
-		-- 	{ "<C-Bslash>", desc = "Toggle Term" },
-		-- 	{ "<M-g>", desc = "Toggle Lazygit" },
-		-- 	{ "<M-i>", desc = "Toggle btop" },
-		-- 	{ "<M-r>", desc = "Code Runner" },
-		-- },
-		after = function()
+		"akinsho/toggleterm.nvim",
+		cmd = { "ToggleTerm" },
+		keys = {
+			{ "<C-Bslash>", desc = "Toggle Term" },
+			{ "<M-g>", desc = "Toggle Lazygit" },
+			{ "<M-i>", desc = "Toggle btop" },
+			{ "<M-r>", desc = "Code Runner" },
+		},
+		config = function()
 			require("toggleterm").setup({
 				open_mapping = "<C-Bslash>",
 				float_opts = { border = "rounded" },
@@ -32,16 +33,32 @@ return {
 				float_opts = float_opts,
 			})
 
+			-- local cmd = require("code_runner.commands").get_filetype_command()
+			-- local code_runner = Terminal:new({ cmd = cmd, hidden = true, direction = "float", close_on_exit = false })
+
 			-- stylua: ignore start
 			vim.keymap.set({ "n", "t" }, "<M-g>", function() lazygit:toggle() end )
 			vim.keymap.set({ "n", "t" }, "<M-i>", function() btop:toggle() end )
+			-- vim.keymap.set("n", "<M-r>", function() code_runner:open() end )
 		end,
 	},
 
+	-- session management
 	{
-		"overseer.nvim",
+		"stevearc/resession.nvim",
+		opts = {},
+		-- stylua: ignore
+		keys = {
+			{ "<leader>ss", function() require("resession").save() end, desc = "Save Session" },
+			{ "<leader>sl", function() require("resession").load() end, desc = "Load Session" },
+			{ "<leader>sd", function() require("resession").delete() end, desc = "Delete Session" },
+		},
+	},
+
+	{
+		"stevearc/overseer.nvim",
 		ft = { "bash", "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
-		after = function()
+		config = function()
 			require("overseer").setup({
 				templates = { "builtin", "user.builder", "user.runner" },
 				strategy = "toggleterm",
@@ -53,9 +70,10 @@ return {
 	},
 
 	{
-		"sniprun",
+		"michaelb/sniprun",
+		build = "sh ./install.sh",
 		ft = { "bash", "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
-		after = function()
+		config = function()
 			require("sniprun").setup({
 				selected_interpreters = { "Generic", "Lua_nvim", "Python3_fifo" },
 				repl_enable = {
@@ -95,18 +113,5 @@ return {
 			vim.keymap.set("n", "<M-r>", "<Plug>SnipRun", { silent = true })
 			-- vim.api.nvim_set_keymap("n", "<leader>f", "<Plug>SnipRunOperator", { silent = true })
 		end,
-	},
-
-	{
-		"resession.nvim",
-		after = function()
-			require("resession").setup({})
-		end,
-		-- stylua: ignore
-		keys = {
-			{ "<leader>ss", function() require("resession").save() end, desc = "Save Session" },
-			{ "<leader>sl", function() require("resession").load() end, desc = "Load Session" },
-			{ "<leader>sd", function() require("resession").delete() end, desc = "Delete Session" },
-		},
 	},
 }

@@ -1,8 +1,9 @@
 return {
 
+	-- lspconfig
 	{
-		"nvim-lspconfig",
-		after = function()
+		"neovim/nvim-lspconfig",
+		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
 			-- diagnostics config
@@ -20,6 +21,7 @@ return {
 			})
 
 			-- lspconfig
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local settings = {
@@ -85,9 +87,32 @@ return {
 		end,
 	},
 
+	-- lsp enhancement
+	-- {
+	-- 	"nvimdev/lspsaga.nvim",
+	-- 	event = { "LspAttach" },
+	-- 	config = function()
+	-- 		require("lspsaga").setup({
+	-- 			symbol_in_winbar = { enable = false },
+	-- 			lightbulb = { enable = false },
+	-- 			outline = { auto_preview = false },
+	-- 			floaterm = { height = 1, width = 1 },
+	-- 		})
+	--
+	-- 		vim.keymap.set("n", "gh", function()
+	-- 			require("lspsaga.finder"):new({})
+	-- 		end, { desc = "Lsp Finder" })
+	--
+	-- 		vim.keymap.set("n", "<M-o>", function()
+	-- 			require("lspsaga.symbol"):outline()
+	-- 		end, { desc = "Lspsaga Outline" })
+	-- 	end,
+	-- },
+
+	-- formatting
 	{
-		"conform.nvim",
-		after = function()
+		"stevearc/conform.nvim",
+		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
 					bib = { "bibtex-tidy" },
@@ -105,7 +130,7 @@ return {
 					nix = { "nixfmt" },
 					python = { "black" },
 					sh = { "shfmt" },
-					-- swift = { "swift_format" },
+					swift = { "swift_format" },
 					tex = { "latexindent" },
 					toml = { "taplo" },
 				},
@@ -135,10 +160,11 @@ return {
 		end,
 	},
 
+	-- linting
 	{
-		"nvim-lint",
+		"mfussenegger/nvim-lint",
 		ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },
-		after = function()
+		config = function()
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
