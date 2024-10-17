@@ -68,22 +68,16 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		---@type ibl.config
-		opts = {
-			exclude = { filetypes = { "conf", "dashboard", "markdown" } },
-			scope = {
-				highlight = {
-					"RainbowRed",
-					"RainbowYellow",
-					"RainbowBlue",
-					"RainbowOrange",
-					"RainbowGreen",
-					"RainbowViolet",
-					"RainbowCyan",
-				},
-			},
-		},
-		config = function(_, opts)
+		config = function()
+			local highlight = {
+				"RainbowRed",
+				"RainbowYellow",
+				"RainbowBlue",
+				"RainbowOrange",
+				"RainbowGreen",
+				"RainbowViolet",
+				"RainbowCyan",
+			}
 			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
@@ -95,8 +89,11 @@ return {
 				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 			end)
 
-			vim.g.rainbow_delimiters = { highlight = opts.scope.highlight }
-			require("ibl").setup(opts)
+			vim.g.rainbow_delimiters = { highlight = highlight }
+			require("ibl").setup({
+				exclude = { filetypes = { "conf", "dashboard", "markdown" } },
+				scope = { highlight = highlight },
+			})
 
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
@@ -135,9 +132,17 @@ return {
 				},
 			})
 
-			-- stylua: ignore start
-			vim.keymap.set({ "i", "n", "s" }, "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, { silent = true, expr = true, desc = "Scroll Forward" })
-			vim.keymap.set({ "i", "n", "s" }, "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, { silent = true, expr = true, desc = "Scroll Backward" })
+			vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+				if not require("noice.lsp").scroll(4) then
+					return "<c-f>"
+				end
+			end, { silent = true, expr = true })
+
+			vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+				if not require("noice.lsp").scroll(-4) then
+					return "<c-b>"
+				end
+			end, { silent = true, expr = true })
 		end,
 	},
 

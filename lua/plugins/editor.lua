@@ -5,6 +5,7 @@ return {
 		"stevearc/oil.nvim",
 		cmd = "Oil",
 		keys = { { "-", "<Cmd>Oil --float<CR>", desc = "Open parent directory" } },
+		---@module "oil"
 		---@type oil.SetupOpts
 		opts = {
 			float = {
@@ -139,6 +140,7 @@ return {
 	{
 		"stevearc/quicker.nvim",
 		ft = { "qf" },
+		---@module "quicker"
 		---@type quicker.SetupOptions
 		opts = {
 			-- stylua: ignore

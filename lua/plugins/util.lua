@@ -19,6 +19,7 @@ return {
 			local Terminal = require("toggleterm.terminal").Terminal
 			local float_opts = { width = vim.o.columns, height = vim.o.lines }
 
+			local btop = Terminal:new({ cmd = "btop", hidden = true, direction = "float", float_opts = float_opts })
 			local lazygit = Terminal:new({
 				cmd = "lazygit",
 				dir = "git_dir",
@@ -26,27 +27,17 @@ return {
 				direction = "float",
 				float_opts = float_opts,
 			})
-			local btop = Terminal:new({
-				cmd = "btop",
-				hidden = true,
-				direction = "float",
-				float_opts = float_opts,
-			})
-
-			-- local cmd = require("code_runner.commands").get_filetype_command()
-			-- local code_runner = Terminal:new({ cmd = cmd, hidden = true, direction = "float", close_on_exit = false })
 
 			-- stylua: ignore start
-			vim.keymap.set({ "n", "t" }, "<M-g>", function() lazygit:toggle() end )
 			vim.keymap.set({ "n", "t" }, "<M-i>", function() btop:toggle() end )
-			-- vim.keymap.set("n", "<M-r>", function() code_runner:open() end )
+			vim.keymap.set({ "n", "t" }, "<M-g>", function() lazygit:toggle() end )
 		end,
 	},
 
 	-- session management
 	{
 		"stevearc/resession.nvim",
-		opts = {},
+		config = true,
 		-- stylua: ignore
 		keys = {
 			{ "<leader>ss", function() require("resession").save() end, desc = "Save Session" },
@@ -57,61 +48,42 @@ return {
 
 	{
 		"stevearc/overseer.nvim",
-		ft = { "bash", "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
-		config = function()
-			require("overseer").setup({
-				templates = { "builtin", "user.builder", "user.runner" },
-				strategy = "toggleterm",
-			})
-
-			vim.keymap.set("n", "<leader>rf", "<Cmd>OverseerRun RunFile<CR>", { silent = true })
-			vim.keymap.set("n", "<leader>rr", "<Cmd>OverseerRun OpenREPL<CR>", { silent = true })
-		end,
+		keys = {
+			{ "<leader>rf", "<Cmd>OverseerRun RunFile<CR>", silent = true },
+			{ "<leader>rr", "<Cmd>OverseerRun OpenREPL<CR>", silent = true },
+		},
+		opts = {
+			templates = { "builtin", "user.builder", "user.runner" },
+			strategy = "toggleterm",
+			dap = false,
+		},
 	},
 
 	{
 		"michaelb/sniprun",
 		build = "sh ./install.sh",
-		ft = { "bash", "c", "cpp", "lua", "markdown", "python", "r", "sh", "swift" },
-		config = function()
-			require("sniprun").setup({
-				selected_interpreters = { "Generic", "Lua_nvim", "Python3_fifo" },
-				repl_enable = {
-					"Bash_original",
-					"Lua_nvim",
-					"Mathematica_original",
-					"Python3_fifo",
-					"R_original",
-					"Swift_original",
-				},
+		keys = { { "<M-r>", "<Plug>SnipRun", mode = { "n", "v" }, silent = true, desc = "Snip Run" } },
+		opts = {
+			selected_interpreters = { "Generic", "Lua_nvim", "Python3_fifo" },
+			repl_enable = { "Bash_original", "Lua_nvim", "Python3_fifo", "R_original" },
 
-				interpreter_options = {
-					Generic = {
-						Swift_original = {
-							supported_filetypes = { "swift" },
-							extension = ".swift",
-							interpreter = "swift",
-							boilerplate_pre = "import Foundation",
-						},
+			interpreter_options = {
+				Generic = {
+					Swift_original = {
+						supported_filetypes = { "swift" },
+						extension = ".swift",
+						interpreter = "swift",
+						boilerplate_pre = "import Foundation",
 					},
-					-- Python3_fifo = {
-					-- 	interpreter = "python",
-					-- 	venv = { "venv_project1", "venv_project2", "../venv_project2" },
-					-- },
-					Mathematica_original = { interpreter = "wolframscript" },
 				},
+			},
 
-				display = {
-					-- "Classic",
-					"VirtualTextOk",
-					"VirtualTextErr",
-					"Terminal",
-				},
-			})
-
-			vim.keymap.set("v", "<M-r>", "<Plug>SnipRun", { silent = true })
-			vim.keymap.set("n", "<M-r>", "<Plug>SnipRun", { silent = true })
-			-- vim.api.nvim_set_keymap("n", "<leader>f", "<Plug>SnipRunOperator", { silent = true })
-		end,
+			display = {
+				-- "Classic",
+				"VirtualTextOk",
+				"VirtualTextErr",
+				"Terminal",
+			},
+		},
 	},
 }

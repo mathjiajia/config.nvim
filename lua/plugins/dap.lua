@@ -76,7 +76,7 @@ return {
 			else
 				cb({
 					type = "executable",
-					command = vim.fn.stdpath("data") .. "mason/packages/debugpy/venv/bin/python",
+					command = "path/to/virtualenvs/debugpy/bin/python", -- FIXME
 					args = { "-m", "debugpy.adapter" },
 					options = { source_filetype = "python" },
 				})
@@ -97,32 +97,29 @@ return {
 					elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
 						return cwd .. "/.venv/bin/python"
 					else
-						return "/opt/homebrew/bin/python3"
+						return "/usr/bin/python"
 					end
 				end,
 			},
 		}
 
-		dap.adapters.codelldb = {
-			type = "server",
-			port = "${port}",
-			executable = {
-				command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb",
-				args = { "--port", "${port}" },
-			},
+		dap.adapters.lldb = {
+			type = "executable",
+			command = "/run/current-system/sw/bin/lldb-dap",
+			name = "lldb",
 		}
 
 		dap.configurations.cpp = {
 			{
-				name = "Launch file",
-				type = "codelldb",
+				name = "Launch",
+				type = "lldb",
 				request = "launch",
 				program = function()
 					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 				end,
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
-				sourceLanguages = { "cpp" },
+				args = {},
 			},
 		}
 

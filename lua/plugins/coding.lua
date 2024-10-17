@@ -5,7 +5,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		lazy = true,
 		build = "make install_jsregexp",
-		dependencies = { "mathjiajia/mySnippets", config = true },
+		dependencies = { "mathjiajia/mySnippets" },
 		config = function()
 			local ls = require("luasnip")
 			local types = require("luasnip.util.types")
@@ -20,6 +20,8 @@ return {
 				enable_autosnippets = true,
 				store_selection_keys = "<Tab>",
 			})
+
+			require("luasnip.loaders.from_lua").lazy_load()
 
 			vim.keymap.set("i", "<C-k>", function()
 				if ls.expandable() then
@@ -56,9 +58,9 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
 			"lukas-reineke/cmp-rg",
 			"saadparwaiz1/cmp_luasnip",
+			{ url = "https://codeberg.org/FelipeLema/cmp-async-path" },
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -91,7 +93,7 @@ return {
 							nvim_lsp = "[LSP]",
 							luasnip = "[Snip]",
 							neorg = "[Norg]",
-							path = "[Path]",
+							async_path = "[Path]",
 							rg = "[RG]",
 						})[entry.source.name]
 						item.kind = icon .. " " .. item.kind
@@ -107,7 +109,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip", option = { show_autosnippets = true } },
-					{ name = "path" },
+					{ name = "async_path" },
 				}, {
 					{ name = "copilot", max_item_count = 2 },
 					{ name = "buffer" },
@@ -125,7 +127,7 @@ return {
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = "path" },
+					{ name = "async_path" },
 				}, {
 					{ name = "cmdline" },
 				}),
