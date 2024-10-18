@@ -29,8 +29,13 @@ return {
 		},
 		-- virtual text for the debugger
 		{ "theHamsta/nvim-dap-virtual-text", config = true },
+		{
+			"mfussenegger/nvim-dap-python",
+			config = function()
+				require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+			end,
+		},
 	},
-
 	-- stylua: ignore
 	keys = {
 		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
@@ -44,7 +49,6 @@ return {
 		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
 		{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets", mode = { "n", "v" } },
 	},
-
 	config = function()
 		-- dap signs
 		local icons = {
@@ -61,55 +65,13 @@ return {
 
 		local dap = require("dap")
 
-		dap.adapters.python = function(cb, config)
-			if config.request == "attach" then
-				---@diagnostic disable-next-line: undefined-field
-				local port = (config.connect or config).port
-				---@diagnostic disable-next-line: undefined-field
-				local host = (config.connect or config).host or "127.0.0.1"
-				cb({
-					type = "server",
-					port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-					host = host,
-					options = { source_filetype = "python" },
-				})
-			else
-				cb({
-					type = "executable",
-					command = "path/to/virtualenvs/debugpy/bin/python", -- FIXME
-					args = { "-m", "debugpy.adapter" },
-					options = { source_filetype = "python" },
-				})
-			end
-		end
-
-		dap.configurations.python = {
-			{
-				type = "python",
-				request = "launch",
-				name = "Launch file",
-
-				program = "${file}",
-				pythonPath = function()
-					local cwd = vim.fn.getcwd()
-					if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-						return cwd .. "/venv/bin/python"
-					elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-						return cwd .. "/.venv/bin/python"
-					else
-						return "/usr/bin/python"
-					end
-				end,
-			},
-		}
-
 		dap.adapters.lldb = {
 			type = "executable",
-			command = "/run/current-system/sw/bin/lldb-dap",
+			command = "/etc/profiles/per-user/" .. os.getenv("USER") .. "/bin/lldb-dap",
 			name = "lldb",
 		}
 
-		dap.configurations.cpp = {
+		dap.configurations.c = {
 			{
 				name = "Launch",
 				type = "lldb",
@@ -120,9 +82,11 @@ return {
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
 				args = {},
+				runInTerminal = true,
+				-- postRunCommands = { "process handle -p true -s false -n false SIGWINCH" },
 			},
 		}
 
-		dap.configurations.c = dap.configurations.cpp
+		dap.configurations.cpp = dap.configurations.c
 	end,
 }

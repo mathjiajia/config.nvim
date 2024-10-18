@@ -41,13 +41,10 @@ return {
 	},
 
 	-- winbar
-	{
-		"Bekaboo/dropbar.nvim",
-		config = true,
-	},
+	{ "Bekaboo/dropbar.nvim", config = true },
 
 	-- statuscolumn
-	{ "luukvbaal/statuscol.nvim", config = true },
+	-- { "luukvbaal/statuscol.nvim", config = true },
 
 	-- statusline/tabline
 	{
@@ -56,13 +53,6 @@ return {
 			require("configs.heirline")
 		end,
 	},
-	-- {
-	-- 	"sschleemilch/slimline.nvim",
-	-- 	opts = {
-	-- 		verbose_mode = true,
-	-- 		style = "fg",
-	-- 	},
-	-- },
 
 	-- indent guides for Neovim
 	{
@@ -137,7 +127,6 @@ return {
 					return "<c-f>"
 				end
 			end, { silent = true, expr = true })
-
 			vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
 				if not require("noice.lsp").scroll(-4) then
 					return "<c-b>"
@@ -153,7 +142,9 @@ return {
 			disable_move = true,
 			shuffle_letter = true,
 			config = {
+				project = { action = "FzfLua files cwd=" },
 				week_header = { enable = true },
+				mru = { cwd_only = true },
 				-- stylua: ignore
 				shortcut = {
 					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
@@ -161,8 +152,6 @@ return {
 					{ desc = "  Directory", group = "Float", action = "Oil --float", key = "d" },
 					{ desc = "  Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
 				},
-				project = { action = "FzfLua files cwd=" },
-				mru = { cwd_only = true },
 			},
 		},
 	},
@@ -189,7 +178,6 @@ return {
 	-- icons
 	{
 		"echasnovski/mini.icons",
-		-- lazy = true,
 		config = function()
 			require("mini.icons").setup({
 				lsp = {

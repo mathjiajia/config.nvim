@@ -34,7 +34,7 @@ return {
 
 		local ret = {
 			{
-				name = "Run " .. ft.name .. " file (" .. vim.fn.expand("%:t") .. ")",
+				name = "RunFile",
 				builder = function()
 					return {
 						cmd = ft.filerunner(),

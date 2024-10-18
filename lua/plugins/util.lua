@@ -5,10 +5,9 @@ return {
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm" },
 		keys = {
-			{ "<C-Bslash>", desc = "Toggle Term" },
 			{ "<M-g>", desc = "Toggle Lazygit" },
 			{ "<M-i>", desc = "Toggle btop" },
-			{ "<M-r>", desc = "Code Runner" },
+			{ "<C-Bslash>", desc = "Toggle Term" },
 		},
 		config = function()
 			require("toggleterm").setup({
@@ -52,6 +51,8 @@ return {
 			{ "<leader>rf", "<Cmd>OverseerRun RunFile<CR>", silent = true },
 			{ "<leader>rr", "<Cmd>OverseerRun OpenREPL<CR>", silent = true },
 		},
+		---@module "overseer"
+		---@type overseer.Config
 		opts = {
 			templates = { "builtin", "user.builder", "user.runner" },
 			strategy = "toggleterm",
@@ -66,7 +67,6 @@ return {
 		opts = {
 			selected_interpreters = { "Generic", "Lua_nvim", "Python3_fifo" },
 			repl_enable = { "Bash_original", "Lua_nvim", "Python3_fifo", "R_original" },
-
 			interpreter_options = {
 				Generic = {
 					Swift_original = {
@@ -77,13 +77,7 @@ return {
 					},
 				},
 			},
-
-			display = {
-				-- "Classic",
-				"VirtualTextOk",
-				"VirtualTextErr",
-				"Terminal",
-			},
+			display = { "VirtualTextOk", "VirtualTextErr", "Terminal" },
 		},
 	},
 }
