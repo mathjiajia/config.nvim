@@ -1,10 +1,10 @@
----@diagnostic disable: undefined-field, duplicate-set-field
 return {
 	"mfussenegger/nvim-dap",
 
 	dependencies = {
-
-		-- fancy UI for the debugger
+		{ "jbyuki/one-small-step-for-vimkind" },
+		{ "mfussenegger/nvim-dap-python", lazy = true },
+		{ "theHamsta/nvim-dap-virtual-text" },
 		{
 			"rcarriga/nvim-dap-ui",
 			dependencies = { "nvim-neotest/nvim-nio" },
@@ -28,10 +28,6 @@ return {
 				end
 			end,
 		},
-		-- virtual text for the debugger
-		{ "theHamsta/nvim-dap-virtual-text", lazy = true },
-		{ "mfussenegger/nvim-dap-python", lazy = true },
-		{ "jbyuki/one-small-step-for-vimkind", lazy = true },
 	},
 	-- stylua: ignore
 	keys = {
@@ -47,7 +43,6 @@ return {
 		{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets", mode = { "n", "v" } },
 	},
 	config = function()
-		-- dap signs
 		local icons = {
 			Stopped = "󰁕 ",
 			Breakpoint = " ",

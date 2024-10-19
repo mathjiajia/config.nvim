@@ -1,6 +1,5 @@
 return {
 
-	-- file explorer
 	{
 		"stevearc/oil.nvim",
 		cmd = "Oil",
@@ -15,13 +14,12 @@ return {
 		},
 	},
 
-	-- search/replace in multiple files
 	{
 		"MagicDuck/grug-far.nvim",
+		cmd = "GrugFar",
 		---@module "grug-far"
 		---@type GrugFarOptionsOverride
 		opts = { headerMaxWidth = 80 },
-		cmd = "GrugFar",
 		keys = {
 			{
 				"<leader>sr",
@@ -36,21 +34,18 @@ return {
 		},
 	},
 
-	-- fuzzy finder
 	{
 		"ibhagwan/fzf-lua",
 		cmd = "FzfLua",
 		-- stylua: ignore
 		keys = {
 			{ "<leader><space>", function () require("fzf-lua").files({ cwd = "%:p:h" }) end, desc = "Find Files (current)" },
-			-- find
 			{ "<leader>fb", function () require("fzf-lua").buffers() end, desc = "Buffers" },
 			{ "<leader>fc", function () require("fzf-lua").files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 			{ "<leader>ff", function () require("fzf-lua").files() end, desc = "Find Files (cwd)" },
 			{ "<leader>fg", function () require("fzf-lua").git_files() end, desc = "Find Git Files" },
 			{ "<leader>fl", function () require("fzf-lua").lsp_finder() end, desc = "Lsp Finder" },
 			{ "<leader>fo", function () require("fzf-lua").oldfiles() end, desc = "Old Files" },
-			-- search
 			{ "<leader>sb", function () require("fzf-lua").blines() end, desc = "Search Current Buffer Lines" },
 			{ "<leader>sg", function () require("fzf-lua").live_grep() end, desc = "Live Grep" },
 			{ "<leader>sh", function () require("fzf-lua").helptags() end, desc = "Help Tags" },
@@ -65,9 +60,6 @@ return {
 		},
 	},
 
-	-- Flash enhances the built-in search functionality by showing labels
-	-- at the end of each match, letting you quickly jump to a specific
-	-- location.
 	{
 		"folke/flash.nvim",
 		config = function()
@@ -82,9 +74,9 @@ return {
 		end,
 	},
 
-	-- git signs
 	{
 		"lewis6991/gitsigns.nvim",
+		---@module "gitsigns"
 		---@type Gitsigns.Config
 		---@diagnostic disable-next-line: missing-fields
 		opts = {
@@ -115,7 +107,6 @@ return {
 					end
 				end)
 
-				-- Actions
 				-- stylua: ignore start
 				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
 				map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
@@ -131,7 +122,6 @@ return {
 				map("n", "<leader>hD", function() gitsigns.diffthis("~") end, { desc = "Diff This (File)" })
 				map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "Toggle Deleted" })
 
-				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 			end,
 		},
@@ -140,6 +130,11 @@ return {
 	{
 		"stevearc/quicker.nvim",
 		ft = { "qf" },
+		-- stylua: ignore
+		keys = {
+			{ "<leader>q", function() vim.diagnostic.setqflist() end, desc = "Toggle Quickfix" },
+			{ "<leader>l", function() vim.diagnostic.setloclist() end, desc = "Toggle Loclist" },
+		},
 		---@module "quicker"
 		---@type quicker.SetupOptions
 		opts = {
@@ -149,23 +144,17 @@ return {
 				{ "<", function() require("quicker").collapse() end, desc = "Collapse quickfix context" },
 			},
 		},
-		-- stylua: ignore
-		keys = {
-			{ "<leader>q", function() vim.diagnostic.setqflist() end, desc = "Toggle Quickfix" },
-			{ "<leader>l", function() vim.diagnostic.setloclist() end, desc = "Toggle Loclist" },
-		},
 	},
 
-	-- symbols outline
 	{
 		"stevearc/aerial.nvim",
 		cmd = "AerialToggle",
+		keys = { { "<leader>cs", "<Cmd>AerialToggle<CR>", desc = "Aerial (Symbols)" } },
 		opts = {
 			backends = { "lsp", "treesitter", "markdown", "man" },
 			layout = { resize_to_content = false },
 			filter_kind = false,
 			show_guides = true,
 		},
-		keys = { { "<leader>cs", "<Cmd>AerialToggle<CR>", desc = "Aerial (Symbols)" } },
 	},
 }

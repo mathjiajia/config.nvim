@@ -1,6 +1,5 @@
 return {
 
-	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
 		lazy = true,
@@ -49,7 +48,6 @@ return {
 		end,
 	},
 
-	-- auto completion
 	{
 		"iguanacucumber/magazine.nvim",
 		name = "nvim-cmp",
@@ -126,16 +124,13 @@ return {
 
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "async_path" },
-				}, {
-					{ name = "cmdline" },
-				}),
+				sources = cmp.config.sources({ { name = "async_path" } }, { { name = "cmdline" } }),
 			})
 		end,
 	},
 
-	-- github copilot
+	{ "altermo/ultimate-autopair.nvim", event = { "InsertEnter", "CmdlineEnter" }, config = true },
+
 	{
 		"zbirenbaum/copilot.lua",
 		build = ":Copilot auth",
@@ -149,10 +144,6 @@ return {
 		},
 	},
 
-	-- auto pairs
-	{ "altermo/ultimate-autopair.nvim", event = { "InsertEnter", "CmdlineEnter" }, config = true },
-
-	-- surround
 	{
 		"kylechui/nvim-surround",
 		config = true,

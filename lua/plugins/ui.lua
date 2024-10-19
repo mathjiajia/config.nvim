@@ -10,7 +10,6 @@ local highlight = {
 
 return {
 
-	-- colorscheme
 	{
 		"ribru17/bamboo.nvim",
 		priority = 1000,
@@ -19,7 +18,7 @@ return {
 			require("bamboo").load()
 		end,
 	},
-	-- better vim.notify
+
 	{
 		"rcarriga/nvim-notify",
 		config = function()
@@ -42,16 +41,12 @@ return {
 		end,
 	},
 
-	-- better vim.ui
 	{ "stevearc/dressing.nvim", config = true },
 
-	-- highlight patterns in text
 	{ "brenoprata10/nvim-highlight-colors", opts = { exclude_buftypes = { "nofile" } } },
 
-	-- winbar
 	{ "Bekaboo/dropbar.nvim", config = true },
 
-	-- statusline/tabline
 	{
 		"rebelot/heirline.nvim",
 		config = function()
@@ -59,7 +54,6 @@ return {
 		end,
 	},
 
-	-- indent guides for Neovim
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
@@ -82,7 +76,6 @@ return {
 		end,
 	},
 
-	-- noicer ui
 	{
 		"folke/noice.nvim",
 		config = function()
@@ -115,20 +108,19 @@ return {
 				},
 			})
 
-			vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+			vim.keymap.set({ "n", "i", "s" }, "<C-f>", function()
 				if not require("noice.lsp").scroll(4) then
-					return "<c-f>"
+					return "<C-f>"
 				end
 			end, { silent = true, expr = true })
-			vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+			vim.keymap.set({ "n", "i", "s" }, "<C-b>", function()
 				if not require("noice.lsp").scroll(-4) then
-					return "<c-b>"
+					return "<C-b>"
 				end
 			end, { silent = true, expr = true })
 		end,
 	},
 
-	-- start screen
 	{
 		"nvimdev/dashboard-nvim",
 		opts = {
@@ -149,7 +141,6 @@ return {
 		},
 	},
 
-	-- Zen mode
 	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
@@ -159,7 +150,6 @@ return {
 		opts = { plugins = { gitsigns = { enabled = false } } },
 	},
 
-	-- rainbow delimiters
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		submodules = false,
@@ -171,7 +161,6 @@ return {
 		end,
 	},
 
-	-- icons
 	{
 		"echasnovski/mini.icons",
 		config = function()

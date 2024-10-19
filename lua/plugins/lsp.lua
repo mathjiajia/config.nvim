@@ -1,12 +1,10 @@
 return {
 
-	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
-			-- diagnostics config
 			vim.diagnostic.config({
 				virtual_text = { spacing = 4, prefix = "●" },
 				severity_sort = true,
@@ -19,8 +17,6 @@ return {
 					},
 				},
 			})
-
-			-- lspconfig
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -87,7 +83,6 @@ return {
 		end,
 	},
 
-	-- lsp enhancement
 	-- {
 	-- 	"nvimdev/lspsaga.nvim",
 	-- 	event = { "LspAttach" },
@@ -109,7 +104,6 @@ return {
 	-- 	end,
 	-- },
 
-	-- formatting
 	{
 		"stevearc/conform.nvim",
 		config = function()
@@ -135,9 +129,7 @@ return {
 					toml = { "taplo" },
 				},
 				formatters = {
-					latexindent = {
-						prepend_args = { "-c", "./.aux", "-m" },
-					},
+					latexindent = { prepend_args = { "-c", "./.aux", "-m" } },
 					["bibtex-tidy"] = {
 						prepend_args = {
 							"--curly",
@@ -148,10 +140,7 @@ return {
 						},
 					},
 				},
-				format_on_save = {
-					lsp_format = "fallback",
-					timeout_ms = 2000,
-				},
+				format_on_save = { lsp_format = "fallback", timeout_ms = 2000 },
 			})
 
 			vim.keymap.set({ "n", "v" }, "<leader>cF", function()
@@ -160,7 +149,6 @@ return {
 		end,
 	},
 
-	-- linting
 	{
 		"mfussenegger/nvim-lint",
 		ft = { "bash", "fish", "gitcommit", "markdown", "zsh" },

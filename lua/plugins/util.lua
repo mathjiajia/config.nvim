@@ -1,6 +1,5 @@
 return {
 
-	-- terminal
 	{
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm" },
@@ -33,7 +32,6 @@ return {
 		end,
 	},
 
-	-- session management
 	{
 		"stevearc/resession.nvim",
 		config = true,
