@@ -4,9 +4,9 @@ return {
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm" },
 		keys = {
-			{ "<M-g>", desc = "Toggle Lazygit" },
-			{ "<M-i>", desc = "Toggle btop" },
 			{ "<C-Bslash>", desc = "Toggle Term" },
+			{ "<leader>tg", desc = "Toggle Lazygit" },
+			{ "<leader>ti", desc = "Toggle btop" },
 		},
 		config = function()
 			require("toggleterm").setup({
@@ -27,8 +27,8 @@ return {
 			})
 
 			-- stylua: ignore start
-			vim.keymap.set({ "n", "t" }, "<M-i>", function() btop:toggle() end )
-			vim.keymap.set({ "n", "t" }, "<M-g>", function() lazygit:toggle() end )
+			vim.keymap.set({ "n", "t" }, "<leader>ti", function() btop:toggle() end )
+			vim.keymap.set({ "n", "t" }, "<leader>tg", function() lazygit:toggle() end )
 		end,
 	},
 
@@ -61,7 +61,7 @@ return {
 	{
 		"michaelb/sniprun",
 		build = "sh ./install.sh",
-		keys = { { "<M-r>", "<Plug>SnipRun", mode = { "n", "v" }, silent = true, desc = "Snip Run" } },
+		keys = { { "<leader>rs", "<Plug>SnipRun", mode = { "n", "v" }, silent = true, desc = "Snip Run" } },
 		opts = {
 			selected_interpreters = { "Generic", "Lua_nvim", "Python3_fifo" },
 			repl_enable = { "Bash_original", "Lua_nvim", "Python3_fifo", "R_original" },

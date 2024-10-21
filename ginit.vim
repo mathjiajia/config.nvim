@@ -1,9 +1,6 @@
 set termguicolors
 set autochdir
 
-nmap <D-s> :w<cr>
-imap <D-s> <Esc>:w<cr>	
-
 " Display
 " Line spacing
 set linespace=10

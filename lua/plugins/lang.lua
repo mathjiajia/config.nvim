@@ -13,11 +13,14 @@ return {
 				["core.defaults"] = {},
 				["core.concealer"] = {},
 				["core.highlights"] = {},
-				["core.integrations.treesitter"] = {},
 				["core.completion"] = { config = { engine = "nvim-cmp" } },
+				-- ["core.integrations.image"] = {},
+				["core.integrations.nvim-cmp"] = {},
+				["core.integrations.treesitter"] = {},
+				-- ["core.latex.renderer"] = {},
 				["core.dirman"] = {
 					config = {
-						workspaces = { notes = "~/Documents/neorg/notes" },
+						workspaces = { notes = "~/Documents/Neorg/notes" },
 						default_workspace = "notes",
 					},
 				},

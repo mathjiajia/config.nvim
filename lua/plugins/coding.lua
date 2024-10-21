@@ -49,8 +49,7 @@ return {
 	},
 
 	{
-		"iguanacucumber/magazine.nvim",
-		name = "nvim-cmp",
+		"hrsh7th/nvim-cmp",
 		event = { "CmdlineEnter", "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-buffer",
@@ -63,9 +62,9 @@ return {
 		config = function()
 			local cmp = require("cmp")
 
-			cmp.setup({
+			local options = {
 				mapping = cmp.mapping.preset.insert({
-					["<C-d>"] = cmp.mapping.scroll_docs(-4),
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
@@ -102,7 +101,6 @@ return {
 					completion = { border = "rounded", col_offset = -1 },
 					documentation = { border = "rounded" },
 				},
-				---@diagnostic disable-next-line: missing-fields
 				matching = { disallow_prefix_unmatching = true },
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -115,7 +113,10 @@ return {
 				}, {
 					{ name = "rg", keyword_length = 2 },
 				}),
-			})
+			}
+
+			-- options = vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
+			cmp.setup(options)
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),

@@ -11,13 +11,22 @@ local highlight = {
 return {
 
 	{
-		"ribru17/bamboo.nvim",
-		priority = 1000,
-		config = function()
-			require("bamboo").setup({ transparent = true })
-			require("bamboo").load()
+		"nvchad/base46",
+		lazy = true,
+		build = function()
+			require("base46").load_all_highlights()
 		end,
 	},
+	{
+		"nvchad/ui",
+		config = function()
+			require("nvchad")
+		end,
+	},
+	{ "nvchad/volt", lazy = true },
+	{ "nvchad/menu", lazy = true },
+	{ "nvchad/minty", cmd = { "Shades", "Huefy" } },
+	{ "nvchad/timerly", cmd = "TimerlyToggle" },
 
 	{
 		"rcarriga/nvim-notify",
@@ -43,16 +52,7 @@ return {
 
 	{ "stevearc/dressing.nvim", config = true },
 
-	{ "brenoprata10/nvim-highlight-colors", opts = { exclude_buftypes = { "nofile" } } },
-
 	{ "Bekaboo/dropbar.nvim", config = true },
-
-	{
-		"rebelot/heirline.nvim",
-		config = function()
-			require("configs.heirline")
-		end,
-	},
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -81,6 +81,7 @@ return {
 		config = function()
 			require("noice").setup({
 				lsp = {
+					signature = { enabled = false },
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
@@ -122,26 +123,6 @@ return {
 	},
 
 	{
-		"nvimdev/dashboard-nvim",
-		opts = {
-			disable_move = true,
-			shuffle_letter = true,
-			config = {
-				project = { action = "FzfLua files cwd=" },
-				week_header = { enable = true },
-				mru = { cwd_only = true },
-				-- stylua: ignore
-				shortcut = {
-					{ desc = "󰚰 Update", group = "Identifier", action = "Lazy update", key = "u" },
-					{ desc = "  Files", group = "Directory", action = "FzfLua files", key = "f" },
-					{ desc = "  Directory", group = "Float", action = "Oil --float", key = "d" },
-					{ desc = "  Quit", group = "String", action = function() vim.api.nvim_input("<Cmd>qa<CR>") end, key = "q" },
-				},
-			},
-		},
-	},
-
-	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
 		dependencies = { "folke/twilight.nvim", config = true },
@@ -152,7 +133,7 @@ return {
 
 	{
 		"HiPhish/rainbow-delimiters.nvim",
-		submodules = false,
+		-- submodules = false,
 		init = function()
 			vim.g.rainbow_delimiters = {
 				highlight = highlight,
