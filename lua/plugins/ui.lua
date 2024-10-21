@@ -37,7 +37,7 @@ return {
 			})
 
 			-- stylua: ignore start
-			vim.keymap.set("n", "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, { desc = "Delete All Notifications" })
+			vim.keymap.set("n", "<leader>tn", function() require("notify").dismiss({ silent = true, pending = true }) end, { desc = "Delete All Notifications" })
 		end,
 	},
 

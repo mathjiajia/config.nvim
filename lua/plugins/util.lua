@@ -81,36 +81,34 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+		-- keys = { "<leader>", "<c-w>", "[", "]", "g", "y", "z" },
 		opts = {
-			defaults = {},
 			spec = {
 				{
-					mode = { "n", "v" },
-					{ "<leader><tab>", group = "tabs" },
-					{ "<leader>b", group = "buffer" },
-					{ "<leader>c", group = "code" },
+					{ "<leader>b", group = "buffer", icon = " " },
+					{ "<leader>c", group = "code", icon = " " },
+					{ "<leader>d", group = "dap", icon = " " },
 					{ "<leader>f", group = "file/find" },
-					{ "<leader>g", group = "git" },
-					{ "<leader>h", group = "hunks" },
-					{ "<leader>q", group = "quit/session" },
-					{ "<leader>s", group = "search" },
-					{ "<leader>r", group = "runners" },
+					{ "<leader>h", group = "hunks", icon = " " },
 					{ "<leader>q", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+					{ "<leader>r", group = "runners", icon = " " },
+					{ "<leader>s", group = "search" },
+					{ "<leader>t", group = "toggle" },
+					{ "<C-w>", group = "window" },
 					{ "[", group = "prev" },
 					{ "]", group = "next" },
 					{ "g", group = "goto" },
-					{ "gs", group = "surround" },
+					{ "gr", group = "lsp" },
+					{ "ys", group = "surround" },
 					{ "z", group = "fold" },
-					{
-						"<leader>w",
-						group = "windows",
-						proxy = "<c-w>",
-						expand = function()
-							return require("which-key.extras").expand.win()
-						end,
-					},
-					-- better descriptions
+				},
+				{
+					mode = "v",
+					{ "<leader>c", group = "format" },
+					{ "<leader>d", group = "dap", icon = " " },
+					{ "<leader>h", group = "hunks", icon = " " },
+					{ "<leader>r", group = "runners", icon = " " },
+					{ "<leader>s", group = "search" },
 				},
 			},
 		},

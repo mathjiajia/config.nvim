@@ -253,8 +253,8 @@ return {
 		ft = { "qf" },
 		-- stylua: ignore
 		keys = {
-			{ "<leader>qq", function() vim.diagnostic.setqflist() end, desc = "Toggle Quickfix" },
-			{ "<leader>ql", function() vim.diagnostic.setloclist() end, desc = "Toggle Loclist" },
+			{ "<leader>qq", function() vim.diagnostic.setqflist() end, desc = "Set Quickfix" },
+			{ "<leader>ql", function() vim.diagnostic.setloclist() end, desc = "Set Loclist" },
 		},
 		---@module "quicker"
 		---@type quicker.SetupOptions
