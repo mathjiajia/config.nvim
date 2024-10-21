@@ -1,15 +1,13 @@
--- Keyboard users
-vim.keymap.set("n", "<C-t>", function()
-	require("menu").open("default")
-end, {})
-
--- mouse users + nvimtree users!
+-- stylua: ignore start
 vim.keymap.set("n", "<RightMouse>", function()
 	vim.cmd.exec('"normal! \\<RightMouse>"')
-
 	local options = vim.bo.ft == "NvimTree" and "nvimtree" or "gitsigns"
 	require("menu").open(options, { mouse = true })
-end, {})
+end, { desc = "Menu" })
+
+vim.keymap.set("n", "<C-t>", function() require("menu").open("default") end, { desc = "Menu" })
+vim.keymap.set("n", "<leader>tm", function() require("nvchad.themes").open() end, { desc = "Themes Picker" })
+-- stylua: ignore end
 
 local options = {
 	base46 = {
@@ -34,7 +32,6 @@ local options = {
 			"semantic_tokens",
 			"statusline",
 			"syntax",
-			"telescope",
 			"treesitter",
 			"tbline",
 		},
@@ -57,11 +54,32 @@ local options = {
 			[[                                                                       ]],
 			[[                                                                       ]],
 		},
+		buttons = {
+			{ txt = "  Find File", keys = "ff", cmd = "FzfLua files" },
+			{ txt = "  Recent Files", keys = "fo", cmd = "FzfLua oldfiles" },
+			{ txt = "󰈭  Find Word", keys = "sg", cmd = "FzfLua live_grep" },
+			{ txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
+			{ txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
+
+			{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+
+			{
+				txt = function()
+					local stats = require("lazy").stats()
+					local ms = math.floor(stats.startuptime) .. " ms"
+					return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+				end,
+				hl = "NvDashLazy",
+				no_gap = true,
+			},
+
+			{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+		},
 	},
 
 	term = {
 		winopts = { number = false, relativenumber = false },
-		float = { relative = "editor", width = 1, height = 1, border = "rounded" },
+		float = { width = 1, height = 1, border = "rounded" },
 	},
 
 	lsp = { signature = true },
