@@ -95,16 +95,16 @@ return {
 			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Frecency" },
 		},
 		dependencies = {
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-bibtex.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local actions_layout = require("telescope.actions.layout")
-			local home = os.getenv("HOME") or "~"
+			local home = vim.uv.os_homedir() or "~"
 
 			local function flash(prompt_bufnr)
 				require("flash").jump({
@@ -156,11 +156,7 @@ return {
 					live_grep = { path_display = { "shorten" } },
 				},
 				extensions = {
-					bibtex = {
-						format = "plain",
-						context = true,
-						-- global_files = { "~/TeX/Jiabibtex.bib" },
-					},
+					bibtex = { format = "plain", context = true },
 					file_browser = { theme = "ivy" },
 					frecency = {
 						show_scores = true,
@@ -174,7 +170,8 @@ return {
 				},
 			})
 
-			local extns = { "fzf", "file_browser", "frecency", "bibtex", "aerial", "noice", "themes", "terms" }
+			local extns =
+				{ "fzf", "file_browser", "frecency", "bibtex", "aerial", "noice", "notify", "themes", "terms" }
 			for _, extn in ipairs(extns) do
 				telescope.load_extension(extn)
 			end

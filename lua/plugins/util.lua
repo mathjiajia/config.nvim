@@ -4,7 +4,7 @@ return {
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm" },
 		keys = {
-			{ "<C-Bslash>", desc = "Toggle Term" },
+			{ "<C-Bslash>", desc = "Toggle Terminal", mode = { "n", "i" } },
 			{ "<leader>tg", desc = "Toggle Lazygit" },
 			{ "<leader>ti", desc = "Toggle btop" },
 		},
@@ -46,8 +46,8 @@ return {
 	{
 		"stevearc/overseer.nvim",
 		keys = {
-			{ "<leader>rf", "<Cmd>OverseerRun RunFile<CR>", silent = true },
-			{ "<leader>rr", "<Cmd>OverseerRun OpenREPL<CR>", silent = true },
+			{ "<leader>rf", "<Cmd>OverseerRun RunFile<CR>", silent = true, desc = "Run File" },
+			{ "<leader>rr", "<Cmd>OverseerRun OpenREPL<CR>", silent = true, desc = "Open REPL" },
 		},
 		---@module "overseer"
 		---@type overseer.Config
@@ -76,41 +76,6 @@ return {
 				},
 			},
 			display = { "VirtualTextOk", "VirtualTextErr", "Terminal" },
-		},
-	},
-
-	{
-		"folke/which-key.nvim",
-		-- keys = { "<leader>", "<c-w>", "[", "]", "g", "y", "z" },
-		opts = {
-			spec = {
-				{
-					{ "<leader>b", group = "buffer", icon = " " },
-					{ "<leader>c", group = "code", icon = " " },
-					{ "<leader>d", group = "dap", icon = " " },
-					{ "<leader>f", group = "file/find" },
-					{ "<leader>h", group = "hunks", icon = " " },
-					{ "<leader>q", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
-					{ "<leader>r", group = "runners", icon = " " },
-					{ "<leader>s", group = "search" },
-					{ "<leader>t", group = "toggle" },
-					{ "<C-w>", group = "window" },
-					{ "[", group = "prev" },
-					{ "]", group = "next" },
-					{ "g", group = "goto" },
-					{ "gr", group = "lsp" },
-					{ "ys", group = "surround" },
-					{ "z", group = "fold" },
-				},
-				{
-					mode = "v",
-					{ "<leader>c", group = "format" },
-					{ "<leader>d", group = "dap", icon = " " },
-					{ "<leader>h", group = "hunks", icon = " " },
-					{ "<leader>r", group = "runners", icon = " " },
-					{ "<leader>s", group = "search" },
-				},
-			},
 		},
 	},
 }
