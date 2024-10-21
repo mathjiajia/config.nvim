@@ -1,18 +1,56 @@
 return {
 
 	{
-		"stevearc/oil.nvim",
-		cmd = "Oil",
-		keys = { { "-", "<Cmd>Oil --float<CR>", desc = "Open parent directory" } },
-		---@module "oil"
-		---@type oil.SetupOpts
-		opts = {
-			float = {
-				max_width = vim.fn.round(vim.o.columns * 0.5),
-				max_height = vim.fn.round(vim.o.lines * 0.5),
-			},
-		},
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			require("nvim-tree").setup({
+				sort = {
+					sorter = "case_sensitive",
+				},
+				view = {
+					width = 30,
+				},
+				renderer = {
+					group_empty = true,
+				},
+				filters = {
+					dotfiles = true,
+				},
+			})
+
+			vim.keymap.set("n", "<leader>fe", function()
+				require("nvim-tree.api").tree.toggle({
+					find_file = false,
+					focus = true,
+					update_root = false,
+				})
+			end, { desc = "File Explorer" })
+		end,
 	},
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	config = function()
+	-- 		require("neo-tree").setup({
+	-- 			open_files_do_not_replace_types = { "aerial", "qf", "terminal" },
+	-- 			filesystem = {
+	-- 				bind_to_cwd = false,
+	-- 				follow_current_file = { enabled = true },
+	-- 				use_libuv_file_watcher = true,
+	-- 				filtered_items = {
+	-- 					hide_dotfiles = false,
+	-- 					hide_gitignored = true,
+	-- 					hide_by_name = { ".git" },
+	-- 				},
+	-- 			},
+	-- 			default_component_configs = { indent = { with_expanders = true } },
+	-- 		})
+	-- 	end,
+	--
+	-- 	-- stylua: ignore start
+	-- 	vim.keymap.set("n", "<leader>fe", function() require("neo-tree.command").execute({ dir = vim.uv.cwd(), toggle = true }) end, { desc = "Explorer NeoTree (cwd)" }),
+	-- 	vim.keymap.set("n", "<leader>ge", function() require("neo-tree.command").execute({ source = "git_status", toggle = true }) end, { desc = "Git Explorer" }),
+	-- 	vim.keymap.set("n", "<leader>be", function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end, { desc = "Buffer Explorer" }),
+	-- },
 
 	{
 		"MagicDuck/grug-far.nvim",
@@ -35,29 +73,112 @@ return {
 	},
 
 	{
-		"ibhagwan/fzf-lua",
-		cmd = "FzfLua",
+		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
 		-- stylua: ignore
 		keys = {
-			{ "<leader><space>", function () require("fzf-lua").files({ cwd = "%:p:h" }) end, desc = "Find Files (current)" },
-			{ "<leader>fb", function () require("fzf-lua").buffers() end, desc = "Buffers" },
-			{ "<leader>fc", function () require("fzf-lua").files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-			{ "<leader>ff", function () require("fzf-lua").files() end, desc = "Find Files (cwd)" },
-			{ "<leader>fg", function () require("fzf-lua").git_files() end, desc = "Find Git Files" },
-			{ "<leader>fl", function () require("fzf-lua").lsp_finder() end, desc = "Lsp Finder" },
-			{ "<leader>fo", function () require("fzf-lua").oldfiles() end, desc = "Old Files" },
-			{ "<leader>sb", function () require("fzf-lua").blines() end, desc = "Search Current Buffer Lines" },
-			{ "<leader>sg", function () require("fzf-lua").live_grep() end, desc = "Live Grep" },
-			{ "<leader>sh", function () require("fzf-lua").helptags() end, desc = "Help Tags" },
-			{ "<leader>sw", function () require("fzf-lua").grep_cword({ word_match = "-w" }) end, desc = "Search Word Under Cursor" },
-			{ "<leader>sw", function () require("fzf-lua").grep_visual() end, mode = "v", desc = "Search Visual Selection" },
+			{ "<leader><space>", function () require('telescope.builtin').find_files({ cwd = "%:p:h" }) end, desc = "Find Files (current)" },
+			-- find
+			{ "<leader>fb", function () require('telescope.builtin').buffers() end, desc = "Buffers" },
+			{ "<leader>fc", function () require('telescope.builtin').find_files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+			{ "<leader>ff", function () require('telescope.builtin').find_files() end, desc = "Find Files (cwd)" },
+			{ "<leader>fg", function () require('telescope.builtin').git_files() end, desc = "Find Git Files" },
+			-- search
+			{ "<leader>sb", function () require('telescope.builtin').current_buffer_fuzzy_find() end, desc = "Current Buf Fuzzy" },
+			{ "<leader>sg", function () require('telescope.builtin').live_grep() end, desc = "Live Grep" },
+			{ "<leader>sh", function () require('telescope.builtin').help_tags() end, desc = "Help Tags" },
+			{ "<leader>sw", function () require('telescope.builtin').grep_string({ word_match = "-w" }) end, desc = "Search Word" },
+			{ "<leader>sw", function () require('telescope.builtin').grep_string() end, mode = "v", desc = "Search Selection" },
+			-- extensions
+			{ "<leader>fd", function() require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" }) end, desc = "File Browser (current)" },
+			{ "<leader>fD", function() require("telescope").extensions.file_browser.file_browser() end, desc = "File Browser (cwd)" },
+			{ "<leader>fr", function() require("telescope").extensions.frecency.frecency() end, desc = "Frecency" },
 		},
-		opts = {
-			defaults = {
-				file_icons = "mini",
-				formatter = "path.dirname_first",
-			},
+		dependencies = {
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			"nvim-telescope/telescope-bibtex.nvim",
+			"nvim-telescope/telescope-frecency.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
 		},
+		config = function()
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+			local actions_layout = require("telescope.actions.layout")
+			local home = os.getenv("HOME") or "~"
+
+			local function flash(prompt_bufnr)
+				require("flash").jump({
+					pattern = "^",
+					label = { after = { 0, 0 } },
+					search = {
+						mode = "search",
+						exclude = {
+							function(win)
+								return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+							end,
+						},
+					},
+					action = function(match)
+						local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+						picker:set_selection(match.pos[1] - 1)
+					end,
+				})
+			end
+
+			telescope.setup({
+				defaults = {
+					sorting_strategy = "ascending",
+					layout_config = { prompt_position = "top" },
+					prompt_prefix = "   ",
+					selection_caret = " ",
+					mappings = {
+						i = {
+							["<C-s>"] = flash,
+							["<C-f>"] = actions.preview_scrolling_down,
+							["<C-b>"] = actions.preview_scrolling_up,
+							["<M-a>"] = actions.toggle_all,
+							["<M-o>"] = actions_layout.toggle_preview,
+						},
+						n = {
+							s = flash,
+							["<M-a>"] = actions.toggle_all,
+							["<M-o>"] = actions_layout.toggle_preview,
+						},
+					},
+					file_ignore_patterns = { "%.jpeg$", "%.jpg$", "%.png$", ".DS_Store" },
+				},
+				pickers = {
+					buffers = { theme = "dropdown", sort_lastused = true, previewer = false },
+					current_buffer_fuzzy_find = { previewer = false },
+					find_files = { theme = "ivy", follow = true },
+					git_files = { theme = "ivy" },
+					grep_string = { path_display = { "shorten" } },
+					live_grep = { path_display = { "shorten" } },
+				},
+				extensions = {
+					bibtex = {
+						format = "plain",
+						context = true,
+						-- global_files = { "~/TeX/Jiabibtex.bib" },
+					},
+					file_browser = { theme = "ivy" },
+					frecency = {
+						show_scores = true,
+						workspaces = {
+							["conf"] = home .. "/.config",
+							["dev"] = home .. "/Developer",
+							["doc"] = home .. "/Documents",
+							["tex"] = home .. "/TeX",
+						},
+					},
+				},
+			})
+
+			local extns = { "fzf", "file_browser", "frecency", "bibtex", "aerial", "noice", "themes", "terms" }
+			for _, extn in ipairs(extns) do
+				telescope.load_extension(extn)
+			end
+		end,
 	},
 
 	{

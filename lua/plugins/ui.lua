@@ -27,6 +27,7 @@ return {
 	{ "nvchad/menu", lazy = true },
 	{ "nvchad/minty", cmd = { "Shades", "Huefy" } },
 	{ "nvchad/timerly", cmd = "TimerlyToggle" },
+	{ "nvchad/showkeys", cmd = "ShowkeysToggle" },
 
 	{
 		"rcarriga/nvim-notify",

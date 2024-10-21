@@ -2,7 +2,12 @@ return {
 
 	{ "mathjiajia/latex.nvim" },
 	{ "OXY2DEV/markview.nvim", ft = "markdown", config = true },
-	{ "folke/lazydev.nvim", ft = "lua", config = true },
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		dependencies = { "Bilal2453/luvit-meta", lazy = true },
+		opts = { library = { { path = "luvit-meta/library", words = { "vim%.uv" } } } },
+	},
 
 	-- neorg
 	{

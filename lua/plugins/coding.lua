@@ -88,6 +88,7 @@ return {
 							buffer = "[Buffer]",
 							cmdline = "[Cmd]",
 							nvim_lsp = "[LSP]",
+							lazydev = "[Lazy]",
 							luasnip = "[Snip]",
 							neorg = "[Norg]",
 							async_path = "[Path]",
@@ -101,8 +102,9 @@ return {
 					completion = { border = "rounded", col_offset = -1 },
 					documentation = { border = "rounded" },
 				},
+
 				matching = { disallow_prefix_unmatching = true },
-				sources = cmp.config.sources({
+				sources = cmp.config.sources({ name = "lazydev", group_index = 0 }, {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip", option = { show_autosnippets = true } },
 					{ name = "async_path" },
