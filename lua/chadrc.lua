@@ -54,27 +54,27 @@ local options = {
 			[[                                                                       ]],
 			[[                                                                       ]],
 		},
-		-- buttons = {
-		-- 	{ txt = "  Find File", keys = "ff", cmd = "FzfLua files" },
-		-- 	{ txt = "  Recent Files", keys = "fo", cmd = "FzfLua oldfiles" },
-		-- 	{ txt = "󰈭  Find Word", keys = "sg", cmd = "FzfLua live_grep" },
-		-- 	{ txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
-		-- 	{ txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
-		--
-		-- 	{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-		--
-		-- 	{
-		-- 		txt = function()
-		-- 			local stats = require("lazy").stats()
-		-- 			local ms = math.floor(stats.startuptime) .. " ms"
-		-- 			return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
-		-- 		end,
-		-- 		hl = "NvDashLazy",
-		-- 		no_gap = true,
-		-- 	},
-		--
-		-- 	{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-		-- },
+		buttons = {
+			{ txt = "  Find File", keys = "ff", cmd = "FzfLua files" },
+			{ txt = "  Recent Files", keys = "fo", cmd = "FzfLua oldfiles" },
+			{ txt = "  Live Grep", keys = "sg", cmd = "FzfLua live_grep" },
+			{ txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
+			{ txt = "  Cheatsheet", keys = "ch", cmd = "NvCheatsheet" },
+
+			{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+
+			{
+				txt = function()
+					local stats = require("lazy").stats()
+					local ms = math.floor(stats.startuptime) .. " ms"
+					return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+				end,
+				hl = "NvDashLazy",
+				no_gap = true,
+			},
+
+			{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+		},
 	},
 
 	term = {
