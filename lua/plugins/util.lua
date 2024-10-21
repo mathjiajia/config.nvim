@@ -78,4 +78,41 @@ return {
 			display = { "VirtualTextOk", "VirtualTextErr", "Terminal" },
 		},
 	},
+
+	{
+		"folke/which-key.nvim",
+		keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+		opts = {
+			defaults = {},
+			spec = {
+				{
+					mode = { "n", "v" },
+					{ "<leader><tab>", group = "tabs" },
+					{ "<leader>b", group = "buffer" },
+					{ "<leader>c", group = "code" },
+					{ "<leader>f", group = "file/find" },
+					{ "<leader>g", group = "git" },
+					{ "<leader>h", group = "hunks" },
+					{ "<leader>q", group = "quit/session" },
+					{ "<leader>s", group = "search" },
+					{ "<leader>r", group = "runners" },
+					{ "<leader>q", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+					{ "[", group = "prev" },
+					{ "]", group = "next" },
+					{ "g", group = "goto" },
+					{ "gs", group = "surround" },
+					{ "z", group = "fold" },
+					{
+						"<leader>w",
+						group = "windows",
+						proxy = "<c-w>",
+						expand = function()
+							return require("which-key.extras").expand.win()
+						end,
+					},
+					-- better descriptions
+				},
+			},
+		},
+	},
 }

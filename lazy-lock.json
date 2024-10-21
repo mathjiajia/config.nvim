@@ -64,5 +64,6 @@
   "ui": { "branch": "v3.0", "commit": "81f5ff0fb2ce60cc3b2cfc9df928751c2ac4f7e9" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "9e3209190c22953566ae4e6436ad2b4ff4dabb95" },
   "volt": { "branch": "main", "commit": "229b4f1bc865c866227dd0e2ecda11ab6ec2c8cc" },
+  "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" },
   "zen-mode.nvim": { "branch": "main", "commit": "29b292bdc58b76a6c8f294c961a8bf92c5a6ebd6" }
 }
