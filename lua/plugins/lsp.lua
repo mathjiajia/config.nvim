@@ -54,7 +54,8 @@ return {
 								"--execute-command",
 								"turn_on_synctex",
 								"--inverse-search",
-								"texlab inverse-search -i %%1 -l %%2",
+								vim.fn.stdpath("data")
+									.. "/mason/packages/texlab/texlab inverse-search --input %%1 --line %%2",
 								"--forward-search-file",
 								"%f",
 								"--forward-search-line",
@@ -83,6 +84,10 @@ return {
 		end,
 	},
 
+	{
+		"williamboman/mason.nvim",
+		opts = { ui = { border = "rounded", height = 0.8 } },
+	},
 	-- {
 	-- 	"nvimdev/lspsaga.nvim",
 	-- 	event = { "LspAttach" },

@@ -1,13 +1,3 @@
-local highlight = {
-	"RainbowRed",
-	"RainbowYellow",
-	"RainbowBlue",
-	"RainbowOrange",
-	"RainbowGreen",
-	"RainbowViolet",
-	"RainbowCyan",
-}
-
 return {
 
 	{
@@ -71,7 +61,17 @@ return {
 
 			require("ibl").setup({
 				exclude = { filetypes = { "conf", "dashboard", "markdown" } },
-				scope = { highlight = highlight },
+				scope = {
+					highlight = {
+						"RainbowRed",
+						"RainbowYellow",
+						"RainbowBlue",
+						"RainbowOrange",
+						"RainbowGreen",
+						"RainbowViolet",
+						"RainbowCyan",
+					},
+				},
 			})
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
@@ -132,16 +132,7 @@ return {
 		opts = { plugins = { gitsigns = { enabled = false } } },
 	},
 
-	{
-		"HiPhish/rainbow-delimiters.nvim",
-		-- submodules = false,
-		init = function()
-			vim.g.rainbow_delimiters = {
-				highlight = highlight,
-				query = { latex = "rainbow-delimiters" },
-			}
-		end,
-	},
+	{ "HiPhish/rainbow-delimiters.nvim" },
 
 	{
 		"echasnovski/mini.icons",

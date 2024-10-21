@@ -11,36 +11,14 @@ vim.keymap.set("n", "<RightMouse>", function()
 	require("menu").open(options, { mouse = true })
 end, {})
 
-return {
+local options = {
 	base46 = {
 		theme = "onedark",
 		transparency = false,
-		theme_toggle = { "onedark", "one_light" },
-		integrations = {
-			"blankline",
-			"cmp",
-			"dap",
-			"defaults",
-			"git",
-			"lsp",
-			"markview",
-			"notify",
-			"nvcheatsheet",
-			"nvdash",
-			"semantic_tokens",
-			"statusline",
-			"syntax",
-			"treesitter",
-			"tbline",
-		},
+		theme_toggle = { "onedark", "onedark" },
 	},
 
-	ui = {
-		statusline = {
-			theme = "minimal",
-			order = { "mode", "file", "git", "%=", "diagnostics", "lsp", "cwd", "cursor" },
-		},
-	},
+	ui = { statusline = { order = { "mode", "file", "git", "%=", "diagnostics", "lsp", "cwd", "cursor" } } },
 
 	nvdash = {
 		load_on_startup = true,
@@ -67,3 +45,5 @@ return {
 	lsp = { signature = true },
 	cheatsheet = { excluded_groups = { ":help", "autopairs", "Opens" } },
 }
+
+return options

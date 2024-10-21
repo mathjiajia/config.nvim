@@ -57,7 +57,7 @@ return {
 
 		local dap = require("dap")
 		require("nvim-dap-virtual-text").setup({})
-		require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+		require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3")
 
 		dap.adapters.nlua = function(callback, conf)
 			local adapter = {
@@ -94,10 +94,8 @@ return {
 
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
-			name = "cppdbg",
 			type = "executable",
-			command = os.getenv("HOME")
-				.. "/.vscode/extensions/ms-vscode.cpptools-1.22.9-darwin-arm64/debugAdapters/bin/OpenDebugAD7",
+			command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
 		}
 
 		local enablePretty = {
@@ -107,12 +105,12 @@ return {
 				ignoreFailures = false,
 			},
 		}
-		dap.configurations.c = {
+		dap.configurations.cpp = {
 			{
 				name = "Launch file",
 				type = "cppdbg",
-				request = "launch",
 				setupCommands = enablePretty,
+				request = "launch",
 				program = "./${fileBasenameNoExtension}",
 				cwd = "${workspaceFolder}",
 				stopAtEntry = true,
@@ -130,6 +128,6 @@ return {
 			},
 		}
 
-		dap.configurations.cpp = dap.configurations.c
+		dap.configurations.c = dap.configurations.cpp
 	end,
 }
