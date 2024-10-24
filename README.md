@@ -1,3 +1,7 @@
+# NOTE:
+
+Move to [nix-darwin]
+
 # config.nvim
 
 My personal Neovim configuration files on macOS (apple silicon).
@@ -39,6 +43,7 @@ see [mysnippets]
 - `plugin` -- autocmds, keymaps, options
 
 [mysnippets]: https://github.com/mathjiajia/mySnippets
+[nix-darwin]: https://github.com/mathjiajia/nix-darwin
 
 ## Acknowledgements
 
